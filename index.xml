@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>大胖狗来了</title>
-    <link>http://localhost:1313/</link>
+    <link>https://kongfany.github.io/</link>
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 16 Jun 2021 21:06:47 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Jun 2021 21:06:47 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Github</title>
-      <link>http://localhost:1313/post/github/</link>
+      <link>https://kongfany.github.io/post/github/</link>
       <pubDate>Wed, 16 Jun 2021 21:06:47 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/github/</guid>
+      <guid>https://kongfany.github.io/post/github/</guid>
       <description>Github使用教程 专栏讲解 界面介绍 仓库管理 Git下载安装 下载提交代码 Git进阶 提交文件夹 Git 1.下载安装 下载安装好之后。打开GitBash查</description>
     </item>
     
     <item>
       <title>CET6</title>
-      <link>http://localhost:1313/post/cet6/</link>
+      <link>https://kongfany.github.io/post/cet6/</link>
       <pubDate>Tue, 08 Jun 2021 19:31:20 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/cet6/</guid>
+      <guid>https://kongfany.github.io/post/cet6/</guid>
       <description>2021年6月六级救命班 做题顺序 仔细阅读（20min），长篇阅读（15min），翻译（25min），选词填空 写作+翻译 写作翻译的保底原则： 单</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://kongfany.github.io/about/</link>
       <pubDate>Sat, 05 Jun 2021 18:55:14 +0800</pubDate>
       
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://kongfany.github.io/about/</guid>
       <description>你一定能够成为你想要成为的人! 你一定能够成为你想要成为的人! 你一定能够成为你想要成为的人! 你一定能够成为你想要成为的人! &amp;mdash;大胖狗</description>
     </item>
     
     <item>
       <title>My First Post</title>
-      <link>http://localhost:1313/post/my-first-post/</link>
+      <link>https://kongfany.github.io/post/my-first-post/</link>
       <pubDate>Sat, 05 Jun 2021 15:48:11 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/my-first-post/</guid>
+      <guid>https://kongfany.github.io/post/my-first-post/</guid>
       <description>hugo创建blog &#34;可以加类似于引言的格式-- 网工172-陈迪荣 2021/6/5 9:48:03 搭建博客可以看这篇下面的reference： https://www.lttzz.cn/post/hello-world/ https://olowolo.com/post/hugo-quick-start/ hugo new不是可以新建博</description>
     </item>
     
