@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>English on 大胖狗来了</title>
+    <link>http://localhost:1313/tags/english/</link>
+    <description>Recent content in English on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 08 Jun 2021 19:31:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/english/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CET6</title>
+      <link>http://localhost:1313/post/cet6/</link>
+      <pubDate>Tue, 08 Jun 2021 19:31:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cet6/</guid>
+      <description>2021年6月六级救命班 做题顺序 仔细阅读（20min），长篇阅读（15min），翻译（25min），选词填空 写作+翻译 写作翻译的保底原则： 单</description>
+    </item>
+    
+  </channel>
+</rss>
