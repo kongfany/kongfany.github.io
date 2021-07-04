@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 02 Jul 2021 14:53:51 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Jul 2021 16:39:31 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pyhon初识及安装</title>
+      <link>https://kongfany.github.io/post/pyhon01/</link>
+      <pubDate>Sun, 04 Jul 2021 16:39:31 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/pyhon01/</guid>
+      <description>Python介绍 Python是一种广泛使用的解释型、高级编程语言。python有3.x和2.x量大版本，并且不兼容（使用3.x） 解释型&amp;md</description>
+    </item>
+    
     <item>
       <title>Planfor202107</title>
       <link>https://kongfany.github.io/post/planfor202107/</link>

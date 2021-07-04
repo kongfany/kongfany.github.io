@@ -5,6 +5,16 @@
     <link>https://kongfany.github.io/categories/</link>
     <description>Recent content in Categories on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://kongfany.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Sun, 04 Jul 2021 16:39:31 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python</title>
+      <link>https://kongfany.github.io/categories/python/</link>
+      <pubDate>Sun, 04 Jul 2021 16:39:31 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/categories/python/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
