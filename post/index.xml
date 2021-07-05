@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 04 Jul 2021 16:39:31 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Jul 2021 15:16:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PyCharm2021使用教程</title>
+      <link>https://kongfany.github.io/post/python02/</link>
+      <pubDate>Mon, 05 Jul 2021 15:16:19 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python02/</guid>
+      <description>下载安装 看前一篇 界面/菜单栏介绍 界面及常用操作介绍 代码补全 file-&amp;gt;settings,找到editor-&amp;gt;general-&amp;g</description>
+    </item>
+    
     <item>
       <title>Pyhon初识及安装</title>
       <link>https://kongfany.github.io/post/pyhon01/</link>
@@ -22,7 +31,7 @@
       <pubDate>Fri, 02 Jul 2021 14:53:51 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/planfor202107/</guid>
-      <description>六级 直接刷题 Python 《廖雪峰Python教程》：最好的Python入门教程。 https://github.com/jackfrued/Python-100-Days 基础版：https://github.com/jackfrued/P</description>
+      <description>六级 直接刷题 Python 慕课嵩天 《廖雪峰Python教程》：最好的Python入门教程。 https://github.com/jackfrued/Python-100-Days 基础版：https://github.com/jackfru</description>
     </item>
     
     <item>
