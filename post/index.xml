@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 05 Jul 2021 15:16:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jul 2021 15:18:30 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python语言元素之变量</title>
+      <link>https://kongfany.github.io/post/python03/</link>
+      <pubDate>Tue, 06 Jul 2021 15:18:30 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python03/</guid>
+      <description>变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新</description>
+    </item>
+    
     <item>
       <title>PyCharm2021使用教程</title>
       <link>https://kongfany.github.io/post/python02/</link>

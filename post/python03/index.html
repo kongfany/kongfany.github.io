@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python语言元素之变量 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python03/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python语言元素之变量" />
+<meta property="og:description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python03/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-06T15:18:30&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-06T15:18:30&#43;08:00" />
+
+<meta itemprop="name" content="Python语言元素之变量">
+<meta itemprop="description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"><meta itemprop="datePublished" content="2021-07-06T15:18:30&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-06T15:18:30&#43;08:00" />
+<meta itemprop="wordCount" content="1272">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python语言元素之变量"/>
+<meta name="twitter:description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python语言元素之变量</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-06 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#变量和类型">变量和类型</a></li>
+    <li><a href="#变量命名">变量命名</a>
+      <ul>
+        <li><a href="#硬性规则">硬性规则</a></li>
+        <li><a href="#非硬性规则">非硬性规则</a></li>
+      </ul>
+    </li>
+    <li><a href="#变量的使用">变量的使用</a>
+      <ul>
+        <li><a href="#类型检查">类型检查</a></li>
+        <li><a href="#类型转化">类型转化</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="变量和类型">变量和类型</h1>
+<p>变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。</p>
+<p>Python中数据类型很多，而且允许我们自定义新的数据类型（后续再讲）,下面是常用的数据类型。</p>
+<ul>
+<li>整型（int）：Python中可以处理任意大小的整数，而且支持二进制（0b11-&gt;4）、八进制（0o100-&gt;64）、十进制（100）和十六进制（0x100-&gt;256）的表示法</li>
+<li>浮点型（float）：浮点数也就是小数，之所以成为浮点数，是因为按照科学记数法表示时，一个浮点数的小数点的位置是可变的，浮点数除了数学写法（12.345）之外，还支持科学计数法（1.23e2）</li>
+<li>字符串型（str）：字符串是以单引号或双引号括起来的任意文本，比如&quot;hello&quot;和&rsquo;hello'。</li>
+<li>布尔型（bool）：布尔值只有True、False两个值。</li>
+</ul>
+<h1 id="变量命名">变量命名</h1>
+<p>在Python中，变量命名需要遵循以下这些规则，这些规则又分为必须遵守的硬性规则和建议遵守的非硬性规则。（见名知意）</p>
+<h2 id="硬性规则">硬性规则</h2>
+<ul>
+<li>变量名由<strong>字母</strong>、数字和<strong>下划线</strong>构成，数字不能开头。需要说明的是，这里说的字母指的是Unicode字符，Unicode称为万国码，囊括了世界上大部分的文字系统，这也就意味着中文、日文、希腊字母等都可以作为变量名中的字符，但是像<code>!</code>、<code>@</code>、<code>#</code>这些特殊字符是不能出现在变量名中的，而且我们强烈建议大家<strong>尽可能使用英文字母</strong>。</li>
+<li><strong>大小写敏感</strong>，简单的说就是大写的<code>A</code>和小写的<code>a</code>是两个不同的变量。</li>
+<li>变量名<strong>不要跟Python语言的关键字</strong>（有特殊含义的单词，后面会讲到）和<strong>保留字</strong>（如函数、模块等的名字）<strong>发生重名的冲突</strong>。</li>
+</ul>
+<h2 id="非硬性规则">非硬性规则</h2>
+<ul>
+<li>变量名通常使用小写英文字母，多个单词用下划线进行连接。</li>
+<li>受保护的变量用单个下划线开头（后面会讲到）。</li>
+<li>私有的变量用两个下划线开头（后面会讲到）。</li>
+</ul>
+<h1 id="变量的使用">变量的使用</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">45</span>	<span class="c1"># a变量保存了45</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 57</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 33</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 540</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 3.75</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="类型检查">类型检查</h2>
+<p>Python中可以使用<code>type()</code>函数对变量的类型进行检查</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">使用type()检查变量的类型
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">12.345</span>
+<span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;int&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;float&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;str&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;bool&#39;&gt;</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="类型转化">类型转化</h2>
+<p>不同类型的变量可以相互转换，这一点可以通过Python的内置函数来实现。</p>
+<ul>
+<li><code>int()</code>：将一个数值或字符串转换成<code>整数</code>，可以指定进制。</li>
+<li><code>float()</code>：将一个字符串转换成<code>浮点数</code>。</li>
+<li><code>str()</code>：将指定的对象转换成<code>字符串</code>形式，可以指定编码。</li>
+<li><code>chr()</code>：将<code>整数</code>转换成该编码对应的<code>字符串</code>（一个字符)。</li>
+<li><code>ord()</code>：将<code>字符串</code>（一个字符）转换成对应的编码（<code>整数</code>）。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">Python中的类型转换操作
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">12.345</span>
+<span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># 整数转成浮点数</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>    <span class="c1"># 100.0</span>
+<span class="c1"># 浮点型转成字符串 (输出字符串时不会看到引号)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>      <span class="c1"># 12.345</span>
+<span class="c1"># 字符串转成布尔型 (有内容的字符串都会变成True)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>     <span class="c1"># True</span>
+<span class="c1"># 布尔型转成整数 (True会转成1，False会转成0)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>      <span class="c1"># 1</span>
+<span class="c1"># 将整数变成对应的字符 (97刚好对应字符表中的字母a)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">))</span>     <span class="c1"># a</span>
+<span class="c1"># 将字符转成整数 (Python中字符和字符串表示法相同)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>    <span class="c1"># 97</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python02/">
+            <span class="next-text nav-default">PyCharm2021使用教程</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

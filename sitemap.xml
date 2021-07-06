@@ -3,34 +3,41 @@
   
   <url>
     <loc>https://kongfany.github.io/categories/</loc>
-    <lastmod>2021-07-05T15:16:19+08:00</lastmod>
+    <lastmod>2021-07-06T15:18:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2021-07-05T15:16:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/post/python02/</loc>
-    <lastmod>2021-07-05T15:16:19+08:00</lastmod>
+    <lastmod>2021-07-06T15:18:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/categories/python/</loc>
-    <lastmod>2021-07-05T15:16:19+08:00</lastmod>
+    <lastmod>2021-07-06T15:18:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/python03/</loc>
+    <lastmod>2021-07-06T15:18:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/</loc>
+    <lastmod>2021-07-06T15:18:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/python02/</loc>
     <lastmod>2021-07-05T15:16:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
