@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python语言元素之运算符 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python04/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python语言元素之运算符" />
+<meta property="og:description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python04/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-06T16:32:59&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-06T16:32:59&#43;08:00" />
+
+<meta itemprop="name" content="Python语言元素之运算符">
+<meta itemprop="description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个"><meta itemprop="datePublished" content="2021-07-06T16:32:59&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-06T16:32:59&#43;08:00" />
+<meta itemprop="wordCount" content="1676">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python语言元素之运算符"/>
+<meta name="twitter:description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python语言元素之运算符</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-06 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#运算符">运算符</a></li>
+    <li><a href="#算术运算符">算术运算符</a></li>
+    <li><a href="#赋值运算符">赋值运算符</a></li>
+    <li><a href="#比较运算符和逻辑运算符">比较运算符和逻辑运算符</a></li>
+    <li><a href="#运算符的例子">运算符的例子</a>
+      <ul>
+        <li><a href="#例1华氏温度转化为摄氏温度">例1：华氏温度转化为摄氏温度</a></li>
+        <li><a href="#例2输入圆的半径计算计算周长和面积">例2：输入圆的半径计算计算周长和面积</a></li>
+        <li><a href="#例3输入年份判断是不是闰年">例3：输入年份判断是不是闰年</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="运算符">运算符</h1>
+<p>以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个运算的顺序。在实际开发中，如果搞不懂就使用圆括号来确保运算的执行顺序。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>[]</code> <code>[:]</code></td>
+<td style="text-align:left">下标、切片</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>**</code></td>
+<td style="text-align:left">指数</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>~</code> <code>+</code> <code>-</code></td>
+<td style="text-align:left">按位取反、正、负</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>*</code> <code>/</code> <code>%</code> <code>//</code></td>
+<td style="text-align:left">乘、处、模、整除</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>+</code> <code>-</code></td>
+<td style="text-align:left">加、减</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&gt;&gt;</code> <code>&lt;&lt;</code></td>
+<td style="text-align:left">右移、左移</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&amp;</code></td>
+<td style="text-align:left">按位与</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>^</code> 、 |</td>
+<td style="text-align:left">按位异或、按位或</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&lt; =</code> <code>&lt;</code> <code>&gt;</code> <code>&gt; =</code></td>
+<td style="text-align:left">小于等于、小于、大于、大于等于</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>= = </code> <code>! =</code></td>
+<td style="text-align:left">等于、不等于</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>is</code> <code>is not</code></td>
+<td style="text-align:left">身份运算符</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>in</code> <code>not in</code></td>
+<td style="text-align:left">成员运算符</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>not</code> <code>or</code> <code>and</code></td>
+<td style="text-align:left">逻辑运算符</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code> <code>//=</code> <code>**=</code> <code>&amp;=</code> `</td>
+<td style="text-align:left">=<code> </code>^=<code> </code>&raquo;=<code> </code>&laquo;=`</td>
+</tr>
+</tbody>
+</table>
+<h1 id="算术运算符">算术运算符</h1>
+<p>加减乘除，整除，求模（求余数），求幂，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="mi">321</span> <span class="o">+</span> <span class="mi">123</span><span class="p">)</span>     <span class="c1"># 加法运算     444</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">321</span> <span class="o">-</span> <span class="mi">123</span><span class="p">)</span>     <span class="c1"># 减法运算     198</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">321</span> <span class="o">*</span> <span class="mi">123</span><span class="p">)</span>     <span class="c1"># 乘法运算     39483</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">321</span> <span class="o">/</span> <span class="mi">123</span><span class="p">)</span>     <span class="c1"># 除法运算     2.6097560975609757</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">321</span> <span class="o">%</span> <span class="mi">123</span><span class="p">)</span>     <span class="c1"># 求模运算     75</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">321</span> <span class="o">//</span> <span class="mi">123</span><span class="p">)</span>    <span class="c1"># 整除运算     2</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">10</span><span class="p">)</span>       <span class="c1"># 求幂运算     1024</span>
+<span class="c1"># 321/123=2...75</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="赋值运算符">赋值运算符</h1>
+<p>赋值运算符的作用是将右边的值赋给左边的变量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">a</span> <span class="o">+=</span> <span class="n">b</span>        <span class="c1"># 相当于：a = a + b</span>
+<span class="n">a</span> <span class="o">*=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">2</span>    <span class="c1"># 相当于：a = a * (a + 2)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>      <span class="c1"># 195</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="比较运算符和逻辑运算符">比较运算符和逻辑运算符</h1>
+<p>比较运算符有地方也叫关系运算符，包括<code>&lt; =</code> <code>&lt;</code> <code>&gt;</code> <code>&gt; =</code> <code>= = </code> <code>! =</code>，比较运算符会产生布尔值，要么是<code>True</code>要么是<code>False</code>。</p>
+<p>逻辑运算符有三个，分别是<code>not</code> <code>or</code> <code>and</code>。</p>
+<p>and：（而且）连接两个布尔值，如果两个值都是True，那么运算结果就是True。如果有一个值是False，结果为False。如果and左边的值为False，不管右边的值是什么，结果都是False，所以在做运算的时候右边的值会被跳过（短路处理），即右边的表达式根本不会执行</p>
+<p>or：（或者）连接两个布尔值，如果两个值有任意一个True，结果就是True。当然or也有短路功能，左边为True时，右边不会执行。</p>
+<p>not：（否）后面跟上一个布尔值，作用是得到与该布尔值相反的值，也就是说not True = False，not False = True。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">flag0</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">flag1</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">2</span>
+<span class="n">flag2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">1</span>
+<span class="n">flag3</span> <span class="o">=</span> <span class="n">flag1</span> <span class="ow">and</span> <span class="n">flag2</span>
+<span class="n">flag4</span> <span class="o">=</span> <span class="n">flag1</span> <span class="ow">or</span> <span class="n">flag2</span>
+<span class="n">flag5</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag0 =&#39;</span><span class="p">,</span> <span class="n">flag0</span><span class="p">)</span>    <span class="c1"># flag0 = True</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag1 =&#39;</span><span class="p">,</span> <span class="n">flag1</span><span class="p">)</span>    <span class="c1"># flag1 = True</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag2 =&#39;</span><span class="p">,</span> <span class="n">flag2</span><span class="p">)</span>    <span class="c1"># flag2 = False</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag3 =&#39;</span><span class="p">,</span> <span class="n">flag3</span><span class="p">)</span>    <span class="c1"># flag3 = False</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag4 =&#39;</span><span class="p">,</span> <span class="n">flag4</span><span class="p">)</span>    <span class="c1"># flag4 = True</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag5 =&#39;</span><span class="p">,</span> <span class="n">flag5</span><span class="p">)</span>    <span class="c1"># flag5 = False</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>比较运算符的优先级高于赋值运算符，所以<code>flag0 = 1 == 1</code>先做<code>1==1</code>产生布尔值True，然后再讲这个值赋值给变量flag0。</p>
+<p>print函数可以输出多个值，多个值之间可以用<code>，</code>进行分隔，输出的内容之间默认以空格分开。</p>
+</blockquote>
+<h1 id="运算符的例子">运算符的例子</h1>
+<h2 id="例1华氏温度转化为摄氏温度">例1：华氏温度转化为摄氏温度</h2>
+<p>华氏温度到摄氏温度的转换公式为：<code>C=(F-32)/1.8</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入华氏温度: &#39;</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.8</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.1f</span><span class="s1">华氏度 = </span><span class="si">%.1f</span><span class="s1">摄氏度&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{f:.1f}华氏度 = {c:.1f}摄氏度&#39;</span><span class="p">)</span> <span class="c1"># print(f&#39;&#39;)</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">请输入华氏温度: 2
+</span><span class="s2">2.0华氏度 = -16.7摄氏度
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>说明：在使用print函数输出的时候，也可以对字符串内容进行格式化处理，上面的print函数中的字符串<code>%.1f</code>是一个占位符，稍后会由一个<code>float</code>类型的变量值来替换掉它，并且<code>小数点后保留1位有效数字</code>。同理，如果字符串中有<code>%d</code>，后面会由一个<code>int</code>类型的变量值来替换。而<code>%s</code>会被<code>字符串</code>的值替换。</p>
+<p>除了这种格式化字符串的方式外，还可以用下面的方式来格式化字符串，其中<code>{f:.1f}</code>和<code>{c:.1f}</code>可以先看成是<code>{f}</code>和<code>{c}</code>，表示输出时会用变量<code>f</code>和变量<code>c</code>的值替换掉这两个占位符。后面的<code>:.1f</code>表示这是一个浮点数，小数点后保留1位有效数字。</p>
+<h2 id="例2输入圆的半径计算计算周长和面积">例2：输入圆的半径计算计算周长和面积</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">radius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入圆的半径: &#39;</span><span class="p">))</span>
+<span class="n">perimeter</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">3.1416</span> <span class="o">*</span> <span class="n">radius</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mf">3.1416</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;周长: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">perimeter</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;面积: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">area</span><span class="p">)</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">请输入圆的半径: 1
+</span><span class="s2">周长: 6.28
+</span><span class="s2">面积: 3.14
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="例3输入年份判断是不是闰年">例3：输入年份判断是不是闰年</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入年份: &#39;</span><span class="p">))</span>
+<span class="n">is_leap</span> <span class="o">=</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="k">print</span><span class="p">(</span><span class="n">is_leap</span><span class="p">)</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">请输入年份: 2021
+</span><span class="s2">False
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>说明：比较运算符会产生布尔值，而逻辑运算符<code>and</code>和<code>or</code>会对这些布尔值进行组合，最终也是得到一个布尔值，闰年输出<code>True</code>，平年输出<code>False</code>。</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python03/">
+            <span class="next-text nav-default">Python语言元素之变量</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
