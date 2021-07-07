@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python语言元素之变量">
 <meta itemprop="description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"><meta itemprop="datePublished" content="2021-07-06T15:18:30&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-06T15:18:30&#43;08:00" />
-<meta itemprop="wordCount" content="1272">
+<meta itemprop="wordCount" content="1880">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python语言元素之变量"/>
 <meta name="twitter:description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"/>
@@ -156,6 +156,7 @@
       <ul>
         <li><a href="#类型检查">类型检查</a></li>
         <li><a href="#类型转化">类型转化</a></li>
+        <li><a href="#字符串常用操作">字符串常用操作</a></li>
       </ul>
     </li>
   </ul>
@@ -169,7 +170,7 @@
 <ul>
 <li>整型（int）：Python中可以处理任意大小的整数，而且支持二进制（0b11-&gt;4）、八进制（0o100-&gt;64）、十进制（100）和十六进制（0x100-&gt;256）的表示法</li>
 <li>浮点型（float）：浮点数也就是小数，之所以成为浮点数，是因为按照科学记数法表示时，一个浮点数的小数点的位置是可变的，浮点数除了数学写法（12.345）之外，还支持科学计数法（1.23e2）</li>
-<li>字符串型（str）：字符串是以单引号或双引号括起来的任意文本，比如&quot;hello&quot;和&rsquo;hello'。</li>
+<li>字符串型（str）：字符串是以单引号或双引号括起来的任意文本，比如&quot;hello&quot;和&rsquo;hello'。<code>打印的时候不打印引号</code></li>
 <li>布尔型（bool）：布尔值只有True、False两个值。</li>
 </ul>
 <h1 id="变量命名">变量命名</h1>
@@ -243,7 +244,7 @@
 <li><code>int()</code>：将一个数值或字符串转换成<code>整数</code>，可以指定进制。</li>
 <li><code>float()</code>：将一个字符串转换成<code>浮点数</code>。</li>
 <li><code>str()</code>：将指定的对象转换成<code>字符串</code>形式，可以指定编码。</li>
-<li><code>chr()</code>：将<code>整数</code>转换成该编码对应的<code>字符串</code>（一个字符)。</li>
+<li><code>chr()</code>：将<code>整数</code>转换成该编码对应的字符串（一个<code>字符</code>)。</li>
 <li><code>ord()</code>：将<code>字符串</code>（一个字符）转换成对应的编码（<code>整数</code>）。</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -290,6 +291,72 @@
 <span class="c1"># 将字符转成整数 (Python中字符和字符串表示法相同)</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>    <span class="c1"># 97</span>
 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="字符串常用操作">字符串常用操作</h2>
+<ul>
+<li>字符串长度：len(str)</li>
+<li>单词首字母变大写：str.title()</li>
+<li>字符串变大写：str.upper()</li>
+<li>字符串变小写：str.lower()</li>
+<li>判断字符串是不是大写：str.isupper()</li>
+<li>字符串是不是以hello开头：str.startswith(&lsquo;hello&rsquo;)（以单个字符'!&lsquo;开头也是一样&rsquo;!'）</li>
+<li>字符串是不是以hello结尾:str.endswith(&lsquo;hello&rsquo;)(单字符同理)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">str1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串的长度是:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;单词首字母大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串变大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="n">str1</span> <span class="o">=</span> <span class="n">str1</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串变小写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以hello开头: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以hello结尾: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以感叹号开头: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以感叹号结尾: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">))</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">字符串的长度是: 13
+</span><span class="s2">单词首字母大写:  Hello, World!
+</span><span class="s2">字符串变大写:  HELLO, WORLD!
+</span><span class="s2">字符串变小写:  hello, world!
+</span><span class="s2">HELLO, WORLD!
+</span><span class="s2">字符串是不是大写:  True
+</span><span class="s2">字符串是不是以hello开头:  False
+</span><span class="s2">字符串是不是以hello结尾:  False
+</span><span class="s2">字符串是不是以感叹号开头:  False
+</span><span class="s2">字符串是不是以感叹号结尾:  True
+</span><span class="s2">&#34;&#34;&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div>

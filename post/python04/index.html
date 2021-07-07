@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python语言元素之运算符">
 <meta itemprop="description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个"><meta itemprop="datePublished" content="2021-07-06T16:32:59&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-06T16:32:59&#43;08:00" />
-<meta itemprop="wordCount" content="1993">
+<meta itemprop="wordCount" content="2097">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python语言元素之运算符"/>
 <meta name="twitter:description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个"/>
@@ -328,6 +328,8 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">flag0</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span>
@@ -342,10 +344,13 @@
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag3 =&#39;</span><span class="p">,</span> <span class="n">flag3</span><span class="p">)</span>    <span class="c1"># flag3 = False</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag4 =&#39;</span><span class="p">,</span> <span class="n">flag4</span><span class="p">)</span>    <span class="c1"># flag4 = True</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;flag5 =&#39;</span><span class="p">,</span> <span class="n">flag5</span><span class="p">)</span>    <span class="c1"># flag5 = False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">flag1</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">)</span>	   <span class="c1"># True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">flag2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">False</span><span class="p">)</span>  <span class="c1"># False</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>比较运算符的优先级高于赋值运算符，所以<code>flag0 = 1 == 1</code>先做<code>1==1</code>产生布尔值True，然后再讲这个值赋值给变量flag0。</p>
+<p><code>is</code>和<code>is not</code>表示判断。<code>flag1 is True</code>即是判断flag1的值是True，是真是假，真即为True；同样 flag2 is not False，即判断flag2是True是真是假，假即为False。</p>
 <p>print函数可以输出多个值，多个值之间可以用<code>，</code>进行分隔，输出的内容之间默认以空格分开。</p>
 </blockquote>
 <h1 id="运算符的例子">运算符的例子</h1>
