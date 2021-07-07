@@ -49,7 +49,7 @@
 <meta itemprop="name" content="循环结构">
 <meta itemprop="description" content="for-in循环 如果明确的知道循环执行的次数，推荐使用for-in循环。被for-in循环控制的语句块也是通过缩进的方式来确定的。 1 2 3 4 5"><meta itemprop="datePublished" content="2021-07-07T21:00:49&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-07T21:00:49&#43;08:00" />
-<meta itemprop="wordCount" content="1996">
+<meta itemprop="wordCount" content="2090">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="循环结构"/>
 <meta name="twitter:description" content="for-in循环 如果明确的知道循环执行的次数，推荐使用for-in循环。被for-in循环控制的语句块也是通过缩进的方式来确定的。 1 2 3 4 5"/>
@@ -218,6 +218,48 @@
 </div><h1 id="while循环">while循环</h1>
 <p>如果要构造不知道具体循环次数的循环结构，我们推荐使用<code>while</code>循环。<code>while</code>循环通过一个能够产生或转换出<code>bool</code>值的表达式来控制循环，表达式的值为<code>True</code>则继续循环；表达式的值为<code>False</code>则结束循环。</p>
 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">用while循环实现1~100求和
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">num</span>
+    <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">用while循环实现1~100之间的偶数求和
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="nb">sum</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span>
+<span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">num</span>
+    <span class="n">num</span> <span class="o">+=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
