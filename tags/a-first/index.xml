@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>A-first on 大胖狗来了</title>
+    <link>https://kongfany.github.io/tags/a-first/</link>
+    <description>Recent content in A-first on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 05 Jun 2021 15:48:11 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/a-first/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Post</title>
+      <link>https://kongfany.github.io/post/my-first-post/</link>
+      <pubDate>Sat, 05 Jun 2021 15:48:11 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/my-first-post/</guid>
+      <description>hugo创建blog &#34;可以加类似于引言的格式-- 网工172-陈迪荣 2021/6/5 9:48:03 搭建博客可以看这篇下面的reference： https://www.lttzz.cn/post/hello-world/ https://olowolo.com/post/hugo-quick-start/ hugo new不是可以新建博</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Pyhon初识及安装">
 <meta itemprop="description" content="Python介绍 Python是一种广泛使用的解释型、高级编程语言。python有3.x和2.x量大版本，并且不兼容（使用3.x） 解释型&md"><meta itemprop="datePublished" content="2021-07-04T16:39:31&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-04T16:39:31&#43;08:00" />
-<meta itemprop="wordCount" content="1741">
+<meta itemprop="wordCount" content="3134">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Pyhon初识及安装"/>
 <meta name="twitter:description" content="Python介绍 Python是一种广泛使用的解释型、高级编程语言。python有3.x和2.x量大版本，并且不兼容（使用3.x） 解释型&md"/>
@@ -169,6 +169,13 @@
             <li><a href="#版本控制">版本控制</a></li>
           </ul>
         </li>
+      </ul>
+    </li>
+    <li><a href="#练习">练习</a>
+      <ul>
+        <li><a href="#画正方形">画正方形</a></li>
+        <li><a href="#画国旗">画国旗</a></li>
+        <li><a href="#画小猪佩奇">画小猪佩奇</a></li>
       </ul>
     </li>
   </ul>
@@ -374,6 +381,620 @@
 </ul>
 <p>更多细节，参见<a href="https://www.jetbrains.com/help/pycharm/tutorial-exploring-navigation-and-search.html">官方文档</a></p>
 <h3 id="版本控制">版本控制</h3>
+<h1 id="练习">练习</h1>
+<p>学习使用turtle在屏幕上绘制图形。</p>
+<h2 id="画正方形">画正方形</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">turtle</span>
+
+<span class="n">turtle</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">pencolor</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">turtle</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202107/18.png" alt=""></p>
+<h2 id="画国旗">画国旗</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">用Python的turtle模块绘制国旗
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="kn">import</span> <span class="nn">turtle</span>
+
+
+<span class="k">def</span> <span class="nf">draw_rectangle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;绘制矩形&#34;&#34;&#34;</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">pencolor</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">fillcolor</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">begin_fill</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">end_fill</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">draw_star</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;绘制五角星&#34;&#34;&#34;</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">setpos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">pos1</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="mi">72</span><span class="p">)</span>
+    <span class="n">pos2</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="mi">72</span><span class="p">)</span>
+    <span class="n">pos3</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="mi">72</span><span class="p">)</span>
+    <span class="n">pos4</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="mi">72</span><span class="p">)</span>
+    <span class="n">pos5</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">pos3</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">pos1</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">pos4</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">pos2</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">pos5</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">end_fill</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="s2">&#34;&#34;&#34;主程序&#34;&#34;&#34;</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">speed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">penup</span><span class="p">()</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">270</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span>
+    <span class="c1"># 画国旗主体</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">540</span><span class="p">,</span> <span class="mi">360</span>
+    <span class="n">draw_rectangle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="c1"># 画大星星</span>
+    <span class="n">pice</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">pice</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span> <span class="o">-</span> <span class="n">pice</span> <span class="o">*</span> <span class="mi">5</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">pice</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">draw_star</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">xcor</span><span class="p">(),</span> <span class="n">turtle</span><span class="o">.</span><span class="n">ycor</span><span class="p">(),</span> <span class="n">pice</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">x_poses</span><span class="p">,</span> <span class="n">y_poses</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+    <span class="c1"># 画小星星</span>
+    <span class="k">for</span> <span class="n">x_pos</span><span class="p">,</span> <span class="n">y_pos</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x_poses</span><span class="p">,</span> <span class="n">y_poses</span><span class="p">):</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x_pos</span> <span class="o">*</span> <span class="n">pice</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span> <span class="o">-</span> <span class="n">y_pos</span> <span class="o">*</span> <span class="n">pice</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">towards</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">)</span> <span class="o">-</span> <span class="n">turtle</span><span class="o">.</span><span class="n">heading</span><span class="p">())</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">pice</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+        <span class="n">draw_star</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">xcor</span><span class="p">(),</span> <span class="n">turtle</span><span class="o">.</span><span class="n">ycor</span><span class="p">(),</span> <span class="n">pice</span><span class="p">)</span>
+    <span class="c1"># 隐藏海龟</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">ht</span><span class="p">()</span>
+    <span class="c1"># 显示绘图窗口</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="画小猪佩奇">画小猪佩奇</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">绘制小猪佩奇
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="kn">from</span> <span class="nn">turtle</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">nose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;画鼻子&#34;&#34;&#34;</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="c1"># 将海龟移动到指定的坐标</span>
+    <span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="c1"># 设置海龟的方向（0-东、90-北、180-西、270-南）</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">0.4</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">30</span> <span class="ow">or</span> <span class="mi">60</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span><span class="mi">90</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mf">0.08</span>
+            <span class="c1"># 向左转3度</span>
+            <span class="n">left</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+            <span class="c1"># 向前走</span>
+            <span class="n">forward</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">0.08</span>
+            <span class="n">left</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+            <span class="n">forward</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="c1"># 设置画笔的颜色(红, 绿, 蓝)</span>
+    <span class="n">pencolor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">192</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">color</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">pencolor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">192</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">color</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">head</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;画头&#34;&#34;&#34;</span>
+    <span class="n">color</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">192</span><span class="p">),</span> <span class="s2">&#34;pink&#34;</span><span class="p">)</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mi">95</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">161</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">goto</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">0.4</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">60</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span><span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">30</span> <span class="ow">or</span> <span class="mi">60</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mf">0.08</span>
+            <span class="n">lt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#向左转3度</span>
+            <span class="n">fd</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#向前走a的步长</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">0.08</span>
+            <span class="n">lt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+            <span class="n">fd</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">ears</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;画耳朵&#34;&#34;&#34;</span>
+    <span class="n">color</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">192</span><span class="p">),</span> <span class="s2">&#34;pink&#34;</span><span class="p">)</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">54</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">56</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">eyes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;画眼睛&#34;&#34;&#34;</span>
+    <span class="n">color</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">192</span><span class="p">),</span> <span class="s2">&#34;white&#34;</span><span class="p">)</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="o">-</span><span class="mi">95</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+    <span class="n">color</span><span class="p">(</span><span class="s2">&#34;black&#34;</span><span class="p">)</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+    <span class="n">color</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">192</span><span class="p">),</span> <span class="s2">&#34;white&#34;</span><span class="p">)</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">seth</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">seth</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+    <span class="n">color</span><span class="p">(</span><span class="s2">&#34;black&#34;</span><span class="p">)</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">forward</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">cheek</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;画脸颊&#34;&#34;&#34;</span>
+    <span class="n">color</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">192</span><span class="p">))</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">begin_fill</span><span class="p">()</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">end_fill</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">mouth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;画嘴巴&#34;&#34;&#34;</span>
+    <span class="n">color</span><span class="p">(</span><span class="mi">239</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
+    <span class="n">penup</span><span class="p">()</span>
+    <span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">pendown</span><span class="p">()</span>
+    <span class="n">setheading</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">setting</span><span class="p">():</span>
+    <span class="s2">&#34;&#34;&#34;设置参数&#34;&#34;&#34;</span>
+    <span class="n">pensize</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="c1"># 隐藏海龟</span>
+    <span class="n">hideturtle</span><span class="p">()</span>
+    <span class="n">colormode</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">color</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">192</span><span class="p">),</span> <span class="s2">&#34;pink&#34;</span><span class="p">)</span>
+    <span class="n">setup</span><span class="p">(</span><span class="mi">840</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">speed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="s2">&#34;&#34;&#34;主函数&#34;&#34;&#34;</span>
+    <span class="n">setting</span><span class="p">()</span> 
+    <span class="n">nose</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">head</span><span class="p">(</span><span class="o">-</span><span class="mi">69</span><span class="p">,</span> <span class="mi">167</span><span class="p">)</span>
+    <span class="n">ears</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span>
+    <span class="n">eyes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
+    <span class="n">cheek</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">mouth</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="n">done</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202107/19.png" alt=""></p>
+<blockquote>
+<p><strong>说明</strong>：turtle是Python内置的一个非常有趣的模块，特别适合对计算机程序设计进行初体验的小伙伴，它最早是Logo语言的一部分，Logo语言是Wally Feurzig和Seymour Papert在1966发明的编程语言。</p>
+</blockquote>
 <blockquote>
 <p>参考：<a href="https://blog.csdn.net/qq_38082146/article/details/109364982">PyCharm安装教程及使用教程（2020最新版）</a></p>
 </blockquote>
