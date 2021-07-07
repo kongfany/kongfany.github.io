@@ -6,7 +6,16 @@
     <description>Recent content in Python on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Jul 2021 16:13:31 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Jul 2021 21:00:49 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>循环结构</title>
+      <link>https://kongfany.github.io/post/python06/</link>
+      <pubDate>Wed, 07 Jul 2021 21:00:49 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python06/</guid>
+      <description>for-in循环 如果明确的知道循环执行的次数，推荐使用for-in循环。被for-in循环控制的语句块也是通过缩进的方式来确定的。 1 2 3 4 5</description>
+    </item>
+    
     <item>
       <title>分支结构</title>
       <link>https://kongfany.github.io/post/python05/</link>
