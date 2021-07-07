@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python语言元素之变量">
 <meta itemprop="description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"><meta itemprop="datePublished" content="2021-07-06T15:18:30&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-06T15:18:30&#43;08:00" />
-<meta itemprop="wordCount" content="1880">
+<meta itemprop="wordCount" content="2198">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python语言元素之变量"/>
 <meta name="twitter:description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"/>
@@ -154,6 +154,7 @@
     </li>
     <li><a href="#变量的使用">变量的使用</a>
       <ul>
+        <li><a href="#float小数默认位数">float小数默认位数</a></li>
         <li><a href="#类型检查">类型检查</a></li>
         <li><a href="#类型转化">类型转化</a></li>
         <li><a href="#字符串常用操作">字符串常用操作</a></li>
@@ -206,6 +207,41 @@
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 3.75</span>
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="float小数默认位数">float小数默认位数</h2>
+<p>在变量的格式输出，使用%-string格式化时默认是6位小数</p>
+<p>其他运算或格式化输出都是默认1位小数，其中有更多位数，就取最大位数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%f</span><span class="s2">&#34;</span><span class="o">%</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{a}&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;{0}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>  <span class="c1"># format函数</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">2.000000
+</span><span class="s2">2.0
+</span><span class="s2">2.0
+</span><span class="s2">2.0
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
 </div><h2 id="类型检查">类型检查</h2>
 <p>Python中可以使用<code>type()</code>函数对变量的类型进行检查</p>
 <div class="highlight"><div class="chroma">
@@ -242,7 +278,7 @@
 <p>不同类型的变量可以相互转换，这一点可以通过Python的内置函数来实现。</p>
 <ul>
 <li><code>int()</code>：将一个数值或字符串转换成<code>整数</code>，可以指定进制。</li>
-<li><code>float()</code>：将一个字符串转换成<code>浮点数</code>。</li>
+<li><code>float()</code>：将一个<code>字符串</code>转换成<code>浮点数</code>。</li>
 <li><code>str()</code>：将指定的对象转换成<code>字符串</code>形式，可以指定编码。</li>
 <li><code>chr()</code>：将<code>整数</code>转换成该编码对应的字符串（一个<code>字符</code>)。</li>
 <li><code>ord()</code>：将<code>字符串</code>（一个字符）转换成对应的编码（<code>整数</code>）。</li>
@@ -291,6 +327,44 @@
 <span class="c1"># 将字符转成整数 (Python中字符和字符串表示法相同)</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>    <span class="c1"># 97</span>
 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;123&#39;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;a =&#39;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>	<span class="c1"># 字符串的引号不会打印出来</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;b =&#39;</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;c =&#39;</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;d =&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">a = 123 的类型是 &lt;class &#39;str&#39;&gt;
+</span><span class="s2">b = 123 的类型是 &lt;class &#39;int&#39;&gt;
+</span><span class="s2">c = False 的类型是 &lt;class &#39;bool&#39;&gt;
+</span><span class="s2">d = False 的类型是 &lt;class &#39;str&#39;&gt;
+</span><span class="s2">&#34;&#34;&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="字符串常用操作">字符串常用操作</h2>

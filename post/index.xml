@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Jul 2021 16:32:59 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Jul 2021 16:13:31 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>分支结构</title>
+      <link>https://kongfany.github.io/post/python05/</link>
+      <pubDate>Wed, 07 Jul 2021 16:13:31 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python05/</guid>
+      <description>分支结构也叫选择结构。 if语句的使用 在Python中，要构造分支结构可以使用if、elif和else关键字。所谓关键字就是有特殊含义的单词，</description>
+    </item>
+    
     <item>
       <title>Python语言元素之运算符</title>
       <link>https://kongfany.github.io/post/python04/</link>

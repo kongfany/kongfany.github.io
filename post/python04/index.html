@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python语言元素之运算符">
 <meta itemprop="description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个"><meta itemprop="datePublished" content="2021-07-06T16:32:59&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-06T16:32:59&#43;08:00" />
-<meta itemprop="wordCount" content="2097">
+<meta itemprop="wordCount" content="2196">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python语言元素之运算符"/>
 <meta name="twitter:description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个"/>
@@ -149,7 +149,7 @@
     <li><a href="#算术运算符">算术运算符</a></li>
     <li><a href="#赋值运算符">赋值运算符</a></li>
     <li><a href="#比较运算符和逻辑运算符">比较运算符和逻辑运算符</a></li>
-    <li><a href="#运算符的例子">运算符的例子</a>
+    <li><a href="#运算符的例题">运算符的例题</a>
       <ul>
         <li><a href="#例1华氏温度转化为摄氏温度">例1：华氏温度转化为摄氏温度</a></li>
         <li><a href="#例2输入圆的半径计算计算周长和面积">例2：输入圆的半径计算计算周长和面积</a></li>
@@ -353,7 +353,7 @@
 <p><code>is</code>和<code>is not</code>表示判断。<code>flag1 is True</code>即是判断flag1的值是True，是真是假，真即为True；同样 flag2 is not False，即判断flag2是True是真是假，假即为False。</p>
 <p>print函数可以输出多个值，多个值之间可以用<code>，</code>进行分隔，输出的内容之间默认以空格分开。</p>
 </blockquote>
-<h1 id="运算符的例子">运算符的例子</h1>
+<h1 id="运算符的例题">运算符的例题</h1>
 <h2 id="例1华氏温度转化为摄氏温度">例1：华氏温度转化为摄氏温度</h2>
 <p>华氏温度到摄氏温度的转换公式为：<code>C=(F-32)/1.8</code></p>
 <div class="highlight"><div class="chroma">
@@ -382,8 +382,10 @@
 </span><span class="s2">&#34;&#34;&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>说明：在使用print函数输出的时候，也可以对字符串内容进行格式化处理，上面的print函数中的字符串<code>%.1f</code>是一个占位符，稍后会由一个<code>float</code>类型的变量值来替换掉它，并且<code>小数点后保留1位有效数字</code>。同理，如果字符串中有<code>%d</code>，后面会由一个<code>int</code>类型的变量值来替换。而<code>%s</code>会被<code>字符串</code>的值替换。</p>
-<p>除了这种格式化字符串的方式外，还可以用下面的方式来格式化字符串，其中<code>{f:.1f}</code>和<code>{c:.1f}</code>可以先看成是<code>{f}</code>和<code>{c}</code>，表示输出时会用变量<code>f</code>和变量<code>c</code>的值替换掉这两个占位符。后面的<code>:.1f</code>表示这是一个浮点数，小数点后保留1位有效数字。</p>
+</div><blockquote>
+<p>说明：在使用print函数输出的时候，也可以对字符串内容进行格式化处理，<code>print('%f'%(a))</code>上面的print函数中的字符串<code>%.1f</code>是一个占位符，稍后会由一个<code>float</code>类型的变量值来替换掉它，并且<code>小数点后保留1位有效数字</code>。同理，如果字符串中有<code>%d</code>，后面会由一个<code>int</code>类型的变量值来替换。而<code>%s</code>会被<code>字符串</code>的值替换。字符串之后的<code>%</code>后面跟的变量值会替换掉占位符然后输出到终端中。</p>
+<p><code>print(f'{a}')</code>字符串前面加f表示格式化字符串，加f后可以在字符串里面使用用花括号括起来的变量和表达式，如果字符串里面没有表达式，那么前面加不加f输出应该都一样。其中<code>{f:.1f}</code>和<code>{c:.1f}</code>可以先看成是<code>{f}</code>和<code>{c}</code>，表示输出时会用变量<code>f</code>和变量<code>c</code>的值替换掉这两个占位符。后面的<code>:.1f</code>表示这是一个浮点数，小数点后保留1位有效数字。</p>
+</blockquote>
 <h2 id="例2输入圆的半径计算计算周长和面积">例2：输入圆的半径计算计算周长和面积</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -461,7 +463,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python05/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">分支结构</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python03/">
             <span class="next-text nav-default">Python语言元素之变量</span>
             <span class="next-text nav-mobile">Next</span>
