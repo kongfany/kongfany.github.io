@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>分支和循环结构的应用 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="经典案例 例1：寻找水仙花数 水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python07/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="分支和循环结构的应用" />
+<meta property="og:description" content="经典案例 例1：寻找水仙花数 水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python07/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-08T10:23:22&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-08T10:23:22&#43;08:00" />
+
+<meta itemprop="name" content="分支和循环结构的应用">
+<meta itemprop="description" content="经典案例 例1：寻找水仙花数 水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等"><meta itemprop="datePublished" content="2021-07-08T10:23:22&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-08T10:23:22&#43;08:00" />
+<meta itemprop="wordCount" content="1767">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="分支和循环结构的应用"/>
+<meta name="twitter:description" content="经典案例 例1：寻找水仙花数 水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">分支和循环结构的应用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-08 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#经典案例">经典案例</a></li>
+    <li><a href="#例1寻找水仙花数">例1：寻找水仙花数</a></li>
+    <li><a href="#例2正整数反转">例2：正整数反转</a></li>
+    <li><a href="#例3百钱百鸡问题">例3：百钱百鸡问题</a></li>
+    <li><a href="#例4craps赌博游戏">例4：CRAPS赌博游戏</a></li>
+    <li><a href="#例5斐波那契数列">例5：斐波那契数列</a></li>
+    <li><a href="#例6打印素数">例6：打印素数</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="经典案例">经典案例</h1>
+<h1 id="例1寻找水仙花数">例1：寻找水仙花数</h1>
+<p>水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等于它本身，例如：1³ + 5³ + 3³ = 153。</p>
+<p>这个题目的关键是将一个三位数拆分为个位、十位、百位，这一点利用Python中的<code>//</code>（整除）和<code>%</code>（求模）运算符其实很容易做到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">找出所有水仙花数
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">):</span>
+    <span class="n">low</span> <span class="o">=</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">10</span>			<span class="c1"># 个位（取余）</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">num</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">%</span> <span class="mi">10</span>	<span class="c1"># 十位，先去掉个位（整除），然后取余</span>
+    <span class="n">high</span> <span class="o">=</span> <span class="n">num</span> <span class="o">//</span> <span class="mi">100</span>		<span class="c1"># 百位，直接去掉后两位（整除）</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">low</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">mid</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">high</span> <span class="o">**</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="例2正整数反转">例2：正整数反转</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">正整数的反转
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;num = &#39;</span><span class="p">))</span>
+<span class="n">reversed_num</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">reversed_num</span> <span class="o">=</span> <span class="n">reversed_num</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">10</span>		<span class="c1"># 得到最后一位数，下一轮将这个数提前</span>
+    <span class="n">num</span> <span class="o">//=</span> <span class="mi">10</span>		<span class="c1">#去掉最后一位数										</span>
+<span class="k">print</span><span class="p">(</span><span class="n">reversed_num</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="例3百钱百鸡问题">例3：百钱百鸡问题</h1>
+<p>《算经》一书中提出的数学问题：鸡翁一值钱五，鸡母一值钱三，鸡雏三值钱一。百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？翻译成现代文是：公鸡5元一只，母鸡3元一只，小鸡1元三只，用100块钱买一百只鸡，问公鸡、母鸡、小鸡各有多少只？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">《百钱百鸡》问题
+</span><span class="s2">穷举法，暴力搜索法
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="c1"># 假设公鸡的数量为x，x的取值范围是0到20</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+    <span class="c1"># 假设母鸡的数量为y，y的取值范围是0到33</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">34</span><span class="p">):</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+        <span class="k">if</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">//</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">z</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;公鸡: {x}只, 母鸡: {y}只, 小鸡: {z}只&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="例4craps赌博游戏">例4：CRAPS赌博游戏</h1>
+<p>CRAPS又称花旗骰，是美国拉斯维加斯非常受欢迎的一种的桌上赌博游戏。该游戏使用两粒骰子，玩家通过摇两粒骰子获得点数进行游戏。简化后的规则是：玩家第一次摇骰子如果摇出了7点或11点，玩家胜；玩家第一次如果摇出2点、3点或12点，庄家胜；玩家如果摇出其他点数则玩家继续摇骰子，如果玩家摇出了7点，庄家胜；如果玩家摇出了第一次摇的点数，玩家胜；其他点数玩家继续摇骰子，直到分出胜负。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">Craps赌博游戏
+</span><span class="s2">我们设定游戏开始时玩家有1000元的赌注
+</span><span class="s2">游戏结束的条件是玩家破产（输光所有的赌注）
+</span><span class="s2">
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="n">money</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="k">while</span> <span class="n">money</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;你的总资产为: {money}元&#39;</span><span class="p">)</span>
+    <span class="n">go_on</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="c1"># 下注金额必须大于0小于等于玩家总资产</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">debt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请下注: &#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">debt</span> <span class="o">&lt;=</span> <span class="n">money</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="c1"># 第一次摇色子</span>
+    <span class="c1"># 用1到6均匀分布的随机数模拟摇色子得到的点数</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">玩家摇出了{first}点&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">first</span> <span class="o">==</span> <span class="mi">7</span> <span class="ow">or</span> <span class="n">first</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;玩家胜!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">money</span> <span class="o">+=</span> <span class="n">debt</span>
+    <span class="k">elif</span> <span class="n">first</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">first</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">first</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;庄家胜!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">money</span> <span class="o">-=</span> <span class="n">debt</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">go_on</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="c1"># 第一次摇色子没有分出胜负游戏继续</span>
+    <span class="k">while</span> <span class="n">go_on</span><span class="p">:</span>
+        <span class="n">go_on</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;玩家摇出了{current}点&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;庄家胜!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">money</span> <span class="o">-=</span> <span class="n">debt</span>
+        <span class="k">elif</span> <span class="n">current</span> <span class="o">==</span> <span class="n">first</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;玩家胜!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">money</span> <span class="o">+=</span> <span class="n">debt</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">go_on</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;你破产了, 游戏结束!&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="例5斐波那契数列">例5：斐波那契数列</h1>
+<p>斐波那契数列（Fibonacci sequence），通常也被称作黄金分割数列，是意大利数学家莱昂纳多·斐波那契（Leonardoda Fibonacci）在《计算之书》中研究在理想假设条件下兔子成长率问题而引入的数列，因此这个数列也常被戏称为“兔子数列”。斐波那契数列的特点是数列的前两个数都是1，从第三个数开始，每个数都是它前面两个数的和，按照这个规律，斐波那契数列的前10个数是：<code>1, 1, 2, 3, 5, 8, 13, 21, 34, 55</code>。斐波那契数列在现代物理、准晶体结构、化学等领域都有直接的应用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">输出斐波那契数列前20个数
+</span><span class="s2">
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="c1"># 前两个数都是1</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="c1"># 通过递推公式算出后面的18个数</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">18</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>		<span class="c1"># 交换</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="例6打印素数">例6：打印素数</h1>
+<p>素数指的是只能被1和自身整除的正整数（不包括1）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">输出100以内的素数
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>  <span class="c1"># 2~</span>
+    <span class="c1"># 假设num是素数</span>
+    <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="c1"># 在2到num-1之间找num的因子</span>
+    <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="c1"># 如果找到了num的因子，num就不是素数</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">break</span>
+    <span class="c1"># 如果布尔值为True在num是素数</span>
+    <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python06/">
+            <span class="next-text nav-default">循环结构</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
