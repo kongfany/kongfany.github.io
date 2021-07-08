@@ -49,7 +49,7 @@
 <meta itemprop="name" content="分支和循环结构的应用">
 <meta itemprop="description" content="经典案例 例1：寻找水仙花数 水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等"><meta itemprop="datePublished" content="2021-07-08T10:23:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-08T10:23:22&#43;08:00" />
-<meta itemprop="wordCount" content="2377">
+<meta itemprop="wordCount" content="2424">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="分支和循环结构的应用"/>
 <meta name="twitter:description" content="经典案例 例1：寻找水仙花数 水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等"/>
@@ -202,10 +202,19 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">正整数的反转
+</span><span class="s2">正整数的反转   
+</span><span class="s2">120-&gt;21 同样成立
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;num = &#39;</span><span class="p">))</span>
 <span class="n">reversed_num</span> <span class="o">=</span> <span class="mi">0</span>
@@ -214,6 +223,13 @@
     <span class="n">num</span> <span class="o">//=</span> <span class="mi">10</span>		<span class="c1">#去掉最后一位数										</span>
 <span class="k">print</span><span class="p">(</span><span class="n">reversed_num</span><span class="p">)</span>
 
+<span class="c1"># 疯狂转化</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="n">l</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># 字符串转列表</span>
+<span class="n">l</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="c1"># 列表反转</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="c1">#列表转字符串</span>
+<span class="n">f</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="例3百钱百鸡问题">例3：百钱百鸡问题</h1>
