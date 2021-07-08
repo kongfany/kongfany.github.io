@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 08 Jul 2021 10:23:22 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Jul 2021 16:36:30 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>函数和模块</title>
+      <link>https://kongfany.github.io/post/python08/</link>
+      <pubDate>Thu, 08 Jul 2021 16:36:30 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python08/</guid>
+      <description>函数的作用 “代码有很多种坏味道，重复是最坏的一种！”。要写出高质量的代码首先要解决的就是重复代码的问题。我们可以将计算阶乘的功能封装到一个称</description>
+    </item>
+    
     <item>
       <title>分支和循环结构的应用</title>
       <link>https://kongfany.github.io/post/python07/</link>

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="分支和循环结构的应用">
 <meta itemprop="description" content="经典案例 例1：寻找水仙花数 水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等"><meta itemprop="datePublished" content="2021-07-08T10:23:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-08T10:23:22&#43;08:00" />
-<meta itemprop="wordCount" content="1767">
+<meta itemprop="wordCount" content="2377">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="分支和循环结构的应用"/>
 <meta name="twitter:description" content="经典案例 例1：寻找水仙花数 水仙花数也被称为超完全数字不变数、自恋数、自幂数、阿姆斯特朗数，它是一个3位数，该数字每个位上数字的立方之和正好等"/>
@@ -152,6 +152,8 @@
     <li><a href="#例4craps赌博游戏">例4：CRAPS赌博游戏</a></li>
     <li><a href="#例5斐波那契数列">例5：斐波那契数列</a></li>
     <li><a href="#例6打印素数">例6：打印素数</a></li>
+    <li><a href="#例7回文数">例7：回文数</a></li>
+    <li><a href="#例8完美数">例8：完美数</a></li>
   </ul>
 </nav>
   </div>
@@ -230,18 +232,22 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">《百钱百鸡》问题
 </span><span class="s2">穷举法，暴力搜索法
+</span><span class="s2">
+</span><span class="s2">注：小鸡一元三只，并且小鸡的个数应该是3 的倍数
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="c1"># 假设公鸡的数量为x，x的取值范围是0到20</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
     <span class="c1"># 假设母鸡的数量为y，y的取值范围是0到33</span>
     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">34</span><span class="p">):</span>
         <span class="n">z</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
-        <span class="k">if</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">//</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">z</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">//</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">z</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  
             <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;公鸡: {x}只, 母鸡: {y}只, 小鸡: {z}只&#39;</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
@@ -294,17 +300,19 @@
 </span><span class="lnt">42
 </span><span class="lnt">43
 </span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">Craps赌博游戏
 </span><span class="s2">我们设定游戏开始时玩家有1000元的赌注
 </span><span class="s2">游戏结束的条件是玩家破产（输光所有的赌注）
-</span><span class="s2">
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 
 <span class="n">money</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="c1"># 下注</span>
 <span class="k">while</span> <span class="n">money</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;你的总资产为: {money}元&#39;</span><span class="p">)</span>
     <span class="n">go_on</span> <span class="o">=</span> <span class="bp">False</span>
@@ -324,6 +332,7 @@
         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;庄家胜!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">money</span> <span class="o">-=</span> <span class="n">debt</span>
     <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;未分出胜负，继续摇骰子&#34;</span><span class="p">)</span>
         <span class="n">go_on</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="c1"># 第一次摇色子没有分出胜负游戏继续</span>
     <span class="k">while</span> <span class="n">go_on</span><span class="p">:</span>
@@ -337,6 +346,7 @@
             <span class="k">print</span><span class="p">(</span><span class="s1">&#39;玩家胜!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">money</span> <span class="o">+=</span> <span class="n">debt</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;未分出胜负，继续摇骰子&#34;</span><span class="p">)</span>
             <span class="n">go_on</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;你破产了, 游戏结束!&#39;</span><span class="p">)</span>
 
@@ -369,7 +379,7 @@
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 <span class="c1"># 通过递推公式算出后面的18个数</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">18</span><span class="p">):</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>		<span class="c1"># 交换</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>		<span class="c1"># b换给a，a+b换给b，每次输出b</span>
     <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
@@ -394,12 +404,23 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">输出100以内的素数
 </span><span class="s2">&#34;&#34;&#34;</span>
-<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>  <span class="c1"># 2~</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>  <span class="c1"># 2~99</span>
     <span class="c1"># 假设num是素数</span>
     <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="c1"># 在2到num-1之间找num的因子</span>
@@ -411,7 +432,110 @@
     <span class="c1"># 如果布尔值为True在num是素数</span>
     <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        
+ <span class="c1"># 改进，       </span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">is_prime</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">mid</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num</span><span class="o">%</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">is_prime</span><span class="o">=</span><span class="bp">False</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="例7回文数">例7：回文数</h1>
+<p>回文数是指将一个正整数从左往右排列和从右往左排列值一样的数</p>
+<p>通过例2的正整数反转，判断如果相同就是回文数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">判断输入的正整数是不是回文数
+</span><span class="s2">回文数是指将一个正整数从左往右排列和从右往左排列值一样的数
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入一个正整数: &#39;</span><span class="p">))</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">num</span>	<span class="c1"># temp用来去操作num，保证num的处所值不变，方便比较</span>
+<span class="n">num2</span> <span class="o">=</span> <span class="mi">0</span>	<span class="c1"># 用来记录num反转的数</span>
+<span class="k">while</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">num2</span> <span class="o">*=</span> <span class="mi">10</span>
+    <span class="n">num2</span> <span class="o">+=</span> <span class="n">temp</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="n">temp</span> <span class="o">//=</span> <span class="mi">10</span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">num2</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">是回文数&#39;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">不是回文数&#39;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="例8完美数">例8：完美数</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">找出1~9999之间的所有完美数
+</span><span class="s2">完美数是除自身外其他所有因子的和正好等于这个数本身的数
+</span><span class="s2">例如: 6 = 1 + 2 + 3, 28 = 1 + 2 + 4 + 7 + 14
+</span><span class="s2">
+</span><span class="s2">int(math.sqrt(num)) 开根号后取整
+</span><span class="s2">
+</span><span class="s2">1不是完美数，可以从2开始判断
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10000</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>	 <span class="c1"># 记录因子和</span>
+    <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># 因子从1 开始到根号下num</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">factor</span>
+            <span class="k">if</span> <span class="n">factor</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">num</span> <span class="o">//</span> <span class="n">factor</span> <span class="o">!=</span> <span class="n">factor</span><span class="p">:</span> 
+                <span class="c1"># 大于1的因子，对应的另一个因子不是本身，则另一个因为也要加到和中</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="n">num</span> <span class="o">//</span> <span class="n">factor</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -435,7 +559,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python08/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">函数和模块</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python06/">
             <span class="next-text nav-default">循环结构</span>
             <span class="next-text nav-mobile">Next</span>
