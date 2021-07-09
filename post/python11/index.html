@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Python11 - 大胖狗来了</title>
+  <title>列表 - 大胖狗来了</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -39,19 +39,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Python11" />
+<meta property="og:title" content="列表" />
 <meta property="og:description" content="在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。 定义和使用列表 在Pyth" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python11/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-07-09T15:15:40&#43;08:00" />
 <meta property="article:modified_time" content="2021-07-09T15:15:40&#43;08:00" />
 
-<meta itemprop="name" content="Python11">
+<meta itemprop="name" content="列表">
 <meta itemprop="description" content="在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。 定义和使用列表 在Pyth"><meta itemprop="datePublished" content="2021-07-09T15:15:40&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-09T15:15:40&#43;08:00" />
-<meta itemprop="wordCount" content="3329">
+<meta itemprop="wordCount" content="3500">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Python11"/>
+<meta name="twitter:title" content="列表"/>
 <meta name="twitter:description" content="在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。 定义和使用列表 在Pyth"/>
 
 <!--[if lte IE 9]>
@@ -129,7 +129,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Python11</h1>
+      <h1 class="post-title">列表</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-07-09 </span>
@@ -156,7 +156,7 @@
         <li><a href="#元素排序和反转">元素排序和反转</a></li>
       </ul>
     </li>
-    <li><a href="#列表的生成式">列表的生成式</a></li>
+    <li><a href="#列表的生成式">☆列表的生成式</a></li>
     <li><a href="#嵌套的列表">嵌套的列表</a></li>
     <li><a href="#总结">总结</a></li>
   </ul>
@@ -179,6 +179,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>除此以外，还可以通过Python内置的<code>list</code>函数将其他序列变成列表。准确的说，<code>list</code>并不是一个函数，而是创建列表对象的构造器（后面会讲到对象和构造器这两个概念）。</p>
+<p><strong>更建议用下面的生成式的方法创建</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -461,6 +462,7 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">]</span>
@@ -474,9 +476,17 @@
 <span class="n">items</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    
 <span class="c1"># [&#39;Python&#39;, &#39;Python&#39;, &#39;Kotlin&#39;, &#39;Java&#39;, &#39;Go&#39;]</span>
+
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="列表的生成式">列表的生成式</h1>
+</div><blockquote>
+<p>print(items.reverse())结果为None。</p>
+<p>在此基础上print(items)结果已经反转</p>
+<p><em>为什么呢？</em></p>
+<p>其实很简单，这里调用了的reverse()函数，它是<strong>没有返回值</strong>的，这个函数只是单纯地把原来列表的元素顺序改变了，这样子以后我们调用这个列表时里面的元素就是被修改过顺序的。
+sort()函数<strong>同理</strong>。</p>
+</blockquote>
+<h1 id="列表的生成式">☆列表的生成式</h1>
 <p>在Python中，列表还可以通过一种特殊的字面量语法来创建，这种语法叫做生成式。我们给出两段代码，大家可以做一个对比，看看哪一种方式更加简单优雅。</p>
 <p>通过<code>for</code>循环为空列表添加元素。</p>
 <div class="highlight"><div class="chroma">
@@ -523,7 +533,7 @@
 <span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>通过生成式创建列表。</p>
+</div><p><strong>通过生成式创建列表。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -630,7 +640,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python12/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">元组</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python10/">
             <span class="next-text nav-default">函数和字符串的应用</span>
             <span class="next-text nav-mobile">Next</span>

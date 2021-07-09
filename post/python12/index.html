@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>元组 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="上一节课为大家讲解了Python中的列表，它是一种容器型数据类型，我们可以通过定义列表类型的变量来保存和操作多个元素。当然，Python中容" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python12/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="元组" />
+<meta property="og:description" content="上一节课为大家讲解了Python中的列表，它是一种容器型数据类型，我们可以通过定义列表类型的变量来保存和操作多个元素。当然，Python中容" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python12/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-09T17:42:21&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-09T17:42:21&#43;08:00" />
+
+<meta itemprop="name" content="元组">
+<meta itemprop="description" content="上一节课为大家讲解了Python中的列表，它是一种容器型数据类型，我们可以通过定义列表类型的变量来保存和操作多个元素。当然，Python中容"><meta itemprop="datePublished" content="2021-07-09T17:42:21&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-09T17:42:21&#43;08:00" />
+<meta itemprop="wordCount" content="2715">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="元组"/>
+<meta name="twitter:description" content="上一节课为大家讲解了Python中的列表，它是一种容器型数据类型，我们可以通过定义列表类型的变量来保存和操作多个元素。当然，Python中容"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">元组</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-09 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#定义和使用元组">定义和使用元组</a></li>
+    <li><a href="#元组的应用场景">元组的应用场景</a>
+      <ul>
+        <li><a href="#打包和解包操作">打包和解包操作</a></li>
+        <li><a href="#交换变量的值">交换变量的值</a></li>
+        <li><a href="#让函数返回多个值">让函数返回多个值</a></li>
+      </ul>
+    </li>
+    <li><a href="#元组和列表的比较">元组和列表的比较</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>上一节课为大家讲解了Python中的列表，它是一种容器型数据类型，我们可以通过定义列表类型的变量来保存和操作多个元素。当然，Python中容器型的数据类型肯定不止列表一种，接下来我们为大家讲解另一种重要的容器型数据类型，它的名字叫元组（tuple）。</p>
+<h1 id="定义和使用元组">定义和使用元组</h1>
+<p>在Python中，元组也是多个元素按照一定的顺序构成的序列。元组和列表的不同之处在于，元组是不可变类型，这就意味着元组类型的变量一旦定义，其中的元素不能再添加或删除，而且元素的值也不能进行修改。定义元组通常使用<code>()</code>字面量语法，也建议大家使用这种方式来创建元组。元组类型支持的运算符跟列表是一样。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义一个三元组</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">55</span><span class="p">)</span>
+<span class="c1"># 定义一个四元组</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;孔&#39;</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;徐州&#39;</span><span class="p">)</span>
+
+<span class="c1"># 查看变量的类型</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>    
+<span class="c1"># &lt;class &#39;tuple&#39;&gt; &lt;class &#39;tuple&#39;&gt;</span>
+
+<span class="c1"># 查看元组中元素的数量</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>      
+<span class="c1"># 3 4</span>
+
+<span class="c1"># 通过索引运算获取元组中的元素</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t1</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>         <span class="c1"># 30 30</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t2</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">t2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>         <span class="c1"># 徐州 徐州</span>
+
+<span class="c1"># 循环遍历元组中的元素</span>
+<span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">t2</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+
+<span class="c1"># 成员运算</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">100</span> <span class="ow">in</span> <span class="n">t1</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">40</span> <span class="ow">in</span> <span class="n">t2</span><span class="p">)</span>     <span class="c1"># True</span>
+
+<span class="c1"># 拼接</span>
+<span class="n">t3</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t3</span><span class="p">)</span>           <span class="c1"># (30, 10, 55, &#39;孔&#39;, 40, True, &#39;徐州&#39;)</span>
+
+<span class="c1"># 切片</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t3</span><span class="p">[::</span><span class="mi">3</span><span class="p">])</span>      <span class="c1"># (30, &#39;孔&#39;, &#39;徐州&#39;)</span>
+
+<span class="c1"># 比较运算</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t1</span> <span class="o">==</span> <span class="n">t3</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t1</span> <span class="o">&gt;=</span> <span class="n">t3</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t1</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">55</span><span class="p">))</span>    <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一个元组中如果有两个元素，我们就称之为二元组；一个元组中如果五个元素，我们就称之为五元组。</p>
+<p>需要提醒大家注意的是，<code>()</code>表示空元组，但是如果元组中只有一个元素，需要加上一个逗号，否则<code>()</code>就不是代表元组的字面量语法，而是改变运算优先级的圆括号，所以<code>('hello', )</code>和<code>(100, )</code>才是一元组，而<code>('hello')</code>和<code>(100)</code>只是字符串和整数。我们可以通过下面的代码来加以验证。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 空元组</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;tuple&#39;&gt;</span>
+
+<span class="c1"># 不是元组</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;str&#39;&gt;</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;int&#39;&gt;</span>
+
+<span class="c1"># 一元组</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;tuple&#39;&gt;</span>
+<span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;tuple&#39;&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="元组的应用场景">元组的应用场景</h1>
+<h2 id="打包和解包操作">打包和解包操作</h2>
+<p>当我们把多个用逗号分隔的值赋给一个变量时，多个值会打包成一个元组类型；当我们把一个元组赋值给多个变量时，元组会解包成多个值然后分别赋给对应的变量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 打包</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>    <span class="c1"># &lt;class &#39;tuple&#39;&gt; (1, 10, 100)</span>
+<span class="c1"># 解包</span>
+<span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>       <span class="c1"># 1 10 100</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在解包时，如果解包出来的元素个数和变量个数不对应，会引发<code>ValueError</code>异常，错误信息为：<code>too many values to unpack</code>（解包的值太多）或<code>not enough values to unpack</code>（解包的值不足）。</p>
+<p>有一种解决变量个数少于元素的个数方法，就是使用星号表达式，我们之前讲函数的可变参数时使用过星号表达式。有了星号表达式，我们就可以让一个变量接收多个值，代码如下所示。需要注意的是，用星号表达式修饰的变量会变成一个列表，列表中有0个或多个元素。还有在解包语法中，星号表达式只能出现一次。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="o">*</span><span class="n">k</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>          <span class="c1"># 1 10 [100, 1000]</span>
+<span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>          <span class="c1"># 1 [10, 100] 1000</span>
+<span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>          <span class="c1"># [1, 10] 100 1000</span>
+<span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>             <span class="c1"># [1, 10, 100] 1000</span>
+<span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">j</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>             <span class="c1"># 1 [10, 100, 1000]</span>
+<span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="n">l</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>       <span class="c1"># 1 10 100 [1000]</span>
+<span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="o">*</span><span class="n">m</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>    <span class="c1"># 1 10 100 1000 []</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>解包语法对所有的序列都成立，这就意味着对字符串、列表以及我们之前讲到的<code>range</code>函数返回的范围序列都可以使用解包语法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在我们可以反过来思考一下函数的可变参数，可变参数其实就是将多个参数打包成了一个元组，可以通过下面的代码来证明这一点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">args</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+
+<span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>        <span class="c1"># &lt;class &#39;tuple&#39;&gt; (1, 10, 20)</span>
+<span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>    <span class="c1"># &lt;class &#39;tuple&#39;&gt; (1, 2, 3, 4, 5)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="交换变量的值">交换变量的值</h2>
+<p>交换两个变量的值是编程语言中的一个经典案例，在很多编程语言中，交换两个变量的值都需要借助一个中间变量才能做到，如果不用中间变量就需要使用比较晦涩的位运算来实现。在Python中，交换两个变量<code>a</code>和<code>b</code>的值只需要使用如下所示的代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>同理，如果要将三个变量<code>a</code>、<code>b</code>、<code>c</code>的值互换，即<code>b</code>赋给<code>a</code>，<code>c</code>赋给<code>b</code>，<code>a</code>赋给<code>c</code>，也可以如法炮制。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">a</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要说明的是，上面并没有用到打包和解包语法，Python的字节码指令中有<code>ROT_TWO</code>和<code>ROT_THREE</code>这样的指令可以实现这个操作，效率是非常高的。但是如果有多于三个变量的值要依次互换，这个时候没有直接可用的字节码指令，执行的原理就是我们上面讲解的打包和解包操作。</p>
+<h2 id="让函数返回多个值">让函数返回多个值</h2>
+<p>有的时候一个函数执行完成后可能需要返回多个值，这个时候元组类型应该是比较方便的选择。例如，编写一个找出列表中最大值和最小的函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">find_max_and_min</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;找出列表中最大和最小的元素
+</span><span class="s2">    :param items: 列表
+</span><span class="s2">    :return: 最大和最小元素构成的二元组
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">max_one</span><span class="p">,</span> <span class="n">min_one</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="n">max_one</span><span class="p">:</span>
+            <span class="n">max_one</span> <span class="o">=</span> <span class="n">item</span>
+        <span class="k">elif</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="n">min_one</span><span class="p">:</span>
+            <span class="n">min_one</span> <span class="o">=</span> <span class="n">item</span>
+    <span class="k">return</span> <span class="n">max_one</span><span class="p">,</span> <span class="n">min_one</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面函数的<code>return</code>语句中有两个值，这两个值会组装成一个二元组然后返回。所以调用<code>find_max_and_min</code>函数会得到这个二元组，如果愿意也可以通过解包语法将二元组中的两个值分别赋给两个变量。</p>
+<h1 id="元组和列表的比较">元组和列表的比较</h1>
+<p>这里还有一个非常值得探讨的问题，Python中已经有了列表类型，为什么还需要元组这样的类型呢？这个问题对于初学者来说似乎有点困难，不过没有关系，我们先抛出观点，大家可以一边学习一边慢慢体会。</p>
+<ol>
+<li>
+<p>元组是不可变类型，<strong>不可变类型更适合多线程环境</strong>，因为它降低了并发访问变量的同步化开销。</p>
+</li>
+<li>
+<p>元组是不可变类型，通常<strong>不可变类型在创建时间和占用空间上面都优于对应的可变类型</strong>。我们可以使用<code>sys</code>模块的<code>getsizeof</code>函数来检查保存相同元素的元组和列表各自占用了多少内存空间。我们也可以使用<code>timeit</code>模块的<code>timeit</code>函数来看看创建保存相同元素的元组和列表各自花费的时间，代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>    <span class="c1"># 900120 800056</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;[1, 2, 3, 4, 5, 6, 7, 8, 9]&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;(1, 2, 3, 4, 5, 6, 7, 8, 9)&#39;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Python中的元组和列表是可以相互转换的，我们可以通过下面的代码来做到。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 将元组转换成列表</span>
+<span class="n">info</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;孔&#39;</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;徐州&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">info</span><span class="p">))</span>       
+<span class="c1"># [&#39;孔&#39;, 175, True, &#39;徐州&#39;]</span>
+
+<span class="c1"># 将列表转换成元组</span>
+<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">fruits</span><span class="p">))</span>    
+<span class="c1"># (&#39;apple&#39;, &#39;banana&#39;, &#39;orange&#39;)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h1 id="总结">总结</h1>
+<p><strong>列表和元组都是容器型的数据类型</strong>，即一个变量可以保存多个数据。<strong>列表是可变数据类型</strong>，<strong>元组是不可变数据类型</strong>，所以列表添加元素、删除元素、清空、排序等方法对于元组来说是不成立的。但是列表和元组都可以进行<strong>拼接</strong>、<strong>成员运算</strong>、<strong>索引和切片</strong>这些操作，就如同之前讲到的字符串类型一样，因为字符串就是字符按一定顺序构成的序列，在这一点上三者并没有什么区别。我们<strong>推荐大家使用列表的生成式语法来创建列表</strong>，它很好用，也是Python中非常有特色的语法。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python11/">
+            <span class="next-text nav-default">列表</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
