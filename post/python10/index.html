@@ -49,7 +49,7 @@
 <meta itemprop="name" content="函数和字符串的应用">
 <meta itemprop="description" content="为什么字符串类型（str）可以通过调用方法的方式进行操作，而之前我们用到的数值类型（如int、float）却没有可以调用的方法。在Pytho"><meta itemprop="datePublished" content="2021-07-09T10:23:46&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-09T10:23:46&#43;08:00" />
-<meta itemprop="wordCount" content="1685">
+<meta itemprop="wordCount" content="1714">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="函数和字符串的应用"/>
 <meta name="twitter:description" content="为什么字符串类型（str）可以通过调用方法的方式进行操作，而之前我们用到的数值类型（如int、float）却没有可以调用的方法。在Pytho"/>
@@ -225,8 +225,8 @@
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">string</span>
 
+<span class="c1"># 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
 <span class="n">ALL_CHARS</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span>
-
 
 <span class="k">def</span> <span class="nf">generate_code</span><span class="p">(</span><span class="n">code_len</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;生成指定长度的验证码
@@ -260,6 +260,13 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_suffix</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
@@ -271,6 +278,13 @@
     <span class="n">pos</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
     <span class="c1"># 通过切片操作从文件名中取出后缀名</span>
     <span class="k">return</span> <span class="n">filename</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">	return等价于
+</span><span class="s2">    if pos &gt; 0:
+</span><span class="s2">        return filename[pos+1:]
+</span><span class="s2">    else:
+</span><span class="s2">        return &#34;&#34;
+</span><span class="s2">&#34;&#34;&#34;</span>
 
 <span class="c1"># test</span>
 <span class="k">print</span><span class="p">(</span><span class="n">get_suffix</span><span class="p">(</span><span class="s1">&#39;readme.txt&#39;</span><span class="p">))</span>       <span class="c1"># txt</span>
@@ -355,7 +369,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python11/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python11</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python09/">
             <span class="next-text nav-default">字符串的使用</span>
             <span class="next-text nav-mobile">Next</span>

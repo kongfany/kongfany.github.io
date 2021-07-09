@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python11 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。 定义和使用列表 在Pyth" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python11/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python11" />
+<meta property="og:description" content="在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。 定义和使用列表 在Pyth" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python11/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-09T15:15:40&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-09T15:15:40&#43;08:00" />
+
+<meta itemprop="name" content="Python11">
+<meta itemprop="description" content="在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。 定义和使用列表 在Pyth"><meta itemprop="datePublished" content="2021-07-09T15:15:40&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-09T15:15:40&#43;08:00" />
+<meta itemprop="wordCount" content="3329">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python11"/>
+<meta name="twitter:description" content="在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。 定义和使用列表 在Pyth"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python11</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-09 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#定义和使用列表">定义和使用列表</a></li>
+    <li><a href="#列表的运算符">列表的运算符</a></li>
+    <li><a href="#列表元素的遍历">列表元素的遍历</a></li>
+    <li><a href="#掷骰子统计每个点数出现次数">掷骰子统计每个点数出现次数</a></li>
+    <li><a href="#列表的方法">列表的方法</a>
+      <ul>
+        <li><a href="#添加和删除元素">添加和删除元素</a></li>
+        <li><a href="#元素位置和次数">元素位置和次数</a></li>
+        <li><a href="#元素排序和反转">元素排序和反转</a></li>
+      </ul>
+    </li>
+    <li><a href="#列表的生成式">列表的生成式</a></li>
+    <li><a href="#嵌套的列表">嵌套的列表</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。</p>
+<h1 id="定义和使用列表">定义和使用列表</h1>
+<p>在Python中，<strong>列表是由一系元素按特定顺序构成的数据序列</strong>，这样就意味着定义一个列表类型的变量，<strong>可以保存多个数据</strong>，而且<strong>允许有重复的数据</strong>。跟上一课我们讲到的字符串类型一样，列表也是一种结构化的、非标量类型，操作一个列表类型的变量，除了可以使用运算符还可以使用它的方法。</p>
+<p>在Python中，可以使用<code>[]</code>字面量语法来定义列表，列表中的多个元素用逗号进行分隔，代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">87</span><span class="p">]</span>
+<span class="n">items2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>除此以外，还可以通过Python内置的<code>list</code>函数将其他序列变成列表。准确的说，<code>list</code>并不是一个函数，而是创建列表对象的构造器（后面会讲到对象和构造器这两个概念）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items1</span><span class="p">)</span>    <span class="c1"># [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="n">items2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items2</span><span class="p">)</span>    <span class="c1"># [&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要说明的是，列表是一种可变数据类型，也就是说列表可以添加元素、删除元素、更新元素，这一点跟我们上一课讲到的字符串有着鲜明的差别。字符串是一种不可变数据类型，也就是说对字符串做拼接、重复、转换大小写、修剪空格等操作的时候会产生新的字符串，原来的字符串并没有发生任何改变。</p>
+<h1 id="列表的运算符">列表的运算符</h1>
+<p>和字符串类型一样，列表也支持拼接、重复、成员运算、索引和切片以及比较运算，对此我们不再进行赘述。（索引从0开始）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">87</span><span class="p">]</span>
+<span class="n">items2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">29</span><span class="p">]</span>
+
+<span class="c1"># 列表的拼接</span>
+<span class="n">items3</span> <span class="o">=</span> <span class="n">items1</span> <span class="o">+</span> <span class="n">items2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">)</span>    <span class="c1"># [35, 12, 99, 68, 55, 87, 45, 8, 29]</span>
+
+<span class="c1"># 列表的重复</span>
+<span class="n">items4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items4</span><span class="p">)</span>    <span class="c1"># [&#39;hello&#39;, &#39;hello&#39;, &#39;hello&#39;]</span>
+
+<span class="c1"># 列表的成员运算</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">100</span> <span class="ow">in</span> <span class="n">items3</span><span class="p">)</span>        <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span> <span class="ow">in</span> <span class="n">items4</span><span class="p">)</span>    <span class="c1"># True</span>
+
+<span class="c1"># 获取列表的长度(元素个数)</span>
+<span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">items3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                 <span class="c1"># 9</span>
+
+<span class="c1"># 列表的索引</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">items3</span><span class="p">[</span><span class="o">-</span><span class="n">size</span><span class="p">])</span>        <span class="c1"># 35 35</span>
+<span class="n">items3</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">[</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">items3</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># 100 100</span>
+
+<span class="c1"># 列表的切片</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>          <span class="c1"># [35, 12, 99, 68, 55]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>          <span class="c1"># [55, 87, 45, 8, 100]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">7</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># [55, 68]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">[::</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>        <span class="c1"># [100, 45, 55, 99, 35]</span>
+
+<span class="c1"># 列表的比较运算</span>
+<span class="n">items5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">items6</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># 两个列表比较相等性比的是对应索引位置上的元素是否相等</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items5</span> <span class="o">==</span> <span class="n">items6</span><span class="p">)</span>    <span class="c1"># True</span>
+<span class="n">items7</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># 两个列表比较大小比的是对应索引位置上的元素的大小</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items5</span> <span class="o">&lt;=</span> <span class="n">items7</span><span class="p">)</span>    <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>值得一提的是，由于列表是可变类型，所以通过索引操作既可以获取列表中的元素，也可以更新列表中的元素。对列表做索引操作一样要注意索引越界的问题，对于有<code>N</code>个元素的列表，正向索引的范围是<code>0</code>到<code>N-1</code>，负向索引的范围是<code>-1</code>到<code>-N</code>，如果超出这个范围，将引发<code>IndexError</code>异常，错误信息为：<code>list index out of range</code>。</p>
+</blockquote>
+<h1 id="列表元素的遍历">列表元素的遍历</h1>
+<p>如果想逐个取出列表中的元素，可以使用<code>for</code>循环的，有以下两种做法。（和字符串一样）</p>
+<p>方法一：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>方法二：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="掷骰子统计每个点数出现次数">掷骰子统计每个点数出现次数</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">counters</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6000</span><span class="p">):</span>
+    <span class="n">face</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">counters</span><span class="p">[</span><span class="n">face</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">face</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{face}点出现了{counters[face - 1]}次&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="列表的方法">列表的方法</h1>
+<h2 id="添加和删除元素">添加和删除元素</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">]</span>
+
+<span class="c1"># 使用append方法在列表尾部添加元素</span>
+<span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Swift&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    
+<span class="c1"># [&#39;Python&#39;, &#39;Java&#39;, &#39;Go&#39;, &#39;Kotlin&#39;, &#39;Swift&#39;]</span>
+
+<span class="c1"># 使用insert方法在列表指定索引位置插入元素</span>
+<span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;SQL&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    
+<span class="c1"># [&#39;Python&#39;, &#39;Java&#39;, &#39;SQL&#39;, &#39;Go&#39;, &#39;Kotlin&#39;, &#39;Swift&#39;]</span>
+
+<span class="c1"># 删除指定的元素</span>
+<span class="n">items</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;Java&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    
+<span class="c1"># [&#39;Python&#39;, &#39;SQL&#39;, &#39;Go&#39;, &#39;Kotlin&#39;, &#39;Swift&#39;]</span>
+
+<span class="c1"># 删除指定索引位置的元素</span>
+<span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    
+<span class="c1"># [&#39;SQL&#39;, &#39;Go&#39;, &#39;Kotlin&#39;]</span>
+
+<span class="c1"># 清空列表中的元素</span>
+<span class="n">items</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    
+<span class="c1"># []</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在使用<code>remove</code>方法删除元素时，如果要删除的元素并不在列表中，会引发<code>ValueError</code>异常，错误消息是：<code>list.remove(x): x not in list</code>。在使用<code>pop</code>方法删除元素时，如果索引的值超出了范围，会引发<code>IndexError</code>异常，错误消息是：<code>pop index out of range</code>。</p>
+<p>从列表中删除元素其实还有一种方式，就是使用Python中的<code>del</code>关键字后面跟要删除的元素，这种做法跟使用<code>pop</code>方法指定索引删除元素没有实质性的区别，但后者会返回删除的元素，前者在性能上略优（<code>del</code>对应字节码指令是<code>DELETE_SUBSCR</code>，而<code>pop</code>对应的字节码指令是<code>CALL_METHOD</code>和<code>POP_TOP</code>）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># [&#39;Python&#39;, &#39;Go&#39;, &#39;Kotlin&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="元素位置和次数">元素位置和次数</h2>
+<p>列表类型的<code>index</code>方法可以查找某个元素在列表中的索引位置；因为列表中允许有重复的元素，所以列表类型提供了<code>count</code>方法来统计一个元素在列表中出现的次数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">]</span>
+
+<span class="c1"># 查找元素的索引位置</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;Python&#39;</span><span class="p">))</span>       <span class="c1"># 0</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>    <span class="c1"># 5</span>
+<span class="c1"># 注意：虽然列表中有&#39;Java&#39;，但是从索引为3这个位置开始后面是没有&#39;Java&#39;的</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>      
+<span class="c1"># ValueError: &#39;Java&#39; is not in list</span>
+
+<span class="c1"># 查找元素出现的次数</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;Python&#39;</span><span class="p">))</span>    <span class="c1"># 2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;Go&#39;</span><span class="p">))</span>        <span class="c1"># 1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;Swfit&#39;</span><span class="p">))</span>     <span class="c1"># 0</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="元素排序和反转">元素排序和反转</h2>
+<p>列表的<code>sort</code>操作可以实现列表元素的排序，而<code>reverse</code>操作可以实现元素的反转</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">]</span>
+
+<span class="c1"># 排序</span>
+<span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    
+<span class="c1"># [&#39;Go&#39;, &#39;Java&#39;, &#39;Kotlin&#39;, &#39;Python&#39;, &#39;Python&#39;]</span>
+
+<span class="c1"># 反转</span>
+<span class="n">items</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    
+<span class="c1"># [&#39;Python&#39;, &#39;Python&#39;, &#39;Kotlin&#39;, &#39;Java&#39;, &#39;Go&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="列表的生成式">列表的生成式</h1>
+<p>在Python中，列表还可以通过一种特殊的字面量语法来创建，这种语法叫做生成式。我们给出两段代码，大家可以做一个对比，看看哪一种方式更加简单优雅。</p>
+<p>通过<code>for</code>循环为空列表添加元素。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建一个由1到9的数字构成的列表</span>
+<span class="n">items1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">items1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items1</span><span class="p">)</span>
+
+<span class="c1"># 创建一个由&#39;hello world&#39;中除空格和元音字母外的字符构成的列表</span>
+<span class="n">items2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s1">&#39;hello world&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39; aeiou&#39;</span><span class="p">:</span>
+        <span class="n">items2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items2</span><span class="p">)</span>
+
+<span class="c1"># 创建一个由个两个字符串中字符的笛卡尔积构成的列表</span>
+<span class="n">items3</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s1">&#39;ABC&#39;</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="s1">&#39;12&#39;</span><span class="p">:</span>
+        <span class="n">items3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过生成式创建列表。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建一个由1到9的数字构成的列表</span>
+<span class="n">items1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items1</span><span class="p">)</span>    
+<span class="c1"># [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+
+<span class="c1"># 创建一个由&#39;hello world&#39;中除空格和元音字母外的字符构成的列表</span>
+<span class="n">items2</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s1">&#39;hello world&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39; aeiou&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items2</span><span class="p">)</span>    
+<span class="c1"># [&#39;h&#39;, &#39;l&#39;, &#39;l&#39;, &#39;w&#39;, &#39;r&#39;, &#39;l&#39;, &#39;d&#39;]</span>
+
+<span class="c1"># 创建一个由个两个字符串中字符的笛卡尔积构成的列表</span>
+<span class="n">items3</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s1">&#39;ABC&#39;</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="s1">&#39;12&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">)</span>    
+<span class="c1"># [&#39;A1&#39;, &#39;A2&#39;, &#39;B1&#39;, &#39;B2&#39;, &#39;C1&#39;, &#39;C2&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面这种方式不仅代码简单优雅，而且性能也优于上面使用<code>for</code>循环和<code>append</code>方法向空列表中追加元素的方式。可以简单跟大家交待下为什么生成式拥有更好的性能，那是因为Python解释器的字节码指令中有专门针对生成式的指令（<code>LIST_APPEND</code>指令）；而<code>for</code>循环是通过方法调用（<code>LOAD_METHOD</code>和<code>CALL_METHOD</code>指令）的方式为列表添加元素，方法调用本身就是一个相对耗时的操作。对这一点不理解也没有关系，记住“<strong>强烈建议用生成式语法来创建列表</strong>”这个结论就可以了。</p>
+<h1 id="嵌套的列表">嵌套的列表</h1>
+<p>Python语言没有限定列表中的元素必须是相同的数据类型，也就是说一个列表中的元素可以任意的数据类型，当然也包括列表。如果列表中的元素又是列表，那么我们可以称之为嵌套的列表。</p>
+<p>嵌套的列表可以用来表示表格或数学上的矩阵，例如：我们想保存5个学生3门课程的成绩，可以定义一个保存5个元素的列表保存5个学生的信息，而每个列表元素又是3个元素构成的列表，分别代表3门课程的成绩。但是，一定要注意下面的代码是有问题的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">scores</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="k">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>    
+<span class="c1"># [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>看上去我们好像创建了一个<code>5 * 3</code>的嵌套列表，但实际上当我们录入第一个学生的第一门成绩后，你就会发现问题来了，我们看看下面代码的输出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 嵌套的列表需要多次索引操作才能获取元素</span>
+<span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">95</span>
+<span class="k">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>    
+<span class="c1"># [[95, 0, 0], [95, 0, 0], [95, 0, 0], [95, 0, 0], [95, 0, 0]]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们不去过多的解释为什么会出现这样的问题，如果想深入研究这个问题，可以通过<a href="http://www.pythontutor.com/visualize.html">Python Tutor</a>网站的可视化代码执行功能，看看创建列表时计算机内存中发生了怎样的变化，下面的图就是在这个网站上生成的。</p>
+<p><img src="/images/202107/22.png" alt=""></p>
+<p>建议大家不去纠结这个问题，现阶段只需要记住不能用<code>[[0] * 3] * 5]</code>这种方式来创建嵌套列表就行了。那么创建嵌套列表的正确做法是什么呢，下面的代码会给你答案。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">scores</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">95</span>
+<span class="k">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>    
+<span class="c1"># [[95, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="总结">总结</h1>
+<p>Python中的列表底层是一个可以动态扩容的数组，列表元素在内存中也是连续存储的，所以可以实现随机访问（通过一个有效的索引获取到对应的元素且操作时间与列表元素个数无关）。</p>
+<p>我们暂时不去触碰这些底层存储细节以及列表每个方法的渐近时间复杂度（执行这个方法耗费的时间跟列表元素个数的关系），等需要的时候再告诉大家。现阶段，大家只需要知道<strong>列表是容器</strong>，可以<strong>保存各种类型的数据</strong>，<strong>可以通过索引操作列表元素</strong>就可以了。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python10/">
+            <span class="next-text nav-default">函数和字符串的应用</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

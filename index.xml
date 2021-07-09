@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 09 Jul 2021 10:23:46 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Jul 2021 15:15:40 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python11</title>
+      <link>https://kongfany.github.io/post/python11/</link>
+      <pubDate>Fri, 09 Jul 2021 15:15:40 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python11/</guid>
+      <description>在Python中我们可以通过容器类型的变量来保存和操作多个数据，我们首先为大家介绍列表（list）这种新的数据类型。 定义和使用列表 在Pyth</description>
+    </item>
+    
     <item>
       <title>函数和字符串的应用</title>
       <link>https://kongfany.github.io/post/python10/</link>
