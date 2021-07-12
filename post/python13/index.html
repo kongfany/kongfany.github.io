@@ -49,7 +49,7 @@
 <meta itemprop="name" content="列表和元组的应用">
 <meta itemprop="description" content="成绩表和平均分统计 录入5个学生3门课程的考试成绩，计算每个学生的平均分和每门课的平均分。 提醒大家在使用嵌套列表时应该避开的坑！ 1 2 3 4 5 6 7"><meta itemprop="datePublished" content="2021-07-11T16:39:00&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-11T16:39:00&#43;08:00" />
-<meta itemprop="wordCount" content="2120">
+<meta itemprop="wordCount" content="2414">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="列表和元组的应用"/>
 <meta name="twitter:description" content="成绩表和平均分统计 录入5个学生3门课程的考试成绩，计算每个学生的平均分和每门课的平均分。 提醒大家在使用嵌套列表时应该避开的坑！ 1 2 3 4 5 6 7"/>
@@ -186,6 +186,29 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
@@ -212,9 +235,32 @@
 <span class="c1"># 计算每门课的平均成绩</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">course</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">courses</span><span class="p">):</span>
     <span class="c1"># 用生成式从scores中取出指定的列创建新列表</span>
+    <span class="c1"># 因为scores列表是规律的所以直接取出相同位置的就可以</span>
     <span class="n">curr_course_scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">score</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">]</span>
+    <span class="c1"># 每一轮 score 其实是 scores 的 元素，就是一个列表</span>
+    <span class="c1"># score：[1.0, 2.0, 3.0],[4.0, 5.0, 6.0]...</span>
+    <span class="c1"># 然后取出score[index]存入到新的列表curr_course_scores中</span>
+    <span class="c1"># 即为各科对应的成绩</span>
     <span class="n">avg_score</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">curr_course_scores</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{course}的平均成绩为：{avg_score:.1f}分&#39;</span><span class="p">)</span>
+    
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">[[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0], [11.0, 12.0, 13.0], [14.0, 15.0, 16.0]]
+</span><span class="s2">----- 学生平均成绩 -----
+</span><span class="s2">关羽的平均成绩为：2.0分
+</span><span class="s2">张飞的平均成绩为：5.0分
+</span><span class="s2">赵云的平均成绩为：8.0分
+</span><span class="s2">马超的平均成绩为：12.0分
+</span><span class="s2">黄忠的平均成绩为：15.0分
+</span><span class="s2">
+</span><span class="s2">----- 课程平均成绩 -----
+</span><span class="s2">[1.0, 4.0, 7.0, 11.0, 14.0]
+</span><span class="s2">语文的平均成绩为：7.4分
+</span><span class="s2">[2.0, 5.0, 8.0, 12.0, 15.0]
+</span><span class="s2">数学的平均成绩为：8.4分
+</span><span class="s2">[3.0, 6.0, 9.0, 13.0, 16.0]
+</span><span class="s2">英语的平均成绩为：9.4分
+</span><span class="s2">v&#34;&#34;&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>上面对列表进行遍历的时候，使用了<code>enumerate</code>函数，这个函数非常有用。我们之前讲过循环遍历列表的两种方法，一种是通过索引循环遍历，一种是直接遍历列表元素。通过<code>enumerate</code>处理后的列表在循环遍历时会取到一个二元组，解包之后第一个值是索引，第二个值是元素，下面是一个简单的对比。</p>
@@ -450,7 +496,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python14/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">集合</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python12/">
             <span class="next-text nav-default">元组</span>
             <span class="next-text nav-mobile">Next</span>
