@@ -6,7 +6,16 @@
     <description>Recent content in Python on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 12 Jul 2021 19:18:40 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Jul 2021 15:51:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>字典</title>
+      <link>https://kongfany.github.io/post/python15/</link>
+      <pubDate>Tue, 13 Jul 2021 15:51:19 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python15/</guid>
+      <description>迄今为止，我们已经为大家介绍了Python中的三种容器型数据类型，但是这些数据类型还不足以帮助我们解决所有的问题。例如，我们要保存一个人的信</description>
+    </item>
+    
     <item>
       <title>集合</title>
       <link>https://kongfany.github.io/post/python14/</link>
