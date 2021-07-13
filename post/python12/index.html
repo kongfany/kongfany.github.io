@@ -49,7 +49,7 @@
 <meta itemprop="name" content="元组">
 <meta itemprop="description" content="上一节课为大家讲解了Python中的列表，它是一种容器型数据类型，我们可以通过定义列表类型的变量来保存和操作多个元素。当然，Python中容"><meta itemprop="datePublished" content="2021-07-09T17:42:21&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-09T17:42:21&#43;08:00" />
-<meta itemprop="wordCount" content="2715">
+<meta itemprop="wordCount" content="2773">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="元组"/>
 <meta name="twitter:description" content="上一节课为大家讲解了Python中的列表，它是一种容器型数据类型，我们可以通过定义列表类型的变量来保存和操作多个元素。当然，Python中容"/>
@@ -441,7 +441,7 @@
 <p>这里还有一个非常值得探讨的问题，Python中已经有了列表类型，为什么还需要元组这样的类型呢？这个问题对于初学者来说似乎有点困难，不过没有关系，我们先抛出观点，大家可以一边学习一边慢慢体会。</p>
 <ol>
 <li>
-<p>元组是不可变类型，<strong>不可变类型更适合多线程环境</strong>，因为它降低了并发访问变量的同步化开销。</p>
+<p>元组是不可变类型，<strong>不可变类型更适合多线程环境</strong>，因为它降低了并发访问变量的同步化开销。如果不需要对元素进行添加、删除、修改的时候，可以考虑使用元组，当然如果一个方法要返回多个值，使用元组也是不错的选择。</p>
 </li>
 <li>
 <p>元组是不可变类型，通常<strong>不可变类型在创建时间和占用空间上面都优于对应的可变类型</strong>。我们可以使用<code>sys</code>模块的<code>getsizeof</code>函数来检查保存相同元素的元组和列表各自占用了多少内存空间。我们也可以使用<code>timeit</code>模块的<code>timeit</code>函数来看看创建保存相同元素的元组和列表各自花费的时间，代码如下所示。</p>

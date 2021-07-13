@@ -49,7 +49,7 @@
 <meta itemprop="name" content="集合">
 <meta itemprop="description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的"><meta itemprop="datePublished" content="2021-07-12T19:18:40&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-12T19:18:40&#43;08:00" />
-<meta itemprop="wordCount" content="3026">
+<meta itemprop="wordCount" content="3194">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="集合"/>
 <meta name="twitter:description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的"/>
@@ -191,6 +191,12 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建集合的字面量语法(重复元素不会出现在集合中)</span>
@@ -212,6 +218,12 @@
 <span class="c1"># 集合元素的循环遍历</span>
 <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">set4</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+    
+<span class="c1"># 将元组转换成集合</span>
+<span class="n">set5</span> <span class="o">=</span> <span class="nb">set</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set5</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set5</span><span class="p">)</span>
+
 </code></pre></td></tr></table>
 </div>
 </div><p>需要提醒大家，集合中的元素必须是<code>hashable</code>类型。所谓<code>hashable</code>类型指的是能够计算出哈希码的数据类型，你可以暂时将哈希码理解为和变量对应的唯一的ID值。通常不可变类型都是<code>hashable</code>类型，如整数、浮点、字符串、元组等，而可变类型都不是<code>hashable</code>类型，因为可变类型无法确定唯一的ID值，所以也就不能放到集合中。集合本身也是可变类型，所以集合不能够作为集合中的元素，这一点请大家一定要注意。</p>
@@ -308,6 +320,9 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/202107/23.png" alt=""></p>
+<blockquote>
+<p><strong>说明：</strong> Python中允许通过一些特殊的方法来为某种类型或数据结构自定义运算符（后面的章节中会讲到），上面的代码中我们对集合进行运算的时候可以调用集合对象的方法，也可以直接使用对应的运算符，例如<code>&amp;</code>运算符跟intersection方法的作用就是一样的，但是使用运算符让代码更加直观。</p>
+</blockquote>
 <p>集合的交集、并集、差集运算还可以跟赋值运算一起构成复合运算</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
