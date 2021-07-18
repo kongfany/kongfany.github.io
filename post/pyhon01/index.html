@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Pyhon初识及安装">
 <meta itemprop="description" content="Python介绍 Python是一种广泛使用的解释型、高级编程语言。python有3.x和2.x量大版本，并且不兼容（使用3.x） 解释型&md"><meta itemprop="datePublished" content="2021-07-04T16:39:31&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-04T16:39:31&#43;08:00" />
-<meta itemprop="wordCount" content="3134">
+<meta itemprop="wordCount" content="3849">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Pyhon初识及安装"/>
 <meta name="twitter:description" content="Python介绍 Python是一种广泛使用的解释型、高级编程语言。python有3.x和2.x量大版本，并且不兼容（使用3.x） 解释型&md"/>
@@ -171,8 +171,12 @@
         </li>
       </ul>
     </li>
-    <li><a href="#练习">练习</a>
+    <li><a href="#turtle">turtle</a>
       <ul>
+        <li><a href="#空间坐标体系">空间坐标体系</a></li>
+        <li><a href="#rgb色彩模式">RGB色彩模式</a></li>
+        <li><a href="#import">import</a></li>
+        <li><a href="#画蟒蛇">画蟒蛇</a></li>
         <li><a href="#画正方形">画正方形</a></li>
         <li><a href="#画国旗">画国旗</a></li>
         <li><a href="#画小猪佩奇">画小猪佩奇</a></li>
@@ -381,9 +385,126 @@
 </ul>
 <p>更多细节，参见<a href="https://www.jetbrains.com/help/pycharm/tutorial-exploring-navigation-and-search.html">官方文档</a></p>
 <h3 id="版本控制">版本控制</h3>
-<h1 id="练习">练习</h1>
-<p>学习使用turtle在屏幕上绘制图形。</p>
-<h2 id="画正方形">画正方形</h2>
+<h1 id="turtle">turtle</h1>
+<p>海龟。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># setup设置窗体大小及位置，后俩参数可省</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">startx</span><span class="p">,</span><span class="n">starty</span><span class="p">)</span>
+
+<span class="c1"># 画笔控制函数</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">penup</span><span class="p">()</span> <span class="c1"># 画笔抬起，不画在画布上</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">pendown</span><span class="p">()</span> <span class="c1"># 画笔落下，画在画布上</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="c1"># 画笔宽度，海龟的腰围</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">pencolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="c1"># color为颜色字符串或rgb值 </span>
+<span class="c1"># 字符串pencolor(&#34;purple&#34;) 小数值pencolor(0.63,0.13,0.94) 元组值pencolor((0.63,0.13,0.94))</span>
+
+<span class="c1"># 运动控制函数</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">forword</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># 海龟走直线,d为行进距离，可以为负数</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">extent</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="c1"># 根据半径r绘制extent角度的弧形，90为1/4</span>
+<span class="c1"># turtle.circle(100)默认圆心的位置为左侧(上方)，若为负，半径在右侧</span>
+
+<span class="c1"># 方向控制函数</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">sethending</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="c1"># 改变行进方向，海龟走角度。绝对角度</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span><span class="c1"># 海龟向左转，海龟角度</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span><span class="c1"># 海龟向右转</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="空间坐标体系">空间坐标体系</h2>
+<p>绝对坐标，中心就是xy的中心</p>
+<p>海龟坐标，以当前点为中心。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># 让海龟从当前位置到达该位置，单位像素</span>
+
+<span class="n">turtle</span><span class="o">.</span><span class="n">fd</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># 正前方向</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">bk</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># 反方向</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">angle</span><span class="p">)</span> <span class="c1">#当前位置左侧的某一点为圆心进行曲线</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="rgb色彩模式">RGB色彩模式</h2>
+<p>由三种颜色构成的万物色。RGB每色的取值范围0-255整数或0-1小数，白色：255，255，255 1，1，1黄色：255,255,0 1,1,0</p>
+<p>默认采用小数值，可切换为整数值。turtle.colormode(mode)-&gt;mode=1.0/255为小数值模式和整数值模式。</p>
+<h2 id="import">import</h2>
+<p>improt turtle下面代码使用库名.函数</p>
+<p>from turtle import* 就可以直接使用函数，但有可能会因为同名的函数产生冲突。</p>
+<p>import 库名 as 库别名。就可以使用，库别名.函数</p>
+<h2 id="画蟒蛇">画蟒蛇</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#PythonDraw.py</span>
+<span class="c1"># improt turtle下面代码使用库名.函数</span>
+<span class="c1"># from turtle import* 就可以直接使用函数，但有可能会因为同名的函数产生冲突</span>
+<span class="kn">import</span> <span class="nn">turtle</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">650</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">penup</span><span class="p">()</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">fd</span><span class="p">(</span><span class="o">-</span><span class="mi">250</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">pendown</span><span class="p">()</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">pencolor</span><span class="p">(</span><span class="s2">&#34;purple&#34;</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">seth</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">fd</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">fd</span><span class="p">(</span><span class="mi">40</span> <span class="o">*</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">done</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="画正方形">画正方形</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1

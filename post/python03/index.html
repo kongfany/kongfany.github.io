@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python语言元素之变量">
 <meta itemprop="description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"><meta itemprop="datePublished" content="2021-07-06T15:18:30&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-06T15:18:30&#43;08:00" />
-<meta itemprop="wordCount" content="2198">
+<meta itemprop="wordCount" content="2438">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python语言元素之变量"/>
 <meta name="twitter:description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"/>
@@ -173,7 +173,13 @@
 <li>浮点型（float）：浮点数也就是小数，之所以成为浮点数，是因为按照科学记数法表示时，一个浮点数的小数点的位置是可变的，浮点数除了数学写法（12.345）之外，还支持科学计数法（1.23e2）</li>
 <li>字符串型（str）：字符串是以单引号或双引号括起来的任意文本，比如&quot;hello&quot;和&rsquo;hello'。<code>打印的时候不打印引号</code></li>
 <li>布尔型（bool）：布尔值只有True、False两个值。</li>
+<li>复数类型：z = 1.23e-4 + 5.6e+89j  z.real获得实部，z.imag获得虚部。</li>
 </ul>
+<p>浮点数间运算存在不确定尾数</p>
+<p>0.1+1.2==0.3 =&gt; False</p>
+<p>round(0.1+0.2,1)==0.3 =&gt;True</p>
+<p>round(x,d):对x四舍五入，d是小数截取位数。浮点数间运算及比较用round()函数辅助。</p>
+<p>abs(x):绝对值。divmod(x,y)商余，（x//y，x%y）同时输出商和余数，divmod(10,3)结果为（3,1)。pow(x,y[,z])幂余，（x**y）%z，[..]表示参数z可省略，pow(3,pow(3,99),10000)结果为4587。</p>
 <h1 id="变量命名">变量命名</h1>
 <p>在Python中，变量命名需要遵循以下这些规则，这些规则又分为必须遵守的硬性规则和建议遵守的非硬性规则。（见名知意）</p>
 <h2 id="硬性规则">硬性规则</h2>
@@ -197,6 +203,7 @@
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">45</span>	<span class="c1"># a变量保存了45</span>
@@ -205,6 +212,7 @@
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 33</span>
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 540</span>
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 3.75</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">//</span><span class="n">b</span><span class="p">)</span> <span class="c1"># 整数除10/</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="float小数默认位数">float小数默认位数</h2>

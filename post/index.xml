@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 13 Jul 2021 15:51:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Jul 2021 22:10:54 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>面向对象编程入门</title>
+      <link>https://kongfany.github.io/post/python16%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sun, 18 Jul 2021 22:10:54 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python16%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%85%A5%E9%97%A8/</guid>
+      <description>面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和</description>
+    </item>
+    
     <item>
       <title>字典</title>
       <link>https://kongfany.github.io/post/python15/</link>

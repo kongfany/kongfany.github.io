@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python语言元素之运算符">
 <meta itemprop="description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个"><meta itemprop="datePublished" content="2021-07-06T16:32:59&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-06T16:32:59&#43;08:00" />
-<meta itemprop="wordCount" content="2201">
+<meta itemprop="wordCount" content="2452">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python语言元素之运算符"/>
 <meta name="twitter:description" content="运算符 以下表格是按照运算符的优先级从上到下列出的。所谓优先级，就是在同一个运算的表达式中，如果出现了多个运算符，应该先执行哪个运算再执行哪个"/>
@@ -444,7 +444,34 @@
 </div><blockquote>
 <p>说明：比较运算符会产生布尔值，而逻辑运算符<code>and</code>和<code>or</code>会对这些布尔值进行组合，最终也是得到一个布尔值，闰年输出<code>True</code>，平年输出<code>False</code>。</p>
 </blockquote>
-
+<p>补充</p>
+<p>eval():评估函数。去掉参数最外侧引号，并执行余下语句的函数。</p>
+<p>eval(tempstr[0:-1]):如果tempstr的值是&quot;12.3&quot;，输出的是12.3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">TempStr</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入带符号的温度值：&#34;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">TempStr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;F&#34;</span><span class="p">,</span><span class="s2">&#34;f&#34;</span><span class="p">]</span>
+	<span class="n">C</span> <span class="o">=</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">TempStr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span><span class="o">/</span><span class="mf">1.8</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;转化后的温度是{:.2f}C&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">C</span><span class="p">))</span>
+<span class="k">elif</span> <span class="n">TempStr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;C&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">]</span>
+	 <span class="n">F</span> <span class="o">=</span><span class="mf">1.8</span><span class="o">*</span><span class="nb">eval</span><span class="p">(</span><span class="n">TempStr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">32</span>
+     <span class="k">print</span><span class="p">(</span><span class="s2">&#34;转化后的温度是{:.2f}F&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">F</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;输入格式&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">

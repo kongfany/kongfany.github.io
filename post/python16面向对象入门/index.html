@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>面向对象编程入门 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python16%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%85%A5%E9%97%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="面向对象编程入门" />
+<meta property="og:description" content="面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python16%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%85%A5%E9%97%A8/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-18T22:10:54&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-18T22:10:54&#43;08:00" />
+
+<meta itemprop="name" content="面向对象编程入门">
+<meta itemprop="description" content="面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和"><meta itemprop="datePublished" content="2021-07-18T22:10:54&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-18T22:10:54&#43;08:00" />
+<meta itemprop="wordCount" content="4299">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="面向对象编程入门"/>
+<meta name="twitter:description" content="面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">面向对象编程入门</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-18 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#类和对象">类和对象</a>
+      <ul>
+        <li><a href="#定义类">定义类</a></li>
+        <li><a href="#创建和使用对象">创建和使用对象</a></li>
+        <li><a href="#初始化方法">初始化方法</a></li>
+        <li><a href="#打印对象">打印对象</a></li>
+        <li><a href="#面向对象的支柱">面向对象的支柱</a></li>
+      </ul>
+    </li>
+    <li><a href="#描述数字时钟">描述数字时钟</a></li>
+    <li><a href="#描述平面上的点">描述平面上的点</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>面向对象编程是一种非常流行的<strong>编程范式</strong>（programming paradigm），所谓编程范式就是<strong>程序设计的方法学</strong>，也就是程序员对程序的认知和理解。</p>
+<p>前面的课程中我们说过“<strong>程序是指令的集合</strong>”，运行程序时，程序中的语句会变成一条或多条指令，然后由CPU（中央处理器）去执行。为了简化程序的设计，我们又讲到了函数，<strong>把相对独立且经常重复使用的代码放置到函数中</strong>，在需要使用这些代码的时候调用函数即可。如果一个函数的功能过于复杂和臃肿，我们又可以进一步<strong>将函数进一步拆分为多个子函数</strong>来降低系统的复杂性。</p>
+<p>在面向对象编程的世界里，程序中的<strong>数据和操作数据的函数是一个逻辑上的整体</strong>，我们称之为<strong>对象</strong>，<strong>对象可以接收消息</strong>，解决问题的方法就是<strong>创建对象并向对象发出各种各样的消息</strong>；通过消息传递，程序中的多个对象可以协同工作，这样就能构造出复杂的系统并解决现实中的问题。</p>
+<h1 id="类和对象">类和对象</h1>
+<blockquote>
+<p><strong>面向对象编程</strong>：把一组数据和处理数据的方法组成<strong>对象</strong>，把行为相同的对象归纳为<strong>类</strong>，通过<strong>封装</strong>隐藏对象的内部细节，通过<strong>继承</strong>实现类的特化和泛化，通过<strong>多态</strong>实现基于对象类型的动态分派。</p>
+</blockquote>
+<p>在面向对象编程中，<strong>类是一个抽象的概念，对象是一个具体的概念</strong>。我们把同一类对象的共同特征抽取出来就是一个类，比如我们经常说的人类，这是一个抽象概念，而我们每个人就是人类的这个抽象概念下的具体的实实在在的存在，也就是一个对象。简而言之，<strong>类是对象的蓝图和模板，对象是类的实例</strong>。在面向对象编程的世界中，<strong>一切皆为对象</strong>，<strong>对象都有属性和行为</strong>，<strong>每个对象都是独一无二的</strong>，而且<strong>对象一定属于某个类</strong>。对象的属性是对象的静态特征，对象的行为是对象的动态特征。按照上面的说法，如果我们把拥有共同特征的对象的属性和行为都抽取出来，就可以定义出一个类。</p>
+<h2 id="定义类">定义类</h2>
+<p>在Python中，可以使用<code>class</code>关键字加上类名来定义类，通过缩进我们可以确定类的代码块，就如同定义函数那样。在类的代码块中，我们需要写一些函数，我们说过类是一个抽象概念，那么这些函数就是我们对一类对象共同的动态特征的提取。写在类里面的函数我们通常称之为<strong>方法</strong>，方法就是对象的行为，也就是对象可以接收的消息。方法的第一个参数通常都是<code>self</code>，它代表了接收这个消息的对象本身。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course_name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;学生正在学习{course_name}.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;学生正在玩游戏.&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="创建和使用对象">创建和使用对象</h2>
+<p>在我们定义好一个类之后，可以使用构造器语法来创建对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">stu1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
+<span class="n">stu2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stu1</span><span class="p">)</span>    <span class="c1"># &lt;__main__.Student object at 0x10ad5ac50&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stu2</span><span class="p">)</span>    <span class="c1"># &lt;__main__.Student object at 0x10ad5acd0&gt; </span>
+<span class="k">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">stu1</span><span class="p">)),</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">stu2</span><span class="p">)))</span>    
+<span class="c1"># 0x10ad5ac50 0x10ad5acd0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在类的名字后跟上圆括号就是所谓的构造器语法，上面的代码创建了两个学生对象，一个赋值给变量<code>stu1</code>，一个赋值给变量<code>stu2</code>。当我们用<code>print</code>函数打印<code>stu1</code>和<code>stu2</code>两个变量时，我们会看到输出了对象在内存中的地址（十六进制形式），跟我们用<code>id</code>函数查看对象标识获得的值是相同的。</p>
+<p>我们定义的变量其实保存的是一个对象在内存中的逻辑地址（位置），通过这个逻辑地址，我们就可以在内存中找到这个对象。所以<code>stu3 = stu2</code>这样的赋值语句并没有创建新的对象，只是用一个新的变量保存了已有对象的地址。</p>
+<p>接下来，我们尝试给对象发消息，即调用对象的方法。刚才的<code>Student</code>类中我们定义了<code>study</code>和<code>play</code>两个方法，两个方法的第一个参数<code>self</code>代表了接收消息的学生对象，<code>study</code>方法的第二个参数是学习的课程名称。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 通过“类.方法”调用方法，第一个参数是接收消息的对象，第二个参数是学习的课程名称</span>
+<span class="n">Student</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="n">stu1</span><span class="p">,</span> <span class="s1">&#39;Python程序设计&#39;</span><span class="p">)</span>    
+<span class="c1"># 学生正在学习Python程序设计.</span>
+
+<span class="c1"># 通过“对象.方法”调用方法，点前面的对象就是接收消息的对象，只需要传入第二个参数</span>
+<span class="n">stu1</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s1">&#39;Python程序设计&#39;</span><span class="p">)</span>             
+<span class="c1"># 学生正在学习Python程序设计.</span>
+
+<span class="n">Student</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">stu2</span><span class="p">)</span>    <span class="c1"># 学生正在玩游戏.</span>
+<span class="n">stu2</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>           <span class="c1"># 学生正在玩游戏. </span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="初始化方法">初始化方法</h2>
+<p>刚才我们创建的学生对象只有行为没有属性，如果要给学生对象定义属性，我们可以修改<code>Student</code>类，为其添加一个名为<code>__init__</code>的方法。在我们调用<code>Student</code>类的构造器创建对象时，首先会在内存中获得保存学生对象所需的内存空间，然后通过自动执行<code>__init__</code>方法，完成对内存的初始化操作，也就是把数据放到内存空间中。所以我们可以通过给<code>Student</code>类添加<code>__init__</code>方法的方式为学生对象指定属性，同时完成对属性赋初始值的操作，正因如此，<code>__init__</code>方法通常也被称为初始化方法。</p>
+<p>我们对上面的<code>Student</code>类稍作修改，给学生对象添加<code>name</code>（姓名）和<code>age</code>（年龄）两个属性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+    <span class="s2">&#34;&#34;&#34;学生&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;初始化方法&#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course_name</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;学习&#34;&#34;&#34;</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{self.name}正在学习{course_name}.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;玩耍&#34;&#34;&#34;</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{self.name}正在玩游戏.&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 由于初始化方法除了self之外还有两个参数</span>
+<span class="c1"># 所以调用Student类的构造器创建对象时要传入这两个参数</span>
+<span class="n">stu1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;kong&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">stu2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">stu1</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s1">&#39;Python程序设计&#39;</span><span class="p">)</span>    <span class="c1"># kong正在学习Python程序设计.</span>
+<span class="n">stu2</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>                    <span class="c1"># 王大锤正在玩游戏</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="打印对象">打印对象</h2>
+<p>上面我们通过<code>__init__</code>方法在创建对象时为对象绑定了属性并赋予了初始值。在Python中，以两个下划线<code>__</code>（读作“dunder”）开头和结尾的方法通常都是有特殊用途和意义的方法，我们一般称之为<strong>魔术方法</strong>或<strong>魔法方法</strong>。如果我们在打印对象的时候不希望看到对象的地址而是看到我们自定义的信息，可以通过在类中放置<code>__repr__</code>魔术方法来做到，该方法返回的字符串就是用<code>print</code>函数打印对象的时候会显示的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+    <span class="s2">&#34;&#34;&#34;学生&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;初始化方法&#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course_name</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;学习&#34;&#34;&#34;</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{self.name}正在学习{course_name}.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;玩耍&#34;&#34;&#34;</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{self.name}正在玩游戏.&#39;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.name}: {self.age}&#39;</span>
+
+
+<span class="n">stu1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;kong&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stu1</span><span class="p">)</span>        <span class="c1"># kong: 40</span>
+<span class="n">students</span> <span class="o">=</span> <span class="p">[</span><span class="n">stu1</span><span class="p">,</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;王小锤&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>    <span class="c1"># [kong: 20, 王小锤: 16, 王大锤: 25]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="面向对象的支柱">面向对象的支柱</h2>
+<p>面向对象编程有三大支柱：封装、继承和多态。对封装的理解是：<strong>隐藏一切可以隐藏的实现细节，只向外界暴露简单的调用接口</strong>。我们在类中定义的对象方法其实就是一种封装，这种封装可以让我们在创建对象之后，只需要给对象发送一个消息就可以执行方法中的代码，也就是说我们在只知道方法的名字和参数（方法的外部视图），不知道方法内部实现细节（方法的内部视图）的情况下就完成了对方法的使用。</p>
+<p>举一个例子，假如要控制一个机器人帮我倒杯水，如果不使用面向对象编程，不做任何的封装，那么就需要向这个机器人发出一系列的指令，如站起来、向左转、向前走5步、拿起面前的水杯、向后转、向前走10步、弯腰、放下水杯、按下出水按钮、等待10秒、松开出水按钮、拿起水杯、向右转、向前走5步、放下水杯等，才能完成这个简单的操作，想想都觉得麻烦。按照面向对象编程的思想，我们可以将倒水的操作封装到机器人的一个方法中，当需要机器人帮我们倒水的时候，只需要向机器人对象发出倒水的消息就可以了，这样做不是更好吗？</p>
+<p>在很多场景下，面向对象编程其实就是一个三步走的问题。第一步定义类，第二步创建对象，第三步给对象发消息。当然，有的时候我们是不需要第一步的，因为我们想用的类可能已经存在了。之前我们说过，Python内置的<code>list</code>、<code>set</code>、<code>dict</code>其实都不是函数而是类，如果要创建列表、集合、字典对象，我们就不用自定义类了。当然，有的类并不是Python标准库中直接提供的，它可能来自于第三方的代码，如何安装和使用三方代码在后续课程中会进行讨论。在某些特殊的场景中，我们会用到名为“内置对象”的对象，所谓“内置对象”就是说上面三步走的第一步和第二步都不需要了，因为类已经存在而且对象已然创建过了，直接向对象发消息就可以了，这也就是我们常说的“开箱即用”。</p>
+<h1 id="描述数字时钟">描述数字时钟</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="c1"># 定义数字时钟类</span>
+<span class="k">class</span> <span class="nc">Clock</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;数字时钟&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;初始化方法
+</span><span class="s2">        :param hour: 时
+</span><span class="s2">        :param minute: 分
+</span><span class="s2">        :param second: 秒
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">=</span> <span class="n">hour</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">minute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sec</span> <span class="o">=</span> <span class="n">second</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;走字&#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sec</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sec</span> <span class="o">==</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sec</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min</span> <span class="o">+=</span> <span class="mi">1</span>
+             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min</span> <span class="o">==</span> <span class="mi">60</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">==</span> <span class="mi">24</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;显示时间&#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.hour:0&gt;2d}:{self.min:0&gt;2d}:{self.sec:0&gt;2d}&#39;</span>
+
+
+<span class="c1"># 创建时钟对象</span>
+<span class="n">clock</span> <span class="o">=</span> <span class="n">Clock</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">58</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># 给时钟对象发消息读取时间</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">clock</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+    <span class="c1"># 休眠1秒钟</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># 给时钟对象发消息使其走字</span>
+    <span class="n">clock</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="描述平面上的点">描述平面上的点</h1>
+<p>定义一个类描述平面上的点，要求提供计算到另一个点距离的方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;屏面上的点&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;初始化方法
+</span><span class="s2">        :param x: 横坐标
+</span><span class="s2">        :param y: 纵坐标
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;计算与另一个点的距离
+</span><span class="s2">        :param other: 另一个点
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;({self.x}, {self.y})&#39;</span>
+
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="总结">总结</h1>
+<p>面向对象编程是一种非常流行的编程范式，除此之外还有<strong>指令式编程</strong>、<strong>函数式编程</strong>等编程范式。由于现实世界是由对象构成的，而对象是可以接收消息的实体，所以<strong>面向对象编程更符合人类正常的思维习惯</strong>。类是抽象的，对象是具体的，有了类就能创建对象，有了对象就可以接收消息，这就是面向对象编程的基础。定义类的过程是一个抽象的过程，找到对象公共的属性属于数据抽象，找到对象公共的方法属于行为抽象。抽象的过程是一个仁者见仁智者见智的过程，对同一类对象进行抽象可能会得到不同的结果。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python15/">
+            <span class="next-text nav-default">字典</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
