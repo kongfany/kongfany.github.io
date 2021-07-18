@@ -3,28 +3,35 @@
   
   <url>
     <loc>https://kongfany.github.io/categories/</loc>
-    <lastmod>2021-07-18T22:10:54+08:00</lastmod>
+    <lastmod>2021-07-18T23:04:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2021-07-18T22:10:54+08:00</lastmod>
+    <lastmod>2021-07-18T23:04:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/categories/python/</loc>
-    <lastmod>2021-07-18T22:10:54+08:00</lastmod>
+    <lastmod>2021-07-18T23:04:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/</loc>
-    <lastmod>2021-07-18T22:10:54+08:00</lastmod>
+    <lastmod>2021-07-18T23:04:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/python17%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/</loc>
+    <lastmod>2021-07-18T23:04:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
