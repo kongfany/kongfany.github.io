@@ -49,7 +49,7 @@
 <meta itemprop="name" content="面向对象编程进阶">
 <meta itemprop="description" content="可见性和属性装饰器 在很多面向对象编程语言中，对象的属性通常会被设置为私有（private）或受保护（protected）的成员，简单的说就是"><meta itemprop="datePublished" content="2021-07-18T23:04:34&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-18T23:04:34&#43;08:00" />
-<meta itemprop="wordCount" content="4312">
+<meta itemprop="wordCount" content="8215">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="面向对象编程进阶"/>
 <meta name="twitter:description" content="可见性和属性装饰器 在很多面向对象编程语言中，对象的属性通常会被设置为私有（private）或受保护（protected）的成员，简单的说就是"/>
@@ -145,9 +145,14 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#可见性和属性装饰器">可见性和属性装饰器</a></li>
-    <li><a href="#动态属性">动态属性</a></li>
+    <li><a href="#可见性和属性装饰器">可见性和属性装饰器</a>
+      <ul>
+        <li><a href="#property装饰器">@property装饰器</a></li>
+      </ul>
+    </li>
+    <li><a href="#动态属性__slots__魔法">动态属性__slots__魔法</a></li>
     <li><a href="#静态方法和类方法">静态方法和类方法</a></li>
+    <li><a href="#类之间的关系">类之间的关系</a></li>
     <li><a href="#继承和多态">继承和多态</a></li>
     <li><a href="#总结">总结</a></li>
   </ul>
@@ -156,7 +161,7 @@
 </div>
     <div class="post-content">
       <h1 id="可见性和属性装饰器">可见性和属性装饰器</h1>
-<p>在很多面向对象编程语言中，对象的属性通常会被设置为私有（private）或受保护（protected）的成员，简单的说就是不允许直接访问这些属性；对象的方法通常都是公开的（public），因为公开的方法是对象能够接受的消息，也是对象暴露给外界的调用接口，这就是所谓的访问可见性。在Python中，可以通过给对象属性名添加前缀下划线的方式来说明属性的访问可见性，例如，可以用<code>__name</code>表示一个私有属性，<code>_name</code>表示一个受保护属性。</p>
+<p>在很多面向对象编程语言中，对象的属性通常会被设置为私有（private）或受保护（protected）的成员，简单的说就是不允许直接访问这些属性；对象的方法通常都是公开的（public），因为公开的方法是对象能够接受的消息，也是对象暴露给外界的调用接口，这就是所谓的访问可见性。在Python中，属性和方法的访问权限只有两种，也就是公开的和私有的，如果希望属性是私有的，可以通过给对象属性名添加前缀下划线的方式来说明属性的访问可见性，例如，可以用<code>__name</code>表示一个私有属性，<code>_name</code>表示一个受保护属性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -224,6 +229,95 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>Python中做出这样的设定是基于一句名言：“<strong>We are all consenting adults here</strong>”（大家都是成年人）。Python语言的设计者认为程序员要为自己的行为负责，而不是由Python语言本身来严格限制访问可见性，而大多数的程序员都认为<strong>开放比封闭要好</strong>，把对象的属性私有化并不是必须的东西。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__foo</span> <span class="o">=</span> <span class="n">foo</span>
+
+    <span class="k">def</span> <span class="nf">__bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__foo</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;__bar&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">Test</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    <span class="c1"># AttributeError: &#39;Test&#39; object has no attribute &#39;__bar&#39;</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">__bar</span><span class="p">()</span>
+    <span class="c1"># AttributeError: &#39;Test&#39; object has no attribute &#39;__foo&#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">__foo</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># Python并没有从语法上严格保证私有属性的私密性</span>
+<span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__foo</span> <span class="o">=</span> <span class="n">foo</span>
+
+    <span class="k">def</span> <span class="nf">__bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__foo</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;__bar&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">Test</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">_Test__bar</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">_Test__foo</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在实际开发中，我们并不建议将属性设置为私有的，因为这会导致子类无法访问（后面会讲到）。所以大多数Python程序员会遵循一种命名惯例就是让属性名以单下划线开头来表示属性是受保护的，本类之外的代码在访问这样的属性时应该要保持慎重。这种做法并不是语法上的规则，单下划线开头的属性和方法外界仍然是可以访问的，所以更多的时候它是一种暗示或隐喻，关于这一点可以看看我的<a href="http://blog.csdn.net/jackfrued/article/details/79521404">《Python - 那些年我们踩过的那些坑》</a>文章中的讲解。</p>
+<h2 id="property装饰器">@property装饰器</h2>
+<p>之前我们讨论过Python中属性和方法访问权限的问题，虽然我们不建议将属性设置为私有的，但是如果直接将属性暴露给外界也是有问题的，比如我们没有办法检查赋给属性的值是否有效。我们之前的建议是将属性命名以单下划线开头，通过这种方式来暗示属性是受保护的，不建议外界直接访问，那么如果想访问属性可以通过属性的getter（访问器）和setter（修改器）方法进行对应的操作。如果要做到这点，就可以考虑使用@property包装器来包装getter和setter方法，使得对属性的访问既安全又方便。</p>
 <p>Python中可以通过<code>property</code>装饰器为“私有”属性提供读取和修改的方法，装饰器通常会放在类、函数或方法的声明之前，通过一个<code>@</code>符号表示将装饰器应用于类、函数或方法。装饰器的概念我们会在稍后的课程中以专题的形式为大家讲解，这里我们只需要了解<code>property</code>装饰器的用法就可以了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -290,8 +384,91 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>在实际项目开发中，我们并不经常使用私有属性，属性装饰器的使用也比较少，所以上面的知识点大家简单了解一下就可以了。</p>
-<h1 id="动态属性">动态属性</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c1"># 访问器 - getter方法</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="c1"># 访问器 - getter方法</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_age</span>
+
+    <span class="c1"># 修改器 - setter方法</span>
+    <span class="nd">@age.setter</span>
+    <span class="k">def</span> <span class="nf">age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">&lt;=</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">正在玩飞行棋.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">正在玩斗地主.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="n">person</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+    <span class="n">person</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">person</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+    <span class="c1"># person.name = &#39;白元芳&#39;  # AttributeError: can&#39;t set attribute</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="动态属性__slots__魔法">动态属性__slots__魔法</h1>
 <p>Python是一门动态语言，对动态语言的解释是：“在运行时可以改变其结构的语言，例如新的函数、对象、甚至代码可以被引进，已有的函数可以被删除或是其他结构上的变化。动态语言非常灵活，目前流行的Python和JavaScript都是动态语言，除此之外如PHP、Ruby等也都属于动态语言，而C、C++等语言则不属于动态语言”。</p>
+<p>通常，动态语言允许我们在程序运行时给对象绑定新的属性或方法，当然也可以对已经绑定的属性和方法进行解绑定。但是如果我们需要限定自定义类型的对象只能绑定某些属性，可以通过在类中定义__slots__变量来进行限定。需要注意的是__slots__的限定只对当前类的对象生效，对子类并不起任何作用。</p>
 <p>在Python中，我们可以动态为对象添加属性，这是Python作为动态类型语言的一项特权，代码如下所示。需要提醒大家的是，对象的方法其实本质上也是对象的属性，如果给对象发送一个无法接收的消息，引发的异常仍然是<code>AttributeError</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -319,7 +496,7 @@
 <span class="n">stu</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="s1">&#39;男&#39;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>如果不希望在使用对象时动态的为对象添加属性，可以使用Python的<code>__slots__</code>魔法。对于<code>Student</code>类来说，可以在类中指定<code>__slots__ = ('name', 'age')</code>，这样<code>Student</code>类的对象只能有<code>name</code>和<code>age</code>属性，如果想动态添加其他属性将会引发异常，代码如下所示。</p>
+</div><p>如果不希望在使用对象时动态的为对象添加属性，可以使用Python的<code>__slots__</code>。对于<code>Student</code>类来说，可以在类中指定<code>__slots__ = ('name', 'age')</code>，这样<code>Student</code>类的对象只能有<code>name</code>和<code>age</code>属性，如果想动态添加其他属性将会引发异常，使用<code>__slots__</code>要注意，<code>__slots__</code>定义的属性仅对当前类起作用，对继承的子类是不起作用的，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -345,7 +522,81 @@
 
 <span class="n">stu</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="c1"># AttributeError: &#39;Student&#39; object has no attribute &#39;sex&#39;</span>
-<span class="n">stu</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="s1">&#39;男&#39;</span>
+<span class="c1"># stu.sex = &#39;男&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="c1"># 限定Person对象只能绑定_name, _age和_gender属性</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_name&#39;</span><span class="p">,</span> <span class="s1">&#39;_age&#39;</span><span class="p">,</span> <span class="s1">&#39;_gender&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_age</span>
+
+    <span class="nd">@age.setter</span>
+    <span class="k">def</span> <span class="nf">age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">&lt;=</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">正在玩飞行棋.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">正在玩斗地主.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+    <span class="n">person</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+    <span class="n">person</span><span class="o">.</span><span class="n">_gender</span> <span class="o">=</span> <span class="s1">&#39;男&#39;</span>
+    <span class="c1"># AttributeError: &#39;Person&#39; object has no attribute &#39;_is_gay&#39;</span>
+    <span class="c1"># person._is_gay = True</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="静态方法和类方法">静态方法和类方法</h1>
@@ -380,6 +631,13 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Triangle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -409,11 +667,213 @@
         <span class="s2">&#34;&#34;&#34;计算面积&#34;&#34;&#34;</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perimeter</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Triangle</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">area</span><span class="p">(),</span><span class="n">s1</span><span class="o">.</span><span class="n">perimeter</span><span class="p">())</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">False
+</span><span class="s2">6.0 12
+</span><span class="s2">&#34;&#34;&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>上面的代码使用<code>staticmethod</code>装饰器声明了<code>is_valid</code>方法是<code>Triangle</code>类的静态方法，如果要声明类方法，可以使用<code>classmethod</code>装饰器。可以直接使用<code>类名.方法名</code>的方式来调用静态方法和类方法，二者的区别在于，类方法的第一个参数是类对象本身，而静态方法则没有这个参数。简单的总结一下，<strong>对象方法、类方法、静态方法都可以通过<code>类名.方法名</code>的方式来调用，区别在于方法的第一个参数到底是普通对象还是类对象，还是没有接受消息的对象</strong>。静态方法通常也可以直接写成一个独立的函数，因为它并没有跟特定的对象绑定。</p>
+</div><p>上面的代码使用<code>staticmethod</code>装饰器声明了<code>is_valid</code>方法是<code>Triangle</code>类的静态方法，如果要声明类方法，可以使用<code>classmethod</code>装饰器。可以直接使用<code>类名.方法名</code>的方式来调用静态方法和类方法，二者的区别在于，类方法的第一个参数是类对象本身，而静态方法则没有这个参数。</p>
+<p>简单的总结一下，<strong>对象方法、类方法、静态方法都可以通过<code>类名.方法名</code>的方式来调用，区别在于方法的第一个参数到底是普通对象还是类对象，还是没有接受消息的对象</strong>。静态方法通常也可以直接写成一个独立的函数，因为它并没有跟特定的对象绑定。</p>
+<p>例如我们定义一个“三角形”类，通过传入三条边长来构造三角形，并提供计算周长和面积的方法，但是传入的三条边长未必能构造出三角形对象，因此我们可以先写一个方法来验证三条边长是否可以构成三角形，这个方法很显然就不是对象方法，因为在调用这个方法时三角形对象尚未创建出来（因为都不知道三条边能不能构成三角形），所以这个方法是属于三角形类而并不属于三角形对象的。我们可以使用静态方法来解决这类问题，代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+
+<span class="k">class</span> <span class="nc">Triangle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_a</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_b</span> <span class="o">=</span> <span class="n">b</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c</span> <span class="o">=</span> <span class="n">c</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">c</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">a</span> <span class="ow">and</span> <span class="n">a</span> <span class="o">+</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">b</span>
+
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_a</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_b</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span>
+
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">half</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perimeter</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">half</span> <span class="o">*</span> <span class="p">(</span><span class="n">half</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_a</span><span class="p">)</span> <span class="o">*</span>
+                    <span class="p">(</span><span class="n">half</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_b</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">half</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span>
+    <span class="c1"># 静态方法和类方法都是通过给类发消息来调用的</span>
+    <span class="k">if</span> <span class="n">Triangle</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">perimeter</span><span class="p">())</span>
+        <span class="c1"># 也可以通过给类发消息来调用对象方法但是要传入接收消息的对象作为参数</span>
+        <span class="c1"># print(Triangle.perimeter(t))</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">area</span><span class="p">())</span>
+        <span class="c1"># print(Triangle.area(t))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;无法构成三角形.&#39;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>和静态方法比较类似，Python还可以在类中定义类方法，类方法的第一个参数约定名为cls，它代表的是当前类相关的信息的对象（类本身也是一个对象，有的地方也称之为类的元数据对象），通过这个参数我们可以获取和类相关的信息并且可以创建出类的对象，代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">localtime</span><span class="p">,</span> <span class="n">sleep</span>
+
+
+<span class="k">class</span> <span class="nc">Clock</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;数字时钟&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hour</span> <span class="o">=</span> <span class="n">hour</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minute</span> <span class="o">=</span> <span class="n">minute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_second</span> <span class="o">=</span> <span class="n">second</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="n">ctime</span> <span class="o">=</span> <span class="n">localtime</span><span class="p">(</span><span class="n">time</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">ctime</span><span class="o">.</span><span class="n">tm_hour</span><span class="p">,</span> <span class="n">ctime</span><span class="o">.</span><span class="n">tm_min</span><span class="p">,</span> <span class="n">ctime</span><span class="o">.</span><span class="n">tm_sec</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;走字&#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_second</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_second</span> <span class="o">==</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_second</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_minute</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minute</span> <span class="o">==</span> <span class="mi">60</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minute</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_hour</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hour</span> <span class="o">==</span> <span class="mi">24</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_hour</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;显示时间&#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%02d</span><span class="s1">:</span><span class="si">%02d</span><span class="s1">:</span><span class="si">%02d</span><span class="s1">&#39;</span> <span class="o">%</span> \
+               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hour</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_second</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># 通过类方法创建对象并获取系统时间</span>
+    <span class="n">clock</span> <span class="o">=</span> <span class="n">Clock</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">clock</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">clock</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="类之间的关系">类之间的关系</h1>
+<p>简单的说，类和类之间的关系有三种：is-a、has-a和use-a关系。</p>
+<ul>
+<li>is-a关系也叫继承或泛化，比如学生和人的关系、手机和电子产品的关系都属于继承关系。</li>
+<li>has-a关系通常称之为关联，比如部门和员工的关系，汽车和引擎的关系都属于关联关系；关联关系如果是整体和部分的关联，那么我们称之为聚合关系；如果整体进一步负责了部分的生命周期（整体和部分是不可分割的，同时同在也同时消亡），那么这种就是最强的关联关系，我们称之为合成关系。</li>
+<li>use-a关系通常称之为依赖，比如司机有一个驾驶的行为（方法），其中（的参数）使用到了汽车，那么司机和汽车的关系就是依赖关系。</li>
+</ul>
+<p>我们可以使用一种叫做 UML（统一建模语言）的东西来进行面向对象建模，其中一项重要的工作就是把类和类之间的关系用标准化的图形符号描述出来。关于UML我们在这里不做详细的介绍，有兴趣的读者可以自行阅读<a href="https://e.jd.com/30392949.html">《UML面向对象设计基础》</a>一书。</p>
+<p>利用类之间的这些关系，我们可以在已有类的基础上来完成某些操作，也可以在已有类的基础上创建新的类，这些都是实现代码复用的重要手段。复用现有的代码不仅可以减少开发的工作量，也有利于代码的管理和维护，这是我们在日常工作中都会使用到的技术手段。</p>
 <h1 id="继承和多态">继承和多态</h1>
-<p>面向对象的编程语言支持在已有类的基础上创建新类，从而减少重复代码的编写。提供继承信息的类叫做父类（超类、基类），得到继承信息的类叫做子类（派生类、衍生类）。例如，我们定义一个学生类和一个老师类，我们会发现他们有大量的重复代码，而这些重复代码都是老师和学生作为人的公共属性和行为，所以在这种情况下，我们应该先定义人类，再通过继承，从人类派生出老师类和学生类，代码如下所示。</p>
+<p>刚才我们提到了，可以在已有类的基础上创建新类，这其中的一种做法就是让一个类从另一个类那里将属性和方法直接继承下来，从而减少重复代码的编写。提供继承信息的我们称之为父类，也叫超类或基类；得到继承信息的我们称之为子类，也叫派生类或衍生类。子类除了继承父类提供的属性和方法，还可以定义自己特有的属性和方法，所以子类比父类拥有的更多的能力，在实际开发中，我们经常会用子类对象去替换掉一个父类对象，这是面向对象编程中一个常见的行为，对应的原则称之为里氏替换原则。</p>
+<p>例如，我们定义一个学生类和一个老师类，我们会发现他们有大量的重复代码，而这些重复代码都是老师和学生作为人的公共属性和行为，所以在这种情况下，我们应该先定义人类，再通过继承，从人类派生出老师类和学生类，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -510,9 +970,252 @@
 <span class="n">stu1</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s1">&#39;Python程序设计&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>继承的语法是在定义类的时候，在类名后的圆括号中指定当前类的父类。如果定义一个类的时候没有指定它的父类是谁，那么默认的父类是<code>object</code>类。<code>object</code>类是Python中的顶级类，这也就意味着所有的类都是它的子类，要么直接继承它，要么间接继承它。Python语言允许多重继承，也就是说一个类可以有一个或多个父类，关于多重继承的问题我们在后面会有更为详细的讨论。在子类的初始化方法中，我们可以通过<code>super().__init__()</code>来调用父类初始化方法，<code>super</code>函数是Python内置函数中专门为获取当前对象的父类对象而设计的。从上面的代码可以看出，子类除了可以通过继承得到父类提供的属性和方法外，还可以定义自己特有的属性和方法，所以子类比父类拥有的更多的能力。在实际开发中，我们经常会用子类对象去替换掉一个父类对象，这是面向对象编程中一个常见的行为，也叫做“里氏替换原则”（Liskov Substitution Principle）。</p>
-<p>子类继承父类的方法后，还可以对方法进行重写（重新实现该方法），不同的子类可以对父类的同一个方法给出不同的实现版本，这样的方法在程序运行时就会表现出多态行为（调用相同的方法，做了不同的事情）。</p>
-<p>多态是面向对象编程中最精髓的部分，当然也是对初学者来说最难以理解和灵活运用的部分，我们会在下一节课中用专门的例子来讲解多态这个知识点。</p>
+</div><p>继承的语法是在定义类的时候，在类名后的圆括号中指定当前类的父类。如果定义一个类的时候没有指定它的父类是谁，那么默认的父类是<code>object</code>类。<code>object</code>类是Python中的顶级类，这也就意味着所有的类都是它的子类，要么直接继承它，要么间接继承它。Python语言允许多重继承，也就是说一个类可以有一个或多个父类，关于多重继承的问题我们在后面会有更为详细的讨论。</p>
+<p>在子类的初始化方法中，我们可以通过<code>super().__init__()</code>来调用父类初始化方法，<code>super</code>函数是Python内置函数中专门为获取当前对象的父类对象而设计的。从上面的代码可以看出，子类除了可以通过继承得到父类提供的属性和方法外，还可以定义自己特有的属性和方法，所以子类比父类拥有的更多的能力。在实际开发中，我们经常会用子类对象去替换掉一个父类对象，这是面向对象编程中一个常见的行为，也叫做“里氏替换原则”（Liskov Substitution Principle）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;人&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_age</span>
+
+    <span class="nd">@age.setter</span>
+    <span class="k">def</span> <span class="nf">age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">正在愉快的玩耍.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">watch_av</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">正在观看爱情动作片.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">只能观看《熊出没》.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;学生&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grade</span> <span class="o">=</span> <span class="n">grade</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">grade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grade</span>
+
+    <span class="nd">@grade.setter</span>
+    <span class="k">def</span> <span class="nf">grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grade</span> <span class="o">=</span> <span class="n">grade</span>
+
+    <span class="k">def</span> <span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">的</span><span class="si">%s</span><span class="s1">正在学习</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grade</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">course</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">Teacher</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;老师&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_title</span> <span class="o">=</span> <span class="n">title</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_title</span>
+
+    <span class="nd">@title.setter</span>
+    <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_title</span> <span class="o">=</span> <span class="n">title</span>
+
+    <span class="k">def</span> <span class="nf">teach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">正在讲</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_title</span><span class="p">,</span> <span class="n">course</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">stu</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;初三&#39;</span><span class="p">)</span>
+    <span class="n">stu</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s1">&#39;数学&#39;</span><span class="p">)</span>
+    <span class="n">stu</span><span class="o">.</span><span class="n">watch_av</span><span class="p">()</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Teacher</span><span class="p">(</span><span class="s1">&#39;骆昊&#39;</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="s1">&#39;砖家&#39;</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">teach</span><span class="p">(</span><span class="s1">&#39;Python程序设计&#39;</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">watch_av</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>子类在继承了父类的方法后，可以对父类已有的方法给出新的实现版本，这个动作称之为方法重写（override）（重新实现该方法）。通过方法重写我们可以让父类的同一个行为在子类中拥有不同的实现版本，当我们调用这个经过子类重写的方法时，不同的子类对象会表现出不同的行为，这个就是多态（poly-morphism）（调用相同的方法，做了不同的事情）。多态是面向对象编程中最精髓的部分。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<span class="k">class</span> <span class="nc">Pet</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;宠物&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nickname</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nickname</span> <span class="o">=</span> <span class="n">nickname</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">make_voice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;发出声音&#34;&#34;&#34;</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Pet</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;狗&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="nf">make_voice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: 汪汪汪...&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nickname</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Pet</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;猫&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="nf">make_voice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: 喵...喵...&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nickname</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">pets</span> <span class="o">=</span> <span class="p">[</span><span class="n">Dog</span><span class="p">(</span><span class="s1">&#39;旺财&#39;</span><span class="p">),</span> <span class="n">Cat</span><span class="p">(</span><span class="s1">&#39;凯蒂&#39;</span><span class="p">),</span> <span class="n">Dog</span><span class="p">(</span><span class="s1">&#39;大黄&#39;</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">pet</span> <span class="ow">in</span> <span class="n">pets</span><span class="p">:</span>
+        <span class="n">pet</span><span class="o">.</span><span class="n">make_voice</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在上面的代码中，我们将<code>Pet</code>类处理成了一个抽象类，所谓抽象类就是不能够创建对象的类，这种类的存在就是专门为了让其他类去继承它。Python从语法层面并没有像Java或C#那样提供对抽象类的支持，但是我们可以通过<code>abc</code>模块的<code>ABCMeta</code>元类和<code>abstractmethod</code>包装器来达到抽象类的效果，如果一个类中存在抽象方法那么这个类就不能够实例化（创建对象）。上面的代码中，<code>Dog</code>和<code>Cat</code>两个子类分别对<code>Pet</code>类中的<code>make_voice</code>抽象方法进行了重写并给出了不同的实现版本，当我们在<code>main</code>函数中调用该方法时，这个方法就表现出了多态行为（同样的方法做了不同的事情）。</p>
 <h1 id="总结">总结</h1>
 <p>Python是动态语言，Python中的对象可以动态的添加属性。在面向对象的世界中，<strong>一切皆为对象</strong>，我们定义的类也是对象，所以<strong>类也可以接收消息</strong>，对应的方法是类方法或静态方法。通过继承，我们<strong>可以从已有的类创建新类</strong>，实现对已有类代码的复用。</p>
 

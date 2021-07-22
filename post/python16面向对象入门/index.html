@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="面向对象：&amp;quot;把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class），通过类的封装（enca" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="面向对象编程入门" />
-<meta property="og:description" content="面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和" />
+<meta property="og:description" content="面向对象：&quot;把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class），通过类的封装（enca" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python16%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%85%A5%E9%97%A8/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-07-18T22:10:54&#43;08:00" />
 <meta property="article:modified_time" content="2021-07-18T22:10:54&#43;08:00" />
 
 <meta itemprop="name" content="面向对象编程入门">
-<meta itemprop="description" content="面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和"><meta itemprop="datePublished" content="2021-07-18T22:10:54&#43;08:00" />
+<meta itemprop="description" content="面向对象：&quot;把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class），通过类的封装（enca"><meta itemprop="datePublished" content="2021-07-18T22:10:54&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-18T22:10:54&#43;08:00" />
-<meta itemprop="wordCount" content="4299">
+<meta itemprop="wordCount" content="4929">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="面向对象编程入门"/>
-<meta name="twitter:description" content="面向对象编程是一种非常流行的编程范式（programming paradigm），所谓编程范式就是程序设计的方法学，也就是程序员对程序的认知和"/>
+<meta name="twitter:description" content="面向对象：&quot;把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class），通过类的封装（enca"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -162,7 +162,8 @@
   </div>
 </div>
     <div class="post-content">
-      <p>面向对象编程是一种非常流行的<strong>编程范式</strong>（programming paradigm），所谓编程范式就是<strong>程序设计的方法学</strong>，也就是程序员对程序的认知和理解。</p>
+      <p>面向对象：&quot;把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class），通过类的封装（encapsulation）隐藏内部细节，通过继承（inheritance）实现类的特化（specialization）和泛化（generalization），通过多态（polymorphism）实现基于对象类型的动态分派。&quot;</p>
+<p>面向对象编程是一种非常流行的<strong>编程范式</strong>（programming paradigm），所谓编程范式就是<strong>程序设计的方法学</strong>，也就是程序员对程序的认知和理解。</p>
 <p>前面的课程中我们说过“<strong>程序是指令的集合</strong>”，运行程序时，程序中的语句会变成一条或多条指令，然后由CPU（中央处理器）去执行。为了简化程序的设计，我们又讲到了函数，<strong>把相对独立且经常重复使用的代码放置到函数中</strong>，在需要使用这些代码的时候调用函数即可。如果一个函数的功能过于复杂和臃肿，我们又可以进一步<strong>将函数进一步拆分为多个子函数</strong>来降低系统的复杂性。</p>
 <p>在面向对象编程的世界里，程序中的<strong>数据和操作数据的函数是一个逻辑上的整体</strong>，我们称之为<strong>对象</strong>，<strong>对象可以接收消息</strong>，解决问题的方法就是<strong>创建对象并向对象发出各种各样的消息</strong>；通过消息传递，程序中的多个对象可以协同工作，这样就能构造出复杂的系统并解决现实中的问题。</p>
 <h1 id="类和对象">类和对象</h1>
@@ -171,6 +172,9 @@
 </blockquote>
 <p>在面向对象编程中，<strong>类是一个抽象的概念，对象是一个具体的概念</strong>。我们把同一类对象的共同特征抽取出来就是一个类，比如我们经常说的人类，这是一个抽象概念，而我们每个人就是人类的这个抽象概念下的具体的实实在在的存在，也就是一个对象。简而言之，<strong>类是对象的蓝图和模板，对象是类的实例</strong>。在面向对象编程的世界中，<strong>一切皆为对象</strong>，<strong>对象都有属性和行为</strong>，<strong>每个对象都是独一无二的</strong>，而且<strong>对象一定属于某个类</strong>。对象的属性是对象的静态特征，对象的行为是对象的动态特征。按照上面的说法，如果我们把拥有共同特征的对象的属性和行为都抽取出来，就可以定义出一个类。</p>
 <h2 id="定义类">定义类</h2>
+<blockquote>
+<p>class后面紧接着是类名，Clock，类名通常是大写开头的单词，紧接着是(object)，表示该类是从哪个类继承下来的，继承的概念我们后面再讲，通常，如果没有合适的继承类，就使用object类，这是所有类最终都会继承的类。</p>
+</blockquote>
 <p>在Python中，可以使用<code>class</code>关键字加上类名来定义类，通过缩进我们可以确定类的代码块，就如同定义函数那样。在类的代码块中，我们需要写一些函数，我们说过类是一个抽象概念，那么这些函数就是我们对一类对象共同的动态特征的提取。写在类里面的函数我们通常称之为<strong>方法</strong>，方法就是对象的行为，也就是对象可以接收的消息。方法的第一个参数通常都是<code>self</code>，它代表了接收这个消息的对象本身。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -404,6 +408,7 @@
 </span><span class="lnt">41
 </span><span class="lnt">42
 </span><span class="lnt">43
+</span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
@@ -436,7 +441,8 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s2">&#34;&#34;&#34;显示时间&#34;&#34;&#34;</span>
+        <span class="s2">&#34;&#34;&#34;显示时间
+</span><span class="s2">        {a:0&gt;2d}左边补0，补够2位&#34;&#34;&#34;</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.hour:0&gt;2d}:{self.min:0&gt;2d}:{self.sec:0&gt;2d}&#39;</span>
 
 
@@ -509,6 +515,127 @@
 <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>定义一个类描述平面上的点并提供移动点和计算到另一个点距离的方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+
+<span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;初始化方法
+</span><span class="s2">        
+</span><span class="s2">        :param x: 横坐标
+</span><span class="s2">        :param y: 纵坐标
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">move_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;移动到指定位置
+</span><span class="s2">        
+</span><span class="s2">        :param x: 新的横坐标
+</span><span class="s2">        &#34;param y: 新的纵坐标
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">move_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;移动指定的增量
+</span><span class="s2">        
+</span><span class="s2">        :param dx: 横坐标的增量
+</span><span class="s2">        &#34;param dy: 纵坐标的增量
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">dx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">dy</span>
+
+    <span class="k">def</span> <span class="nf">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;计算与另一个点的距离
+</span><span class="s2">        
+</span><span class="s2">        :param other: 另一个点
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+        <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;(</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">move_by</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>
