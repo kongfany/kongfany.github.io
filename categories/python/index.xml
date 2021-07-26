@@ -6,7 +6,16 @@
     <description>Recent content in Python on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 19 Jul 2021 16:28:18 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Jul 2021 16:34:33 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>函数使用进阶</title>
+      <link>https://kongfany.github.io/post/python19%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6/</link>
+      <pubDate>Mon, 26 Jul 2021 16:34:33 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python19%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6/</guid>
+      <description>关键字参数 下面是一个判断传入的三条边长能否构成三角形的函数，在调用函数传入参数时，我们可以指定参数名，也可以不指定参数名，代码如下所示。 1 2</description>
+    </item>
+    
     <item>
       <title>面向对象编程应用</title>
       <link>https://kongfany.github.io/post/python18%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/</link>
