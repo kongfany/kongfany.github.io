@@ -49,7 +49,7 @@
 <meta itemprop="name" content="函数使用进阶">
 <meta itemprop="description" content="关键字参数 下面是一个判断传入的三条边长能否构成三角形的函数，在调用函数传入参数时，我们可以指定参数名，也可以不指定参数名，代码如下所示。 1 2"><meta itemprop="datePublished" content="2021-07-26T16:34:33&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-26T16:34:33&#43;08:00" />
-<meta itemprop="wordCount" content="3227">
+<meta itemprop="wordCount" content="3452">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="函数使用进阶"/>
 <meta name="twitter:description" content="关键字参数 下面是一个判断传入的三条边长能否构成三角形的函数，在调用函数传入参数时，我们可以指定参数名，也可以不指定参数名，代码如下所示。 1 2"/>
@@ -263,7 +263,7 @@
         <span class="n">result</span> <span class="o">+=</span> <span class="n">arg</span>
     <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
         <span class="n">result</span> <span class="o">+=</span> <span class="n">value</span>
-    <span class="k">return</span> <span class="n">total</span>
+    <span class="k">return</span> <span class="n">result</span>
 
 
 <span class="k">print</span><span class="p">(</span><span class="n">calc</span><span class="p">())</span>                  <span class="c1"># 0</span>
@@ -330,12 +330,20 @@
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">operator</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">calc</span><span class="p">(</span><span class="n">init_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>      <span class="c1"># 15</span>
-<span class="k">print</span><span class="p">(</span><span class="n">calc</span><span class="p">(</span><span class="n">init_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>    <span class="c1"># 120</span>
+<span class="c1"># SyntaxError: positional argument follows keyword argument</span>
+<span class="c1"># 出现这个bug的原因在于参数位置不正确，关键字参数必须跟随在位置参数后面! 因为python函数在解析参数时, 是按照顺序来的, 位置参数是必须先满足, 才能考虑其他可变参数</span>
+<span class="c1"># print(calc(init_value=0, op=operator.add, 1, 2, 3, x=4, y=5))      </span>
+<span class="c1"># print(calc(init_value=1, op=operator.mul, 1, 2, x=3, y=4, z=5))  </span>
+<span class="k">print</span><span class="p">(</span><span class="n">calc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">init_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">calc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="n">init_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Python内置函数中有不少高阶函数，我们前面提到过的<code>filter</code>和<code>map</code>函数就是高阶函数，前者可以实现对序列中元素的过滤，后者可以实现对序列中元素的映射，例如我们要去掉一个整数列表中的奇数，并对所有的偶数求平方得到一个新的列表，就可以直接使用这两个函数来做到，具体的做法是如下所示。</p>
@@ -352,6 +360,10 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">is_even</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
@@ -363,8 +375,12 @@
 
 
 <span class="n">numbers1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">52</span><span class="p">]</span>
+<span class="c1"># filter过滤掉列表numbers1中符合is_even的数据-&gt;[12, 8, 60, 52]</span>
+<span class="c1"># map将列表numbers3中的数据通过square方法运算后映射到新的列表中</span>
 <span class="n">numbers2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="nb">filter</span><span class="p">(</span><span class="n">is_even</span><span class="p">,</span> <span class="n">numbers1</span><span class="p">)))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">numbers2</span><span class="p">)</span>    <span class="c1"># [144, 64, 3600, 2704]</span>
+<span class="n">numbers3</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">is_even</span><span class="p">,</span><span class="n">numbers1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">numbers3</span><span class="p">)</span> <span class="c1"># [12, 8, 60, 52]</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>当然，要完成上面代码的功能，也可以使用列表生成式，列表生成式的做法更为简单优雅。</p>
@@ -373,11 +389,15 @@
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">numbers1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">52</span><span class="p">]</span>
 <span class="n">numbers2</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers1</span> <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">numbers2</span><span class="p">)</span>    <span class="c1"># [144, 64, 3600, 2704]</span>
+<span class="n">numbers3</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">numbers3</span><span class="p">)</span> <span class="c1"># [12, 8, 60, 52]</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="lambda函数">Lambda函数</h1>
@@ -485,7 +505,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python20%E5%87%BD%E6%95%B0%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">函数的高级应用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python18%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/">
             <span class="next-text nav-default">面向对象编程应用</span>
             <span class="next-text nav-mobile">Next</span>
