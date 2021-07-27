@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 27 Jul 2021 11:48:24 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Jul 2021 20:31:34 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>文件读写和异常处理</title>
+      <link>https://kongfany.github.io/post/python22%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</link>
+      <pubDate>Tue, 27 Jul 2021 20:31:34 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python22%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</guid>
+      <description>实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（</description>
+    </item>
+    
     <item>
       <title>Python标准库初探</title>
       <link>https://kongfany.github.io/post/python21python%E6%A0%87%E5%87%86%E5%BA%93%E5%88%9D%E6%8E%A2/</link>

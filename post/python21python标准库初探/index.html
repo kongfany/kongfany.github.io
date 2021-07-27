@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python标准库初探">
 <meta itemprop="description" content="base64 - Base64编解码模块 Base64是一种基于64个可打印字符来表示二进制数据的方法。由于$log _{2}64=6$，所以Base64以6"><meta itemprop="datePublished" content="2021-07-27T11:48:24&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-27T11:48:24&#43;08:00" />
-<meta itemprop="wordCount" content="3786">
+<meta itemprop="wordCount" content="3798">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python标准库初探"/>
 <meta name="twitter:description" content="base64 - Base64编解码模块 Base64是一种基于64个可打印字符来表示二进制数据的方法。由于$log _{2}64=6$，所以Base64以6"/>
@@ -274,6 +274,7 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">hashlib</span>
@@ -282,6 +283,7 @@
 <span class="k">print</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="s1">&#39;123456&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
 
 <span class="c1"># 计算文件&#34;Python-3.7.1.tar.xz&#34;的MD5摘要</span>
+<span class="c1"># 当前目录下的一个文件</span>
 <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Python-3.7.1.tar.xz&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
@@ -469,7 +471,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python22%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">文件读写和异常处理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python20%E5%87%BD%E6%95%B0%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/">
             <span class="next-text nav-default">函数的高级应用</span>
             <span class="next-text nav-mobile">Next</span>
