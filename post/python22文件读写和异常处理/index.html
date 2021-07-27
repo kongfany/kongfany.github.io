@@ -49,7 +49,7 @@
 <meta itemprop="name" content="文件读写和异常处理">
 <meta itemprop="description" content="实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（"><meta itemprop="datePublished" content="2021-07-27T20:31:34&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-27T20:31:34&#43;08:00" />
-<meta itemprop="wordCount" content="5018">
+<meta itemprop="wordCount" content="6915">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="文件读写和异常处理"/>
 <meta name="twitter:description" content="实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（"/>
@@ -150,6 +150,7 @@
     <li><a href="#异常处理机制">异常处理机制</a></li>
     <li><a href="#上下文语法">上下文语法</a></li>
     <li><a href="#读写二进制文件">读写二进制文件</a></li>
+    <li><a href="#读写json文件">读写JSON文件</a></li>
     <li><a href="#简单的总结">简单的总结</a></li>
   </ul>
 </nav>
@@ -206,11 +207,13 @@
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">())</span>
+<span class="c1"># utf-8</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>使用<code>open</code>函数打开文件成功后会返回一个文件对象，通过这个对象，我们就可以实现对文件的读写操作；如果打开文件失败，<code>open</code>函数会引发异常，稍后会对此加以说明。如果要关闭打开的文件，可以使用文件对象的<code>close</code>方法，这样可以在结束文件操作时释放掉这个文件。</p>
@@ -257,14 +260,14 @@
 <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;致橡树.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span><span class="c1"># 列表中每个元素对应文件每行</span>
 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>如果要向文件中写入内容，可以在打开文件时使用<code>w</code>或者<code>a</code>作为操作模式，前者会截断之前的文本内容写入新的内容，后者是在原来内容的尾部追加新的内容。</p>
+</div><p>要将文本信息写入文件文件也非常简单，在使用<code>open</code>函数时指定好文件名并将文件模式设置为<code>'w'</code>即可。注意如果需要对文件内容进行追加式写入，应该将模式设置为<code>'a'</code>。如果要写入的文件不存在会自动创建文件而不是引发异常。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -296,6 +299,87 @@
 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
     <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">{line}&#39;</span><span class="p">)</span>
 <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面的例子演示了如何将1-9999之间的素数分别写入三个文件中（1-99之间的素数保存在a.txt中，100-999之间的素数保存在b.txt中，1000-9999之间的素数保存在c.txt中）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+
+<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;判断素数的函数&#34;&#34;&#34;</span>
+    <span class="k">assert</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="bp">False</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;b.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;c.txt&#39;</span><span class="p">)</span>
+    <span class="n">fs_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">fs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                    <span class="n">fs_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+                    <span class="n">fs_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fs_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;写文件时发生错误!&#39;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">fs</span> <span class="ow">in</span> <span class="n">fs_list</span><span class="p">:</span>
+            <span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;操作完成!&#39;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="异常处理机制">异常处理机制</h1>
@@ -550,7 +634,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="读写二进制文件">读写二进制文件</h1>
-<p>读写二进制文件跟读写文本文件的操作类似，但是需要注意，在使用<code>open</code>函数打开文件时，如果要进行读操作，操作模式是<code>'rb'</code>，如果要进行写操作，操作模式是<code>'wb'</code>。还有一点，读写文本文件时，<code>read</code>方法的返回值以及<code>write</code>方法的参数是<code>str</code>对象（字符串），而读写二进制文件时，<code>read</code>方法的返回值以及<code>write</code>方法的参数是<code>bytes-like</code>对象（字节串）。下面的代码实现了将当前路径下名为<code>guido.jpg</code>的图片文件复制到<code>吉多.jpg</code>文件中的操作。</p>
+<p>读写二进制文件跟读写文本文件的操作类似，但是需要注意，在使用<code>open</code>函数打开文件时，如果要进行读操作，操作模式是<code>'rb'</code>，如果要进行写操作，操作模式是<code>'wb'</code>。还有一点，读写文本文件时，<code>read</code>方法的返回值以及<code>write</code>方法的参数是<code>str</code>对象（字符串），而读写二进制文件时，<code>read</code>方法的返回值以及<code>write</code>方法的参数是<code>bytes-like</code>对象（字节串）。下面的代码实现了将当前路径下名为<code>kkk.jpg</code>的图片文件复制到<code>hhh.jpg</code>文件中的操作。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -566,9 +650,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;guido.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file1</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;kkk.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file1</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">file1</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;吉多.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file2</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;hhh.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file2</span><span class="p">:</span>
         <span class="n">file2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">FileNotFoundError</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;指定的文件无法打开.&#39;</span><span class="p">)</span>
@@ -595,8 +679,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;guido.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file1</span><span class="p">,</span> \
-        <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;吉多.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file2</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;kkk.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file1</span><span class="p">,</span> \
+        <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;hhh.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file2</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">file1</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">data</span><span class="p">:</span>
             <span class="n">file2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -608,7 +692,207 @@
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;程序执行结束.&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="简单的总结">简单的总结</h1>
+</div><h1 id="读写json文件">读写JSON文件</h1>
+<p>通过上面的讲解，我们已经知道如何将文本数据和二进制数据保存到文件中，那么这里还有一个问题，如果希望把一个列表或者一个字典中的数据保存到文件中又该怎么做呢？答案是将数据以JSON格式进行保存。JSON是“JavaScript Object Notation”的缩写，它本来是JavaScript语言中创建对象的一种字面量语法，现在已经被广泛的应用于跨平台跨语言的数据交换，原因很简单，因为JSON也是纯文本，任何系统任何编程语言处理纯文本都是没有问题的。目前JSON基本上已经取代了XML作为异构系统间交换数据的事实标准。关于JSON的知识，更多的可以参考<a href="http://json.org">JSON的官方网站</a>，从这个网站也可以了解到每种语言处理JSON数据格式可以使用的工具或三方库，下面是一个JSON的简单例子。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;kong&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">38</span><span class="p">,</span>
+    <span class="nt">&#34;qq&#34;</span><span class="p">:</span> <span class="mi">957658</span><span class="p">,</span>
+    <span class="nt">&#34;friends&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;王大锤&#34;</span><span class="p">,</span> <span class="s2">&#34;白元芳&#34;</span><span class="p">],</span>
+    <span class="nt">&#34;cars&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="nt">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;BYD&#34;</span><span class="p">,</span> <span class="nt">&#34;max_speed&#34;</span><span class="p">:</span> <span class="mi">180</span><span class="p">},</span>
+        <span class="p">{</span><span class="nt">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;Audi&#34;</span><span class="p">,</span> <span class="nt">&#34;max_speed&#34;</span><span class="p">:</span> <span class="mi">280</span><span class="p">},</span>
+        <span class="p">{</span><span class="nt">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;Benz&#34;</span><span class="p">,</span> <span class="nt">&#34;max_speed&#34;</span><span class="p">:</span> <span class="mi">320</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可能大家已经注意到了，上面的JSON跟Python中的字典其实是一样一样的，事实上JSON的数据类型和Python的数据类型是很容易找到对应关系的，如下面两张表所示。</p>
+<table>
+<thead>
+<tr>
+<th>JSON</th>
+<th>Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td>dict</td>
+</tr>
+<tr>
+<td>array</td>
+<td>list</td>
+</tr>
+<tr>
+<td>string</td>
+<td>str</td>
+</tr>
+<tr>
+<td>number (int / real)</td>
+<td>int / float</td>
+</tr>
+<tr>
+<td>true / false</td>
+<td>True / False</td>
+</tr>
+<tr>
+<td>null</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>JSON</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>object</td>
+</tr>
+<tr>
+<td>list, tuple</td>
+<td>array</td>
+</tr>
+<tr>
+<td>str</td>
+<td>string</td>
+</tr>
+<tr>
+<td>int, float, int- &amp; float-derived Enums</td>
+<td>number</td>
+</tr>
+<tr>
+<td>True / False</td>
+<td>true / false</td>
+</tr>
+<tr>
+<td>None</td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<p>我们使用Python中的json模块就可以将字典或列表以JSON格式保存到文件中，代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;kong&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">38</span><span class="p">,</span>
+        <span class="s1">&#39;qq&#39;</span><span class="p">:</span> <span class="mi">957658</span><span class="p">,</span>
+        <span class="s1">&#39;friends&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="s1">&#39;白元芳&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cars&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;brand&#39;</span><span class="p">:</span> <span class="s1">&#39;BYD&#39;</span><span class="p">,</span> <span class="s1">&#39;max_speed&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">},</span>
+            <span class="p">{</span><span class="s1">&#39;brand&#39;</span><span class="p">:</span> <span class="s1">&#39;Audi&#39;</span><span class="p">,</span> <span class="s1">&#39;max_speed&#39;</span><span class="p">:</span> <span class="mi">280</span><span class="p">},</span>
+            <span class="p">{</span><span class="s1">&#39;brand&#39;</span><span class="p">:</span> <span class="s1">&#39;Benz&#39;</span><span class="p">,</span> <span class="s1">&#39;max_speed&#39;</span><span class="p">:</span> <span class="mi">320</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">mydict</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;保存数据完成!&#39;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+<span class="c1"># 文件中的jason串中的中文变成了Unicode编码</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>json模块主要有四个比较重要的函数，分别是：</p>
+<ul>
+<li><code>dump</code> - 将Python对象按照JSON格式序列化到文件中</li>
+<li><code>dumps</code> - 将Python对象处理成JSON格式的字符串</li>
+<li><code>load</code> - 将文件中的JSON数据反序列化成对象</li>
+<li><code>loads</code> - 将字符串的内容反序列化成Python对象</li>
+</ul>
+<p>这里出现了两个概念，一个叫序列化，一个叫反序列化。“序列化（serialization）在计算机科学的数据处理中，是指将数据结构或对象状态转换为可以存储或传输的形式，这样在需要的时候能够恢复到原先的状态，而且通过序列化的数据重新获取字节时，可以利用这些字节来产生原始对象的副本（拷贝）。与这个过程相反的动作，即从一系列字节中提取数据结构的操作，就是反序列化（deserialization）”。</p>
+<p>目前绝大多数网络数据服务（或称之为网络API）都是基于HTTP协议提供JSON格式的数据，关于HTTP协议的相关知识，可以看看阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2016/08/http.html">《HTTP协议入门》</a>，如果想了解国内的网络数据服务，可以看看<a href="https://www.juhe.cn/">聚合数据</a>和<a href="http://www.avatardata.cn/">阿凡达数据</a>等网站，国外的可以看看<a href="http://apis.io/">{API}Search</a>网站。下面的例子演示了如何使用<a href="http://docs.python-requests.org/zh_CN/latest/">requests</a>模块（封装得足够好的第三方网络访问模块）访问网络API获取国内新闻，如何通过json模块解析JSON数据并显示新闻标题，这个例子使用了<a href="https://www.tianapi.com/">天行数据</a>提供的国内新闻数据接口，其中的APIKey需要自己到该网站申请。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://api.tianapi.com/guonei/?key=APIKey&amp;num=10&#39;</span><span class="p">)</span>
+    <span class="n">data_model</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">news</span> <span class="ow">in</span> <span class="n">data_model</span><span class="p">[</span><span class="s1">&#39;newslist&#39;</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">news</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在Python中要实现序列化和反序列化除了使用json模块之外，还可以使用pickle和shelve模块，但是这两个模块是使用特有的序列化协议来序列化数据，因此序列化后的数据只能被Python识别。关于这两个模块的相关知识可以自己看看网络上的资料。另外，如果要了解更多的关于Python异常机制的知识，可以看看segmentfault上面的文章<a href="https://segmentfault.com/a/1190000007736783">《总结：Python中的异常处理》</a>，这篇文章不仅介绍了Python中异常机制的使用，还总结了一系列的最佳实践，很值得一读。</p>
+<h1 id="简单的总结">简单的总结</h1>
 <p>通过读写文件的操作，我们可以实现数据持久化。在Python中可以通过<code>open</code>函数来获得文件对象，可以通过文件对象的<code>read</code>和<code>write</code>方法实现文件读写操作。程序在运行时可能遭遇无法预料的异常状况，可以使用Python的异常机制来处理这些状况。Python的异常机制主要包括<code>try</code>、<code>except</code>、<code>else</code>、<code>finally</code>和<code>raise</code>这五个核心关键字。<code>try</code>后面的<code>except</code>语句不是必须的，<code>finally</code>语句也不是必须的，但是二者必须要有一个；<code>except</code>语句可以有一个或多个，多个<code>except</code>会按照书写的顺序依次匹配指定的异常，如果异常已经处理就不会再进入后续的<code>except</code>语句；<code>except</code>语句中还可以通过元组同时指定多个异常类型进行捕获；<code>except</code>语句后面如果不指定异常类型，则默认捕获所有异常；捕获异常后可以使用<code>raise</code>要再次抛出，但是不建议捕获并抛出同一个异常；不建议在不清楚逻辑的情况下捕获所有异常，这可能会掩盖程序中严重的问题。最后强调一点，不要使用异常机制来处理正常业务逻辑或控制程序流程，简单的说就是不要滥用异常机制。</p>
 
     </div>
