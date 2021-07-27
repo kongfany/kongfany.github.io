@@ -49,7 +49,7 @@
 <meta itemprop="name" content="函数使用进阶">
 <meta itemprop="description" content="关键字参数 下面是一个判断传入的三条边长能否构成三角形的函数，在调用函数传入参数时，我们可以指定参数名，也可以不指定参数名，代码如下所示。 1 2"><meta itemprop="datePublished" content="2021-07-26T16:34:33&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-26T16:34:33&#43;08:00" />
-<meta itemprop="wordCount" content="3452">
+<meta itemprop="wordCount" content="3590">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="函数使用进阶"/>
 <meta name="twitter:description" content="关键字参数 下面是一个判断传入的三条边长能否构成三角形的函数，在调用函数传入参数时，我们可以指定参数名，也可以不指定参数名，代码如下所示。 1 2"/>
@@ -482,7 +482,31 @@
 <p><strong>提示1</strong>：上面使用的<code>reduce</code>函数是Python标准库<code>functools</code>模块中的函数，它可以实现对数据的归约操作，通常情况下，<strong>过滤</strong>（filter）、<strong>映射</strong>（map）和<strong>归约</strong>（reduce）是处理数据中非常关键的三个步骤，而Python的标准库也提供了对这三个操作的支持。</p>
 <p><strong>提示2</strong>：上面使用的<code>all</code>函数是Python内置函数，如果传入的序列中所有布尔值都是<code>True</code>，<code>all</code>函数就返回<code>True</code>，否则<code>all</code>函数就返回<code>False</code>。</p>
 </blockquote>
-<h1 id="总结">总结</h1>
+<p><a href="https://www.runoob.com/python/python-func-reduce.html">reduce()</a></p>
+<p>归约：把一个函数作用于一个列表，这个函数接收这两个参数，reduce把列表中的前两个数值运算后，再将结果与下一个值传给函数运算，依次累积计算。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">:</span>            <span class="c1"># 两数相加</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="n">sum1</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>   <span class="c1"># 计算列表和：1+2+3+4+5</span>
+<span class="n">sum2</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># 使用 lambda 匿名函数</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sum1</span><span class="p">)</span>	<span class="c1"># 15</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sum2</span><span class="p">)</span> <span class="c1"># 15</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="总结">总结</h1>
 <p>Python中的函数可以使用可变参数<code>*args</code>和关键字参数<code>**kwargs</code>来接收任意数量的参数，而且传入参数时可以带上参数名也可以没有参数名，可变参数会被处理成一个元组，而关键字参数会被处理成一个字典。Python中的函数也是对象，所以函数可以作为函数的参数和返回值，也就是说，在Python中我们可以使用高阶函数。如果我们要定义的函数非常简单，只有一行代码且不需要名字，可以将函数写成Lambda函数（匿名函数）的形式。</p>
 
     </div>

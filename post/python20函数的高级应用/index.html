@@ -49,7 +49,7 @@
 <meta itemprop="name" content="函数的高级应用">
 <meta itemprop="description" content="装饰器 装饰器是Python中用一个函数装饰另外一个函数或类并为其提供额外功能的语法现象。装饰器本身是一个函数，它的参数是被装饰的函数或类，它"><meta itemprop="datePublished" content="2021-07-27T10:12:56&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-27T10:12:56&#43;08:00" />
-<meta itemprop="wordCount" content="5110">
+<meta itemprop="wordCount" content="5122">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="函数的高级应用"/>
 <meta name="twitter:description" content="装饰器 装饰器是Python中用一个函数装饰另外一个函数或类并为其提供额外功能的语法现象。装饰器本身是一个函数，它的参数是被装饰的函数或类，它"/>
@@ -483,9 +483,17 @@
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">RecordTime</span><span class="p">:</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="k">class</span> <span class="nc">RecordTime</span><span class="p">:</span>
     
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
 
@@ -635,7 +643,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python21python%E6%A0%87%E5%87%86%E5%BA%93%E5%88%9D%E6%8E%A2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python标准库初探</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python19%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6/">
             <span class="next-text nav-default">函数使用进阶</span>
             <span class="next-text nav-mobile">Next</span>
