@@ -49,7 +49,7 @@
 <meta itemprop="name" content="文件读写和异常处理">
 <meta itemprop="description" content="实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（"><meta itemprop="datePublished" content="2021-07-27T20:31:34&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-27T20:31:34&#43;08:00" />
-<meta itemprop="wordCount" content="6915">
+<meta itemprop="wordCount" content="7347">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="文件读写和异常处理"/>
 <meta name="twitter:description" content="实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（"/>
@@ -151,6 +151,7 @@
     <li><a href="#上下文语法">上下文语法</a></li>
     <li><a href="#读写二进制文件">读写二进制文件</a></li>
     <li><a href="#读写json文件">读写JSON文件</a></li>
+    <li><a href="#读写csv文件">读写csv文件</a></li>
     <li><a href="#简单的总结">简单的总结</a></li>
   </ul>
 </nav>
@@ -892,7 +893,121 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>在Python中要实现序列化和反序列化除了使用json模块之外，还可以使用pickle和shelve模块，但是这两个模块是使用特有的序列化协议来序列化数据，因此序列化后的数据只能被Python识别。关于这两个模块的相关知识可以自己看看网络上的资料。另外，如果要了解更多的关于Python异常机制的知识，可以看看segmentfault上面的文章<a href="https://segmentfault.com/a/1190000007736783">《总结：Python中的异常处理》</a>，这篇文章不仅介绍了Python中异常机制的使用，还总结了一系列的最佳实践，很值得一读。</p>
-<h1 id="简单的总结">简单的总结</h1>
+<h1 id="读写csv文件">读写csv文件</h1>
+<p>csv是最通用的一种文件格式，它可以非常容易地被导入各种PC表格及数据库中。此文件，一行即为数据表的一行。生成数据表字段用半角逗号隔开。csv文件用记事本和excel都能打开，用记事本打开显示逗号，用excel打开，没有逗号了，逗号都用来分列了,还可有Editplus打开。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;example.csv&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">FileNotFoundError</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;无法打开文件:&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%-30s%-20s%-10s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">csv</span>
+
+
+<span class="k">class</span> <span class="nc">Teacher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__age</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__title</span>
+
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;teacher.csv&#39;</span>
+<span class="n">teachers</span> <span class="o">=</span> <span class="p">[</span><span class="n">Teacher</span><span class="p">(</span><span class="s1">&#39;骆昊&#39;</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="s1">&#39;叫兽&#39;</span><span class="p">),</span> <span class="n">Teacher</span><span class="p">(</span><span class="s1">&#39;狄仁杰&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;砖家&#39;</span><span class="p">)]</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">teacher</span> <span class="ow">in</span> <span class="n">teachers</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">teacher</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">teacher</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">teacher</span><span class="o">.</span><span class="n">title</span><span class="p">])</span>
+<span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;无法写入文件:&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;保存数据完成!&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="简单的总结">简单的总结</h1>
 <p>通过读写文件的操作，我们可以实现数据持久化。在Python中可以通过<code>open</code>函数来获得文件对象，可以通过文件对象的<code>read</code>和<code>write</code>方法实现文件读写操作。程序在运行时可能遭遇无法预料的异常状况，可以使用Python的异常机制来处理这些状况。Python的异常机制主要包括<code>try</code>、<code>except</code>、<code>else</code>、<code>finally</code>和<code>raise</code>这五个核心关键字。<code>try</code>后面的<code>except</code>语句不是必须的，<code>finally</code>语句也不是必须的，但是二者必须要有一个；<code>except</code>语句可以有一个或多个，多个<code>except</code>会按照书写的顺序依次匹配指定的异常，如果异常已经处理就不会再进入后续的<code>except</code>语句；<code>except</code>语句中还可以通过元组同时指定多个异常类型进行捕获；<code>except</code>语句后面如果不指定异常类型，则默认捕获所有异常；捕获异常后可以使用<code>raise</code>要再次抛出，但是不建议捕获并抛出同一个异常；不建议在不清楚逻辑的情况下捕获所有异常，这可能会掩盖程序中严重的问题。最后强调一点，不要使用异常机制来处理正常业务逻辑或控制程序流程，简单的说就是不要滥用异常机制。</p>
 
     </div>

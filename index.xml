@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 28 Jul 2021 17:53:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Jul 2021 22:20:26 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>图形用户界面和游戏开发</title>
+      <link>https://kongfany.github.io/post/python23%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E5%92%8C%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Wed, 28 Jul 2021 22:20:26 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python23%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E5%92%8C%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</guid>
+      <description>基于tkinter模块的GUI GUI是图形用户界面的缩写，图形化的用户界面对使用过计算机的人来说应该都不陌生，在此也无需进行赘述。Pytho</description>
+    </item>
+    
     <item>
       <title>校园导“游”系统的设计与实现</title>
       <link>https://kongfany.github.io/post/bishe/</link>
