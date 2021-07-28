@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>校园导“游”系统的设计与实现 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="摘 要 随着各种地图App的推广，旅行更加具有自主性。但就目前而言，没有针对校园的导游系统。校园的导游系统，可以使得学生更方便的熟悉和了解校园以" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/bishe/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="校园导“游”系统的设计与实现" />
+<meta property="og:description" content="摘 要 随着各种地图App的推广，旅行更加具有自主性。但就目前而言，没有针对校园的导游系统。校园的导游系统，可以使得学生更方便的熟悉和了解校园以" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/bishe/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-28T17:53:19&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-28T17:53:19&#43;08:00" />
+
+<meta itemprop="name" content="校园导“游”系统的设计与实现">
+<meta itemprop="description" content="摘 要 随着各种地图App的推广，旅行更加具有自主性。但就目前而言，没有针对校园的导游系统。校园的导游系统，可以使得学生更方便的熟悉和了解校园以"><meta itemprop="datePublished" content="2021-07-28T17:53:19&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-28T17:53:19&#43;08:00" />
+<meta itemprop="wordCount" content="18405">
+<meta itemprop="keywords" content="毕设," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="校园导“游”系统的设计与实现"/>
+<meta name="twitter:description" content="摘 要 随着各种地图App的推广，旅行更加具有自主性。但就目前而言，没有针对校园的导游系统。校园的导游系统，可以使得学生更方便的熟悉和了解校园以"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">校园导“游”系统的设计与实现</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-28 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#摘-要">摘 要</a></li>
+    <li><a href="#abstract">ABSTRACT</a></li>
+    <li><a href="#第一章-绪论">第一章 绪论</a>
+      <ul>
+        <li><a href="#11-研究背景和意义">1.1 研究背景和意义</a></li>
+        <li><a href="#12研究现状">1.2研究现状</a></li>
+        <li><a href="#13主要研究内容">1.3主要研究内容</a></li>
+        <li><a href="#14论文结构">1.4论文结构</a></li>
+      </ul>
+    </li>
+    <li><a href="#第二章-相关工作">第二章 相关工作</a>
+      <ul>
+        <li><a href="#21-相关技术介绍">2.1 相关技术介绍</a>
+          <ul>
+            <li><a href="#211android">2.1.1Android</a></li>
+            <li><a href="#212-spring-boot">2.1.2 Spring Boot</a></li>
+            <li><a href="#213-mysql数据库">2.1.3 MySQL数据库</a></li>
+          </ul>
+        </li>
+        <li><a href="#22课题技术路线"><strong>2.2课题技术路线</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#第三章-系统分析">第三章 系统分析</a>
+      <ul>
+        <li><a href="#31-可行性分析">3.1 可行性分析</a>
+          <ul>
+            <li><a href="#311-社会可行性">3.1.1 社会可行性</a></li>
+            <li><a href="#312--经济可行性"><strong>3.1.2</strong>  <strong>经济可行性</strong></a></li>
+            <li><a href="#313--技术可行性"><strong>3.1.3</strong>  <strong>技术可行性</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#32-需求分析">3.2 需求分析</a>
+          <ul>
+            <li><a href="#321-系统总体需求">3.2.1 系统总体需求</a></li>
+            <li><a href="#322其他需求">3.2.2其他需求</a></li>
+            <li><a href="#323角色用例">3.2.3角色用例</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#第四章-系统总体设计">第四章 系统总体设计</a>
+      <ul>
+        <li><a href="#41-系统架构">4.1 系统架构</a></li>
+        <li><a href="#42-系统功能概述">4.2 系统功能概述</a>
+          <ul>
+            <li><a href="#421-android-客户端用户模块"><strong>4.2.1 Android</strong> 客户端用户模块</a></li>
+            <li><a href="#422--web-管理端管理模块"><strong>4.2.2</strong>  Web 管理端管理模块</a></li>
+          </ul>
+        </li>
+        <li><a href="#43-数据库设计">4.3 数据库设计</a>
+          <ul>
+            <li><a href="#431--数据库需求分析"><strong>4.3.1</strong>  <strong>数据库需求分析</strong></a></li>
+            <li><a href="#432--数据库概念模型设计"><strong>4.3.2</strong>  <strong>数据库概念模型设计</strong></a></li>
+            <li><a href="#433--数据库逻辑设计"><strong>4.3.3</strong>  <strong>数据库逻辑设计</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#44目录结构设计">4.4目录结构设计</a>
+          <ul>
+            <li><a href="#441-android-客户端目录"><strong>4.4.1</strong> Android 客户端目录</a></li>
+            <li><a href="#442-web-管理端目录"><strong>4.4</strong>.2 Web 管理端目录</a></li>
+            <li><a href="#443--服务器后端目录"><strong>4.4.3  服务器后端目录</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#第五章-系统详细设计与实现">第五章 系统详细设计与实现</a>
+      <ul>
+        <li><a href="#51-管理端登录注册模块">5.1 管理端登录注册模块</a>
+          <ul>
+            <li><a href="#511--服务器端的基础配置"><strong>5.1.1</strong>  <strong>服务器端的基础配置</strong></a></li>
+            <li><a href="#512登录注册功能流程图">5.1.2登录注册功能流程图</a></li>
+            <li><a href="#513-ajax介绍及核心代码">5.1.3 Ajax介绍及核心代码</a></li>
+            <li><a href="#514-登录注册界面展示">5.1.4 登录注册界面展示</a></li>
+          </ul>
+        </li>
+        <li><a href="#52管理端用户管理模块">5.2管理端用户管理模块</a>
+          <ul>
+            <li><a href="#521-jpa-介绍及核心代码"><strong>5.2</strong>.1 <strong><strong>JPA</strong></strong> 介绍及核心代码</a></li>
+            <li><a href="#522-用户管理模块界面展示"><strong>5.2.2 用户管理模块界面展示</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#53-客户端导航模块">5.3 客户端导航模块</a>
+          <ul>
+            <li><a href="#531-导航模块流程图"><strong>5.3.1 导航模块流程图</strong></a></li>
+            <li><a href="#532-导航模块及核心代码">5.3.2 导航模块及核心代码</a></li>
+            <li><a href="#533-导航功能界面展示"><strong>5.3.3 导航功能界面展示</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#54客户端景点模块">5.4客户端景点模块</a>
+          <ul>
+            <li><a href="#541-okhttp网络请求框架及核心代码"><strong>5.4.1 OkHttp网络请求框架及核心代码</strong></a></li>
+            <li><a href="#542景点模块界面展示"><strong>5.4.2景点模块界面展示</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#55客户端活动模块">5.5客户端活动模块</a>
+          <ul>
+            <li><a href="#551-活动模块收藏功能及核心代码"><strong>5.5.1 活动模块收藏功能及核心代码</strong></a></li>
+            <li><a href="#552-活动模块及我的收藏界面展示"><strong>5.5.2 活动模块及我的收藏界面展示</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#56客户端个人信息模块">5.6客户端个人信息模块</a>
+          <ul>
+            <li><a href="#561-个人信息模块及核心代码"><strong>5.6.1 个人信息模块及核心代码</strong></a></li>
+            <li><a href="#562-个人信息模块界面展示"><strong>5.6.2 个人信息模块界面展示</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#57-系统测试">5.7 系统测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#第六章-总结与展望">第六章 总结与展望</a>
+      <ul>
+        <li><a href="#61-总结">6.1 总结</a></li>
+        <li><a href="#62-展望">6.2 展望</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="摘-要">摘 要</h1>
+<p>随着各种地图App的推广，旅行更加具有自主性。但就目前而言，没有针对校园的导游系统。校园的导游系统，可以使得学生更方便的熟悉和了解校园以及周边的环境，增加学生对于学校的归属感。本文介绍校园导&quot;游&quot;系统的设计与实现，并且，这里的&quot;导游&quot;是广义上的，包括学校活动等。</p>
+<p>本校园导游系统以高德地图为主体，为用户提供导航以及路线规划服务，用户可以选择不同的出行方式，通过地图点击或键盘输入的方式输入目的地，用户会在地图上查看到路线规划以及路程所需的时间，点击路线详情可以查看路线的详细规划。在此基础上为用户提供了景点、活动等方面的信息，并且用户可以对这些信息通过点赞，评论，收藏的方式进行评价。与此同时，本系统为管理员提供一个高效的平台管理用户信息、活动信息和景点信息等。管理员可以对这些信息实现基本的增、删、改、查操作。</p>
+<p>本系统采用了Android平台作为学生用户的使用平台，管理员系统的前端界面采用VUE框架，element进行网页设计，为系统管理员使用，后台使用Spring Boot整合Spring、Spring MVC、JPA来进行搭建。数据库存储使用MySQL进行存储数据。采用Android studio 以及IntelliJ IDEA进行开发。</p>
+<p>经过测试，校园导游系统满足了用户对于导游系统的基本需求，同时为管理员提供了一个方便的平台。为管理员和用户营造了一个轻松便利的环境。</p>
+<p><strong>关键词：</strong> 校园导游；Android；MySQL 数据库；Spring Boot</p>
+<h1 id="abstract">ABSTRACT</h1>
+<p>With the promotion of various map apps, travel becomes more autonomous. But for now, there is no tour guide system for campuses. The campus tour guide system can make it easier for students to familiarize and understand the campus and surrounding environment, and increase the students' sense of belonging to the school. This article introduces the design and implementation of the campus &quot;guide&quot; tour system, and the &quot;guide&quot; here is in a broad sense, including school activities and so on.</p>
+<p>This campus tour guide system takes AutoNavi map as the main body to provide users with navigation and route planning services. Users can choose different travel modes and enter the destination by clicking on the map or keyboard input. The user will view the route planning and route planning on the map. The time required for the journey, click on the route details to view the detailed plan of the route. On this basis, users are provided with information on scenic spots, activities, etc., and users can evaluate this information through likes, comments, and collections. At the same time, the system provides an efficient platform for administrators to manage user information, activity information, and scenic spot information. The administrator can implement basic operations of adding, deleting, modifying, and checking the information.</p>
+<p>This system uses the Android platform as the platform for student users. The front-end interface of the system uses the VUE framework, and the element is used for web page design for system administrators. The back-end uses Spring Boot to integrate Spring, Spring MVC, and JPA to build. Database storage uses MySQL to store data. Use Android studio and IntelliJ IDEA for development.</p>
+<p>After testing, the campus tour guide system meets the basic needs of users for the tour guide system. At the same time, it provides a convenient platform for administrators. In conclusion，the campus tour guide system creates a relaxed and convenient environment for administrators and users.</p>
+<p><strong>Keywords:</strong> Campus tour guide, Android, MySQL database, Spring Boot</p>
+<h1 id="第一章-绪论">第一章 绪论</h1>
+<h2 id="11-研究背景和意义">1.1 研究背景和意义</h2>
+<p>随着人们物质水平的提高，以及高校的快速发展，几乎所有的高校都是一个集风景，人文，美食及活动等为一体的，更加个性化的校园。校园生活日益丰富多彩，学校校园及周边环境也让人心旷神怡，各种历史人文名胜，各种轻松解压的娱乐场所，各种美不胜收的自然风光，以及校园丰富多彩的社团活动。如此美好的氛围，使得同学们有着很高涨的情绪去参观。由此学生对于景点和活动的信息以及路线的需求也会增加。如今导航软件数量很多，然而对于校园用户来说，并不需要的是去多远的地方或者是过多信息的干扰。此时若有一款针对学生用户的软件，即使是没有市面上的导游软件那么的功能强大。但是如果可以做到真正贴合学生需求就显得更加有意义。</p>
+<p>校园导游系统的主要用途是，帮助新生更直观的了解学校的环境，方便学生用户的日常需求，参与校园活动，更加有效直接的获取校园的信息以及更好的融入校园。对于校园文娱活动的管理员来说可以拥有一个更加方便快捷的平台来管理校园景点或者标志性建筑的信息，以及发布校园活动。与此同时，校园导游系统的使用也可以引领一种积极正向的校园文化氛围。</p>
+<h2 id="12研究现状">1.2研究现状</h2>
+<p>近年来，随着&quot;智慧城市&quot;、&quot;智慧地球&quot;等概念的建立，&quot;数字化校园&quot;、&quot;智慧校园&quot;的概念也逐步深入人心，在世界各国大中小校园中得到倡导。 &quot;数字校园&quot;的概念是在上世纪 90 年代美国 Claremont Graduate University 大学计算机专业 Kenneth Green 教授在其主持的名为&quot;信息化校园计划&quot;的大型科研项目中提出。在后来的建设实践过程中，&quot;数字校园&quot;的理念不断完善以及逐步扩充，并得到了社会的广泛认可。 &quot;校园导游系统&quot;是其中很成功的一个典型应用案例，它的核心思想是&quot;地理信息系统+导航信息系统&quot;，这在一定程度上推动了&quot;数字校园&quot;的发展。</p>
+<p>目前而言，校园导游系统在我国各地高校中并没有范围的普及和应用，绝大数的高校并没有一套完整的校园导游系统。由于传统的管理系统对于处理数据比较乏力，既费时又费力，并且有时候会显得更新很慢，跟不上用户的实时需求。因此建立校园导游系统可以弥补很多问题，可以极大的方便管理员和用户。</p>
+<h2 id="13主要研究内容">1.3主要研究内容</h2>
+<p>校园导游系统旨在给学生逛景点与参加校内活动提供导引作用。方便学生了解校内及周边景点浏览、了解与参加学校活动。具体研究内容主要包括以下几个方面：</p>
+<p>（1）校园景点导游服务：景点查询、可视化导航、点赞、导航。</p>
+<p>（2）周边景点导游服务：景点查询、可视化导航、点赞、导航。</p>
+<p>（3）学校活动的导游服务：看公告、查询、收藏、点赞、评价。</p>
+<h2 id="14论文结构">1.4论文结构</h2>
+<p>本文研究的是如何设计与实现一个校园导游系统。全文共六章，论文结构如下：</p>
+<p>第一章为绪论。通过对于系统的研究背景和现状的分析，给出系统的主要的研究内容。</p>
+<p>第二章为相关工作。通过对当前常用的相关技术的了解和学习，确定系统的技术路线，以及系统开发所需要的开发环境和技术。</p>
+<p>第三章为系统分析。给出系统的可行性分析，并分析出系统的不同角色的用户的需求，得到功能模块的用例图。</p>
+<p>第四章为系统总体设计。通过对系统总体的需求分析，给出系统的架构。与此同时进行数据库的设计，进一步明确学生用户和管理员的详细功能。</p>
+<p>第五章为系统详细设计与实现。给出呈现每个功能详细设计及运行效果。</p>
+<p>第六章为总结与展望。通过对整个系统开发工作的总结，对未来的学习和工作生活进行展望。</p>
+<h1 id="第二章-相关工作">第二章 相关工作</h1>
+<h2 id="21-相关技术介绍">2.1 相关技术介绍</h2>
+<h3 id="211android">2.1.1Android</h3>
+<p>Android是一种基于Linux的自由且开放源代码的操作系统，主要适用于移动设备。现如今Android操作系统应用十分广泛，此外Android的安全性也比较完善。</p>
+<p>Android的系统架构是由Linux 系统内核、系统运行库、应用程序框架和应用层4 个部分组成：</p>
+<p>（1）Linux 内核层</p>
+<p>Android 系统提供给用户的服务是通过Linux2.6内核完成。Linux内核是链接硬件系统和软件系统的中间层，通过制定统一的接口提供相应的服务。</p>
+<p>（2）系统运行库层</p>
+<p>系统运行库是建立在Linux内核之上的平台，通过一组C/C++的函数库为Android系统服务。</p>
+<p>（3）应用程序框架</p>
+<p>应用程序框架提供了各种开发程序时所需要的构建块以及使用Android系统所需要的基本管理功能。负责程序开发和设计的人员可以通过应用程序框架迅速做出系统的概要设计和详细设计，从而快速的进行Android程序开发。</p>
+<p>（4）应用层</p>
+<p>应用层位于Android体系架构的最上层，系统开发人员和设计人员研发的应用程序都是调用了相同的库来构建于应用层之上。</p>
+<h3 id="212-spring-boot">2.1.2 Spring Boot</h3>
+<p>SpringBoot就是为了解决Spring缺点而生的，主要是简化了使用Spring 的难度，节省了繁重的配置，开发者能够快速上手。SpringBoot的核心功能有两个，起步依赖，自动配置，也就是他的默认配置。起步依赖就是将具备某种功能的坐标打包到一起，并解决了Spring的jar包冲突问题。自动配置就是SpringBoot在底层给我们自动做了一些配置，所以SpringBoot项目不编写配置文件也可以正常运行，但是根据我们的具体开发需要修改SpringBoot自动配置的默认值。</p>
+<p>Spring Boot所具备的特征有：</p>
+<p>（1）可以创建独立的Spring应用程序，并且基于其Maven或Gradle插件，可以创建可执行的JARs和WARs。</p>
+<p>（2）内嵌Tomcat或Jetty等Servlet容器。</p>
+<p>（3）提供自动配置的&quot;starter&quot;项目对象模型（POMS）以简化Maven配置。</p>
+<p>（4）尽可能自动配置Spring容器。</p>
+<h3 id="213-mysql数据库">2.1.3 MySQL数据库</h3>
+<p>MySQL是当前最流行的关系型数据库管理系统，MySQL逻辑体系结构是典型的C/S系统。总体来看有两层，Client层和Server层。最上层Client层为客户端连接服务，用于不同的语言与SQL的交互。MySQL Server逻辑系统的架构主要分为3层，分别是应用层、MySQL服务层、存储引擎层。</p>
+<p>MySQL是一个关系型数据库管理系统，关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并且提高了灵活性。所以很多中小型系统都选用MySQL数据库。</p>
+<h2 id="22课题技术路线"><strong>2.2课题技术路线</strong></h2>
+<p>校园导游系统的设计，首先需要使用MySQL数据库存储景点以及活动的基本信息，其次使用Spring Boot框架进行搭建服务器端。管理端采用Element技术进行界面的设计，与此同时使用Ajax实现与服务器的数据传输。用户客户端采取Android操作，先进行页面布局设计，利用高德导航API实现定位、导航以及路线规划，与此同时利用OKHTTP网络请求框架进行数据信息的请求，最终在布局上实现数据的渲染。</p>
+<h1 id="第三章-系统分析">第三章 系统分析</h1>
+<h2 id="31-可行性分析">3.1 可行性分析</h2>
+<p>经过分析可知该系统的使用者包含普通用户、系统后台管理员两种不同的角色。因此便可以将该系统分为客户端导航子系统和后台管理子系统。客户端导航子系统提供给普通用户使用，用于进行导航以及信息的基本查询。管理端管理子系统提供给系统管理员使用，用于管理整个系统的数据信息。</p>
+<p>综合考虑系统的功能需求之后，选择借助MySQL数据库来实现数据的存储，以IDEA和Android studio作为系统的开发工具。下文将通过社会可行性、经济可行性、和技术可行性三个方面进行分析，以此来确实系统的价值，是否能带来经济效益，是否能带来社会效益。</p>
+<h3 id="311-社会可行性">3.1.1 社会可行性</h3>
+<p>随着当今社会的快速发展，网络信息化正在影响和改变人们的日常生活，人们可以通过网络获取各种各样的信息，而Android App更是当前比较方便的工具。用户可以更加方便快捷的查询到校园景点和活动的基本信息，与此同时管理员可以拥有一个平台集中处理用户、景点以及活动的数据信息。系统为用户和管理员都提供了十足的便利，避免了过多的人力和物力的浪费，同时可以提升校园学生用户的参加活动积极性，进而提升大学生的自主实践和学习的能力。</p>
+<h3 id="312--经济可行性"><strong>3.1.2</strong>  <strong>经济可行性</strong></h3>
+<p>校园系统主要目的并不在于实现经济收益，仅仅是作为毕业设计来检验自身的水平，检验自身对已学到知识的灵活应用。与此同时此系统所需要的成本也是很低的，仅仅是需要一个普通的PC机进行设计，以及一部Android手机进行测试，并不需要其他额外的费用。</p>
+<h3 id="313--技术可行性"><strong>3.1.3</strong>  <strong>技术可行性</strong></h3>
+<p>通过大学四年本科知识的学习，基本掌握各科专业课的知识，尤其是Android开发设计、JSP Web技术、数据库系统概论等课程的知识，以及此前对Android Studio、IntelliJ IDEA、MySQL等软件的熟练应用，都为系统的开发打下了基础，提供了技术上的可行性。</p>
+<h2 id="32-需求分析">3.2 需求分析</h2>
+<h3 id="321-系统总体需求">3.2.1 系统总体需求</h3>
+<p>市面上的导游软件多是以导航为主体。但是由于地图上的比例尺过大，并不能贴合学生对于校园的导游的需求。就学生用户而言，在校园内的时候，更多的需要是对于校园内部的标志性地点的熟悉，比如操场、食堂等地点，此外校园生活最精彩的便是社团活动，但学生并没有一个很便捷的方式获取到校园活动的信息。与此同时，对于管理员来说，各种各样的信息杂乱无章，没有一个完善的平台进行用户信息和活动信息的管理和维护。</p>
+<p>这表明有必要开发一款针对于校园生活的导游系统，真正意义上为校园用户服务的系统。因此校园导游系统应运而生，本系统设计开发的目标是为校园用户提供校园景点的导游，以及准确高效的景点、活动信息。在充分了解校园用户的需求并进行深入分析之后，结合一般的地图导航软件，制定出可行的基于Android的校园导游系统的各个功能。此系统的主要功能需求如下：</p>
+<p>用户功能需求：用户注册登录、导航、路线规划、修改个人信息、获取景点信息，获取活动信息，点赞、收藏、评论等功能模块。</p>
+<p>管理员功能需求：登录、用户管理、景点管理、活动管理、收藏管理、留言管理、评论管理等功能模块。</p>
+<h3 id="322其他需求">3.2.2其他需求</h3>
+<p>整个系统的安全性是开发系统时不可忽略的，安全性往往与权限密不可分。而权限的不同决定着角色的不同，所以本系统将角色分为普通用户、系统管理员两种。</p>
+<p>系统的便捷性也是系统主要考虑的，只有足够方便才会得到用户的青睐。现如今手机是最为便捷的工具，与此同时Android用户的数量在国内占据较大的比重。所以本系统选择使用Android操作系统进行开发。</p>
+<h3 id="323角色用例">3.2.3角色用例</h3>
+<p>使用本系统的角色主要分为普通用户、系统管理员。</p>
+<p>（1）普通用户。系统为该类用户提供修改个人信息，实现定位，获取到景点和活动的基本信息，获取行程路线规划及行程时间和距离等功能。普通用户用例图如图3.1所示。</p>
+<p><img src="/images/bishe/1.png" alt=""></p>
+<p>图3.1 普通用户用例图</p>
+<p>① 个人信息模块：用户的个人信息模块是系统最为基本的模块。用户通过注册账号，实现系统登录，进入系统。此外用户可以查看个人的详细信息，并且可以进行修改信息。个人信息模块用例图如图3.2所示。</p>
+<p><img src="/images/bishe/2.png" alt=""></p>
+<p>图3.2 个人信息模块用例图</p>
+<p>② 景点信息模块：景点信息是用户的主要需求，因此景点信息模块是很重要的部分。作为校园用户对于景点的需求可以分为校园景点和周边景点两部分。在用户获取到景点信息之后，可以选择对这个景点进行点赞。进而可以借助后文的导航模块实现导航。景点信息模块用例图如图3.3所示。</p>
+<p><img src="/images/bishe/3.png" alt=""></p>
+<p>图3.3 景点用例图</p>
+<p>③ 活动信息模块：校园生活的主要呈现方式便是校园活动，因此活动信息同样是校园导游系统的重中之重。活动信息更是五花八门，活动信息模块则更加需要具有人性化。首先便是展示校园活动，其次可以根据活动的类型分类进行展示。与此同时用户可以对某个活动进行评论，点赞和收藏。活动信息模块用例图如图3.4所示。</p>
+<p><img src="/images/bishe/4.png" alt=""></p>
+<p>图3.4活动信息用例图</p>
+<p>④ 导航模块：导游系统的主体便是导航，而导航需要的功能首先便是其获取当前定位，并且将地图以自我为中心展开。用户选择不同的出行方式，并通过在地图上点击或者键盘输入的方式输入目的地，进而在地图上获得路线的规划，路线规划的详细信息，行程距离及所需的时间。导航模块用例图如图3.5所示。</p>
+<p><img src="/images/bishe/5.png" alt=""></p>
+<p>图3.5导航模块用例图</p>
+<p>（2）系统管理员：系统管理员是系统得以安全高效运行的保障，因此管理员可以管理用户的基本信息、景点信息和活动信息，对用户的评论，收藏信息。系统管理员用例图如图3.6所示。</p>
+<p><img src="/images/bishe/6.png" alt=""></p>
+<p>图3.6系统管理员用例图</p>
+<p>管理员对各个功能模块的操作基本相同。以活动管理模块为例进行分析。首先，管理员可以查看当前已经发布的活动的基本信息。其次，管理员可以对已经发布过的活动进行修改和删除。再次，管理员可以发布活动。最后，可以打印出所有的活动信息，打印到excel。管理员活动管理模块用例图如图3.7所示。</p>
+<p><img src="/images/bishe/7.png" alt=""></p>
+<p>图3.7 管理员活动管理模块用例图</p>
+<h1 id="第四章-系统总体设计">第四章 系统总体设计</h1>
+<h2 id="41-系统架构">4.1 系统架构</h2>
+<p>本校园导游系统包括了客户端、管理端和服务器端三大部分。其中客户端和用户界面由Android 手机承担。游客在手机客户端查看景点数据信息，以及导航和路线规划等信息，最终数据处理结果的都显示在手机界面上。管理端建立在计算机上，使得管理员可以高效的处理用户信息，景点信息，活动信息及收藏信息等。服务器端它向前端提供了统一的访问接口，对前端发送的数据请求进行接收后并做分析处理，最终将处理后的结果返回给前端。数据库主要存储了系统运行所需的数据信息。系统框架如图4.1所示。</p>
+<p>管理端通过AJAX请求和接收服务器端的数据，同时客户端采用OkHttp请求和接收数据，数据均以Jason串的方式进行传输。</p>
+<p><img src="/images/bishe/8.png" alt=""></p>
+<p>图4.1系统框架图</p>
+<h2 id="42-系统功能概述">4.2 系统功能概述</h2>
+<p>通过对系统总体需求进行分析后，从使用者角度将整个系统分为普通用户和管理员两个部分。功能模块图如图4.2所示。</p>
+<p><img src="/images/bishe/9.png" alt=""></p>
+<p>图4.2功能模块图</p>
+<h3 id="421-android-客户端用户模块"><strong>4.2.1 Android</strong> 客户端用户模块</h3>
+<p>（1）注册登录功能。用户没有账号可以先进行注册，登录之后可以获得下面功能。</p>
+<p>（2）个人信息修改功能。如修改密码、修改手机号等，该功能符合广大用户的实际需求，也使得该系统更加人性化。</p>
+<p>（3）导航功能。用户选择不同的出行方式，并通过在地图上点击或者键盘输入的方式输入目的地，在地图上得到路线规划图。</p>
+<p>（4）详细路径功能。用户进行导航之后，可以查看详细的路线规划，以及该种出行方式所需要的时间和路程。</p>
+<p>（5）景点查询功能。用户可以查看景点的详细信息，包括景点的名称，地址，属性分类，景点照片，及景点介绍。</p>
+<p>（6）活动查询功能。用户可以查看活动的基本信息，名称，简介，主办方，类型，时间等信息。</p>
+<p>（7）活动按类别加载功能。界面展示的时候，不同种类的活动在不同的种类标签下展示，给予用户更好的查询体验。</p>
+<p>（8）评价功能。用户可以通过点赞，收藏和评论的方式对活动或景点进行评价</p>
+<p>（9）收藏功能。用户可以查看自己收藏过的活动。</p>
+<p>（10）换肤功能。用户可以切换APP的主题颜色。</p>
+<p>（11）退出登录功能。界面退出到登录界面。</p>
+<h3 id="422--web-管理端管理模块"><strong>4.2.2</strong>  Web 管理端管理模块</h3>
+<p>（1）登录注册功能。管理员通过系统指定账号登录管理系统，进行业务管理和用户管理。</p>
+<p>（2）用户管理功能。管理员查看注册用户数量，查看用户详细信息，修改用户信息，删除用户信息，还可以进行分页展示以及导出用户信息。</p>
+<p>（3）景点管理功能。对景点信息进行增加、删除、修改、查询、分页查询以及导出操作。</p>
+<p>（4）活动管理功能。对活动信息进行增加、删除、修改、查询、分页查询以及导出操作。</p>
+<p>（5）评论收藏管理功能。对评论和收藏进行增加、删除、修改、查询、分页查询以及导出操作。</p>
+<h2 id="43-数据库设计">4.3 数据库设计</h2>
+<p>数据库是整个系统的基础和核心，数据库的设计与建立是系统开发非常重要的部分。由于本系统涉及多个功能模块，所以需要通过合理的存储这些数据来完成对应系统功能模块的设计。MySQL是当前应用最为广泛的关系型数据库，以下便是数据库的设计过程</p>
+<h3 id="431--数据库需求分析"><strong>4.3.1</strong>  <strong>数据库需求分析</strong></h3>
+<p>根据本章第二节对系统功能的概述，系统包括两个部分，普通用户和管理员用户。那么需要两张表来分别存放用户和管理员的基本信息。此外用户需要景点的信息的查看，而景点包括校内景点和周边景点，那么需要两张表分别来存储校内景点和周边景点的信息，并且用户可以进行点赞。而校园中最鲜明的特色就是校园活动，活动表必不可少。用户可以通过点赞，评论和收藏的方式对活动进行评价。那么还需要一张活信息表，评论表和收藏表。</p>
+<h3 id="432--数据库概念模型设计"><strong>4.3.2</strong>  <strong>数据库概念模型设计</strong></h3>
+<p>通过对数据库的需求进行分析，得出整个系统实体有：用户、管理员、景点类别、景点、活动、活动类别、收藏、评论。各实体的属性如下：</p>
+<p>用户（用户id、用户名、密码、电子邮箱、手机号）</p>
+<p>管理员（管理员id、管理员用户名、管理员密码）</p>
+<p>景点（景点id、景点名称、景点地址、景点类型、景点介绍、景点图片）</p>
+<p>景点类别（类别id、分类名称）</p>
+<p>活动（活动id、活动名称、活动介绍、活动主办方、活动类型、活动举办时间、活动评价数、喜欢数、收藏数）</p>
+<p>点赞（收藏id、用户id、活动id、点赞标志）</p>
+<p>收藏（收藏id、用户id、活动id、收藏标志)</p>
+<p>评论（评论id、用户id、活动id、内容)</p>
+<p>活动类别（类别id、分类名称）</p>
+<p>通过对各实体属性的分析，可得系统E-R图如图4.3所示。注:为了方便表示，有些实体进行了省略。如用户实体概括了用户和用户信息。景点实体概括了校园景点和周边景点等。</p>
+<p><img src="/images/bishe/10.png" alt=""></p>
+<p>图4.3系统E-R图</p>
+<h3 id="433--数据库逻辑设计"><strong>4.3.3</strong>  <strong>数据库逻辑设计</strong></h3>
+<p>本系统采用的是MySQL数据库来管理数据，图4.4是登录MySQL的界面</p>
+<p><img src="/images/bishe/11.png" alt=""></p>
+<p>图4.4登录MySQL的界面</p>
+<p>系统使用到的数据库表有admin表、user表、user_info表、scenery_school表、school_like表、scenery_near表、near_like表、scenery_type表、event表、event_info表、event_type表、event_like表、event_comment表、event_collect表。表的定义如表4.1~表4.14所示。</p>
+<p>（1）管理员表（admin）</p>
+<p>表4.1 admin表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>username</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>管理员名称</td>
+</tr>
+<tr>
+<td>password</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>管理员密码</td>
+</tr>
+</tbody>
+</table>
+<p>（2）用户表（user）</p>
+<p>表4.2user表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>username</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>用户密码</td>
+</tr>
+</tbody>
+</table>
+<p>（3）用户信息表（user_info）</p>
+<p>表4.3 user_info表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>userid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键user.id用户id</td>
+</tr>
+<tr>
+<td>email</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>用户邮箱</td>
+</tr>
+<tr>
+<td>tel</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>用户电话</td>
+</tr>
+</tbody>
+</table>
+<p>（4）景点类型表（scenery_type）</p>
+<p>表4.4 scenery_type表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>typeid</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>类型名称</td>
+</tr>
+</tbody>
+</table>
+<p>（5）校园景点表（scenery_school）</p>
+<p>表4.5 scenery_school表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>景点名称</td>
+</tr>
+<tr>
+<td>location</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>景点地址</td>
+</tr>
+<tr>
+<td>url</td>
+<td>text</td>
+<td>否</td>
+<td>景点图片网页链接</td>
+</tr>
+<tr>
+<td>sceneryid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键scenery_type.typeid景点类型id</td>
+</tr>
+</tbody>
+</table>
+<p>（6）校园景点点赞表（school_like）</p>
+<p>表4.6 school_like表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>userid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键user.id用户id</td>
+</tr>
+<tr>
+<td>schoolid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键scenery_school.id校园景点id</td>
+</tr>
+<tr>
+<td>likeflag</td>
+<td>int(0)</td>
+<td>否</td>
+<td>点赞标志，1为点赞</td>
+</tr>
+</tbody>
+</table>
+<p>（7）周边景点表（scenery_near）</p>
+<p>表4.7 scenery_near表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>景点名称</td>
+</tr>
+<tr>
+<td>location</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>景点地址</td>
+</tr>
+<tr>
+<td>introduce</td>
+<td>varchar(255)</td>
+<td>否</td>
+<td>景点介绍</td>
+</tr>
+<tr>
+<td>url</td>
+<td>text</td>
+<td>否</td>
+<td>景点图片网页链接</td>
+</tr>
+<tr>
+<td>type</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>景点属性类别</td>
+</tr>
+<tr>
+<td>sceneryid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键scenery_type.typeid景点类型id</td>
+</tr>
+</tbody>
+</table>
+<p>（8）周边景点点赞表（near_like）</p>
+<p>表4.8 near_like表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>userid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键user.id用户id</td>
+</tr>
+<tr>
+<td>nearid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键scenery_near.id校园景点id</td>
+</tr>
+<tr>
+<td>likeflag</td>
+<td>int(0)</td>
+<td>否</td>
+<td>点赞标志，1为点赞</td>
+</tr>
+</tbody>
+</table>
+<p>（9）活动类型表（event_type）</p>
+<p>表4.9 event_type表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>typeid</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>类型名称</td>
+</tr>
+</tbody>
+</table>
+<p>（10）活动表（event）</p>
+<p>表4.10 event表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>活动名称</td>
+</tr>
+<tr>
+<td>introduce</td>
+<td>varchar(255)</td>
+<td>否</td>
+<td>活动简介</td>
+</tr>
+<tr>
+<td>sponsor</td>
+<td>varchar(20)</td>
+<td>否</td>
+<td>活动主办方</td>
+</tr>
+<tr>
+<td>time</td>
+<td>varcahr(20)</td>
+<td>否</td>
+<td>活动举办时间</td>
+</tr>
+<tr>
+<td>typeid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键event_type.typeid活动类型id</td>
+</tr>
+</tbody>
+</table>
+<p>（11）活动详情表（event_info）</p>
+<p>表4.11 event_info表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>eventid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键event.id活动id</td>
+</tr>
+<tr>
+<td>commentnum</td>
+<td>int(0)</td>
+<td>否</td>
+<td>评论数</td>
+</tr>
+<tr>
+<td>likenum</td>
+<td>int(0)</td>
+<td>否</td>
+<td>喜欢数</td>
+</tr>
+<tr>
+<td>collectnum</td>
+<td>int(0)</td>
+<td>否</td>
+<td>收藏数</td>
+</tr>
+</tbody>
+</table>
+<p>(12)活动评价表（event_comment）</p>
+<p>表4.12 event_comment表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>userid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键user.id用户id</td>
+</tr>
+<tr>
+<td>eventid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键event.id活动id</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>varchar（255）</td>
+<td>否</td>
+<td>评价内容</td>
+</tr>
+</tbody>
+</table>
+<p>（13）活动点赞表（event_like）</p>
+<p>表4.13 event_like表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>userid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键user.id用户id</td>
+</tr>
+<tr>
+<td>eventid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键event.id活动id</td>
+</tr>
+<tr>
+<td>likeflag</td>
+<td>int(0)</td>
+<td>否</td>
+<td>点赞标志，1为点赞</td>
+</tr>
+</tbody>
+</table>
+<p>（14）活动收藏表（event_collect）</p>
+<p>表4.14 event_collect表</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>是否主键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(0)</td>
+<td>是</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>userid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键user.id用户id</td>
+</tr>
+<tr>
+<td>eventid</td>
+<td>int(0)</td>
+<td>否</td>
+<td>外键event.id活动id</td>
+</tr>
+<tr>
+<td>flag</td>
+<td>int(0)</td>
+<td>否</td>
+<td>收藏的标志1为收藏</td>
+</tr>
+</tbody>
+</table>
+<h2 id="44目录结构设计">4.4目录结构设计</h2>
+<h3 id="441-android-客户端目录"><strong>4.4.1</strong> Android 客户端目录</h3>
+<p>Android客户端目录如图4.5所示。Activity中主要是activity文件。Adapter主要是一些布局的适配器和导航所需的适配器。API是Android请求接口和请求方法。Entity是从服务器端接收到的Jason串对应的实体类。Overlay是导航所需的实体类。Util是常用的方法工具类。View是视图相关工具类。</p>
+<p>Res是布局相关的内容。Drawable中是控件的布局设计。Layout是对应activity的布局文件及其他自己设计的布局文件。Mipmap中是设计中使用的图片文件。Xml中是定义的颜色及字体大小等。Xml中是设置禁用掉明文流量请求的检查。</p>
+<p><img src="/images/bishe/12.png" alt=""></p>
+<p>图4.5Android客户端目录</p>
+<h3 id="442-web-管理端目录"><strong>4.4</strong>.2 Web 管理端目录</h3>
+<p>Web前端目录如图4.6，CSS和JS主要是进行布局的优化和交互控制。HTML文件是由Element设计的页面。</p>
+<p><img src="/images/bishe/13.png" alt=""></p>
+<p>图4.6 web管理端目录</p>
+<h3 id="443--服务器后端目录"><strong>4.4.3  服务器后端目录</strong></h3>
+<p>服务器后端的目录如图4.7。其中，common是基础的配置代码，Result是统一的返回数据的包装类；CorsConfig是用于进行跨域处理的，用于部署在服务器上，放开跨域处理的限制；Authlnterceptor是权限的拦截器； WebMvcConfig是对拦截器的配置。Controller为接口层。Dao为数据库访问层，利用JPA访问。Entity为实体类，与数据库表对应的实体类。Exception为异常处理。Service为应用处理类。</p>
+<p><img src="/images/bishe/14.png" alt=""></p>
+<p>图4.7服务器后端目录</p>
+<h1 id="第五章-系统详细设计与实现">第五章 系统详细设计与实现</h1>
+<p>校园导游系统主要包括Android客户端，Web管理端和服务器后端。本章按照功能模块进行介绍系统中最为核心的功能，前一部分介绍管理端的登录和注册功能，其次，以用户管理模块为例介绍数据库的增、删、改、查功能。后一部分是Android客户端的介绍，首先介绍导航模块，其次以景点模块为例介绍Android连接服务端的基本操作。再次以活动模块介绍收藏功能的实现，最后介绍个人信息的展示及修改。</p>
+<h2 id="51-管理端登录注册模块">5.1 管理端登录注册模块</h2>
+<h3 id="511--服务器端的基础配置"><strong>5.1.1</strong>  <strong>服务器端的基础配置</strong></h3>
+<p>由于服务器端程序采用Spring Boot框架进行搭建，下面是Spring Boot的配置文件application.yml。包括服务器的端口的配置和连接数据库的配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">server</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">9999</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">datasource</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">driver- **class** -name</span><span class="p">:</span><span class="w"> </span><span class="l">com.mysql.cj.jdbc.Driver</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="m">123456</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://localhost:3306/test?useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;allowMultiQueries=true&amp;amp;useSSL=false&amp;amp;serverTimezone=GMT%2b8</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">com.alibaba.druid.pool.DruidDataSource</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">jpa</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">generate-ddl</span><span class="p">:</span><span class="w">  </span><span class="cp">**false**</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">hibernate</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">ddl-auto</span><span class="p">:</span><span class="w"> </span><span class="l">none</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="512登录注册功能流程图">5.1.2登录注册功能流程图</h3>
+<p>首先如果管理员没有账号可以先进行注册，然后进行登录。并且通过拦截器，对用户的状态信息进行判断，如果用户没有登录，需要重新登录。登录之后把用户的信息保存在Session中，然后就不会被拦截。注册登录功能流程图如图5.1所示。</p>
+<p><img src="/images/bishe/15.png" alt=""></p>
+<p>图5.1 注册登录功能流程图</p>
+<h3 id="513-ajax介绍及核心代码">5.1.3 Ajax介绍及核心代码</h3>
+<p>Ajax是一种创建交互式网页应用的网页开发技术，具有实现前后台交互的作用。通过Ajax，可以实现客户端给服务端发送信息，和接收响应。Ajax不需要使用插件，而且它的用户体验比较好，不需要刷新页面，就可以更新数据。</p>
+<p>登录功能界面数据传输的过程为，管理员在login.html发起post请求，然后在UserController层调用user/login接口，进一步请求UserService层对数据库请求的数据进行逻辑的处理。而UserService会引入UserDao层，通过JPA提供的数据访问接口从数据库中传入数据，通过UserService的验证，如果账号和密码验证成功，那么可以成功登录。注册模块的数据传输过程和登录类似，就不多阐述。</p>
+<p>下面是登录注册模块的核心代码</p>
+<p>login.html:（登录）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">     login() {  //登录 
+2.	                   if (!this.user.username) { //判断用户名 
+3.	                       this.$message({  
+4.	                           message: &#34;请输入用户名&#34;,  
+5.	                           type: &#34;error&#34;  
+6.	                       })  
+7.	                       return;  
+8.	                   }  
+9.	                   if (!this.user.password) {  //判断密码
+10.	                       this.$message({  
+11.	                           message: &#34;请输入密码&#34;,  
+12.	                           type: &#34;error&#34;  
+13.	                       })  
+14.	                       return;  
+15.	                   }  
+16.	                   $.ajax({  //post请求登录接口
+17.	                       url: &#34;/user/login&#34;,  
+18.	                       type: &#34;POST&#34;,  
+19.	                       contentType: &#34;application/json&#34;,  
+20.	                       data: JSON.stringify(this.user)  
+21.	                   }).then(res =&gt; {  
+22.	                       if (res.code === &#39;0&#39;) {  //登录成功
+23.	                           this.$message({  
+24.	                               message: &#34;登陆成功&#34;,  
+25.	                               type: &#34;success&#34;  
+26.	                           });  
+27.	                           localStorage.setItem(&#34;user&#34;, JSON.stringify(res.data));  
+28.	                           setTimeout(() =&gt; {  
+29.	                               location.href= &#34;/index.html&#34;  //跳转主页
+30.	                           }, 1000)  
+31.	                       } else {  //登录失败
+32.	                           this.$message({  
+33.	                               message: res.msg,  
+34.	                               type: &#34;error&#34;  
+35.	                           })  
+36.	                       }  
+37.	                   })  
+38.	               } 
+
+</code></pre></td></tr></table>
+</div>
+</div><p>register.html（注册）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">  register() {  //注册
+2.	                    if (!this.user.username) {  
+3.	                        this.$message({  //判断用户名
+4.	                            message: &#34;请输入用户名&#34;,  
+5.	                            type: &#34;error&#34;  
+6.	                        });  
+7.	                        return;  
+8.	                    }  
+9.	                    if (!this.user.password) {  
+10.	                        this.$message({  
+11.	                            message: &#34;请输入密码&#34;,  
+12.	                            type: &#34;error&#34;  
+13.	                        });  
+14.	                        return;  
+15.	                    }  
+16.	                    $.ajax({  //post请求注册接口
+17.	                        url: &#34;/user/register&#34;,  
+18.	                        type: &#34;POST&#34;,  
+19.	                        contentType: &#34;application/json&#34;,  
+20.	                        data: JSON.stringify(this.user)  
+21.	                    }).then(res =&gt; {  
+22.	                        if (res.code === &#39;0&#39;) {  //注册成功
+23.	                            this.$message({  
+24.	                                message: &#34;注册成功&#34;,  
+25.	                                type: &#34;success&#34;  
+26.	                            });  
+27.	                            localStorage.setItem(&#34;user&#34;, JSON.stringify(res.data));  
+28.	                            setTimeout(() =&gt; {  
+29.	                                location.href= &#34;/index.html&#34;  
+30.	                            }, 1000)  
+31.	                        } else {  //注册失败
+32.	                            this.$message({  
+33.	                                message: res.msg,  
+34.	                                type: &#34;error&#34;  
+35.	                            })  
+36.	                        }  
+37.	                    })  
+38.	                } 
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="514-登录注册界面展示">5.1.4 登录注册界面展示</h3>
+<p>登录界面如图5.2所示，注册界面如图5.3所示。</p>
+<p><img src="/images/bishe/16.png" alt=""></p>
+<p>图5.2 登录界面</p>
+<p><img src="/images/bishe/17.png" alt=""></p>
+<p>图5.3 注册界面</p>
+<h2 id="52管理端用户管理模块">5.2管理端用户管理模块</h2>
+<h3 id="521-jpa-介绍及核心代码"><strong>5.2</strong>.1 <strong><strong>JPA</strong></strong> 介绍及核心代码</h3>
+<p>JPA,即Java持久层API,用于对象持久化的API，使得应用程序可以以统一的方式访问持久层。通过JPA访问数据库，操作比较简单，而且容易继承。下面以用户管理模块介绍JPA的使用，而其他模块的使用与之类似，就不一一阐述。</p>
+<p>在实现过程中，首先引入JPA的依赖，其次创建一个和数据库表中属性一一对应的实体类User.java，在UserDao层利用JPA提供的接口实现数据库的查询。在UserService层中注入UserDao，就可以通过JPA提供的方法实现基础的增删改查及业务处理。并且在此基础上实现了分页查询的功能。进一步在UserController层定义了接口，并且增加了一个导出到excel的接口。通过以上步骤，管理端便可以在index.html界面调用接口，通过AJAX最终实现数据库的增删改查操作。</p>
+<p>下面是数据库操作的核心代码：</p>
+<p>UserService.java （数据库操作）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">	<span class="nd">@Resource</span>  
+	   <span class="kd">private</span> <span class="n">UserDao</span> <span class="n">userDao</span><span class="o">;</span>  
+	  
+	   <span class="kd">public</span> <span class="n">User</span> <span class="nf">save</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>  
+	       <span class="k">return</span> <span class="n">userDao</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>  
+	   <span class="o">}</span>  
+	   <span class="c1">//按id删除
+</span><span class="c1"></span>	   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>  
+	       <span class="n">userDao</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>  
+	   <span class="o">}</span>  
+	  
+	  <span class="c1">//按id查找
+</span><span class="c1"></span>	   <span class="kd">public</span> <span class="n">User</span> <span class="nf">findById</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>  
+	       <span class="k">return</span> <span class="n">userDao</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">id</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>  
+	   <span class="o">}</span>  
+	  <span class="c1">//展示所有信息
+</span><span class="c1"></span>	   <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="o">()</span> <span class="o">{</span>  
+	       <span class="k">return</span> <span class="n">userDao</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span>  
+	   <span class="o">}</span>  
+	  
+	   <span class="c1">//分页查询，传进的页码需要减一，默认页码从零开始的  
+</span><span class="c1"></span>	   <span class="kd">public</span> <span class="n">Page</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="nf">findPage</span><span class="o">(</span><span class="kt">int</span> <span class="n">pageNum</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pageSize</span><span class="o">)</span> <span class="o">{</span>  
+	       <span class="k">return</span> <span class="n">userDao</span><span class="o">.</span><span class="na">findAll</span><span class="o">(</span><span class="n">PageRequest</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">pageNum</span> <span class="o">-</span> <span class="n">1</span><span class="o">,</span> <span class="n">pageSize</span><span class="o">));</span>  
+	   <span class="o">}</span>  
+	  
+  
+	   <span class="kd">public</span> <span class="n">User</span> <span class="nf">add</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>  
+	       <span class="k">return</span> <span class="n">userDao</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>  
+	   <span class="o">}</span>  
+	  
+	   <span class="kd">public</span> <span class="n">User</span> <span class="nf">findByUsername</span><span class="o">(</span><span class="n">String</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>  
+	       <span class="k">return</span> <span class="n">userDao</span><span class="o">.</span><span class="na">findByUsername</span><span class="o">(</span><span class="n">username</span><span class="o">);</span>  
+	   <span class="o">}</span>  
+
+</code></pre></td></tr></table>
+</div>
+</div><p>UserController.Java（导出）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"> <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">&#34;/export&#34;</span><span class="o">)</span>  
+	   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">export</span><span class="o">(</span><span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>  
+	  	<span class="c1">//导出接口
+</span><span class="c1"></span>	       <span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">CollUtil</span><span class="o">.</span><span class="na">newArrayList</span><span class="o">();</span>  
+	  
+	       <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">userService</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span>  
+	       <span class="k">for</span> <span class="o">(</span><span class="n">User</span> <span class="n">user</span> <span class="o">:</span> <span class="n">all</span><span class="o">)</span> <span class="o">{</span>  
+	           <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">row1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>  
+	           <span class="n">row1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;用户名&#34;</span><span class="o">,</span> <span class="n">user</span><span class="o">.</span><span class="na">getUsername</span><span class="o">());</span>  
+	           <span class="n">row1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;邮箱&#34;</span><span class="o">,</span> <span class="n">user</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>  
+	           <span class="n">row1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;电话&#34;</span><span class="o">,</span> <span class="n">user</span><span class="o">.</span><span class="na">getTel</span><span class="o">());</span>  
+	           <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">row1</span><span class="o">);</span>  
+	       <span class="o">}</span>  
+	  
+	       <span class="c1">// 2. 写excel  
+</span><span class="c1"></span>	       <span class="n">ExcelWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">ExcelUtil</span><span class="o">.</span><span class="na">getWriter</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>  
+	       <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  
+	  
+	       <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">&#34;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8&#34;</span><span class="o">);</span>  
+	       <span class="n">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="s">&#34;用户表&#34;</span><span class="o">,</span> <span class="s">&#34;UTF-8&#34;</span><span class="o">);</span>  
+	       <span class="n">response</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">&#34;Content-Disposition&#34;</span><span class="o">,</span> <span class="s">&#34;attachment;filename=&#34;</span> <span class="o">+</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s">&#34;.xlsx&#34;</span><span class="o">);</span>  
+  
+	       <span class="n">ServletOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>  
+	       <span class="n">writer</span><span class="o">.</span><span class="na">flush</span><span class="o">(</span><span class="n">out</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  
+	       <span class="n">writer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>  
+	       <span class="n">IoUtil</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">);</span>  
+	   <span class="o">}</span>  
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="522-用户管理模块界面展示"><strong>5.2.2 用户管理模块界面展示</strong></h3>
+<p>首先是用户管理界面的展示，如图5.4所示。管理员进行修改用户信息的界面如图5.5所示。分页界面如图5.6所示。新增界面如图5.7所示。导出界面如图5.8所示。导出结果界面如图5.9所示。</p>
+<p><img src="/images/bishe/18.png" alt=""></p>
+<p>图5.4 用户管理界面</p>
+<p><img src="/images/bishe/19.png" alt=""></p>
+<p>图5.5 用户管理界面</p>
+<p><img src="/images/bishe/20.png" alt=""></p>
+<p>图5.6 用户分页界面</p>
+<p><img src="/images/bishe/21.png" alt=""></p>
+<p>图5.7 用户新增界面</p>
+<p><img src="/images/bishe/23.png" alt=""></p>
+<p>图5.8 用户信息导出界面</p>
+<h2 id="53-客户端导航模块">5.3 客户端导航模块</h2>
+<h3 id="531-导航模块流程图"><strong>5.3.1 导航模块流程图</strong></h3>
+<p>首先用户获取自身到实时定位，选择自己所需要的出行方式，通过地图点击或者键盘输入两种方式输入目的地。在此之后，用户会在地图上查看到路线规划以及路程所需的时间，点击路线详情可以查看路线的详细规划。导航功能流程图如图5.10所示。</p>
+<p><img src="/images/bishe/24.png" alt=""></p>
+<p>图5.10 导航功能流程图</p>
+<h3 id="532-导航模块及核心代码">5.3.2 导航模块及核心代码</h3>
+<p>本系统的导航模块是借助高德导航API设计实现的。首先是开发的准备工作，需要在高德开放平台上添加一个key供Android平台使用。进一步下载高德地图的地图SDK和定位SDK，导入到项目中，之后在AndroidManifest.xml下，添加定位服务以及联网权限，定位权限等一系列的开发所需要的权限。导航模块具体实现过程如下：</p>
+<p>（1）进行初始化定位initLocation()，重写onLocationChanged的方法来获取定位结果。</p>
+<p>（2）进行地图的展示，实现以当前定位展示地图。进一步设置地图上的控件进行优化地图展示的效果，添加了指南针和比例尺，并且缩小了比例尺，使得地图上能更细致的展现校园的位置信息。</p>
+<p>（3）设置地图的点击事件，使得通过点击地图获取导航的目的地，通过逆地理编码实现从坐标转化为地址。与此同时也可以通过输入框获得目的地，即通过地址转化为经纬度坐标，同时显示在地图上。</p>
+<p>（4）地图的路线规划，一共包括四种出行方式，步行，骑行，驾车，公交，下面以步行为例介绍路线规划的实现。首先从高德示例的Demo中引入一些需要的工具类如ChString、MapUtil等工具类，实现地图图层的叠加，引入步行路线图层类，将步行路线加入到地图中，最后通过步行段列表适配器展示路线规划的详细路径及行程所需要时间。</p>
+<p>下面是导航模块核心代码：</p>
+<p>NavigationActivity.java（步行规划路径结果）</p>
+<p>walkSegmentListAdapter.java（步行段适配器）</p>
+<h3 id="533-导航功能界面展示"><strong>5.3.3 导航功能界面展示</strong></h3>
+<p>用户进入到导航界面，导航的界面展示如图5.11所示。选择出行方式界面，如图5.12示。用户可以通过两种方式设置目的地，可以选择在地图上点击设置为目的地，如图5.13所示。或者选择以输入框的方式设置目的地如图5.14所示。最后是详细路径信息界面的展示，如图5.15所示。</p>
+<p><img src="/images/bishe/25.jpg" alt=""></p>
+<p>图5.11 导航界面</p>
+<p><img src="/images/bishe/26.jpg" alt=""></p>
+<p>图5.12 切换出行方式界面</p>
+<p><img src="/images/bishe/27.jpg" alt=""></p>
+<p>图5.13 地图点击导航界面</p>
+<p><img src="/images/bishe/28.jpg" alt=""></p>
+<p>图5.14 键盘输入导航界面</p>
+<p><img src="/images/bishe/29.jpg" alt=""></p>
+<p>图5.15 详细路线规划界面</p>
+<h2 id="54客户端景点模块">5.4客户端景点模块</h2>
+<h3 id="541-okhttp网络请求框架及核心代码"><strong>5.4.1 OkHttp网络请求框架及核心代码</strong></h3>
+<p>OkHttp是一个高效的Http客户端，是Android进行网络请求的方式，是一个基于传输层的实现应用层协议的网络框架。OkHttp有很多优势，比如链接复用，请求失败自动重连等特点。OkHttp的请求方法包括post、get、put、delete等方法。下面以post请求为例介绍OkHttp请求数据的过程。</p>
+<p>第一步创建OkHttpClient，通过map添加需要传送的数据，并通过JASONObject将之转化为Jason字符串。进一步创建请求体，设置请求体格式为application，将Jason字符串封装到请求体中。然后创建request对象，对请求的链接地址发起post请求，并且创建回调对象，请求成功的回调会返回一个response对象得到body，转化为Jason字符串。最后通过GaonFormat插件将Jason串转化为对应的实体类。在此之后便通过适配器将从后端请求到的数据渲染到布局上。代码以周边活动为例给出核心代码。</p>
+<p>下面是景点模块核心代码：</p>
+<p>Api.java（请求接口）</p>
+<p>NewsFragment.java（景点布局适配器）</p>
+<h3 id="542景点模块界面展示"><strong>5.4.2景点模块界面展示</strong></h3>
+<p>用户进入到景点界面，首先展示是的校内景点的详细信息，如图5.16所示。用户可以对活动点赞，此外可以切换景点范围，如图5.17所示。进而查看周边景点的详细信息，同样可以对活动点赞，如图5.18所示。</p>
+<p><img src="/images/bishe/30.jpg" alt=""></p>
+<p>图5.16 校内景点界面</p>
+<p><img src="/images/bishe/31.jpg" alt=""></p>
+<p>图5.17 切换景点界面</p>
+<p><img src="/images/bishe/32.jpg" alt=""></p>
+<p>图5.18 周边景点界面</p>
+<h2 id="55客户端活动模块">5.5客户端活动模块</h2>
+<h3 id="551-活动模块收藏功能及核心代码"><strong>5.5.1 活动模块收藏功能及核心代码</strong></h3>
+<p>活动模块的基础功能和景点模块类似，此模块主要介绍活动的评价收藏和点赞。其中收藏功能是活动模块的主要功能。用户可以查看我的收藏，通过收藏可以收进我的收藏中，同样也可以取消收藏。</p>
+<p>当用户收藏某个活动的时候，活动表中会将该活动的收藏数+1，并且将收藏标志改为1，同时在界面上的数字也会加一，颜色变红，同时在收藏表中加入这个活动的id。取消收藏就会把收藏表中的该活动id删除，同时更新活动表的信息。</p>
+<p>我的收藏则是通过接口调用数据库中活动的id然后根据每一个活动的id，分别请求每一个活动的数据，最终通过适配器渲染到我的收藏布局中。</p>
+<p>下面是活动模块核心代码：</p>
+<p>VideoAdapter.java（收藏）</p>
+<h3 id="552-活动模块及我的收藏界面展示"><strong>5.5.2 活动模块及我的收藏界面展示</strong></h3>
+<p>用户进入活动界面，景点按照活动的属性进行展示，如图5.19所示。用户可以对活动进行点赞，评论和收藏，查看活动的评论如图5.20所示，查看我的收藏如图5.21所示。</p>
+<p><img src="/images/bishe/33.jpg" alt=""></p>
+<p>图5.19 活动界面</p>
+<p><img src="/images/bishe/34.jpg" alt=""></p>
+<p>图5.20 活动评价界面</p>
+<p><img src="/images/bishe/35.jpg" alt=""></p>
+<p>图5.21 我的收藏界面</p>
+<h2 id="56客户端个人信息模块">5.6客户端个人信息模块</h2>
+<h3 id="561-个人信息模块及核心代码"><strong>5.6.1 个人信息模块及核心代码</strong></h3>
+<p>用户在登陆之后，会将个人信息保存在本地的文件夹中，在个人信息界面进行展示，同时用户可以修改个人信息，并且个人信息会通过调用用户接口同步更新到数据库。</p>
+<p>下面是个人信息模块核心代码：</p>
+<p>LoginActivity.java（个人信息保存）</p>
+<h3 id="562-个人信息模块界面展示"><strong>5.6.2 个人信息模块界面展示</strong></h3>
+<p>用户进入到我的界面，如图5.22所示。用户点击个人信息，可以查看到个人信息，并且可以进行修改，如图5.23所示。同时在我的界面还有一个换肤功能，如图5.24所示。</p>
+<p><img src="/images/bishe/36.jpg" alt=""></p>
+<p>图5.22 我的界面</p>
+<p><img src="/images/bishe/37.jpg" alt=""></p>
+<p>图5.23 个人信息界面</p>
+<p><img src="/images/bishe/38.jpg" alt=""></p>
+<p>图5.24 个人信息界面</p>
+<h2 id="57-系统测试">5.7 系统测试</h2>
+<p>系统测试是检验一个系统合格的重要一步。只有通过对每一个功能的检测，做到每一个功能都可以正确且高效的运行。在浏览器中输入地址访问管理端系统主页。可以进行用户管理、景点管理、活动管理、收藏评论管理。Android客户端，用户注册登录之后，可以查看个人信息，景点信息，活动信息，和评论收藏信息。Web管理端测试表如表5.1所示，Android客户端测试表如表5.2所示。</p>
+<p>表5.1 管理端测试表</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>功能名称</th>
+<th>功能操作</th>
+<th>预期结果</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>管理员登录</td>
+<td>输入用户名、密码</td>
+<td>输入正确用户名和密码进入用户界面，输入错误给出提示&quot;用户名或密码错误&quot;</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>2</td>
+<td>管理员注册</td>
+<td>输入想要的用户名和密码</td>
+<td>注册之后可以成功登陆，并且不能注册相同的用户名</td>
+<td>符合预期</td>
+</tr>
+</tbody>
+</table>
+<p>续表5.1</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>功能名称</th>
+<th>功能操作</th>
+<th>预期结果</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>用户管理</td>
+<td>进入到用户管理界面</td>
+<td>可以对用户信息进行新增，修改，删除和分页展示，和导出</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>4</td>
+<td>景点管理</td>
+<td>进入到景点管理界面</td>
+<td>可以对景点信息进行新增，修改，删除和分页展示，和导出</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>5</td>
+<td>活动管理</td>
+<td>进入到活动管理界面</td>
+<td>可以对活动信息进行新增，修改，删除和分页展示，和导出</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>6</td>
+<td>收藏管理</td>
+<td>进入到收藏管理界面</td>
+<td>可以对收藏信息进行新增，修改，删除和分页展示，和导出</td>
+<td>符合预期</td>
+</tr>
+</tbody>
+</table>
+<p>表5.2 客户端测试表</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>功能名称</th>
+<th>功能操作</th>
+<th>预期结果</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>用户登录</td>
+<td>输入用户名、密码</td>
+<td>输入正确用户名和密码进入系统后台，输入错误给出提示&quot;登录失败&quot;</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>2</td>
+<td>用户注册</td>
+<td>输入用户名密码邮箱电话等个人信息。</td>
+<td>注册之后，用户可以实现登录，并且注册时用户名不重复</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>3</td>
+<td>修改个人信息</td>
+<td>点击个人信息</td>
+<td>用户可以查看到个人信息，并且可以进行修改</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>4</td>
+<td>导航</td>
+<td>选择出行方式之后，设置目的地</td>
+<td>在地图上可以查看导航的路线，以及路程时间</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>5</td>
+<td>路线规划</td>
+<td>点击路线详情</td>
+<td>可以查看到路线规划的详细信息</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>6</td>
+<td>景点信息</td>
+<td>用户进入到景点界面</td>
+<td>可以查看到校内景点，并且可以切换景点范围，进而查看到周边景点，也可以对活动点赞</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>7</td>
+<td>活动信息</td>
+<td>用户进入到活动界面</td>
+<td>可以查看到活动信息，并且活动可以以活动属性分类展示，并且可以实现点赞评论和收藏</td>
+<td>符合预期</td>
+</tr>
+</tbody>
+</table>
+<p>续表5.2</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>功能名称</th>
+<th>功能操作</th>
+<th>预期效果</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>我的收藏</td>
+<td>用户进入到我的收藏界面</td>
+<td>可以查看到当前收藏的活动，收藏和删除之后，我的收藏会更新</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>9</td>
+<td>换肤</td>
+<td>用户点击换肤</td>
+<td>界面的主体部分会变色，再次点击会恢复</td>
+<td>符合预期</td>
+</tr>
+<tr>
+<td>10</td>
+<td>退出登录</td>
+<td>用户点击退出登录</td>
+<td>界面回回到系统初始界面，并且登录之后才可以重新进入系统</td>
+<td>符合预期</td>
+</tr>
+</tbody>
+</table>
+<h1 id="第六章-总结与展望">第六章 总结与展望</h1>
+<h2 id="61-总结">6.1 总结</h2>
+<p>本文主要讲述的一个校园导游系统的开发。从绪论开始由研究现状开始一步步深入了解当前校园导游的现状，再结合相关文献的阅读，最终确定导游系统开发的大致方向以及发过程中所用到的技术。进一步分析系统的可行性以及用户的需求，确定用户的管理员主要的功能。最后介绍系统的架构和系统功能的设计。</p>
+<p>通过本次的系统的开发，比较系统的了解到了一个完整的系统的基本框架，拥有了比较清晰的思路，而不是原先那种只知其一不知其二的懵懂感。这次系统的开发也学习到很多原先没有去了解到的东西，很多原来一知半解的东西也在这次系统开发的过程中得以融会贯通。在系统开发的过程中，同样遇到了很多不懂的知识，而这种探索的过程，便是这次开发过程中最重要的收获。通过阅读文献，以及指导老师的指导和朋友的建议，最终完成了这次的校园导游系统的开发。可能现在的系统并不是很成熟，功能也不是很完善，一个完美的软件从来不是一蹴而就的，但我相信此刻已经是我最完美的答卷。</p>
+<h2 id="62-展望">6.2 展望</h2>
+<p>很难想象四年前选择了计算机专业，当时真正进入到专业课学习的时候，一切都是那么陌生，只是知道按部就班的学习些皮毛知识，这四年来学了很多很多的专业知识，四年时间匆匆一瞬间，我知道此刻将意味着大学的终止，意味着即将开始一段新的旅程。如果没有这次毕业设计的开发系统的过程，我很难想象毕业后的自己会是什么样的状态。但是经过了这个系统开发的过程，我更加深刻的了解了整个系统开发的过程，我对未来充满期待，我坚信这将会是一个美好的开端。</p>
+<p>我相信这会是我大学阶段最宝贵的财富，在以后的学习和工作中，难免会回想起这次的毕设，整个开发过程中的开发经验将会使我受益无穷。那就在此祝福自己，一定会成为想要成为的人。</p>
+<p><strong>参考文献</strong></p>
+<p>[1] 代品宣,李震,卢超,王宇轩,李阳.基于Android的校园导游和定位系统设计与实[J].江苏科技大学学报(自然科学版),2015,29(04):378-381.</p>
+<p>[2]张凯,宓詠,闫华,向望,刘百祥,吴庆杰.&quot;i复旦&quot;——复旦大学校园移动应用的开发与实践[J].武汉大学学报(理学版),2012,58(S1):265-270.</p>
+<p>[3]潘泽锴,朱雪花,黄论.基于移动互联技术的校园导游系统研究与实现[J].物联网技术,2020,10(09):90-91+95.</p>
+<p>[4] 湛朱喜,易泽慧,张强.基于微信小程序的校园导游智能机器人[J].电脑知识与技术,2019,15(11):76-77+80.</p>
+<p>[5] 曾惠霞,罗荻.基于微信小程序的校园导游播报系统的研究与实现[J].电子世界,2020(13):13-14.</p>
+<p>[6]田忠,江梨,杨建华,左欣.基于微信公众平台的校园智能导游系统设计[J].电脑编程技巧与维护,2017(07):40-42.</p>
+<p>[7]杨丽萍.最短路径算法在校园导游系统中的应用[J].计算机时代,2014(02):31-32+35.</p>
+<p>[8] 杨艳,尚维来,庄天龙.基于二部图的数字化校园导游系统研究[J].电脑知识与技术,2010,6(34):9773-9774.</p>
+<p>[9]刘浩,孙继银,高文广,唐中奇.基于全景图的校园导游系统[J].计算机与信息技术,2010,18(Z2):69-71.</p>
+<p>[10]乔丽,朱敬鹏.高校校园导游系统设计[J].商丘师范学院学报,2004(02):89-91.</p>
+<p>[11]邵家勇. 基于GIS的校园导游系统的设计与实现[D].电子科技大学,2013.</p>
+<p>[12]黄荣怀,张进宝,胡永斌,杨俊锋.智慧校园:数字校园发展的必然趋势[J].开放教育研究,2012,18(04):12-17.</p>
+<p>[13]刘应成.基于智能手机的导游系统设计[J].计算机应用与软件,2014,31(11):248-250.</p>
+<p>[14]郭奇青,李伟.基于Android手机的智能导游系统设计[J].计算机与现代化,2017(09):111-113+119.</p>
+<p>[15]蒋燕翔.基于Android平台的景区交互式智能导游系统设计[J].电子技术与软件工程,2019(03):35-36.</p>
+<p>[16]王特起,谢亚琴.基于Dijkstra算法的校园导航系统的设计与实现[J].通信技术，2019,52(08):1937-1943</p>
+<p>[17]刘建,罗婉丽.Android环境构建下的旅游景区自助导游系统的设计分析[J].电子测试,2016(23):70-71+76.</p>
+<p>[18]吴晓红,张振宇,时现伟.基于Android的旅游景区自助导游系统的设计与实现[J].现代计算机,2013(28):61-66.</p>
+<p>[19]曾斯.基于Android平台的手机自助导游系统的设计与实现[J].电脑知识与技术,2015,11(35):50-52.</p>
+<p>[20]朱飞燕,周挺.智慧景区自助导游服务系统设计与实现[J].计算机产品与流通,2017(07):53.</p>
+<p>[21]王晓兰. 基于Android的自助导游系统的设计与实现[D].电子科技大学,2013.</p>
+<p>[22]崔少星. 基于Android手机平台和增强现实的自助导游系统的设计与实现[D].西北大学,2015.</p>
+<p>[23]徐占然. 基于移动互联网平台的自助导游系统研究与开发[D].河北工业大学,2016.</p>
+<p>[24]曾斯. 基于Android手机平台的雁城智慧旅游系统的设计与实现[D].南华大学,2016.</p>
+<p>[25]窦艳. 基于Android的自助导游系统研究与实现[D].湖南大学,2015.</p>
+<p>[26]张怀勇. 基于Spring Boot框架的车辆寄售后台系统的设计与实现[D].北京邮电大学,2020.</p>
+<p>[27]谭蜜. 面向智慧旅游小镇的移动终端系统的设计与实现[D].北京邮电大学,2020.</p>
+<p>致 谢</p>
+<p>当想到真正结束论文的时候，似乎就意味着大学四年生活的结束，我不禁有很多情绪油然而生。因为缘分，我来到了南通大学这所学校，来到了南通这座城市。在这里，遇到了很多人很多的事，给了我不一样的经历，不一样的感悟。借此机会也纪念一下对这段记忆。</p>
+<p>这次的毕业设计，没有想象中的那么漫长。好像转瞬即逝，但是每一天都异常充实。在此我不得不感谢我的指导老师徐慧老师。每一次的指导并不是说很刻板的告诉我们该如何去做，她总是提出一个个引人深思的问题，一步一步的引导我们，去开拓我们的思维。尤其是在系统设计之初，她总是能提出很好的想法，就算是一个很简单的功能也换一种角度变成一个很新奇的想法。或许这就是她的经验吧，这使我受益无穷。在徐慧老师的指导下，我得以快速的缕清了思路，这才使得我整个系统开发的过程显得不慌不忙。</p>
+<p>同时，我想感谢我的父母，他们总是十分支持我的想法，也愿意包容我的不完美。我总是觉得他们无所不能，希望我也能成为他们的无所不能。</p>
+<p>最后，我对未来的学习工作满怀期待，我也始终坚信我一定会成为我想要成为的人。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%AF%95%E8%AE%BE/">毕设</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/springboot01/">
+            <span class="next-text nav-default">基础入门</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

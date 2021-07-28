@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>毕设 on 大胖狗来了</title>
+    <link>https://kongfany.github.io/tags/%E6%AF%95%E8%AE%BE/</link>
+    <description>Recent content in 毕设 on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 28 Jul 2021 17:53:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/%E6%AF%95%E8%AE%BE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>校园导“游”系统的设计与实现</title>
+      <link>https://kongfany.github.io/post/bishe/</link>
+      <pubDate>Wed, 28 Jul 2021 17:53:19 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/bishe/</guid>
+      <description>摘 要 随着各种地图App的推广，旅行更加具有自主性。但就目前而言，没有针对校园的导游系统。校园的导游系统，可以使得学生更方便的熟悉和了解校园以</description>
+    </item>
+    
+  </channel>
+</rss>
