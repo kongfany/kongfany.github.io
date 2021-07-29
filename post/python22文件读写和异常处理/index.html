@@ -49,7 +49,7 @@
 <meta itemprop="name" content="文件读写和异常处理">
 <meta itemprop="description" content="实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（"><meta itemprop="datePublished" content="2021-07-27T20:31:34&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-27T20:31:34&#43;08:00" />
-<meta itemprop="wordCount" content="7347">
+<meta itemprop="wordCount" content="7578">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="文件读写和异常处理"/>
 <meta name="twitter:description" content="实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（"/>
@@ -859,7 +859,36 @@
 <li><code>loads</code> - 将字符串的内容反序列化成Python对象</li>
 </ul>
 <p>这里出现了两个概念，一个叫序列化，一个叫反序列化。“序列化（serialization）在计算机科学的数据处理中，是指将数据结构或对象状态转换为可以存储或传输的形式，这样在需要的时候能够恢复到原先的状态，而且通过序列化的数据重新获取字节时，可以利用这些字节来产生原始对象的副本（拷贝）。与这个过程相反的动作，即从一系列字节中提取数据结构的操作，就是反序列化（deserialization）”。</p>
-<p>目前绝大多数网络数据服务（或称之为网络API）都是基于HTTP协议提供JSON格式的数据，关于HTTP协议的相关知识，可以看看阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2016/08/http.html">《HTTP协议入门》</a>，如果想了解国内的网络数据服务，可以看看<a href="https://www.juhe.cn/">聚合数据</a>和<a href="http://www.avatardata.cn/">阿凡达数据</a>等网站，国外的可以看看<a href="http://apis.io/">{API}Search</a>网站。下面的例子演示了如何使用<a href="http://docs.python-requests.org/zh_CN/latest/">requests</a>模块（封装得足够好的第三方网络访问模块）访问网络API获取国内新闻，如何通过json模块解析JSON数据并显示新闻标题，这个例子使用了<a href="https://www.tianapi.com/">天行数据</a>提供的国内新闻数据接口，其中的APIKey需要自己到该网站申请。</p>
+<p>我们可以通过下面的代码，从上面创建的<code>data.json</code>文件中读取JSON格式的数据并还原成字典。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="n">my_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">my_dict</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">my_dict</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>目前绝大多数网络数据服务（或称之为网络API）都是基于HTTP协议提供JSON格式的数据，关于HTTP协议的相关知识，可以看看阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2016/08/http.html">《HTTP协议入门》</a>，如果想了解国内的网络数据服务，可以看看<a href="https://www.juhe.cn/">聚合数据</a>和<a href="http://www.avatardata.cn/">阿凡达数据</a>等网站，国外的可以看看<a href="http://apis.io/">{API}Search</a>网站。下面的例子演示了如何使用<a href="http://docs.python-requests.org/zh_CN/latest/">requests</a>模块（封装得足够好的第三方网络访问模块）访问网络API获取国内新闻，如何通过json模块解析JSON数据并显示新闻标题，这个例子使用了<a href="https://www.tianapi.com/">天行数据</a>提供的国内新闻数据接口，其中的APIKey需要自己到该网站申请。</p>
+<p>安装<code>requests</code>库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip install requests -i https://pypi.doubanio.com/simple/
+</code></pre></td></tr></table>
+</div>
+</div><p>获取国内新闻并显示新闻标题和链接。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -892,7 +921,10 @@
     <span class="n">main</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>在Python中要实现序列化和反序列化除了使用json模块之外，还可以使用pickle和shelve模块，但是这两个模块是使用特有的序列化协议来序列化数据，因此序列化后的数据只能被Python识别。关于这两个模块的相关知识可以自己看看网络上的资料。另外，如果要了解更多的关于Python异常机制的知识，可以看看segmentfault上面的文章<a href="https://segmentfault.com/a/1190000007736783">《总结：Python中的异常处理》</a>，这篇文章不仅介绍了Python中异常机制的使用，还总结了一系列的最佳实践，很值得一读。</p>
+</div><blockquote>
+<p><strong>注意</strong>：上面代码中的APIKey需要换成自己在天行数据网站申请的APIKey，同时还要申请开通国内新闻的接口才能获取到JSON格式的数据。这个网站上还有很多非常有意思的网络API接口，例如：垃圾分类、美女图片、周公解梦等等，大家可以仿照上面的代码来调用这些接口。</p>
+</blockquote>
+<p>在Python中要实现序列化和反序列化除了使用json模块之外，还可以使用pickle和shelve模块，但是这两个模块是使用特有的序列化协议来序列化数据，因此序列化后的数据只能被Python识别。关于这两个模块的相关知识可以自己看看网络上的资料。另外，如果要了解更多的关于Python异常机制的知识，可以看看segmentfault上面的文章<a href="https://segmentfault.com/a/1190000007736783">《总结：Python中的异常处理》</a>，这篇文章不仅介绍了Python中异常机制的使用，还总结了一系列的最佳实践，很值得一读。</p>
 <h1 id="读写csv文件">读写csv文件</h1>
 <p>csv是最通用的一种文件格式，它可以非常容易地被导入各种PC表格及数据库中。此文件，一行即为数据表的一行。生成数据表字段用半角逗号隔开。csv文件用记事本和excel都能打开，用记事本打开显示逗号，用excel打开，没有逗号了，逗号都用来分列了,还可有Editplus打开。</p>
 <div class="highlight"><div class="chroma">
