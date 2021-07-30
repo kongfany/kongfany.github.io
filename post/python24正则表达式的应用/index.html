@@ -49,7 +49,7 @@
 <meta itemprop="name" content="正则表达式的应用">
 <meta itemprop="description" content="正则表达式相关知识 在编写处理字符串的程时，经常会遇到在一段文本中查找符合某些规则的字符串的需求，正则表达式就是用于描述这些规则的工具，换句话"><meta itemprop="datePublished" content="2021-07-29T16:16:25&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-29T16:16:25&#43;08:00" />
-<meta itemprop="wordCount" content="3482">
+<meta itemprop="wordCount" content="3853">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="正则表达式的应用"/>
 <meta name="twitter:description" content="正则表达式相关知识 在编写处理字符串的程时，经常会遇到在一段文本中查找符合某些规则的字符串的需求，正则表达式就是用于描述这些规则的工具，换句话"/>
@@ -457,6 +457,10 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
@@ -468,6 +472,10 @@
 <span class="n">qq</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入QQ号: &#39;</span><span class="p">)</span>
 <span class="c1"># match函数的第一个参数是正则表达式字符串或正则表达式对象</span>
 <span class="c1"># match函数的第二个参数是要跟正则表达式做匹配的字符串对象</span>
+
+<span class="c1"># ^：匹配的字符串以后面的开头</span>
+<span class="c1"># $: 匹配的字符串以前面的结尾</span>
+<span class="c1"># [0-9a-zA-Z_]{6,20}:[...]数字字母或下划线，{6,20}匹配6,20次</span>
 <span class="n">m1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[0-9a-zA-Z_]{6,20}$&#39;</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">m1</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;请输入有效的用户名.&#39;</span><span class="p">)</span>
@@ -509,14 +517,24 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
-
+<span class="c1"># (?&lt;=\D)1[34578]\d{9}(?=\D) </span>
+<span class="c1"># (?&lt;=\D):\D非数字，从非数字后面开始匹配，即匹配结果的前面是非数字</span>
+<span class="c1"># [23478]:匹配23478任一字符</span>
+<span class="c1"># \d{9}：匹配九个数字</span>
+<span class="c1"># (?=\D):匹配非数字前的字符，即匹配结果后面是非数字</span>
 <span class="c1"># 创建正则表达式对象，使用了前瞻和回顾来保证手机号前后不应该再出现数字</span>
 <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?&lt;=\D)1[34578]\d{9}(?=\D)&#39;</span><span class="p">)</span>
 <span class="n">sentence</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;重要的事情说8130123456789遍，我的手机号是13512346789这个靓号，
 </span><span class="s1">不是15600998765，也是110或119，王大锤的手机号才是15600998765。&#39;&#39;&#39;</span>
+
 <span class="c1"># 方法一：查找所有匹配并保存到一个列表中</span>
 <span class="n">tels_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">tel</span> <span class="ow">in</span> <span class="n">tels_list</span><span class="p">:</span>
@@ -563,26 +581,32 @@
 <h1 id="拆分长字符串">拆分长字符串</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="n">poem</span> <span class="o">=</span> <span class="s1">&#39;窗前明月光，疑是地上霜。举头望明月，低头思故乡。&#39;</span>
 <span class="n">sentences_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[，。, .]&#39;</span><span class="p">,</span> <span class="n">poem</span><span class="p">)</span>
+<span class="c1"># [&#39;窗前明月光&#39;, &#39;疑是地上霜&#39;, &#39;举头望明月&#39;, &#39;低头思故乡&#39;, &#39;&#39;]</span>
 <span class="n">sentences_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">sentence</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences_list</span> <span class="k">if</span> <span class="n">sentence</span><span class="p">]</span>
+<span class="c1"># bool(a)：Z字符串a有内容为True，无内容为False</span>
+<span class="c1"># [&#39;窗前明月光&#39;, &#39;疑是地上霜&#39;, &#39;举头望明月&#39;, &#39;低头思故乡&#39;]</span>
 <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences_list</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="简单总结">简单总结</h1>
-<p>正则表达式在字符串的处理和匹配上真的非常强大，通过上面的例子相信大家已经感受到了正则表达式的魅力，当然写一个正则表达式对新手来说并不是那么容易，但是很多事情都是熟能生巧，大胆的去尝试就行了，有一个在线的<a href="https://c.runoob.com/front-end/854">正则表达式测试工具</a>相信能够在一定程度上帮到大家。</p>
+<p>正则表达式在字符串的处理和匹配上真的非常强大，通过上面的例子相信大家已经感受到了正则表达式的魅力，当然写一个正则表达式对新手来说并不是那么容易，但是很多事情都是熟能生巧，大胆的去尝试就行了，有一个在线的<a href="https://c.runoob.com/front-end/854">正则表达式测试工具(以及常用正则表达式举例)</a>相信能够在一定程度上帮到大家。</p>
 
     </div>
 
@@ -604,7 +628,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python25%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">处理图像</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/python23%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E5%92%8C%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">
             <span class="next-text nav-default">图形用户界面和游戏开发</span>
             <span class="next-text nav-mobile">Next</span>

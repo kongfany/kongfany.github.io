@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>分支结构 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="分支结构也叫选择结构。 if语句的使用 在Python中，要构造分支结构可以使用if、elif和else关键字。所谓关键字就是有特殊含义的单词，" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python05%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="分支结构" />
+<meta property="og:description" content="分支结构也叫选择结构。 if语句的使用 在Python中，要构造分支结构可以使用if、elif和else关键字。所谓关键字就是有特殊含义的单词，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python05%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-07T16:13:31&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-07T16:13:31&#43;08:00" />
+
+<meta itemprop="name" content="分支结构">
+<meta itemprop="description" content="分支结构也叫选择结构。 if语句的使用 在Python中，要构造分支结构可以使用if、elif和else关键字。所谓关键字就是有特殊含义的单词，"><meta itemprop="datePublished" content="2021-07-07T16:13:31&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-07T16:13:31&#43;08:00" />
+<meta itemprop="wordCount" content="1759">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="分支结构"/>
+<meta name="twitter:description" content="分支结构也叫选择结构。 if语句的使用 在Python中，要构造分支结构可以使用if、elif和else关键字。所谓关键字就是有特殊含义的单词，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">分支结构</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-07 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#if语句的使用">if语句的使用</a></li>
+    <li><a href="#例题">例题</a>
+      <ul>
+        <li><a href="#例1英制单位英寸与公制单位厘米互换">例1：英制单位英寸与公制单位厘米互换</a></li>
+        <li><a href="#例2百分制成绩转化为等级制">例2：百分制成绩转化为等级制</a></li>
+        <li><a href="#例3能否构成三角形">例3：能否构成三角形</a></li>
+        <li><a href="#例4掷骰子">例4：掷骰子</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>分支结构也叫选择结构。</p>
+<h1 id="if语句的使用">if语句的使用</h1>
+<p>在Python中，要构造分支结构可以使用<code>if</code>、<code>elif</code>和<code>else</code>关键字。所谓<strong>关键字</strong>就是有特殊含义的单词，像<code>if</code>和<code>else</code>就是专门用于构造分支结构的关键字，很显然你不能够使用它作为变量名。</p>
+<p>不需要加括号了。。。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">用户身份验证
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入用户名: &#39;</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入口令: &#39;</span><span class="p">)</span>
+<span class="c1"># 用户名是admin且密码是123456则身份验证成功否则身份验证失败</span>
+<span class="k">if</span> <span class="n">username</span> <span class="o">==</span> <span class="s1">&#39;admin&#39;</span> <span class="ow">and</span> <span class="n">password</span> <span class="o">==</span> <span class="s1">&#39;123456&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;身份验证成功!&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;身份验证失败!&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>需要说明的是，不同于C++、Java等编程语言，Python中没有用花括号来构造代码块而是<code>使用了缩进</code>的方式来表示代码的层次结构，如果<code>if</code>条件成立的情况下需要执行多条语句，只要保持多条语句具有相同的缩进就可以了。换句话说<strong>连续的代码如果又保持了相同的缩进那么它们属于同一个代码块</strong>，相当于是一个执行的整体。<strong>缩进</strong>可以使用任意数量的空格，但<strong>通常使用4个空格</strong>，强烈建议大家<strong>不要使用制表键来缩进代码</strong>，如果你已经习惯了这么做，可以<strong>设置代码编辑工具将1个制表键自动变成4个空格</strong>，很多的代码编辑工具都支持这项功能。</p>
+<p>注：<code>if</code>和<code>else</code>的最后面有一个<code>:</code></p>
+</blockquote>
+<p>如果要构造出更多的分支，可以使用<code>if...elif...else...</code>结构或者嵌套的<code>if...else...</code>结构，下面的代码演示了如何利用多分支结构实现分段函数求值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">分段函数求值
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;x = &#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">5</span>
+<span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;f({x}) = {y}&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>当然根据实际开发的需要，分支结构是可以嵌套的，那么我们就需要在<code>if</code>的内部构造出一个新的分支结构，同理<code>elif</code>和<code>else</code>中也可以再构造新的分支，我们称之为嵌套的分支结构，也就是说上面的代码也可以写成下面的样子。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">分段函数求值
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;x = &#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">5</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;f({x}) = {y}&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>说明：</strong> 大家可以自己感受和评判一下这两种写法到底是哪一种更好。在<strong>Python之禅</strong>中有这么一句话：“<strong>Flat is better than nested</strong>”，之所以提倡代码“扁平化”是因为嵌套结构的嵌套层次如果很多，会严重的影响代码的可读性，所以能使用扁平化结构时就不要使用嵌套结构。</p>
+<p>建议使用第一种方式。</p>
+</blockquote>
+<h1 id="例题">例题</h1>
+<h2 id="例1英制单位英寸与公制单位厘米互换">例1：英制单位英寸与公制单位厘米互换</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">英制单位英寸和公制单位厘米互换
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入长度: &#39;</span><span class="p">))</span>
+<span class="n">unit</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入单位: &#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;in&#39;</span> <span class="ow">or</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;英寸&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%f</span><span class="s1">英寸 = </span><span class="si">%f</span><span class="s1">厘米&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">2.54</span><span class="p">))</span>
+<span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;cm&#39;</span> <span class="ow">or</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;厘米&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%f</span><span class="s1">厘米 = </span><span class="si">%f</span><span class="s1">英寸&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">value</span> <span class="o">/</span> <span class="mf">2.54</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;请输入有效的单位&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="例2百分制成绩转化为等级制">例2：百分制成绩转化为等级制</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入成绩: &#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s1">&#39;C&#39;</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s1">&#39;E&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;对应的等级是:&#39;</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="例3能否构成三角形">例3：能否构成三角形</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">判断输入的边长能否构成三角形，如果能则计算出三角形的周长和面积
+</span><span class="s2">任意两边之和大于第三边
+</span><span class="s2">
+</span><span class="s2">已知三角形三边求面积
+</span><span class="s2">海伦公式：p=（a+b+c）/2
+</span><span class="s2">s=√（p*(p-a)*(p-b)*(p-c))   根号下，周长一半乘周长一半分别减各边
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;a = &#39;</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;b = &#39;</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;c = &#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">c</span> <span class="ow">and</span> <span class="n">a</span> <span class="o">+</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">:</span>
+    <span class="n">peri</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;周长: {peri}&#39;</span><span class="p">)</span>
+    <span class="n">half</span> <span class="o">=</span> <span class="n">peri</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="n">half</span> <span class="o">*</span> <span class="p">(</span><span class="n">half</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">half</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">half</span> <span class="o">-</span> <span class="n">c</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;面积: {area}&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;不能构成三角形&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="例4掷骰子">例4：掷骰子</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>	
+<span class="c1"># randint()函数属于random模块,，告诉Python在random模块中寻找这个函数</span>
+
+<span class="n">face</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">face</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;唱首歌&#39;</span>
+<span class="k">elif</span> <span class="n">face</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;跳个舞&#39;</span>
+<span class="k">elif</span> <span class="n">face</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;学狗叫&#39;</span>
+<span class="k">elif</span> <span class="n">face</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;做俯卧撑&#39;</span>
+<span class="k">elif</span> <span class="n">face</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;念绕口令&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;讲冷笑话&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/python06%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">循环结构</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/python04%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0%E4%B9%8B%E8%BF%90%E7%AE%97%E7%AC%A6/">
+            <span class="next-text nav-default">Python语言元素之运算符</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

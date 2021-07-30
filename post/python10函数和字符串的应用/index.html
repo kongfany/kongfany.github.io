@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>函数和字符串的应用 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="为什么字符串类型（str）可以通过调用方法的方式进行操作，而之前我们用到的数值类型（如int、float）却没有可以调用的方法。在Pytho" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python10%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%BA%94%E7%94%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="函数和字符串的应用" />
+<meta property="og:description" content="为什么字符串类型（str）可以通过调用方法的方式进行操作，而之前我们用到的数值类型（如int、float）却没有可以调用的方法。在Pytho" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python10%E5%87%BD%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%BA%94%E7%94%A8/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-09T10:23:46&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-09T10:23:46&#43;08:00" />
+
+<meta itemprop="name" content="函数和字符串的应用">
+<meta itemprop="description" content="为什么字符串类型（str）可以通过调用方法的方式进行操作，而之前我们用到的数值类型（如int、float）却没有可以调用的方法。在Pytho"><meta itemprop="datePublished" content="2021-07-09T10:23:46&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-09T10:23:46&#43;08:00" />
+<meta itemprop="wordCount" content="1714">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="函数和字符串的应用"/>
+<meta name="twitter:description" content="为什么字符串类型（str）可以通过调用方法的方式进行操作，而之前我们用到的数值类型（如int、float）却没有可以调用的方法。在Pytho"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">函数和字符串的应用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-09 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#生成指定长度验证码的函数">生成指定长度验证码的函数</a></li>
+    <li><a href="#返回给定文件名的后缀名的函数">返回给定文件名的后缀名的函数</a></li>
+    <li><a href="#在终端中显示跑马灯滚动文字">在终端中显示跑马灯（滚动）文字</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>为什么字符串类型（<code>str</code>）可以通过调用方法的方式进行操作，而之前我们用到的数值类型（如<code>int</code>、<code>float</code>）却没有可以调用的方法。在Python中，数值类型是标量类型，也就是说这种类型的变量没有可以访问的内部结构；而字符串类型是一种结构化的、非标量类型，所以才会有一系列的方法可供调用。</p>
+<p>一定要有意识的<strong>将相对独立且重复出现的功能封装成函数</strong>。字符串是非常重要的数据类型，<strong>字符串的常用运算和方法需要掌握</strong>，因为一般的商业项目中，处理字符串比处理数值的操作要更多。</p>
+<h1 id="生成指定长度验证码的函数">生成指定长度验证码的函数</h1>
+<p>验证码由数字和英文大小写字母构成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">ALL_CHARS</span> <span class="o">=</span> <span class="s1">&#39;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">generate_code</span><span class="p">(</span><span class="n">code_len</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;生成指定长度的验证码
+</span><span class="s2">    :param code_len: 验证码的长度(默认4个字符)
+</span><span class="s2">    :return: 由大小写英文字母和数字构成的随机验证码字符串
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">code_len</span><span class="p">):</span>
+        <span class="c1"># 产生0到字符串长度减1范围的随机数作为索引</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ALL_CHARS</span><span class="p">))</span>
+        <span class="c1"># 利用索引运算从字符串中取出字符并进行拼接</span>
+        <span class="n">code</span> <span class="o">+=</span> <span class="n">ALL_CHARS</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">code</span>
+
+<span class="c1"># 生成10组随机验证码来测试上面的函数</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">generate_code</span><span class="p">())</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的函数其实还有一种更为简单的写法，直接利用<code>random</code>模块的随机抽样函数从字符串中取出指定数量的字符，然后利用字符串的<code>join</code>方法将选中的那些字符拼接起来。此外，可以利用Python标准库中的<code>string</code> 模块来获得数字和英文字母的字面常量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="c1"># 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span class="n">ALL_CHARS</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span>
+
+<span class="k">def</span> <span class="nf">generate_code</span><span class="p">(</span><span class="n">code_len</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;生成指定长度的验证码
+</span><span class="s2">    :param code_len: 验证码的长度(默认4个字符)
+</span><span class="s2">    :return: 由大小写英文字母和数字构成的随机验证码字符串
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">ALL_CHARS</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">code_len</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>说明</strong>：<code>random</code>模块的<code>sample</code>和<code>choices</code>函数都可以实现随机抽样，<code>sample</code>实现无放回抽样，这意味着抽样取出的字符是不重复的；<code>choices</code>实现有放回抽样，这意味着可能会重复选中某些字符。</p>
+<p>这两个函数的第一个参数代表抽样的总体，而参数<code>k</code>代表抽样的数量。</p>
+</blockquote>
+<h1 id="返回给定文件名的后缀名的函数">返回给定文件名的后缀名的函数</h1>
+<p>文件名通常是一个字符串，而文件的后缀名指的是文件名中最后一个<code>.</code>后面的部分，也称为文件的扩展名，它是某些操作系统用来标记文件类型的一种机制，例如在Windows系统上，后缀名<code>exe</code>表示这是一个可执行程序，而后缀名<code>txt</code>表示这是一个纯文本文件。需要注意的是，在Linux和macOS系统上，文件名可以以<code>.</code>开头，表示这是一个隐藏文件，像<code>.gitignore</code>这样的文件名，<code>.</code>后面并不是后缀名，这个文件没有后缀名或者说后缀名为<code>''</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_suffix</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;获取文件名的后缀名
+</span><span class="s2">    :param filename: 文件名
+</span><span class="s2">    :return: 文件的后缀名
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="c1"># 从字符串中逆向查找.出现的位置</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="c1"># 通过切片操作从文件名中取出后缀名</span>
+    <span class="k">return</span> <span class="n">filename</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">	return等价于
+</span><span class="s2">    if pos &gt; 0:
+</span><span class="s2">        return filename[pos+1:]
+</span><span class="s2">    else:
+</span><span class="s2">        return &#34;&#34;
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="c1"># test</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_suffix</span><span class="p">(</span><span class="s1">&#39;readme.txt&#39;</span><span class="p">))</span>       <span class="c1"># txt</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_suffix</span><span class="p">(</span><span class="s1">&#39;readme.txt.md&#39;</span><span class="p">))</span>    <span class="c1"># md</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_suffix</span><span class="p">(</span><span class="s1">&#39;.readme&#39;</span><span class="p">))</span>          <span class="c1">#</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_suffix</span><span class="p">(</span><span class="s1">&#39;readme.&#39;</span><span class="p">))</span>          <span class="c1">#</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_suffix</span><span class="p">(</span><span class="s1">&#39;readme&#39;</span><span class="p">))</span>           <span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的<code>get_suffix</code>函数还有一个更为便捷的实现方式，就是直接使用<code>os.path</code>模块的<code>splitext</code>函数，这个函数会将文件名拆分成带路径的文件名和扩展名两个部分，然后返回一个二元组（下节课会讲到元组），二元组中的第二个元素就是文件的后缀名（包含<code>.</code>），如果要去掉后缀名中的<code>.</code>，可以做一个字符串的切片操作，代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">splitext</span>
+
+<span class="k">def</span> <span class="nf">get_suffix</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="在终端中显示跑马灯滚动文字">在终端中显示跑马灯（滚动）文字</h1>
+<p>实现跑马灯文字的原理非常简单，把当前字符串的第一个字符放到要输出的内容的最后面，把从第二个字符开始后面的内容放到要输出的内容的最前面，通过循环重复这个操作，就可以看到滚动起来的文字。</p>
+<p>两次循环之间的间隔可以通过<code>time</code>模块的<code>sleep</code>函数来实现，而清除屏幕上之前的输出可以使用<code>os</code>模块的<code>system</code>函数调用系统清屏命令来实现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;北 京 欢 迎 你 为 你 开 天 辟 地           &#39;</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># Windows清除屏幕上的输出</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;cls&#39;</span><span class="p">)</span>  
+    <span class="c1"># macOS清除屏幕上的输出</span>
+    <span class="c1"># os.system(&#39;clear&#39;)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="c1"># 休眠0.2秒（200毫秒）</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>提示</strong>：如果你使用PyCharm，需要提醒大家，PyCharm的运行窗口无法用上面的方式做清屏处理。</p>
+<p>建议在“命令行提示符”或“终端”（PyCharm中的“Terminal”相当于就是Windows系统的“命令行提示符”或macOS系统的“终端”）中运行该程序。</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/python11%E5%88%97%E8%A1%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">列表</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/python09%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+            <span class="next-text nav-default">字符串</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>集合 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python14%E9%9B%86%E5%90%88/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="集合" />
+<meta property="og:description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python14%E9%9B%86%E5%90%88/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-12T19:18:40&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-12T19:18:40&#43;08:00" />
+
+<meta itemprop="name" content="集合">
+<meta itemprop="description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的"><meta itemprop="datePublished" content="2021-07-12T19:18:40&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-12T19:18:40&#43;08:00" />
+<meta itemprop="wordCount" content="3194">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="集合"/>
+<meta name="twitter:description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">集合</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-12 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#创建集合">创建集合</a></li>
+    <li><a href="#集合的运算">集合的运算</a>
+      <ul>
+        <li><a href="#成员运算">成员运算</a></li>
+        <li><a href="#交并差运算">交并差运算</a></li>
+        <li><a href="#比较运算">比较运算</a></li>
+      </ul>
+    </li>
+    <li><a href="#集合的方法">集合的方法</a></li>
+    <li><a href="#不可变集合">不可变集合</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“<strong>把一定范围的、确定的、可以区别的事物当作一个整体来看待</strong>”，集合中的各个事物通常称为集合的元素。集合应该满足以下特性：</p>
+<ol>
+<li><strong>无序性</strong>：一个集合中，每个元素的地位都是相同的，元素之间是无序的。</li>
+<li><strong>互异性</strong>：一个集合中，任何两个元素都认为是不相同的，即每个元素只能出现一次。</li>
+<li><strong>确定性</strong>：给定一个集合，任给一个元素，该元素或者属于或者不属于该集合，二者必居其一，不允许有模棱两可的情况出现。</li>
+</ol>
+<p>Python程序中的集合跟数学上的集合是完全一致的，需要强调的是上面所说的无序性和互异性。无序性说明集合中的元素并不像列表中的元素那样一个挨着一个，可以通过索引的方式实现随机访问（随机访问指的是给定一个有效的范围，随机抽取出一个数字，然后通过这个数字获取到对应的元素），所以Python中的<strong>集合肯定不能够支持索引运算</strong>。另外，集合的互异性决定了<strong>集合中不能有重复元素</strong>，这一点也是集合区别于列表的关键，说得更直白一些就是，Python中的集合类型具有去重特性。当然，Python中的集合一定是支持<code>in</code>和<code>not in</code>成员运算的，这样就可以确定一个元素是否属于集合，也就是上面所说的集合的确定性。<strong>集合的成员运算在性能上要优于列表的成员运算</strong>，这是集合的底层存储特性决定的，此处我们暂时不做讨论，先记下这个结论即可。</p>
+<h1 id="创建集合">创建集合</h1>
+<p>在Python中，创建集合可以使用<code>{}</code>字面量语法，<code>{}</code>中需要至少有一个元素，因为没有元素的<code>{}</code>并不是空集合而是一个空字典，我们下一节课就会大家介绍字典的知识。当然，也可以使用内置函数<code>set</code>来创建一个集合，准确的说<code>set</code>并不是一个函数，而是创建集合对象的构造器，这个知识点我们很快也会讲到，现在不理解跳过它就可以了。要创建空集合可以使用<code>set()</code>；也可以将其他序列转换成集合，例如：<code>set('hello')</code>会得到一个包含了4个字符的集合（重复的<code>l</code>会被去掉）。除了这两种方式，我们还可以使用生成式语法来创建集合，就像我们之前用生成式创建列表那样。要知道集合中有多少个元素，还是使用内置函数<code>len</code>；使用<code>for</code>循环可以实现对集合元素的遍历。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建集合的字面量语法(重复元素不会出现在集合中)</span>
+<span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>         <span class="c1"># {1, 2, 3}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>    <span class="c1"># 3</span>
+
+<span class="c1"># 创建集合的构造器语法(后面会讲到什么是构造器)</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>         <span class="c1"># {&#39;h&#39;, &#39;l&#39;, &#39;o&#39;, &#39;e&#39;}</span>
+<span class="c1"># 将列表转换成集合(可以去掉列表中的重复元素)</span>
+<span class="n">set3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set3</span><span class="p">)</span>         <span class="c1"># {1, 2, 3}</span>
+
+<span class="c1"># 创建集合的生成式语法(将列表生成式的[]换成{})</span>
+<span class="n">set4</span> <span class="o">=</span> <span class="p">{</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set4</span><span class="p">)</span>         <span class="c1"># {3, 5, 6, 9, 10, 12, 15, 18}</span>
+
+<span class="c1"># 集合元素的循环遍历</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">set4</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+    
+<span class="c1"># 将元组转换成集合</span>
+<span class="n">set5</span> <span class="o">=</span> <span class="nb">set</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set5</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set5</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>需要提醒大家，集合中的元素必须是<code>hashable</code>类型。所谓<code>hashable</code>类型指的是能够计算出哈希码的数据类型，你可以暂时将哈希码理解为和变量对应的唯一的ID值。通常不可变类型都是<code>hashable</code>类型，如整数、浮点、字符串、元组等，而可变类型都不是<code>hashable</code>类型，因为可变类型无法确定唯一的ID值，所以也就不能放到集合中。集合本身也是可变类型，所以集合不能够作为集合中的元素，这一点请大家一定要注意。</p>
+<h1 id="集合的运算">集合的运算</h1>
+<p>Python为集合类型提供了非常丰富的运算符，主要包括：成员运算、交集运算、并集运算、差集运算、比较运算（相等性、子集、超集）等。</p>
+<h2 id="成员运算">成员运算</h2>
+<p>可以通过成员运算<code>in</code>和<code>not in </code>检查元素是否在集合中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">10</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">)</span>        <span class="c1"># False </span>
+<span class="k">print</span><span class="p">(</span><span class="mi">15</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">)</span>        <span class="c1"># True</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Swift&#39;</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ruby&#39;</span> <span class="ow">in</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Java&#39;</span> <span class="ow">in</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="交并差运算">交并差运算</h2>
+<p>Python中的集合跟数学上的集合一样，可以进行交集、并集、差集等运算，而且可以通过运算符和方法调用两种方式来进行操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">}</span>
+
+<span class="c1"># 交集</span>
+<span class="c1"># 方法一: 使用 &amp; 运算符</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>                <span class="c1"># {2, 4, 6}</span>
+<span class="c1"># 方法二: 使用intersection方法</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {2, 4, 6}</span>
+
+<span class="c1"># 并集</span>
+<span class="c1"># 方法一: 使用 | 运算符</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>         <span class="c1"># {1, 2, 3, 4, 5, 6, 7, 8, 10}</span>
+<span class="c1"># 方法二: 使用union方法</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {1, 2, 3, 4, 5, 6, 7, 8, 10}</span>
+
+<span class="c1"># 差集</span>
+<span class="c1"># 方法一: 使用 - 运算符</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>              <span class="c1"># {1, 3, 5, 7}</span>
+<span class="c1"># 方法二: 使用difference方法</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {1, 3, 5, 7}</span>
+
+<span class="c1"># 对称差</span>
+<span class="c1"># 方法一: 使用 ^ 运算符</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">^</span> <span class="n">set2</span><span class="p">)</span>                        
+<span class="c1"># {1, 3, 5, 7, 8, 10}</span>
+<span class="c1"># 方法二: 使用symmetric_difference方法</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    
+<span class="c1"># {1, 3, 5, 7, 8, 10}</span>
+<span class="c1"># 方法三: 对称差相当于两个集合的并集减去交集</span>
+<span class="k">print</span><span class="p">((</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">))</span>      
+<span class="c1"># {1, 3, 5, 7, 8, 10}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202107/23.png" alt=""></p>
+<blockquote>
+<p><strong>说明：</strong> Python中允许通过一些特殊的方法来为某种类型或数据结构自定义运算符（后面的章节中会讲到），上面的代码中我们对集合进行运算的时候可以调用集合对象的方法，也可以直接使用对应的运算符，例如<code>&amp;</code>运算符跟intersection方法的作用就是一样的，但是使用运算符让代码更加直观。</p>
+</blockquote>
+<p>集合的交集、并集、差集运算还可以跟赋值运算一起构成复合运算</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="c1"># 将set1和set2求并集再赋值给set1</span>
+<span class="c1"># 也可以通过set1.update(set2)来实现</span>
+<span class="n">set1</span> <span class="o">|=</span> <span class="n">set2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    
+<span class="c1"># {1, 2, 3, 4, 5, 6, 7}</span>
+<span class="n">set3</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">}</span>
+<span class="c1"># 将set1和set3求交集再赋值给set1</span>
+<span class="c1"># 也可以通过set1.intersection_update(set3)来实现</span>
+<span class="n">set1</span> <span class="o">&amp;=</span> <span class="n">set3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {3, 6}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="比较运算">比较运算</h2>
+<p>两个集合可以用<code>==</code>和<code>!=</code>进行相等性判断，如果两个集合中的元素完全相同，那么<code>==</code>比较的结果就是<code>True</code>，否则就是<code>False</code>。如果集合A的任意一个元素都是集合B的元素，那么集合A称为集合B的子集，即对于∀a∈A，均有a∈B，则A⊆B。A是B的子集，反过来也可以称B是A的超集。如果A是B的子集且A不等于B，那么A就是B的真子集。Python为集合类型提供了判断子集和超集的运算符，其实就是我们非常熟悉的<code>&lt;</code>和<code>&gt;</code>运算符，代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">set3</span> <span class="o">=</span> <span class="n">set2</span>
+<span class="c1"># &lt;运算符表示真子集，&lt;=运算符表示子集</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&lt;</span> <span class="n">set2</span><span class="p">,</span> <span class="n">set1</span> <span class="o">&lt;=</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># True True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set2</span> <span class="o">&lt;</span> <span class="n">set3</span><span class="p">,</span> <span class="n">set2</span> <span class="o">&lt;=</span> <span class="n">set3</span><span class="p">)</span>    <span class="c1"># False True</span>
+<span class="c1"># 通过issubset方法也能进行子集判断</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>      <span class="c1"># True</span>
+
+<span class="c1"># 反过来可以用issuperset或&gt;运算符进行超集判断</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set2</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>    <span class="c1"># True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set2</span> <span class="o">&gt;</span> <span class="n">set1</span><span class="p">)</span>              <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="集合的方法">集合的方法</h1>
+<p>Python中的集合是可变类型，我们可以通过集合类型的方法为集合添加或删除元素。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建一个空集合</span>
+<span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="c1"># 通过add方法添加元素</span>
+<span class="n">set1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">33</span><span class="p">)</span>
+<span class="n">set1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
+<span class="n">set1</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {33, 1, 100, 55, 1000, 10}</span>
+
+<span class="c1"># 通过discard方法删除指定元素</span>
+<span class="n">set1</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">set1</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {1, 10, 33, 55, 1000}</span>
+<span class="c1"># 通过remove方法删除指定元素，建议先做成员运算再删除</span>
+<span class="c1"># 否则元素如果不在集合中就会引发KeyError异常</span>
+<span class="k">if</span> <span class="mi">10</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">:</span>
+    <span class="n">set1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {33, 1, 55, 1000}</span>
+
+<span class="c1"># pop方法可以从集合中随机删除一个元素并返回该元素</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+
+<span class="c1"># clear方法可以清空整个集合</span>
+<span class="n">set1</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># set()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果要判断两个集合有没有相同的元素可以使用<code>isdisjoint</code>方法，没有相同元素返回<code>True</code>，否则返回<code>False</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">}</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Kotlin&#39;</span><span class="p">,</span> <span class="s1">&#39;Swift&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Objective-C&#39;</span><span class="p">,</span> <span class="s1">&#39;Dart&#39;</span><span class="p">}</span>
+<span class="n">set3</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;HTML&#39;</span><span class="p">,</span> <span class="s1">&#39;CSS&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaScript&#39;</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set3</span><span class="p">))</span>    <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="不可变集合">不可变集合</h1>
+<p>Python中还有一种不可变类型的集合，名字叫<code>frozenset</code>。<code>set</code>跟<code>frozenset</code>的区别就如同<code>list</code>跟<code>tuple</code>的区别，<code>frozenset</code>由于是不可变类型，能够计算出哈希码，因此它可以作为<code>set</code>中的元素。除了不能添加和删除元素，<code>frozenset</code>在其他方面跟<code>set</code>基本是一样的，下面的代码简单的展示了<code>frozenset</code>的用法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">})</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({1, 3, 5})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({1, 2, 3, 4, 5, 7})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({7})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&lt;</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># False</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="总结">总结</h1>
+<p>Python中的集合底层使用了<strong>哈希存储</strong>的方式，对于这一点我们暂时不做介绍，在后面的课程有需要的时候再为大家讲解集合的底层原理，现阶段大家只需要知道<strong>集合是一种容器</strong>，元素必须是<code>hashable</code>类型，与列表不同的地方在于集合中的元素<strong>没有序</strong>、<strong>不能用索引运算</strong>、<strong>不能重复</strong>。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-12
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/python15%E5%AD%97%E5%85%B8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">字典</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/python13%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%E7%9A%84%E5%BA%94%E7%94%A8/">
+            <span class="next-text nav-default">列表和元组的应用</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
