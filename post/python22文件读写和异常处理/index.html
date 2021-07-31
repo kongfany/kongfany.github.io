@@ -49,7 +49,7 @@
 <meta itemprop="name" content="文件读写和异常处理">
 <meta itemprop="description" content="实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（"><meta itemprop="datePublished" content="2021-07-27T20:31:34&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-27T20:31:34&#43;08:00" />
-<meta itemprop="wordCount" content="7578">
+<meta itemprop="wordCount" content="9158">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="文件读写和异常处理"/>
 <meta name="twitter:description" content="实际开发中常常会遇到对数据进行持久化的场景，所谓持久化是指将数据从无法长久保存数据的存储介质（通常是内存）转移到可以长久保存数据的存储介质（"/>
@@ -151,7 +151,12 @@
     <li><a href="#上下文语法">上下文语法</a></li>
     <li><a href="#读写二进制文件">读写二进制文件</a></li>
     <li><a href="#读写json文件">读写JSON文件</a></li>
-    <li><a href="#读写csv文件">读写csv文件</a></li>
+    <li><a href="#读写csv文件">读写csv文件</a>
+      <ul>
+        <li><a href="#将数据写入csv文件">将数据写入CSV文件</a></li>
+        <li><a href="#从csv文件读取数据">从CSV文件读取数据</a></li>
+      </ul>
+    </li>
     <li><a href="#简单的总结">简单的总结</a></li>
   </ul>
 </nav>
@@ -926,7 +931,139 @@
 </blockquote>
 <p>在Python中要实现序列化和反序列化除了使用json模块之外，还可以使用pickle和shelve模块，但是这两个模块是使用特有的序列化协议来序列化数据，因此序列化后的数据只能被Python识别。关于这两个模块的相关知识可以自己看看网络上的资料。另外，如果要了解更多的关于Python异常机制的知识，可以看看segmentfault上面的文章<a href="https://segmentfault.com/a/1190000007736783">《总结：Python中的异常处理》</a>，这篇文章不仅介绍了Python中异常机制的使用，还总结了一系列的最佳实践，很值得一读。</p>
 <h1 id="读写csv文件">读写csv文件</h1>
-<p>csv是最通用的一种文件格式，它可以非常容易地被导入各种PC表格及数据库中。此文件，一行即为数据表的一行。生成数据表字段用半角逗号隔开。csv文件用记事本和excel都能打开，用记事本打开显示逗号，用excel打开，没有逗号了，逗号都用来分列了,还可有Editplus打开。</p>
+<p>CSV（Comma Separated Values）全称逗号分隔值文件是一种简单、通用的文件格式，被广泛的应用于应用程序（数据库、电子表格等）数据的导入和导出以及异构系统之间的数据交换。因为CSV是纯文本文件，不管是什么操作系统和编程语言都是可以处理纯文本的，而且很多编程语言中都提供了对读写CSV文件的支持，因此CSV格式在数据处理和数据科学中被广泛应用。</p>
+<p>CSV文件有以下特点：</p>
+<ol>
+<li>纯文本，使用某种字符集（如ASCII、Unicode、GB2312等）；</li>
+<li>由一条条的记录组成（典型的是每行一条记录）；</li>
+<li>每条记录被分隔符（如逗号、分号、制表符等）分隔为字段（列）；</li>
+<li>每条记录都有同样的字段序列。</li>
+</ol>
+<p>CSV文件可以使用文本编辑器或类似于Excel电子表格这类工具打开和编辑，当使用Excel这类电子表格打开CSV文件时，你甚至感觉不到CSV和Excel文件的区别。很多数据库系统都支持将数据导出到CSV文件中，当然也支持从CSV文件中读入数据保存到数据库中。csv是最通用的一种文件格式，它可以非常容易地被导入各种PC表格及数据库中。此文件，一行即为数据表的一行。生成数据表字段用半角逗号隔开。csv文件用记事本和excel都能打开，用记事本打开显示逗号，用excel打开，没有逗号了，逗号都用来分列了,还可有Editplus打开。</p>
+<h2 id="将数据写入csv文件">将数据写入CSV文件</h2>
+<p>现有五个学生三门课程的考试成绩需要保存到一个CSV文件中，要达成这个目标，可以使用Python标准库中的<code>csv</code>模块，该模块的<code>writer</code>函数会返回一个<code>csvwriter</code>对象，通过该对象的<code>writerow</code>或<code>writerows</code>方法就可以将数据写入到CSV文件中，具体的代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;scores.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s1">&#39;姓名&#39;</span><span class="p">,</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span> <span class="s1">&#39;英语&#39;</span><span class="p">])</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;关羽&#39;</span><span class="p">,</span> <span class="s1">&#39;张飞&#39;</span><span class="p">,</span> <span class="s1">&#39;赵云&#39;</span><span class="p">,</span> <span class="s1">&#39;马超&#39;</span><span class="p">,</span> <span class="s1">&#39;黄忠&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">verbal</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">math</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">english</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">verbal</span><span class="p">,</span> <span class="n">math</span><span class="p">,</span> <span class="n">english</span><span class="p">])</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">姓名,语文,数学,英语
+</span><span class="s2">
+</span><span class="s2">关羽,60,83,70
+</span><span class="s2">
+</span><span class="s2">张飞,62,99,38
+</span><span class="s2">
+</span><span class="s2">赵云,61,72,74
+</span><span class="s2">
+</span><span class="s2">马超,82,80,88
+</span><span class="s2">
+</span><span class="s2">黄忠,81,95,98
+</span><span class="s2">
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要说明的是上面的<code>writer</code>函数，该函数除了传入要写入数据的文件对象外，还可以<code>dialect</code>参数，它表示CSV文件的方言，默认值是<code>excel</code>。除此之外，还可以通过<code>delimiter</code>、<code>quotechar</code>、<code>quoting</code>参数来指定分隔符（默认是逗号）、包围值的字符（默认是双引号）以及包围的方式。其中，包围值的字符主要用于当字段中有特殊符号时，通过添加包围值的字符可以避免二义性。大家可以尝试将上面第5行代码修改为下面的代码，看看生成的CSV文件到底有什么区别。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_ALL</span><span class="p">)</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">&#34;姓名&#34;|&#34;语文&#34;|&#34;数学&#34;|&#34;英语&#34;
+</span><span class="s2">
+</span><span class="s2">&#34;关羽&#34;|&#34;76&#34;|&#34;52&#34;|&#34;96&#34;
+</span><span class="s2">
+</span><span class="s2">&#34;张飞&#34;|&#34;70&#34;|&#34;93&#34;|&#34;63&#34;
+</span><span class="s2">
+</span><span class="s2">&#34;赵云&#34;|&#34;96&#34;|&#34;99&#34;|&#34;90&#34;
+</span><span class="s2">
+</span><span class="s2">&#34;马超&#34;|&#34;98&#34;|&#34;91&#34;|&#34;57&#34;
+</span><span class="s2">
+</span><span class="s2">&#34;黄忠&#34;|&#34;98&#34;|&#34;56&#34;|&#34;75&#34;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="从csv文件读取数据">从CSV文件读取数据</h2>
+<p>如果要读取刚才创建的CSV文件，可以使用下面的代码，通过<code>csv</code>模块的<code>reader</code>函数可以创建出<code>csvreader</code>对象，该对象是一个迭代器，可以通过<code>next</code>函数或<code>for-in</code>循环读取到文件中的数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;scores.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">line_num</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>注意</strong>：上面的代码对<code>csvreader</code>对象做<code>for</code>循环时，每次会取出一个列表对象，该列表对象包含了一行中所有的字段。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1

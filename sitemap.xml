@@ -3,34 +3,48 @@
   
   <url>
     <loc>https://kongfany.github.io/categories/</loc>
-    <lastmod>2021-07-30T19:08:52+08:00</lastmod>
+    <lastmod>2021-07-31T21:17:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2021-07-30T19:08:52+08:00</lastmod>
+    <lastmod>2021-07-31T21:17:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/categories/python/</loc>
-    <lastmod>2021-07-30T19:08:52+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/post/python25%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F/</loc>
-    <lastmod>2021-07-30T19:08:52+08:00</lastmod>
+    <lastmod>2021-07-31T21:17:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/</loc>
+    <lastmod>2021-07-31T21:17:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/python27%E6%93%8D%E4%BD%9Cpdf%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2021-07-31T21:17:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excel%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2021-07-31T19:44:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/python25%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F/</loc>
     <lastmod>2021-07-30T19:08:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

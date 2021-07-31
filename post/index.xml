@@ -6,7 +6,25 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 30 Jul 2021 19:08:52 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 31 Jul 2021 21:17:33 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作PDF文件</title>
+      <link>https://kongfany.github.io/post/python27%E6%93%8D%E4%BD%9Cpdf%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Sat, 31 Jul 2021 21:17:33 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python27%E6%93%8D%E4%BD%9Cpdf%E6%96%87%E4%BB%B6/</guid>
+      <description>PDF是Portable Document Format的缩写，这类文件通常使用.pdf作为其扩展名。在日常开发工作中，最容易遇到的就是从PDF中读取文本内容</description>
+    </item>
+    
+    <item>
+      <title>读写Excel文件</title>
+      <link>https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excel%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Sat, 31 Jul 2021 19:44:34 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excel%E6%96%87%E4%BB%B6/</guid>
+      <description>Python操作Excel需要三方库的支持，如果要兼容Excel 2007以前的版本，也就是xls格式的Excel文件，可以使用三方库xlrd</description>
+    </item>
+    
     <item>
       <title>处理图像</title>
       <link>https://kongfany.github.io/post/python25%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F/</link>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>读写Excel文件 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="Python操作Excel需要三方库的支持，如果要兼容Excel 2007以前的版本，也就是xls格式的Excel文件，可以使用三方库xlrd" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excel%E6%96%87%E4%BB%B6/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="读写Excel文件" />
+<meta property="og:description" content="Python操作Excel需要三方库的支持，如果要兼容Excel 2007以前的版本，也就是xls格式的Excel文件，可以使用三方库xlrd" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excel%E6%96%87%E4%BB%B6/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-31T19:44:34&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-31T19:44:34&#43;08:00" />
+
+<meta itemprop="name" content="读写Excel文件">
+<meta itemprop="description" content="Python操作Excel需要三方库的支持，如果要兼容Excel 2007以前的版本，也就是xls格式的Excel文件，可以使用三方库xlrd"><meta itemprop="datePublished" content="2021-07-31T19:44:34&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-31T19:44:34&#43;08:00" />
+<meta itemprop="wordCount" content="3075">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="读写Excel文件"/>
+<meta name="twitter:description" content="Python操作Excel需要三方库的支持，如果要兼容Excel 2007以前的版本，也就是xls格式的Excel文件，可以使用三方库xlrd"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">读写Excel文件</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-31 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#使用xlwt和xlrd">使用xlwt和xlrd</a>
+      <ul>
+        <li><a href="#读excel文件">读Excel文件</a></li>
+        <li><a href="#写excel文件">写Excel文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#调整单元格样式">调整单元格样式</a></li>
+    <li><a href="#公式计算">公式计算</a></li>
+    <li><a href="#简单的总结">简单的总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Python操作Excel需要三方库的支持，如果要兼容Excel 2007以前的版本，也就是<code>xls</code>格式的Excel文件，可以使用三方库<code>xlrd</code>和<code>xlwt</code>，前者用于读Excel文件，后者用于写Excel文件。如果使用较新版本的Excel，即操作<code>xlsx</code>格式的Excel文件，也可以使用<code>openpyxl</code>库，当然这个库不仅仅可以操作Excel，还可以操作其他基于Office Open XML的电子表格文件。</p>
+<h1 id="使用xlwt和xlrd">使用xlwt和xlrd</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip install xlwt xlrd -i https://pypi.doubanio.com/simple
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="读excel文件">读Excel文件</h2>
+<p>例如在当前文件夹下有一个名为“阿里巴巴2017年股票数据.xlsx”的Excel文件，如果想读取并显示该文件的内容，可以通过如下所示的代码来完成。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">xlrd</span>
+
+<span class="c1"># 使用xlrd模块的open_workbook函数打开指定Excel文件并获得Book对象（工作簿）</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="s1">&#39;阿里巴巴2017年股票数据.xlsx&#39;</span><span class="p">)</span>
+<span class="c1"># 通过Book对象的sheet_names方法可以获取所有表单名称</span>
+<span class="n">sheetname</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># 通过指定的表单名称获取Sheet对象（工作表）</span>
+<span class="n">sheet</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">sheetname</span><span class="p">)</span>
+<span class="c1"># 通过Sheet对象的nrows和ncols属性获取表单的行数和列数</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">nrows</span><span class="p">,</span> <span class="n">sheet</span><span class="o">.</span><span class="n">ncols</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">nrows</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">ncols</span><span class="p">):</span>
+        <span class="c1"># 通过Sheet对象的cell方法获取指定Cell对象（单元格）</span>
+        <span class="c1"># 通过Cell对象的value属性获取单元格中的值</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="c1"># 对除首行外的其他行进行数据格式化处理</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># 第1列的xldate类型先转成元组再格式化为“年月日”的格式</span>
+            <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># xldate_as_tuple函数的第二个参数只有0和1两个取值</span>
+                <span class="c1"># 其中0代表以1900-01-01为基准的日期，1代表以1904-01-01为基准的日期</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">xldate_as_tuple</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;{value[0]}年{value[1]:&gt;02d}月{value[2]:&gt;02d}日&#39;</span>
+            <span class="c1"># 其他列的number类型处理成小数点后保留两位有效数字的浮点数</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;{value:.2f}&#39;</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">()</span>
+<span class="c1"># 获取最后一个单元格的数据类型</span>
+<span class="c1"># 0 - 空值，1 - 字符串，2 - 数字，3 - 日期，4 - 布尔，5 - 错误</span>
+<span class="n">last_cell_type</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="n">cell_type</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">nrows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sheet</span><span class="o">.</span><span class="n">ncols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">last_cell_type</span><span class="p">)</span>
+<span class="c1"># 获取第一行的值（列表）</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">row_values</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="c1"># 获取指定行指定列范围的数据（列表）</span>
+<span class="c1"># 第一个参数代表行索引，第二个和第三个参数代表列的开始（含）和结束（不含）索引</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">row_slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">252 7
+</span><span class="s2">Date	Open	High	Low	Close	Adj Close	Volume	
+</span><span class="s2">2017年01月03日	89.00	89.00	88.08	88.60	88.60	8789400.00	
+</span><span class="s2">...	
+</span><span class="s2">2017年12月29日	172.28	173.67	171.20	172.43	172.43	9704600.00	
+</span><span class="s2">2
+</span><span class="s2">[&#39;Date&#39;, &#39;Open&#39;, &#39;High&#39;, &#39;Low&#39;, &#39;Close&#39;, &#39;Adj Close&#39;, &#39;Volume&#39;]
+</span><span class="s2">[xldate:42740.0, number:91.910004, number:94.809998, number:91.639999, number:94.370003]
+</span><span class="s2">
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://blog.csdn.net/weixin_44073728/article/details/111054157">报错：</a></p>
+<p>相信通过上面的代码，大家已经了解到了如何读取一个Excel文件，如果想知道更多关于<code>xlrd</code>模块的知识，可以阅读它的<a href="https://xlrd.readthedocs.io/en/latest/">官方文档</a>。</p>
+<h2 id="写excel文件">写Excel文件</h2>
+<p>写入Excel文件可以通过<code>xlwt</code> 模块的<code>Workbook</code>类创建工作簿对象，通过工作簿对象的<code>add_sheet</code>方法可以添加工作表，通过工作表对象的<code>write</code>方法可以向指定单元格中写入数据，最后通过工作簿对象的<code>save</code>方法将工作簿写入到指定的文件或内存中。下面的代码实现了将5个学生3门课程的考试成绩写入Excel文件的操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">xlwt</span>
+
+<span class="n">student_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;关羽&#39;</span><span class="p">,</span> <span class="s1">&#39;张飞&#39;</span><span class="p">,</span> <span class="s1">&#39;赵云&#39;</span><span class="p">,</span> <span class="s1">&#39;马超&#39;</span><span class="p">,</span> <span class="s1">&#39;黄忠&#39;</span><span class="p">]</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="c1"># 创建工作簿对象（Workbook）</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Workbook</span><span class="p">()</span>
+<span class="c1"># 创建工作表对象（Worksheet）</span>
+<span class="n">sheet</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">add_sheet</span><span class="p">(</span><span class="s1">&#39;一年级二班&#39;</span><span class="p">)</span>
+<span class="c1"># 添加表头数据</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;姓名&#39;</span><span class="p">,</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span> <span class="s1">&#39;英语&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">titles</span><span class="p">):</span>
+    <span class="n">sheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+<span class="c1"># 将学生姓名和考试成绩写入单元格</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)):</span>
+    <span class="n">sheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">student_names</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="n">row</span><span class="p">])):</span>
+        <span class="n">sheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">scores</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">])</span>
+<span class="c1"># 保存Excel工作簿</span>
+<span class="n">wb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;考试成绩表.xlsx&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="调整单元格样式">调整单元格样式</h1>
+<p>在写Excel文件时，我们还可以为单元格设置样式，主要包括字体（Font）、对齐方式（Alignment）、边框（Border）和背景（Background）的设置，<code>xlwt</code>对这几项设置都封装了对应的类来支持。要设置单元格样式需要首先创建一个<code>XFStyle</code>对象，再通过该对象的属性对字体、对齐方式、边框等进行设定，例如在上面的例子中，如果希望将表头单元格的背景色修改为黄色，可以按照如下的方式进行操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">header_style</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">XFStyle</span><span class="p">()</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Pattern</span><span class="p">()</span>
+<span class="n">pattern</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Pattern</span><span class="o">.</span><span class="n">SOLID_PATTERN</span>
+<span class="c1"># 0 - 黑色、1 - 白色、2 - 红色、3 - 绿色、4 - 蓝色、5 - 黄色、6 - 粉色、7 - 青色</span>
+<span class="n">pattern</span><span class="o">.</span><span class="n">pattern_fore_colour</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">header_style</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="n">pattern</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;姓名&#39;</span><span class="p">,</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span> <span class="s1">&#39;英语&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">titles</span><span class="p">):</span>
+    <span class="n">sheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">header_style</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果希望为表头设置指定的字体，可以使用<code>Font</code>类并添加如下所示的代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">font</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Font</span><span class="p">()</span>
+<span class="c1"># 字体名称</span>
+<span class="n">font</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;华文楷体&#39;</span>
+<span class="c1"># 字体大小（20是基准单位，18表示18px）</span>
+<span class="n">font</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">18</span>
+<span class="c1"># 是否使用粗体</span>
+<span class="n">font</span><span class="o">.</span><span class="n">bold</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># 是否使用斜体</span>
+<span class="n">font</span><span class="o">.</span><span class="n">italic</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="c1"># 字体颜色</span>
+<span class="n">font</span><span class="o">.</span><span class="n">colour_index</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">header_style</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="n">font</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果希望表头垂直居中对齐，可以使用下面的代码进行设置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">align</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Alignment</span><span class="p">()</span>
+<span class="c1"># 垂直方向的对齐方式</span>
+<span class="n">align</span><span class="o">.</span><span class="n">vert</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Alignment</span><span class="o">.</span><span class="n">VERT_CENTER</span>
+<span class="c1"># 水平方向的对齐方式</span>
+<span class="n">align</span><span class="o">.</span><span class="n">horz</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Alignment</span><span class="o">.</span><span class="n">HORZ_CENTER</span>
+<span class="n">header_style</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">align</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果希望给表头加上黄色的虚线边框，可以使用下面的代码来设置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">borders</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Borders</span><span class="p">()</span>
+<span class="n">props</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;top_colour&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;right_colour&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom_colour&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;left_colour&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># 通过循环对四个方向的边框样式及颜色进行设定</span>
+<span class="k">for</span> <span class="n">position</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">props</span><span class="p">:</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">borders</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Borders</span><span class="o">.</span><span class="n">DASHED</span><span class="p">)</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">borders</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">header_style</span><span class="o">.</span><span class="n">borders</span> <span class="o">=</span> <span class="n">borders</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果要调整单元格的宽度（列宽）和表头的高度（行高），可以按照下面的代码进行操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 设置行高为40px</span>
+<span class="n">sheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">xlwt</span><span class="o">.</span><span class="n">easyxf</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;font:height {20 * 40}&#39;</span><span class="p">))</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;姓名&#39;</span><span class="p">,</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span> <span class="s1">&#39;英语&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">titles</span><span class="p">):</span>
+    <span class="c1"># 设置列宽为200px</span>
+    <span class="n">sheet</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">200</span>
+    <span class="c1"># 设置单元格的数据和样式</span>
+    <span class="n">sheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">header_style</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="公式计算">公式计算</h1>
+<p>对于前面打开的“阿里巴巴2017年股票数据.xlsx”文件，如果要统计全年收盘价（Close字段）的平均值以及全年交易量（Volume字段）的总和，可以使用Excel的公式计算即可。我们可以先使用<code>xlrd</code>读取Excel文件夹，然后通过一个名为<code>xlutils</code>的三方库提供的<code>copy</code>函数将读取到的Excel文件转成<code>Workbook</code>对象进行写操作，在调用<code>write</code>方法时，可以将一个<code>Formula</code>对象写入单元格。</p>
+<p>安装<code>xlutils</code>三方库。</p>
+<p>实现公式计算的代码如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">xlrd</span>
+<span class="kn">import</span> <span class="nn">xlwt</span>
+<span class="kn">from</span> <span class="nn">xlutils.copy</span> <span class="kn">import</span> <span class="n">copy</span>
+
+<span class="n">wb_for_read</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="s1">&#39;阿里巴巴2017年股票数据.xlsx&#39;</span><span class="p">)</span>
+<span class="n">sheet1</span> <span class="o">=</span> <span class="n">wb_for_read</span><span class="o">.</span><span class="n">sheet_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="n">sheet1</span><span class="o">.</span><span class="n">nrows</span><span class="p">,</span> <span class="n">sheet1</span><span class="o">.</span><span class="n">ncols</span>
+<span class="n">wb_for_write</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">wb_for_read</span><span class="p">)</span>
+<span class="n">sheet2</span> <span class="o">=</span> <span class="n">wb_for_write</span><span class="o">.</span><span class="n">get_sheet</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sheet2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Formula</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;average(E2:E{nrows})&#39;</span><span class="p">))</span>
+<span class="n">sheet2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Formula</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;sum(G2:G{nrows})&#39;</span><span class="p">))</span>
+<span class="n">wb_for_write</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;阿里巴巴2017年股票数据-2.xlsx&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="简单的总结">简单的总结</h1>
+<p>其他操作Excel文件的三方库（如<code>openpyxl</code>）大家有兴趣可以自行了解。掌握了Python程序操作Excel的方法，可以解决日常办公中很多繁琐的处理Excel电子表格工作，最常见就是将多个数据格式相同的Excel文件合并到一个文件以及从多个Excel文件或表单中提取指定的数据。当然，如果要对表格数据进行处理，使用Python数据分析神器之一的<code>pandas</code>库可能更为方便，因为<code>pandas</code>库封装的函数以及<code>DataFrame</code>类可以完成大多数数据处理的任务。</p>
+<blockquote>
+<p>本章例子中使用的Excel文件，大家可以从我的百度云盘链接中进行下载，地址：<a href="https://pan.baidu.com/s/1rQujl5RQn9R7PadB2Z5g_g">https://pan.baidu.com/s/1rQujl5RQn9R7PadB2Z5g_g</a>，提取码：e7b4。</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-31
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/python27%E6%93%8D%E4%BD%9Cpdf%E6%96%87%E4%BB%B6/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">操作PDF文件</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/python25%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F/">
+            <span class="next-text nav-default">处理图像</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
