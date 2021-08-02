@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>解析HTML页面 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="在上一课中我们讲到了使用Python获取网络资源，如果我们获取到一个或多个页面，需要从页面中提取出指定的信息，首先得掌握解析HTML页面的技" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python29%E8%A7%A3%E6%9E%90html%E9%A1%B5%E9%9D%A2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="解析HTML页面" />
+<meta property="og:description" content="在上一课中我们讲到了使用Python获取网络资源，如果我们获取到一个或多个页面，需要从页面中提取出指定的信息，首先得掌握解析HTML页面的技" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python29%E8%A7%A3%E6%9E%90html%E9%A1%B5%E9%9D%A2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-02T16:42:20&#43;08:00" />
+<meta property="article:modified_time" content="2021-08-02T16:42:20&#43;08:00" />
+
+<meta itemprop="name" content="解析HTML页面">
+<meta itemprop="description" content="在上一课中我们讲到了使用Python获取网络资源，如果我们获取到一个或多个页面，需要从页面中提取出指定的信息，首先得掌握解析HTML页面的技"><meta itemprop="datePublished" content="2021-08-02T16:42:20&#43;08:00" />
+<meta itemprop="dateModified" content="2021-08-02T16:42:20&#43;08:00" />
+<meta itemprop="wordCount" content="2341">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="解析HTML页面"/>
+<meta name="twitter:description" content="在上一课中我们讲到了使用Python获取网络资源，如果我们获取到一个或多个页面，需要从页面中提取出指定的信息，首先得掌握解析HTML页面的技"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">解析HTML页面</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-02 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#html页面的结构">HTML页面的结构</a></li>
+    <li><a href="#xpath解析">XPath解析</a></li>
+    <li><a href="#css选择器解析">CSS选择器解析</a></li>
+    <li><a href="#简单的总结">简单的总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在上一课中我们讲到了使用Python获取网络资源，如果我们获取到一个或多个页面，需要从页面中提取出指定的信息，首先得掌握解析HTML页面的技术。上一课中我们把整个HTML页面当成一个字符串，使用正则表达式的捕获组提取出了需要的内容。但是，写出一个正确的正则表达式经常也是一件让人头疼的事情。为此，我们可以先了解HTML页面的结构，在此基础上就可以掌握其他的解析HTML页面的方法。</p>
+<h1 id="html页面的结构">HTML页面的结构</h1>
+<p>我们在浏览器中打开任意一个网站，然后通过鼠标右键菜单，选择“显示网页源代码”菜单项，就可以看到网页对应的HTML代码。</p>
+<p>代码的第1行是文档类型声明，第2行的<code>&lt;html&gt;</code>标签是整个页面根标签的开始标签，最后一行是根标签的结束标签<code>&lt;/html&gt;</code>。<code>&lt;html&gt;</code>标签下面有两个子标签<code>&lt;head&gt;</code>和<code>&lt;body&gt;</code>，放在<code>&lt;body&gt;</code>标签下的内容会显示在浏览器窗口中，这部分内容是网页的主体；放在<code>&lt;head&gt;</code>标签下的内容不会显示在浏览器窗口中，但是却包含了页面重要的元信息，通常称之为网页的头部。HTML页面大致的代码结构如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- 页面的元信息，如字符编码、标题、关键字、媒体查询等 --&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- 页面的主体，显示在浏览器窗口中的内容 --&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>标签、层叠样式表（CSS）、JavaScript是构成HTML页面的三要素，其中标签用来承载页面要显示的内容，CSS负责对页面的渲染，而JavaScript用来控制页面的交互式行为。对HTML页面的解析可以使用一种名为XPath的语法，根据HTML标签的层次结构提取标签中的内容或标签属性；除此之外，也可以使用CSS选择器来定位页面元素，如果不清楚什么是CSS选择器，可以移步到我的<a href="https://github.com/jackfrued/Python-100-Days/blob/master/Day21-30/21-30.Web%E5%89%8D%E7%AB%AF%E6%A6%82%E8%BF%B0.md">《Web前端概述》</a>一文进行了解。</p>
+<h1 id="xpath解析">XPath解析</h1>
+<p>XPath是在XML（eXtensible Markup Language）文档中查找信息的一种语法，XML跟HTML类似也是一种用标签承载数据的标签语言，不同之处在于XML的标签是可扩展的，可以自定义的，而且XML对语法有更严格的要求。XPath使用路径表达式来选取XML文档中的节点或者节点集，这里所说的节点包括元素、属性、文本、命名空间、处理指令、注释、根节点等。下面我们通过一个例子来说明如何使用XPath对页面进行解析。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span class="nt">&lt;bookstore&gt;</span>
+    <span class="nt">&lt;book&gt;</span>
+      <span class="nt">&lt;title</span> <span class="na">lang=</span><span class="s">&#34;eng&#34;</span><span class="nt">&gt;</span>Harry Potter<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;price&gt;</span>29.99<span class="nt">&lt;/price&gt;</span>
+    <span class="nt">&lt;/book&gt;</span>
+    <span class="nt">&lt;book&gt;</span>
+      <span class="nt">&lt;title</span> <span class="na">lang=</span><span class="s">&#34;eng&#34;</span><span class="nt">&gt;</span>Learning XML<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;price&gt;</span>39.95<span class="nt">&lt;/price&gt;</span>
+    <span class="nt">&lt;/book&gt;</span>
+<span class="nt">&lt;/bookstore&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对于上面的XML文件，我们可以用如下所示的XPath语法获取文档中的节点。</p>
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/bookstore</td>
+<td>选取根元素 bookstore。<strong>注意</strong>：假如路径起始于正斜杠( / )，则此路径始终代表到某元素的绝对路径！</td>
+</tr>
+<tr>
+<td>//book</td>
+<td>选取所有 book 子元素，而不管它们在文档中的位置。</td>
+</tr>
+<tr>
+<td>//@lang</td>
+<td>选取名为 lang 的所有属性。</td>
+</tr>
+<tr>
+<td>/bookstore/book[1]</td>
+<td>选取属于 bookstore 子元素的第一个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()]</td>
+<td>选取属于 bookstore 子元素的最后一个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()-1]</td>
+<td>选取属于 bookstore 子元素的倒数第二个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[position()&lt;3]</td>
+<td>选取最前面的两个属于 bookstore 元素的子元素的 book 元素。</td>
+</tr>
+<tr>
+<td>//title[@lang]</td>
+<td>选取所有拥有名为 lang 的属性的 title 元素。</td>
+</tr>
+<tr>
+<td>//title[@lang=&lsquo;eng&rsquo;]</td>
+<td>选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性。</td>
+</tr>
+<tr>
+<td>/bookstore/book[price&gt;35.00]</td>
+<td>选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+<tr>
+<td>/bookstore/book[price&gt;35.00]/title</td>
+<td>选取 bookstore 元素中的 book 元素的所有 title 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+</tbody>
+</table>
+<p>XPath还支持通配符用法，如下所示。</p>
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/bookstore/*</td>
+<td>选取 bookstore 元素的所有子元素。</td>
+</tr>
+<tr>
+<td>//*</td>
+<td>选取文档中的所有元素。</td>
+</tr>
+<tr>
+<td>//title[@*]</td>
+<td>选取所有带有属性的 title 元素。</td>
+</tr>
+</tbody>
+</table>
+<p>如果要选取多个节点，可以使用如下所示的方法。</p>
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>//book/title | //book/price</td>
+<td>选取 book 元素的所有 title 和 price 元素。</td>
+</tr>
+<tr>
+<td>//title | //price</td>
+<td>选取文档中的所有 title 和 price 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book/title | //price</td>
+<td>选取属于 bookstore 元素的 book 元素的所有 title 元素，以及文档中所有的 price 元素。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>说明</strong>：上面的例子来自于“菜鸟教程”网站上的<a href="https://www.runoob.com/xpath/xpath-tutorial.html">XPath教程</a>，有兴趣的读者可以自行阅读原文。</p>
+</blockquote>
+<p>当然，如果不理解或不熟悉XPath语法，可以在浏览器的开发者工具中按照如下所示的方法查看元素的XPath语法，下图是在Chrome浏览器的开发者工具中查看豆瓣网电影详情信息中影片标题的XPath语法。</p>
+<p><img src="/images/202107/45.png" alt=""></p>
+<p>//*[@id=&ldquo;content&rdquo;]/h1/span[1]</p>
+<p>实现XPath解析需要三方库<code>lxml</code> 的支持，可以使用下面的命令安装<code>lxml</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip install lxml
+</code></pre></td></tr></table>
+</div>
+</div><p>下面我们用XPath解析方式改写之前获取豆瓣电影Top250的代码，如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;https://movie.douban.com/top250?start={(page - 1) * 25}&#39;</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;BaiduSpider&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="c1"># 通过XPath语法从页面中提取需要的数据</span>
+    <span class="n">spans</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&#34;content&#34;]/div/div[1]/ol/li/div/div[2]/div[1]/a/span[1]&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">span</span> <span class="ow">in</span> <span class="n">spans</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="css选择器解析">CSS选择器解析</h1>
+<p>对于熟悉CSS选择器和JavaScript的开发者来说，通过CSS选择器获取页面元素可能是更为简单的选择，因为浏览器中运行的JavaScript本身就可以<code>document</code>对象的<code>querySelector()</code>和<code>querySelectorAll()</code>方法基于CSS选择器获取页面元素。在Python中，我们可以利用三方库<code>bs4</code>（BeautifulSoup）或<code>pyquery</code>来做同样的事情。BeautifulSoup可以用来解析HTML和XML文档，修复含有未闭合标签等错误的文档，通过为待解析的页面在内存中创建一棵树结构，实现对从页面中提取数据操作的封装。可以用下面的命令来安装BeautifulSoup。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip install beautifulsoup4
+</code></pre></td></tr></table>
+</div>
+</div><p>下面是使用<code>bs4</code>改写的获取豆瓣电影Top250电影名称的代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">bs4</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;https://movie.douban.com/top250?start={(page - 1) * 25}&#39;</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;BaiduSpider&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">bs4</span><span class="o">.</span><span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+    <span class="c1"># 通过CSS选择器从页面中提取需要的数据</span>
+    <span class="n">spans</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;div.info &gt; div.hd &gt; a &gt; span:nth-child(1)&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">span</span> <span class="ow">in</span> <span class="n">spans</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>关于BeautifulSoup更多的知识，可以参考它的<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/">官方网站</a>。</p>
+<h1 id="简单的总结">简单的总结</h1>
+<p>下面我们对三种解析方式做一个简单比较。</p>
+<table>
+<thead>
+<tr>
+<th>解析方式</th>
+<th>对应的模块</th>
+<th>速度</th>
+<th>使用难度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正则表达式解析</td>
+<td><code>re</code></td>
+<td>快</td>
+<td>困难</td>
+</tr>
+<tr>
+<td>XPath解析</td>
+<td><code>lxml</code></td>
+<td>快</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>CSS选择器解析</td>
+<td><code>bs4</code>或<code>pyquery</code></td>
+<td>不确定</td>
+<td>简单</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-08-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python28%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE/">
+            <span class="next-text nav-default">获取网络数据</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
