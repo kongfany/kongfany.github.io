@@ -6,7 +6,16 @@
     <description>Recent content in Python on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 31 Jul 2021 21:17:33 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Aug 2021 15:48:54 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>获取网络数据</title>
+      <link>https://kongfany.github.io/post/python28%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Mon, 02 Aug 2021 15:48:54 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python28%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE/</guid>
+      <description>对于Python语言来说，一个较为擅长的领域就是网络数据采集，实现网络数据采集的程序通常称之为网络爬虫或蜘蛛程序。即便是在大数据时代，数据对</description>
+    </item>
+    
     <item>
       <title>操作PDF文件</title>
       <link>https://kongfany.github.io/post/python27%E6%93%8D%E4%BD%9Cpdf%E6%96%87%E4%BB%B6/</link>

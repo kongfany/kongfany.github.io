@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>获取网络数据 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="对于Python语言来说，一个较为擅长的领域就是网络数据采集，实现网络数据采集的程序通常称之为网络爬虫或蜘蛛程序。即便是在大数据时代，数据对" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/python28%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="获取网络数据" />
+<meta property="og:description" content="对于Python语言来说，一个较为擅长的领域就是网络数据采集，实现网络数据采集的程序通常称之为网络爬虫或蜘蛛程序。即便是在大数据时代，数据对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/python28%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-02T15:48:54&#43;08:00" />
+<meta property="article:modified_time" content="2021-08-02T15:48:54&#43;08:00" />
+
+<meta itemprop="name" content="获取网络数据">
+<meta itemprop="description" content="对于Python语言来说，一个较为擅长的领域就是网络数据采集，实现网络数据采集的程序通常称之为网络爬虫或蜘蛛程序。即便是在大数据时代，数据对"><meta itemprop="datePublished" content="2021-08-02T15:48:54&#43;08:00" />
+<meta itemprop="dateModified" content="2021-08-02T15:48:54&#43;08:00" />
+<meta itemprop="wordCount" content="2535">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="获取网络数据"/>
+<meta name="twitter:description" content="对于Python语言来说，一个较为擅长的领域就是网络数据采集，实现网络数据采集的程序通常称之为网络爬虫或蜘蛛程序。即便是在大数据时代，数据对"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">获取网络数据</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-02 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#http和requests库">HTTP和requests库</a></li>
+    <li><a href="#访问网络数据接口">访问网络数据接口</a></li>
+    <li><a href="#开发爬虫蜘蛛程序">开发爬虫/蜘蛛程序</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>对于Python语言来说，一个较为擅长的领域就是网络数据采集，实现网络数据采集的程序通常称之为网络爬虫或蜘蛛程序。即便是在大数据时代，数据对于中小企业来说仍然是硬伤和短板，有些数据需要通过开放或付费的数据接口来获得，其他的行业数据则必须要通过网络数据采集的方式来获得。不管使用哪种方式获取网络数据资源，Python语言都是非常好的选择，因为Python的标准库和三方库都对获取网络数据提供了良好的支持。</p>
+<h1 id="http和requests库">HTTP和requests库</h1>
+<p>要使用Python获取网络数据，我们可以先安装一个名为<code>requests</code> 的三方库，这个库我们在第24课中已经使用过了。按照官方网站的解释，<code>requests</code>是基于Python标准库进行了封装，简化了通过<a href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP</a>访问网络资源的操作。说到HTTP相信大家不会陌生，通常我们打开浏览器浏览网页时，我们就是使用了HTTP或<a href="https://zhuanlan.zhihu.com/p/100591696">HTTPS</a>。HTTP是一个请求响应式的协议，当我们在浏览器中输入正确的<a href="https://developer.mozilla.org/zh-CN/docs/Learn/Common_questions/What_is_a_URL">URL</a>（通常也称为网址）并按下回车（Enter），我们就向网络上的<a href="https://developer.mozilla.org/zh-CN/docs/Learn/Common_questions/What_is_a_web_server">Web服务器</a>发送了一个HTTP请求，服务器在收到请求后会给我们一个HTTP响应，服务器给浏览器的数据就包含在这个响应中。我们可以使用浏览器提供的“开发者工具”或是“抓包工具”（如：Fiddler、Charles等）来了解HTTP请求和响应到底是什么样子的，如下图所示。</p>
+<p>安装<code>requests</code>库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip install requests -i https://pypi.doubanio.com/simple/
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202107/40.png" alt=""></p>
+<p>通过<code>requests</code>库，我们可以让程序向浏览器一样向Web服务器发起请求，并接收到服务器返回的响应，从响应中我们就可以提取出我们想要的数据。下面通过两个例子来演示如何获取网页代码和网络资源（如：图片），浏览器呈现给我们的网页是用<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML">HTML</a>编写的，浏览器相当于是HTML的解释器环境，我们看到的网页中的内容都包含在HTML的标签中。在获取到HTML代码后，就可以从标签的属性或标签体中提取我们需要的内容。</p>
+<p>获取搜狐网首页。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># requests的get函数会返回一个Response对象</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.sohu.com/&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="c1"># 通过Response对象的text属性获取服务器返回的文本内容</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202107/42.png" alt=""></p>
+<p>获取百度Logo并保存到名为<code>baidu.png</code>的本地文件中。首先在百度的首页上，右键点击百度Logo，并通过“复制图片地址”菜单获取图片的URL。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;baidu.png&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="c1"># 通过Response对象的content属性获取服务器返回的二进制内容</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202107/43.png" alt=""></p>
+<blockquote>
+<p><strong>说明</strong>：关于<code>requests</code>库的详细使用方法，大家可以参考<a href="https://requests.readthedocs.io/zh_CN/latest/">官方文档</a>的内容。</p>
+</blockquote>
+<h1 id="访问网络数据接口">访问网络数据接口</h1>
+<p>国内外的很多网站都提供了开放数据接口，在开发商业项目时，如果有些事情我们自己无法解决，就可以借助这些开放的数据接口来处理。例如要根据用户或企业上传的资料进行实名认证或企业认证，我们就可以调用第三方提供的开放接口来识别用户或企业信息的真伪；例如要获取某个城市的天气信息，我们不可能直接从气象卫星拿到数据然后自己进行运算，只能通过第三方提供的数据接口来得到对应的天气信息。通常，提供有商业价值的数据的接口都是需要支付费用后才能访问的，在访问接口时还需要提供身份标识，便于服务器判断用户是不是付费用户以及进行费用扣除等相关操作。当然，还有些接口是可以免费使用的，但是必须先提供个人或者公司的信息才能访问，例如：<a href="https://opendata.sz.gov.cn/data/api/toApi">深圳市政府数据开放平台</a>、<a href="https://open.qingting.fm/">蜻蜓FM开放平台</a>等。如果查找自己需要的数据接口，可以访问<a href="https://www.juhe.cn/">聚合数据</a>这类型的网站。</p>
+<p>目前，我们访问的网络数据接口大多会返回JSON格式的数据，我们在讲解序列化和反序列的时候，提到过JSON格式的字符串跟Python中的字典如何进行转换，并以<a href="https://www.tianapi.com/">天行数据</a>为例讲解过网络数据接口访问的相关知识，这里我们就不再进行赘述了。</p>
+<h1 id="开发爬虫蜘蛛程序">开发爬虫/蜘蛛程序</h1>
+<p>有的时候，我们需要的数据并不能通过开放数据接口来获得，但是可能在某些网页上能够获取到，这个时候就需要我们开发爬虫程序通过爬取页面来获得需要的内容。我们可以按照上面提供的方法，使用<code>requests</code>先获取到网页的HTML代码，我们可以将整个代码看成一个长字符串，这样我们就可以使用正则表达式的捕获组从字符串提取我们需要的内容。下面我们通过代码演示如何从<a href="https://movie.douban.com/">豆瓣电影</a>获取排前250名的电影的名称。豆瓣电影Top250页面的结构和对应的代码如下图所示。</p>
+<p><img src="/images/202107/41.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="c1"># 请求https://movie.douban.com/top250时，start参数代表了从哪一部电影开始</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;https://movie.douban.com/top250?start={(page - 1) * 25}&#39;</span><span class="p">,</span>
+        <span class="c1"># 如果不设置HTTP请求头中的User-Agent，豆瓣会检测出爬虫程序而阻止我们的请求</span>
+        <span class="c1"># User-Agent可以设置为浏览器的标识（可以在浏览器的开发者工具查看HTTP请求头找到）</span>
+        <span class="c1"># 由于豆瓣网允许百度爬虫获取它的数据，因此直接将我们的爬虫伪装成百度的爬虫</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;自行修改&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="c1"># 创建正则表达式对象，通过捕获组捕获span标签中的电影标题</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\&lt;span class=&#34;title&#34;\&gt;([^&amp;]*?)\&lt;\/span\&gt;&#39;</span><span class="p">)</span>
+    <span class="c1"># 通过正则表达式获取class属性为title且标签内容不以&amp;符号开头的span标签</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="c1"># 循环变量列表中所有的电影标题</span>
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="c1"># 随机休眠1-3秒，避免获取页面过于频繁</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202107/44.png" alt=""></p>
+<p>编写爬虫程序比较重要的一点就是让爬虫程序隐匿自己的身份，因为一般的网站都比较反感爬虫。隐匿身份除了像上面的代码中修改<code>User-Agent</code>之外，还可以使用<strong>商业IP代理</strong>（如：<a href="http://www.moguproxy.com/">蘑菇代理</a>、<a href="http://www.zhimaruanjian.com/">芝麻代理</a>等），让被爬取的网站无法得知爬虫程序的真实IP地址，也就无法通过IP地址对爬虫程序进行封禁。当然，爬虫本身也是一个处于灰色地带的东西，没有谁说它是违法的，但也没有谁说它是合法的，本着<strong>法不禁止即为许可</strong>的精神，我们可以根据自己工作的需要去编写爬虫程序，但是如果被爬取的网站能够<strong>举证你的爬虫程序有破坏动产的行为</strong>，那么在打官司的时候，基本上是要败诉的，这一点需要注意。</p>
+<p>另外，用编写正则表达式的方式从网页中提取内容虽然可行，但是写出一个能够满足需求的正则表达式本身也不是件容易的事情，这一点对于新手来说尤为明显。在下一节课中，我们将会为大家介绍另外两种从页面中提取数据的方法，虽然从性能上来讲，它们可能不如正则表达式，但是却降低了编码的复杂性，相信大家会喜欢上它们的。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-08-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python27%E6%93%8D%E4%BD%9Cpdf%E6%96%87%E4%BB%B6/">
+            <span class="next-text nav-default">操作PDF文件</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
