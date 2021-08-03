@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 03 Aug 2021 16:03:16 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Aug 2021 16:35:38 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>网络编程入门和网络应用开发</title>
+      <link>https://kongfany.github.io/post/python30%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Tue, 03 Aug 2021 16:35:38 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/python30%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/</guid>
+      <description>网络编程入门 计算机网络基础 计算机网络是独立自主的计算机互联而成的系统的总称，组建计算机网络最主要的目的是实现多台计算机之间的通信和资源共享。</description>
+    </item>
+    
     <item>
       <title>Linux常用操作</title>
       <link>https://kongfany.github.io/post/linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</link>
