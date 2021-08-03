@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 02 Aug 2021 16:42:20 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Aug 2021 16:03:16 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux常用操作</title>
+      <link>https://kongfany.github.io/post/linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Tue, 03 Aug 2021 16:03:16 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</guid>
+      <description>目录操作 ls：查看目录下文件和目录,蓝色字代表目录，白色代表文件 cd xx：进入目录xx cd .. :向上一级目录 cd - :回退到上一次目录 cd ~ :回到当前用</description>
+    </item>
+    
     <item>
       <title>解析HTML页面</title>
       <link>https://kongfany.github.io/post/python29%E8%A7%A3%E6%9E%90html%E9%A1%B5%E9%9D%A2/</link>
@@ -35,12 +44,12 @@
     </item>
     
     <item>
-      <title>读写Excel文件</title>
-      <link>https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excel%E6%96%87%E4%BB%B6/</link>
+      <title>读写ExcelWord文件</title>
+      <link>https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excelword%E6%96%87%E4%BB%B6/</link>
       <pubDate>Sat, 31 Jul 2021 19:44:34 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excel%E6%96%87%E4%BB%B6/</guid>
-      <description>Python操作Excel需要三方库的支持，如果要兼容Excel 2007以前的版本，也就是xls格式的Excel文件，可以使用三方库xlrd</description>
+      <guid>https://kongfany.github.io/post/python26%E8%AF%BB%E5%86%99excelword%E6%96%87%E4%BB%B6/</guid>
+      <description>Excel Python操作Excel需要三方库的支持，如果要兼容Excel 2007以前的版本，也就是xls格式的Excel文件，可以使用三方库xlr</description>
     </item>
     
     <item>

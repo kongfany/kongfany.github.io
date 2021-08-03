@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 大胖狗来了</title>
+    <link>https://kongfany.github.io/tags/linux/</link>
+    <description>Recent content in Linux on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 03 Aug 2021 16:03:16 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux常用操作</title>
+      <link>https://kongfany.github.io/post/linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Tue, 03 Aug 2021 16:03:16 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</guid>
+      <description>目录操作 ls：查看目录下文件和目录,蓝色字代表目录，白色代表文件 cd xx：进入目录xx cd .. :向上一级目录 cd - :回退到上一次目录 cd ~ :回到当前用</description>
+    </item>
+    
+  </channel>
+</rss>
