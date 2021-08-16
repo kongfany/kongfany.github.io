@@ -3,27 +3,41 @@
   
   <url>
     <loc>https://kongfany.github.io/categories/</loc>
-    <lastmod>2021-08-04T14:42:06+08:00</lastmod>
+    <lastmod>2021-08-08T09:56:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2021-08-04T14:42:06+08:00</lastmod>
+    <lastmod>2021-08-08T09:56:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/categories/python/</loc>
-    <lastmod>2021-08-04T14:42:06+08:00</lastmod>
+    <loc>https://kongfany.github.io/categories/spring-boot/</loc>
+    <lastmod>2021-08-08T09:56:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/springboot%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2021-08-08T09:56:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/</loc>
+    <lastmod>2021-08-08T09:56:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/categories/python/</loc>
     <lastmod>2021-08-04T14:42:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -128,22 +142,8 @@
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/categories/spring-boot/</loc>
-    <lastmod>2021-07-28T16:46:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://kongfany.github.io/post/springboot01/</loc>
     <lastmod>2021-07-28T16:46:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/post/springboot%E9%A1%B9%E7%9B%AE/</loc>
-    <lastmod>2021-07-28T16:00:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

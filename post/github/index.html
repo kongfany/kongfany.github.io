@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Github">
 <meta itemprop="description" content="Github使用教程 专栏讲解 界面介绍 仓库管理 Git下载安装 下载提交代码 Git进阶 提交文件夹 Git 1.下载安装 下载安装好之后。打开GitBash查"><meta itemprop="datePublished" content="2021-06-16T21:06:47&#43;08:00" />
 <meta itemprop="dateModified" content="2021-06-16T21:06:47&#43;08:00" />
-<meta itemprop="wordCount" content="5542">
+<meta itemprop="wordCount" content="5592">
 <meta itemprop="keywords" content="Git,Github," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Github"/>
 <meta name="twitter:description" content="Github使用教程 专栏讲解 界面介绍 仓库管理 Git下载安装 下载提交代码 Git进阶 提交文件夹 Git 1.下载安装 下载安装好之后。打开GitBash查"/>
@@ -649,6 +649,10 @@ git reset --soft 版本号 (回退到之前的版本，但保留当前工作区�
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-text" data-lang="text">git init   // 初始化版本库
@@ -658,6 +662,10 @@ git add .   // 添加文件到版本库（只是添加到缓存区），.代表�
 git commit -m &#34;first commit&#34; // 把添加的文件提交到版本库，并填写提交备注
 
 git remote add origin 你的远程库地址  // 把本地库与远程库关联
+
+git branch -M main	//修改master为main
+
+git pull –rebase origin main	//合并远程创建的README.
 
 git push -u origin main    // 第一次推送时
 
