@@ -3,14 +3,56 @@
   
   <url>
     <loc>https://kongfany.github.io/categories/</loc>
-    <lastmod>2021-08-08T09:56:30+08:00</lastmod>
+    <lastmod>2021-08-17T13:59:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2021-08-08T09:56:30+08:00</lastmod>
+    <lastmod>2021-08-17T13:59:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/categories/python/</loc>
+    <lastmod>2021-08-17T13:59:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/pythonmooc/</loc>
+    <lastmod>2021-08-17T13:59:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/</loc>
+    <lastmod>2021-08-17T13:59:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/machine-learning/</loc>
+    <lastmod>2021-08-17T13:22:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/machine-learning/</loc>
+    <lastmod>2021-08-17T13:22:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/</loc>
+    <lastmod>2021-08-17T13:22:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -25,20 +67,6 @@
   <url>
     <loc>https://kongfany.github.io/post/springboot%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2021-08-08T09:56:30+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/</loc>
-    <lastmod>2021-08-08T09:56:30+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/categories/python/</loc>
-    <lastmod>2021-08-04T14:42:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -66,13 +94,6 @@
   
   <url>
     <loc>https://kongfany.github.io/post/linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2021-08-03T16:03:16+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/tags/</loc>
     <lastmod>2021-08-03T16:03:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
