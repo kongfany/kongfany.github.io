@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python慕课嵩天">
 <meta itemprop="description" content="视频 作业 基本数据类型 数值运算函数： abs(x):绝对值函数 divmod(x,y):商余（x//y,x%y）。divmod(10,3)=(3,"><meta itemprop="datePublished" content="2021-08-17T13:59:06&#43;08:00" />
 <meta itemprop="dateModified" content="2021-08-17T13:59:06&#43;08:00" />
-<meta itemprop="wordCount" content="2944">
+<meta itemprop="wordCount" content="4358">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python慕课嵩天"/>
 <meta name="twitter:description" content="视频 作业 基本数据类型 数值运算函数： abs(x):绝对值函数 divmod(x,y):商余（x//y,x%y）。divmod(10,3)=(3,"/>
@@ -146,6 +146,8 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#基本数据类型">基本数据类型</a></li>
+    <li><a href="#程序的控制结构">程序的控制结构</a></li>
+    <li><a href="#函数和代码复现">函数和代码复现</a></li>
   </ul>
 </nav>
   </div>
@@ -313,7 +315,137 @@
 <span class="c1"># IDLE开发环境并不会刷新，应该使用命令行等类型的工具打开</span>
 </code></pre></td></tr></table>
 </div>
+</div><h1 id="程序的控制结构">程序的控制结构</h1>
+<p>f分支结构：</p>
+<ul>
+<li>单分支结构：if &hellip;:</li>
+<li>二分支结构：if &hellip;: else:/紧凑形式：&lt;表达式1&gt; if &lt;条件&gt; else &lt;表达式2&gt; 注：只是表达式而不是语句</li>
+<li>多分支结构：if&hellip;: elif&hellip; : else:</li>
+</ul>
+<p>异常处理：</p>
+<ul>
+<li>try:&lt;&hellip;&gt; except:&lt;&hellip;&gt;</li>
+<li>try:&lt;&hellip;&gt; expect&lt;异常类型&gt;：&lt;&hellip;&gt;</li>
+<li>try:&lt;&gt; except:&lt;&gt; else:&lt;&gt; finally:&lt;&gt;（finally对应语句块一定会执行，else对应语句块在不发生异常时执行）</li>
+</ul>
+<blockquote>
+<p>height,weight=eval(input(&ldquo;请输入身高（米）和体重(公斤)[逗号隔开]：&quot;))</p>
+</blockquote>
+<p>遍历循环：</p>
+<ul>
+<li>for in:</li>
+<li>for i in range(N):0~n-1,range(1,6):12345,range(1,6,2):135</li>
+<li>字符串遍历循环：for c in s:</li>
+<li>列表遍历循环：for item in ls:</li>
+<li>文件遍历循环：for line in fi:</li>
+</ul>
+<p>无限循环：</p>
+<ul>
+<li>while&lt;&hellip;&gt;:</li>
+</ul>
+<p>循环控制保留字：</p>
+<ul>
+<li>break:跳出并结束当前整个循环，执行循环后的语句</li>
+<li>continue：结束当次循环，继续执行后续次数循环</li>
+</ul>
+<p>循环的扩展：</p>
+<ul>
+<li>for &lt;&hellip;&gt; in &lt;&hellip;&gt; : &lt;&hellip;&gt; else : &lt;&hellip;&gt;</li>
+<li>while &lt;&hellip;&gt; : &lt;&hellip;&gt; else:&lt;&hellip;&gt;</li>
+<li>当循环没有被break语句退出时，执行else语句块（正常完成循环时执行）</li>
+</ul>
+<p>random库</p>
+<ul>
+<li>基本随机数函数：seed(),random()
+<ul>
+<li>seed(a=None):初始化给定的随机数种子，默认为当前系统时间。random.seed(10)#产生种子10对应的随机数</li>
+<li>random():生成[0.0,1.0)之间的随机小数。random.random() #0.5714025936877234</li>
+<li>种子？如果编程中给出了随机种子，只要种子相同产生的随机数（先设定种子再调用random）也是相同的，对于使用随机数的程序可以再现或者复现程序运行的过程。如果不使用随机数种子，那么它使用的是当前系统时间，精确到微秒的，这个时间是很难再现的，所有后面产生的程序运行的结果就是完全随机（直接使用random）的，是我们认为不可再现的。如果我么需要再现随机过程，就设定种子，如果只是用随机数，不关心程序别人复现的结果，就不设定种子。</li>
+</ul>
+</li>
+<li>扩展随机数函数：randint(), getrandbits(), uniform(), randrange(), choice(), shuffle()
+<ul>
+<li>randint(a,b):生成一个[a,b]之间的整数</li>
+<li>randrange(m,n[,k]):生成一个[m,n)之间步长为k的随机整数</li>
+<li>getrandbits(k):生成一个k比特长的随机整数。random.getrandbits(16):37885</li>
+<li>uniform(a,b):生成一个[a,b]之间的随机小数。（小数点后16位）</li>
+<li>choice(seq):从序列seq中随机选择一个元素。random.choice([1,2,3,4,5,6,7,8,9])</li>
+<li>shuffle(seq):将序列中的元素随机排列，返回打乱后的序列。random.shuffle([1,2,3,4,5])</li>
+</ul>
+</li>
+</ul>
+<p>圆周率的计算：</p>
+<ul>
+<li>
+<p>公式法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pai</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">100</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">pai</span><span class="o">+=</span><span class="mi">1</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="p">(</span> \
+    <span class="mi">4</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span><span class="o">-</span> \
+    <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;圆周率值是：{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pai</span><span class="p">))</span>
+</code></pre></td></tr></table>
 </div>
+</div></li>
+</ul>
+<blockquote>
+<p>小技巧：一行代码特别长，可以用\进行换行</p>
+</blockquote>
+<ul>
+<li>
+<p>蒙特卡罗方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">perf_counter</span>
+<span class="n">DARTS</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">hits</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">start</span><span class="o">=</span><span class="n">perf_counter</span><span class="p">()</span><span class="c1">#计时时间</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Darts</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span><span class="c1">#模拟撒点</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">random</span><span class="p">(),</span><span class="n">random</span><span class="p">()</span>
+    <span class="n">dist</span><span class="o">=</span><span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="c1">#通过随机坐标到原点的距离判断是否在圆内</span>
+    <span class="k">if</span> <span class="n">dist</span><span class="o">&lt;=</span><span class="mf">1.0</span><span class="p">:</span>
+        <span class="n">hits</span><span class="o">=</span><span class="n">hits</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">pai</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">hits</span><span class="o">/</span><span class="n">DARTS</span><span class="p">)</span>
+<span class="c1">#圆内点的数量比上总数就是π/4</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;圆周率值是：{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pai</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;运行时间是：{:.5f}s&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">perf_counter</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="函数和代码复现">函数和代码复现</h1>
+
     </div>
 
     <div class="post-copyright">
