@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Python慕课嵩天">
 <meta itemprop="description" content="视频 作业 基本数据类型 数值运算函数： abs(x):绝对值函数 divmod(x,y):商余（x//y,x%y）。divmod(10,3)=(3,"><meta itemprop="datePublished" content="2021-08-17T13:59:06&#43;08:00" />
 <meta itemprop="dateModified" content="2021-08-17T13:59:06&#43;08:00" />
-<meta itemprop="wordCount" content="4358">
+<meta itemprop="wordCount" content="5553">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python慕课嵩天"/>
 <meta name="twitter:description" content="视频 作业 基本数据类型 数值运算函数： abs(x):绝对值函数 divmod(x,y):商余（x//y,x%y）。divmod(10,3)=(3,"/>
@@ -445,7 +445,266 @@
 </div></li>
 </ul>
 <h1 id="函数和代码复现">函数和代码复现</h1>
-
+<p>定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="o">&lt;</span><span class="err">函数名</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="err">参数（</span><span class="mi">0</span><span class="err">个或多个）</span><span class="o">&gt;</span><span class="p">):</span>
+	<span class="o">&lt;</span><span class="err">函数体</span><span class="o">&gt;</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="err">返回值</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>可选参数传递：函数在定义时可以为某些参数指定默认值，构成可选参数。但是可选参数必须放在非可选参数之后。</p>
+</li>
+<li>
+<p>可变参数传递：函数定义是可以设计可变数量参数，即不确定参数总数量。def&lt;函数名&gt;(&lt;参数&gt;,*b):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="o">*</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">s</span><span class="o">*=</span><span class="n">i</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">*=</span><span class="n">item</span>
+    <span class="k">return</span> <span class="n">s</span>
+<span class="n">fact</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="c1">#10886400</span>
+<span class="n">fact</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span><span class="c1">#435456000</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>函数传递的两种方式：</p>
+<ul>
+<li>函数调用时，参数可以按照位置或名称方式传递</li>
+</ul>
+<p>函数返回值：</p>
+<ul>
+<li>函数可以返回0个或多个结果</li>
+<li>return保留字用来传递返回值</li>
+<li>函数可以有返回值，也可以没有，可以有return，也可以没有</li>
+<li>return可以传递0个返回值，也可以传递多个返回值。return s,m,n返回结果为（1,2,3）元组类型</li>
+</ul>
+<p>局部变量和全局变量</p>
+<ul>
+<li>
+<p>局部变量：函数内部变量及参数都是</p>
+</li>
+<li>
+<p>局部变量是函数内部的占位符，与全局可能重名但不同</p>
+</li>
+<li>
+<p>函数运算结束后，局部变量被释放</p>
+</li>
+<li>
+<p>可以使用global保留字在函数内部使用全局变量</p>
+</li>
+<li>
+<p>局部变量为组合数据类型且未创建，等同于全局变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ls</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;F&#34;</span><span class="p">,</span><span class="s2">&#34;f&#34;</span><span class="p">]</span><span class="c1">#通过[]真实创建了一个全局变量列表s</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="c1">#ls=[]</span>
+    <span class="c1">#若函数内部创建了ls列表则为局部变量</span>
+    <span class="n">ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+	<span class="c1">#此处ls是列表类型，未真实创建，则等同于全局变量</span>
+    <span class="k">return</span>
+<span class="n">func</span><span class="p">(</span><span class="s2">&#34;c&#34;</span><span class="p">)</span><span class="c1">#全局变量ls被修改</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span><span class="c1">#[&#34;F&#34;,&#34;f&#34;,&#34;s&#34;]</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>lambda函数：&lt;函数名&gt; = lambda&lt;参数&gt;:&lt;表达式&gt;</p>
+<ul>
+<li>返回函数名作为结果</li>
+<li>是一种匿名函数，即没有名字的函数</li>
+<li>使用lambda保留字定义，函数名是返回结果</li>
+<li>用于定义简单的，能够在一行内表示的函数</li>
+<li>f=lambda x,y:x+y -&gt;f(10,15)=25</li>
+<li>谨慎使用，主要用作一些特定函数或方法的参数</li>
+</ul>
+<p>七段数码管绘制：。。。</p>
+<p>代码复用：</p>
+<ul>
+<li>函数和对象是代码复用的两种主要方式</li>
+<li>函数：将代码命名在代码层面建立了初步抽象</li>
+<li>对象：属性和方法，在函数之上再次组织抽象</li>
+</ul>
+<p>汉诺塔：</p>
+<p>三个柱子abc，初始在柱子a通过柱子b到达柱子c</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+<span class="c1">#n个圆盘需要移动，源柱子，目标柱子，中间柱子</span>
+<span class="k">def</span> <span class="nf">hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">dst</span><span class="p">,</span><span class="n">mid</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">count</span><span class="c1">#全局变量，计数移动次数</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;{}:{}-&gt;{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">dst</span><span class="p">))</span>
+        <span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">dst</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;{}:{}-&gt;{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">dst</span><span class="p">))</span>
+        <span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">dst</span><span class="p">,</span><span class="n">src</span><span class="p">)</span>
+<span class="n">hanoi</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="s2">&#34;C&#34;</span><span class="p">,</span><span class="s2">&#34;B&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>PyInstaller:</p>
+<ul>
+<li>
+<p>将.py源代码转换成无需源代码的可执行文件。</p>
+</li>
+<li>
+<p>第三方库,需安装。<a href="http://www.pyinstaller.org">官网</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install pyinstaller
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在源代码所在目录下通过window命令行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">pyinstaller -F &lt;文件名.py&gt;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>常用参数</p>
+<ul>
+<li>
+<p>-h：查看帮助</p>
+</li>
+<li>
+<p>.- - clean:清理打包过程中的临时文件</p>
+</li>
+<li>
+<p>-D,- - onedir:默认值，生成dist文件夹</p>
+</li>
+<li>
+<p>-F，- - onefile:在dist文件夹中只生成独立的打包文件</p>
+</li>
+<li>
+<p>-i &lt;图标文件名.ico&gt;:指定打包程序使用的图标(icon)文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">pyinstaller -i &lt;图标文件名.ico&gt; -F &lt;文件名.py&gt;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<p>科赫雪花：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">turtle</span>
+<span class="k">def</span> <span class="nf">koch</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">fd</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">angle</span> <span class="ow">in</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span><span class="mi">60</span><span class="p">]:</span>
+            <span class="n">turtle</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+            <span class="n">koch</span><span class="p">(</span><span class="n">size</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">600</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">penup</span><span class="p">()</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">pendown</span><span class="p">()</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">level</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">koch</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="n">level</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+    <span class="n">koch</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="n">level</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+    <span class="n">koch</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="n">level</span><span class="p">)</span>
+    
+    <span class="n">turtle</span><span class="o">.</span><span class="n">hideturte</span><span class="p">()</span>
+<span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
