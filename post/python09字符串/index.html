@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python09%E5%AD%97%E7%AC%A6%E4%B8%B2/" />
@@ -43,13 +43,13 @@
 <meta property="og:description" content="字符串的定义 所谓字符串，就是由零个或多个字符组成的有限序列。 在Python程序中，如果我们把单个或多个字符用单引号或者双引号包围起来，就可以" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python09%E5%AD%97%E7%AC%A6%E4%B8%B2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-08T21:35:20&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-08T21:35:20&#43;08:00" />
+<meta property="article:published_time" content="2021-07-08T21:35:20+08:00" />
+<meta property="article:modified_time" content="2021-07-08T21:35:20+08:00" />
 
 <meta itemprop="name" content="字符串">
-<meta itemprop="description" content="字符串的定义 所谓字符串，就是由零个或多个字符组成的有限序列。 在Python程序中，如果我们把单个或多个字符用单引号或者双引号包围起来，就可以"><meta itemprop="datePublished" content="2021-07-08T21:35:20&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-08T21:35:20&#43;08:00" />
-<meta itemprop="wordCount" content="5158">
+<meta itemprop="description" content="字符串的定义 所谓字符串，就是由零个或多个字符组成的有限序列。 在Python程序中，如果我们把单个或多个字符用单引号或者双引号包围起来，就可以"><meta itemprop="datePublished" content="2021-07-08T21:35:20+08:00" />
+<meta itemprop="dateModified" content="2021-07-08T21:35:20+08:00" />
+<meta itemprop="wordCount" content="5154">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="字符串"/>
 <meta name="twitter:description" content="字符串的定义 所谓字符串，就是由零个或多个字符组成的有限序列。 在Python程序中，如果我们把单个或多个字符用单引号或者双引号包围起来，就可以"/>
@@ -174,7 +174,7 @@
 <p>在Python程序中，如果我们把单个或多个字符用单引号或者双引号包围起来，就可以表示一个字符串。字符串中的字符可以是特殊符号、英文字母、中文字符、日文的平假名或片假名、希腊字母、<a href="http://www.ruanyifeng.com/blog/2017/04/emoji.html">Emoji字符</a>等。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -192,15 +192,15 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="s2">&#34;你好，世界！&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
 <span class="c1"># 以三个双引号或单引号开头的字符串可以折行</span>
 <span class="n">s3</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;		#s3包括两个换行符加上两行hello,world!
 </span><span class="s1">hello, 
 </span><span class="s1">world!
 </span><span class="s1">&#39;&#39;&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">hello, world! 你好，世界！
 </span><span class="s2">
@@ -217,7 +217,7 @@
 <p>可以在字符串中使用<code>\</code>（反斜杠）来表示转义，也就是说<code>\</code>后面的字符不再是它原来的意义，例如：<code>\n</code>不是代表反斜杠和字符<code>n</code>，而是表示换行；<code>\t</code>也不是代表反斜杠和字符<code>t</code>，而是表示制表符。所以如果字符串本身又包含了<code>'</code>、<code>&quot;</code>、<code>\</code>这些特殊的字符，必须要通过<code>\</code>进行转义处理。例如要输出一个带单引号或反斜杠的字符串，需要用如下所示的方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -228,10 +228,10 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">hello, world!</span><span class="se">\&#39;</span><span class="s1">&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">hello, world!</span><span class="se">\&#39;</span><span class="s1">&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">hello, world!</span><span class="se">\\</span><span class="s1">&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
 
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">&#39;hello, world!&#39;
@@ -242,7 +242,7 @@
 </div><p>Python中的字符串可以<code>r</code>或<code>R</code>开头，这种字符串被称为原始字符串，意思是字符串中的每个字符都是它本来的含义，没有所谓的转义字符。例如，在字符串<code>'hello\n'</code>中，<code>\n</code>表示换行；而在<code>r'hello\n'</code>中，<code>\n</code>不再表示换行，就是反斜杠和字符<code>n</code>。大家可以运行下面的代码，看看会输出什么。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -256,12 +256,12 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 字符串s1中\t是制表符，\n是换行符</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 字符串s1中\t是制表符，\n是换行符</span>
 <span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">ime up </span><span class="se">\n</span><span class="s1">ow&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
 <span class="c1"># 字符串s2中没有转义字符，每个字符都是原始含义</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\time up \now&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
 
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">	ime up 
@@ -273,7 +273,7 @@
 </div><p>python中还允许在<code>\</code>后面还可以跟一个八进制或者十六进制数来表示字符，例如<code>\141</code>和<code>\x61</code>都代表小写字母<code>a</code>，前者是八进制的表示法，后者是十六进制的表示法。另外一种表示字符的方式是在<code>\u</code>后面跟Unicode<a href="http://www.jsons.cn/unicode/">字符编码</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -282,9 +282,9 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\141\142\143\x61\x62\x63</span><span class="s1">&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\141\142\143\x61\x62\x63</span><span class="s1">&#39;</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u5b54\u51e1\u8dc3</span><span class="s1">&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
 
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">abcabc 孔凡跃
@@ -297,7 +297,7 @@
 <p>下面的例子演示了使用<code>+</code>和<code>*</code>运算符来实现字符串的拼接和重复操作。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -307,14 +307,14 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s1">&#39;world&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>    <span class="c1"># hello world</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s1">&#39;world&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>    <span class="c1"># hello world</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;!&#39;</span> <span class="o">*</span> <span class="mi">3</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>    <span class="c1"># !!!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>    <span class="c1"># !!!</span>
 <span class="n">s1</span> <span class="o">+=</span> <span class="n">s2</span>     <span class="c1"># s1 = s1 + s2</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>    <span class="c1"># hello world!!!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>    <span class="c1"># hello world!!!</span>
 <span class="n">s1</span> <span class="o">*=</span> <span class="mi">2</span>      <span class="c1"># s1 = s1 * 2</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>    <span class="c1"># hello world!!!hello world!!!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>    <span class="c1"># hello world!!!hello world!!!</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="比较运算">比较运算</h2>
@@ -322,7 +322,7 @@
 <p>如果不清楚两个字符对应的编码到底是多少，可以使用<code>ord</code>函数来获得，例如<code>ord('A')</code>的值是<code>65</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -332,20 +332,20 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;a whole new world&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;a whole new world&#39;</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span><span class="p">)</span>      <span class="c1"># False True</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span> <span class="o">==</span> <span class="s1">&#39;hello world&#39;</span><span class="p">)</span>    <span class="c1"># True</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span> <span class="o">==</span> <span class="s1">&#39;Hello world&#39;</span><span class="p">)</span>    <span class="c1"># False</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span> <span class="o">!=</span> <span class="s1">&#39;Hello world&#39;</span><span class="p">)</span>    <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span><span class="p">)</span>      <span class="c1"># False True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span> <span class="o">==</span> <span class="s1">&#39;hello world&#39;</span><span class="p">)</span>    <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span> <span class="o">==</span> <span class="s1">&#39;Hello world&#39;</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span> <span class="o">!=</span> <span class="s1">&#39;Hello world&#39;</span><span class="p">)</span>    <span class="c1"># True</span>
 <span class="n">s3</span> <span class="o">=</span> <span class="s1">&#39;孔凡跃&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;孔&#39;</span><span class="p">),</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;凡&#39;</span><span class="p">),</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;跃&#39;</span><span class="p">))</span>  <span class="c1"># 23380 20961 36291</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;孔&#39;</span><span class="p">),</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;凡&#39;</span><span class="p">),</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;跃&#39;</span><span class="p">))</span>  <span class="c1"># 23380 20961 36291</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>需要强调一下的是，字符串的比较运算比较的是字符串的<code>内容</code>，Python中还有一个<code>is</code>运算符（身份运算符），如果用<code>is</code>来比较两个字符串，它比较的是两个变量对应的字符串是否在内存中相同的位置（内存地址），简单的说就是两个变量是否对应内存中的<code>同一个</code>字符串。看看下面的代码就比较清楚<code>is</code>运算符的作用了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -354,43 +354,43 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>
 <span class="n">s3</span> <span class="o">=</span> <span class="n">s2</span>
 <span class="c1"># 比较字符串的内容</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s2</span> <span class="o">==</span> <span class="n">s3</span><span class="p">)</span>    <span class="c1"># True True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s2</span> <span class="o">==</span> <span class="n">s3</span><span class="p">)</span>    <span class="c1"># True True</span>
 <span class="c1"># 比较字符串的内存地址</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span> <span class="ow">is</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s2</span> <span class="ow">is</span> <span class="n">s3</span><span class="p">)</span>    <span class="c1"># False True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span> <span class="ow">is</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s2</span> <span class="ow">is</span> <span class="n">s3</span><span class="p">)</span>    <span class="c1"># False True</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="成员运算">成员运算</h2>
 <p>Python中可以用<code>in</code>和<code>not in</code>判断一个字符串中是否存在另外一个字符或字符串，<code>in</code>和<code>not in</code>运算通常称为成员运算，会产生布尔值<code>True</code>或<code>False</code>，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;wo&#39;</span> <span class="ow">in</span> <span class="n">s1</span><span class="p">)</span>    <span class="c1"># True</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;wo&#39;</span> <span class="ow">in</span> <span class="n">s1</span><span class="p">)</span>    <span class="c1"># True</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;goodbye&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span> <span class="ow">in</span> <span class="n">s1</span><span class="p">)</span>      <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span> <span class="ow">in</span> <span class="n">s1</span><span class="p">)</span>      <span class="c1"># False</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="获取字符串长度">获取字符串长度</h2>
 <p>获取字符串长度没有直接的运算符，而是使用内置函数<code>len</code>，我们在上节课的提到过这个内置函数，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>                  <span class="c1"># 12</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s1">&#39;goodbye, world&#39;</span><span class="p">))</span>    <span class="c1"># 14</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>                  <span class="c1"># 12</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s1">&#39;goodbye, world&#39;</span><span class="p">))</span>    <span class="c1"># 14</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="索引和切片">索引和切片</h2>
@@ -401,7 +401,7 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -417,20 +417,20 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;abc123456&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;abc123456&#39;</span>
 <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
 <span class="c1"># 获取第一个字符</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="n">N</span><span class="p">])</span>    <span class="c1"># a a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="n">N</span><span class="p">])</span>    <span class="c1"># a a</span>
 
 <span class="c1"># 获取最后一个字符</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 6 6</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 6 6</span>
 
 <span class="c1"># 获取索引为2或-7的字符</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">])</span>    <span class="c1"># c c</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">])</span>    <span class="c1"># c c</span>
 
 <span class="c1"># 获取索引为5和-4的字符</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>    <span class="c1"># 3 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>    <span class="c1"># 3 3</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>如果要从字符串中取出多个字符，我们可以对字符串进行切片，运算符是<code>[i:j:k]</code>，其中<code>i</code>是开始索引，索引对应的字符<code>可以取到</code>；<code>j</code>是结束索引，索引对应的字符<code>不能取到</code>；<code>k</code>是步长，默认值为<code>1</code>，表示从前向后获取相邻字符的连续切片，所以<code>:k</code>部分可以省略。</p>
@@ -438,7 +438,7 @@
 <p>记住第一个字符的索引是<code>0</code>或<code>-N</code>，最后一个字符的索引是<code>N-1</code>或<code>-1</code>就行了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -489,55 +489,55 @@
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;abc123456&#39;</span>		<span class="c1"># len=9</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;abc123456&#39;</span>		<span class="c1"># len=9</span>
 
 <span class="c1"># i=2, j=5, k=1的正向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>       <span class="c1"># c12</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>       <span class="c1"># c12</span>
 
 <span class="c1"># i=-7, j=-4, k=1的正向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>     <span class="c1"># c12</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>     <span class="c1"># c12</span>
 
 <span class="c1"># i=2, j=9, k=1的正向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>        <span class="c1"># c123456</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>        <span class="c1"># c123456</span>
 
 <span class="c1"># i=-7, j=9, k=1的正向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:])</span>       <span class="c1"># c123456</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:])</span>       <span class="c1"># c123456</span>
 
 <span class="c1"># i=2, j=9, k=2的正向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>      <span class="c1"># c246</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>      <span class="c1"># c246</span>
 
 <span class="c1"># i=-7, j=9, k=2的正向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>     <span class="c1"># c246</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>     <span class="c1"># c246</span>
 
 <span class="c1"># i=0, j=9, k=2的正向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>       <span class="c1"># ac246</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>       <span class="c1"># ac246</span>
 
 <span class="c1"># i=1, j=-1, k=2的正向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="err">👎</span><span class="mi">2</span><span class="p">])</span>    <span class="c1"># b135</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="err">👎</span><span class="mi">2</span><span class="p">])</span>    <span class="c1"># b135</span>
 
 <span class="c1"># i=7, j=1, k=-1的负向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># 54321c</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># 54321c</span>
 
 <span class="c1"># i=-2, j=-8, k=-1的负向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 54321c</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 54321c</span>
 
 <span class="c1"># i=7, j=-10, k=-1的负向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>     <span class="c1"># 54321cba</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>     <span class="c1"># 54321cba</span>
 
 <span class="c1"># i=-1, j=1, k=-1的负向切片操作</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>     <span class="c1"># 654321c</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>     <span class="c1"># 654321c</span>
 
 <span class="c1"># i=0, j=9, k=1的正向切片</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[:])</span>         <span class="c1"># abc123456</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[:])</span>         <span class="c1"># abc123456</span>
 
 <span class="c1"># i=0, j=9, k=2的正向切片</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>       <span class="c1"># ac246</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>       <span class="c1"># ac246</span>
 
 <span class="c1"># i=-1, j=-10, k=-1的负向切片</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>      <span class="c1"># 654321cba</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>      <span class="c1"># 654321cba</span>
 
 <span class="c1"># i=-1, j=-10, k=-2的负向切片</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>      <span class="c1"># 642ca</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>      <span class="c1"># 642ca</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="循环遍历">循环遍历</h2>
@@ -545,33 +545,33 @@
 <p>方式一：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
 <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)):</span>	<span class="c1"># 类似于数组下标</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>方式二：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
 <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s1</span><span class="p">:</span>	<span class="c1"># 直接取</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="大小写">大小写</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -585,25 +585,25 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
 
 <span class="c1"># 使用capitalize方法获得字符串 首字母 大写后的字符串</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>   <span class="c1"># Hello, world!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>   <span class="c1"># Hello, world!</span>
 <span class="c1"># 使用title方法获得字符串 每个单词 首字母大写后的字符串</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>        <span class="c1"># Hello, World!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>        <span class="c1"># Hello, World!</span>
 <span class="c1"># 使用upper方法获得字符串大写后的字符串</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>        <span class="c1"># HELLO, WORLD!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>        <span class="c1"># HELLO, WORLD!</span>
 
 <span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;GOODBYE&#39;</span>
 <span class="c1"># 使用lower方法获得字符串小写后的字符串</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>        <span class="c1"># goodbye</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>        <span class="c1"># goodbye</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="查找">查找</h2>
 <p>如果想在一个字符串中从前向后查找有没有另外一个字符串，可以使用字符串的<code>find</code>或<code>index</code>方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -618,25 +618,25 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
 
 <span class="c1"># find方法从字符串中查找另一个字符串所在的位置</span>
 <span class="c1"># 找到了返回字符串中另一个字符串首字符的索引</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;or&#39;</span><span class="p">))</span>        <span class="c1"># 8</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;or&#39;</span><span class="p">))</span>        <span class="c1"># 8</span>
 <span class="c1"># 找不到返回-1</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;hh&#39;</span><span class="p">))</span>      <span class="c1"># -1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;hh&#39;</span><span class="p">))</span>      <span class="c1"># -1</span>
 
 <span class="c1"># index方法与find方法类似</span>
 <span class="c1"># 找到了返回字符串中另一个字符串首字符的索引</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;or&#39;</span><span class="p">))</span>       <span class="c1"># 8</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;or&#39;</span><span class="p">))</span>       <span class="c1"># 8</span>
 <span class="c1"># 找不到引发异常</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;hh&#39;</span><span class="p">))</span>     <span class="c1"># ValueError: substring not found</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;hh&#39;</span><span class="p">))</span>     <span class="c1"># ValueError: substring not found</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>在使用<code>find</code>和<code>index</code>方法时还可以通过方法的参数来指定查找的范围，也就是查找不必从索引为<code>0</code>的位置开始。<code>find</code>和<code>index</code>方法还有逆向查找（从后向前查找）的版本，分别是<code>rfind</code>和<code>rindex</code>，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -646,21 +646,21 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello good world!&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello good world!&#39;</span>
 
 <span class="c1"># 从前向后查找字符o出现的位置(相当于第一次出现)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">))</span>       <span class="c1"># 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">))</span>       <span class="c1"># 4</span>
 <span class="c1"># 从索引为5的位置开始查找字符o出现的位置</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>    <span class="c1"># 7</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>    <span class="c1"># 7</span>
 <span class="c1"># 从后向前查找字符o出现的位置(相当于最后一次出现)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">))</span>      <span class="c1"># 12</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">))</span>      <span class="c1"># 12</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="性质判断">性质判断</h2>
 <p>可以通过字符串的<code>startswith</code>、<code>endswith</code>来判断字符串是否以某个字符串开头和结尾；还可以用<code>is开头</code>的方法判断字符串的特征，这些方法都返回布尔值，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -678,29 +678,29 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
 
 <span class="c1"># startwith方法检查字符串是否以指定的字符串开头返回布尔值</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;He&#39;</span><span class="p">))</span>    <span class="c1"># False</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;hel&#39;</span><span class="p">))</span>   <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;He&#39;</span><span class="p">))</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;hel&#39;</span><span class="p">))</span>   <span class="c1"># True</span>
 <span class="c1"># endswith方法检查字符串是否以指定的字符串结尾返回布尔值</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">))</span>       <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">))</span>       <span class="c1"># True</span>
 
 <span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;abc123456&#39;</span>
 
 <span class="c1"># isdigit方法检查字符串是否由数字构成返回布尔值</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>    <span class="c1"># False</span>
 <span class="c1"># isalpha方法检查字符串是否以字母构成返回布尔值</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>    <span class="c1"># False</span>
 <span class="c1"># isalnum方法检查字符串是否以数字和字母构成返回布尔值</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>    <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>    <span class="c1"># True</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="格式化字符串">格式化字符串</h2>
 <p>在Python中，字符串类型可以通过<code>center</code>、<code>ljust</code>、<code>rjust</code>方法做居中、左对齐和右对齐的处理。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -710,53 +710,53 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
 
 <span class="c1"># center方法以宽度20将字符串居中并在两侧填充*</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">))</span>  <span class="c1"># ****hello, world****</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">))</span>  <span class="c1"># ****hello, world****</span>
 <span class="c1"># rjust方法以宽度20将字符串右对齐并在左侧填充空格</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>        <span class="c1">#         hello, world</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>        <span class="c1">#         hello, world</span>
 <span class="c1"># ljust方法以宽度20将字符串左对齐并在右侧填充~</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;~&#39;</span><span class="p">))</span>   <span class="c1"># hello, world~~~~~~~~</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;~&#39;</span><span class="p">))</span>   <span class="c1"># hello, world~~~~~~~~</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>我们之前讲过，在用<code>print</code>函数输出字符串时，可以用下面的方式对字符串进行格式化。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">321</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">321</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">123</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> * </span><span class="si">%d</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> * </span><span class="si">%d</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>当然，我们也可以用字符串的方法来完成字符串的格式，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">321</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">321</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">123</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;{0} * {1} = {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> * </span><span class="si">{1}</span><span class="s1"> = </span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>从Python 3.6开始，格式化字符串还有更为简洁的书写方式，就是在字符串前加上<code>f</code>来格式化字符串，在这种以<code>f</code>打头的字符串中，<code>{变量名}</code>是一个占位符，会被变量对应的值将其替换掉，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">321</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">321</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">123</span>
-<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{a} * {b} = {a * b}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> * </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>如果需要进一步控制格式化语法中变量值的形式，可以参照下面的表格来进行字符串格式化操作。<code>print({a:.2f})</code></p>
@@ -842,7 +842,7 @@
 <p>字符串的<code>strip</code>方法可以帮我们获得将原字符串修剪掉左右两端空格之后的字符串。这个方法非常有实用价值，通常用来将用户输入中因为不小心键入的头尾空格去掉，<code>strip</code>方法还有<code>lstrip</code>和<code>rstrip</code>两个版本</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -855,11 +855,11 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;   1939667131@qq.com  </span><span class="se">\t\r\n</span><span class="s1">&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;   1939667131@qq.com  </span><span class="se">\t\r\n</span><span class="s1">&#39;</span>
 <span class="c1"># strip方法获得字符串修剪左右两侧空格之后的字符串</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>    
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">1939667131@qq.com
 </span><span class="s2">1939667131@qq.com  	
@@ -871,7 +871,7 @@
 </div><h1 id="字符串常用操作">字符串常用操作</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -915,39 +915,39 @@
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pyperclip</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pyperclip</span>
 
 <span class="c1"># 转义字符</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;My brother</span><span class="se">\&#39;</span><span class="s1">s name is </span><span class="se">\&#39;</span><span class="s1">007</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;My brother</span><span class="se">\&#39;</span><span class="s1">s name is </span><span class="se">\&#39;</span><span class="s1">007</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="c1"># My brother&#39;s name is &#39;007&#39;</span>
 <span class="c1"># 原始字符串</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;My brother</span><span class="se">\&#39;</span><span class="s1">s name is </span><span class="se">\&#39;</span><span class="s1">007</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;My brother</span><span class="se">\&#39;</span><span class="s1">s name is </span><span class="se">\&#39;</span><span class="s1">007</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="c1"># My brother\&#39;s name is \&#39;007\&#39;</span>
 
 <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;hello123world&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;he&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;her&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;he&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;her&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">)</span>
 <span class="c1"># 字符串是否只包含字母</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
 <span class="c1"># 字符串是否只包含字母和数字</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>
 <span class="c1"># 字符串是否只包含数字</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">())</span>
 
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span><span class="c1">#hello</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">())</span><span class="c1">#123</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span><span class="c1">#hello</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">())</span><span class="c1">#123</span>
 
 <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;床前明月光&#39;</span><span class="p">,</span> <span class="s1">&#39;疑是地上霜&#39;</span><span class="p">,</span> <span class="s1">&#39;举头望明月&#39;</span><span class="p">,</span> <span class="s1">&#39;低头思故乡&#39;</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">))</span>
 <span class="c1"># 床前明月光-疑是地上霜-举头望明月-低头思故乡</span>
 <span class="n">sentence</span> <span class="o">=</span> <span class="s1">&#39;You go your way I will go mine&#39;</span>
 <span class="n">words_list</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">words_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words_list</span><span class="p">)</span>
 <span class="c1"># [&#39;You&#39;, &#39;go&#39;, &#39;your&#39;, &#39;way&#39;, &#39;I&#39;, &#39;will&#39;, &#39;go&#39;, &#39;mine&#39;]</span>
 <span class="n">email</span> <span class="o">=</span> <span class="s1">&#39;     jackfrued@126.com          &#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span>
 <span class="c1">#      jackfrued@126.com          </span>
 <span class="c1"># jackfrued@126.com</span>
 <span class="c1"># jackfrued@126.com</span>
@@ -962,7 +962,7 @@
 </div><h1 id="实现字符串倒转的方法">实现字符串倒转的方法</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1031,7 +1031,7 @@
 </span><span class="lnt">67
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
 
 <span class="k">def</span> <span class="nf">reverse_str1</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
@@ -1087,16 +1087,16 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;I love Python&#39;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">reverse_str1</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">reverse_str2</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">reverse_str3</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">reverse_str4</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">reverse_str5</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reverse_str1</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reverse_str2</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reverse_str3</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reverse_str4</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reverse_str5</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>

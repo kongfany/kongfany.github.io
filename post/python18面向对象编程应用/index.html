@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python18%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="奥特曼打小怪兽 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python18%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-19T16:28:18&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-19T16:28:18&#43;08:00" />
+<meta property="article:published_time" content="2021-07-19T16:28:18+08:00" />
+<meta property="article:modified_time" content="2021-07-19T16:28:18+08:00" />
 
 <meta itemprop="name" content="面向对象编程应用">
-<meta itemprop="description" content="奥特曼打小怪兽 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63"><meta itemprop="datePublished" content="2021-07-19T16:28:18&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-19T16:28:18&#43;08:00" />
+<meta itemprop="description" content="奥特曼打小怪兽 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63"><meta itemprop="datePublished" content="2021-07-19T16:28:18+08:00" />
+<meta itemprop="dateModified" content="2021-07-19T16:28:18+08:00" />
 <meta itemprop="wordCount" content="7114">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="面向对象编程应用"/>
@@ -156,7 +156,7 @@
       <h1 id="奥特曼打小怪兽">奥特曼打小怪兽</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -343,7 +343,7 @@
 </span><span class="lnt">185
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span><span class="p">,</span> <span class="n">randrange</span>
 
 
@@ -370,7 +370,7 @@
     <span class="k">def</span> <span class="nf">hp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hp</span>
         
-    <span class="nd">@hp.setter</span>
+    <span class="nd">@hp</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">hp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hp</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_hp</span> <span class="o">=</span> <span class="n">hp</span> <span class="k">if</span> <span class="n">hp</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
@@ -417,10 +417,10 @@
             <span class="n">injury</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">hp</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">//</span> <span class="mi">4</span>
             <span class="n">injury</span> <span class="o">=</span> <span class="n">injury</span> <span class="k">if</span> <span class="n">injury</span> <span class="o">&gt;=</span> <span class="mi">50</span> <span class="k">else</span> <span class="mi">50</span>
             <span class="n">other</span><span class="o">.</span><span class="n">hp</span> <span class="o">-=</span> <span class="n">injury</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">attack</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">magic_attack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">others</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;魔法攻击
@@ -434,9 +434,9 @@
             <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">others</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">temp</span><span class="o">.</span><span class="n">alive</span><span class="p">:</span>
                     <span class="n">temp</span><span class="o">.</span><span class="n">hp</span> <span class="o">-=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">resume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;恢复魔法值&#34;&#34;&#34;</span>
@@ -467,14 +467,14 @@
     <span class="s2">&#34;&#34;&#34;判断有没有小怪兽是活着的&#34;&#34;&#34;</span>
     <span class="k">for</span> <span class="n">monster</span> <span class="ow">in</span> <span class="n">monsters</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">monster</span><span class="o">.</span><span class="n">alive</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
 
 
 <span class="k">def</span> <span class="nf">select_alive_one</span><span class="p">(</span><span class="n">monsters</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;选中一只活着的小怪兽&#34;&#34;&#34;</span>
     <span class="n">monsters_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">monsters</span><span class="p">)</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">index</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">monsters_len</span><span class="p">)</span>
         <span class="n">monster</span> <span class="o">=</span> <span class="n">monsters</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">monster</span><span class="o">.</span><span class="n">alive</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -483,9 +483,9 @@
 
 <span class="k">def</span> <span class="nf">display_info</span><span class="p">(</span><span class="n">ultraman</span><span class="p">,</span> <span class="n">monsters</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;显示奥特曼和小怪兽的信息&#34;&#34;&#34;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">ultraman</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ultraman</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">monster</span> <span class="ow">in</span> <span class="n">monsters</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">monster</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">monster</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -496,34 +496,34 @@
     <span class="n">ms</span> <span class="o">=</span> <span class="p">[</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">]</span>
     <span class="n">fight_round</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">u</span><span class="o">.</span><span class="n">alive</span> <span class="ow">and</span> <span class="n">is_any_alive</span><span class="p">(</span><span class="n">ms</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;========第</span><span class="si">%02d</span><span class="s1">回合========&#39;</span> <span class="o">%</span> <span class="n">fight_round</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;========第</span><span class="si">%02d</span><span class="s1">回合========&#39;</span> <span class="o">%</span> <span class="n">fight_round</span><span class="p">)</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">select_alive_one</span><span class="p">(</span><span class="n">ms</span><span class="p">)</span>  <span class="c1"># 选中一只小怪兽</span>
         <span class="n">skill</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>   <span class="c1"># 通过随机数选择使用哪种技能</span>
         <span class="k">if</span> <span class="n">skill</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># 60%的概率使用普通攻击</span>
-            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用普通攻击打了</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用普通攻击打了</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
             <span class="n">u</span><span class="o">.</span><span class="n">attack</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">的魔法值恢复了</span><span class="si">%d</span><span class="s1">点.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">resume</span><span class="p">()))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">的魔法值恢复了</span><span class="si">%d</span><span class="s1">点.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">resume</span><span class="p">()))</span>
         <span class="k">elif</span> <span class="n">skill</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">:</span>  <span class="c1"># 30%的概率使用魔法攻击(可能因魔法值不足而失败)</span>
             <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">magic_attack</span><span class="p">(</span><span class="n">ms</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用了魔法攻击.&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用了魔法攻击.&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用魔法失败.&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用魔法失败.&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># 10%的概率使用究极必杀技(如果魔法值不足则使用普通攻击)</span>
             <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">huge_attack</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用究极必杀技虐了</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用究极必杀技虐了</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用普通攻击打了</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">的魔法值恢复了</span><span class="si">%d</span><span class="s1">点.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">resume</span><span class="p">()))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">使用普通攻击打了</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">的魔法值恢复了</span><span class="si">%d</span><span class="s1">点.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">resume</span><span class="p">()))</span>
         <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">alive</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># 如果选中的小怪兽没有死就回击奥特曼</span>
-            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">回击了</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">回击了</span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
             <span class="n">m</span><span class="o">.</span><span class="n">attack</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
         <span class="n">display_info</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">ms</span><span class="p">)</span>  <span class="c1"># 每个回合结束后显示奥特曼和小怪兽的信息</span>
         <span class="n">fight_round</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">========战斗结束!========</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">========战斗结束!========</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">alive</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">奥特曼胜利!&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">奥特曼胜利!&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;小怪兽胜利!&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;小怪兽胜利!&#39;</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -538,14 +538,14 @@
 <p>牌的属性显而易见，有花色和点数。我们可以用0到3的四个数字来代表四种不同的花色，但是这样的代码可读性会非常糟糕，因为我们并不知道黑桃、红心、草花、方块跟0到3的数字的对应关系。如果一个变量的取值只有有限多个选项，我们可以使用枚举。与C、Java等语言不同的是，Python中没有声明枚举类型的关键字，但是可以通过继承<code>enum</code>模块的<code>Enum</code>类来创建枚举类型，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 <span class="k">class</span> <span class="nc">Suite</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;花色(枚举)&#34;&#34;&#34;</span>
@@ -556,18 +556,18 @@
 <p>注意，使用符号常量肯定是优于使用字面常量的，因为能够读懂英文就能理解符号常量的含义，代码的<code>可读性</code>会提升很多。Python中的枚举类型是可迭代类型，简单的说就是可以将枚举类型放到<code>for-in</code>循环中，依次取出每一个符号常量及其对应的值，如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">suite</span> <span class="ow">in</span> <span class="n">Suite</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{suite}: {suite.value}&#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">suite</span> <span class="ow">in</span> <span class="n">Suite</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">suite</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">suite</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来我们可以定义牌类。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -581,7 +581,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Card</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Card</span><span class="p">:</span>
     <span class="s2">&#34;&#34;&#34;牌&#34;&#34;&#34;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suite</span><span class="p">,</span> <span class="n">face</span><span class="p">):</span>
@@ -592,26 +592,26 @@
         <span class="n">suites</span> <span class="o">=</span> <span class="s1">&#39;♠♥♣♦&#39;</span>
         <span class="n">faces</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">]</span>
         <span class="c1"># 根据牌的花色和点数取到对应的字符</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{suites[self.suite.value]}{faces[self.face]}&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">suites</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">value</span><span class="p">]</span><span class="si">}{</span><span class="n">faces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">face</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>可以通过下面的代码来测试下<code>Card</code>类。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">card1</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="n">Suite</span><span class="o">.</span><span class="n">SPADE</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">card1</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="n">Suite</span><span class="o">.</span><span class="n">SPADE</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">card2</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="n">Suite</span><span class="o">.</span><span class="n">HEART</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">card1</span><span class="p">,</span> <span class="n">card2</span><span class="p">)</span>    <span class="c1"># ♠5 ♥K</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">card1</span><span class="p">,</span> <span class="n">card2</span><span class="p">)</span>    <span class="c1"># ♠5 ♥K</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来我们定义扑克类。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -642,7 +642,7 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
 
 
 <span class="k">class</span> <span class="nc">Poker</span><span class="p">:</span>
@@ -676,7 +676,7 @@
 </div><p>可以通过下面的代码来测试下<code>Poker</code>类。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -684,9 +684,9 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">poker</span> <span class="o">=</span> <span class="n">Poker</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">poker</span> <span class="o">=</span> <span class="n">Poker</span><span class="p">()</span>
 <span class="n">poker</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">poker</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poker</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span>
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">[♥K, ♦K, ♣Q, ♥Q, ♣K, ♠7, ♠10, ♦9, ♥J, ♦4, ♣2, ♥8, ♠5, ♣7, ♦3, ♥9, ♥A, ♦2, ♠9, ♦J, ♥6, ♠6, ♦A, ♥7, ♦10, ♠Q, ♥5, ♦6, ♠3, ♣8, ♥3, ♣J, ♥2, ♠J, ♦5, ♠4, ♥10, ♥4, ♣6, ♣A, ♦Q, ♠A, ♣9, ♠K, ♣4, ♣3, ♠2, ♦8, ♣5, ♦7, ♠8, ♣10]
 </span><span class="s2">&#34;&#34;&#34;</span>
@@ -695,7 +695,7 @@
 </div><p>定义玩家类。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -711,7 +711,7 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Player</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Player</span><span class="p">:</span>
     <span class="s2">&#34;&#34;&#34;玩家&#34;&#34;&#34;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -730,7 +730,7 @@
 </div><p>创建四个玩家并将牌发到玩家的手上。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -742,7 +742,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">poker</span> <span class="o">=</span> <span class="n">Poker</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">poker</span> <span class="o">=</span> <span class="n">Poker</span><span class="p">()</span>
 <span class="n">poker</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
 <span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">Player</span><span class="p">(</span><span class="s1">&#39;东邪&#39;</span><span class="p">),</span> <span class="n">Player</span><span class="p">(</span><span class="s1">&#39;西毒&#39;</span><span class="p">),</span> <span class="n">Player</span><span class="p">(</span><span class="s1">&#39;南帝&#39;</span><span class="p">),</span> <span class="n">Player</span><span class="p">(</span><span class="s1">&#39;北丐&#39;</span><span class="p">)]</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">):</span>
@@ -750,8 +750,8 @@
         <span class="n">player</span><span class="o">.</span><span class="n">get_one</span><span class="p">(</span><span class="n">poker</span><span class="o">.</span><span class="n">deal</span><span class="p">())</span>
 <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players</span><span class="p">:</span>
     <span class="n">player</span><span class="o">.</span><span class="n">arrange</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{player.name}: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">player</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>执行上面的代码会在<code>player.arrange()</code>那里出现异常，因为<code>Player</code>的<code>arrange</code>方法使用了列表的<code>sort</code>对玩家手上的牌进行排序，排序需要比较两个<code>Card</code>对象的大小，而<code>&lt;</code>运算符又不能直接作用于<code>Card</code>类型，所以就出现了<code>TypeError</code>异常，异常消息为：<code>'&lt;' not supported between instances of 'Card' and 'Card'</code>。</p>
@@ -759,7 +759,7 @@
 <p>修改后的<code>Card</code>类代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -780,7 +780,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Card</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Card</span><span class="p">:</span>
     <span class="s2">&#34;&#34;&#34;牌&#34;&#34;&#34;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suite</span><span class="p">,</span> <span class="n">face</span><span class="p">):</span>
@@ -791,7 +791,7 @@
         <span class="n">suites</span> <span class="o">=</span> <span class="s1">&#39;♠♥♣♦&#39;</span>
         <span class="n">faces</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">]</span>
         <span class="c1"># 根据牌的花色和点数取到对应的字符</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{suites[self.suite.value]}{faces[self.face]}&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">suites</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">value</span><span class="p">]</span><span class="si">}{</span><span class="n">faces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">face</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
     <span class="c1"># &lt;运算符重载</span>
     <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="c1"># 花色相同比较点数的大小</span>
@@ -803,7 +803,7 @@
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -915,7 +915,7 @@
 </span><span class="lnt">110
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
 
 
 <span class="k">class</span> <span class="nc">Card</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -1018,9 +1018,9 @@
         <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players</span><span class="p">:</span>
             <span class="n">player</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="n">player</span><span class="o">.</span><span class="n">arrange</span><span class="p">(</span><span class="n">get_key</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">cards_on_hand</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">cards_on_hand</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -1034,7 +1034,7 @@
 <p>通过对上述需求的分析，可以看出部门经理、程序员、销售员都是员工，有相同的属性和行为，那么我们可以先设计一个名为<code>Employee</code>的父类，再通过继承的方式从这个父类派生出部门经理、程序员和销售员三个子类。很显然，后续的代码不会创建<code>Employee</code> 类的对象，因为我们需要的是具体的员工对象，所以这个类可以设计成专门用于继承的抽象类。Python中没有定义抽象类的关键字，但是可以通过<code>abc</code>模块中名为<code>ABCMeta</code> 的元类来定义抽象类。关于元类的知识，后面的课程中会有专门的讲解，这里不用太纠结这个概念，记住用法即可。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1050,7 +1050,7 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="c1"># 专门用于继承的抽象类</span>
 <span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
@@ -1069,7 +1069,7 @@
 </div><p>在上面的员工类中，有一个名为<code>get_salary</code>的方法用于结算月薪，但是由于还没有确定是哪一类员工，所以结算月薪虽然是员工的公共行为但这里却没有办法实现。对于暂时无法实现的方法，我们可以使用<code>abstractmethod</code>装饰器将其声明为抽象方法，所谓<strong>抽象方法就是只有声明没有实现的方法</strong>，<strong>声明这个方法是为了让子类去重写这个方法</strong>。接下来的代码展示了如何从员工类派生出部门经理、程序员、销售员这三个子类以及子类如何重写父类的抽象方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1098,7 +1098,7 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;部门经理&#34;&#34;&#34;</span>
 
     <span class="k">def</span> <span class="nf">get_salary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1131,7 +1131,7 @@
 <p>我们通过下面的代码来完成这个工资结算系统，由于程序员和销售员需要分别录入本月的工作时间和销售额，所以在下面的代码中我们使用了Python内置的<code>isinstance</code>函数来判断员工对象的类型。我们之前讲过的<code>type</code>函数也能识别对象的类型，但是<code>isinstance</code>函数更加强大，因为它可以判断出一个对象是不是某个继承结构下的子类型，你可以简答的理解为<code>type</code>函数是对对象类型的精准匹配，而<code>isinstance</code>函数是对对象类型的模糊匹配。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1143,21 +1143,21 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">emps</span> <span class="o">=</span> <span class="p">[</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">emps</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">Manager</span><span class="p">(</span><span class="s1">&#39;刘备&#39;</span><span class="p">),</span> <span class="n">Programmer</span><span class="p">(</span><span class="s1">&#39;诸葛亮&#39;</span><span class="p">),</span> <span class="n">Manager</span><span class="p">(</span><span class="s1">&#39;曹操&#39;</span><span class="p">),</span> 
     <span class="n">Programmer</span><span class="p">(</span><span class="s1">&#39;荀彧&#39;</span><span class="p">),</span> <span class="n">Salesman</span><span class="p">(</span><span class="s1">&#39;吕布&#39;</span><span class="p">),</span> <span class="n">Programmer</span><span class="p">(</span><span class="s1">&#39;张辽&#39;</span><span class="p">),</span>
 <span class="p">]</span>
 <span class="k">for</span> <span class="n">emp</span> <span class="ow">in</span> <span class="n">emps</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">emp</span><span class="p">,</span> <span class="n">Programmer</span><span class="p">):</span>
-        <span class="n">emp</span><span class="o">.</span><span class="n">working_hour</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;请输入{emp.name}本月工作时间: &#39;</span><span class="p">))</span>
+        <span class="n">emp</span><span class="o">.</span><span class="n">working_hour</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;请输入</span><span class="si">{</span><span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">本月工作时间: &#39;</span><span class="p">))</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">emp</span><span class="p">,</span> <span class="n">Salesman</span><span class="p">):</span>
-        <span class="n">emp</span><span class="o">.</span><span class="n">sales</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;请输入{emp.name}本月销售额: &#39;</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{emp.name}本月工资为: ￥{emp.get_salary():.2f}元&#39;</span><span class="p">)</span>
+        <span class="n">emp</span><span class="o">.</span><span class="n">sales</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;请输入</span><span class="si">{</span><span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">本月销售额: &#39;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">本月工资为: ￥</span><span class="si">{</span><span class="n">emp</span><span class="o">.</span><span class="n">get_salary</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">元&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1258,7 +1258,7 @@
 </span><span class="lnt">99
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">某公司有三种类型的员工 分别是部门经理、程序员和销售员
 </span><span class="s2">需要设计一个工资结算系统 根据提供的员工信息来计算月薪
 </span><span class="s2">部门经理的月薪是每月固定15000元
@@ -1311,7 +1311,7 @@
     <span class="k">def</span> <span class="nf">working_hour</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_working_hour</span>
 
-    <span class="nd">@working_hour.setter</span>
+    <span class="nd">@working_hour</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">working_hour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">working_hour</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_working_hour</span> <span class="o">=</span> <span class="n">working_hour</span> <span class="k">if</span> <span class="n">working_hour</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
@@ -1330,7 +1330,7 @@
     <span class="k">def</span> <span class="nf">sales</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sales</span>
 
-    <span class="nd">@sales.setter</span>
+    <span class="nd">@sales</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">sales</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sales</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sales</span> <span class="o">=</span> <span class="n">sales</span> <span class="k">if</span> <span class="n">sales</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
@@ -1351,7 +1351,7 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">emp</span><span class="p">,</span> <span class="n">Salesman</span><span class="p">):</span>
             <span class="n">emp</span><span class="o">.</span><span class="n">sales</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入</span><span class="si">%s</span><span class="s1">本月销售额: &#39;</span> <span class="o">%</span> <span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
         <span class="c1"># 同样是接收get_salary这个消息但是不同的员工表现出了不同的行为(多态)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">本月工资为: ￥</span><span class="si">%s</span><span class="s1">元&#39;</span> <span class="o">%</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">本月工资为: ￥</span><span class="si">%s</span><span class="s1">元&#39;</span> <span class="o">%</span>
               <span class="p">(</span><span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">emp</span><span class="o">.</span><span class="n">get_salary</span><span class="p">()))</span>
 
 

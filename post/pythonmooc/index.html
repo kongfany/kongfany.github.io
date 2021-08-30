@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/pythonmooc/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="视频 作业 基本数据类型 数值运算函数： abs(x):绝对值函数 divmod(x,y):商余（x//y,x%y）。divmod(10,3)=(3," />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/pythonmooc/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-08-17T13:59:06&#43;08:00" />
-<meta property="article:modified_time" content="2021-08-17T13:59:06&#43;08:00" />
+<meta property="article:published_time" content="2021-08-17T13:59:06+08:00" />
+<meta property="article:modified_time" content="2021-08-17T13:59:06+08:00" />
 
 <meta itemprop="name" content="Python慕课嵩天">
-<meta itemprop="description" content="视频 作业 基本数据类型 数值运算函数： abs(x):绝对值函数 divmod(x,y):商余（x//y,x%y）。divmod(10,3)=(3,"><meta itemprop="datePublished" content="2021-08-17T13:59:06&#43;08:00" />
-<meta itemprop="dateModified" content="2021-08-17T13:59:06&#43;08:00" />
+<meta itemprop="description" content="视频 作业 基本数据类型 数值运算函数： abs(x):绝对值函数 divmod(x,y):商余（x//y,x%y）。divmod(10,3)=(3,"><meta itemprop="datePublished" content="2021-08-17T13:59:06+08:00" />
+<meta itemprop="dateModified" content="2021-08-17T13:59:06+08:00" />
 <meta itemprop="wordCount" content="5553">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python慕课嵩天"/>
@@ -185,16 +185,16 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#获取星期字符串</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#获取星期字符串</span>
 <span class="n">weekStr</span> <span class="o">=</span> <span class="s2">&#34;一二三四五六日&#34;</span>
 <span class="n">weekId</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入星期数字（1-7）:&#34;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;星期&#34;</span> <span class="o">+</span> <span class="n">weekStr</span><span class="p">[</span><span class="n">weekId</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;星期&#34;</span> <span class="o">+</span> <span class="n">weekStr</span><span class="p">[</span><span class="n">weekId</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -281,7 +281,7 @@
 <p>文本进度条：(不同设计函数：修改文本进度条的实现算法)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -298,10 +298,10 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 单行动态刷新</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 单行动态刷新</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="n">scale</span><span class="o">=</span><span class="mi">50</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;执行开始&#34;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">scale</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;-&#34;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;执行开始&#34;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">scale</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;-&#34;</span><span class="p">))</span>
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">scale</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
@@ -309,9 +309,9 @@
     <span class="n">b</span><span class="o">=</span><span class="s2">&#34;.&#34;</span><span class="o">*</span><span class="p">(</span><span class="n">scale</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
     <span class="n">c</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="n">scale</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
     <span class="n">dur</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span><span class="o">-</span><span class="n">start</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\r</span><span class="s2">{:^3.0f}%[{}-&gt;{}]{:.2f}s&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">dur</span><span class="p">),</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\r</span><span class="si">{:^3.0f}</span><span class="s2">%[</span><span class="si">{}</span><span class="s2">-&gt;</span><span class="si">{}</span><span class="s2">]</span><span class="si">{:.2f}</span><span class="s2">s&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">dur</span><span class="p">),</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">+</span><span class="s2">&#34;执行结束&#34;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">scale</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;-&#34;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">+</span><span class="s2">&#34;执行结束&#34;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">scale</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;-&#34;</span><span class="p">))</span>
 <span class="c1"># IDLE开发环境并不会刷新，应该使用命令行等类型的工具打开</span>
 </code></pre></td></tr></table>
 </div>
@@ -380,7 +380,7 @@
 <p>公式法</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -389,13 +389,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pai</span><span class="o">=</span><span class="mi">0</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">pai</span><span class="o">=</span><span class="mi">0</span>
 <span class="n">N</span><span class="o">=</span><span class="mi">100</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
     <span class="n">pai</span><span class="o">+=</span><span class="mi">1</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="p">(</span> \
     <span class="mi">4</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span><span class="o">-</span> \
     <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">6</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;圆周率值是：{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pai</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;圆周率值是：</span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pai</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -408,7 +408,7 @@
 <p>蒙特卡罗方法</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -425,7 +425,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">perf_counter</span>
 <span class="n">DARTS</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mi">100</span>
 <span class="n">hits</span><span class="o">=</span><span class="mf">0.0</span>
@@ -438,8 +438,8 @@
         <span class="n">hits</span><span class="o">=</span><span class="n">hits</span><span class="o">+</span><span class="mi">1</span>
 <span class="n">pai</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">hits</span><span class="o">/</span><span class="n">DARTS</span><span class="p">)</span>
 <span class="c1">#圆内点的数量比上总数就是π/4</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;圆周率值是：{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pai</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;运行时间是：{:.5f}s&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">perf_counter</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;圆周率值是：</span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pai</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;运行时间是：</span><span class="si">{:.5f}</span><span class="s2">s&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">perf_counter</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -448,14 +448,14 @@
 <p>定义：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="o">&lt;</span><span class="err">函数名</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="err">参数（</span><span class="mi">0</span><span class="err">个或多个）</span><span class="o">&gt;</span><span class="p">):</span>
-	<span class="o">&lt;</span><span class="err">函数体</span><span class="o">&gt;</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="err">返回值</span><span class="o">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="o">&lt;</span><span class="n">函数名</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">参数</span><span class="err">（</span><span class="mi">0</span><span class="n">个或多个</span><span class="err">）</span><span class="o">&gt;</span><span class="p">):</span>
+	<span class="o">&lt;</span><span class="n">函数体</span><span class="o">&gt;</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="n">返回值</span><span class="o">&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -466,7 +466,7 @@
 <p>可变参数传递：函数定义是可以设计可变数量参数，即不确定参数总数量。def&lt;函数名&gt;(&lt;参数&gt;,*b):</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -477,7 +477,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="o">*</span><span class="n">b</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="o">*</span><span class="n">b</span><span class="p">):</span>
     <span class="n">s</span><span class="o">=</span><span class="mi">1</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">s</span><span class="o">*=</span><span class="n">i</span>
@@ -519,7 +519,7 @@
 <p>局部变量为组合数据类型且未创建，等同于全局变量</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -530,7 +530,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ls</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;F&#34;</span><span class="p">,</span><span class="s2">&#34;f&#34;</span><span class="p">]</span><span class="c1">#通过[]真实创建了一个全局变量列表s</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">ls</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;F&#34;</span><span class="p">,</span><span class="s2">&#34;f&#34;</span><span class="p">]</span><span class="c1">#通过[]真实创建了一个全局变量列表s</span>
 <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="c1">#ls=[]</span>
     <span class="c1">#若函数内部创建了ls列表则为局部变量</span>
@@ -538,7 +538,7 @@
 	<span class="c1">#此处ls是列表类型，未真实创建，则等同于全局变量</span>
     <span class="k">return</span>
 <span class="n">func</span><span class="p">(</span><span class="s2">&#34;c&#34;</span><span class="p">)</span><span class="c1">#全局变量ls被修改</span>
-<span class="k">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span><span class="c1">#[&#34;F&#34;,&#34;f&#34;,&#34;s&#34;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span><span class="c1">#[&#34;F&#34;,&#34;f&#34;,&#34;s&#34;]</span>
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -563,7 +563,7 @@
 <p>三个柱子abc，初始在柱子a通过柱子b到达柱子c</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -579,20 +579,20 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">count</span><span class="o">=</span><span class="mi">0</span>
 <span class="c1">#n个圆盘需要移动，源柱子，目标柱子，中间柱子</span>
 <span class="k">def</span> <span class="nf">hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">dst</span><span class="p">,</span><span class="n">mid</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">count</span><span class="c1">#全局变量，计数移动次数</span>
     <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;{}:{}-&gt;{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">dst</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">-&gt;</span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">dst</span><span class="p">))</span>
         <span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">dst</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;{}:{}-&gt;{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">dst</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">-&gt;</span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">dst</span><span class="p">))</span>
         <span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
         <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">dst</span><span class="p">,</span><span class="n">src</span><span class="p">)</span>
 <span class="n">hanoi</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="s2">&#34;C&#34;</span><span class="p">,</span><span class="s2">&#34;B&#34;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>PyInstaller:</p>
@@ -604,10 +604,10 @@
 <p>第三方库,需安装。<a href="http://www.pyinstaller.org">官网</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install pyinstaller
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install pyinstaller
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -615,10 +615,10 @@
 <p>在源代码所在目录下通过window命令行</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">pyinstaller -F &lt;文件名.py&gt;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pyinstaller -F &lt;文件名.py&gt;
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -641,10 +641,10 @@
 <p>-i &lt;图标文件名.ico&gt;:指定打包程序使用的图标(icon)文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">pyinstaller -i &lt;图标文件名.ico&gt; -F &lt;文件名.py&gt;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pyinstaller -i &lt;图标文件名.ico&gt; -F &lt;文件名.py&gt;
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -654,7 +654,7 @@
 <p>科赫雪花：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -679,7 +679,7 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">turtle</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">turtle</span>
 <span class="k">def</span> <span class="nf">koch</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
         <span class="n">turtle</span><span class="o">.</span><span class="n">fd</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>

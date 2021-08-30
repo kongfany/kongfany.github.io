@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python24%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="正则表达式相关知识 在编写处理字符串的程时，经常会遇到在一段文本中查找符合某些规则的字符串的需求，正则表达式就是用于描述这些规则的工具，换句话" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python24%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-29T16:16:25&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-29T16:16:25&#43;08:00" />
+<meta property="article:published_time" content="2021-07-29T16:16:25+08:00" />
+<meta property="article:modified_time" content="2021-07-29T16:16:25+08:00" />
 
 <meta itemprop="name" content="正则表达式的应用">
-<meta itemprop="description" content="正则表达式相关知识 在编写处理字符串的程时，经常会遇到在一段文本中查找符合某些规则的字符串的需求，正则表达式就是用于描述这些规则的工具，换句话"><meta itemprop="datePublished" content="2021-07-29T16:16:25&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-29T16:16:25&#43;08:00" />
+<meta itemprop="description" content="正则表达式相关知识 在编写处理字符串的程时，经常会遇到在一段文本中查找符合某些规则的字符串的需求，正则表达式就是用于描述这些规则的工具，换句话"><meta itemprop="datePublished" content="2021-07-29T16:16:25+08:00" />
+<meta itemprop="dateModified" content="2021-07-29T16:16:25+08:00" />
 <meta itemprop="wordCount" content="3853">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="正则表达式的应用"/>
@@ -438,7 +438,7 @@
 <p>是否有效并给出对应的提示信息。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -463,7 +463,7 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">要求：用户名必须由字母、数字或下划线构成且长度在6~20个字符之间，QQ号是5~12的数字且首位不能为0
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -478,14 +478,14 @@
 <span class="c1"># [0-9a-zA-Z_]{6,20}:[...]数字字母或下划线，{6,20}匹配6,20次</span>
 <span class="n">m1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[0-9a-zA-Z_]{6,20}$&#39;</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">m1</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;请输入有效的用户名.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;请输入有效的用户名.&#39;</span><span class="p">)</span>
 <span class="c1"># fullmatch函数要求字符串和正则表达式完全匹配</span>
 <span class="c1"># 所以正则表达式没有写起始符和结束符</span>
 <span class="n">m2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[1-9]\d{4,11}&#39;</span><span class="p">,</span> <span class="n">qq</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">m2</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;请输入有效的QQ号.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;请输入有效的QQ号.&#39;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">m1</span> <span class="ow">and</span> <span class="n">m2</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;你输入的信息是有效的!&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;你输入的信息是有效的!&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -495,7 +495,7 @@
 <p><img src="/images/202107/31.png" alt=""></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -524,32 +524,32 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
 <span class="c1"># (?&lt;=\D)1[34578]\d{9}(?=\D) </span>
 <span class="c1"># (?&lt;=\D):\D非数字，从非数字后面开始匹配，即匹配结果的前面是非数字</span>
 <span class="c1"># [23478]:匹配23478任一字符</span>
 <span class="c1"># \d{9}：匹配九个数字</span>
 <span class="c1"># (?=\D):匹配非数字前的字符，即匹配结果后面是非数字</span>
 <span class="c1"># 创建正则表达式对象，使用了前瞻和回顾来保证手机号前后不应该再出现数字</span>
-<span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?&lt;=\D)1[34578]\d{9}(?=\D)&#39;</span><span class="p">)</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?&lt;=\D)1[34578]\d</span><span class="si">{9}</span><span class="s1">(?=\D)&#39;</span><span class="p">)</span>
 <span class="n">sentence</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;重要的事情说8130123456789遍，我的手机号是13512346789这个靓号，
 </span><span class="s1">不是15600998765，也是110或119，王大锤的手机号才是15600998765。&#39;&#39;&#39;</span>
 
 <span class="c1"># 方法一：查找所有匹配并保存到一个列表中</span>
 <span class="n">tels_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">tel</span> <span class="ow">in</span> <span class="n">tels_list</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">tel</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------华丽的分隔线--------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tel</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--------华丽的分隔线--------&#39;</span><span class="p">)</span>
 
 <span class="c1"># 方法二：通过迭代器取出匹配对象并获得匹配的内容</span>
 <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------华丽的分隔线--------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--------华丽的分隔线--------&#39;</span><span class="p">)</span>
 
 <span class="c1"># 方法三：通过search函数指定搜索位置找出所有匹配</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
 <span class="k">while</span> <span class="n">m</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">())</span>
 </code></pre></td></tr></table>
 </div>
@@ -559,7 +559,7 @@
 <h1 id="替换字符串中的不良内容">替换字符串中的不良内容</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -567,12 +567,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="n">sentence</span> <span class="o">=</span> <span class="s1">&#39;Oh, shit! 你丫是傻叉吗? Fuck you.&#39;</span>
 <span class="n">purified</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;fuck|shit|[傻煞沙][比逼叉缺吊碉雕]&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">purified</span><span class="p">)</span>  <span class="c1"># Oh, *! 你丫是*吗? * you.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">purified</span><span class="p">)</span>  <span class="c1"># Oh, *! 你丫是*吗? * you.</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -581,7 +581,7 @@
 <h1 id="拆分长字符串">拆分长字符串</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -593,7 +593,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="n">poem</span> <span class="o">=</span> <span class="s1">&#39;窗前明月光，疑是地上霜。举头望明月，低头思故乡。&#39;</span>
 <span class="n">sentences_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[，。, .]&#39;</span><span class="p">,</span> <span class="n">poem</span><span class="p">)</span>
@@ -602,7 +602,7 @@
 <span class="c1"># bool(a)：Z字符串a有内容为True，无内容为False</span>
 <span class="c1"># [&#39;窗前明月光&#39;, &#39;疑是地上霜&#39;, &#39;举头望明月&#39;, &#39;低头思故乡&#39;]</span>
 <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences_list</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="简单总结">简单总结</h1>

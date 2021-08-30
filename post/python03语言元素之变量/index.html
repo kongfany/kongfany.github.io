@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python03%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0%E4%B9%8B%E5%8F%98%E9%87%8F/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python03%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0%E4%B9%8B%E5%8F%98%E9%87%8F/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-06T15:18:30&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-06T15:18:30&#43;08:00" />
+<meta property="article:published_time" content="2021-07-06T15:18:30+08:00" />
+<meta property="article:modified_time" content="2021-07-06T15:18:30+08:00" />
 
 <meta itemprop="name" content="Python语言元素之变量">
-<meta itemprop="description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"><meta itemprop="datePublished" content="2021-07-06T15:18:30&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-06T15:18:30&#43;08:00" />
+<meta itemprop="description" content="变量和类型 变量是数据的载体，简单来说就是一块来保存数据的内存空间，变量的值可以被读取和修改。 Python中数据类型很多，而且允许我们自定义新"><meta itemprop="datePublished" content="2021-07-06T15:18:30+08:00" />
+<meta itemprop="dateModified" content="2021-07-06T15:18:30+08:00" />
 <meta itemprop="wordCount" content="2438">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python语言元素之变量"/>
@@ -197,7 +197,7 @@
 <h1 id="变量的使用">变量的使用</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -206,13 +206,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">45</span>	<span class="c1"># a变量保存了45</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">45</span>	<span class="c1"># a变量保存了45</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">12</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 57</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 33</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 540</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 3.75</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">//</span><span class="n">b</span><span class="p">)</span> <span class="c1"># 整数除10/</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 57</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 33</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 540</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>	<span class="c1"># 3.75</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">//</span><span class="n">b</span><span class="p">)</span> <span class="c1"># 整数除10/</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="float小数默认位数">float小数默认位数</h2>
@@ -220,7 +220,7 @@
 <p>其他运算或格式化输出都是默认1位小数，其中有更多位数，就取最大位数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -235,12 +235,12 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%f</span><span class="s2">&#34;</span><span class="o">%</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%f</span><span class="s2">&#34;</span><span class="o">%</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{a}&#34;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;{0}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>  <span class="c1"># format函数</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">{0}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>  <span class="c1"># format函数</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">2.000000
@@ -254,7 +254,7 @@
 <p>Python中可以使用<code>type()</code>函数对变量的类型进行检查</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -268,17 +268,17 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">使用type()检查变量的类型
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mf">12.345</span>
 <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
-<span class="n">d</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;int&#39;&gt;</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;float&#39;&gt;</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;str&#39;&gt;</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;bool&#39;&gt;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;int&#39;&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;float&#39;&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;str&#39;&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>    <span class="c1"># &lt;class &#39;bool&#39;&gt;</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -293,7 +293,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -315,31 +315,31 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">Python中的类型转换操作
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mf">12.345</span>
 <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;hello, world&#39;</span>
-<span class="n">d</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">d</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="c1"># 整数转成浮点数</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>    <span class="c1"># 100.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>    <span class="c1"># 100.0</span>
 <span class="c1"># 浮点型转成字符串 (输出字符串时不会看到引号)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>      <span class="c1"># 12.345</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>      <span class="c1"># 12.345</span>
 <span class="c1"># 字符串转成布尔型 (有内容的字符串都会变成True)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>     <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>     <span class="c1"># True</span>
 <span class="c1"># 布尔型转成整数 (True会转成1，False会转成0)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>      <span class="c1"># 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>      <span class="c1"># 1</span>
 <span class="c1"># 将整数变成对应的字符 (97刚好对应字符表中的字母a)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">))</span>     <span class="c1"># a</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">))</span>     <span class="c1"># a</span>
 <span class="c1"># 将字符转成整数 (Python中字符和字符串表示法相同)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>    <span class="c1"># 97</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>    <span class="c1"># 97</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -357,15 +357,15 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;123&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;123&#39;</span>
 <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">c</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">c</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">d</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;a =&#39;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>	<span class="c1"># 字符串的引号不会打印出来</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;b =&#39;</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;c =&#39;</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;d =&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a =&#39;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>	<span class="c1"># 字符串的引号不会打印出来</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;b =&#39;</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;c =&#39;</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;d =&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="s1">&#39;的类型是&#39;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
 
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">a = 123 的类型是 &lt;class &#39;str&#39;&gt;
@@ -387,7 +387,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -414,18 +414,18 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">str1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串的长度是:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;单词首字母大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串变大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">str1</span> <span class="o">=</span> <span class="s1">&#39;hello, world!&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;字符串的长度是:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;单词首字母大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;字符串变大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
 <span class="n">str1</span> <span class="o">=</span> <span class="n">str1</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串变小写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以hello开头: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以hello结尾: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以感叹号开头: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以感叹号结尾: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;字符串变小写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是大写: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以hello开头: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以hello结尾: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以感叹号开头: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;字符串是不是以感叹号结尾: &#39;</span><span class="p">,</span> <span class="n">str1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">))</span>
 
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">字符串的长度是: 13

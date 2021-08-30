@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/pyhon01%E5%88%9D%E8%AF%86%E5%8F%8A%E5%AE%89%E8%A3%85/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="Python介绍 Python是一种广泛使用的解释型、高级编程语言。python有3.x和2.x量大版本，并且不兼容（使用3.x） 解释型&md" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/pyhon01%E5%88%9D%E8%AF%86%E5%8F%8A%E5%AE%89%E8%A3%85/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-04T16:39:31&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-04T16:39:31&#43;08:00" />
+<meta property="article:published_time" content="2021-07-04T16:39:31+08:00" />
+<meta property="article:modified_time" content="2021-07-04T16:39:31+08:00" />
 
 <meta itemprop="name" content="Pyhon初识及安装">
-<meta itemprop="description" content="Python介绍 Python是一种广泛使用的解释型、高级编程语言。python有3.x和2.x量大版本，并且不兼容（使用3.x） 解释型&md"><meta itemprop="datePublished" content="2021-07-04T16:39:31&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-04T16:39:31&#43;08:00" />
+<meta itemprop="description" content="Python介绍 Python是一种广泛使用的解释型、高级编程语言。python有3.x和2.x量大版本，并且不兼容（使用3.x） 解释型&md"><meta itemprop="datePublished" content="2021-07-04T16:39:31+08:00" />
+<meta itemprop="dateModified" content="2021-07-04T16:39:31+08:00" />
 <meta itemprop="wordCount" content="3872">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Pyhon初识及安装"/>
@@ -196,11 +196,11 @@
 <p><a href="https://www.python.org/downloads/windows/">python官网</a>下载的3.7.8版本。安装过程中记得选择“Add PYthon 3.x to PATH”选项，会帮助我们将python解释器添加到Path环境变量中。完成后再cmd来检查是否安装成功。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;python --version
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&gt;python --version
 3.7.8
 </code></pre></td></tr></table>
 </div>
@@ -214,19 +214,19 @@
 <h4 id="helloworld">Hello，world</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello, world&#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, world&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>书写代码后，将上面的代码命名为hello.py。windows系统中，在当前目录下按住<code>shift</code>再点击右键，<del>会出现“命令行提示符”选项</del>，(出现了windows powershell，没用过)点击打开。输入命令</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">python hello.py
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python hello.py
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/202107/2.png" alt=""></p>
@@ -240,7 +240,7 @@
 <p>多行注释：以三个引号<code>&quot;&quot;&quot;</code>开头，三个引号<code>&quot;&quot;&quot;</code>结尾</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -249,13 +249,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 单行注释：以#和空格开头</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 单行注释：以#和空格开头</span>
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">多行注释
 </span><span class="s2">以三个引号开头
 </span><span class="s2">三个引号结尾
 </span><span class="s2">&#34;&#34;&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello, world&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, world&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="pycharm">PyCharm</h1>
@@ -282,7 +282,7 @@
 <p>file→new。test_guess.py</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -305,23 +305,23 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 
 <span class="k">def</span> <span class="nf">play</span><span class="p">():</span>
     <span class="n">random_init</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span> <span class="c1"># 区分大小写</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># 区分大小写</span>
         <span class="n">user_guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;What number did you guess(0-100)?&#34;</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">user_guess</span> <span class="o">==</span> <span class="n">random_init</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;You found the number ({random_init}). Congrats!&#34;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;You found the number (</span><span class="si">{random_init}</span><span class="s2">). Congrats!&#34;</span><span class="p">)</span>
             <span class="k">break</span>
         <span class="c1">#if结束后好像不会合理缩进，需要手动缩进？---缩进敏感，缩进很重要！</span>
         <span class="k">if</span> <span class="n">user_guess</span> <span class="o">&lt;</span> <span class="n">random_init</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Your number is less than the number we guessed.&#34;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Your number is less than the number we guessed.&#34;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="k">if</span> <span class="n">user_guess</span> <span class="o">&gt;</span> <span class="n">random_init</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Your number is more than the number we guessed.&#34;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Your number is more than the number we guessed.&#34;</span><span class="p">)</span>
             <span class="k">continue</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -390,7 +390,7 @@
 <p>海龟。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -411,7 +411,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># setup设置窗体大小及位置，后俩参数可省</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># setup设置窗体大小及位置，后俩参数可省</span>
 <span class="n">turtle</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">startx</span><span class="p">,</span><span class="n">starty</span><span class="p">)</span>
 
 <span class="c1"># 画笔控制函数</span>
@@ -423,7 +423,7 @@
 
 <span class="c1"># 运动控制函数</span>
 <span class="n">turtle</span><span class="o">.</span><span class="n">forword</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># 海龟走直线,d为行进距离，可以为负数</span>
-<span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">extent</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="c1"># 根据半径r绘制extent角度的弧形，90为1/4</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">extent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># 根据半径r绘制extent角度的弧形，90为1/4</span>
 <span class="c1"># turtle.circle(100)默认圆心的位置为左侧(上方)，若为负，半径在右侧</span>
 
 <span class="c1"># 方向控制函数</span>
@@ -437,7 +437,7 @@
 <p>海龟坐标，以当前点为中心。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -445,7 +445,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">turtle</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 <span class="c1"># 让海龟从当前位置到达该位置，单位像素</span>
 
 <span class="n">turtle</span><span class="o">.</span><span class="n">fd</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># 正前方向</span>
@@ -463,7 +463,7 @@
 <h2 id="画蟒蛇">画蟒蛇</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -484,7 +484,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#PythonDraw.py</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#PythonDraw.py</span>
 <span class="c1"># improt turtle下面代码使用库名.函数</span>
 <span class="c1"># from turtle import* 就可以直接使用函数，但有可能会因为同名的函数产生冲突</span>
 <span class="kn">import</span> <span class="nn">turtle</span>
@@ -508,7 +508,7 @@
 </div><h2 id="画正方形">画正方形</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -525,7 +525,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">turtle</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">turtle</span>
 
 <span class="n">turtle</span><span class="o">.</span><span class="n">pensize</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">turtle</span><span class="o">.</span><span class="n">pencolor</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
@@ -546,7 +546,7 @@
 <h2 id="画国旗">画国旗</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -622,7 +622,7 @@
 </span><span class="lnt">74
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">用Python的turtle模块绘制国旗
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="kn">import</span> <span class="nn">turtle</span>
@@ -701,7 +701,7 @@
 </div><h2 id="画小猪佩奇">画小猪佩奇</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -907,7 +907,7 @@
 </span><span class="lnt">204
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">绘制小猪佩奇
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="kn">from</span> <span class="nn">turtle</span> <span class="kn">import</span> <span class="o">*</span>

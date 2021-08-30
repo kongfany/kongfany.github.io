@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python16%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%85%A5%E9%97%A8/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="面向对象：&quot;把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class），通过类的封装（enca" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python16%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%85%A5%E9%97%A8/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-18T22:10:54&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-18T22:10:54&#43;08:00" />
+<meta property="article:published_time" content="2021-07-18T22:10:54+08:00" />
+<meta property="article:modified_time" content="2021-07-18T22:10:54+08:00" />
 
 <meta itemprop="name" content="面向对象编程入门">
-<meta itemprop="description" content="面向对象：&quot;把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class），通过类的封装（enca"><meta itemprop="datePublished" content="2021-07-18T22:10:54&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-18T22:10:54&#43;08:00" />
+<meta itemprop="description" content="面向对象：&quot;把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class），通过类的封装（enca"><meta itemprop="datePublished" content="2021-07-18T22:10:54+08:00" />
+<meta itemprop="dateModified" content="2021-07-18T22:10:54+08:00" />
 <meta itemprop="wordCount" content="4929">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="面向对象编程入门"/>
@@ -178,7 +178,7 @@
 <p>在Python中，可以使用<code>class</code>关键字加上类名来定义类，通过缩进我们可以确定类的代码块，就如同定义函数那样。在类的代码块中，我们需要写一些函数，我们说过类是一个抽象概念，那么这些函数就是我们对一类对象共同的动态特征的提取。写在类里面的函数我们通常称之为<strong>方法</strong>，方法就是对象的行为，也就是对象可以接收的消息。方法的第一个参数通常都是<code>self</code>，它代表了接收这个消息的对象本身。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -187,20 +187,20 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course_name</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;学生正在学习{course_name}.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;学生正在学习</span><span class="si">{</span><span class="n">course_name</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;学生正在玩游戏.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;学生正在玩游戏.&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="创建和使用对象">创建和使用对象</h2>
 <p>在我们定义好一个类之后，可以使用构造器语法来创建对象</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -208,11 +208,11 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">stu1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">stu1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
 <span class="n">stu2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stu1</span><span class="p">)</span>    <span class="c1"># &lt;__main__.Student object at 0x10ad5ac50&gt;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stu2</span><span class="p">)</span>    <span class="c1"># &lt;__main__.Student object at 0x10ad5acd0&gt; </span>
-<span class="k">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">stu1</span><span class="p">)),</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">stu2</span><span class="p">)))</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">stu1</span><span class="p">)</span>    <span class="c1"># &lt;__main__.Student object at 0x10ad5ac50&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stu2</span><span class="p">)</span>    <span class="c1"># &lt;__main__.Student object at 0x10ad5acd0&gt; </span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">stu1</span><span class="p">)),</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">stu2</span><span class="p">)))</span>    
 <span class="c1"># 0x10ad5ac50 0x10ad5acd0</span>
 </code></pre></td></tr></table>
 </div>
@@ -221,7 +221,7 @@
 <p>接下来，我们尝试给对象发消息，即调用对象的方法。刚才的<code>Student</code>类中我们定义了<code>study</code>和<code>play</code>两个方法，两个方法的第一个参数<code>self</code>代表了接收消息的学生对象，<code>study</code>方法的第二个参数是学习的课程名称。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -233,7 +233,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 通过“类.方法”调用方法，第一个参数是接收消息的对象，第二个参数是学习的课程名称</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 通过“类.方法”调用方法，第一个参数是接收消息的对象，第二个参数是学习的课程名称</span>
 <span class="n">Student</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="n">stu1</span><span class="p">,</span> <span class="s1">&#39;Python程序设计&#39;</span><span class="p">)</span>    
 <span class="c1"># 学生正在学习Python程序设计.</span>
 
@@ -250,7 +250,7 @@
 <p>我们对上面的<code>Student</code>类稍作修改，给学生对象添加<code>name</code>（姓名）和<code>age</code>（年龄）两个属性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -267,7 +267,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
     <span class="s2">&#34;&#34;&#34;学生&#34;&#34;&#34;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
@@ -277,16 +277,16 @@
 
     <span class="k">def</span> <span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course_name</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;学习&#34;&#34;&#34;</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{self.name}正在学习{course_name}.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">正在学习</span><span class="si">{</span><span class="n">course_name</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;玩耍&#34;&#34;&#34;</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{self.name}正在玩游戏.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">正在玩游戏.&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -294,7 +294,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 由于初始化方法除了self之外还有两个参数</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 由于初始化方法除了self之外还有两个参数</span>
 <span class="c1"># 所以调用Student类的构造器创建对象时要传入这两个参数</span>
 <span class="n">stu1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;kong&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">stu2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
@@ -306,7 +306,7 @@
 <p>上面我们通过<code>__init__</code>方法在创建对象时为对象绑定了属性并赋予了初始值。在Python中，以两个下划线<code>__</code>（读作“dunder”）开头和结尾的方法通常都是有特殊用途和意义的方法，我们一般称之为<strong>魔术方法</strong>或<strong>魔法方法</strong>。如果我们在打印对象的时候不希望看到对象的地址而是看到我们自定义的信息，可以通过在类中放置<code>__repr__</code>魔术方法来做到，该方法返回的字符串就是用<code>print</code>函数打印对象的时候会显示的内容。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -332,7 +332,7 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
     <span class="s2">&#34;&#34;&#34;学生&#34;&#34;&#34;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
@@ -342,20 +342,20 @@
 
     <span class="k">def</span> <span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course_name</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;学习&#34;&#34;&#34;</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{self.name}正在学习{course_name}.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">正在学习</span><span class="si">{</span><span class="n">course_name</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;玩耍&#34;&#34;&#34;</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{self.name}正在玩游戏.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">正在玩游戏.&#39;</span><span class="p">)</span>
     
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.name}: {self.age}&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s1">&#39;</span>
 
 
 <span class="n">stu1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;kong&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stu1</span><span class="p">)</span>        <span class="c1"># kong: 40</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stu1</span><span class="p">)</span>        <span class="c1"># kong: 40</span>
 <span class="n">students</span> <span class="o">=</span> <span class="p">[</span><span class="n">stu1</span><span class="p">,</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;王小锤&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">)]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>    <span class="c1"># [kong: 20, 王小锤: 16, 王大锤: 25]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>    <span class="c1"># [kong: 20, 王小锤: 16, 王大锤: 25]</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="面向对象的支柱">面向对象的支柱</h2>
@@ -365,7 +365,7 @@
 <h1 id="描述数字时钟">描述数字时钟</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -411,7 +411,7 @@
 </span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
 
 
 <span class="c1"># 定义数字时钟类</span>
@@ -442,15 +442,15 @@
 
     <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;显示时间
-</span><span class="s2">        {a:0&gt;2d}左边补0，补够2位&#34;&#34;&#34;</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.hour:0&gt;2d}:{self.min:0&gt;2d}:{self.sec:0&gt;2d}&#39;</span>
+</span><span class="s2">        </span><span class="si">{a:0&gt;2d}</span><span class="s2">左边补0，补够2位&#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="si">:</span><span class="s1">0&gt;2d</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">min</span><span class="si">:</span><span class="s1">0&gt;2d</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sec</span><span class="si">:</span><span class="s1">0&gt;2d</span><span class="si">}</span><span class="s1">&#39;</span>
 
 
 <span class="c1"># 创建时钟对象</span>
 <span class="n">clock</span> <span class="o">=</span> <span class="n">Clock</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">58</span><span class="p">)</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="c1"># 给时钟对象发消息读取时间</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">clock</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">clock</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
     <span class="c1"># 休眠1秒钟</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1"># 给时钟对象发消息使其走字</span>
@@ -461,7 +461,7 @@
 <p>定义一个类描述平面上的点，要求提供计算到另一个点距离的方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -489,7 +489,7 @@
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;屏面上的点&#34;&#34;&#34;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -508,19 +508,19 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;({self.x}, {self.y})&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s1">)&#39;</span>
 
 
 <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>定义一个类描述平面上的点并提供移动点和计算到另一个点距离的方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -579,7 +579,7 @@
 </span><span class="lnt">57
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
 
 
 <span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -627,11 +627,11 @@
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
     <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
     <span class="n">p2</span><span class="o">.</span><span class="n">move_by</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">distance_to</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

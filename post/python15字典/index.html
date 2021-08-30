@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python15%E5%AD%97%E5%85%B8/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="迄今为止，我们已经为大家介绍了Python中的三种容器型数据类型，但是这些数据类型还不足以帮助我们解决所有的问题。例如，我们要保存一个人的信" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python15%E5%AD%97%E5%85%B8/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-13T15:51:19&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-13T15:51:19&#43;08:00" />
+<meta property="article:published_time" content="2021-07-13T15:51:19+08:00" />
+<meta property="article:modified_time" content="2021-07-13T15:51:19+08:00" />
 
 <meta itemprop="name" content="字典">
-<meta itemprop="description" content="迄今为止，我们已经为大家介绍了Python中的三种容器型数据类型，但是这些数据类型还不足以帮助我们解决所有的问题。例如，我们要保存一个人的信"><meta itemprop="datePublished" content="2021-07-13T15:51:19&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-13T15:51:19&#43;08:00" />
+<meta itemprop="description" content="迄今为止，我们已经为大家介绍了Python中的三种容器型数据类型，但是这些数据类型还不足以帮助我们解决所有的问题。例如，我们要保存一个人的信"><meta itemprop="datePublished" content="2021-07-13T15:51:19+08:00" />
+<meta itemprop="dateModified" content="2021-07-13T15:51:19+08:00" />
 <meta itemprop="wordCount" content="3678">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="字典"/>
@@ -163,12 +163,12 @@
       <p>迄今为止，我们已经为大家介绍了Python中的三种容器型数据类型，但是这些数据类型还不足以帮助我们解决所有的问题。例如，我们要保存一个人的信息，包括姓名、年龄、体重、单位地址、家庭住址、本人手机号、紧急联系人手机号等信息，你会发现我们之前学过的列表、元组和集合都不是最理想的选择。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">,</span> <span class="s1">&#39;中同仁路8号&#39;</span><span class="p">,</span> <span class="s1">&#39;13122334455&#39;</span><span class="p">,</span> <span class="s1">&#39;13800998877&#39;</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">person1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">,</span> <span class="s1">&#39;中同仁路8号&#39;</span><span class="p">,</span> <span class="s1">&#39;13122334455&#39;</span><span class="p">,</span> <span class="s1">&#39;13800998877&#39;</span><span class="p">]</span>
 <span class="n">person2</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">,</span> <span class="s1">&#39;中同仁路8号&#39;</span><span class="p">,</span> <span class="s1">&#39;13122334455&#39;</span><span class="p">,</span> <span class="s1">&#39;13800998877&#39;</span><span class="p">)</span>
 <span class="n">person3</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">,</span> <span class="s1">&#39;中同仁路8号&#39;</span><span class="p">,</span> <span class="s1">&#39;13122334455&#39;</span><span class="p">,</span> <span class="s1">&#39;13800998877&#39;</span><span class="p">}</span>
 </code></pre></td></tr></table>
@@ -179,7 +179,7 @@
 <p>在Python中创建字典可以使用<code>{}</code>字面量语法，这一点跟上一节课讲的集合是一样的。但是字典的<code>{}</code>中的元素是以键值对的形式存在的，每个元素由<code>:</code>分隔的两个值构成，<code>:</code>前面是键，<code>:</code>后面是值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -191,23 +191,23 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">xinhua</span> <span class="o">=</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">xinhua</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;麓&#39;</span><span class="p">:</span> <span class="s1">&#39;山脚下&#39;</span><span class="p">,</span> <span class="s1">&#39;路&#39;</span><span class="p">:</span> <span class="s1">&#39;道，往来通行的地方；方面，地区：南～货，外～货；种类：他俩是一～人&#39;</span><span class="p">,</span>
     <span class="s1">&#39;蕗&#39;</span><span class="p">:</span> <span class="s1">&#39;甘草的别名&#39;</span><span class="p">,</span> <span class="s1">&#39;潞&#39;</span><span class="p">:</span> <span class="s1">&#39;潞水，水名，即今山西省的浊漳河；潞江，水名，即云南省的怒江&#39;</span>
 <span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">xinhua</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xinhua</span><span class="p">)</span>
 <span class="n">person</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;office&#39;</span><span class="p">:</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;home&#39;</span><span class="p">:</span> <span class="s1">&#39;中同仁路8号&#39;</span><span class="p">,</span> <span class="s1">&#39;tel&#39;</span><span class="p">:</span> <span class="s1">&#39;13122334455&#39;</span><span class="p">,</span> <span class="s1">&#39;econtact&#39;</span><span class="p">:</span> <span class="s1">&#39;13800998877&#39;</span>
 <span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>通过上面的代码，相信大家已经看出来了，用字典来保存一个人的信息远远优于使用列表或元组，因为我们可以用<code>:</code>前面的键来表示条目的含义，而<code>:</code>后面就是这个条目所对应的值。</p>
 <p>我们也可以使用内置函数<code>dict</code>或者是字典的生成式语法来创建字典。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -225,37 +225,37 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># dict函数(构造器)中的每一组参数就是字典中的一组键值对</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># dict函数(构造器)中的每一组参数就是字典中的一组键值对</span>
 <span class="n">person</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">home</span><span class="o">=</span><span class="s1">&#39;中同仁路8号&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>    
 <span class="c1"># {&#39;name&#39;: &#39;王大锤&#39;, &#39;age&#39;: 55, &#39;weight&#39;: 60, &#39;home&#39;: &#39;中同仁路8号&#39;}</span>
 
 <span class="c1"># 可以通过Python内置函数zip压缩两个序列并创建字典</span>
 <span class="n">items1</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="s1">&#39;ABCDE&#39;</span><span class="p">,</span> <span class="s1">&#39;12345&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">items1</span><span class="p">)</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">items1</span><span class="p">)</span>    
 <span class="c1"># {&#39;A&#39;: &#39;1&#39;, &#39;B&#39;: &#39;2&#39;, &#39;C&#39;: &#39;3&#39;, &#39;D&#39;: &#39;4&#39;, &#39;E&#39;: &#39;5&#39;}</span>
 <span class="n">items2</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="s1">&#39;ABCDE&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">items2</span><span class="p">)</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">items2</span><span class="p">)</span>    
 <span class="c1"># {&#39;A&#39;: 1, &#39;B&#39;: 2, &#39;C&#39;: 3, &#39;D&#39;: 4, &#39;E&#39;: 5}</span>
 
 <span class="c1"># 用字典生成式语法创建字典</span>
 <span class="n">items3</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">items3</span><span class="p">)</span>     <span class="c1"># {1: 1, 2: 8, 3: 27, 4: 64, 5: 125}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">items3</span><span class="p">)</span>     <span class="c1"># {1: 1, 2: 8, 3: 27, 4: 64, 5: 125}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>想知道字典中一共有多少组键值对，仍然是使用<code>len</code>函数；如果想对字典进行遍历，可以用<code>for</code>循环，但是需要注意，<code>for</code>循环只是对字典的键进行了遍历，不过没关系，我们可以通过字典的键获取到和这个键对应的值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;office&#39;</span><span class="p">:</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>    <span class="c1"># 4</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;office&#39;</span><span class="p">:</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>    <span class="c1"># 4</span>
 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">person</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="字典的运算">字典的运算</h1>
@@ -263,7 +263,7 @@
 <p><strong>字典中的键必须是不可变类型</strong>，例如整数（<code>int</code>）、浮点数（<code>float</code>）、字符串（<code>str</code>）、元组（<code>tuple</code>）等类型的值；显然，列表（<code>list</code>）和集合（<code>set</code>）是不能作为字典中的键的，当然字典类型本身也不能再作为字典中的键，因为字典也是可变类型，但是字典可以作为字典中的值。关于可变类型不能作为字典中的键的原因，我们在后面的课程中再为大家详细说明。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -280,21 +280,21 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;office&#39;</span><span class="p">:</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;office&#39;</span><span class="p">:</span> <span class="s1">&#39;科华北路62号&#39;</span><span class="p">}</span>
 <span class="c1"># 检查name和tel两个键在不在person字典中</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">,</span> <span class="s1">&#39;tel&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">)</span>    <span class="c1"># True False</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">,</span> <span class="s1">&#39;tel&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">)</span>    <span class="c1"># True False</span>
 <span class="c1"># 通过age修将person字典中对应的值修改为25</span>
 <span class="k">if</span> <span class="s1">&#39;age&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">:</span>
     <span class="n">person</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">25</span>
 <span class="c1"># 通过索引操作向person字典中存入新的键值对</span>
 <span class="n">person</span><span class="p">[</span><span class="s1">&#39;tel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;13122334455&#39;</span>
 <span class="n">person</span><span class="p">[</span><span class="s1">&#39;signature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;forever in heart, only in heart&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">,</span> <span class="s1">&#39;tel&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">)</span>    <span class="c1"># True True</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">,</span> <span class="s1">&#39;tel&#39;</span> <span class="ow">in</span> <span class="n">person</span><span class="p">)</span>    <span class="c1"># True True</span>
 <span class="c1"># 检查person字典中键值对的数量</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>    <span class="c1"># 6</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>    <span class="c1"># 6</span>
 <span class="c1"># 对字典的键进行循环并通索引运算获取键对应的值</span>
 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">person</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{key}: {person[key]}&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">person</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>需要注意，在通过索引运算获取字典中的值时，如指定的键没有在字典中，将会引发<code>KeyError</code>异常。</p>
@@ -302,7 +302,7 @@
 <p>字典类型的方法基本上都跟字典的键值对操作相关，可以通过下面的例子来了解这些方法的使用。例如，我们要用一个字典来保存学生的信息，我们可以使用学生的学号作为字典中的键，通过学号做索引运算就可以得到对应的学生；我们可以把字典中键对应的值也做成一个字典，这样就可以用多组键值对分别存储学生的姓名、性别、年龄、籍贯等信息，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -359,81 +359,81 @@
 </span><span class="lnt">55
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 字典中的值又是一个字典(嵌套的字典)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 字典中的值又是一个字典(嵌套的字典)</span>
 <span class="n">students</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">1001</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;狄仁杰&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;山西大同&#39;</span><span class="p">},</span>
-    <span class="mi">1002</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;白元芳&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;河北保定&#39;</span><span class="p">},</span>
-    <span class="mi">1003</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;武则天&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;四川广元&#39;</span><span class="p">}</span>
+    <span class="mi">1001</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;狄仁杰&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;山西大同&#39;</span><span class="p">},</span>
+    <span class="mi">1002</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;白元芳&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;河北保定&#39;</span><span class="p">},</span>
+    <span class="mi">1003</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;武则天&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;四川广元&#39;</span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1"># 使用get方法通过键获取对应的值，如果取不到不会引发KeyError异常而是返回None或设定的默认值</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1002</span><span class="p">))</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1002</span><span class="p">))</span>    
 <span class="c1"># {&#39;name&#39;: &#39;白元芳&#39;, &#39;sex&#39;: True, &#39;age&#39;: 23, &#39;place&#39;: &#39;河北保定&#39;}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1005</span><span class="p">))</span>    <span class="c1"># None</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1005</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;无名氏&#39;</span><span class="p">}))</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1005</span><span class="p">))</span>    <span class="c1"># None</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1005</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;无名氏&#39;</span><span class="p">}))</span>    
 <span class="c1"># {&#39;name&#39;: &#39;无名氏&#39;}</span>
 
 <span class="c1"># 获取字典中所有的键</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>      <span class="c1"># dict_keys([1001, 1002, 1003])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>      <span class="c1"># dict_keys([1001, 1002, 1003])</span>
 <span class="c1"># 获取字典中所有的值</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>    <span class="c1"># dict_values([{...}, {...}, {...}])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>    <span class="c1"># dict_values([{...}, {...}, {...}])</span>
 <span class="c1"># 获取字典中所有的键值对</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>     <span class="c1"># dict_items([(1001, {...}), (1002, {....}), (1003, {...})])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>     <span class="c1"># dict_items([(1001, {...}), (1002, {....}), (1003, {...})])</span>
 <span class="c1"># 对字典中所有的键值对进行循环遍历</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">students</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">&#39;---&gt;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">&#39;---&gt;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
 <span class="c1"># 使用pop方法通过键删除对应的键值对并返回该值</span>
 <span class="n">stu1</span> <span class="o">=</span> <span class="n">students</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1002</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stu1</span><span class="p">)</span>            
+<span class="nb">print</span><span class="p">(</span><span class="n">stu1</span><span class="p">)</span>            
 <span class="c1"># {&#39;name&#39;: &#39;白元芳&#39;, &#39;sex&#39;: True, &#39;age&#39;: 23, &#39;place&#39;: &#39;河北保定&#39;}</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">students</span><span class="p">))</span>    <span class="c1"># 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">students</span><span class="p">))</span>    <span class="c1"># 2</span>
 <span class="c1"># stu2 = students.pop(1005)    # KeyError: 1005</span>
 <span class="n">stu2</span> <span class="o">=</span> <span class="n">students</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1005</span><span class="p">,</span> <span class="p">{})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stu2</span><span class="p">)</span>             <span class="c1"># {}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stu2</span><span class="p">)</span>             <span class="c1"># {}</span>
 
 <span class="c1"># 使用popitem方法删除字典中最后一组键值对并返回对应的二元组</span>
 <span class="c1"># 如果字典中没有元素，调用该方法将引发KeyError异常</span>
 <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">students</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>    
 <span class="c1"># 1003 {&#39;name&#39;: &#39;武则天&#39;, &#39;sex&#39;: False, &#39;age&#39;: 20, &#39;place&#39;: &#39;四川广元&#39;}</span>
 
 <span class="c1"># setdefault可以更新字典中的键对应的值或向字典中存入新的键值对</span>
 <span class="c1"># setdefault方法的第一个参数是键，第二个参数是键对应的值</span>
 <span class="c1"># 如果这个键在字典中存在，更新这个键之后会返回原来与这个键对应的值</span>
 <span class="c1"># 如果这个键在字典中不存在，方法将返回第二个参数的值，默认为None</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">students</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="mi">1005</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;方启鹤&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>        <span class="c1"># {&#39;name&#39;: &#39;方启鹤&#39;, &#39;sex&#39;: True}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>      <span class="c1"># {1001: {...}, 1005: {...}}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">students</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="mi">1005</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;方启鹤&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>        <span class="c1"># {&#39;name&#39;: &#39;方启鹤&#39;, &#39;sex&#39;: True}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>      <span class="c1"># {1001: {...}, 1005: {...}}</span>
 
 <span class="c1"># 使用update更新字典元素，相同的键会用新值覆盖掉旧值，不同的键会添加到字典中</span>
 <span class="n">others</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">1005</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;乔峰&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;北京大兴&#39;</span><span class="p">},</span>
-    <span class="mi">1010</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王语嫣&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">19</span><span class="p">},</span>
-    <span class="mi">1008</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;钟灵&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+    <span class="mi">1005</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;乔峰&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;北京大兴&#39;</span><span class="p">},</span>
+    <span class="mi">1010</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王语嫣&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">19</span><span class="p">},</span>
+    <span class="mi">1008</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;钟灵&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
 <span class="p">}</span>
 <span class="n">students</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>      <span class="c1"># {1001: {...}, 1005: {...}, 1010: {...}, 1008: {...}}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>      <span class="c1"># {1001: {...}, 1005: {...}, 1010: {...}, 1008: {...}}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>跟列表一样，从字典中删除元素也可以使用<code>del</code>关键字，在删除元素的时候如果指定的键索引不到对应的值，一样会引发<code>KeyError</code>异常，具体的做法如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;王大锤&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 <span class="k">del</span> <span class="n">person</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>    <span class="c1"># {&#39;name&#39;: &#39;王大锤&#39;, &#39;sex&#39;: True}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>    <span class="c1"># {&#39;name&#39;: &#39;王大锤&#39;, &#39;sex&#39;: True}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="字典的应用">字典的应用</h1>
 <h2 id="统计每个英文字母出现的次数">统计每个英文字母出现的次数</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -442,19 +442,19 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sentence</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入一段话: &#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">sentence</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入一段话: &#39;</span><span class="p">)</span>
 <span class="n">counter</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">:</span>
     <span class="k">if</span> <span class="s1">&#39;A&#39;</span> <span class="o">&lt;=</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="s1">&#39;Z&#39;</span> <span class="ow">or</span> <span class="s1">&#39;a&#39;</span> <span class="o">&lt;=</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span>
         <span class="n">counter</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">counter</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;字母{key}出现了{value}次.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;字母</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">出现了</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">次.&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="找出股价大于100元的股票并创建一个新的字典">找出股价大于100元的股票并创建一个新的字典</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -467,7 +467,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">stocks</span> <span class="o">=</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">stocks</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;AAPL&#39;</span><span class="p">:</span> <span class="mf">191.88</span><span class="p">,</span>
     <span class="s1">&#39;GOOG&#39;</span><span class="p">:</span> <span class="mf">1186.96</span><span class="p">,</span>
     <span class="s1">&#39;IBM&#39;</span><span class="p">:</span> <span class="mf">149.24</span><span class="p">,</span>
@@ -477,7 +477,7 @@
     <span class="s1">&#39;SYMC&#39;</span><span class="p">:</span> <span class="mf">21.29</span>
 <span class="p">}</span>
 <span class="n">stocks2</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stocks</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stocks2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stocks2</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>

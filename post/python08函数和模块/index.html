@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python08%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="函数的作用 “代码有很多种坏味道，重复是最坏的一种！”。要写出高质量的代码首先要解决的就是重复代码的问题。我们可以将计算阶乘的功能封装到一个称" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python08%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-08T16:36:30&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-08T16:36:30&#43;08:00" />
+<meta property="article:published_time" content="2021-07-08T16:36:30+08:00" />
+<meta property="article:modified_time" content="2021-07-08T16:36:30+08:00" />
 
 <meta itemprop="name" content="函数和模块">
-<meta itemprop="description" content="函数的作用 “代码有很多种坏味道，重复是最坏的一种！”。要写出高质量的代码首先要解决的就是重复代码的问题。我们可以将计算阶乘的功能封装到一个称"><meta itemprop="datePublished" content="2021-07-08T16:36:30&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-08T16:36:30&#43;08:00" />
+<meta itemprop="description" content="函数的作用 “代码有很多种坏味道，重复是最坏的一种！”。要写出高质量的代码首先要解决的就是重复代码的问题。我们可以将计算阶乘的功能封装到一个称"><meta itemprop="datePublished" content="2021-07-08T16:36:30+08:00" />
+<meta itemprop="dateModified" content="2021-07-08T16:36:30+08:00" />
 <meta itemprop="wordCount" content="5123">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="函数和模块"/>
@@ -170,7 +170,7 @@
 <p><img src="/images/202107/21.png" alt=""></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -191,7 +191,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">输入M和N计算C(M,N)
 </span><span class="s2">从m中选n的结果
 </span><span class="s2">&#34;&#34;&#34;</span>
@@ -209,7 +209,7 @@
 <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;n = &#39;</span><span class="p">))</span>
 <span class="c1"># 当需要计算阶乘的时候不用再写重复的代码而是直接调用函数fac</span>
 <span class="c1"># 调用函数的语法是在函数名后面跟上圆括号并传入参数</span>
-<span class="k">print</span><span class="p">(</span><span class="n">fac</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">//</span> <span class="n">fac</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">//</span> <span class="n">fac</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fac</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">//</span> <span class="n">fac</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">//</span> <span class="n">fac</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">n</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -223,7 +223,7 @@
 <p>如果函数中没有<code>return</code>语句，那么函数默认返回代表空值的<code>None</code>。另外，在定义函数时，函数也可以没有自变量，但是函数名后面的圆括号是必须有的。Python中还允许函数的参数拥有默认值。调用的时候如果没指定参数，就使用默认参数。如果指定了，就是指定的参数。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -240,21 +240,21 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;三个数相加求和&#34;&#34;&#34;</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
 
 
 <span class="c1"># 调用add函数，没有传入参数，那么a、b、c都使用默认值0</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">())</span>         <span class="c1"># 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">())</span>         <span class="c1"># 0</span>
 <span class="c1"># 调用add函数，传入一个参数，那么该参数赋值给变量a, 变量b和c使用默认值0</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>        <span class="c1"># 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>        <span class="c1"># 1</span>
 <span class="c1"># 调用add函数，传入两个参数，1和2分别赋值给变量a和b，变量c使用默认值0</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>     <span class="c1"># 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>     <span class="c1"># 3</span>
 <span class="c1"># 调用add函数，传入三个参数，分别赋值给a、b、c三个变量</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 6</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 6</span>
 <span class="c1"># 传递参数时可以不按照设定的顺序进行传递，但是要用“参数名=参数值”的形式</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">200</span><span class="p">))</span>    <span class="c1"># 350</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">200</span><span class="p">))</span>    <span class="c1"># 350</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -264,7 +264,7 @@
 <p>我们还可以实现一个对任意多个数求和的<code>add</code>函数，因为Python语言中的函数可以通过<code>星号表达式</code>语法来支持可变参数。所谓可变参数指的是在调用函数时，可以向函数传入0个或任意多个参数。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -286,7 +286,7 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">用可变参数实现对任意多个数求和的and函数
 </span><span class="s2">&#34;&#34;&#34;</span>
 
@@ -301,11 +301,11 @@
 
 
 <span class="c1"># 在调用add函数时可以传入0个或任意多个参数</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="用模块管理函数">用模块管理函数</h1>
@@ -313,29 +313,29 @@
 <p><code>module1.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello, world!&#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello, world!&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>module2.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;goodbye, world!&#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;goodbye, world!&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>test.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -343,7 +343,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">module1</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">module1</span>
 <span class="kn">import</span> <span class="nn">module2</span>
 
 <span class="c1"># 用“模块名.函数名”的方式（完全限定名）调用函数，</span>
@@ -355,15 +355,15 @@
 <p><code>test.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">module1</span> <span class="kn">as</span> <span class="nn">m1</span>
-<span class="kn">import</span> <span class="nn">module2</span> <span class="kn">as</span> <span class="nn">m2</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">module1</span> <span class="k">as</span> <span class="nn">m1</span>
+<span class="kn">import</span> <span class="nn">module2</span> <span class="k">as</span> <span class="nn">m2</span>
 
 <span class="n">m1</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>    <span class="c1"># hello, world!</span>
 <span class="n">m2</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>    <span class="c1"># goodbye, world!</span>
@@ -373,7 +373,7 @@
 <p><code>test.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -382,7 +382,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">module1</span> <span class="kn">import</span> <span class="n">foo</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">module1</span> <span class="kn">import</span> <span class="n">foo</span>
 
 <span class="n">foo</span><span class="p">()</span>    <span class="c1"># hello, world!</span>
 
@@ -395,13 +395,13 @@
 <p><code>test.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">module2</span> <span class="kn">import</span> <span class="n">foo</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">module2</span> <span class="kn">import</span> <span class="n">foo</span>
 <span class="kn">from</span> <span class="nn">module1</span> <span class="kn">import</span> <span class="n">foo</span>
 
 <span class="n">foo</span><span class="p">()</span>    <span class="c1"># hello, world!</span>
@@ -411,14 +411,14 @@
 <p><code>test.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">module1</span> <span class="kn">import</span> <span class="n">foo</span> <span class="k">as</span> <span class="n">f1</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">module1</span> <span class="kn">import</span> <span class="n">foo</span> <span class="k">as</span> <span class="n">f1</span>
 <span class="kn">from</span> <span class="nn">module2</span> <span class="kn">import</span> <span class="n">foo</span> <span class="k">as</span> <span class="n">f2</span>
 
 <span class="n">f1</span><span class="p">()</span>    <span class="c1"># hello, world!</span>
@@ -431,7 +431,7 @@
 <p><code>module3.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -448,7 +448,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
     <span class="k">pass</span>
 
 
@@ -459,9 +459,9 @@
 <span class="c1"># 只有被Python解释器直接执行的模块的名字才是__main__</span>
 <span class="c1"># 直接执行的该模块时才会被执行，被导入的时候不会执行</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call foo()&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;call foo()&#39;</span><span class="p">)</span>
     <span class="n">foo</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call bar()&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;call bar()&#39;</span><span class="p">)</span>
     <span class="n">bar</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
@@ -474,12 +474,12 @@
 <p><code>test.py</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">module3</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">module3</span>
 
 <span class="c1"># 导入module3时 不会执行模块中if条件成立时的代码 因为模块的名字是module3而不是__main__</span>
 </code></pre></td></tr></table>
@@ -569,7 +569,7 @@
 <p>最后，我们来讨论一下Python中有关变量作用域的问题。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -589,15 +589,15 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
     <span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
 
     <span class="c1"># Python中可以在函数内部再定义函数</span>
     <span class="k">def</span> <span class="nf">bar</span><span class="p">():</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
     <span class="n">bar</span><span class="p">()</span>
     <span class="c1"># print(c)  # NameError: name &#39;c&#39; is not defined</span>
@@ -613,7 +613,7 @@
 <p>再看看下面这段代码，我们希望通过函数调用修改全局变量<code>a</code>的值，但实际上下面的代码是做不到的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -624,21 +624,21 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mi">200</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 200</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 200</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">foo</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 100</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 100</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>在调用<code>foo</code>函数后，我们发现<code>a</code>的值仍然是100，这是因为当我们在函数<code>foo</code>中写<code>a = 200</code>的时候，是重新定义了一个名字为<code>a</code>的局部变量，它跟全局作用域的<code>a</code>并不是同一个变量，因为局部作用域中有了自己的变量<code>a</code>，因此<code>foo</code>函数不再搜索全局作用域中的<code>a</code>。如果我们希望在<code>foo</code>函数中修改全局作用域中的<code>a</code>，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -650,16 +650,16 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">a</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mi">200</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 200</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 200</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">foo</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 200</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 200</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>我们可以使用<code>global</code>关键字来指示<code>foo</code>函数中的变量<code>a</code>来自于全局作用域，如果全局作用域中没有<code>a</code>，那么下面一行的代码就会定义变量<code>a</code>并将其置于全局作用域。同理，如果我们希望函数内部的函数能够修改嵌套作用域中的变量，可以使用<code>nonlocal</code>关键字来指示变量来自于嵌套作用域，请大家自行试验。</p>
@@ -670,7 +670,7 @@
 <p>说了那么多，其实结论很简单，从现在开始我们可以将Python代码按照下面的格式进行书写，这一点点的改进其实就是在我们理解了函数和作用域的基础上跨出的巨大的一步。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -679,7 +679,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="c1"># Todo: Add your code here</span>
     <span class="k">pass</span>
 

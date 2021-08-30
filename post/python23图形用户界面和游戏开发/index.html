@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python23%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E5%92%8C%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="小恐龙 基于tkinter模块的GUI GUI是图形用户界面的缩写，图形化的用户界面对使用过计算机的人来说应该都不陌生，在此也无需进行赘述。Py" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python23%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E5%92%8C%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-28T22:20:26&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-28T22:20:26&#43;08:00" />
+<meta property="article:published_time" content="2021-07-28T22:20:26+08:00" />
+<meta property="article:modified_time" content="2021-07-28T22:20:26+08:00" />
 
 <meta itemprop="name" content="图形用户界面和游戏开发">
-<meta itemprop="description" content="小恐龙 基于tkinter模块的GUI GUI是图形用户界面的缩写，图形化的用户界面对使用过计算机的人来说应该都不陌生，在此也无需进行赘述。Py"><meta itemprop="datePublished" content="2021-07-28T22:20:26&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-28T22:20:26&#43;08:00" />
+<meta itemprop="description" content="小恐龙 基于tkinter模块的GUI GUI是图形用户界面的缩写，图形化的用户界面对使用过计算机的人来说应该都不陌生，在此也无需进行赘述。Py"><meta itemprop="datePublished" content="2021-07-28T22:20:26+08:00" />
+<meta itemprop="dateModified" content="2021-07-28T22:20:26+08:00" />
 <meta itemprop="wordCount" content="4466">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="图形用户界面和游戏开发"/>
@@ -175,7 +175,7 @@
 <p>下面的代码演示了如何使用tkinter做一个简单的GUI应用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -220,16 +220,16 @@
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">tkinter</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">tkinter</span>
 <span class="kn">import</span> <span class="nn">tkinter.messagebox</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="c1"># 修改标签上的文字</span>
     <span class="k">def</span> <span class="nf">change_label_text</span><span class="p">():</span>
-        <span class="n">nonlocal</span> <span class="n">flag</span>
+        <span class="k">nonlocal</span> <span class="n">flag</span>
         <span class="n">flag</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">flag</span>
         <span class="n">color</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>\
             <span class="k">if</span> <span class="n">flag</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Goodbye, world!&#39;</span><span class="p">)</span>
@@ -273,7 +273,7 @@
 <h2 id="制作游戏窗口">制作游戏窗口</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -296,7 +296,7 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pygame</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pygame</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -306,13 +306,13 @@
     <span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
     <span class="c1"># 设置当前窗口的标题</span>
     <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s1">&#39;大球吃小球&#39;</span><span class="p">)</span>
-    <span class="n">running</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="c1"># 开启一个事件循环处理发生的事件</span>
     <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
         <span class="c1"># 从消息队列中获取事件并对事件进行处理</span>
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
-                <span class="n">running</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -323,7 +323,7 @@
 <p>可以通过pygame中draw模块的函数在窗口上绘图，可以绘制的图形包括：线条、矩形、多边形、圆、椭圆、圆弧等。需要说明的是，屏幕坐标系是将屏幕左上角设置为坐标原点<code>(0, 0)</code>，向右是x轴的正向，向下是y轴的正向，在表示位置或者设置尺寸的时候，我们默认的单位都是像素。所谓像素就是屏幕上的一个点，你可以用浏览图片的软件试着将一张图片放大若干倍，就可以看到这些点。pygame中表示颜色用的是色光三原色表示法，即通过一个元组或列表来指定颜色的RGB值，每个值都在0~255之间，因为是每种原色都用一个8位（bit）的值来表示，三种颜色相当于一共由24位构成，这也就是常说的“24位颜色表示法”。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -352,7 +352,7 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pygame</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pygame</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -368,13 +368,13 @@
     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="c1"># 刷新当前窗口(渲染窗口将绘制的图像呈现出来)</span>
     <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
-    <span class="n">running</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="c1"># 开启一个事件循环处理发生的事件</span>
     <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
         <span class="c1"># 从消息队列中获取事件并对事件进行处理</span>
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
-                <span class="n">running</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -386,7 +386,7 @@
 <p>如果需要直接加载图像到窗口上，可以使用pygame中image模块的函数来加载图像，再通过之前获得的窗口对象的<code>blit</code>方法渲染图像，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -417,7 +417,7 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pygame</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pygame</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -435,13 +435,13 @@
     <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">ball_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
     <span class="c1"># 刷新当前窗口(渲染窗口将绘制的图像呈现出来)</span>
     <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
-    <span class="n">running</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="c1"># 开启一个事件循环处理发生的事件</span>
     <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
         <span class="c1"># 从消息队列中获取事件并对事件进行处理</span>
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
-                <span class="n">running</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -453,7 +453,7 @@
 <p>说到动画这个词大家都不会陌生，事实上要实现动画效果，本身的原理也非常简单，就是将不连续的图片连续的播放，只要每秒钟达到了一定的帧数，那么就可以做出比较流畅的动画效果。如果要让上面代码中的小球动起来，可以将小球的位置用变量来表示，并在循环中修改小球的位置再刷新整个窗口即可。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -484,7 +484,7 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pygame</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">pygame</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -496,13 +496,13 @@
     <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s1">&#39;大球吃小球&#39;</span><span class="p">)</span>
     <span class="c1"># 定义变量来表示小球在屏幕上的位置</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span>
-    <span class="n">running</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="c1"># 开启一个事件循环处理发生的事件</span>
     <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
         <span class="c1"># 从消息队列中获取事件并对事件进行处理</span>
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
-                <span class="n">running</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
         <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
@@ -519,7 +519,7 @@
 <p>通常一个游戏中会有很多对象出现，而这些对象之间的“碰撞”在所难免，比如炮弹击中了飞机、箱子撞到了地面等。碰撞检测在绝大多数的游戏中都是一个必须得处理的至关重要的问题，pygame的sprite（动画精灵）模块就提供了对碰撞检测的支持，这里我们暂时不介绍sprite模块提供的功能，因为要检测两个小球有没有碰撞其实非常简单，只需要检查球心的距离有没有小于两个球的半径之和。为了制造出更多的小球，我们可以通过对鼠标事件的处理，在点击鼠标的位置创建颜色、大小和移动速度都随机的小球，当然要做到这一点，我们可以把之前学习到的面向对象的知识应用起来。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -587,7 +587,7 @@
 </span><span class="lnt">66
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">unique</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">unique</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 
@@ -625,7 +625,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sx</span> <span class="o">=</span> <span class="n">sx</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sy</span> <span class="o">=</span> <span class="n">sy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">alive</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alive</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;移动&#34;&#34;&#34;</span>
@@ -646,7 +646,7 @@
             <span class="n">distance</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">radius</span> \
                     <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">radius</span><span class="p">:</span>
-                <span class="n">other</span><span class="o">.</span><span class="n">alive</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">alive</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="mf">0.146</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">):</span>
@@ -659,7 +659,7 @@
 <p>可以在事件循环中对鼠标事件进行处理，通过事件对象的<code>type</code>属性可以判定事件类型，再通过<code>pos</code>属性就可以获得鼠标点击的位置。如果要处理键盘事件也是在这个地方，做法与处理鼠标事件类似。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -707,7 +707,7 @@
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="c1"># 定义用来装所有球的容器</span>
     <span class="n">balls</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># 初始化导入的pygame中的模块</span>
@@ -716,13 +716,13 @@
     <span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
     <span class="c1"># 设置当前窗口的标题</span>
     <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s1">&#39;大球吃小球&#39;</span><span class="p">)</span>
-    <span class="n">running</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="c1"># 开启一个事件循环处理发生的事件</span>
     <span class="k">while</span> <span class="n">running</span><span class="p">:</span>
         <span class="c1"># 从消息队列中获取事件并对事件进行处理</span>
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
-                <span class="n">running</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="c1"># 处理鼠标事件的代码</span>
             <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">MOUSEBUTTONDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="c1"># 获得点击鼠标的位置</span>

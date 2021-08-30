@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python31%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="今天我们使用的计算机早已进入多CPU或多核时代，而我们使用的操作系统都是支持“多任务”的操作系统，这使得我们可以同时运行多个程序，也可以将一" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python31%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-08-04T14:42:06&#43;08:00" />
-<meta property="article:modified_time" content="2021-08-04T14:42:06&#43;08:00" />
+<meta property="article:published_time" content="2021-08-04T14:42:06+08:00" />
+<meta property="article:modified_time" content="2021-08-04T14:42:06+08:00" />
 
 <meta itemprop="name" content="进程和线程">
-<meta itemprop="description" content="今天我们使用的计算机早已进入多CPU或多核时代，而我们使用的操作系统都是支持“多任务”的操作系统，这使得我们可以同时运行多个程序，也可以将一"><meta itemprop="datePublished" content="2021-08-04T14:42:06&#43;08:00" />
-<meta itemprop="dateModified" content="2021-08-04T14:42:06&#43;08:00" />
+<meta itemprop="description" content="今天我们使用的计算机早已进入多CPU或多核时代，而我们使用的操作系统都是支持“多任务”的操作系统，这使得我们可以同时运行多个程序，也可以将一"><meta itemprop="datePublished" content="2021-08-04T14:42:06+08:00" />
+<meta itemprop="dateModified" content="2021-08-04T14:42:06+08:00" />
 <meta itemprop="wordCount" content="7792">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="进程和线程"/>
@@ -172,7 +172,7 @@
 <p>下面用一个下载文件的例子来说明使用多进程和不使用多进程到底有什么差别，先看看下面的代码。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -193,14 +193,14 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
 
 <span class="k">def</span> <span class="nf">download_task</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;开始下载</span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;开始下载</span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
     <span class="n">time_to_download</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">sleep</span><span class="p">(</span><span class="n">time_to_download</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">下载完成! 耗费了</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">time_to_download</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">下载完成! 耗费了</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">time_to_download</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -208,7 +208,7 @@
     <span class="n">download_task</span><span class="p">(</span><span class="s1">&#39;Python从入门到住院.pdf&#39;</span><span class="p">)</span>
     <span class="n">download_task</span><span class="p">(</span><span class="s1">&#39;Peking Hot.avi&#39;</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;总共耗费了</span><span class="si">%.2f</span><span class="s1">秒.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;总共耗费了</span><span class="si">%.2f</span><span class="s1">秒.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
@@ -217,14 +217,14 @@
 </div><p>下面是运行程序得到的一次运行结果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">开始下载Python从入门到住院.pdf...
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">开始下载Python从入门到住院.pdf...
 Python从入门到住院.pdf下载完成! 耗费了6秒
 开始下载Peking Hot.avi...
 Peking Hot.avi下载完成! 耗费了7秒
@@ -234,7 +234,7 @@ Peking Hot.avi下载完成! 耗费了7秒
 </div><p>从上面的例子可以看出，如果程序中的代码只能按顺序一点点的往下执行，那么即使执行两个毫不相关的下载任务，也需要先等待一个文件下载完成后才能开始下一个下载任务，很显然这并不合理也没有效率。接下来我们使用多进程的方式将两个下载任务放到不同的进程中，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -264,18 +264,18 @@ Peking Hot.avi下载完成! 耗费了7秒
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getpid</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
 
 
 <span class="k">def</span> <span class="nf">download_task</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;启动下载进程，进程号[</span><span class="si">%d</span><span class="s1">].&#39;</span> <span class="o">%</span> <span class="n">getpid</span><span class="p">())</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;开始下载</span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;启动下载进程，进程号[</span><span class="si">%d</span><span class="s1">].&#39;</span> <span class="o">%</span> <span class="n">getpid</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;开始下载</span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
     <span class="n">time_to_download</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">sleep</span><span class="p">(</span><span class="n">time_to_download</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">下载完成! 耗费了</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">time_to_download</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">下载完成! 耗费了</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">time_to_download</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -287,7 +287,7 @@ Peking Hot.avi下载完成! 耗费了7秒
     <span class="n">p1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
     <span class="n">p2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;总共耗费了</span><span class="si">%.2f</span><span class="s1">秒.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;总共耗费了</span><span class="si">%.2f</span><span class="s1">秒.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -297,7 +297,7 @@ Peking Hot.avi下载完成! 耗费了7秒
 </div><p>在上面的代码中，我们通过<code>Process</code>类创建了进程对象，通过<code>target</code>参数我们传入一个函数来表示进程启动后要执行的代码，后面的<code>args</code>是一个元组，它代表了传递给函数的参数。<code>Process</code>对象的<code>start</code>方法用来启动进程，而<code>join</code>方法表示等待进程执行结束。运行上面的代码可以明显发现两个下载任务“同时”启动了，而且程序的执行时间将大大缩短，不再是两个任务的时间总和。下面是程序的一次执行结果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -306,7 +306,7 @@ Peking Hot.avi下载完成! 耗费了7秒
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">启动下载进程，进程号<span class="o">[</span>1530<span class="o">]</span>.
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">启动下载进程，进程号<span class="o">[</span>1530<span class="o">]</span>.
 开始下载Python从入门到住院.pdf...
 启动下载进程，进程号<span class="o">[</span>1531<span class="o">]</span>.
 开始下载Peking Hot.avi...
@@ -318,7 +318,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </div><p>我们也可以使用subprocess模块中的类和函数来创建和启动子进程，然后通过管道来和子进程通信，这些内容我们不在此进行讲解，有兴趣的读者可以自己了解这些知识。接下来我们将重点放在如何实现两个进程间的通信。我们启动两个进程，一个输出Ping，一个输出Pong，两个进程输出的Ping和Pong加起来一共10个。听起来很简单吧，但是如果这样写可是错的哦。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -341,7 +341,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
 
 <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
@@ -350,7 +350,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 <span class="k">def</span> <span class="nf">sub_task</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">counter</span>
     <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
 
@@ -369,7 +369,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 <p>在Python早期的版本中就引入了thread模块（现在名为_thread）来实现多线程编程，然而该模块过于底层，而且很多功能都没有提供，因此目前的多线程开发我们推荐使用threading模块，该模块对多线程编程提供了更好的面向对象的封装。我们把刚才下载文件的例子用多线程的方式来实现一遍。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -397,16 +397,16 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
 
 
 <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;开始下载</span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;开始下载</span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
     <span class="n">time_to_download</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">sleep</span><span class="p">(</span><span class="n">time_to_download</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">下载完成! 耗费了</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">time_to_download</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">下载完成! 耗费了</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">time_to_download</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -418,7 +418,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
     <span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
     <span class="n">t2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;总共耗费了</span><span class="si">%.3f</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;总共耗费了</span><span class="si">%.3f</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -428,7 +428,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </div><p>我们可以直接使用threading模块的<code>Thread</code>类来创建线程，但是我们之前讲过一个非常重要的概念叫“继承”，我们可以从已有的类创建新类，因此也可以通过继承<code>Thread</code>类的方式来创建自定义的线程类，然后再创建线程对象并启动线程。代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -462,7 +462,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
 
@@ -474,10 +474,10 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
         <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="n">filename</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;开始下载</span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;开始下载</span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
         <span class="n">time_to_download</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
         <span class="n">sleep</span><span class="p">(</span><span class="n">time_to_download</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">下载完成! 耗费了</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">,</span> <span class="n">time_to_download</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">下载完成! 耗费了</span><span class="si">%d</span><span class="s1">秒&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">,</span> <span class="n">time_to_download</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -489,7 +489,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
     <span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
     <span class="n">t2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;总共耗费了</span><span class="si">%.2f</span><span class="s1">秒.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;总共耗费了</span><span class="si">%.2f</span><span class="s1">秒.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -500,7 +500,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 <p>下面的例子演示了100个线程向同一个银行账户转账（转入1元钱）的场景，在这个例子中，银行账户就是一个临界资源，在没有保护的情况下我们很有可能会得到错误的结果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -551,7 +551,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 
 
@@ -595,7 +595,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
     <span class="c1"># 等所有存款的线程都执行完毕</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
         <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;账户余额为: ￥</span><span class="si">%d</span><span class="s1">元&#39;</span> <span class="o">%</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;账户余额为: ￥</span><span class="si">%d</span><span class="s1">元&#39;</span> <span class="o">%</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -605,7 +605,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </div><p>运行上面的程序，结果让人大跌眼镜，100个线程分别向账户中转入1元钱，结果居然远远小于100元。之所以出现这种情况是因为我们没有对银行账户这个“临界资源”加以保护，多个线程同时向账户中存钱时，会一起执行到<code>new_balance = self._balance + money</code>这行代码，多个线程得到的账户余额都是初始状态下的<code>0</code>，所以都是<code>0</code>上面做了+1的操作，因此得到了错误的结果。在这种情况下，“锁”就可以派上用场了。我们可以通过“锁”来保护“临界资源”，只有获得“锁”的线程才能访问“临界资源”，而其他没有得到“锁”的线程只能被阻塞起来，直到获得“锁”的线程释放了“锁”，其他线程才有机会获得“锁”，进而访问被保护的“临界资源”。下面的代码演示了如何使用“锁”来保护对银行账户的操作，从而获得正确的结果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -658,7 +658,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">51
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span><span class="p">,</span> <span class="n">Lock</span>
 
 
@@ -704,7 +704,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
         <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
         <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;账户余额为: ￥</span><span class="si">%d</span><span class="s1">元&#39;</span> <span class="o">%</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;账户余额为: ￥</span><span class="si">%d</span><span class="s1">元&#39;</span> <span class="o">%</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -728,7 +728,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 <p>如下所示的界面中，有“下载”和“关于”两个按钮，用休眠的方式模拟点击“下载”按钮会联网下载文件需要耗费10秒的时间，如果不使用“多线程”，我们会发现，当点击“下载”按钮后整个程序的其他部分都被这个耗时间的任务阻塞而无法执行了，这显然是非常糟糕的用户体验，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -763,7 +763,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">tkinter</span>
 <span class="kn">import</span> <span class="nn">tkinter.messagebox</span>
 
@@ -782,7 +782,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
     <span class="n">top</span> <span class="o">=</span> <span class="n">tkinter</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
     <span class="n">top</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;单线程&#39;</span><span class="p">)</span>
     <span class="n">top</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s1">&#39;200x150&#39;</span><span class="p">)</span>
-    <span class="n">top</span><span class="o">.</span><span class="n">wm_attributes</span><span class="p">(</span><span class="s1">&#39;-topmost&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">top</span><span class="o">.</span><span class="n">wm_attributes</span><span class="p">(</span><span class="s1">&#39;-topmost&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
     <span class="n">panel</span> <span class="o">=</span> <span class="n">tkinter</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
     <span class="n">button1</span> <span class="o">=</span> <span class="n">tkinter</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">panel</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;下载&#39;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">download</span><span class="p">)</span>
@@ -801,7 +801,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </div><p>如果使用多线程将耗时间的任务放到一个独立的线程中执行，这样就不会因为执行耗时间的任务而阻塞了主线程，修改后的代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -846,7 +846,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">tkinter</span>
 <span class="kn">import</span> <span class="nn">tkinter.messagebox</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
@@ -867,7 +867,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
         <span class="n">button1</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">tkinter</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">)</span>
         <span class="c1"># 通过daemon参数将线程设置为守护线程(主程序退出就不再保留执行)</span>
         <span class="c1"># 在线程中处理耗时间的下载任务</span>
-        <span class="n">DownloadTaskHandler</span><span class="p">(</span><span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">DownloadTaskHandler</span><span class="p">(</span><span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">show_about</span><span class="p">():</span>
         <span class="n">tkinter</span><span class="o">.</span><span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="s1">&#39;关于&#39;</span><span class="p">,</span> <span class="s1">&#39;作者: h(v1.0)&#39;</span><span class="p">)</span>
@@ -895,7 +895,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 <p>我们来完成1~100000000求和的计算密集型任务，这个问题本身非常简单，有点循环的知识就能解决，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -913,7 +913,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -922,9 +922,9 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">number_list</span><span class="p">:</span>
         <span class="n">total</span> <span class="o">+=</span> <span class="n">number</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Execution time: </span><span class="si">%.3f</span><span class="s1">s&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time: </span><span class="si">%.3f</span><span class="s1">s&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -934,7 +934,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </div><p>在上面的代码中，我故意先去创建了一个列表容器然后填入了100000000个数，这一步其实是比较耗时间的，所以为了公平起见，当我们将这个任务分解到8个进程中去执行的时候，我们暂时也不考虑列表切片操作花费的时间，只是把做运算和合并运算结果的时间统计出来，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -975,7 +975,7 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 
@@ -1007,9 +1007,9 @@ Python从入门到住院.pdf下载完成! 耗费了10秒
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="n">result_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
         <span class="n">total</span> <span class="o">+=</span> <span class="n">result_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Execution time: &#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time: &#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

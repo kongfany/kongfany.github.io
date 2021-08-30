@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python21python%E6%A0%87%E5%87%86%E5%BA%93%E5%88%9D%E6%8E%A2/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="base64 - Base64编解码模块 Base64是一种基于64个可打印字符来表示二进制数据的方法。由于$log _{2}64=6$，所以Base64以6" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python21python%E6%A0%87%E5%87%86%E5%BA%93%E5%88%9D%E6%8E%A2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-27T11:48:24&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-27T11:48:24&#43;08:00" />
+<meta property="article:published_time" content="2021-07-27T11:48:24+08:00" />
+<meta property="article:modified_time" content="2021-07-27T11:48:24+08:00" />
 
 <meta itemprop="name" content="Python标准库初探">
-<meta itemprop="description" content="base64 - Base64编解码模块 Base64是一种基于64个可打印字符来表示二进制数据的方法。由于$log _{2}64=6$，所以Base64以6"><meta itemprop="datePublished" content="2021-07-27T11:48:24&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-27T11:48:24&#43;08:00" />
+<meta itemprop="description" content="base64 - Base64编解码模块 Base64是一种基于64个可打印字符来表示二进制数据的方法。由于$log _{2}64=6$，所以Base64以6"><meta itemprop="datePublished" content="2021-07-27T11:48:24+08:00" />
+<meta itemprop="dateModified" content="2021-07-27T11:48:24+08:00" />
 <meta itemprop="wordCount" content="3798">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python标准库初探"/>
@@ -163,7 +163,7 @@
 <p>关于Base64编码的细节，大家可以参考<a href="http://www.ruanyifeng.com/blog/2008/06/base64.html">《Base64笔记》</a>一文，Python标准库中的<code>base64</code>模块提供了<code>b64encode</code>和<code>b64decode</code>两个函数，专门用于实现Base64的编码和解码，下面演示了在<strong>Python的交互式环境</strong>中执行这两个函数的效果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -173,7 +173,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">base64</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">base64</span>
 <span class="o">&gt;&gt;&gt;</span> 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
@@ -195,7 +195,7 @@
 <p>下面是在<strong>Python交互式环境中</strong>使用<code>namedtuple</code>创建扑克牌类的例子。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -210,7 +210,7 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="o">&gt;&gt;&gt;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">Card</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Card&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;suite&#39;</span><span class="p">,</span> <span class="s1">&#39;face&#39;</span><span class="p">))</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">card1</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="s1">&#39;红桃&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -219,16 +219,16 @@
 <span class="n">Card</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="s1">&#39;红桃&#39;</span><span class="p">,</span> <span class="n">face</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">card2</span>
 <span class="n">Card</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="s1">&#39;草花&#39;</span><span class="p">,</span> <span class="n">face</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{card1.suite}{card1.face}&#39;</span><span class="p">)</span>
-<span class="err">红桃</span><span class="mi">5</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{card2.suite}{card2.face}&#39;</span><span class="p">)</span>
-<span class="err">草花</span><span class="mi">9</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">card1</span><span class="o">.</span><span class="n">suite</span><span class="si">}{</span><span class="n">card1</span><span class="o">.</span><span class="n">face</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">红桃5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">card2</span><span class="o">.</span><span class="n">suite</span><span class="si">}{</span><span class="n">card2</span><span class="o">.</span><span class="n">face</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">草花9</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>下面是使用<code>Counter</code>类统计列表中出现次数最多的三个元素的例子。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -242,7 +242,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
 
 <span class="n">words</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;look&#39;</span><span class="p">,</span> <span class="s1">&#39;into&#39;</span><span class="p">,</span> <span class="s1">&#39;my&#39;</span><span class="p">,</span> <span class="s1">&#39;eyes&#39;</span><span class="p">,</span> <span class="s1">&#39;look&#39;</span><span class="p">,</span> <span class="s1">&#39;into&#39;</span><span class="p">,</span> <span class="s1">&#39;my&#39;</span><span class="p">,</span> <span class="s1">&#39;eyes&#39;</span><span class="p">,</span>
@@ -253,7 +253,7 @@
 <span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
 <span class="c1"># 打印words列表中出现频率最高的3个元素及其出现次数</span>
 <span class="k">for</span> <span class="n">elem</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counter</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="hashlib---哈希函数模块">hashlib - 哈希函数模块</h1>
@@ -261,7 +261,7 @@
 <p>Python标准库的<code>hashlib</code>模块提供了对哈希函数的封装，通过使用<code>md5</code>、<code>sha1</code>、<code>sha256</code>等类，我们可以轻松的生成“数字指纹”。举一个简单的例子，用户注册时我们希望在数据库中保存用户的密码，很显然我们不能将用户密码直接保存在数据库中，这样可能会导致用户隐私的泄露，所以在数据库中保存用户密码时，通常都会将密码的“指纹”保存起来，用户登录时通过哈希函数计算密码的“指纹”再进行匹配来判断用户登录是否成功。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -277,20 +277,20 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">hashlib</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">hashlib</span>
 
 <span class="c1"># 计算字符串&#34;123456&#34;的MD5摘要</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="s1">&#39;123456&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="s1">&#39;123456&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
 
 <span class="c1"># 计算文件&#34;Python-3.7.1.tar.xz&#34;的MD5摘要</span>
 <span class="c1"># 当前目录下的一个文件</span>
 <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Python-3.7.1.tar.xz&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Python-3.7.1.tar.xz&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
     <span class="k">while</span> <span class="n">data</span><span class="p">:</span>
         <span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -300,7 +300,7 @@
 <p><code>heapq</code>模块实现了堆排序算法，如果希望使用堆排序，尤其是要解决<strong>TopK问题</strong>（从序列中找到K个最大或最小元素），直接使用该模块即可，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -322,13 +322,13 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">heapq</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">heapq</span>
 
 <span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">]</span>
 <span class="c1"># 找出列表中最大的三个元素</span>
-<span class="k">print</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">list1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">list1</span><span class="p">))</span>
 <span class="c1"># 找出列表中最小的三个元素</span>
-<span class="k">print</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">list1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">list1</span><span class="p">))</span>
 
 <span class="n">list2</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span> <span class="s1">&#39;shares&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="mf">91.1</span><span class="p">},</span>
@@ -339,16 +339,16 @@
     <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ACME&#39;</span><span class="p">,</span> <span class="s1">&#39;shares&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="mf">115.65</span><span class="p">}</span>
 <span class="p">]</span>
 <span class="c1"># 找出价格最高的三只股票</span>
-<span class="k">print</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">list2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">list2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]))</span>
 <span class="c1"># 找出持有数量最高的三只股票</span>
-<span class="k">print</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">list2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;shares&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">list2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;shares&#39;</span><span class="p">]))</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="itertools---迭代工具模块">itertools - 迭代工具模块</h1>
 <p><code>itertools</code>可以帮助我们生成各种各样的迭代器，大家可以看看下面的例子。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -370,26 +370,26 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">itertools</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">itertools</span>
 
 <span class="c1"># 产生ABCD的全排列</span>
 <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <span class="c1"># 产生ABCDE的五选三组合</span>
 <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="s1">&#39;ABCDE&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <span class="c1"># 产生ABCD和123的笛卡尔积</span>
 <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">,</span> <span class="s1">&#39;123&#39;</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <span class="c1"># 产生ABC的无限循环序列</span>
 <span class="n">it</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">((</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="random---随机数和随机抽样模块">random - 随机数和随机抽样模块</h1>
@@ -432,7 +432,7 @@
 <p>由于<code>uuid4</code>存在概率型重复，那么在真正需要全局唯一标识符的地方最好不用使用它。在分布式环境下，<code>uuid1</code>是很好的选择，因为它能够保证生成ID的全局唯一性。下面是在<strong>Python交互式环境中</strong>使用<code>uuid1</code>函数生成全局唯一标识符的例子。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -441,7 +441,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">uuid</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">uuid</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
 <span class="s1">&#39;622a8334baab11eaaa9c60f81da8d840&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>

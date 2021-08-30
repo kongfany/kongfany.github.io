@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python14%E9%9B%86%E5%90%88/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python14%E9%9B%86%E5%90%88/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-12T19:18:40&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-12T19:18:40&#43;08:00" />
+<meta property="article:published_time" content="2021-07-12T19:18:40+08:00" />
+<meta property="article:modified_time" content="2021-07-12T19:18:40+08:00" />
 
 <meta itemprop="name" content="集合">
-<meta itemprop="description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的"><meta itemprop="datePublished" content="2021-07-12T19:18:40&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-12T19:18:40&#43;08:00" />
+<meta itemprop="description" content="在学习了列表和元组之后，我们再来学习一种容器型的数据类型，它的名字叫集合（set）。通常我们对集合的定义是“把一定范围的、确定的、可以区别的"><meta itemprop="datePublished" content="2021-07-12T19:18:40+08:00" />
+<meta itemprop="dateModified" content="2021-07-12T19:18:40+08:00" />
 <meta itemprop="wordCount" content="3194">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="集合"/>
@@ -172,7 +172,7 @@
 <p>在Python中，创建集合可以使用<code>{}</code>字面量语法，<code>{}</code>中需要至少有一个元素，因为没有元素的<code>{}</code>并不是空集合而是一个空字典，我们下一节课就会大家介绍字典的知识。当然，也可以使用内置函数<code>set</code>来创建一个集合，准确的说<code>set</code>并不是一个函数，而是创建集合对象的构造器，这个知识点我们很快也会讲到，现在不理解跳过它就可以了。要创建空集合可以使用<code>set()</code>；也可以将其他序列转换成集合，例如：<code>set('hello')</code>会得到一个包含了4个字符的集合（重复的<code>l</code>会被去掉）。除了这两种方式，我们还可以使用生成式语法来创建集合，就像我们之前用生成式创建列表那样。要知道集合中有多少个元素，还是使用内置函数<code>len</code>；使用<code>for</code>循环可以实现对集合元素的遍历。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -199,30 +199,30 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建集合的字面量语法(重复元素不会出现在集合中)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建集合的字面量语法(重复元素不会出现在集合中)</span>
 <span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>         <span class="c1"># {1, 2, 3}</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>    <span class="c1"># 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>         <span class="c1"># {1, 2, 3}</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>    <span class="c1"># 3</span>
 
 <span class="c1"># 创建集合的构造器语法(后面会讲到什么是构造器)</span>
 <span class="n">set2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>         <span class="c1"># {&#39;h&#39;, &#39;l&#39;, &#39;o&#39;, &#39;e&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>         <span class="c1"># {&#39;h&#39;, &#39;l&#39;, &#39;o&#39;, &#39;e&#39;}</span>
 <span class="c1"># 将列表转换成集合(可以去掉列表中的重复元素)</span>
 <span class="n">set3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set3</span><span class="p">)</span>         <span class="c1"># {1, 2, 3}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set3</span><span class="p">)</span>         <span class="c1"># {1, 2, 3}</span>
 
 <span class="c1"># 创建集合的生成式语法(将列表生成式的[]换成{})</span>
 <span class="n">set4</span> <span class="o">=</span> <span class="p">{</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set4</span><span class="p">)</span>         <span class="c1"># {3, 5, 6, 9, 10, 12, 15, 18}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set4</span><span class="p">)</span>         <span class="c1"># {3, 5, 6, 9, 10, 12, 15, 18}</span>
 
 <span class="c1"># 集合元素的循环遍历</span>
 <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">set4</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
     
 <span class="c1"># 将元组转换成集合</span>
 <span class="n">set5</span> <span class="o">=</span> <span class="nb">set</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set5</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set5</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set5</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -233,7 +233,7 @@
 <p>可以通过成员运算<code>in</code>和<code>not in </code>检查元素是否在集合中。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -241,19 +241,19 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="mi">10</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">)</span>        <span class="c1"># False </span>
-<span class="k">print</span><span class="p">(</span><span class="mi">15</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">)</span>        <span class="c1"># True</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">10</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">)</span>        <span class="c1"># False </span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">15</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">)</span>        <span class="c1"># True</span>
 <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Swift&#39;</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ruby&#39;</span> <span class="ow">in</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># False</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Java&#39;</span> <span class="ow">in</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ruby&#39;</span> <span class="ow">in</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Java&#39;</span> <span class="ow">in</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># True</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="交并差运算">交并差运算</h2>
 <p>Python中的集合跟数学上的集合一样，可以进行交集、并集、差集等运算，而且可以通过运算符和方法调用两种方式来进行操作</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -286,36 +286,36 @@
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
 <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">}</span>
 
 <span class="c1"># 交集</span>
 <span class="c1"># 方法一: 使用 &amp; 运算符</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>                <span class="c1"># {2, 4, 6}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>                <span class="c1"># {2, 4, 6}</span>
 <span class="c1"># 方法二: 使用intersection方法</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {2, 4, 6}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {2, 4, 6}</span>
 
 <span class="c1"># 并集</span>
 <span class="c1"># 方法一: 使用 | 运算符</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>         <span class="c1"># {1, 2, 3, 4, 5, 6, 7, 8, 10}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>         <span class="c1"># {1, 2, 3, 4, 5, 6, 7, 8, 10}</span>
 <span class="c1"># 方法二: 使用union方法</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {1, 2, 3, 4, 5, 6, 7, 8, 10}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {1, 2, 3, 4, 5, 6, 7, 8, 10}</span>
 
 <span class="c1"># 差集</span>
 <span class="c1"># 方法一: 使用 - 运算符</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>              <span class="c1"># {1, 3, 5, 7}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>              <span class="c1"># {1, 3, 5, 7}</span>
 <span class="c1"># 方法二: 使用difference方法</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {1, 3, 5, 7}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># {1, 3, 5, 7}</span>
 
 <span class="c1"># 对称差</span>
 <span class="c1"># 方法一: 使用 ^ 运算符</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">^</span> <span class="n">set2</span><span class="p">)</span>                        
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">^</span> <span class="n">set2</span><span class="p">)</span>                        
 <span class="c1"># {1, 3, 5, 7, 8, 10}</span>
 <span class="c1"># 方法二: 使用symmetric_difference方法</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    
 <span class="c1"># {1, 3, 5, 7, 8, 10}</span>
 <span class="c1"># 方法三: 对称差相当于两个集合的并集减去交集</span>
-<span class="k">print</span><span class="p">((</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">))</span>      
+<span class="nb">print</span><span class="p">((</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">))</span>      
 <span class="c1"># {1, 3, 5, 7, 8, 10}</span>
 </code></pre></td></tr></table>
 </div>
@@ -326,7 +326,7 @@
 <p>集合的交集、并集、差集运算还可以跟赋值运算一起构成复合运算</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -340,25 +340,25 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
 <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
 <span class="c1"># 将set1和set2求并集再赋值给set1</span>
 <span class="c1"># 也可以通过set1.update(set2)来实现</span>
 <span class="n">set1</span> <span class="o">|=</span> <span class="n">set2</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    
 <span class="c1"># {1, 2, 3, 4, 5, 6, 7}</span>
 <span class="n">set3</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">}</span>
 <span class="c1"># 将set1和set3求交集再赋值给set1</span>
 <span class="c1"># 也可以通过set1.intersection_update(set3)来实现</span>
 <span class="n">set1</span> <span class="o">&amp;=</span> <span class="n">set3</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {3, 6}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {3, 6}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="比较运算">比较运算</h2>
 <p>两个集合可以用<code>==</code>和<code>!=</code>进行相等性判断，如果两个集合中的元素完全相同，那么<code>==</code>比较的结果就是<code>True</code>，否则就是<code>False</code>。如果集合A的任意一个元素都是集合B的元素，那么集合A称为集合B的子集，即对于∀a∈A，均有a∈B，则A⊆B。A是B的子集，反过来也可以称B是A的超集。如果A是B的子集且A不等于B，那么A就是B的真子集。Python为集合类型提供了判断子集和超集的运算符，其实就是我们非常熟悉的<code>&lt;</code>和<code>&gt;</code>运算符，代码如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -372,25 +372,25 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
 <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
 <span class="n">set3</span> <span class="o">=</span> <span class="n">set2</span>
 <span class="c1"># &lt;运算符表示真子集，&lt;=运算符表示子集</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&lt;</span> <span class="n">set2</span><span class="p">,</span> <span class="n">set1</span> <span class="o">&lt;=</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># True True</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set2</span> <span class="o">&lt;</span> <span class="n">set3</span><span class="p">,</span> <span class="n">set2</span> <span class="o">&lt;=</span> <span class="n">set3</span><span class="p">)</span>    <span class="c1"># False True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&lt;</span> <span class="n">set2</span><span class="p">,</span> <span class="n">set1</span> <span class="o">&lt;=</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># True True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set2</span> <span class="o">&lt;</span> <span class="n">set3</span><span class="p">,</span> <span class="n">set2</span> <span class="o">&lt;=</span> <span class="n">set3</span><span class="p">)</span>    <span class="c1"># False True</span>
 <span class="c1"># 通过issubset方法也能进行子集判断</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>      <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>      <span class="c1"># True</span>
 
 <span class="c1"># 反过来可以用issuperset或&gt;运算符进行超集判断</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set2</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>    <span class="c1"># True</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set2</span> <span class="o">&gt;</span> <span class="n">set1</span><span class="p">)</span>              <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set2</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>    <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set2</span> <span class="o">&gt;</span> <span class="n">set1</span><span class="p">)</span>              <span class="c1"># True</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="集合的方法">集合的方法</h1>
 <p>Python中的集合是可变类型，我们可以通过集合类型的方法为集合添加或删除元素。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -416,54 +416,54 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建一个空集合</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 创建一个空集合</span>
 <span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 <span class="c1"># 通过add方法添加元素</span>
 <span class="n">set1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">33</span><span class="p">)</span>
 <span class="n">set1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
 <span class="n">set1</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {33, 1, 100, 55, 1000, 10}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {33, 1, 100, 55, 1000, 10}</span>
 
 <span class="c1"># 通过discard方法删除指定元素</span>
 <span class="n">set1</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">set1</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {1, 10, 33, 55, 1000}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {1, 10, 33, 55, 1000}</span>
 <span class="c1"># 通过remove方法删除指定元素，建议先做成员运算再删除</span>
 <span class="c1"># 否则元素如果不在集合中就会引发KeyError异常</span>
 <span class="k">if</span> <span class="mi">10</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">:</span>
     <span class="n">set1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {33, 1, 55, 1000}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># {33, 1, 55, 1000}</span>
 
 <span class="c1"># pop方法可以从集合中随机删除一个元素并返回该元素</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
 
 <span class="c1"># clear方法可以清空整个集合</span>
 <span class="n">set1</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># set()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>    <span class="c1"># set()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>如果要判断两个集合有没有相同的元素可以使用<code>isdisjoint</code>方法，没有相同元素返回<code>True</code>，否则返回<code>False</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">,</span> <span class="s1">&#39;Kotlin&#39;</span><span class="p">}</span>
 <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Kotlin&#39;</span><span class="p">,</span> <span class="s1">&#39;Swift&#39;</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">,</span> <span class="s1">&#39;Objective-C&#39;</span><span class="p">,</span> <span class="s1">&#39;Dart&#39;</span><span class="p">}</span>
 <span class="n">set3</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;HTML&#39;</span><span class="p">,</span> <span class="s1">&#39;CSS&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaScript&#39;</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># False</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set3</span><span class="p">))</span>    <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set3</span><span class="p">))</span>    <span class="c1"># True</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="不可变集合">不可变集合</h1>
 <p>Python中还有一种不可变类型的集合，名字叫<code>frozenset</code>。<code>set</code>跟<code>frozenset</code>的区别就如同<code>list</code>跟<code>tuple</code>的区别，<code>frozenset</code>由于是不可变类型，能够计算出哈希码，因此它可以作为<code>set</code>中的元素。除了不能添加和删除元素，<code>frozenset</code>在其他方面跟<code>set</code>基本是一样的，下面的代码简单的展示了<code>frozenset</code>的用法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -471,12 +471,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">})</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">})</span>
 <span class="n">set2</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({1, 3, 5})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({1, 2, 3, 4, 5, 7})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({7})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&lt;</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({1, 3, 5})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({1, 2, 3, 4, 5, 7})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># frozenset({7})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">set1</span> <span class="o">&lt;</span> <span class="n">set2</span><span class="p">)</span>    <span class="c1"># False</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python25%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="入门知识 颜色。如果你有使用颜料画画的经历，那么一定知道混合红、黄、蓝三种颜料可以得到其他的颜色，事实上这三种颜色就是美术中的三原色，它们是不" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python25%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-30T19:08:52&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-30T19:08:52&#43;08:00" />
+<meta property="article:published_time" content="2021-07-30T19:08:52+08:00" />
+<meta property="article:modified_time" content="2021-07-30T19:08:52+08:00" />
 
 <meta itemprop="name" content="处理图像">
-<meta itemprop="description" content="入门知识 颜色。如果你有使用颜料画画的经历，那么一定知道混合红、黄、蓝三种颜料可以得到其他的颜色，事实上这三种颜色就是美术中的三原色，它们是不"><meta itemprop="datePublished" content="2021-07-30T19:08:52&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-30T19:08:52&#43;08:00" />
+<meta itemprop="description" content="入门知识 颜色。如果你有使用颜料画画的经历，那么一定知道混合红、黄、蓝三种颜料可以得到其他的颜色，事实上这三种颜色就是美术中的三原色，它们是不"><meta itemprop="datePublished" content="2021-07-30T19:08:52+08:00" />
+<meta itemprop="dateModified" content="2021-07-30T19:08:52+08:00" />
 <meta itemprop="wordCount" content="2731">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="处理图像"/>
@@ -214,15 +214,15 @@
 <p><a href="https://jingyan.baidu.com/article/ff42efa929e6c8c19f220254.html">安装</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">pip install pillow
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">pip install pillow
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -317,7 +317,7 @@
 </span><span class="lnt">93
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="se">\S</span>cripts&gt;easy_install.exe pip
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="se">\S</span>cripts&gt;easy_install.exe pip
 WARNING: The easy_install <span class="nb">command</span> is deprecated and will be removed in a future version.
 Searching <span class="k">for</span> pip
 Best match: pip 20.1.1
@@ -419,7 +419,7 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 <h2 id="读取和显示图像">读取和显示图像</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -433,16 +433,16 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
 <span class="c1"># 读取图像获得Image对象</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;messi.jpg&#39;</span><span class="p">)</span>
 <span class="c1"># 通过Image对象的format属性获得图像的格式</span>
-<span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">format</span><span class="p">)</span> <span class="c1"># JPEG</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">format</span><span class="p">)</span> <span class="c1"># JPEG</span>
 <span class="c1"># 通过Image对象的size属性获得图像的尺寸</span>
-<span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>   <span class="c1"># (500, 750)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>   <span class="c1"># (500, 750)</span>
 <span class="c1"># 通过Image对象的mode属性获取图像的模式</span>
-<span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>   <span class="c1"># RGB</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>   <span class="c1"># RGB</span>
 <span class="c1"># 通过Image对象的show方法显示图像</span>
 <span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></td></tr></table>
@@ -450,11 +450,11 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 </div><h2 id="剪裁图像">剪裁图像</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 通过Image对象的crop方法指定剪裁区域剪裁图像</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 通过Image对象的crop方法指定剪裁区域剪裁图像</span>
 <span class="n">image</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
@@ -462,12 +462,12 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 <h2 id="生成缩略图">生成缩略图</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 通过Image对象的thumbnail方法生成指定尺寸的缩略图</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 通过Image对象的thumbnail方法生成指定尺寸的缩略图</span>
 <span class="n">image</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">((</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">))</span>
 <span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></td></tr></table>
@@ -476,7 +476,7 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 <h2 id="缩放和黏贴图像">缩放和黏贴图像</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -489,7 +489,7 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 读取neymarjr的照片获得Image对象</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 读取neymarjr的照片获得Image对象</span>
 <span class="n">ney_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;ney.jpg&#39;</span><span class="p">)</span>
 <span class="c1"># 读取messi的照片获得Image对象</span>
 <span class="n">messi_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;messi.jpg&#39;</span><span class="p">)</span>
@@ -506,7 +506,7 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 <h2 id="旋转和翻转">旋转和翻转</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -515,7 +515,7 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;messi.jpg&#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;messi.jpg&#39;</span><span class="p">)</span>
 <span class="c1"># 使用Image对象的rotate方法实现图像的旋转</span>
 <span class="n">image</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="c1"># 使用Image对象的transpose方法实现图像翻转</span>
@@ -529,14 +529,14 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 <h2 id="操作像素">操作像素</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">480</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">480</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">400</span><span class="p">):</span>
         <span class="c1"># 通过Image对象的putpixel方法修改图像指定像素点</span>
         <span class="n">image</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">))</span>
@@ -547,14 +547,14 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 <h2 id="滤镜效果">滤镜效果</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFilter</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFilter</span>
 
 <span class="c1"># 使用Image对象的filter方法对图像进行滤镜处理</span>
 <span class="c1"># ImageFilter模块包含了诸多预设的滤镜也可以自定义滤镜</span>
@@ -566,7 +566,7 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 <p>Pillow中有一个名为<code>ImageDraw</code>的模块，该模块的<code>Draw</code>函数会返回一个<code>ImageDraw</code>对象，通过<code>ImageDraw</code>对象的<code>arc</code>、<code>line</code>、<code>rectangle</code>、<code>ellipse</code>、<code>polygon</code>等方法，可以在图像上绘制出圆弧、线条、矩形、椭圆、多边形等形状，也可以通过该对象的<code>text</code>方法在图像上添加文字。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -604,7 +604,7 @@ D:<span class="se">\P</span>ython<span class="se">\P</span>ython37<span class="s
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
 
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFont</span>
 

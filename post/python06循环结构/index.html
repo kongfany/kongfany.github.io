@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://kongfany.github.io/post/python06%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="for-in循环 如果明确的知道循环执行的次数，推荐使用for-in循环。被for-in循环控制的语句块也是通过缩进的方式来确定的。 1 2 3 4 5" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/python06%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-07T21:00:49&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-07T21:00:49&#43;08:00" />
+<meta property="article:published_time" content="2021-07-07T21:00:49+08:00" />
+<meta property="article:modified_time" content="2021-07-07T21:00:49+08:00" />
 
 <meta itemprop="name" content="循环结构">
-<meta itemprop="description" content="for-in循环 如果明确的知道循环执行的次数，推荐使用for-in循环。被for-in循环控制的语句块也是通过缩进的方式来确定的。 1 2 3 4 5"><meta itemprop="datePublished" content="2021-07-07T21:00:49&#43;08:00" />
-<meta itemprop="dateModified" content="2021-07-07T21:00:49&#43;08:00" />
+<meta itemprop="description" content="for-in循环 如果明确的知道循环执行的次数，推荐使用for-in循环。被for-in循环控制的语句块也是通过缩进的方式来确定的。 1 2 3 4 5"><meta itemprop="datePublished" content="2021-07-07T21:00:49+08:00" />
+<meta itemprop="dateModified" content="2021-07-07T21:00:49+08:00" />
 <meta itemprop="wordCount" content="2090">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="循环结构"/>
@@ -166,7 +166,7 @@
 <p>如果明确的知道循环执行的次数，推荐使用<code>for-in循环</code>。被<code>for-in</code>循环控制的语句块也是通过<code>缩进</code>的方式来确定的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -176,13 +176,13 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">用for循环实现1~100求和
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span>
-<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -195,7 +195,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -205,13 +205,13 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">用for循环实现1~100之间的偶数求和
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span>
-<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -219,7 +219,7 @@
 <p>如果要构造不知道具体循环次数的循环结构，我们推荐使用<code>while</code>循环。<code>while</code>循环通过一个能够产生或转换出<code>bool</code>值的表达式来控制循环，表达式的值为<code>True</code>则继续循环；表达式的值为<code>False</code>则结束循环。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -239,7 +239,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">用while循环实现1~100求和
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
@@ -247,7 +247,7 @@
 <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
     <span class="nb">sum</span> <span class="o">+=</span> <span class="n">num</span>
     <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
 
 <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">用while循环实现1~100之间的偶数求和
@@ -256,12 +256,12 @@
 <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
     <span class="nb">sum</span> <span class="o">+=</span> <span class="n">num</span>
     <span class="n">num</span> <span class="o">+=</span> <span class="mi">2</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -284,7 +284,7 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">猜数字游戏
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="kn">import</span> <span class="nn">random</span>
@@ -292,18 +292,18 @@
 <span class="c1"># 产生一个1-100范围的随机数</span>
 <span class="n">answer</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 计数</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入: &#39;</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="n">answer</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;大一点&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;大一点&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="n">answer</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;小一点&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;小一点&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;恭喜你猜对了!&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;恭喜你猜对了!&#39;</span><span class="p">)</span>
         <span class="k">break</span>
 <span class="c1"># 当退出while循环的时候显示用户一共猜了多少次</span>
-<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;你总共猜了{counter}次&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;你总共猜了</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s1">次&#39;</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -313,7 +313,7 @@
 <h1 id="嵌套的循环结构">嵌套的循环结构</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -323,13 +323,13 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">打印乘法口诀表
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>	<span class="c1"># 外层产生九行</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>	<span class="c1"># 每行对应的列</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{i}*{j}={i * j}&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># 制表符结尾</span>
-    <span class="k">print</span><span class="p">()</span> <span class="c1"># 实现换行</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">*</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># 制表符结尾</span>
+    <span class="nb">print</span><span class="p">()</span> <span class="c1"># 实现换行</span>
 <span class="c1"># range(10)的话会从0开始！</span>
 </code></pre></td></tr></table>
 </div>
@@ -338,7 +338,7 @@
 <p>若不想换行就自定义<code>end</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -346,19 +346,19 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;b&#34;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>	<span class="c1"># end为空，不换行也没空格</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;b&#34;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34; &#34;</span><span class="p">)</span>	<span class="c1"># end为空格，有空格不换行</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;b&#34;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;b&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>	<span class="c1"># end为空，不换行也没空格</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;b&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34; &#34;</span><span class="p">)</span>	<span class="c1"># end为空格，有空格不换行</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;b&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="举例">举例</h1>
 <h2 id="例1判断素数">例1：判断素数</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -378,7 +378,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">输入一个正整数判断它是不是素数
 </span><span class="s2">素数指的是只能被1和自身整除的大于1的整数
 </span><span class="s2">
@@ -386,22 +386,22 @@
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;请输入一个正整数: &#39;</span><span class="p">))</span>
 <span class="n">end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">is_prime</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">is_prime</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">is_prime</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">break</span>
 <span class="k">if</span> <span class="n">is_prime</span> <span class="ow">and</span> <span class="n">num</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{num}是素数&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">是素数&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{num}不是素数&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">不是素数&#39;</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="例2最大公约数最小公倍数">例2：最大公约数最小公倍数</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -422,7 +422,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
 </span><span class="s2">输入两个正整数计算它们的最大公约数和最小公倍数
 </span><span class="s2">最大公约数是两个数的公共因子中最大的数
 </span><span class="s2">最小公倍数是能够同时被两个数整除的最小的数
@@ -437,8 +437,8 @@
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>    <span class="c1"># Python中可以用这样的方式来交换两个变量的值</span>
 <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{x}和{y}的最大公约数是{factor}&#39;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{x}和{y}的最小公倍数是{x * y // factor}&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">和</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">的最大公约数是</span><span class="si">{</span><span class="n">factor</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">和</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">的最小公倍数是</span><span class="si">{</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">//</span> <span class="n">factor</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">break</span>
 
 </code></pre></td></tr></table>
@@ -449,7 +449,7 @@
 <h2 id="例3打印三角形">例3：打印三角形</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -474,7 +474,7 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">*
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">*
 **
 ***
 ****
@@ -501,7 +501,7 @@
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -524,27 +524,27 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入行数:&#34;</span><span class="p">))</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入行数:&#34;</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>		<span class="c1"># i为0~row-1</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>	<span class="c1"># j为0~i</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;*&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;*&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>		<span class="c1"># i为0~row-1</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>	<span class="c1"># j为0~row-1</span>
         <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">row</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;*&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;*&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>				<span class="c1"># i为0~row-1</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>	<span class="c1"># j为0~row-i-2</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div>
