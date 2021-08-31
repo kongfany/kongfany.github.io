@@ -6,14 +6,14 @@
     <description>Recent content in Machine-Learning on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Aug 2021 13:22:44 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Aug 2021 13:22:44 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Machine Learning</title>
       <link>https://kongfany.github.io/post/machine-learning/</link>
-      <pubDate>Tue, 17 Aug 2021 13:22:44 +0800</pubDate>
+      <pubDate>Tue, 31 Aug 2021 13:22:44 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/machine-learning/</guid>
-      <description>吴恩达《机器学习》 视频 讲义 作业 test test</description>
+      <description>吴恩达《机器学习》 视频 讲义 笔记 作业 Jupyter Notebook介绍、安装及使用教程 引言(Introduction) Machine Learning definition： Tom Mitchell (1998) Well-posed Learning</description>
     </item>
     
   </channel>

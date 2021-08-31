@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Aug 2021 13:59:06 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Aug 2021 13:22:44 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Machine Learning</title>
+      <link>https://kongfany.github.io/post/machine-learning/</link>
+      <pubDate>Tue, 31 Aug 2021 13:22:44 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/machine-learning/</guid>
+      <description>吴恩达《机器学习》 视频 讲义 笔记 作业 Jupyter Notebook介绍、安装及使用教程 引言(Introduction) Machine Learning definition： Tom Mitchell (1998) Well-posed Learning</description>
+    </item>
+    
     <item>
       <title>Python慕课嵩天</title>
       <link>https://kongfany.github.io/post/pythonmooc/</link>
@@ -14,15 +23,6 @@
       
       <guid>https://kongfany.github.io/post/pythonmooc/</guid>
       <description>视频 作业 基本数据类型 数值运算函数： abs(x):绝对值函数 divmod(x,y):商余（x//y,x%y）。divmod(10,3)=(3,</description>
-    </item>
-    
-    <item>
-      <title>Machine Learning</title>
-      <link>https://kongfany.github.io/post/machine-learning/</link>
-      <pubDate>Tue, 17 Aug 2021 13:22:44 +0800</pubDate>
-      
-      <guid>https://kongfany.github.io/post/machine-learning/</guid>
-      <description>吴恩达《机器学习》 视频 讲义 作业 test test</description>
     </item>
     
     <item>
