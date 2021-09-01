@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine-Learning on 大胖狗来了</title>
+    <link>https://kongfany.github.io/categories/machine-learning/</link>
+    <description>Recent content in Machine-Learning on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 Sep 2021 22:43:33 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linear Regression With One Variable</title>
+      <link>https://kongfany.github.io/post/ml2/</link>
+      <pubDate>Wed, 01 Sep 2021 22:43:33 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/ml2/</guid>
+      <description>二、单变量线性回归(Linear Regression with One Variable) Model representation：模型描述 在监督学习中我们有一个数据集，这个数据集被称训练集。（Tra</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://kongfany.github.io/post/ml1/</link>
+      <pubDate>Tue, 31 Aug 2021 13:22:44 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/ml1/</guid>
+      <description>吴恩达《机器学习》 视频 讲义 笔记 作业 Jupyter Notebook介绍、安装及使用教程 一、引言(Introduction) Machine Learning definition： Tom Mitchell (1998)</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linear Regression With One Variable - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="二、单变量线性回归(Linear Regression with One Variable) Model representation：模型描述 在监督学习中我们有一个数据集，这个数据集被称训练集。（Tra" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/ml2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Linear Regression With One Variable" />
+<meta property="og:description" content="二、单变量线性回归(Linear Regression with One Variable) Model representation：模型描述 在监督学习中我们有一个数据集，这个数据集被称训练集。（Tra" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/ml2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-01T22:43:33+08:00" />
+<meta property="article:modified_time" content="2021-09-01T22:43:33+08:00" />
+
+<meta itemprop="name" content="Linear Regression With One Variable">
+<meta itemprop="description" content="二、单变量线性回归(Linear Regression with One Variable) Model representation：模型描述 在监督学习中我们有一个数据集，这个数据集被称训练集。（Tra"><meta itemprop="datePublished" content="2021-09-01T22:43:33+08:00" />
+<meta itemprop="dateModified" content="2021-09-01T22:43:33+08:00" />
+<meta itemprop="wordCount" content="687">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linear Regression With One Variable"/>
+<meta name="twitter:description" content="二、单变量线性回归(Linear Regression with One Variable) Model representation：模型描述 在监督学习中我们有一个数据集，这个数据集被称训练集。（Tra"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linear Regression With One Variable</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-01 </span>
+        <div class="post-category">
+            <a href="/categories/machine-learning/"> Machine-Learning </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#二单变量线性回归linear-regression-with-one-variable">二、单变量线性回归(Linear Regression with One Variable)</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="二单变量线性回归linear-regression-with-one-variable">二、单变量线性回归(Linear Regression with One Variable)</h1>
+<p>Model representation：模型描述</p>
+<ul>
+<li>在监督学习中我们有一个数据集，这个数据集被称训练集。（<strong>Training Set</strong>）</li>
+</ul>
+<p><img src="/images/202109/1.png" alt=""></p>
+<ul>
+<li>m:Number of traning examples</li>
+<li>x:&ldquo;input&quot;variable/features输入变量/输入特征</li>
+<li>y:&ldquo;output&quot;variable/&ldquo;target&quot;variable输出/目标</li>
+<li>(x,y):a single training example</li>
+<li><img src="/images/202109/3.png" alt="">：第i个训练样本，训练集第i行</li>
+</ul>
+<p><img src="/images/202109/2.png" alt=""></p>
+<ul>
+<li>h：hypothesis假设函数</li>
+<li>h的作用是把房子的大小作为输入变量x，输出房子的预测价格y</li>
+</ul>
+<p>how to we represent h?</p>
+<ul>
+<li><img src="/images/202109/4.png" alt=""></li>
+<li>this model is called liner regression 线性回归</li>
+<li>univariate liner regression单变量线性回归</li>
+</ul>
+<p>Cost Function:代价函数/损失函数</p>
+<ul>
+<li>
+<p>θ0,θ1：parameters of model模型参数</p>
+</li>
+<li>
+<p>我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度，模型所预测的值<code>h(x)</code>与训练集中实际值<code>y</code>之间的差距就是<strong>建模误差</strong>（<strong>modeling error</strong>）。我们的目标便是选择出可以使得建模误差的平方和能够最小的模型参数，使得代价函数最小。</p>
+<p><img src="http://www.ai-start.com/ml2014/images/6168b654649a0537c67df6f2454dc9ba.png" alt="img"></p>
+</li>
+<li>
+<p>代价函数：<img src="/images/202109/5.png" alt=""></p>
+</li>
+<li>
+<p>确定θ0,θ1，使得代价函数最小。二元函数求极值需要做偏导，而这里的1/2m是为了求导时刚到抵消掉平方</p>
+</li>
+<li>
+<p>代价函数也被称作平方误差函数，有时也被称为平方误差代价函数。我们之所以要求出误差的平方和，是因为误差平方代价函数，对于大多数问题，特别是回归问题，都是一个合理的选择。还有其他的代价函数也能很好地发挥作用，但是平方误差代价函数可能是解决回归问题最常用的手段了。</p>
+</li>
+<li>
+<p>我们绘制一个等高线图，三个坐标分别为θ0和θ1和J,则可以看出在三维空间中存在一个使得最小的点。</p>
+<p><img src="http://www.ai-start.com/ml2014/images/27ee0db04705fb20fab4574bb03064ab.png" alt="img"></p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-09-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/ml1/">
+            <span class="next-text nav-default">Machine Learning</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
