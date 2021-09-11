@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 01 Sep 2021 22:43:33 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Sep 2021 20:42:06 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2021/9/11</title>
+      <link>https://kongfany.github.io/introspection/210911/</link>
+      <pubDate>Sat, 11 Sep 2021 20:42:06 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/introspection/210911/</guid>
+      <description>现在，处于一个节点，研究生即将入学。进行一下大学的总结和未来的规划吧。 大学四年，完全是辜负了高考的努力，成为了一个感动自己的废物，大学四年什</description>
+    </item>
+    
     <item>
       <title>Linear Regression With One Variable</title>
       <link>https://kongfany.github.io/post/ml2/</link>
@@ -22,7 +31,7 @@
       <pubDate>Tue, 31 Aug 2021 13:22:44 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/ml1/</guid>
-      <description>吴恩达《机器学习》 视频 讲义 笔记 作业 Jupyter Notebook介绍、安装及使用教程 一、引言(Introduction) Machine Learning definition： Tom Mitchell (1998)</description>
+      <description>吴恩达《机器学习》 视频 讲义 笔记 作业 Jupyter Notebook介绍、安装及使用教程 机器学习数学基础 python代码 一、引言(Introduction)</description>
     </item>
     
     <item>

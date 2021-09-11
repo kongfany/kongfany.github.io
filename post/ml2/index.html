@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Linear Regression With One Variable">
 <meta itemprop="description" content="二、单变量线性回归(Linear Regression with One Variable) Model representation：模型描述 在监督学习中我们有一个数据集，这个数据集被称训练集。（Tra"><meta itemprop="datePublished" content="2021-09-01T22:43:33+08:00" />
 <meta itemprop="dateModified" content="2021-09-01T22:43:33+08:00" />
-<meta itemprop="wordCount" content="687">
+<meta itemprop="wordCount" content="797">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linear Regression With One Variable"/>
 <meta name="twitter:description" content="二、单变量线性回归(Linear Regression with One Variable) Model representation：模型描述 在监督学习中我们有一个数据集，这个数据集被称训练集。（Tra"/>
@@ -85,6 +85,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/introspection/">
+        <li class="mobile-menu-item">Introspection</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">About</li>
       </a>
@@ -115,6 +117,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/introspection/">Introspection</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">About</a>
       </li>
@@ -198,6 +202,24 @@
 <p><img src="http://www.ai-start.com/ml2014/images/27ee0db04705fb20fab4574bb03064ab.png" alt="img"></p>
 </li>
 </ul>
+<p>Cost Function - Intuition I：直观理解1</p>
+<p><img src="http://www.ai-start.com/ml2014/images/10ba90df2ada721cf1850ab668204dc9.png" alt="img"></p>
+<ul>
+<li>简化代价函数使得函数过原点</li>
+</ul>
+<p><img src="http://www.ai-start.com/ml2014/images/2c9fe871ca411ba557e65ac15d55745d.png" alt="img"></p>
+<p>Cost Function - Intuition II</p>
+<ul>
+<li>
+<p>代价函数的样子，等高线图，则可以看出在三维空间中存在一个使得最小的点。</p>
+<p><img src="http://www.ai-start.com/ml2014/images/0b789788fc15889fe33fb44818c40852.png" alt="img"></p>
+<p><img src="http://www.ai-start.com/ml2014/images/86c827fe0978ebdd608505cd45feb774.png" alt="img"></p>
+</li>
+<li>
+<p>我们真正需要的是一种有效的算法，能够自动地找出这些使代价函数取最小值的参数来。</p>
+</li>
+</ul>
+<p>Gradient Descent ：梯度下降</p>
 
     </div>
 
