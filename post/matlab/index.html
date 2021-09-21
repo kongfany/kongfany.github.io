@@ -49,7 +49,7 @@
 <meta itemprop="name" content="MATLAB">
 <meta itemprop="description" content="安装教程 视频教程 MATLAB变量命名规则 MATLAB数据类型 数字 字符与字符串 s = &lsquo;a&rsquo; abs(s) %ASCLL码 char(97) %字符 num2str(65) %数字 length(str) %计算字符串的长度 矩阵 A"><meta itemprop="datePublished" content="2021-09-19T20:17:05+08:00" />
 <meta itemprop="dateModified" content="2021-09-19T20:17:05+08:00" />
-<meta itemprop="wordCount" content="604">
+<meta itemprop="wordCount" content="1828">
 <meta itemprop="keywords" content="Matlab," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MATLAB"/>
 <meta name="twitter:description" content="安装教程 视频教程 MATLAB变量命名规则 MATLAB数据类型 数字 字符与字符串 s = &lsquo;a&rsquo; abs(s) %ASCLL码 char(97) %字符 num2str(65) %数字 length(str) %计算字符串的长度 矩阵 A"/>
@@ -145,12 +145,7 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#matlab变量命名规则">MATLAB变量命名规则</a></li>
-    <li><a href="#matlab数据类型">MATLAB数据类型</a></li>
-  </ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
@@ -158,9 +153,9 @@
 <p><a href="https://mp.weixin.qq.com/s/ExBUwr_QlODRp1KNtLvg4g">安装教程</a></p>
 <p><a href="https://www.bilibili.com/video/BV13D4y1Q7RS?p=1">视频教程</a></p>
 </blockquote>
-<h1 id="matlab变量命名规则">MATLAB变量命名规则</h1>
+<p>MATLAB变量命名规则</p>
 <p><img src="/images/202109/7.png" alt=""></p>
-<h1 id="matlab数据类型">MATLAB数据类型</h1>
+<p>MATLAB数据类型</p>
 <ul>
 <li>数字</li>
 <li>字符与字符串
@@ -185,8 +180,24 @@
 <li>E(:,:,3) = randn(10,5)</li>
 </ul>
 </li>
-<li>元胞数组</li>
-<li>结构体</li>
+<li>元胞数组
+<ul>
+<li>数组的一种，其内部元素可以是属于不同的数据类型</li>
+<li>A = cell(1,6) %{0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}    {0×0 double}</li>
+<li>A{2} = eye(3) %索引从1开始，{3×3 double}，三阶单位阵</li>
+<li>magic：用来生成n阶幻方。比如三阶幻方就是1-9九个数字，组成一个3*3的矩阵，使得该矩阵无论横、竖还是斜三个方向的三个数的和总是相同。magic(n):生成一个n阶幻方，就是把1-n^2排成一个n×n的 矩阵，使得矩阵的每行、每列，以及主副对角线上面的n个数之和都相等，这个和等于n×(n^2+1)/2。</li>
+<li>A{5} = magic(5)：五阶幻方，和为65</li>
+</ul>
+</li>
+<li>结构体
+<ul>
+<li>相当于Python中的字典</li>
+<li>books = struct(&lsquo;name&rsquo;,{{&lsquo;Machine Learning&rsquo;,&lsquo;Data Mining&rsquo;}},&lsquo;price&rsquo;,[30 40]) %name: {&lsquo;Machine Learning&rsquo;  &lsquo;Data Mining&rsquo;} price: [30 40]</li>
+<li>books.name %{&lsquo;Machine Learning&rsquo;}    {&lsquo;Data Mining&rsquo;}</li>
+<li>books.name(1) %{&lsquo;Machine Learning&rsquo;}，结果为cell</li>
+<li>books.name{1} %&lsquo;Machine Learning&rsquo;，结果为值</li>
+</ul>
+</li>
 </ul>
 <p>清空环境变量及命令：</p>
 <ul>
@@ -220,7 +231,273 @@
 </ul>
 </li>
 </ul>
-<p>p5</p>
+<p>MATLAB矩阵操作</p>
+<ul>
+<li>
+<p>矩阵的定义与构造</p>
+<ul>
+<li>A = [1 2 3 4 5 6] %1     2     3     4     5     6</li>
+<li>B = 1:2:9 %1-9步长为2,13579</li>
+<li>C = repmat(B,3,1) %重复三行一列B</li>
+<li>D = ones(2,4) %两行四列均为1的矩阵</li>
+</ul>
+</li>
+<li>
+<p>矩阵的四则运算</p>
+<ul>
+<li>
+<p>A=[1 2 3 4;5 6 7 8]</p>
+<p>B=[1 1 2 2;2 2 1 1]</p>
+</li>
+<li>
+<p>C = A+B %矩阵相加</p>
+</li>
+<li>
+<p>D = A-B %矩阵相减</p>
+</li>
+<li>
+<p>E = A*B' %矩阵相乘，转置</p>
+</li>
+<li>
+<p>F = A.*B %对应项相乘</p>
+</li>
+<li>
+<p>G = A/B %相当于A乘B的逆</p>
+</li>
+<li>
+<p>H = A./B %对应项相除</p>
+</li>
+</ul>
+</li>
+<li>
+<p>矩阵的下标</p>
+<ul>
+<li>A =magic(5)</li>
+<li>B = A(2,3) %第二行第三列，下标从1开始</li>
+<li>C = A(3,:) %第三行</li>
+<li>D = A(:,4) %第四列</li>
+<li>[m,n] = find(A&gt;20)%找大于20的序号值/矩阵，返回的是行和列的值</li>
+</ul>
+</li>
+</ul>
+<p>MATLAB逻辑与流程控制</p>
+<ul>
+<li>
+<p>if &hellip; else &hellip; end</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="k">if</span> 条件表达式
+语句体
+<span class="k">end</span>
+
+<span class="k">if</span> 表达式
+语句体<span class="mi">1</span>
+<span class="k">else</span>
+语句体<span class="mi">2</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>for &hellip; end</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="k">for</span> 循环变量<span class="p">=</span>初值：步长：终值
+	执行语句<span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">for</span> <span class="n">n</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span>
+<span class="n">sum</span><span class="p">=</span><span class="n">sum</span><span class="o">+</span><span class="n">n</span>^<span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span>
+<span class="n">p</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">i</span>
+<span class="n">p</span><span class="p">=</span><span class="n">p</span><span class="o">*</span><span class="nb">j</span>
+<span class="k">end</span>
+<span class="n">sum</span><span class="p">=</span><span class="n">sum</span><span class="o">+</span><span class="n">p</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中，步长的默认值为1，可以省略；初值、步长、终值可以是正数也可以是负数，也可以是小数</p>
+</li>
+<li>
+<p>while &hellip; end</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="k">while</span> 条件表达式
+执行语句
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>switch &hellip; case &hellip; end</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="k">switch</span> 表达式（数值或字符串）
+<span class="k">case</span> 数值或字符串<span class="mi">1</span>
+语句体<span class="mi">1</span>；
+<span class="k">case</span> 数值或字符串<span class="mi">2</span>
+语句体<span class="mi">2</span><span class="p">;</span>
+<span class="c">...</span>
+<span class="k">otherwise</span>
+语句体<span class="n">n</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>MATLAB基本绘图操作：</p>
+<p>1、二维平面绘图</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="n">x</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">;</span> <span class="c">%0-2pi,步长为0.01</span>
+<span class="n">y</span> <span class="p">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="n">figure</span> <span class="c">%建立一个幕布</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;y = sin(x)&#39;</span><span class="p">)</span> <span class="c">%标题</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span> <span class="c">%x的标签</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;sin(x)&#39;</span><span class="p">)</span> <span class="c">%y的标签</span>
+<span class="n">xlim</span><span class="p">([</span><span class="mi">0</span> <span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">])</span> <span class="c">%设置x坐标轴的范围</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>颜色选项参数：r,g,b,y</li>
+<li>线型选项参数：-,&ndash;,:,-.</li>
+<li>数据标记点选项参数：.,+,○，*，×&hellip;</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="n">x</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mi">20</span><span class="p">;</span>
+<span class="n">y1</span> <span class="p">=</span> <span class="mi">200</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">.*</span><span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="n">y2</span> <span class="p">=</span> <span class="mf">0.8</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">.*</span><span class="nb">sin</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="p">);</span> <span class="c">%.*:按元素乘法</span>
+<span class="n">figure</span>
+<span class="n">yyaxis</span> <span class="n">left</span> <span class="c">%yyaxis:创建具有两个y轴的图</span>
+<span class="c">%yyaxis left 激活当前坐标区中与左侧 y 轴关联的一侧。后续图形命令的目标为左侧。</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="s">&#39;b--&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Slow Decay&#39;</span><span class="p">)</span><span class="c">%创建y1标签</span>
+<span class="n">yyaxis</span> <span class="n">right</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="s">&#39;g:o&#39;</span><span class="p">)</span><span class="c">%第三个参数为指定线型颜色和标记。</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Fast Decay&#39;</span><span class="p">)</span><span class="c">%创建y2标签</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time(\musce)&#39;</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Multiple Decay Rates&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202109/8.png" alt=""></p>
+<p>2、三维立体绘图</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="n">t</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="nb">pi</span><span class="o">/</span><span class="mi">50</span><span class="p">:</span><span class="mi">10</span><span class="o">*</span><span class="nb">pi</span><span class="p">;</span>
+<span class="n">plot3</span><span class="p">(</span><span class="nb">sin</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="nb">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">)</span> <span class="c">%三维绘图</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;sin(t)&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;cos(t)&#39;</span><span class="p">)</span>
+<span class="n">zlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">grid</span> <span class="n">on</span> <span class="c">%加入网格线</span>
+<span class="n">axis</span> <span class="n">square</span> <span class="c">%变成正方形</span>
+<span class="c">% hold on:同一个幕布中绘制多条线</span>
+<span class="c">% hold off:不保留当前画的东西</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>3、图形的保存与导出</p>
+<ul>
+<li>编辑-复制粘贴</li>
+<li>文件-另存为</li>
+<li>文件-导出设置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">]</span> <span class="p">=</span> <span class="n">peaks</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+<span class="n">mesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="n">grid</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202109/9.png" alt=""></p>
 
     </div>
 
