@@ -49,7 +49,7 @@
 <meta itemprop="name" content="MATLAB">
 <meta itemprop="description" content="安装教程 视频教程 MATLAB变量命名规则 MATLAB数据类型 数字 字符与字符串 s = &lsquo;a&rsquo; abs(s) %ASCLL码 char(97) %字符 num2str(65) %数字 length(str) %计算字符串的长度 矩阵 A"><meta itemprop="datePublished" content="2021-09-19T20:17:05+08:00" />
 <meta itemprop="dateModified" content="2021-09-19T20:17:05+08:00" />
-<meta itemprop="wordCount" content="1828">
+<meta itemprop="wordCount" content="5322">
 <meta itemprop="keywords" content="Matlab," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MATLAB"/>
 <meta name="twitter:description" content="安装教程 视频教程 MATLAB变量命名规则 MATLAB数据类型 数字 字符与字符串 s = &lsquo;a&rsquo; abs(s) %ASCLL码 char(97) %字符 num2str(65) %数字 length(str) %计算字符串的长度 矩阵 A"/>
@@ -145,7 +145,20 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#傅里叶变换httpswwwcnblogscomh2zzhoup8405717html"><a href="https://www.cnblogs.com/h2zZhou/p/8405717.html">傅里叶变换</a></a>
+      <ul>
+        <li><a href="#频域">频域</a></li>
+        <li><a href="#傅里叶级数fourier-series的频谱">傅里叶级数(Fourier Series)的频谱</a></li>
+        <li><a href="#傅里叶级数fourier-series的相位谱">傅里叶级数（Fourier Series）的相位谱</a></li>
+        <li><a href="#傅里叶变换fourier-tranformation">傅里叶变换（Fourier Tranformation）</a></li>
+        <li><a href="#欧拉公式">欧拉公式</a></li>
+        <li><a href="#指数形式的傅里叶变换">指数形式的傅里叶变换</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
@@ -498,6 +511,249 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/202109/9.png" alt=""></p>
+<h1 id="傅里叶变换httpswwwcnblogscomh2zzhoup8405717html"><a href="https://www.cnblogs.com/h2zZhou/p/8405717.html">傅里叶变换</a></h1>
+<p>为什么进行傅里叶变换？</p>
+<ul>
+<li>傅里叶变换-&gt;信号的分解过程
+<ul>
+<li>时域上的原信号-&gt;分解成一系列频率下的正弦余弦信号</li>
+<li>正弦信号的表示-&gt;频率频幅/频率相位-&gt;频谱图</li>
+</ul>
+</li>
+<li>傅里叶变换的好处-&gt;正弦信号的特点
+<ul>
+<li>正弦信号比原信号更简单-&gt;已被充分的研究</li>
+<li>处理正弦信号-&gt;比处理原信号更简单</li>
+<li>线性系统-&gt;正弦信号的频率保持性
+<ul>
+<li>输入正弦信号-&gt;输出仍是同频率的正弦信号</li>
+<li>幅值和相位可能会发生变化-&gt;但频率与输入信号保持一致</li>
+<li>频率保持性具有很高的工程实用价值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="频域">频域</h2>
+<p>在时域，我们观察到钢琴的琴弦一会上一会下的摆动，就如同一支股票的走势；而在频域，只有那一个永恒的音符。</p>
+<p>傅里叶同学告诉我们，任何周期函数，都可以看作是不同振幅，不同相位正弦波的叠加。在第一个例子里我们可以理解为，利用对不同琴键不同力度，不同时间点的敲击，可以组合出任何一首乐曲。</p>
+<p>而贯穿时域与频域的方法之一，就是传中说的傅里叶分析。傅里叶分析可分为傅里叶级数（Fourier Serie）和傅里叶变换(Fourier Transformation)</p>
+<h2 id="傅里叶级数fourier-series的频谱">傅里叶级数(Fourier Series)的频谱</h2>
+<p><img src="/images/202109/10.png" alt=""></p>
+<p><img src="http://ww2.sinaimg.cn/mw690/7cc829d3gw1eh5v57q4vij20go0a0gn0.jpg" alt="img"></p>
+<p><img src="https://images0.cnblogs.com/news/66372/201405/271734446194512.gif" alt="File:Fourier series and transform.gif"></p>
+<p>我把sin（3x）+sin（5x）的曲线给你，但是前提是你不知道这个曲线的方程式，现在需要你把sin（5x）给我从图里拿出去，看看剩下的是什么。这基本是不可能做到的。</p>
+<p>但是在频域呢？则简单的很，无非就是几条竖线而已。</p>
+<p>所以很多在时域看似不可能做到的数学操作，在频域相反很容易。这就是需要傅里叶变换的地方。尤其是从某条曲线中去除一些特定的频率成分，这在工程上称为滤波，是信号处理最重要的概念之一，只有在频域才能轻松的做到。</p>
+<p>通过时域到频域的变换，我们得到了一个从侧面看的频谱，但是这个频谱并没有包含时域中全部的信息。因为频谱只代表每一个对应的正弦波的振幅是多少，而没有提到相位。基础的正弦波A.sin(wt+θ)中，振幅，频率，相位缺一不可，不同相位决定了波的位置，所以对于频域分析，仅仅有频谱（振幅谱）是不够的，我们还需要一个相位谱。</p>
+<h2 id="傅里叶级数fourier-series的相位谱">傅里叶级数（Fourier Series）的相位谱</h2>
+<p><img src="http://ww4.sinaimg.cn/mw690/7cc829d3gw1eh5v58ov24j20go0hutao.jpg" alt="img"></p>
+<p>鉴于正弦波是周期的，我们需要设定一个用来标记正弦波位置的东西。在图中就是那些小红点。小红点是距离频率轴最近的波峰，而这个波峰所处的位置离频率轴有多远呢？为了看的更清楚，我们将红色的点投影到下平面，投影点我们用粉色点来表示。当然，这些粉色的点只标注了波峰距离频率轴的距离，并不是相位。</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/7cc829d3gw1eh5v5cn9yrj20go0fsgmu.jpg" alt="img"></p>
+<p>时间差并不是相位差。如果将全部周期看作2Pi或者360度的话，相位差则是时间差在一个周期中所占的比例。我们将时间差除周期再乘2Pi，就得到了相位差。</p>
+<p>在完整的立体图中，我们将投影得到的时间差依次除以所在频率的周期，就得到了最下面的相位谱。所以，频谱是从侧面看，相位谱是从下面看。</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/7cc829d3gw1eh5v5dhli2j20go0dtwga.jpg" alt="img"></p>
+<h2 id="傅里叶变换fourier-tranformation">傅里叶变换（Fourier Tranformation）</h2>
+<p>傅里叶级数的本质是将一个周期的信号分解成无限多分开的（离散的）正弦波</p>
+<blockquote>
+<p>往昔连续非周期，</p>
+<p>回忆周期不连续，</p>
+<p>任你ZT、DFT，</p>
+<p>还原不回去。</p>
+</blockquote>
+<p>往昔是一个连续的非周期信号，而回忆是一个周期离散信号。</p>
+<p>比如傅里叶级数，在时域是一个周期且连续的函数，而在频域是一个非周期离散的函数。而在我们接下去要讲的傅里叶变换，则是将一个时域非周期的连续信号，转换为一个在频域非周期的连续信号。或者我们也可以换一个角度理解：傅里叶变换实际上是对一个周期无限大的函数进行傅里叶变换。</p>
+<p><img src="http://ww4.sinaimg.cn/large/7cc829d3gw1eh5q2g0nhuj20go08baan.jpg" alt="img"></p>
+<p>为了方便大家对比，我们这次从另一个角度来看频谱，还是傅里叶级数中用到最多的那幅图，我们从频率较高的方向看。</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/7cc829d3gw1eh5q2gl2u3j20go07z756.jpg" alt="img"></p>
+<p>以上是离散谱，那么连续谱是什么样子呢？</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/7cc829d3gw1eh5q2i13r8j20go08smyb.jpg" alt="img"></p>
+<p>通过这样两幅图去比较，大家应该可以理解如何从离散谱变成了连续谱的了吧？原来离散谱的叠加，变成了连续谱的累积。所以在计算上也从求和符号变成了积分符号。</p>
+<h2 id="欧拉公式">欧拉公式</h2>
+<p>虚数i这个概念大家在高中就接触过，但那时我们只知道它是-1 的平方根，可是它真正的意义是什么呢?</p>
+<p><img src="http://ww4.sinaimg.cn/large/7cc829d3gw1eh5q2ioeygj20go03cwep.jpg" alt="img">
+这里有一条数轴，在数轴上有一个红色的线段，它的长度是1。当它乘以 3 的时候，它的长度发生了变化，变成了蓝色的线段，而当它乘以-1 的时候，就变成了绿色的线段，或者说线段在数轴上围绕原点旋转了 180 度。</p>
+<p>我们知道乘-1 其实就是乘了两次 i 使线段旋转了 180 度，那么乘一次 i 呢——答案很简单——旋转了 90 度。</p>
+<p><img src="http://ww3.sinaimg.cn/mw690/7cc829d3gw1eh5q2kqrs0j20go09iaaq.jpg" alt="img"></p>
+<p>同时，我们获得了一个垂直的虚数轴。实数轴与虚数轴共同构成了一个复数的平面，也称复平面。这样我们就了解到，乘虚数i的一个功能——旋转。</p>
+<p><img src="https://images0.cnblogs.com/news/66372/201406/071037530204619.jpg" alt="img">
+这个公式在数学领域的意义要远大于傅里叶分析，它的特殊形式——当x等于 Pi 的时候。</p>
+<p><img src="https://images0.cnblogs.com/news/66372/201406/071037530679604.jpg" alt="img"></p>
+<p>这个公式关键的作用，是将正弦波统一成了简单的指数形式。我们来看看图像上的涵义：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/7cc829d3gw1eh5q2kwv90j20go08b0tx.jpg" alt="img"></p>
+<p>欧拉公式所描绘的，是一个随着时间变化，在复平面上做圆周运动的点，随着时间的改变，在时间轴上就成了一条螺旋线。如果只看它的实数部分，也就是螺旋线在左侧的投影，就是一个最基础的余弦函数。而右侧的投影则是一个正弦函数。</p>
+<p>关于复数更深的理解，大家可以参考：</p>
+<p><a href="http://www.zhihu.com/question/23234701/answer/26017000">复数的物理意义是什么？</a></p>
+<h2 id="指数形式的傅里叶变换">指数形式的傅里叶变换</h2>
+<p>有了欧拉公式的帮助，我们便知道：正弦波的叠加，也可以理解为螺旋线的叠加在实数空间的投影。</p>
+<p><code>fplot</code>：绘制表达式或函数</p>
+<p><code>fourier</code>：傅里叶变换</p>
+<p><code>ifourier</code>：逆傅里叶变换</p>
+<p>假设一个信号x(t)=2cos(pait)+3cos(2pait)+cos(3pait),建立这个信号被干扰的一个模型，然后计算FFT检查信号的频谱时间选10秒。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="n">t</span><span class="p">=</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mi">10</span><span class="p">;</span>
+<span class="n">x</span><span class="p">=</span><span class="mi">2</span><span class="o">*</span><span class="nb">cos</span><span class="p">(</span><span class="nb">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="nb">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="nb">cos</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="n">t</span><span class="p">);</span>
+<span class="c">%噪声信号</span>
+<span class="n">x_noisy</span><span class="p">=</span><span class="n">x</span><span class="o">+</span><span class="nb">randn</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">),</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;时间（ms）&#39;</span><span class="p">),</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;原始信号&#39;</span><span class="p">)</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">),</span><span class="n">x_noisy</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;时间（ms）&#39;</span><span class="p">),</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;包含噪声的原始信号&#39;</span><span class="p">)</span>
+<span class="n">FT</span><span class="p">=</span><span class="n">fft</span><span class="p">(</span><span class="n">x_noisy</span><span class="p">,</span><span class="mi">1001</span><span class="p">);</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">FT</span><span class="p">);</span>
+<span class="c">%P=FT.*conj(FT)/512;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://blog.csdn.net/weixin_42765703/article/details/104871604">解析MATLAB短时傅里叶变换函数spectrogram()</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="n">Nw</span> <span class="p">=</span> <span class="mi">128</span><span class="p">;</span> 							<span class="c">%窗函数长度</span>
+<span class="n">window</span> <span class="p">=</span> <span class="n">hamming</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span>  			<span class="c">% 使用海明窗（默认窗函数）</span>
+<span class="n">noverlap</span> <span class="p">=</span> <span class="mi">120</span><span class="p">;</span> 					<span class="c">%重叠长度</span>
+<span class="c">%P = nextpow2(A):返回满足2的p次方大于等于A的最小值7</span>
+<span class="n">nfft</span> <span class="p">=</span> <span class="mi">2</span>^<span class="nb">nextpow2</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">window</span><span class="p">));</span> 	<span class="c">%DFT(离散傅里叶变换)点数 128</span>
+<span class="n">fs</span> <span class="p">=</span> <span class="mi">1000</span><span class="p">;</span> 							<span class="c">%采样率</span>
+<span class="n">t</span><span class="p">=</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="n">fs</span><span class="p">:</span><span class="mi">2</span><span class="p">;</span>                                          <span class="c">% 2 secs @ 1kHz sample rate</span>
+<span class="n">y</span><span class="p">=</span><span class="n">chirp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="s">&#39;q&#39;</span><span class="p">);</span>                   		 <span class="c">% Start @ 100Hz, cross 200Hz at t=1sec </span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">spectrogram</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">noverlap</span><span class="p">,</span> <span class="n">nfft</span><span class="p">,</span><span class="n">fs</span><span class="p">,</span> <span class="s">&#39;yaxis&#39;</span><span class="p">);</span>  <span class="c">% Display the spectrogram</span>
+<span class="n">h</span><span class="p">=</span><span class="n">colorbar</span><span class="p">;</span>
+<span class="n">h</span><span class="p">.</span><span class="n">Label</span><span class="p">.</span><span class="n">String</span> <span class="p">=</span> <span class="s">&#39;Power/Frequency(dB/Hz)&#39;</span><span class="p">;</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Quadratic Chirp: start at 100Hz and cross 200Hz at t=1sec&#39;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://blog.csdn.net/weixin_42943114/article/details/88735799">matlab时频分析之短时傅里叶变换 spectrogram</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="c">%短时傅里叶变换展示</span>
+<span class="n">fs</span><span class="p">=</span><span class="mi">2</span>^<span class="mi">10</span><span class="p">;</span>    <span class="c">%采样频率 fs=65536hz</span>
+<span class="n">dt</span><span class="p">=</span><span class="mi">1</span><span class="o">/</span><span class="n">fs</span><span class="p">;</span>    <span class="c">%时间精度</span>
+<span class="n">timestart</span><span class="p">=</span><span class="o">-</span><span class="mi">4</span><span class="p">;</span>
+<span class="n">timeend</span><span class="p">=</span><span class="mi">4</span><span class="p">;</span>
+<span class="n">t</span><span class="p">=(</span><span class="mi">0</span><span class="p">:(</span><span class="n">timeend</span><span class="o">-</span><span class="n">timestart</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">dt</span><span class="o">+</span><span class="n">timestart</span><span class="p">;</span>
+<span class="n">L</span><span class="p">=</span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+
+<span class="c">%设置信号</span>
+<span class="n">z</span><span class="p">=</span><span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="mf">5.</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.*</span><span class="p">(</span><span class="n">t</span><span class="o">&lt;-</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="mf">10.</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.*</span><span class="p">(</span><span class="n">t</span><span class="o">&gt;</span><span class="p">=</span><span class="o">-</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">t</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="c">...</span>
+    <span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="mf">20.</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.*</span><span class="p">(</span><span class="n">t</span><span class="o">&gt;</span><span class="p">=</span><span class="mi">0</span><span class="o">&amp;</span><span class="n">t</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="mf">40.</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.*</span><span class="p">(</span><span class="n">t</span><span class="o">&gt;</span><span class="p">=</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">z2</span><span class="p">=</span><span class="n">wextend</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;sym&#39;</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">));</span><span class="c">%镜像延拓</span>
+
+<span class="n">wlen</span><span class="p">=</span><span class="mi">512</span><span class="p">;</span><span class="c">%设置窗口长度。窗口越长时间分辨率越差，频率分辨率越好。</span>
+<span class="n">hop</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span><span class="c">%每次平移的步长，最小为1。越小图像时间精度越好，但计算量大。</span>
+<span class="n">z2</span><span class="p">=</span><span class="n">wkeep1</span><span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="n">L</span><span class="o">+</span><span class="mi">1</span><span class="o">*</span><span class="n">wlen</span><span class="p">);</span><span class="c">%中间截断</span>
+
+
+<span class="c">%做短时傅里叶</span>
+<span class="n">h</span><span class="p">=</span><span class="n">hamming</span><span class="p">(</span><span class="n">wlen</span><span class="p">);</span><span class="c">%设置海明窗的窗长</span>
+<span class="n">f</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="mf">0.5</span><span class="p">:</span><span class="mi">60</span><span class="p">;</span><span class="c">%设置频率刻度</span>
+
+<span class="p">[</span><span class="n">tfr2</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">t2</span><span class="p">]=</span><span class="n">spectrogram</span><span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">wlen</span><span class="o">-</span><span class="n">hop</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">fs</span><span class="p">);</span>
+<span class="n">tfr2</span><span class="p">=</span><span class="n">tfr2</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="n">wlen</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+<span class="n">figure</span>
+<span class="n">imagesc</span><span class="p">(</span><span class="n">t2</span><span class="o">+</span><span class="n">timestart</span><span class="o">-</span><span class="n">wlen</span><span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">tfr2</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://blog.csdn.net/zhanghaijun2013/article/details/106331270?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163256095216780264084080%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163256095216780264084080&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~top_click~default-2-106331270.pc_v2_rank_blog_default&amp;utm_term=%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2matlab&amp;spm=1018.2226.3001.4450">Matlab中短时傅里叶变换 spectrogram和stft的用法</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">)</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">noverlap</span><span class="p">)</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">noverlap</span><span class="p">,</span> <span class="n">nfft</span><span class="p">)</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">noverlap</span><span class="p">,</span> <span class="n">nfft</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+<span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="p">=</span> <span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">noverlap</span><span class="p">,</span> <span class="n">nfft</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+<span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="p">=</span> <span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">noverlap</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+<span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="p">=</span> <span class="n">spectrogram</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">noverlap</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>x表示输入信号；</li>
+<li>window表示窗函数，如果window的值是一个整数，那么被分段的x的每一段的长度都等于window，并采用默认的Hamming窗；如果window是一个向量，那么被分段后每一段的长度都等于length(window)，且输入的向量即为所要加的窗函数；</li>
+<li>overlap表示两段之间的重合点数，overlap的值必须要小于窗长，如果没有指定overlap，默认是窗长的一半，即50%的overlap；</li>
+<li>nfft表示fft的点数，fft的点数跟窗长可以是不同的，当没有指定该参数时，Matlab会取max(256, 2^(ceil(log2(length(window)))))，即当窗长小于256时，fft的点数是256；当窗长大于256时，fft的点数取大于窗长的最小的2的整数次幂；</li>
+<li>fs表示采样率，用来归一化显示使用；</li>
+<li>f表示显示的频谱范围，f是一个向量，长度跟s的行数相同；
+当x是实信号且nfft为偶数时，s的行数为(nfft/2+1)
+当x是实信号且nfft为奇数时，s的行数为(nfft+1)/2
+当x是复信号时，s的行数为nfft
+当在输入的参数列表中指定f后，函数会在f指定的频率处计算频谱图，返回的f跟输入的f是相同的；</li>
+<li>t表示显示的时间范围，是一个向量，长度跟s的列数相同；</li>
+<li>p表示功率谱密度，对于实信号，p是各段PSD的单边周期估计；对于复信号，当指定F频率向量时，P为双边PSD;</li>
+</ul>
+<p><a href="http://www.khscience.cn/docs/index.php/2020/04/09/1/">时频域分析工具箱（TFA_Toolboxs）下载与安装</a></p>
 
     </div>
 
