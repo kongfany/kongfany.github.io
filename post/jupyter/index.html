@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Jupyter - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="pip不能使用： https://blog.csdn.net/hll19950830/article/details/88551506 安装： https://www.zhihu.com/collection/261855801 https://www.jianshu.com/p/91365f343585 https://blog.csdn.net/liboshi123/article/details/116809849 一劳永逸配置pip源（推荐）：只需在windows命令行中输入一行命令，即可永久设置pip下载源为国内源 1 pip config" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/jupyter/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Jupyter" />
+<meta property="og:description" content="pip不能使用： https://blog.csdn.net/hll19950830/article/details/88551506 安装： https://www.zhihu.com/collection/261855801 https://www.jianshu.com/p/91365f343585 https://blog.csdn.net/liboshi123/article/details/116809849 一劳永逸配置pip源（推荐）：只需在windows命令行中输入一行命令，即可永久设置pip下载源为国内源 1 pip config" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/jupyter/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-19T16:28:37+08:00" />
+<meta property="article:modified_time" content="2021-10-19T16:28:37+08:00" />
+
+<meta itemprop="name" content="Jupyter">
+<meta itemprop="description" content="pip不能使用： https://blog.csdn.net/hll19950830/article/details/88551506 安装： https://www.zhihu.com/collection/261855801 https://www.jianshu.com/p/91365f343585 https://blog.csdn.net/liboshi123/article/details/116809849 一劳永逸配置pip源（推荐）：只需在windows命令行中输入一行命令，即可永久设置pip下载源为国内源 1 pip config"><meta itemprop="datePublished" content="2021-10-19T16:28:37+08:00" />
+<meta itemprop="dateModified" content="2021-10-19T16:28:37+08:00" />
+<meta itemprop="wordCount" content="2061">
+<meta itemprop="keywords" content="Jupyter,Machine-Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Jupyter"/>
+<meta name="twitter:description" content="pip不能使用： https://blog.csdn.net/hll19950830/article/details/88551506 安装： https://www.zhihu.com/collection/261855801 https://www.jianshu.com/p/91365f343585 https://blog.csdn.net/liboshi123/article/details/116809849 一劳永逸配置pip源（推荐）：只需在windows命令行中输入一行命令，即可永久设置pip下载源为国内源 1 pip config"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/introspection/">
+        <li class="mobile-menu-item">Introspection</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/introspection/">Introspection</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Jupyter</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-19 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#jupyter-notebook的基本使用">Jupyter Notebook的基本使用</a>
+      <ul>
+        <li><a href="#file页面">File页面：</a></li>
+        <li><a href="#笔记本的基本操作">笔记本的基本操作</a>
+          <ul>
+            <li><a href="#笔记本重命名的两种方式">笔记本重命名的两种方式：</a></li>
+          </ul>
+        </li>
+        <li><a href="#running页面">Running页面</a></li>
+        <li><a href="#教程">教程</a></li>
+      </ul>
+    </li>
+    <li><a href="#python数据分析神器jupyter-notebook快速入门">python数据分析神器Jupyter notebook快速入门</a>
+      <ul>
+        <li><a href="#第1步导入数据分析库pandas数据可视化库matplotlib">第1步：导入数据分析库pandas，数据可视化库matplotlib</a></li>
+        <li><a href="#第2步导入数据集查看数据集">第2步：导入数据集，查看数据集</a></li>
+        <li><a href="#第3步提取特征">第3步：提取特征</a>
+          <ul>
+            <li><a href="#提取特征学习时间-提取标签学习成绩">提取特征：学习时间 提取标签：学习成绩</a></li>
+          </ul>
+        </li>
+        <li><a href="#第四步建立模型">第四步：建立模型</a>
+          <ul>
+            <li><a href="#拆分数据四分之三的数据作为训练集四分之一的数据作为测试集">拆分数据，四分之三的数据作为训练集，四分之一的数据作为测试集</a></li>
+            <li><a href="#用训练集的数据进行训练">用训练集的数据进行训练</a></li>
+            <li><a href="#对测试集进行预测">对测试集进行预测</a></li>
+          </ul>
+        </li>
+        <li><a href="#可视化">可视化</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>pip不能使用：</p>
+<p><a href="https://blog.csdn.net/hll19950830/article/details/88551506">https://blog.csdn.net/hll19950830/article/details/88551506</a></p>
+<p>安装：</p>
+<p><a href="https://www.zhihu.com/collection/261855801">https://www.zhihu.com/collection/261855801</a></p>
+<p><a href="https://www.jianshu.com/p/91365f343585">https://www.jianshu.com/p/91365f343585</a></p>
+<p><a href="https://blog.csdn.net/liboshi123/article/details/116809849">https://blog.csdn.net/liboshi123/article/details/116809849</a></p>
+<p>一劳永逸配置pip源（推荐）：只需在windows命令行中输入一行命令，即可永久设置pip下载源为国内源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>帮助：jupyter notebook &ndash;help</p>
+<p>启动：在cmd命令行中，输入：jupyter notebook</p>
+<p>配置默认启动路径：命令行输入命令：jupyter notebook &ndash;generate-config，找到<code>“c.NotebookApp.notebook_dir=……”</code>，把路径改成自己的工作目录。</p>
+<p>快捷键：https://blog.csdn.net/qq_37294751/article/details/79489910</p>
+<h1 id="jupyter-notebook的基本使用">Jupyter Notebook的基本使用</h1>
+<p><a href="https://www.jianshu.com/p/91365f343585">https://www.jianshu.com/p/91365f343585</a></p>
+<h2 id="file页面">File页面：</h2>
+<p><img src="/images/202110/15.png" alt=""></p>
+<p>对于现有的文件，可以通过勾选文件的方式，对选中文件进行复制、重命名、移动、下载、查看、编辑和删除的操作。</p>
+<p>同时，也可以根据需要，在“New”下拉列表中选择想要创建文件的环境，进行创建“ipynb”格式的笔记本、“txt”格式的文档、终端或文件夹。</p>
+<h2 id="笔记本的基本操作">笔记本的基本操作</h2>
+<p><img src="/images/202110/16.png" alt=""></p>
+<h3 id="笔记本重命名的两种方式">笔记本重命名的两种方式：</h3>
+<h4 id="--笔记本内部重命名">⑴  笔记本内部重命名</h4>
+<p>在使用笔记本时，可以直接在其内部进行重命名。在左上方“Jupyter”的图标旁有程序默认的标题“Untitled”，点击“Untitled”然后在弹出的对话框中输入自拟的标题，点击“Rename”即完成了重命名。</p>
+<h4 id="--笔记本外部重命名">⑵  笔记本外部重命名</h4>
+<p>若在使用笔记本时忘记了重命名，且已经保存并退出至“Files”界面，则在“Files”界面勾选需要重命名的文件，点击“Rename”然后直接输入自拟的标题即可。</p>
+<h2 id="running页面">Running页面</h2>
+<p>Running页面主要展示的是当前正在运行当中的终端和“ipynb”格式的笔记本。若想要关闭已经打开的终端和“ipynb”格式的笔记本，仅仅关闭其页面是无法彻底退出程序的，需要在Running页面点击其对应的“Shutdown”。</p>
+<h2 id="教程">教程</h2>
+<p><a href="https://www.zhihu.com/zvideo/1346452501533818881">https://www.zhihu.com/zvideo/1346452501533818881</a></p>
+<blockquote>
+<p>执行快捷键：shift+回车,运行并到达下一行；ctrl+回车，只运行这一行</p>
+<p>自动补全：Tab</p>
+<p>Help:
+np.random.random?
+np.random.random()：光标放在括号里，按住shift双击Tab</p>
+<p>魔术命令：</p>
+<p>专属于jupyter notebook的方法，带%的</p>
+</blockquote>
+<p><code>%matplotlib inline</code>
+让画出来的图直接显示在web界面内</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[&lt;matplotlib.lines.Line2D at 0x21f15d5fb08&gt;]
+</code></pre>
+<p><img src="/images/202110/17.png" alt=""></p>
+<blockquote>
+<p>推荐个更简单的方法，直接使用pip下载清华大学的matplotlib镜像，代码是：pip install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> matplotlib。这个镜像会自己把matplotlib需要的库顺便安装了，这样一行代码就可以搞定。</p>
+</blockquote>
+<p><code>%pwd</code>
+查看当前目录</p>
+<p><code>%timeit [x**3 for x in range(1000)]</code>
+执行本行代码所需要的时间</p>
+<h1 id="python数据分析神器jupyter-notebook快速入门">python数据分析神器Jupyter notebook快速入门</h1>
+<p><a href="https://www.bilibili.com/video/BV1Q4411H7fJ?from=search&amp;seid=5559550492727856855&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1Q4411H7fJ?from=search&amp;seid=5559550492727856855&amp;spm_id_from=333.337.0.0</a></p>
+<p>内核是ipython，可以命令行直接输<code>ipython</code>进入</p>
+<p>数据分析与可视化案例：学习时间与成绩的关系（线性回归）</p>
+<p>数据集csv，用逗号隔开的数据，也可以用excel打开自动转化为单元格</p>
+<p><img src="/images/202110/18.png" alt=""></p>
+<p><img src="/images/202110/19.png" alt=""></p>
+<p><img src="/images/202110/20.png" alt=""></p>
+<h2 id="第1步导入数据分析库pandas数据可视化库matplotlib">第1步：导入数据分析库pandas，数据可视化库matplotlib</h2>
+<p><code>%matplotlib inline</code>是Ipython的魔法函数，其作用是使matplotlib绘制的图像嵌入在juptyer notebook的单元格里</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="第2步导入数据集查看数据集">第2步：导入数据集，查看数据集</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./studentscores.csv&#39;</span><span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="c1">#查看前十行</span>
+</code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hours</th>
+      <th>Scores</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.5</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.1</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.2</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8.5</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.5</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1.5</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>9.2</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5.5</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8.3</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2.7</td>
+      <td>25</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="nb">type</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="c1">#二维表格类型</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>pandas.core.frame.DataFrame
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="c1">#25行2列</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>(25, 2)
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">dataset</span><span class="o">.</span><span class="n">columns</span><span class="c1">#第一行的表头</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>Index(['Hours', 'Scores'], dtype='object')
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">dataset</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 25 entries, 0 to 24
+Data columns (total 2 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   Hours   25 non-null     float64
+ 1   Scores  25 non-null     int64  
+dtypes: float64(1), int64(1)
+memory usage: 528.0 bytes
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">dataset</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="c1">#快速的一览统计特征，</span>
+<span class="c1">#个数，平均数，标准差，最小值，下四分位数，中位数，上四分位数，最大值</span>
+</code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hours</th>
+      <th>Scores</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>25.000000</td>
+      <td>25.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.012000</td>
+      <td>51.480000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2.525094</td>
+      <td>25.286887</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.100000</td>
+      <td>17.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.700000</td>
+      <td>30.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>4.800000</td>
+      <td>47.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7.400000</td>
+      <td>75.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>9.200000</td>
+      <td>95.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h2 id="第3步提取特征">第3步：提取特征</h2>
+<h3 id="提取特征学习时间-提取标签学习成绩">提取特征：学习时间 提取标签：学习成绩</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hours&#39;</span><span class="p">]</span>
+<span class="n">label_column</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Scores&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">features</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">]</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">label_column</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">features</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hours</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="nb">type</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="c1">#二维表格数据</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>pandas.core.frame.DataFrame
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">label</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Scores</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">X</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">values</span><span class="c1">#数据变成了一维数组</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">X</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>array([[2.5],
+       [5.1],
+       [3.2],
+       [8.5],
+       [3.5],
+       [1.5],
+       [9.2],
+       [5.5],
+       [8.3],
+       [2.7],
+       [7.7],
+       [5.9],
+       [4.5],
+       [3.3],
+       [1.1],
+       [8.9],
+       [2.5],
+       [1.9],
+       [6.1],
+       [7.4],
+       [2.7],
+       [4.8],
+       [3.8],
+       [6.9],
+       [7.8]])
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="c1">#25行1列的向量</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>(25, 1)
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">Y</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">values</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="第四步建立模型">第四步：建立模型</h2>
+<h3 id="拆分数据四分之三的数据作为训练集四分之一的数据作为测试集">拆分数据，四分之三的数据作为训练集，四分之一的数据作为测试集</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="用训练集的数据进行训练">用训练集的数据进行训练</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#调用sklearn中的线性模型把训练集的数据传进来进行模型的训练</span>
+<span class="c1">#regressor 是训练好的模型</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="n">regressor</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">regressor</span> <span class="o">=</span> <span class="n">regressor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="对测试集进行预测">对测试集进行预测</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#用训练好的模型regressor来对测试集的数据来进行测试</span>
+<span class="n">Y_pred</span> <span class="o">=</span> <span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="可视化">可视化</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 散点图：红色点表示训练集的点</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span> <span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="c1"># 线图：蓝色线表示由训练集训练出的线性回归模型</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_train</span> <span class="p">,</span> <span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202110/21.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 散点图：红色点表示测试集的点</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span> <span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="c1"># 线图：蓝色线表示对测试集进行预测的结果</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span> <span class="p">,</span> <span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202110/22.png" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-10-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/jupyter/">Jupyter</a>
+          <a href="/tags/machine-learning/">Machine-Learning</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/matlab/">
+            <span class="next-text nav-default">MATLAB</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
