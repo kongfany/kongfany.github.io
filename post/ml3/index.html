@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Categories - 大胖狗来了</title>
+  <title>Linear Regression with Multiple Variables - 大胖狗来了</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="多变量线性回归(Linear Regression with Multiple Variables) Multiple Features：多维特征 目前为止，我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
-<link rel="canonical" href="https://kongfany.github.io/categories/" />
-  <link href="https://kongfany.github.io/categories/index.xml" rel="alternate" type="application/rss+xml" title="大胖狗来了" />
-  <link href="https://kongfany.github.io/categories/index.xml" rel="feed" type="application/rss+xml" title="大胖狗来了" />
+<link rel="canonical" href="https://kongfany.github.io/post/ml3/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,15 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Categories" />
-<meta property="og:description" content="Hugo theme even example site." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kongfany.github.io/categories/" />
+<meta property="og:title" content="Linear Regression with Multiple Variables" />
+<meta property="og:description" content="多变量线性回归(Linear Regression with Multiple Variables) Multiple Features：多维特征 目前为止，我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/ml3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-22T11:52:33+08:00" />
+<meta property="article:modified_time" content="2021-10-22T11:52:33+08:00" />
 
-<meta itemprop="name" content="Categories">
-<meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Categories"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+<meta itemprop="name" content="Linear Regression with Multiple Variables">
+<meta itemprop="description" content="多变量线性回归(Linear Regression with Multiple Variables) Multiple Features：多维特征 目前为止，我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征"><meta itemprop="datePublished" content="2021-10-22T11:52:33+08:00" />
+<meta itemprop="dateModified" content="2021-10-22T11:52:33+08:00" />
+<meta itemprop="wordCount" content="362">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linear Regression with Multiple Variables"/>
+<meta name="twitter:description" content="多变量线性回归(Linear Regression with Multiple Variables) Multiple Features：多维特征 目前为止，我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -127,27 +130,83 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <div class="terms">
-      <div class="terms-title">
-        3 Categories In Total
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linear Regression with Multiple Variables</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-22 </span>
+        <div class="post-category">
+            <a href="/categories/machine-learning/"> Machine-Learning </a>
+            </div>
+        
       </div>
-      <div class="terms-tags">
-        <a class="terms-link" href="/categories/python/">
-            python
-            <span class="terms-count">32</span>
-          </a>
-        <a class="terms-link" href="/categories/machine-learning/">
-            machine-learning
-            <span class="terms-count">3</span>
-          </a>
-        <a class="terms-link" href="/categories/spring-boot/">
-            spring-boot
-            <span class="terms-count">2</span>
-          </a>
-        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#多变量线性回归linear-regression-with-multiple-variables">多变量线性回归(Linear Regression with Multiple Variables)</a>
+      <ul>
+        <li><a href="#multiple-features多维特征">Multiple Features：多维特征</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="多变量线性回归linear-regression-with-multiple-variables">多变量线性回归(Linear Regression with Multiple Variables)</h1>
+<h2 id="multiple-features多维特征">Multiple Features：多维特征</h2>
+<p>目前为止，我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征，例如房间数楼层等，构成一个含有多个变量的模型，模型中的特征为（X1,X2,&hellip;,Xn）。</p>
+<p><img src="/images/202110/23.png" alt=""></p>
+<p>增添更多的特征后，我们引入一系列新的注释：</p>
+<p>n：代表特征的数量</p>
+<p>x^(i):代表第i个训练实力，是特征矩阵中的第i行，是一个向量</p>
+<p>x^(i)_j:代表特征矩阵中第i行的第j个特征，也就是第i个训练实例的第j个特征</p>
+<p>支持多变量的假设h表示为：<img src="/iamges/202110/24.png" alt=""></p>
+<p>公式中有n+1个参数和n各变量，为了使得公式能够简化一些，引入x0=1，则公式转化为：</p>
+<p><img src="/images/202110/25.png" alt=""></p>
+<p>此时模型中的参数是一个n+1维的向量，任何一个训练实例也是n+1维的向量，特征方程X的维度是m*（n+1）。因此公式可以简化为：<img src="/images/202110/26.png" alt="">，即为参数向量θ和特征向量X的内积。</p>
+
     </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-10-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/jupyter/">
+            <span class="next-text nav-default">Jupyter</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
 
       </div>
     </main>

@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Oct 2021 16:28:37 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Oct 2021 11:52:33 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linear Regression with Multiple Variables</title>
+      <link>https://kongfany.github.io/post/ml3/</link>
+      <pubDate>Fri, 22 Oct 2021 11:52:33 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/ml3/</guid>
+      <description>多变量线性回归(Linear Regression with Multiple Variables) Multiple Features：多维特征 目前为止，我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征</description>
+    </item>
+    
     <item>
       <title>Jupyter</title>
       <link>https://kongfany.github.io/post/jupyter/</link>
