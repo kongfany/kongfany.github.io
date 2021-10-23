@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Leetcodes on 大胖狗来了</title>
+    <link>https://kongfany.github.io/leetcode/</link>
+    <description>Recent content in Leetcodes on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 22 Oct 2021 22:23:27 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>求众数2</title>
+      <link>https://kongfany.github.io/leetcode/229/</link>
+      <pubDate>Fri, 22 Oct 2021 22:23:27 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/leetcode/229/</guid>
+      <description>给定一个大小为 n 的整数数组，找出其中所有出现超过 ⌊ n/3 ⌋ 次的元素。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 class Solution(object): def majorityElement(self, nums): &amp;#34;&amp;#34;&amp;#34; :type nums: List[int] :rtype: List[int] &amp;#34;&amp;#34;&amp;#34; cnt = {} ans</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Leetcode on 大胖狗来了</title>
+    <link>https://kongfany.github.io/categories/leetcode/</link>
+    <description>Recent content in Leetcode on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 22 Oct 2021 22:23:27 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>求众数2</title>
+      <link>https://kongfany.github.io/post/lcode229/</link>
+      <pubDate>Fri, 22 Oct 2021 22:23:27 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/lcode229/</guid>
+      <description>https://www.php.cn/python-tutorials-419658.html 给定一个大小为 n 的整数数组，找出其中所有出现超过 ⌊ n/3 ⌋ 次的元素。 方法一：哈希统计 思路:我们用哈希统计数组中每个元素出现的次数，设数组的长度</description>
+    </item>
+    
+  </channel>
+</rss>
