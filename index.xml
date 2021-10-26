@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 22 Oct 2021 22:23:27 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Oct 2021 20:57:15 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>有效三角形的个数</title>
+      <link>https://kongfany.github.io/post/lcode611/</link>
+      <pubDate>Tue, 26 Oct 2021 20:57:15 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/lcode611/</guid>
+      <description>给定一个包含非负整数的数组，你的任务是统计其中可以组成三角形三条边的三元组个数。 1 2 3 4 5 6 7 输入: [2,2,3,4] 输出: 3 解释: 有效的组合是: 2,3,4 (使用第</description>
+    </item>
+    
     <item>
       <title>求众数2</title>
       <link>https://kongfany.github.io/post/lcode229/</link>
