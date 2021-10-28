@@ -49,7 +49,7 @@
 <meta itemprop="name" content="有效三角形的个数">
 <meta itemprop="description" content="给定一个包含非负整数的数组，你的任务是统计其中可以组成三角形三条边的三元组个数。 1 2 3 4 5 6 7 输入: [2,2,3,4] 输出: 3 解释: 有效的组合是: 2,3,4 (使用第"><meta itemprop="datePublished" content="2021-10-26T20:57:15+08:00" />
 <meta itemprop="dateModified" content="2021-10-26T20:57:15+08:00" />
-<meta itemprop="wordCount" content="810">
+<meta itemprop="wordCount" content="1710">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="有效三角形的个数"/>
 <meta name="twitter:description" content="给定一个包含非负整数的数组，你的任务是统计其中可以组成三角形三条边的三元组个数。 1 2 3 4 5 6 7 输入: [2,2,3,4] 输出: 3 解释: 有效的组合是: 2,3,4 (使用第"/>
@@ -148,6 +148,7 @@
     <li>
       <ul>
         <li><a href="#方法一排序--二分查找">方法一：排序 + 二分查找</a></li>
+        <li><a href="#方法二排序--双指针">方法二：排序 + 双指针</a></li>
       </ul>
     </li>
   </ul>
@@ -183,7 +184,104 @@
 <p>对于正整数a，b，c，他们可以作为三角形的三条边，当且仅当任意两边之和大于第三边均成立。如果将三条边升序排列，使得a&lt;=b&lt;=c,那么只需要a+b&gt;c成立即可。</p>
 <p>将数组nums进行升序排列，然后使用二重循环枚举a和b。设a=nums[i],b=nums[j]，为了防止重复统计答案，需要保证i&lt;j。剩余的边c需要满足c&lt;num[i]+num[j],我们在[j+1,n-1]的下标范围内使用二分查找(其中n是数组nums的长度)，找出最大的满足nums[k]&lt;nums[i]+nums[j]的下标k，那么在[j+1,k]范围内的下标都可以作为边c的下标，我们将范围的长度k-j累加答案。当枚举完成时，返回累加的答案即可</p>
 <p>细节：</p>
-<p>题目中描述nums包含的元素的非负整数，即除了正整数以外，nums还包含0。但如果将nums进行升序排序，那么在枚举a和b出现了0，那么nums[i]一定为0.此时，边c需要满足c&lt;nums[i]+nums[j]=nums[j],而下标</p>
+<p>题目中描述nums包含的元素的非负整数，即除了正整数以外，nums还包含0。但如果将nums进行升序排序，那么在枚举a和b出现了0，那么nums[i]一定为0.此时，边c需要满足c&lt;nums[i]+nums[j]=nums[j],而下标在[j+1,n-1]范围内的元素一定都是大于等于num[j]的，因此二分查找法会失败。若二分查找失败，令k=j，此时对应的范围长度k-j=0，保证了答案的正确性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">triangleNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span>
+                <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+                    <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+                    <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span><span class="c1">#查找成功修改k</span>
+                        <span class="n">k</span> <span class="o">=</span> <span class="n">mid</span>
+                        <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span><span class="c1">#查找失败</span>
+                        <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">ans</span> <span class="o">+=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">j</span>
+        <span class="k">return</span> <span class="n">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>复杂度分析：</p>
+<ul>
+<li>
+<p>时间复杂度：O(n^2 log n)，其中 n 是数组 nums 的长度。我们需要 O(nlogn) 的时间对数组 nums 进行排序，随后需要 O(n^2 log n)的时间使用二重循环枚举 a, b 的下标以及使用二分查找得到 c 的下标范围。</p>
+</li>
+<li>
+<p>空间复杂度：O(logn)，即为排序需要的栈空间。</p>
+</li>
+</ul>
+<h2 id="方法二排序--双指针">方法二：排序 + 双指针</h2>
+<p>思路：</p>
+<p>将a=num[i],b=num[j]时，最大满足nums[k]&lt;nums[i]+nums[j]的下标k记为k_i,j。如果我们固定i，那么随着j的递增，不等式右侧nums[i]+nums[j]也是递增的，因此k_i,j也是递增的。这样，我们就可以将j和k看成两个同向(递增)移动的指针。</p>
+<ul>
+<li>使用一重循环枚举i。当i固定时，使用双指针同时维护j和k，初始值均为i</li>
+<li>每一次将j向右移动一个位置，即j=j+1，并尝试不断向右移动k，使得k是最大的满足nums[k]&lt;nums[i]+nums[j]的下标。将max(k-j,0)累加入答案。</li>
+</ul>
+<p>细节：</p>
+<p>与方法一中「二分查找的失败」类似，方法二的双指针中，也会出现不存在满足 nums[k]&lt;nums[i]+nums[j]的下标的情况。此时，指针 k 不会出现在指针 j 的右侧，即 k - j ≤0，因此我们需要将 k - j 与 0 中的较大值累加入答案，防止错误的负数出现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">triangleNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">while</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">ans</span> <span class="o">+=</span> <span class="nb">max</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>复杂度分析：</p>
+<ul>
+<li>
+<p>时间复杂度：O(n^2)，其中 n 是数组 nums 的长度。我们需要 O(nlogn) 的时间对数组 nums 进行排序，随后需要 O(n^2)的时间使用一重循环枚举 a 的下标以及使用双指针维护 b,c 的下标。</p>
+</li>
+<li>
+<p>空间复杂度：O(logn)，即为排序需要的栈空间。</p>
+</li>
+</ul>
 <p><code>二分查找法</code>：</p>
 <p>（1）首先，从数组的中间元素开始搜索，如果该元素正好是目标元素，则搜索过程结束，否则执行下一步。</p>
 <p>（2）如果目标元素大于/小于中间元素，则在数组大于/小于中间元素的那一半区域查找，然后重复步骤（1）的操作。</p>
