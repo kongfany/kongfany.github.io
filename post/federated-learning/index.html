@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>联邦学习(Federated Learning) - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/federated-learning/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="联邦学习(Federated Learning)" />
+<meta property="og:description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/federated-learning/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-30T13:19:05+08:00" />
+<meta property="article:modified_time" content="2021-10-30T13:19:05+08:00" />
+
+<meta itemprop="name" content="联邦学习(Federated Learning)">
+<meta itemprop="description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An"><meta itemprop="datePublished" content="2021-10-30T13:19:05+08:00" />
+<meta itemprop="dateModified" content="2021-10-30T13:19:05+08:00" />
+<meta itemprop="wordCount" content="3399">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="联邦学习(Federated Learning)"/>
+<meta name="twitter:description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">联邦学习(Federated Learning)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-30 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#简要分析httpswwwbilibilicomvideobv1ub4y1z7amspm_id_from33399900"><a href="https://www.bilibili.com/video/BV1ub4y1Z7aM?spm_id_from=333.999.0.0">简要分析</a></a></li>
+        <li><a href="#背景介绍">背景介绍</a></li>
+        <li><a href="#联邦学习的概念">联邦学习的概念</a></li>
+        <li><a href="#联邦学习的分类">联邦学习的分类</a>
+          <ul>
+            <li><a href="#横向联邦学习">横向联邦学习</a></li>
+          </ul>
+        </li>
+        <li><a href="#纵向联邦学习">纵向联邦学习</a></li>
+        <li><a href="#联邦迁移学习"><strong>联邦迁移学习</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="简要分析httpswwwbilibilicomvideobv1ub4y1z7amspm_id_from33399900"><a href="https://www.bilibili.com/video/BV1ub4y1Z7aM?spm_id_from=333.999.0.0">简要分析</a></h2>
+<p>数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决Android的更新问题，Google提出让用户在自己的设备中训练模型，以上传模型参数取代直接上传数据，一定程度上保证了个人数据的私密，这就是联邦学习的雏形。</p>
+<p>如果联邦学习的业务参与者们业务相似，数据的特征重叠多，样本重叠少，比如不同地区的两家银行就可以通过上传参数，在服务器中聚合更新模型，再将最新的参数下放完成模型效果的提升，这被称为<code>横向联邦学习</code>或特征对齐的联邦学习。如果参与者的数据中样本重叠多，特征重叠少，例如同一地区的银行和电商，就需要先将样本对齐，由于不能直接比对，我们需要加密算法的帮助，让参与者不暴露不重叠的样本的情况下，找出相同的样本后联合他们的特征进行学习，这是<code>纵向联邦学习</code>，也被称为样本对齐的联邦学习。如果样本和特征重合都不多，希望利用数据提升模型能力，就需要将参与者的模型和数据迁移到同一空间中运算，这杯称为<code>联邦迁移学习</code>。联邦学习的存在目标是解决数据的协助和隐私问题。</p>
+<h2 id="背景介绍">背景介绍</h2>
+<p>在追逐AI的同时却忽略了一点，AI是靠数据来喂的，而且是大量优质数据。</p>
+<p>现实生活中，除了少数巨头公司能够满足，绝大多数企业都存在数据量少，数据质量差的问题，不足以支撑人工智能技术的实现；同时国内外监管环境也在逐步加强数据保护，陆续出台相关政策，如欧盟最近引入 的新法案《通用数据保护条例》（GDPR），我国国家互联网信息办公室起草的《数据安全管理办法(征求意见稿)》，因此数据在安全合规的前提下自由流动，成了大势所趋；在用户和企业角度下，商业公司所拥有的数据往往都有巨大的潜在价值。两个公司甚至公司间的部门都要考虑利益的交换，往往这些机构不会提供各自数据与其他公司做与单的聚合，导致即使在同一个公司内，数据也往往以孤岛形式出现。</p>
+<p>基于以上不足以支撑实现、不允许粗暴交换、不愿意贡献价值三点，导致了现在大量存在的数据孤岛，以及隐私保护问题，联邦学习应运而生。</p>
+<h2 id="联邦学习的概念">联邦学习的概念</h2>
+<p>本质：联邦学习本质上是一种<strong>分布式</strong>机器学习技术，或机器学习<strong>框架</strong>。</p>
+<p>目标：联邦学习的目标是在保证数据隐私安全及合法合规的基础上，实现共同建模，提升AI模型的效果。</p>
+<p>前身：联邦学习最早在 2016 年由谷歌提出，原本用于解决安卓手机终端用户在本地更新模型的问题；</p>
+<h2 id="联邦学习的分类">联邦学习的分类</h2>
+<p>我们把每个参与共同建模的企业称为参与方，根据多参与方之间数据分布的不同，把联邦学习分为三类：横向联邦学习、纵向联邦学习和联邦迁移学习。</p>
+<p><img src="/images/202110/27.jpg" alt=""></p>
+<h3 id="横向联邦学习">横向联邦学习</h3>
+<p><strong>适用场景：</strong></p>
+<p>横向联邦学习的本质是<code>样本的联合</code>，适用于参与者间业态相同但触达客户不同，即特征重叠多，用户重叠少时的场景，比如不同地区的银行间，他们的业务相似（特征相似），但用户不同（样本不同）</p>
+<p><strong>学习过程：</strong></p>
+<p><img src="/images/202110/28.jpg" alt=""></p>
+<p>step1：参与方各自从服务器A下载最新模型；</p>
+<p>step2：每个参与方利用本地数据训练模型，加密梯度上传给服务器A，服务器A聚合各用户的梯度更新模型参数；</p>
+<p>step3：服务器A返回更新后的模型给各参与方；</p>
+<p>step4：各参与方更新各自模型。</p>
+<p><strong>步骤解读：<strong>在传统的机器学习建模中，通常是把模型训练需要的数据集合到一个数据中心然后再训练模型，之后预测。在横向联邦学习中，可以看作是</strong>基于样本的分布式模型训练</strong>，分发全部数据到不同的机器，每台机器从服务器下载模型，然后利用本地数据训练模型，之后返回给服务器需要更新的参数；服务器聚合各机器上的返回的参数，更新模型，再把最新的模型反馈到每台机器。</p>
+<p>在这个过程中，每台机器下都是<strong>相同且完整的模型</strong>，且机器之间不交流不依赖，在预测时每台机器也可以<strong>独立预测</strong>，可以把这个过程看作成基于样本的分布式模型训练。谷歌最初就是采用横向联邦的方式解决安卓手机终端用户在本地更新模型的问题的。</p>
+<h2 id="纵向联邦学习">纵向联邦学习</h2>
+<p><strong>适用场景：</strong></p>
+<p>纵向联邦学习的本质是<code>特征的联合</code>，适用于用户重叠多，特征重叠少的场景，比如同一地区的商超和银行，他们触达的用户都为该地区的居民（样本相同），但业务不同（特征不同）。</p>
+<p><strong>学习过程：</strong></p>
+<p><img src="/images/202110/29.jpg" alt=""></p>
+<p>纵向联邦学习的本质是交叉用户在不同业态下的特征联合，比如商超A和银行B，在传统的机器学习建模过程中，需要将两部分数据集中到一个数据中心，然后再将每个用户的特征join成一条数据用来训练模型，所以就需要双方有用户交集（基于join结果建模），并有一方存在label。其学习步骤如上图所示，分为两大步：</p>
+<p>第一步：加密样本对齐。是在系统级做这件事，因此在企业感知层面不会暴露非交叉用户。</p>
+<p>第二步：对齐样本进行模型加密训练：</p>
+<p>step1：由第三方C向A和B发送公钥，用来加密需要传输的数据；</p>
+<p>step2：A和B分别计算和自己相关的特征中间结果，并加密交互，用来求得各自梯度和损失；</p>
+<p>step3：A和B分别计算各自加密后的梯度并添加掩码发送给C，同时B计算加密后的损失发送给C；</p>
+<p>step4：C解密梯度和损失后回传给A和B，A、B去除掩码并更新模型。</p>
+<p>（同态加密：同态加密对经过同态加密的数据进行处理得到一个输出，将这一输出进行解密，其结果与用同一方法处理未加密的原始数据得到的输出结果是一样的。</p>
+<p>知道了同态加密就容易理解了，这个计算过程中的A和B都是在（从C那里获取的公钥进行）同态度加密的数据上玩的，然后由C（用私钥）解密最终计算的梯度信息返回给它们。</p>
+<p>详细来讲：在setup2中：A和B交互都是用C发的公钥加密的，只有他两交互后（损失对齐）后才能计算关于本地参数的梯度，且这时计算的都是基于同态加密的数据并不能直接用于更新本地模型，所以需要在setup3中：A和B分别个各自计算的梯度和损失（注意是加密过的）推送给C，由C（用C的私钥）来解密，并把解密后的结果返回给它们。）</p>
+<p><strong>步骤解读：</strong></p>
+<p>我们以线性回归为例具体说明其训练过程。</p>
+<p>存在数据集 <img src="https://www.zhihu.com/equation?tex=%5Cleft%5C%7B+x_%7Bi%7D%5E%7BA%7D+%5Cright%5C%7D%2Ci%5C+%5Cin+D_%7BA%7D" alt="[公式]"> <img src="https://www.zhihu.com/equation?tex=%5Cleft%5C%7B+x_%7Bi%7D%5E%7BB%7D+%2Cy_%7Bi%7D%5E%7BB%7D%5Cright%5C%7D%2Ci%5C+%5Cin+D_%7BB%7D" alt="[公式]"> ,A和B分别初始化模型参数 <img src="https://www.zhihu.com/equation?tex=%5CTheta_%7BA%7D%2C%5CTheta_%7BB%7D" alt="[公式]"></p>
+<p>其目标函数为：<img src="https://www.zhihu.com/equation?tex=%5Cmin_%7B%5CTheta_%7BA%7D+%2C%5CTheta_%7BB%7D%7D%5Csum_%7Bi%7D%5E%7B%7D%7B%7C%7C%5CTheta_%7BA%7Dx_%7Bi%7D%5E%7BA%7D%2B+%5CTheta_%7BB%7Dx_%7Bi%7D%5E%7BB%7D-y_%7Bi%7D%7D%7C%7C%5E%7B2%7D%2B%5Cfrac%7B%5Clambda%7D%7B2%7D%5Cleft%28+%7C%7C%5CTheta_%7BA%7D%7C%7C%5E%7B2%7D%2B%7C%7C%5CTheta_%7BB%7D%7C%7C%5E%7B2%7D%5Cright%29" alt="[公式]"></p>
+<p>令：<img src="https://www.zhihu.com/equation?tex=u_%7Bi%7D%5E%7BA%7D%3D%5CTheta_%7BA%7Dx_%7Bi%7D%5E%7BA%7D%2Cu_%7Bi%7D%5E%7BB%7D%3D%5CTheta_%7BB%7Dx_%7Bi%7D%5E%7BB%7D" alt="[公式]"> ，且对原目标函数同态加密后可表示为：</p>
+<p><img src="https://www.zhihu.com/equation?tex=%5B%5BL%5D%5D%3D%5B%5B%5Csum_%7Bi%7D%5E%7B%7D%7B%28%28u_%7Bi%7D%5E%7BA%7D%2B+u_%7Bi%7D%5E%7BB%7D-y_%7Bi%7D%7D%29%29%5E%7B2%7D%2B%5Cfrac%7B%5Clambda%7D%7B2%7D%5Cleft%28+%7C%7C%5CTheta_%7BA%7D%7C%7C%5E%7B2%7D%2B%7C%7C%5CTheta_%7BB%7D%7C%7C%5E%7B2%7D%5Cright%29%5D%5D" alt="[公式]"> , <img src="https://www.zhihu.com/equation?tex=%5B%5B%5Cbullet%5D%5D" alt="[公式]"> 表示同态加密， <img src="https://www.zhihu.com/equation?tex=%5B%5BL_%7BA%7D%5D%5D%3D%5B%5B%5CSigma_%7Bi%7D%5Cleft%28+u_%7Bi%7D%5E%7BA%7D%5Cright%29%5E%7B2%7D%2B%5Cfrac%7B%5Clambda%7D%7B2%7D%7C%7C%5CTheta_%7BA%7D%7C%7C%5E%7B2%7D%5D%5D" alt="[公式]"> , <img src="https://www.zhihu.com/equation?tex=%5Cleft%5B+%5Cleft%5B+L_%7BB%7D+%5Cright%5D+%5Cright%5D%3D%5B%5B%5Csum_%7Bi%7D%5E%7B%7D%7B%28%28u_%7Bi%7D%5E%7BB%7D-y_%7Bi%7D%29%5E%7B2%7D%29%2B%5Cfrac%7B%5Clambda%7D%7B2%7D%7D%5CTheta_%7BB%7D%5E%7B2%7D%5D%5D" alt="[公式]"> , <img src="https://www.zhihu.com/equation?tex=%5B%5BL_%7BAB%7D%5D%5D%3D2%5CSigma_%7Bi%7D%5Cleft%28%5B%5Bu_%7Bi%7D%5E%7BA%7D%5D%5D%5Cleft%28+u_%7Bi%7D%5E%7BB%7D-y_%7Bi%7D%5Cright%29%5Cright%29" alt="[公式]"> ,</p>
+<p>因此有 <img src="https://www.zhihu.com/equation?tex=%5B%5BL%5D%5D+%3D+%5B%5BL_%7BA%7D%5D%5D%2B%5B%5BL_%7BB%7D%5D%5D%2B%5B%5BL_%7BAB%7D%5D%5D" alt="[公式]"> ,同理令 <img src="https://www.zhihu.com/equation?tex=%5B%5Bd_%7Bi%7D%5D%5D+%3D+%5B%5Bu_%7Bi%7D%5E%7BA%7D%5D%5D%2B%5B%5Bu_%7Bi%7D%5E%7BB%7D-y_%7Bi%7D%5D%5D" alt="[公式]"> ,</p>
+<p>梯度可表示如下：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-26fceb8258238f27d62ec1de64100bbf_720w.jpg" alt="img"></p>
+<p>具体训练步骤如下：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-134ba72d9b4b8dd41e3e87697fa965f5_720w.jpg" alt="img"></p>
+<p><strong>在整个过程中参与方都不知道另一方的数据和特征，且训练结束后参与方只得到自己侧的模型参数，即半模型。</strong></p>
+<p><strong>预测过程：</strong></p>
+<p>由于各参与方只能得到与自己相关的模型参数，预测时需要双方协作完成，如下图所示：</p>
+<p><img src="/images/202110/30.jpg" alt=""></p>
+<p><strong>共同建模的结果：</strong></p>
+<ul>
+<li>双方均获得数据保护</li>
+<li>共同提升模型效果</li>
+<li>模型无损失</li>
+</ul>
+<h2 id="联邦迁移学习"><strong>联邦迁移学习</strong></h2>
+<p><strong>适用场景：</strong></p>
+<p>当参与者间特征和样本重叠都很少时可以考虑使用联邦迁移学习，如不同地区的银行和商超间的联合。主要适用于以深度神经网络为基模型的场景。</p>
+<p><strong>迁移学习介绍：</strong></p>
+<p>迁移学习，是指利用数据、任务、或模型之间的相似性，将在源领域学习过的模型，应用于 目标领域的一种学习过程。</p>
+<p>其实我们人类对于迁移学习这种能力，是与生俱来的。比如，我们如果已经会打乒乓球，就可以类比着学习打网球。再比如，我们如果已经会下中国象棋，就可以类比着下国际象棋。因为这些活动之间，往往有着极高的相似性。生活中常用的“举一反三”、“照猫画虎”就很好地体现了迁移学习的思想。</p>
+<p>迁移学习的核心是，找到源领域和目标领域之间的相似性，举一个杨强教授经常举的例子来说明：我们都知道在中国大陆开车时，驾驶员坐在左边，靠马路右侧行驶。这是基本的规则。然而，如果在英国、香港等地区开车，驾驶员是坐在右边，需要靠马路左侧行驶。那么，如果我们从中国大陆到了香港，应该如何快速地适应 他们的开车方式呢？诀窍就是找到这里的不变量：不论在哪个地区，驾驶员都是紧靠马路中间。这就是我们这个开车问题中的不变量。 找到相似性 (不变量)，是进行迁移学习的核心。</p>
+<p><strong>学习过程：</strong></p>
+<p>联邦迁移学习的步骤与纵向联邦学习相似，只是中间传递结果不同（实际上每个模型的中间传递结果都不同）。这里重点讲一下联邦迁移的思想：</p>
+<p><img src="/images/202110/31.jpg" alt=""></p>
+<p>源域： <img src="https://www.zhihu.com/equation?tex=D_%7BA%7D%3D%5Cleft%5C%7B+%28x_%7Bi%7D%5E%7BA%7D%2Cy_%7Bi%7D%5E%7BA%7D%29+%5Cright%5C%7D_%7Bi%3D1%7D%5E%7BN_%7BA%7D%7D" alt="[公式]"> ，目标域： <img src="https://www.zhihu.com/equation?tex=D_%7BB%7D%3D%5Cleft%5C%7B+%28x_%7Bj%7D%5E%7BB%7D%29+%5Cright%5C%7D_%7Bj%3D1%7D%5E%7BN_%7BB%7D%7D" alt="[公式]"> ，我们假设源域和目标域间存在共同样本 <img src="https://www.zhihu.com/equation?tex=D_%7BAB%7D%3D%5Cleft%5C%7B+%28x_%7Bi%7D%5E%7BA%7D%2Cx_%7Bi%7D%5E%7BB%7D%29+%5Cright%5C%7D_%7Bi%3D1%7D%5E%7BN_%7BAB%7D%7D" alt="[公式]"> ，对于其共同样本存在 <img src="https://www.zhihu.com/equation?tex=D_%7BC%7D%3D%5Cleft%5C%7B+%28x_%7Bi%7D%5E%7BB%7D%2Cy_%7Bi%7D%5E%7BA%7D%29+%5Cright%5C%7D_%7Bi%3D1%7D%5E%7BN_%7BC%7D%7D" alt="[公式]"> ， <img src="https://www.zhihu.com/equation?tex=u_%7BA%7D%2Cu_%7BB%7D" alt="[公式]"> 分别为源域和目标域间的隐层特征不变量，我们定义对目标域的分类函数为： <img src="https://www.zhihu.com/equation?tex=%5Cvarphi%5Cleft%28+u_%7Bj%7D%5E%7BB%7D+%5Cright%29+%3D%5Cfrac%7B1%7D%7BN_%7BA%7D%7D%5Csum_%7Bi%7D%5E%7BN_%7BA%7D%7D%7By_%7Bi%7D%5E%7BA%7Du_%7Bi%7D%5E%7BA%7D%28u_%7Bj%7D%5E%7BB%7D%29%27%7D%3D%5CPhi%5E%7BA%7D%5COmega%28u_%7Bj%7D%5E%7BB%7D%29" alt="[公式]"></p>
+<p>目标函数：</p>
+<p><img src="https://www.zhihu.com/equation?tex=arg%5Cmin_%7B%5CTheta%5E%7BA%7D%2C+%5CTheta%5E%7BB%7D%7D%7BL_%7B1%7D%7D%3D%5Csum_%7Bi%7D%5E%7BN_%7Bc%7D%7D%7Bl_%7B1%7D%28y_%7Bi%7D%5E%7BA%7D%2C%5Cvarphi%5Cleft%28+u_%7Bi%7D%5E%7BB%7D%5Cright%29%29%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=arg%5Cmin_%7B%5CTheta%5E%7BA%7D%2C+%5CTheta%5E%7BB%7D%7D%7BL_%7B2%7D%7D%3D%5Csum_%7Bi%7D%5E%7BN_%7BAB%7D%7D%7Bl_%7B2%7D%28u_%7Bi%7D%5E%7BA%7D%2Cu_%7Bi%7D%5E%7BB%7D%29%7D" alt="[公式]"></p>
+<p>整体目标函数为： <img src="https://www.zhihu.com/equation?tex=arg%5Cmin_%7B%5CTheta%5E%7BA%7D%2C+%5CTheta%5E%7BB%7D%7D%7BL%7D%3DL_%7B1%7D%2B%5Cgamma+L_%7B2%7D%2B%5Cfrac%7B%5Clambda%7D%7B2%7D%28%7C%7C%5CTheta%5E%7BA%7D%7C%7C%5E%7B2%7D%2B%7C%7C%5CTheta%5E%7BB%7D%7C%7C%5E%7B2%7D%29" alt="[公式]"></p>
+<p>使用BP算法，根据目标函数 <img src="https://www.zhihu.com/equation?tex=L+" alt="[公式]"> 分别对 <img src="https://www.zhihu.com/equation?tex=%5CTheta%5E%7BA%7D%2C%5CTheta%5E%7BB%7D" alt="[公式]"> 求梯度，双方交互计算梯度和损失需要用到的中间结果，重复迭代直至收敛。整个学习过程是利用A、B之间共同样本来学习两者间各自的特征不变量表示 <img src="https://www.zhihu.com/equation?tex=u_%7BA%7D%2Cu_%7BB%7D" alt="[公式]">，同时利用A的所有样本label <img src="https://www.zhihu.com/equation?tex=y_%7BA%7D" alt="[公式]"> 和A的不变量特征 <img src="https://www.zhihu.com/equation?tex=u_%7BA%7D" alt="[公式]"> 学习分类器。在这个阶段中，[联邦] 体现在A,B可以通过安全交互中间结果共同学习一个模型，[迁移] 体现在B迁移了A的分类能力。在预测时， <img src="https://www.zhihu.com/equation?tex=u_%7BB%7D" alt="[公式]"> 依赖于 由<img src="https://www.zhihu.com/equation?tex=u_%7BA%7D%2Cy_%7BA%7D" alt="[公式]"> 组成的分类器，因此和纵向联邦相同需要两者协作来完成。</p>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/79284686">https://zhuanlan.zhihu.com/p/79284686</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-10-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/lcode869/">
+            <span class="next-text nav-default">重新排序得到 2 的幂</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,7 +6,16 @@
     <description>Recent content in Tags on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Oct 2021 16:28:37 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Oct 2021 13:19:05 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Federated Learning</title>
+      <link>https://kongfany.github.io/tags/federated-learning/</link>
+      <pubDate>Sat, 30 Oct 2021 13:19:05 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/tags/federated-learning/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Jupyter</title>
       <link>https://kongfany.github.io/tags/jupyter/</link>
