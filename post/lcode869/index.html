@@ -49,7 +49,7 @@
 <meta itemprop="name" content="重新排序得到 2 的幂">
 <meta itemprop="description" content="给定正整数 N ，我们按任何顺序（包括原始顺序）将数字重新排序，注意其前导数字不能为零。 如果我们可以通过上述方式得到 2 的幂，返回 true；否则，"><meta itemprop="datePublished" content="2021-10-28T21:20:26+08:00" />
 <meta itemprop="dateModified" content="2021-10-28T21:20:26+08:00" />
-<meta itemprop="wordCount" content="467">
+<meta itemprop="wordCount" content="5220">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="重新排序得到 2 的幂"/>
 <meta name="twitter:description" content="给定正整数 N ，我们按任何顺序（包括原始顺序）将数字重新排序，注意其前导数字不能为零。 如果我们可以通过上述方式得到 2 的幂，返回 true；否则，"/>
@@ -148,6 +148,23 @@
     <li>
       <ul>
         <li><a href="#方法一搜索回溯--位运算">方法一：搜索回溯 + 位运算</a></li>
+        <li><a href="#方法二预处理哈希表">方法二：预处理+哈希表</a></li>
+        <li><a href="#2的幂">2的幂</a>
+          <ul>
+            <li><a href="#方法一二进制表示">方法一：二进制表示</a></li>
+            <li><a href="#方法二判断是否为最大2的幂的约数">方法二：判断是否为最大2的幂的约数</a></li>
+          </ul>
+        </li>
+        <li><a href="#全排列">全排列</a>
+          <ul>
+            <li><a href="#回溯法"><code>回溯法</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#全排列2">全排列2</a>
+          <ul>
+            <li><a href="#搜索回溯">搜索回溯</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -241,7 +258,348 @@
         <span class="k">return</span> <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
+</div><p>复杂度分析：</p>
+<ul>
+<li>
+<p>时间复杂度：O(m!)。其中m=⌊log_10 <em>n</em>⌋+1,即n的十进制表示的长度。</p>
+<p><img src="/images/202111/3.png" alt=""></p>
+</li>
+<li>
+<p>空间复杂度：O(m)。我们需要 O(m) 的标记数组，同时在递归的时候栈深度会达到 O(m)，因此总空间复杂度为 O(m+m)=O(2m)=O(m)。</p>
+</li>
+</ul>
+<h2 id="方法二预处理哈希表">方法二：预处理+哈希表</h2>
+<p>由于我们可以按任何顺序将数字重新排列，因此对于两个不同的整数a和b，如果对于两个不同的整数a和b，如果其十进制表示的字符数组，从小到大排序后的结果是相同的，那么若a能够重排得到2的幂，b也可以；若a不能重排得到2的幂，那么b也不能。</p>
+<p>进一步地，只要a和b的十进制表示的字符数组中，从0到9每个字符出现次数，在a和b中都是一样的，那么a和b能否得到2的幂的结果是一样的。</p>
+<p>由于2^29&lt;10^9&lt;2^30，因此在[1,10^9] 范围内有 2^0,2^1,&hellip;,2^29一共 30 个 2 的幂。对这 30 个数的每个数，我们可以预处理其十进制表示的字符数组中从 0 到 9 每个字符的出现次数，记在一个长度为 10 的数组中，并用一哈希表记录这些数组。对于数字 n，我们同样统计其十进制表示的字符数组中从 0 到 9 每个字符的出现次数，然后去哈希表中查找，若存在则说明 n 可以通过重排得到 2 的幂，否则不能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">countDigits</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="n">cnt</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
+    <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">cnt</span><span class="p">[</span><span class="n">n</span> <span class="o">%</span> <span class="mi">10</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">n</span> <span class="o">//=</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
+
+<span class="n">powerOf2Digits</span> <span class="o">=</span> <span class="p">{</span><span class="n">countDigits</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">)}</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">reorderedPowerOf2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">countDigits</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">in</span> <span class="n">powerOf2Digits</span>
+</code></pre></td></tr></table>
 </div>
+</div><p>复杂度分析</p>
+<ul>
+<li>时间复杂度O(logn)。统计 n 的每个数字的出现次数需要 O(logn) 的时间。</li>
+<li>空间复杂度：O(1)。</li>
+</ul>
+<h2 id="2的幂">2的幂</h2>
+<blockquote>
+<p>给你一个整数 n，请你判断该整数是否是 2 的幂次方。如果是，返回 true ；否则，返回 false 。</p>
+<p>如果存在一个整数 x 使得 n = 2x ，则认为 n 是 2 的幂次方。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>-2^31 &lt;= n &lt;= 2^31 - 1</code></li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">输入：n = 1
+输出：true
+解释：20 = 1
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>示例 2：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">输入：n = 16
+输出：true
+解释：24 = 16
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<h3 id="方法一二进制表示">方法一：二进制表示</h3>
+<p>思路与算法：</p>
+<p>一个数n是2的幂，当且仅当n是正整数，并且n的二进制表示中包含1个1。</p>
+<p>因此可以考虑为运算，将n的二进制表示中最低位的那个1提取出来，再判断剩余的数值是否是0即可。</p>
+<p>下面介绍两种常见的与<code>二进制表示中最低位</code>相关的位运算技巧：</p>
+<ol>
+<li>
+<p>n &amp; (n-1):其中&amp;表示按位与运算（两个1为1，其余为0）。该运算技巧可以直接将n的二进制表示的最低位1移除，它的原理如下：</p>
+<p>假设n的二进制表示为：(a10&hellip;0)₂,其中a表示若干个高位，1表示最低位的那个1,那么n-1的二进制为(a01&hellip;1)₂,将(a10&hellip;0)₂和(a01&hellip;1)₂进行按位与运算，高位a不变，在这之后的所有位都会变为0，这样就将最低位的那个1移除了。</p>
+<p>因此，如果n是正整数并且<code>n &amp; (n-1) = 0</code>，那么n就是2的幂。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isPowerOfTwo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>n &amp; (-n):其中-n是n的相反数，是一个负数。该位运算技巧可以直接获取n二进制的最低位的1，它的原理为：</p>
+<p>假设n的二进制为：(a10&hellip;0)₂，那么-n的二进制为(a'01&hellip;1)₂+(1)₂=(a'10&hellip;0)₂,其中a‘为a的每一位取反，将(a10&hellip;0)₂和(a'10&hellip;0)₂进行按位与运算，高位全部变为0，最低位的1以及之后的所有0不变，最低位的1以及之后的所有0不变，这样就获取了n二进制表示的最低位的1。</p>
+<p>因此，如果n是正整数并且<code>n &amp; (-n) = n</code>，那么n就是2的幂。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isPowerOfTwo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>复杂度分析：</p>
+<ul>
+<li>时间复杂度：O(1)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<h3 id="方法二判断是否为最大2的幂的约数">方法二：判断是否为最大2的幂的约数</h3>
+<p>思路和算法：</p>
+<p>除了使用二进制表示判断之外，还有一种较为取巧的方法。</p>
+<p>在题目给定的32位有符的整数的范围内，最大的2的幂为2^30=1073741824。我们只需判断n是否是2^30的约数即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+
+    <span class="n">BIG</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">30</span>
+
+    <span class="k">def</span> <span class="nf">isPowerOfTwo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Solution</span><span class="o">.</span><span class="n">BIG</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>复杂度分析：</p>
+<ul>
+<li>时间复杂度：O(1)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<h2 id="全排列">全排列</h2>
+<blockquote>
+<p>给定一个<code>不含重复</code>数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。</p>
+<p>示例 1：</p>
+<p>输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+示例 2：</p>
+<p>输入：nums = [0,1]
+输出：[[0,1],[1,0]]
+示例 3：</p>
+<p>输入：nums = [1]
+输出：[[1]]</p>
+<p>提示：</p>
+<p>1 &lt;= nums.length &lt;= 6
+-10 &lt;= nums[i] &lt;= 10
+nums 中的所有整数 互不相同</p>
+</blockquote>
+<p>预备知识：</p>
+<h3 id="回溯法"><code>回溯法</code></h3>
+<p>一种通过探索所有可能候选解来找出所有的解的算法。如果候选解被确认不是一个解（或者至少不是最后一个解），回溯算法会通过</p>
+<p>思路和算法：</p>
+<p>问题可以看做n个排列成一行的空格，需要从左往右依次填入题目给定的n个数，每个数只能使用一次。可以很直接的想到一种穷举算法，即从左到右每一个位置都依次尝试填入一个数，看能不能填完这n个空格，在程序中使用回溯法来模拟这个过程。</p>
+<p>定义递归函数backtrack(first,output)表示从左向右填到first个位置，当前排列为output。那么整个递归函数分为两个情况：</p>
+<ul>
+<li>如果first=n，说明已经填完n个位置（注意下标从0开始），找到了一个可行的解，将output放入答案数组中，递归结束。</li>
+<li>如果first&lt;n，应考虑这第first个位置要填那个数。根据题目要求我们不能填已经填过的数，因为可以想到：定义一个标记数组vis[]来标记已经填过的数，那么在填第first个数的时候，遍历题目给定的n个数，如果这个数美原油被标记过，就尝试填入，并将其标记，继续尝试填下一个位置，即调用函数backtrack(first+1,output)。回溯的时候要撤销这一个位置填的数以及标记，并继续尝试其他未被标记过的数</li>
+</ul>
+<p>使用标记数组来处理填过的数是一个很直观的思路，但是标记数组增加了算法的空间复杂度。我们可以将题目给定的n个数的数组nums划分为左右两个部分，左边的表示已经填过的数，右边表示待填的数，在回溯的时候只要动态的维护这个数组即可。</p>
+<p>具体来说，假设我们已经填到第first个位置，那么nums数组中[0,first-1]是已填过的数的集合，[first,n-1]是待填的数的集合。尝试用[first,n-1]的数去填第first个数，假设待填的数的下标为i，那么填完以后，我们将第i个数和第first个数交换，即使能够在填第first+1个数和第first个数交换，即能使得在填第first+1个数的时候nums数组的[0,first]部分为已填过的数，[first+1,n-1]为待填的数，回溯的时候交换回来即能完成撤销操作。回退就是指撤销对当前数字的选择，回退到上一步，未选择的状态</p>
+<p>举例：假设[2,5,8,9,10]这5个数要填入，已经填到第3个位置，已经填了[8,9]这两个数，那么这个数组目前为[8,9|2,5,10]这样的状态，分隔符区分了左右两个部分。假设这个位置填10，为了维护数组，我们将2和10交换，即能使得数组继续保持分隔符左边的数已经填过，右边的待填[8,9,10|2,5]</p>
+<p><img src="/images/202111/1.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        :type nums: List[int]
+</span><span class="s2">        :rtype: List[List[int]]
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">def</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">first</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="c1"># 所有数都填完了</span>
+            <span class="k">if</span> <span class="n">first</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>  
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[:])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="c1"># 动态维护数组</span>
+                <span class="n">nums</span><span class="p">[</span><span class="n">first</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">first</span><span class="p">]</span>
+                <span class="c1"># 继续递归填下一个数</span>
+                <span class="n">backtrack</span><span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># 撤销操作</span>
+                <span class="n">nums</span><span class="p">[</span><span class="n">first</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">first</span><span class="p">]</span>
+        
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">backtrack</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">res</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>复杂度分析：</p>
+<ul>
+<li>
+<p>时间复杂度：O(n*n!)，其中n为序列的长度</p>
+<p><img src="/images/202111/2.png" alt=""></p>
+</li>
+<li>
+<p>空间复杂度：O(n)。除了答案数组外，递归函数在递归过程中需要为每一层递归函数分配栈空间，所以需要额外的空间且该空间取决于递归的深度，可知递归调用深度为O(n)。</p>
+</li>
+</ul>
+<h2 id="全排列2">全排列2</h2>
+<blockquote>
+<p>给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。</p>
+<p>示例 1：</p>
+<p>输入：nums = [1,1,2]
+输出：
+[[1,1,2],
+[1,2,1],
+[2,1,1]]
+示例 2：</p>
+<p>输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</p>
+<p>提示：</p>
+<p>1 &lt;= nums.length &lt;= 8
+-10 &lt;= nums[i] &lt;= 10</p>
+</blockquote>
+<h3 id="搜索回溯">搜索回溯</h3>
+<p>我们将这个问题看作有 n 个排列成一行的空格，我们需要从左往右依次填入题目给定的 nn 个数，每个数只能使用一次。那么很直接的可以想到一种穷举的算法，即从左往右每一个位置都依此尝试填入一个数，看能不能填完这 n 个空格，在程序中我们可以用「回溯法」来模拟这个过程。</p>
+<p>我们定义递归函数 backtrack(idx, perm) 表示当前排列为 perm，下一个待填入的位置是第 idx 个位置（下标从 0 开始）。那么整个递归函数分为两个情况：</p>
+<ul>
+<li>如果 idx==n，说明我们已经填完了 n 个位置，找到了一个可行的解，我们将 perm 放入答案数组中，递归结束。</li>
+<li>如果 idx&lt;n，我们要考虑第 idx 个位置填哪个数。根据题目要求我们肯定不能填已经填过的数，因此很容易想到的一个处理手段是我们定义一个标记数组 vis 来标记已经填过的数，那么在填第 idx 个数的时候我们遍历题目给定的 n 个数，如果这个数没有被标记过，我们就尝试填入，并将其标记，继续尝试填下一个位置，即调用函数 backtrack(idx + 1, perm)。搜索回溯的时候要撤销该个位置填的数以及标记，并继续尝试其他没被标记过的数。</li>
+</ul>
+<p>但题目解到这里并没有满足「全排列不重复」 的要求，在上述的递归函数中我们会生成大量重复的排列，因为对于第 idx 的位置，如果存在重复的数字 i，我们每次会将重复的数字都重新填上去并继续尝试导致最后答案的重复，因此我们需要处理这个情况。</p>
+<p>要解决重复问题，只要设定一个规则，保证在填第idx个数的时候重复数字只会被填入一次即可。而在本题解中，选择对原数组排序，保证相同的数字都相邻，然后每次填入的数一定是这个数所在重复数集合中<code>从左往右第一个 未被填过的数字</code>，即如下的判断条件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+	<span class="k">continue</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个判断条件保证了对于重复数的集合，一定是从左向右逐个填入的。</p>
+<p>假设有三个重复数排完序后相邻，我们一定保证每次都是拿从左往右的第一个未被填过的数字，即整个数组的状态其实是保证了，（未填，未填，未填）到（填入，未填，未填）再到（填入，填入，未填）最后到（填入，填入，填入）的过程，因此可以达到去重的目标。</p>
+<p><code>？？？</code></p>
+<p>加上 !vis[i - 1]来去重主要是通过限制一下两个相邻的重复数字的访问顺序。举个栗子，对于两个相同的数11，我们将其命名为1a1b, 1a表示第一个1，1b表示第二个1； 那么，不做去重的话，会有两种重复排列 1a1b, 1b1a， 我们只需要取其中任意一种排列； 为了达到这个目的，限制一下1a, 1b访问顺序即可。 比如我们只取1a1b那个排列的话，只有当visit nums[i-1]之后我们才去visit nums[i]， 也就是如果!visited[i-1]的话则continue</p>
+<p>for循环保证了从数组中从前往后一个一个取值，再用if判断条件。所以nums[i - 1]一定比nums[i]先被取值和判断。如果nums[i - 1]被取值了，那vis[i - 1]会被置1，只有当递归再回退到这一层时再将它置0。每递归一层都是在寻找数组对应于递归深度位置的值，每一层里用for循环来寻找。所以当vis[i - 1] == 1时，说明nums[i - 1]和nums[i]分别属于两层递归中，也就是我们要用这两个数分别放在数组的两个位置，这时不需要去重。但是当vis[i - 1] == 0时，说明nums[i - 1]和nums[i]属于同一层递归中（只是for循环进入下一层循环），也就是我们要用这两个数放在数组中的同一个位置上，这就是我们要去重的情况。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">permuteUnique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
+        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">res</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">ans</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">visited</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+        <span class="k">def</span> <span class="nf">dfs</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span><span class="o">==</span><span class="n">n</span><span class="p">:</span>
+                <span class="c1">#不是append(ans)，区别是深拷贝和浅拷贝</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ans</span><span class="p">[::])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="k">continue</span>
+                <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+                <span class="n">dfs</span><span class="p">()</span>
+                <span class="n">ans</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">dfs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">res</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>复杂度分析：</p>
+<ul>
+<li>时间复杂度：O(n*n!)</li>
+<li>空间复杂度：O(n)，需要O(n)的标记数组，同时递归的时候栈深度会达到O(n)，因此总空间复杂度为O(n+n)=O(2n)=O(n)</li>
+</ul>
+
     </div>
 
     <div class="post-copyright">
