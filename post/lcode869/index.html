@@ -49,7 +49,7 @@
 <meta itemprop="name" content="重新排序得到 2 的幂">
 <meta itemprop="description" content="给定正整数 N ，我们按任何顺序（包括原始顺序）将数字重新排序，注意其前导数字不能为零。 如果我们可以通过上述方式得到 2 的幂，返回 true；否则，"><meta itemprop="datePublished" content="2021-10-28T21:20:26+08:00" />
 <meta itemprop="dateModified" content="2021-10-28T21:20:26+08:00" />
-<meta itemprop="wordCount" content="5220">
+<meta itemprop="wordCount" content="5857">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="重新排序得到 2 的幂"/>
 <meta name="twitter:description" content="给定正整数 N ，我们按任何顺序（包括原始顺序）将数字重新排序，注意其前导数字不能为零。 如果我们可以通过上述方式得到 2 的幂，返回 true；否则，"/>
@@ -148,7 +148,11 @@
     <li>
       <ul>
         <li><a href="#方法一搜索回溯--位运算">方法一：搜索回溯 + 位运算</a></li>
-        <li><a href="#方法二预处理哈希表">方法二：预处理+哈希表</a></li>
+        <li><a href="#方法二预处理哈希表">方法二：预处理+哈希表</a>
+          <ul>
+            <li><a href="#向左位移">向左位移</a></li>
+          </ul>
+        </li>
         <li><a href="#2的幂">2的幂</a>
           <ul>
             <li><a href="#方法一二进制表示">方法一：二进制表示</a></li>
@@ -286,20 +290,94 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">countDigits</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">countDigits</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span><span class="c1">#统计对应十进制各个数字出现的次数。</span>
     <span class="n">cnt</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
     <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
         <span class="n">cnt</span><span class="p">[</span><span class="n">n</span> <span class="o">%</span> <span class="mi">10</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">n</span> <span class="o">//=</span> <span class="mi">10</span>
+    <span class="c1">#tuple():列表转元组</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
-
-<span class="n">powerOf2Digits</span> <span class="o">=</span> <span class="p">{</span><span class="n">countDigits</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">)}</span>
+<span class="c1">#1&lt;&lt;i,左移，相当于1*2^i</span>
+<span class="n">powerOf2Digits</span> <span class="o">=</span> <span class="p">{</span><span class="n">countDigits</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">)}</span><span class="c1">#集合</span>
 
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">reorderedPowerOf2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">countDigits</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">in</span> <span class="n">powerOf2Digits</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+(0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+(0, 0, 0, 0, 1, 0, 0, 0, 0, 0)
+(0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+(0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+(0, 0, 1, 1, 0, 0, 0, 0, 0, 0)
+(0, 0, 0, 0, 1, 0, 1, 0, 0, 0)
+(0, 1, 1, 0, 0, 0, 0, 0, 1, 0)
+(0, 0, 1, 0, 0, 1, 1, 0, 0, 0)
+(0, 1, 1, 0, 0, 1, 0, 0, 0, 0)
+(1, 1, 1, 0, 1, 0, 0, 0, 0, 0)
+(1, 0, 1, 0, 1, 0, 0, 0, 1, 0)
+(1, 0, 0, 0, 1, 0, 1, 0, 0, 1)
+(0, 1, 1, 0, 0, 0, 0, 0, 1, 1)
+(0, 1, 0, 1, 1, 0, 1, 0, 1, 0)
+(0, 0, 1, 1, 0, 0, 1, 1, 1, 0)
+(0, 0, 0, 1, 0, 2, 2, 0, 0, 0)
+(1, 2, 1, 1, 0, 0, 0, 1, 0, 0)
+(0, 1, 2, 0, 2, 0, 1, 0, 0, 0)
+(0, 0, 2, 0, 1, 1, 0, 0, 2, 0)
+(1, 1, 0, 0, 1, 1, 1, 1, 1, 0)
+(1, 1, 2, 0, 0, 1, 0, 1, 0, 1)
+(1, 1, 0, 1, 3, 0, 0, 0, 0, 1)
+(1, 0, 0, 1, 0, 0, 1, 0, 4, 0)
+(0, 2, 1, 0, 0, 0, 2, 3, 0, 0)
+(0, 0, 1, 3, 2, 2, 0, 0, 0, 0)
+(1, 1, 0, 0, 1, 0, 2, 1, 2, 0)
+(0, 2, 2, 1, 1, 0, 0, 2, 1, 0)
+(0, 0, 1, 1, 2, 2, 2, 0, 1, 0)
+(1, 1, 1, 1, 0, 1, 1, 1, 1, 1)
+{(0, 1, 0, 0, 0, 0, 0, 0, 0, 0), (0, 1, 1, 0, 0, 0, 0, 0, 1, 0), (0, 1, 2, 0, 2, 0, 1, 0, 0, 0), (1, 1, 0, 0, 1, 0, 2, 1, 2, 0), (0, 0, 0, 1, 0, 2, 2, 0, 0, 0), (1, 2, 1, 1, 0, 0, 0, 1, 0, 0), (0, 0, 1, 0, 0, 0, 0, 0, 0, 0), (0, 2, 2, 1, 1, 0, 0, 2, 1, 0), (0, 1, 0, 1, 1, 0, 1, 0, 1, 0), (0, 0, 0, 0, 0, 0, 0, 0, 1, 0), (0, 0, 0, 0, 1, 0, 0, 0, 0, 0), (0, 2, 1, 0, 0, 0, 2, 3, 0, 0), (0, 1, 0, 0, 0, 0, 1, 0, 0, 0), (0, 1, 1, 0, 0, 1, 0, 0, 0, 0), (0, 0, 1, 1, 0, 0, 1, 1, 1, 0), (1, 1, 0, 0, 1, 1, 1, 1, 1, 0), (0, 0, 1, 3, 2, 2, 0, 0, 0, 0), (0, 0, 1, 1, 0, 0, 0, 0, 0, 0), (1, 1, 1, 1, 0, 1, 1, 1, 1, 1), (0, 0, 1, 1, 2, 2, 2, 0, 1, 0), (0, 0, 0, 0, 1, 0, 1, 0, 0, 0), (0, 1, 1, 0, 0, 0, 0, 0, 1, 1), (0, 0, 1, 0, 0, 1, 1, 0, 0, 0), (1, 1, 0, 1, 3, 0, 0, 0, 0, 1), (1, 0, 0, 1, 0, 0, 1, 0, 4, 0), (0, 0, 2, 0, 1, 1, 0, 0, 2, 0), (1, 0, 1, 0, 1, 0, 0, 0, 1, 0), (1, 1, 2, 0, 0, 1, 0, 1, 0, 1), (1, 1, 1, 0, 1, 0, 0, 0, 0, 0), (1, 0, 0, 0, 1, 0, 1, 0, 0, 1)}
+(0, 0, 0, 0, 1, 0, 1, 0, 0, 0)
+True
 </code></pre></td></tr></table>
 </div>
 </div><p>复杂度分析</p>
@@ -307,6 +385,52 @@
 <li>时间复杂度O(logn)。统计 n 的每个数字的出现次数需要 O(logn) 的时间。</li>
 <li>空间复杂度：O(1)。</li>
 </ul>
+<blockquote>
+<h3 id="向左位移">向左位移</h3>
+<p>‘&laquo;’ 操作符将执行按位的“左移”，即左操作数的值被右操作数给出的位数移动到左：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"> #2 = 0b10
+ 2 &lt;&lt; 2
+ #输出: 8
+ #8 = 0b1000
+
+ bin(2 &lt;&lt; 2)
+ #输出: 0b1000
+</code></pre></td></tr></table>
+</div>
+</div><p>执行1的左位移位相当于乘以2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"> 7 &lt;&lt; 1
+ #输出: 14
+</code></pre></td></tr></table>
+</div>
+</div><p>执行n的左位移位相当于乘以2**n ：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"> 3 &lt;&lt; 4
+ #输出: 48
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
 <h2 id="2的幂">2的幂</h2>
 <blockquote>
 <p>给你一个整数 n，请你判断该整数是否是 2 的幂次方。如果是，返回 true ；否则，返回 false 。</p>
@@ -543,8 +667,7 @@ nums 中的所有整数 互不相同</p>
 </div>
 </div><p>这个判断条件保证了对于重复数的集合，一定是从左向右逐个填入的。</p>
 <p>假设有三个重复数排完序后相邻，我们一定保证每次都是拿从左往右的第一个未被填过的数字，即整个数组的状态其实是保证了，（未填，未填，未填）到（填入，未填，未填）再到（填入，填入，未填）最后到（填入，填入，填入）的过程，因此可以达到去重的目标。</p>
-<p><code>？？？</code></p>
-<p>加上 !vis[i - 1]来去重主要是通过限制一下两个相邻的重复数字的访问顺序。举个栗子，对于两个相同的数11，我们将其命名为1a1b, 1a表示第一个1，1b表示第二个1； 那么，不做去重的话，会有两种重复排列 1a1b, 1b1a， 我们只需要取其中任意一种排列； 为了达到这个目的，限制一下1a, 1b访问顺序即可。 比如我们只取1a1b那个排列的话，只有当visit nums[i-1]之后我们才去visit nums[i]， 也就是如果!visited[i-1]的话则continue</p>
+<p><code>！！！</code></p>
 <p>for循环保证了从数组中从前往后一个一个取值，再用if判断条件。所以nums[i - 1]一定比nums[i]先被取值和判断。如果nums[i - 1]被取值了，那vis[i - 1]会被置1，只有当递归再回退到这一层时再将它置0。每递归一层都是在寻找数组对应于递归深度位置的值，每一层里用for循环来寻找。所以当vis[i - 1] == 1时，说明nums[i - 1]和nums[i]分别属于两层递归中，也就是我们要用这两个数分别放在数组的两个位置，这时不需要去重。但是当vis[i - 1] == 0时，说明nums[i - 1]和nums[i]属于同一层递归中（只是for循环进入下一层循环），也就是我们要用这两个数放在数组中的同一个位置上，这就是我们要去重的情况。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -594,11 +717,15 @@ nums 中的所有整数 互不相同</p>
         <span class="k">return</span> <span class="n">res</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>复杂度分析：</p>
+</div><p><img src="/images/202111/869.jpg" alt=""></p>
+<p>复杂度分析：</p>
 <ul>
 <li>时间复杂度：O(n*n!)</li>
 <li>空间复杂度：O(n)，需要O(n)的标记数组，同时递归的时候栈深度会达到O(n)，因此总空间复杂度为O(n+n)=O(2n)=O(n)</li>
 </ul>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/137486712">Python位操作符</a></p>
+</blockquote>
 
     </div>
 
