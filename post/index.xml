@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 30 Oct 2021 13:19:05 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Dec 2021 12:12:46 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ex1线性回归</title>
+      <link>https://kongfany.github.io/post/mlex1-/</link>
+      <pubDate>Wed, 15 Dec 2021 12:12:46 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/mlex1-/</guid>
+      <description>1 2 3 import numpy as np import pandas as pd import matplotlib.pyplot as plt 1 2 A = np.eye(5) A array([[1., 0., 0., 0., 0.], [0., 1., 0., 0., 0.], [0., 0., 1., 0., 0.], [0., 0., 0., 1., 0.], [0., 0., 0., 0., 1.]]) 单变量的线性回归 整个2的部分需要根据城市人口数量</description>
+    </item>
+    
     <item>
       <title>联邦学习(Federated Learning)</title>
       <link>https://kongfany.github.io/post/federated-learning/</link>
