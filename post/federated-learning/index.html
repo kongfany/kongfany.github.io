@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习(Federated Learning)">
 <meta itemprop="description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An"><meta itemprop="datePublished" content="2021-10-30T13:19:05+08:00" />
 <meta itemprop="dateModified" content="2021-10-30T13:19:05+08:00" />
-<meta itemprop="wordCount" content="3399">
+<meta itemprop="wordCount" content="4612">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习(Federated Learning)"/>
 <meta name="twitter:description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An"/>
@@ -146,6 +146,7 @@
     <li>
       <ul>
         <li><a href="#简要分析httpswwwbilibilicomvideobv1ub4y1z7amspm_id_from33399900"><a href="https://www.bilibili.com/video/BV1ub4y1Z7aM?spm_id_from=333.999.0.0">简要分析</a></a></li>
+        <li><a href="#举例httpswwwbilibilicomvideobv1q5411b7suspm_id_fromtrigger_reload"><a href="https://www.bilibili.com/video/BV1Q5411b7su/?spm_id_from=trigger_reload">举例</a></a></li>
         <li><a href="#背景介绍">背景介绍</a></li>
         <li><a href="#联邦学习的概念">联邦学习的概念</a></li>
         <li><a href="#联邦学习的分类">联邦学习的分类</a>
@@ -165,6 +166,11 @@
       <h2 id="简要分析httpswwwbilibilicomvideobv1ub4y1z7amspm_id_from33399900"><a href="https://www.bilibili.com/video/BV1ub4y1Z7aM?spm_id_from=333.999.0.0">简要分析</a></h2>
 <p>数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决Android的更新问题，Google提出让用户在自己的设备中训练模型，以上传模型参数取代直接上传数据，一定程度上保证了个人数据的私密，这就是联邦学习的雏形。</p>
 <p>如果联邦学习的业务参与者们业务相似，数据的特征重叠多，样本重叠少，比如不同地区的两家银行就可以通过上传参数，在服务器中聚合更新模型，再将最新的参数下放完成模型效果的提升，这被称为<code>横向联邦学习</code>或特征对齐的联邦学习。如果参与者的数据中样本重叠多，特征重叠少，例如同一地区的银行和电商，就需要先将样本对齐，由于不能直接比对，我们需要加密算法的帮助，让参与者不暴露不重叠的样本的情况下，找出相同的样本后联合他们的特征进行学习，这是<code>纵向联邦学习</code>，也被称为样本对齐的联邦学习。如果样本和特征重合都不多，希望利用数据提升模型能力，就需要将参与者的模型和数据迁移到同一空间中运算，这杯称为<code>联邦迁移学习</code>。联邦学习的存在目标是解决数据的协助和隐私问题。</p>
+<h2 id="举例httpswwwbilibilicomvideobv1q5411b7suspm_id_fromtrigger_reload"><a href="https://www.bilibili.com/video/BV1Q5411b7su/?spm_id_from=trigger_reload">举例</a></h2>
+<p>train一个model，一般就是minimize一个loss function。最简单的方法就是用gradient descent（梯度下降），比如有10000个data，他们存在10个不同的local sites，那gradient descent的做法就是，先有一个initial value（初值），然后算10000个data在这个initial value上的gradient，然后再进行descent。那这10000个data的gradient就等于这10个local sites的gradient的和，所以只需要在迭代的每一步，告诉每个local site，算自己的gradient，就不需要他们的data，只需要他们的gradient，aggregated information（聚合信息）。这个central server接到10个sites的gradient之后，把它们合成起来，就可以算出global gradient，然后再update parameter（更新参数），然后再把这个parameter传给local sites，然后local sites再算gradient，这样一直循环直到这个算法converge（聚集）。不需要知道每个size的具体的data，每一步的迭代只需要一个summary statistics（总结数据）</p>
+<p>但是是不是就保证了data privacy呢？只能说一定程度上保证了data privacy,因为从这些summary statistics里面，还是可以反推出原来的data，这就涉及到差分隐私differential privacy，对什么是数据隐私有一个严格的数学定义。比如（ε，δ）differential privacy。fl只提供了一种data privacy方法，多大程度的话还需具体推导。</p>
+<p>fl还面临其他的一些挑战，比如数据的差异性heterogeneity。因为不同的local site data distribution（分布）不一定是一样的。如果train一个university model来predict每个data的话，在有一些local sites上面prediction performation会好，但是在另一些site上面的performance可能会差一些，有没有方法来handle这种heterogeneous data呢也是研究较多的话题。对于数据的heterogeneity情况，还是希望对于不同的data来fit不同的model，这样它的prediction performatio会更好。</p>
+<p>还有一个挑战就是关于communication efficiency，一般这种learning method都是一种迭代的算法，在每一次的迭代过程中，都要向central server传一个summary statistics，那么怎样传才能使得这个communication更efficiency高效。</p>
 <h2 id="背景介绍">背景介绍</h2>
 <p>在追逐AI的同时却忽略了一点，AI是靠数据来喂的，而且是大量优质数据。</p>
 <p>现实生活中，除了少数巨头公司能够满足，绝大多数企业都存在数据量少，数据质量差的问题，不足以支撑人工智能技术的实现；同时国内外监管环境也在逐步加强数据保护，陆续出台相关政策，如欧盟最近引入 的新法案《通用数据保护条例》（GDPR），我国国家互联网信息办公室起草的《数据安全管理办法(征求意见稿)》，因此数据在安全合规的前提下自由流动，成了大势所趋；在用户和企业角度下，商业公司所拥有的数据往往都有巨大的潜在价值。两个公司甚至公司间的部门都要考虑利益的交换，往往这些机构不会提供各自数据与其他公司做与单的聚合，导致即使在同一个公司内，数据也往往以孤岛形式出现。</p>
