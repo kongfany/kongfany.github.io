@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>联邦学习综述 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/fl_faq/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="联邦学习综述" />
+<meta property="og:description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/fl_faq/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-18T17:03:03+08:00" />
+<meta property="article:modified_time" content="2021-12-18T17:03:03+08:00" />
+
+<meta itemprop="name" content="联邦学习综述">
+<meta itemprop="description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务"><meta itemprop="datePublished" content="2021-12-18T17:03:03+08:00" />
+<meta itemprop="dateModified" content="2021-12-18T17:03:03+08:00" />
+<meta itemprop="wordCount" content="6505">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="联邦学习综述"/>
+<meta name="twitter:description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">联邦学习综述</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-18 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概念">概念</a></li>
+        <li><a href="#问题">问题</a>
+          <ul>
+            <li><a href="#效率和效用">效率和效用</a></li>
+            <li><a href="#鲁棒性">鲁棒性</a></li>
+            <li><a href="#附录">附录</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p><a href="https://arxiv.org/abs/1912.04977">原论文</a></p>
+<p><a href="https://github.com/open-intelligence/federated-learning-chinese">原论文翻译</a></p>
+<p><a href="https://www.bilibili.com/video/BV1mE411j7GT?spm_id_from=333.999.0.0">视频总结</a></p>
+<p><a href="https://github.com/tao-shen/Federated-Learning-FAQ/">视频文档</a></p>
+</blockquote>
+<h2 id="概念">概念</h2>
+<ol>
+<li>
+<p>什么是联邦学习？</p>
+<p>联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务器（例如，服务提供商）的协调下<strong>共同训练模型</strong>，同时保持训练数据的<strong>去中心化及分散性</strong>。</p>
+<p>去中心化：去中心化，不是不要中心，而是由节点来自由选择中心、自由决定中心。简单地说，中心化的意思，是中心决定节点。节点必须依赖中心，节点离开了中心就无法生存。在去中心化系统中，任何人都是一个节点，任何人也都可以成为一个中心。任何中心都不是永久的，而是阶段性的，任何中心对节点都不具有强制性。<strong>去中心化计算</strong>（英语：Decentralized computing）是把硬件和软件资源分配到每个工作站或办公室的计算模式。相比之下，集中式计算则是将大部分计算功能从本地或者远程进行集中计算。</p>
+<p>联邦学习的<strong>长期目标</strong>：在不暴露数据的情况下分析和学习多个数据拥有者的数据。（目的：解决数据孤岛）</p>
+<p><img src="/images/202112/21.png" alt=""></p>
+<p>联邦学习的过程：首先服务器提供一个已经训练好的输入推荐模型，称为公共模型。把这个公共模型分发给各个客户端。用户使用这个输入法后就会产生一些用户行为的数据，仅保存在手机的内部，并没有发送给服务器。客户端会产生一个本地更新的操作，就是得到公共模型后，会根据本地数据，更新本地模型的参数。本地更新好的模型反传给服务器，服务器在接收到各个客户端传来的模型后，进行模型聚合。就是将收集到的模型重新组成一个公共模型。（如何聚合？最经典的联邦学习算法，FedAvg算法。）得到新的公共模型之后，会再次分发给客户端。训练一定程度后直至收敛。</p>
+<p>lifelong learning？</p>
+</li>
+<li>
+<p>为什么叫“联邦”学习？有什么特点？</p>
+<p>因为学习任务是通过由中央服务器协调的参与设备（客户端）的松散联邦来解决的。<strong>不均衡和Non-IID</strong>（非独立同分布）的数据分隔通过大量<strong>不可靠的设备</strong>，并且是<strong>有限的通信带宽</strong>（设备之间，设备服务器之间），这是作为引入的挑战。</p>
+</li>
+<li>
+<p>为什么要引入“联邦学习”这个概念？</p>
+<p>大量工作试图使用中央服务器在<strong>保护隐私的同时从本地数据中学习</strong>。目前没有任何一项工作可以直接解决FL定义下的全部挑战。“联邦学习”这个词为这一系列特征，约束和挑战<strong>提供了便捷的简写</strong>，这些约束和挑战通常在隐私至关重要的机器学习问题中同时出现。</p>
+</li>
+<li>
+<p>联邦学习的场景与分类？</p>
+<p>联邦学习根据不同场景可以分为两大类：“<strong>跨设备</strong>”和“<strong>跨孤岛</strong>”。</p>
+<p>跨设备：Gboard移动键盘（输入推荐）</p>
+<p>跨孤岛：（数据孤岛）医疗数据联邦学习</p>
+</li>
+<li>
+<p>跨数据和跨孤岛的主要区别？</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>跨孤岛</strong></th>
+<th><strong>跨设备</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>例子</td>
+<td>医疗机构</td>
+<td>手机端应用</td>
+</tr>
+<tr>
+<td>节点数量</td>
+<td>1~100</td>
+<td>1~10^10</td>
+</tr>
+<tr>
+<td>节点状态</td>
+<td>节点几乎稳定运行</td>
+<td>大部分节点不在线</td>
+</tr>
+<tr>
+<td>主要瓶颈</td>
+<td>计算瓶颈和通信瓶颈</td>
+<td>WiFi速度，设备不在线</td>
+</tr>
+<tr>
+<td>Yang分类</td>
+<td>横向/纵向</td>
+<td>横向</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>联邦学习有什么经典的优化算法？</p>
+<p>联邦平均算法（FedAvg）:把所有收集到的模型参数进行加权平均，得到新的公共模型。</p>
+<p><img src="/images/202112/22.png" alt=""></p>
+</li>
+<li>
+<p>FedAvg算法的流程？</p>
+<ol>
+<li>**客户端选择：**服务器从一组符合资格要求的客户端中采样。例如，为避免影响设备用户，移动电话可能仅在未计量的wi-fi连接上插入且处于空闲状态时才签入服务器。</li>
+<li><strong>传播：</strong> 选定的客户端从服务器下载当前模型权重和训练程序。</li>
+<li><strong>客户端计算：</strong> 每个选定的设备都通过执行训练程序在本地计算对模型的更新，例如，可以在本地数据上运行SGD。</li>
+<li><strong>聚合：</strong> 服务器收集设备更新的汇总。为了提高效率，一旦有足够数量的设备报告了结果，用户就可以在此处放散手。此阶段也是许多其他技术的集成点，这些技术将在后面讨论，可能包括：用于增加隐私的安全聚合，为了通信效率而对聚合进行有损压缩，以及针对差分隐私的噪声添加和更新限幅。</li>
+<li><strong>模型选择：</strong> 服务器根据从参与当前轮次的客户端计算出的聚合更新在本地更新共享模型。</li>
+</ol>
+</li>
+<li>
+<p>移动设备上典型联邦学习中涉及的数量的典型数量级大小？</p>
+<table>
+<thead>
+<tr>
+<th>总样本大小</th>
+<th>10^6~10^10个设备</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一轮训练的设备选择数</td>
+<td>50&ndash;5000</td>
+</tr>
+<tr>
+<td>参与一个模型训练的总设备数</td>
+<td>10^5~10^7</td>
+</tr>
+<tr>
+<td>模型收敛的总轮数</td>
+<td>5000&ndash;10000</td>
+</tr>
+<tr>
+<td>训练时间</td>
+<td>1~10天</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>联邦学习和一般分布式机器学习的主要区别？</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:left"><strong>分布式训练</strong></th>
+<th><strong>联邦学习</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据分布</td>
+<td style="text-align:left">集中存储不固定，可以任意打乱、平衡地分配给所有客户端</td>
+<td>分散存储且固定，数据无法互通、可能存在数据的Non-IID（非独立同分布）</td>
+</tr>
+<tr>
+<td>节点数量</td>
+<td style="text-align:left">1~1000</td>
+<td>1~10^10</td>
+</tr>
+<tr>
+<td>节点状态</td>
+<td style="text-align:left">所有节点稳定运行</td>
+<td>节点可能不在线</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>联邦学习和完全去中心化学习的主要区别？</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>联邦学习</th>
+<th>完全去中心化（点对点）学习</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编排方式</td>
+<td>中央编排流程服务器或服务负责组织训练，但从未看到原始数据。</td>
+<td>没有集中的编排流程。</td>
+</tr>
+<tr>
+<td>宽域通信</td>
+<td>中心辐射型拓扑，中心代表协调服务提供商（通常不包含数据），分支连接到客户端。</td>
+<td>对等拓扑，带有动态连接图。</td>
+</tr>
+</tbody>
+</table>
+<ol start="11">
+<li>
+<p>数据集中式分布式学习与跨孤岛/跨设备联邦学习的综合对比？</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>数据集中式的分布式学习</th>
+<th>跨孤岛的联邦学习</th>
+<th>跨设备的联邦学习</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设置</td>
+<td>在大型但“扁平”的数据集上训练模型。客户端是单个群集或数据中心中的计算节点。</td>
+<td>在数据孤岛上训练模型。客户是不同的组织（例如，医疗或金融）或地理分布的数据中心。</td>
+<td>客户端是大量的移动或物联网设备</td>
+</tr>
+<tr>
+<td>数据分布</td>
+<td>数据被集中存储，可以在客户端之间进行混洗和平衡。任何客户端都可以读取数据集的任何部分。</td>
+<td>数据在本地生成，并保持分散化。每个客户端都存储自己的数据，无法读取其他客户端的数据。数据不是独立或相同分布的。</td>
+<td>与跨孤岛的数据分布一样</td>
+</tr>
+<tr>
+<td>编排方式</td>
+<td>中央式编排</td>
+<td>中央编排服务器/服务负责组织培训，但从未看到原始数据。</td>
+<td>与跨数据孤岛编排方式一样</td>
+</tr>
+<tr>
+<td>广域通讯</td>
+<td>无（在一个数据中心/群集中完全连接客户端）。</td>
+<td>中心辐射型拓扑，中心代表协调服务提供商（通常不包含数据），分支连接到客户端。</td>
+<td>与跨孤岛的广域通讯方式一样</td>
+</tr>
+<tr>
+<td>数据可用性</td>
+<td>所有客户端都是可用的</td>
+<td>所有客户端都是可用的</td>
+<td>在任何时候，只有一小部分客户可用，通常会有日间或其他变化。</td>
+</tr>
+<tr>
+<td>数据分布范围</td>
+<td>通常1-1000个客户端</td>
+<td>通常2~1000个客户端</td>
+<td>大规模并行，最多10^10个客户端。</td>
+</tr>
+<tr>
+<td>主要瓶颈</td>
+<td>在可以假设网络非常快的情况下，计算通常是数据中心的瓶颈。</td>
+<td>可能是计算和通信量</td>
+<td>通信通常是主要的瓶颈，尽管这取决于任务。通常跨设备联邦学习使用wifi或更慢的连接。</td>
+</tr>
+<tr>
+<td>可解决性</td>
+<td>每个客户端都有一个标识或名称，该标识或名称允许系统专门访问它。</td>
+<td>与数据集中式的分布式学习一样</td>
+<td>无法直接为客户建立索引（即不对用户进行标记）。</td>
+</tr>
+<tr>
+<td>客户状态</td>
+<td>有状态的-每个客户都可以参与到计算的每一轮中，不断地传递状态。</td>
+<td>有状态的-每个客户都可以参与到计算的每一轮中，不断地传递状态。</td>
+<td>高度不可靠-预计有5％或更多的客户端参与一轮计算会失败或退出（例如，由于违反了电池，网络或闲置的要求而导致设备无法使用）。</td>
+</tr>
+<tr>
+<td>客户可靠性</td>
+<td>相对较少的失败次数</td>
+<td>相对较少的失败次数。</td>
+<td>无状态的-每个客户在一个任务中可能只参与一次，因此通常假定在每轮计算中都有一个从未见过的客户的新样本。</td>
+</tr>
+<tr>
+<td>数据分区轴</td>
+<td>数据可以在客户端之间任意分区/重新分区。</td>
+<td>固定分区。能够根据样本分区（横向）或者特征分区（纵向）。</td>
+<td>根据样本固定分区（横向）。</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>完成一个联邦学习任务需要经历一个什么样的过程？</p>
+</li>
+</ol>
+<p><strong>联邦学习的生命周期：</strong></p>
+<ol>
+<li>
+<p><strong>问题识别：</strong> 模型工程师识别确立一个需要在FL中解决的问题。</p>
+</li>
+<li>
+<p><strong>客户工具：</strong> 如果需要，可以对客户端（例如，在手机上运行的应用程序）进行工具化，以在本地（时间和数量上受限制）存储必要的训练数据。在许多情况下，该应用程序已经存储了这些数据（例如，短信应用程序必须存储文本消息，照片管理应用程序已经存储了照片）。但是，在某些情况下，可能需要维护其他数据或元数据，例如用户交互数据，为监督学习任务提供标签。</p>
+</li>
+<li>
+<p>**仿真原型：**模型工程师可以使用代理数据集在FL模拟中对模型体系结构进行原型设计并测试学习超参数。</p>
+</li>
+<li>
+<p><strong>联邦模型训练：</strong> 开始执行多个联邦训练任务以训练模型的不同变体，或使用不同的优化超参数。</p>
+</li>
+<li>
+<p><strong>（联邦）模型评估：</strong> 在对任务进行了足够的训练之后（通常是几天），将对模型进行分析并选择好的候选。分析可能包括在数据中心的标准数据集上计算的度量矩阵，或者是联邦评估，其中，将模型推送给受约束的客户，以评估本地客户数据。</p>
+</li>
+<li>
+<p><strong>部署方式：</strong> 最后，一旦选择了一个好的模型，就会通过标准的模型启动过程，包括手动的质量审查，实时A / B测试（通常通过在某些设备上使用新模型以及在其他设备上使用上一代模型来比较其内在性能）。</p>
+</li>
+</ol>
+<h2 id="问题">问题</h2>
+<h3 id="效率和效用">效率和效用</h3>
+<ol>
+<li>
+<p>联邦学习主要面临哪些挑战？</p>
+<ul>
+<li>non-IID和不平衡的数据</li>
+<li>有限的通信带宽</li>
+<li>不可靠和有限的可用设备</li>
+</ul>
+</li>
+<li>
+<p>什么是Non-IID非独立同分布数据？</p>
+<p>独立同分布？每个数据相互之间没有关系，都是来自于同一个分布</p>
+<p>非独立同分布主要有三个方面：</p>
+<ul>
+<li><strong>不同客户端数据分布不同</strong> (x,y)~P_j(x,y)
+<ul>
+<li>特征分布倾斜：P(y|x)相同（条件概率），P_i(x)不同；不同人的笔迹不同</li>
+<li>标签分布倾斜：P(x|y)相同，P(y)不同；企鹅在只在南极、北极熊只在北极</li>
+<li>标签相同特征不同：P(y)相同，P(x|y)不同；概念飘移表示yes是点头/摇头</li>
+<li>特征相同标签不同：P_i(x)相同，P(y|x)不同；点头表示Yes / No?</li>
+<li>数量不平衡：客户端的数据量</li>
+</ul>
+</li>
+<li><strong>数据偏移</strong>：训练集测试集不同分布（训练草丛上的狗，无法识别海里的狗）</li>
+<li><strong>非独立</strong>：可用节点大多在附近的时区（地理位置）（睡觉时手机的状态容易被选中）</li>
+</ul>
+</li>
+<li>
+<p>处理Non-IID数据有什么策略？</p>
+<ul>
+<li>修改现有的算法</li>
+<li>创建一个可以全局共享的小数据集</li>
+<li>不同客户端提供不同的模型（Non-IID变成一种特性）</li>
+</ul>
+</li>
+<li>
+<p>联邦学习的优化算法有什么理论分析成果？</p>
+<ul>
+<li>
+<p>讨论IID（独立同分布）的情况：</p>
+<p>客户端每个mini-batch与整个训练数据集分布相同，定义随机优化问题：
+$$
+\min\limits_{x\in\mathbb{R}}F(x):=\mathop{\mathbb{E}}\limits_{z\thicksim \mathcal{P}}[f(x;z)]
+$$
+对 $f$ 的不同假设会产生不同的保证。</p>
+<ul>
+<li>
+<p>如果 $f$ 是凸的：</p>
+<p>假设$H-smooth$: 对于任意$x,y$有
+$$
+||\bigtriangledown f(x,z)-\bigtriangledown f(y,z)|| \leq H||x-y||
+$$
+设置梯度bound：
+$$
+\mathop{\mathbb{E}}\limits_{z\thicksim P}||\bigtriangledown_x f(x;z)-\bigtriangledown F(x)|| \leq \sigma^2
+$$
+Baseline1：考虑$M$个客户端，每个客户端分别计算$K$个mini-batch上的梯度：
+$$
+\mathcal{O}\left(\frac{H}{T^{2}}+\frac{\sigma}{\sqrt{T K M}}\right)
+$$
+Baseline2：考虑1个客户端，连续执行$KT$步：
+$$
+\mathcal{O}\left(\frac{H}{(T K)^{2}}+\frac{\sigma}{\sqrt{T K}}\right)
+$$
+最优“统计”项$(\sigma / \sqrt{T K M})$，和最优“优化”项$(H/ \sqrt{(HK)^2})$。</p>
+<p><img src="/images/202112/23.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p>讨论Non-IID（非独立同分布）的情况：</p>
+<p>$N$个客户端都拥有自己的本地数据分布$\mathcal{P}<em>i$和本地目标函数：
+$$
+f</em>{i}(x)=\underset{z \sim \mathcal{P}<em>{i}}{\mathbb{E}}[f(x ; z)]
+$$
+其中$f(x;z)$为模型$x$对于样本$z$的损失。我们通常希望最小化：
+$$
+F(x)=\frac{1}{N} \sum</em>{i=1}^{N} f_{i}(x)
+$$
+请注意，当$\mathcal{P}_i$是同分布的时候就是IID的设定。</p>
+</li>
+</ul>
+<p><img src="/images/202112/24.png" alt=""></p>
+</li>
+<li>
+<p>有哪些多模型方法？</p>
+<p>通过特征个性化、多任务学习、本地微调和元学习</p>
+</li>
+<li>
+<p>联邦学习的通信瓶颈有哪些？</p>
+<p>不同的联邦学习场景通信约束有不同的特点：</p>
+<ul>
+<li>跨设备：WiFi速度慢、设备不在线</li>
+<li>跨孤岛：上传速度通常慢于下载速度，中心节点带宽</li>
+</ul>
+</li>
+<li>
+<p>联邦学习的通信瓶颈有什么解决思路？</p>
+<p>目前解决联邦学习通信瓶颈的方法主要有通信内容压缩（减少通信量）和FPGA通信加速（降低通信延迟）两种思路</p>
+</li>
+<li>
+<p>通信内容压缩有哪些分类？</p>
+<p>根据压缩目标的不同，可以大致分为3类：</p>
+<ul>
+<li><strong>上传压缩</strong>：减少从客户端到服务器通信的对象的大小，该对象用于更新全局模型；</li>
+<li><strong>下载压缩</strong>：减小从服务器向客户端广播的模型的大小，客户端从该模型开始本地训练；</li>
+<li><strong>本地压缩</strong>：修改整体训练算法，使本地训练过程在计算上更加高效。</li>
+</ul>
+</li>
+<li>
+<p>目前有哪些压缩方法？</p>
+<ul>
+<li>量化方法：降低更新参数的“分辨率”，如：整数化，二值化</li>
+<li>低秩矩阵：将通信内容结构化，低秩分解</li>
+<li>稀疏化：只传递足够重要的信息</li>
+<li>知识蒸馏：将大模型知识迁移到小模型</li>
+</ul>
+</li>
+<li>
+<p>什么是FPGA？</p>
+<p>CPU、GPU（通用芯片）、TPU、矿机(ASIC)、FPGA（半ASIC）</p>
+</li>
+<li>
+<p>为什么要用FPGA？</p>
+<p>FPGA适合通信领域，因为通信领域需要高速的通信协议处理，另一方面通信协议随时都在修改，不适合做成专门的芯片，所以需要能够灵活改变的功能的FPGA。</p>
+</li>
+<li>
+<p>FPGA在联邦学习中有哪些用武之地？</p>
+<ul>
+<li>定制通讯协议并用FPGA加速（跨孤岛场景：减少中间商）</li>
+<li>加速计算
+<ul>
+<li>加速知识蒸馏（前推）</li>
+<li>加速模型计算（反传）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="鲁棒性">鲁棒性</h3>
+<ol>
+<li>
+<p>联邦学习可能遇到什么样的安全威胁？</p>
+<table>
+<thead>
+<tr>
+<th><strong>数据/访问节点</strong></th>
+<th><strong>参与者</strong></th>
+<th><strong>威胁模型</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户端</td>
+<td>通过系统设计或破坏设备获得客户端设备的最高访问权限者</td>
+<td>恶意客户端可以检查所参与轮次从服务器接收的全部消息（包括模型迭代），并可以篡改训练过程。老实但好奇的客户端可以检查从服务器接收的所有消息，但不能篡改培训过程。在某些情况下，安全包围/TEEs等技术可能会限制此类攻击者的影响和信息可见性，从而削弱该模型威胁程度。</td>
+</tr>
+<tr>
+<td>服务器</td>
+<td>通过系统设计或破坏设备获得服务器设备的最高访问权限者</td>
+<td>恶意服务器可以检查所有轮次发送到服务器的全部消息（包括梯度更新），并可以篡改训练过程。老实但好奇的客户端可以检查发送到服务器的所有消息，但不能篡改培训过程。在某些情况下，安全包围/TEEs等技术可能会限制此类攻击者的影响和信息可见性，从而削弱该模型威胁程度。</td>
+</tr>
+<tr>
+<td>输出模型</td>
+<td>工程师与分析师</td>
+<td>恶意分析师或模型工程师可以访问系统的多组输出，例如，使用不同超参数的多个训练运行的模型迭代序列。该向这类参与者发布什么信息是一个重要的系统设计问题。</td>
+</tr>
+<tr>
+<td>部署模型</td>
+<td>其他设备</td>
+<td>在跨设备联邦学习场景下，最终模型可能部署到数亿个设备上。访问部分受损的设备可能仍满足黑盒模型，而访问完全受损的设备可以认为是白盒模型。</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>联邦学习环境下的攻击者有哪些特征？</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>特征</strong></th>
+<th style="text-align:center"><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">攻击向量</td>
+<td style="text-align:center">敌人发起攻击的方式  l <em>数据中毒</em>： 敌人修改用来训练的用户数据集  l <em>模型更新中毒</em>：敌人更新发送回服务器的模型更新数据  l <em>回避攻击</em>：对手改变推断阶段使用的数据</td>
+</tr>
+<tr>
+<td style="text-align:center">模型检查</td>
+<td style="text-align:center">敌人是否能够观察到模型参数  l <em>黑箱</em>：对手在攻击前和攻击时都没有能力观测到模型参数。在联邦学习环境中一般不是这种情况  l <em>陈旧白箱</em>：对手只能观测到一个陈旧的模型。当对手可以接触到参加中间训练回合的客户时，这自然会在联邦环境中出现。  l <em>白箱</em>：对手有能力直接观测到模型参数</td>
+</tr>
+<tr>
+<td style="text-align:center">参与者串通</td>
+<td style="text-align:center">多个敌人是否可以协同发起攻击  l <em>无串通</em>：参与者无法通过串通发起攻击  l <em>Cross-update**串通</em>：过去的客户端参与者可与未来的参与者协同攻击全局模型在未来的更新  l <em>Wthin-update**串通</em>：当前客户端参与者可协同发起对模型当前更新的攻击</td>
+</tr>
+<tr>
+<td style="text-align:center">参与率</td>
+<td style="text-align:center">在训练期间敌人能多久发动一次攻击  l 在跨设备联邦环境中，一个恶意用户可能只能参与一个模型训练回合  l 在跨竖井联邦环境中，一个敌人可能能持续参与模型的学习过程</td>
+</tr>
+<tr>
+<td style="text-align:center">适应性</td>
+<td style="text-align:center">敌人是否能在攻击过程中修改攻击参数  l <em>静态</em>：敌人必须在攻击之初确定攻击参数且无法在发起攻击后更改。  l <em>动态</em>：敌人能够在模型训练过程中修改攻击</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h3 id="附录">附录</h3>
+<ol>
+<li>
+<p>联邦学习有哪些工具和平台？</p>
+<ul>
+<li>TensorFlow Federated [38]专门针对研究用例，提供大规模模拟功能以及灵活的编排来控制采样。</li>
+<li>PySyft 是用于安全的私有深度学习Python库。 PySyft使用PyTorch中的联邦学习，差分隐私和多方计算（MPC）将私人数据与模型训练分离。</li>
+<li>Leaf 提供了多个数据集以及模拟和评估功能。</li>
+<li>FATE（Federated AI Technology Enabler）是一个开源项目，旨在提供安全的计算框架来支持联邦AI生态系统。</li>
+<li>PaddleFL 是基于PaddlePaddle 的开源联邦学习框架。在PaddleFL中，通过应用程序演示提供了几种联邦学习策略和训练策略。</li>
+<li>Clara培训框架包括基于服务器客户端方法和数据隐私保护的跨孤岛联邦学习的支持</li>
+</ul>
+</li>
+<li>
+<p>联邦学习有什么数据集？</p>
+<ul>
+<li>EMNIST数据集由671,585个数字图像和大小写英文字符（62个类）组成。 联邦版本将数据集拆分为3,400个不平衡客户端，这些客户端由数字/字符的原始编写者索引。 非IID分布来自每个人独特的写作风格。</li>
+<li>Stackoverflow数据集由来自Stack Overflow的问答组成，并带有时间戳，分数等元数据。训练数据集拥有342,477多个唯一用户和135,818,730个示例。请注意，时间戳信息可能有助于模拟传入数据的模式。</li>
+<li>Shakespeare是从The Complete Works of William Shakespeare获得的语言建模数据集。 它由715个字符组成，其连续行是客户端数据集中的示例。训练集有16,068个示例，测试集有2,356个示例。</li>
+</ul>
+<ul>
+<li>Leafproject 提供了对EMNIST和Shakespeare的预处理，它还提供了sentiment140和celebA数据集的联邦版本。这些数据集具有足够的客户端，可以用于模拟跨设备FL场景，但是对于规模特别重要的问题，它们可能太小。在这方面，Stackoverflow提供了跨设备FL问题的最现实示例。</li>
+<li>NICO</li>
+</ul>
+</li>
+<li></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-12-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/pfl/">
+            <span class="next-text nav-default">PFL联邦学习开源框架</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
