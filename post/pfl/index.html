@@ -49,7 +49,7 @@
 <meta itemprop="name" content="PFL联邦学习开源框架">
 <meta itemprop="description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"><meta itemprop="datePublished" content="2021-12-17T21:05:53+08:00" />
 <meta itemprop="dateModified" content="2021-12-17T21:05:53+08:00" />
-<meta itemprop="wordCount" content="202">
+<meta itemprop="wordCount" content="1964">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PFL联邦学习开源框架"/>
 <meta name="twitter:description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"/>
@@ -147,6 +147,14 @@
       <ul>
         <li><a href="#pfl框架优势">PFL框架优势</a></li>
         <li><a href="#pfl框架设计">PFL框架设计</a></li>
+        <li><a href="#演示">演示</a>
+          <ul>
+            <li><a href="#pfl_modelpy"><code>pfl_model.py</code></a></li>
+            <li><a href="#pfl_serverpy"><code>pfl_server.py</code></a></li>
+            <li><a href="#pfl_clientpy"><code>pfl_client.py</code></a></li>
+            <li><a href="#流程分析">流程分析</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -163,6 +171,230 @@
 </ul>
 <h2 id="pfl框架设计">PFL框架设计</h2>
 <p><img src="/images/202112/20.png" alt=""></p>
+<p>在prepare_job阶段，模型方需要制定各种策略，设计好联邦学习任务。在run_time阶段，使用模型方生成的job协调fl_client客户端和fl_server服务端进行联邦学习训练。如图，PFL框架支持多对多的server和client通信模式。</p>
+<p>prepare job：模型方准备联邦学习任务阶段</p>
+<ul>
+<li>FederateSrategy:联邦学习算法策略选择，目前提供FED_AVG和FED_DISTILLATION两种选项</li>
+<li>WorkModeStrategy:工作模式选择，目前可以选择单机模式和集群模式</li>
+<li>TrainStrategy:训练策略，定义联邦学习任务的迭代次数</li>
+<li>User-Defined-Model:定义好一个运行需要的模型类，用户自定义的模型类</li>
+</ul>
+<p>FL Run-Time:使用模型方生成的job协调FLClient客户端和FLServer服务端进行联邦学习训练</p>
+<ul>
+<li>FLClient:根据FederateStrategy来执行客户端对应的操作</li>
+<li>FLServer:根据FederateStrategy来执行不同的启动策略</li>
+</ul>
+<h2 id="演示">演示</h2>
+<p>使用单例模式进行演示</p>
+<p>服务端的pfl_model,pfl_server</p>
+<p>和客户端的pfl_client</p>
+<h3 id="pfl_modelpy"><code>pfl_model.py</code></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># pfl_model:模型文件，定义训练时使用的模型，并且生成相应的联邦学习任务</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="c1"># pfl的核心策略包，包含pfl的工作模式策略，联邦学习算法策略和训练策略</span>
+<span class="kn">import</span> <span class="nn">gfl.core.strategy</span> <span class="k">as</span> <span class="nn">strategy</span>
+<span class="c1"># pfl的任务管理包</span>
+<span class="kn">from</span> <span class="nn">gfl.core.job_manager</span> <span class="kn">import</span> <span class="n">JobManager</span>
+
+
+<span class="c1"># 定义了一个简单的模型类net</span>
+<span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="c1"># 实例化模型model，和任务管理器job_manager</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
+    <span class="n">job_manager</span> <span class="o">=</span> <span class="n">JobManager</span><span class="p">()</span>
+    <span class="c1"># 定义一个联邦学习任务job，工作模式设为单例模式，（也可以使用集群模式），联邦学习算法策略为联邦平均法，（也可以使用联邦蒸馏算法），epoch为3，模型类型为net</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">job_manager</span><span class="o">.</span><span class="n">generate_job</span><span class="p">(</span><span class="n">work_mode</span><span class="o">=</span><span class="n">strategy</span><span class="o">.</span><span class="n">WorkModeStrategy</span><span class="o">.</span><span class="n">WORKMODE_STANDALONE</span><span class="p">,</span>
+                                   <span class="n">fed_strategy</span><span class="o">=</span><span class="n">strategy</span><span class="o">.</span><span class="n">FederateStrategy</span><span class="o">.</span><span class="n">FED_AVG</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">Net</span><span class="p">)</span>
+    <span class="c1"># 向job_manager传入定义好的job和model</span>
+    <span class="n">job_manager</span><span class="o">.</span><span class="n">submit_job</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="pfl_serverpy"><code>pfl_server.py</code></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 根据在pfl_model文件中设置的job参数</span>
+<span class="c1"># 从server包中导入了FLStandaloneServer，再从strategy中导入的联邦学习策略算法FederateStrategy</span>
+<span class="kn">from</span> <span class="nn">gfl.core.server</span> <span class="kn">import</span> <span class="n">FLStandaloneServer</span>
+<span class="kn">from</span> <span class="nn">gfl.core.strategy</span> <span class="kn">import</span> <span class="n">FederateStrategy</span>
+
+<span class="n">FEDERATE_STRATEGY</span> <span class="o">=</span> <span class="n">FederateStrategy</span><span class="o">.</span><span class="n">FED_AVG</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="c1"># 定义好server的联邦学习方法策略为FederateStrategy,并启动server</span>
+    <span class="n">FLStandaloneServer</span><span class="p">(</span><span class="n">FEDERATE_STRATEGY</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># 运行后日志提示聚合开始</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="pfl_clientpy"><code>pfl_client.py</code></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+<span class="c1"># 导入pfl的相关包，包括客户端包，策略包，训练控制器</span>
+<span class="kn">from</span> <span class="nn">gfl.core.client</span> <span class="kn">import</span> <span class="n">FLClient</span>
+<span class="kn">from</span> <span class="nn">gfl.core.strategy</span> <span class="kn">import</span> <span class="n">WorkModeStrategy</span><span class="p">,</span> <span class="n">TrainStrategy</span><span class="p">,</span> <span class="n">LossStrategy</span>
+<span class="kn">from</span> <span class="nn">gfl.core.trainer_controller</span> <span class="kn">import</span> <span class="n">TrainerController</span>
+
+<span class="n">CLIENT_ID</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="c1"># CLIENT_ID = int(sys.argv[1])</span>
+    <span class="c1"># 数据集mnist的导入</span>
+    <span class="n">mnist_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s2">&#34;D:\Python\PycharmProjects\pflttt\mnist_data&#34;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.13066062</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.30810776</span><span class="p">,))</span>
+    <span class="p">]))</span>
+    <span class="c1"># 实例化一个客户端</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">FLClient</span><span class="p">()</span>
+    <span class="c1"># 获得服务器端的模型pfl</span>
+    <span class="n">gfl_models</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_remote_gfl_models</span><span class="p">()</span>
+
+    <span class="c1"># 由于一个flclient可以参与多个job，所以获得的pflmodels也有可能是多个</span>
+    <span class="c1"># 循环遍历这些模型</span>
+    <span class="k">for</span> <span class="n">gfl_model</span> <span class="ow">in</span> <span class="n">gfl_models</span><span class="p">:</span>
+        <span class="c1"># 对于每个模型，要定义好优化集，optimize，和训练策略，train_strategy</span>
+        <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">gfl_model</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">train_strategy</span> <span class="o">=</span> <span class="n">TrainStrategy</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">loss_function</span><span class="o">=</span><span class="n">LossStrategy</span><span class="o">.</span><span class="n">NLL_LOSS</span><span class="p">)</span>
+        <span class="c1"># 并将策略传入到对应的pfl_model中，(不同的模型也可以设置不同的训练策略)</span>
+        <span class="n">gfl_model</span><span class="o">.</span><span class="n">set_train_strategy</span><span class="p">(</span><span class="n">train_strategy</span><span class="p">)</span>
+
+    <span class="c1"># 调用TrainerController设置工作模式为单例模式，模型为pfl_models,数据为mnist数据集</span>
+    <span class="c1"># 客户端id为0，curve设置本地是否显示训练曲线，concurrent_num为本地线程数</span>
+    <span class="c1"># 启动TrainerController</span>
+    <span class="n">TrainerController</span><span class="p">(</span><span class="n">work_mode</span><span class="o">=</span><span class="n">WorkModeStrategy</span><span class="o">.</span><span class="n">WORKMODE_STANDALONE</span><span class="p">,</span> <span class="n">models</span><span class="o">=</span><span class="n">gfl_models</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mnist_data</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">CLIENT_ID</span><span class="p">,</span>
+                      <span class="n">curve</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">concurrent_num</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="流程分析">流程分析</h3>
+<p>运行pfl_model后可以看到，job已经生成并添加成功了。同时在日志文件中也有了相应的记录。
+编写pfl_server以及pfl_client
+先运行pfl_server，运行后日志提示聚合开始
+然后运行pfl_client,可以看到client已经获取到了job，载入模型开始进行训练
+等client完成一轮训练后，可以在server端看到第一轮的参数聚合在server端完成了。
+训练完成后，会产生一个模型文件</p>
+<p>当然pfl框架也可以使用集群模式进行训练
+只需要在client和server文件中声明地址，并选择工作模式为集群模式即可
+<a href="https://galaxylearning.github.io/quickstart/">https://galaxylearning.github.io/quickstart/</a></p>
 <blockquote>
 <p><a href="https://www.bilibili.com/video/BV12E411H7Lk?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click">视频</a></p>
 <p><a href="https://github.com/GalaxyLearning/GFL">项目地址</a></p>
