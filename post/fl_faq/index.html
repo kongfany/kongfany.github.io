@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习综述">
 <meta itemprop="description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务"><meta itemprop="datePublished" content="2021-12-18T17:03:03+08:00" />
 <meta itemprop="dateModified" content="2021-12-18T17:03:03+08:00" />
-<meta itemprop="wordCount" content="6505">
+<meta itemprop="wordCount" content="6946">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习综述"/>
 <meta name="twitter:description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务"/>
@@ -163,7 +163,7 @@
       <blockquote>
 <p><a href="https://arxiv.org/abs/1912.04977">原论文</a></p>
 <p><a href="https://github.com/open-intelligence/federated-learning-chinese">原论文翻译</a></p>
-<p><a href="https://www.bilibili.com/video/BV1mE411j7GT?spm_id_from=333.999.0.0">视频总结</a></p>
+<p><a href="https://mp.weixin.qq.com/s/_9n4nh9Kt0eTgMir2sTrcA">视频总结</a></p>
 <p><a href="https://github.com/tao-shen/Federated-Learning-FAQ/">视频文档</a></p>
 </blockquote>
 <h2 id="概念">概念</h2>
@@ -467,9 +467,9 @@
 <li>
 <p>处理Non-IID数据有什么策略？</p>
 <ul>
-<li>修改现有的算法</li>
+<li>修改现有的算法（普通机器学习算法的前提是独立同分布）</li>
 <li>创建一个可以全局共享的小数据集</li>
-<li>不同客户端提供不同的模型（Non-IID变成一种特性）</li>
+<li>不同客户端提供不同的模型（Non-IID变成一种特性）&mdash;聚合的时候，知识蒸馏</li>
 </ul>
 </li>
 <li>
@@ -477,46 +477,39 @@
 <ul>
 <li>
 <p>讨论IID（独立同分布）的情况：</p>
-<p>客户端每个mini-batch与整个训练数据集分布相同，定义随机优化问题：
-$$
-\min\limits_{x\in\mathbb{R}}F(x):=\mathop{\mathbb{E}}\limits_{z\thicksim \mathcal{P}}[f(x;z)]
-$$
-对 $f$ 的不同假设会产生不同的保证。</p>
+<p>客户端每个mini-batch与整个训练数据集分布相同，定义随机优化问题：</p>
+<p><img src="/images/202112/25.png" alt=""></p>
+<p>最小化损失函数=最小化在某个数据集上的经验风险（深度学习上的）</p>
+<p>对 $f$ 的不同假设会产生不同的保证。</p>
 <ul>
 <li>
 <p>如果 $f$ 是凸的：</p>
-<p>假设$H-smooth$: 对于任意$x,y$有
-$$
-||\bigtriangledown f(x,z)-\bigtriangledown f(y,z)|| \leq H||x-y||
-$$
-设置梯度bound：
-$$
-\mathop{\mathbb{E}}\limits_{z\thicksim P}||\bigtriangledown_x f(x;z)-\bigtriangledown F(x)|| \leq \sigma^2
-$$
-Baseline1：考虑$M$个客户端，每个客户端分别计算$K$个mini-batch上的梯度：
-$$
-\mathcal{O}\left(\frac{H}{T^{2}}+\frac{\sigma}{\sqrt{T K M}}\right)
-$$
-Baseline2：考虑1个客户端，连续执行$KT$步：
-$$
-\mathcal{O}\left(\frac{H}{(T K)^{2}}+\frac{\sigma}{\sqrt{T K}}\right)
-$$
-最优“统计”项$(\sigma / \sqrt{T K M})$，和最优“优化”项$(H/ \sqrt{(HK)^2})$。</p>
+<p>假设$H-smooth$: 对于任意$x,y$有</p>
+<p><img src="/images/202112/26.png" alt=""></p>
+<p>在数据集上，模型的两个不同的参数的梯度差需要小于x-y的范数再乘一个常数</p>
+<p>这个常数H代表了函数的平滑度。</p>
+<p>这两个假设做优化方面理论分析常用的假设，目的是希望函数f更有利于优化</p>
+<p>设置梯度bound：（上界，随机梯度的更新和真实梯度的差值设置一个界限）</p>
+<p><img src="/images/202112/27.png" alt=""></p>
+<p>Baseline1：考虑$M$个客户端，每个客户端分别计算$K$个mini-batch上的梯度：</p>
+<p>K：本地更新的次数，也就是本地训练了多少个mini-batch</p>
+<p>在服务端的角度看训练的效果</p>
+<p><img src="/images/202112/28.png" alt=""></p>
+<p>Baseline2：考虑1个客户端，连续执行$KT$步：</p>
+<p><img src="/images/202112/29.png" alt=""></p>
+<p>在客户端的角度看训练的效果</p>
+<p>最优“统计”项 (sigma / sqrt{T K M}），和最优“优化”项(H/ sqrt{(HK)^2})。</p>
 <p><img src="/images/202112/23.png" alt=""></p>
 </li>
 </ul>
 </li>
 <li>
 <p>讨论Non-IID（非独立同分布）的情况：</p>
-<p>$N$个客户端都拥有自己的本地数据分布$\mathcal{P}<em>i$和本地目标函数：
-$$
-f</em>{i}(x)=\underset{z \sim \mathcal{P}<em>{i}}{\mathbb{E}}[f(x ; z)]
-$$
-其中$f(x;z)$为模型$x$对于样本$z$的损失。我们通常希望最小化：
-$$
-F(x)=\frac{1}{N} \sum</em>{i=1}^{N} f_{i}(x)
-$$
-请注意，当$\mathcal{P}_i$是同分布的时候就是IID的设定。</p>
+<p>$N$个客户端都拥有自己的本地数据分布$\mathcal{P}_i$和本地目标函数：</p>
+<p><img src="/images/202112/30.png" alt=""></p>
+<p>其中$f(x;z)$为模型$x$对于样本$z$的损失。我们通常希望最小化：</p>
+<p><img src="/images/202112/31.png" alt=""></p>
+<p>请注意，当$\mathcal{P}_i$是同分布的时候就是IID的设定。</p>
 </li>
 </ul>
 <p><img src="/images/202112/24.png" alt=""></p>
@@ -547,16 +540,27 @@ $$
 </ul>
 </li>
 <li>
-<p>目前有哪些压缩方法？</p>
+<p>目前有哪些压缩方法？（对通信内容的压缩）</p>
 <ul>
-<li>量化方法：降低更新参数的“分辨率”，如：整数化，二值化</li>
-<li>低秩矩阵：将通信内容结构化，低秩分解</li>
-<li>稀疏化：只传递足够重要的信息</li>
-<li>知识蒸馏：将大模型知识迁移到小模型</li>
+<li>
+<p>量化方法：降低更新参数的“分辨率”，降低保存的精度。如：整数化，二值化</p>
+<p>依概率的量化方法，并不是说0.3就一定量化成0.25（分四段），引入概率可以保证数值量化前和量化后的数学期望是相等的，可以很大程度上提高模型的精度。</p>
+</li>
+<li>
+<p>低秩矩阵：将通信内容结构化，低秩分解</p>
+<p>需要传递的梯度存在矩阵中，将矩阵进行分解成低秩的矩阵（奇异值分解）</p>
+</li>
+<li>
+<p>稀疏化：只传递足够重要的信息</p>
+<p>设置阈值，不重要的不传输。会降低精度，通过动量修正，局部梯度修剪，动量因子掩盖，预训练的方式提高精度。但不适用跨设备的联邦学习</p>
+</li>
+<li>
+<p>知识蒸馏：将大模型知识迁移到小模型</p>
+</li>
 </ul>
 </li>
 <li>
-<p>什么是FPGA？</p>
+<p>什么是FPGA？人为定制化的芯片来加速通信</p>
 <p>CPU、GPU（通用芯片）、TPU、矿机(ASIC)、FPGA（半ASIC）</p>
 </li>
 <li>
@@ -569,7 +573,7 @@ $$
 <li>定制通讯协议并用FPGA加速（跨孤岛场景：减少中间商）</li>
 <li>加速计算
 <ul>
-<li>加速知识蒸馏（前推）</li>
+<li>加速知识蒸馏（前推）蒸馏比普通的机器学习只是加了一个前推的过程，但时间会翻倍，可能是gpu不适合很难的很多的前推计算（资源配置原因）</li>
 <li>加速模型计算（反传）</li>
 </ul>
 </li>
@@ -671,7 +675,6 @@ $$
 <li>NICO</li>
 </ul>
 </li>
-<li></li>
 </ol>
 
     </div>
