@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习综述">
 <meta itemprop="description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务"><meta itemprop="datePublished" content="2021-12-18T17:03:03+08:00" />
 <meta itemprop="dateModified" content="2021-12-18T17:03:03+08:00" />
-<meta itemprop="wordCount" content="6946">
+<meta itemprop="wordCount" content="7496">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习综述"/>
 <meta name="twitter:description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务"/>
@@ -276,6 +276,7 @@
 </li>
 <li>
 <p>联邦学习和一般分布式机器学习的主要区别？</p>
+<p>分布式训练：数据中心的。数据都是保存在数据中心的，但是这个数据中心由于算力有限，需要把算力分散化。将集中存储的数据分发给所有的计算单元，分发的情况是打乱的其次是希望每个节点时间差不多的，即保证了独立同分布的。集中力量办大事，节点数少。分布式训练时已经搭建好的分布式训练平台，每一个节点认为都是可以稳定运行的。</p>
 <table>
 <thead>
 <tr>
@@ -455,7 +456,7 @@
 <ul>
 <li>特征分布倾斜：P(y|x)相同（条件概率），P_i(x)不同；不同人的笔迹不同</li>
 <li>标签分布倾斜：P(x|y)相同，P(y)不同；企鹅在只在南极、北极熊只在北极</li>
-<li>标签相同特征不同：P(y)相同，P(x|y)不同；概念飘移表示yes是点头/摇头</li>
+<li>标签相同特征不同：P(y)相同，P(x|y)不同；概念飘移。同一个信息代表的含义不同，表示yes是点头/摇头</li>
 <li>特征相同标签不同：P_i(x)相同，P(y|x)不同；点头表示Yes / No?</li>
 <li>数量不平衡：客户端的数据量</li>
 </ul>
@@ -676,6 +677,14 @@
 </ul>
 </li>
 </ol>
+<p>question：</p>
+<p>本地模型失去了自己的个性？本地为了训练处一个公共模型而服务，就会失去自己的个性。</p>
+<p>每个客户端有个专属小模型。公共模型是为了更好的训练小模型，可以保证个性personalization&mdash;&gt;improve fedrated learning personalization via model  Agnostic meta learning</p>
+<p>cv+fl？推荐文章：nips 2019 workshop egg yangqiang</p>
+<p>投毒？评测上传的模型是不是好的，贡献值&ndash;&gt; chunlin xie/原文搜关键词sharply value</p>
+<p>客户端的参数是如何汇总到服务器上的&ndash;&gt;通过传输协议、通过区块链。直接上传，服务器再做聚合</p>
+<p>聚合算法都是同步的，异步的？异步算法在传统分布式上，更多的是在通信受限的时候会异步更新</p>
+<p>联邦学习+知识蒸馏？公共模型，本地也有个自己的模型，本地和公共有个知识蒸馏的关系，相互蒸馏,保证每个客户端都有一个本地模型，也能保证公共模型是可以聚合的&ndash;&gt;deep mutual learning</p>
 
     </div>
 
