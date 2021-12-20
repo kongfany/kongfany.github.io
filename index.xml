@@ -6,7 +6,16 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 18 Dec 2021 17:03:03 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Dec 2021 19:22:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>联邦学习(Federated Learning)</title>
+      <link>https://kongfany.github.io/post/federated-learning/</link>
+      <pubDate>Mon, 20 Dec 2021 19:22:19 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/federated-learning/</guid>
+      <description>简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An</description>
+    </item>
+    
     <item>
       <title>联邦学习综述</title>
       <link>https://kongfany.github.io/post/fl_faq/</link>
@@ -18,10 +27,10 @@
     
     <item>
       <title>PFL联邦学习开源框架</title>
-      <link>https://kongfany.github.io/post/pfl/</link>
+      <link>https://kongfany.github.io/post/fl_pfl/</link>
       <pubDate>Fri, 17 Dec 2021 21:05:53 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/pfl/</guid>
+      <guid>https://kongfany.github.io/post/fl_pfl/</guid>
       <description>PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个</description>
     </item>
     
@@ -44,12 +53,12 @@
     </item>
     
     <item>
-      <title>联邦学习(Federated Learning)</title>
-      <link>https://kongfany.github.io/post/federated-learning/</link>
+      <title>联邦学习</title>
+      <link>https://kongfany.github.io/post/fl2/</link>
       <pubDate>Sat, 30 Oct 2021 13:19:05 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/federated-learning/</guid>
-      <description>简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An</description>
+      <guid>https://kongfany.github.io/post/fl2/</guid>
+      <description>背景介绍 在追逐AI的同时却忽略了一点，AI是靠数据来喂的，而且是大量优质数据。 现实生活中，除了少数巨头公司能够满足，绝大多数企业都存在数据量</description>
     </item>
     
     <item>
