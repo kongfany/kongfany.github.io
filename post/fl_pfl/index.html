@@ -49,7 +49,7 @@
 <meta itemprop="name" content="PFL联邦学习开源框架">
 <meta itemprop="description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"><meta itemprop="datePublished" content="2021-12-17T21:05:53+08:00" />
 <meta itemprop="dateModified" content="2021-12-17T21:05:53+08:00" />
-<meta itemprop="wordCount" content="1997">
+<meta itemprop="wordCount" content="5096">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PFL联邦学习开源框架"/>
 <meta name="twitter:description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"/>
@@ -134,15 +134,15 @@
       <div class="post-meta">
         <span class="post-time"> 2021-12-17 </span>
         
-          <span class="more-meta"> 1997 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 5096 words </span>
+          <span class="more-meta"> 11 mins read </span>
         
       </div>
     </header>
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content">
+  <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
     <li>
@@ -157,7 +157,15 @@
             <li><a href="#流程分析">流程分析</a></li>
           </ul>
         </li>
-        <li><a href="#gfl-a-decentralized-federated-learning-framework-based-on-blockchain">GFL: A Decentralized Federated Learning Framework Based On Blockchain</a></li>
+        <li><a href="#gfl">GFL</a>
+          <ul>
+            <li><a href="#abstract">Abstract：</a></li>
+            <li><a href="#introduction">Introduction：</a></li>
+            <li><a href="#contributions">contributions</a></li>
+            <li><a href="#related-work">Related Work</a></li>
+            <li><a href="#the-proposed-framework">The Proposed Framework</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -398,8 +406,51 @@
 <p>当然pfl框架也可以使用集群模式进行训练
 只需要在client和server文件中声明地址，并选择工作模式为集群模式即可
 <a href="https://galaxylearning.github.io/quickstart/">https://galaxylearning.github.io/quickstart/</a></p>
-<h2 id="gfl-a-decentralized-federated-learning-framework-based-on-blockchain">GFL: A Decentralized Federated Learning Framework Based On Blockchain</h2>
-<p>GFL:一个基于区块链的去中心化联邦学习框架</p>
+<h2 id="gfl">GFL</h2>
+<p>A Decentralized Federated Learning Framework Based On Blockchain</p>
+<p>GFL:一个基于<code>区块链</code>的<code>去中心化</code>联邦学习框架</p>
+<h3 id="abstract">Abstract：</h3>
+<p>当前的FL框架在恶意节点攻击下如何提高通信性能、保持安全性和鲁棒性是一个巨大的挑战。本文提出了一种基于区块链的去中心化的FL学习框架——银河联邦学习框架(Galaxy  Federated Learning Framework, GFL)。GFL引入了<code>一致哈希算法</code>来提高通信性能，并提出了一种新的<code>环形去中心化</code>FL算法(RDFL)来提高分散FL性能和带宽利用率。此外，GFL还引入了星际文件系统(InterPlanetary File System, <code>IPFS</code>)和<code>区块链</code>，进一步提高了通信效率和FL的安全性。在恶意节点和非独立同分布（非IID）数据集的数据中毒情况下，提高通信性能和分散FL性能。</p>
+<h3 id="introduction">Introduction：</h3>
+<p>传统的FL框架使用中心化的体系结构，中心结点收集梯度或模型参数来更新全局模型。传统的压力和挑战：中心结点的通信压力和通信带宽瓶颈以及通信压力带来的中心结点的稳定性挑战。</p>
+<p>提出了去中心化的FL框架：移除了中心结点，并在数据结点之间同步FL更新，然后执行聚合。在突破通信瓶颈和提高FL稳定性方面取得了一些进展，但是仍面临通信压力、分散FL性能和安全方面的挑战。用于同步FL更新的去中心化FL框架会造成更大的通信压力。由于数据节点中恶意节点的数据中毒以及非独立同分布（非IID）问题，现有去中心化FL框架中使用的聚合算法无法实现竞争性能。此外，现有去中心化FL框架的更新过程存在被篡改的安全风险，并且由于缺乏共识（协商一致）机制，无法追踪FL更新的来源。</p>
+<p>为了解决上述问题，本文提出了一种基于区块链的去中心化FL框架——银河联邦学习框架（GFL）。GFL采用一致性哈希算法构建数据节点的环形拓扑，旨在降低通信压力，提高拓扑稳定性。此外，本文还设计了一种新颖的环形去中心化FL算法（RDFL）。在RDFL中引入了<code>RingAllReduce</code>算法和<code>知识蒸馏</code>，以提高带宽利用率和去中心化FL性能。此外，还引入了星际文件系统（IPFS）和区块链，以进一步提高分散FL的通信效率和安全性。</p>
+<p><code>Consistent Hashing Algorithm:</code><a href="https://www.cnblogs.com/frankcui/p/15354596.html">一致性哈希算法</a>(<a href="https://www.cnblogs.com/xialihua1023/p/10304932.html">Consistent Hashing Algorithm</a>)。是一种分布式算法，常用于负载均衡。Memcached client也选择这种算法，解决将key-value均匀分配到众多cahce server上的问题。它可以取代传统的取模操作，解决了取模操作无法应对增删cached Server的问题 (增删server会导致同一个key,在get操作时分配不到数据真正存储的server，命中率会急剧下降)。简单来说，是将整个哈希值空间组织成一个虚拟的圆环，整个空间按顺时针方向组织。将各个服务器使用Hash进行一个哈希，具体可以选择服务器的ip或主机名作为关键字进行哈希，这样每台机器就能确定其在哈希环上的位置。将数据key使用相同的函数Hash计算出哈希值，并确定此数据在环上的位置，从此位置<strong>沿环顺时针“行走”</strong>，第一台遇到的服务器就是其应该定位到的服务器。</p>
+<p><code>RingAllReduce:</code><a href="https://blog.csdn.net/lj2048/article/details/108322931">ring allreduce</a>是一种算法，其通信成本是恒定的并且与系统中GPU的数量无关，并且仅由系统中GPU之间的最慢连接确定; 事实上，如果你只考虑带宽作为通信成本的一个因素（并忽略延迟），那么ring allreduce是一种最佳的通信算法。（当您的模型很大时，这是对通信成本的一个很好的预估，并且您只需要较少数次数发送大量数据。）Ring allreduce中的GPU排列在一个逻辑环中。 每个GPU应该有一个左邻居和一个右邻居; 它只会向其右邻居发送数据，并从其左邻居接收数据。该算法分两步进行：第一步是scatter-reduce，然后是all-gather。 在scatter-reduce步骤中，GPU将交换数据，使得每个GPU最终得到最终结果的一部分。 在all-gather步骤中，GPU将交换这些块，以便所有GPU最终得到完整的最终结果。</p>
+<p><code>IPFS:</code><a href="https://blog.csdn.net/CHYabc123456hh/article/details/105437637">IPFS</a>（InterPlanetary File System）叫星际文件传输系统，本质是一个基于点对点的分布式超媒体分发协议，它整合了分布式系统，为所有人提供全球统一的可寻址空间，因为他具有良好的安全性、较高的传输速度等特点，被认为是最有可能取代HTTP的新一代互联网协议。IPFS用基于内容的寻址替代传统的基于域名的寻址。用户不需要关心服务器的位置，不用考虑文件存储的名字和路径。我们将一个文件放到IPFS节点中，将会得到基于其内容计算出的唯一加密哈希值。哈希值直接反映文件的内容，哪怕只修改1比特，哈希值也会完全不同。当IPFS被请求一个文件哈希时，它会使用一个分布式哈希表找到文件所在的节点，取回文件并验证文件的哈希值，如果哈希值不符合，说明内容被篡改了。将传统的基于内容的地址替代基于域名的地址，也就是用户寻找的不是某个地址而是储存在某个地方的内容，不需要验证发送者的身份，而只需要验证内容的哈希，通过这样可以让网页的速度更快、更安全、更健壮、更持久。</p>
+<p><code>Knowledge Distillation：</code><a href="https://baijiahao.baidu.com/s?id=1683133392734090972&amp;wfr=spider&amp;for=pc">知识蒸馏</a>,培养一个能很好表现和概括的大模型。这就是所谓的教师模式。取你所有的数据，计算教师模型的预测值。包含这些预测的总数据集称为知识，而预测本身通常称为软目标。这就是知识提炼的步骤。利用之前获得的知识来训练较小的网络，称为学生模型。</p>
+<p><code>blockchain:</code><a href="http://blockchain.idcquan.com/162625.shtml">区块链</a>(<a href="https://baijiahao.baidu.com/s?id=1648712868414807289&amp;wfr=spider&amp;for=pc">Blockchain</a>)是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。”所谓共识机制是区块链系统中实现不同节点之间建立信任、获取权益的数学算法。区块链就是一种网络技术，通过程序员敲代码形成的网络，各方相互合作交易均可直接对接完成，不需要靠第三方平台，也就省去了中间的一些程序和费用(省时省力还省钱)，但为了合作或交易的安全，系统会将每一个参与者的动作广播给所有参与者，保障了整个过程的安全、透明，解决了信任问题。区块链准确的说就是“全中心”体系，就是链上的每个节点都是中心。不可删除，不可更改，这就是区块链技术。</p>
+<h3 id="contributions">contributions</h3>
+<ul>
+<li>设计了一种新的去中心化FL数据节点拓扑机制，采用了一致性哈希算法。该机制能够显著降低通信压力，提高拓扑稳定性。据我们所知，这是第一次尝试在去中心化FL框架中为数据节点拓扑设计引入一致性哈希算法。</li>
+<li>提出了一种新的环分散联邦学习（RDFL）算法，旨在提高训练中的带宽利用率和分散联邦学习性能。</li>
+<li>为了提高去中心化的FL框架的通信性能和安全性，我们引入IPFS技术来降低系统通信压力，并引入区块链来提高FL的安全性。</li>
+</ul>
+<h3 id="related-work">Related Work</h3>
+<ul>
+<li>
+<p>中心化FL：存在通信瓶颈和稳定性问题</p>
+</li>
+<li>
+<p>去中心化FL：基于八卦算法和模型分割的去中心化FL算法，点对点的去中心化FL算法，完全分散的FL算法，基于区块链的分散FL框架。在分散的FL性能和安全性方面面临挑战。</p>
+</li>
+<li>
+<p>解决通信问题：主要集中在研究新的通信压缩或模型压缩技术来降低通信压力。利用八卦算法提高带宽利用率，并通过模型分割降低通信压力。降低沟通压力的模型量化方法。通信压缩方法，以降低通信压力。</p>
+</li>
+<li>
+<p>提高Non-IID数据集上的FL性能：现有研究主要集中在集中式FL上，共享数据集，知识蒸馏。</p>
+<p>在分散FL场景中，为了提高非IID数据集上的分散FL性能和恶意数据节点的数据中毒，Li提出了一个分散FL框架，但在没有数据中毒的情况下，没有实现比联邦平均（FedAvg）更好的性能。</p>
+</li>
+<li>
+<p>保护数据隐私：现有的研究集中在新的防御方法上，如差分隐私和多方安全计算。也有研究将区块链技术应用于分散FL，以提高安全性。</p>
+</li>
+</ul>
+<h3 id="the-proposed-framework">The Proposed Framework</h3>
+<ul>
+<li>描述了GFL中设计的拓扑机制如何利用一致性哈希算法为数据节点构建环形分散FL拓扑</li>
+<li>在GFL中描述了RDFL算法</li>
+<li>描述了GFL如何利用IPF和区块链来降低通信压力和提高FL安全性</li>
+</ul>
 <blockquote>
 <p><a href="https://www.bilibili.com/video/BV12E411H7Lk?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click">视频</a></p>
 <p><a href="https://github.com/GalaxyLearning/GFL">项目地址</a></p>
