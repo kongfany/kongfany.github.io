@@ -49,7 +49,7 @@
 <meta itemprop="name" content="PFL联邦学习开源框架">
 <meta itemprop="description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"><meta itemprop="datePublished" content="2021-12-17T21:05:53+08:00" />
 <meta itemprop="dateModified" content="2021-12-17T21:05:53+08:00" />
-<meta itemprop="wordCount" content="5096">
+<meta itemprop="wordCount" content="7494">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PFL联邦学习开源框架"/>
 <meta name="twitter:description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2021-12-17 </span>
         
-          <span class="more-meta"> 5096 words </span>
-          <span class="more-meta"> 11 mins read </span>
+          <span class="more-meta"> 7494 words </span>
+          <span class="more-meta"> 15 mins read </span>
         
       </div>
     </header>
@@ -164,6 +164,7 @@
             <li><a href="#contributions">contributions</a></li>
             <li><a href="#related-work">Related Work</a></li>
             <li><a href="#the-proposed-framework">The Proposed Framework</a></li>
+            <li><a href="#framework-design">Framework Design</a></li>
           </ul>
         </li>
       </ul>
@@ -197,8 +198,7 @@
 </ul>
 <h2 id="演示">演示</h2>
 <p>使用单例模式进行演示</p>
-<p>服务端的pfl_model,pfl_server</p>
-<p>和客户端的pfl_client</p>
+<p>服务端的pfl_model,pfl_server和客户端的pfl_client</p>
 <h3 id="pfl_modelpy"><code>pfl_model.py</code></h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -396,7 +396,8 @@
                       <span class="n">curve</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">concurrent_num</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="流程分析">流程分析</h3>
+</div><p><img src="/images/202112/35.png" alt=""></p>
+<h3 id="流程分析">流程分析</h3>
 <p>运行pfl_model后可以看到，job已经生成并添加成功了。同时在日志文件中也有了相应的记录。
 编写pfl_server以及pfl_client
 先运行pfl_server，运行后日志提示聚合开始
@@ -417,7 +418,7 @@
 <p>为了解决上述问题，本文提出了一种基于区块链的去中心化FL框架——银河联邦学习框架（GFL）。GFL采用一致性哈希算法构建数据节点的环形拓扑，旨在降低通信压力，提高拓扑稳定性。此外，本文还设计了一种新颖的环形去中心化FL算法（RDFL）。在RDFL中引入了<code>RingAllReduce</code>算法和<code>知识蒸馏</code>，以提高带宽利用率和去中心化FL性能。此外，还引入了星际文件系统（IPFS）和区块链，以进一步提高分散FL的通信效率和安全性。</p>
 <p><code>Consistent Hashing Algorithm:</code><a href="https://www.cnblogs.com/frankcui/p/15354596.html">一致性哈希算法</a>(<a href="https://www.cnblogs.com/xialihua1023/p/10304932.html">Consistent Hashing Algorithm</a>)。是一种分布式算法，常用于负载均衡。Memcached client也选择这种算法，解决将key-value均匀分配到众多cahce server上的问题。它可以取代传统的取模操作，解决了取模操作无法应对增删cached Server的问题 (增删server会导致同一个key,在get操作时分配不到数据真正存储的server，命中率会急剧下降)。简单来说，是将整个哈希值空间组织成一个虚拟的圆环，整个空间按顺时针方向组织。将各个服务器使用Hash进行一个哈希，具体可以选择服务器的ip或主机名作为关键字进行哈希，这样每台机器就能确定其在哈希环上的位置。将数据key使用相同的函数Hash计算出哈希值，并确定此数据在环上的位置，从此位置<strong>沿环顺时针“行走”</strong>，第一台遇到的服务器就是其应该定位到的服务器。</p>
 <p><code>RingAllReduce:</code><a href="https://blog.csdn.net/lj2048/article/details/108322931">ring allreduce</a>是一种算法，其通信成本是恒定的并且与系统中GPU的数量无关，并且仅由系统中GPU之间的最慢连接确定; 事实上，如果你只考虑带宽作为通信成本的一个因素（并忽略延迟），那么ring allreduce是一种最佳的通信算法。（当您的模型很大时，这是对通信成本的一个很好的预估，并且您只需要较少数次数发送大量数据。）Ring allreduce中的GPU排列在一个逻辑环中。 每个GPU应该有一个左邻居和一个右邻居; 它只会向其右邻居发送数据，并从其左邻居接收数据。该算法分两步进行：第一步是scatter-reduce，然后是all-gather。 在scatter-reduce步骤中，GPU将交换数据，使得每个GPU最终得到最终结果的一部分。 在all-gather步骤中，GPU将交换这些块，以便所有GPU最终得到完整的最终结果。</p>
-<p><code>IPFS:</code><a href="https://blog.csdn.net/CHYabc123456hh/article/details/105437637">IPFS</a>（InterPlanetary File System）叫星际文件传输系统，本质是一个基于点对点的分布式超媒体分发协议，它整合了分布式系统，为所有人提供全球统一的可寻址空间，因为他具有良好的安全性、较高的传输速度等特点，被认为是最有可能取代HTTP的新一代互联网协议。IPFS用基于内容的寻址替代传统的基于域名的寻址。用户不需要关心服务器的位置，不用考虑文件存储的名字和路径。我们将一个文件放到IPFS节点中，将会得到基于其内容计算出的唯一加密哈希值。哈希值直接反映文件的内容，哪怕只修改1比特，哈希值也会完全不同。当IPFS被请求一个文件哈希时，它会使用一个分布式哈希表找到文件所在的节点，取回文件并验证文件的哈希值，如果哈希值不符合，说明内容被篡改了。将传统的基于内容的地址替代基于域名的地址，也就是用户寻找的不是某个地址而是储存在某个地方的内容，不需要验证发送者的身份，而只需要验证内容的哈希，通过这样可以让网页的速度更快、更安全、更健壮、更持久。</p>
+<p><code>IPFS:</code><a href="https://blog.csdn.net/CHYabc123456hh/article/details/105437637">IPFS</a>（InterPlanetary File System）叫星际文件传输系统，本质是一个基于点对点的分布式超媒体分发协议，它整合了分布式系统，为所有人提供全球统一的可寻址空间，因为他具有良好的安全性、较高的传输速度等特点，被认为是最有可能取代HTTP的新一代互联网协议。IPFS用基于内容的寻址替代传统的基于域名的寻址。用户不需要关心服务器的位置，不用考虑文件存储的名字和路径。我们将一个文件放到IPFS节点中，将会得到基于其内容计算出的唯一加密哈希值。哈希值直接反映文件的内容，哪怕只修改1比特，哈希值也会完全不同。当IPFS被请求一个文件哈希时，它会使用一个分布式哈希表找到文件所在的节点，取回文件并验证文件的哈希值，如果哈希值不符合，说明内容被篡改了。将传统的基于内容的地址替代基于域名的地址，也就是用户寻找的不是某个地址而是储存在某个地方的内容，不需要验证发送者的身份，而只需要验证内容的哈希，通过这样可以让网页的速度更快、更安全、更健壮、更持久。大文件会被切分成小的分块，下载的时候可以从多个服务器同时获取。IPFS的网络是不固定的、细粒度的、分布式的网络，可以很好的适应内容分发网络的要求。</p>
 <p><code>Knowledge Distillation：</code><a href="https://baijiahao.baidu.com/s?id=1683133392734090972&amp;wfr=spider&amp;for=pc">知识蒸馏</a>,培养一个能很好表现和概括的大模型。这就是所谓的教师模式。取你所有的数据，计算教师模型的预测值。包含这些预测的总数据集称为知识，而预测本身通常称为软目标。这就是知识提炼的步骤。利用之前获得的知识来训练较小的网络，称为学生模型。</p>
 <p><code>blockchain:</code><a href="http://blockchain.idcquan.com/162625.shtml">区块链</a>(<a href="https://baijiahao.baidu.com/s?id=1648712868414807289&amp;wfr=spider&amp;for=pc">Blockchain</a>)是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。”所谓共识机制是区块链系统中实现不同节点之间建立信任、获取权益的数学算法。区块链就是一种网络技术，通过程序员敲代码形成的网络，各方相互合作交易均可直接对接完成，不需要靠第三方平台，也就省去了中间的一些程序和费用(省时省力还省钱)，但为了合作或交易的安全，系统会将每一个参与者的动作广播给所有参与者，保障了整个过程的安全、透明，解决了信任问题。区块链准确的说就是“全中心”体系，就是链上的每个节点都是中心。不可删除，不可更改，这就是区块链技术。</p>
 <h3 id="contributions">contributions</h3>
@@ -451,6 +452,79 @@
 <li>在GFL中描述了RDFL算法</li>
 <li>描述了GFL如何利用IPF和区块链来降低通信压力和提高FL安全性</li>
 </ul>
+<ol>
+<li>
+<p>Ring Decentralized FL Topology 环分散FL拓扑</p>
+<p>n个数据结点，可信任结点为m个，不可信任结点为n-m个。数据结点记作D={DP1,DP2,&hellip;,DPn}。GFL利用一致性散列算法构造了n个数据节点的环形拓扑。一致哈希值Hk=Hash(DPk^ip)。DPkip表示DPk的ip。数据节点分布在环上，根据一致的哈希值其值范围为[0,2^32−1] 。</p>
+<p>不受信任的数据节点将以顺时针方向将本地模型发送到环拓扑上最近的受信任数据节点。绿色数据节点表示受信任的数据节点，灰色数据节点表示不受信任的数据节点。在一致性哈希算法的帮助下，不同的不可信数据节点向不同的可信节点发送模型，有效降低了可信节点的通信压力。为了使可信节点在环上的分布更加均匀，GFL在环拓扑中引入可信节点的虚拟节点，进一步降低通信压力。带有红色虚线的绿色节点表示虚拟节点，如果不受信任的数据节点发现最近的受信任节点是顺时针方向的虚拟节点，它们将直接将模型发送到虚拟节点对应的受信任节点。</p>
+<p><img src="/images/202112/36.png" alt=""><img src="/images/202112/37.png" alt=""></p>
+</li>
+<li>
+<p>RDFL Algorithm</p>
+<p>GFL基于一致性哈希算法构建的环形分散拓扑结构，开始执行RDFL算法。</p>
+<p>为了提高可信节点之间的带宽利用率，RDFL算法在一致性哈希算法中引入了RingAllReduce算法和顺时针原理来执行模型同步。</p>
+<ul>
+<li>
+<p>Train and Synchronize Model 每个数据节点加载用于本地训练的全局模型，并按顺时针方向同步其模型</p>
+<ol>
+<li>
+<p>每个数据节点DPk首先加载上一次迭代生成的全局模型GM进行局部训练，并获得一个新的局部模型MK。</p>
+</li>
+<li>
+<p>非信任节点根据顺时针原则将本地模型发送到最近的信任节点。</p>
+</li>
+<li>
+<p>受信任节点同步模型,以便所有受信任节点获得其余受信任节点的模型。</p>
+</li>
+<li>
+<p>m-1之后轮同步（r=m−1） ，所有受信任节点都具有其他受信任节点的模型</p>
+<p><code>???：</code>已经知道是不受信任结点的模型，为何还要发给信任结点，并全部同步？</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Knowledge Distillation 利用知识蒸馏将可信节点拥有的其他模型的dark knowledge收敛到本地模型，并在可信节点之间同步本地模型</p>
+<ol>
+<li>由于同步，每个受信任节点从其余受信任数据节点获取模型。</li>
+<li>每个受信任节点在本地进行知识蒸馏</li>
+<li>teacher模型中的 dark knowledge 转移到知识较少的student模型中</li>
+<li>可信节点利用RingAllReduce算法和顺时针规则同步可信节点的局部模型</li>
+<li>同步后，所有受信任节点都具有其他受信任节点的本地模型。</li>
+<li>在RDFL算法的知识蒸馏步骤中，每个可信节点DPk使用本地模型Mk作为学生，DPk拥有的剩余模型将用作教师，以将dark knowledge提取到Mk。RDFL利用KL散度来衡量模型之间的分布差异。为了避免恶意节点在不可信节点中的数据中毒，RDFL只允许前30%的模型与Mk的KL差异最小的模型作为教师模型。</li>
+</ol>
+</li>
+<li>
+<p>Federated Averaging 每个受信任节点执行联合平均（FedAvg）以生成新的全局模型并开始下一次迭代</p>
+<ol>
+<li>每个受信任节点DPK执行 FedAvg以获得新的全局模型。</li>
+<li>然后，每个受信任节点根据环形拓扑将新的全局模型逆时针发送给不受信任的节点，并开始下一次迭代。</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/202112/38.png" alt=""></p>
+</li>
+<li>
+<p>IPFS and Blockchain</p>
+<p>数据节点之间的模型传输占用大量通信开销，并造成严重的通信压力。通信存在被篡改的安全风险，并且无法追踪模型的来源。</p>
+<ul>
+<li>Communication Pressure：引入IPFS作为模型存储系统。IPFS由GFL中的可信节点组成。IPFS中的文件将被分成多个存储在不同节点上的片段，IPFS将生成与该文件对应的IPFS hash值。IPFS hash是一个46字节的字符串，可以通过IPFS hash从IPFS获取相应的文件。由于模型文件以片段形式存储在受信任节点中，因此数据隐私泄漏的风险进一步降低。</li>
+<li>Communication Security：引入区块链作为通信系统。数据节点发送的IPFS hash以区块链交易的形式传输。每个交易都通过一致性算法进行验证，以降低篡改风险。由于区块链记录每个交易信息，GFL可以根据交易信息追溯到恶意节点。由于区块链的开放性，区块链上的任何节点都可以获取区块链中的交易信息。为了避免IPFS hash的泄漏，GFL对IPFS hash进行加密以保护数据节点的隐私。</li>
+</ul>
+</li>
+</ol>
+<h3 id="framework-design">Framework Design</h3>
+<ol>
+<li>
+<p>Architecture(架构)：GFL的架构由IPFS和区块链组成。对于区块链，GFL利用Ethereum作为区块链的实施平台。在GFL中，区块链由所有数据节点组成，IPFS由可信节点组成。可信数据节点是构成IPFS和区块链的节点，而不可信节点只是构成区块链的节点。</p>
+<p>智能合约(一种旨在以信息化方式传播、验证或执行合同的计算机协议)是部署在区块链上的协议，通过该协议，区块链可以执行比数字交易更多的功能。数据节点通过使用智能合约，将模型的IPFS hash以交易的形式发送到区块链。区块链首先执行共识机制，验证交易是否被篡改，如果验证通过，交易将打包到区块中。</p>
+<p>GFL中有两种类型的智能合约。控制器合约负责控制所有FL任务的流程。存储合约负责存储模型的IPFS hash，每个FL任务都有一个独立的存储合约。</p>
+<p><img src="/images/202112/39.png" alt=""></p>
+</li>
+<li>
+<p>Encryption Mechanism(加密机制)：由于区块链的可见性，区块链上的节点可以访问任何区块中的交易信息，不可信数据节点中存在恶意节点可能导致数据隐私泄露。为了解决数据隐私泄露问题，GFL采用RSA非对称加密算法和AES对称加密算法对交易信息进行加密。通过GFL的加密机制，对每个区块链交易中模型的IPFS hash进行加密，防止数据隐私泄露。</p>
+<p>如果DPh和DPk是第一次通信，DPk将生成AES密钥，并使用DPh的公钥对其进行加密，并在通信之前将其发送给DPh。DPh在收到AES密钥后利用其私钥对其进行解密。然后，DPh和DPk之间传输的IPFS hash将使用AES密钥加密。A将明文使用AES密钥加密，然后使用RSA公钥将密钥加密，发送给B；B接收到后用私钥打开获取到AES的密钥。保证了密钥的安全性，之后便可以通过AES通信。</p>
+</li>
+</ol>
 <blockquote>
 <p><a href="https://www.bilibili.com/video/BV12E411H7Lk?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click">视频</a></p>
 <p><a href="https://github.com/GalaxyLearning/GFL">项目地址</a></p>
