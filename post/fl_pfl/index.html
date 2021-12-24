@@ -49,7 +49,7 @@
 <meta itemprop="name" content="PFL联邦学习开源框架">
 <meta itemprop="description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"><meta itemprop="datePublished" content="2021-12-17T21:05:53+08:00" />
 <meta itemprop="dateModified" content="2021-12-17T21:05:53+08:00" />
-<meta itemprop="wordCount" content="7494">
+<meta itemprop="wordCount" content="7681">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PFL联邦学习开源框架"/>
 <meta name="twitter:description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2021-12-17 </span>
         
-          <span class="more-meta"> 7494 words </span>
-          <span class="more-meta"> 15 mins read </span>
+          <span class="more-meta"> 7681 words </span>
+          <span class="more-meta"> 16 mins read </span>
         
       </div>
     </header>
@@ -182,7 +182,7 @@
 <li>即将提供基于区块链的通信支持，结合知识蒸馏的联邦学习算法，为用户提供去中心化的联邦学习服务</li>
 </ul>
 <h2 id="pfl框架设计">PFL框架设计</h2>
-<p><img src="/images/202112/20.png" alt=""></p>
+<p><img src="/images/202112/40.png" alt=""></p>
 <p>在prepare_job阶段，模型方需要制定各种策略，设计好联邦学习任务。在run_time阶段，使用模型方生成的job协调fl_client客户端和fl_server服务端进行联邦学习训练。如图，PFL框架支持多对多的server和client通信模式。</p>
 <p>prepare job：模型方准备联邦学习任务阶段</p>
 <ul>
@@ -357,6 +357,7 @@
 </span><span class="lnt">33
 </span><span class="lnt">34
 </span><span class="lnt">35
+</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch</span>
@@ -371,6 +372,7 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
     <span class="c1"># CLIENT_ID = int(sys.argv[1])</span>
     <span class="c1"># 数据集mnist的导入</span>
+    <span class="c1">#手写数字数据集</span>
     <span class="n">mnist_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s2">&#34;D:\Python\PycharmProjects\pflttt\mnist_data&#34;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
         <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
         <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.13066062</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.30810776</span><span class="p">,))</span>
@@ -450,7 +452,7 @@
 <ul>
 <li>描述了GFL中设计的拓扑机制如何利用一致性哈希算法为数据节点构建环形分散FL拓扑</li>
 <li>在GFL中描述了RDFL算法</li>
-<li>描述了GFL如何利用IPF和区块链来降低通信压力和提高FL安全性</li>
+<li>描述了GFL如何利用IPFS和区块链来降低通信压力和提高FL安全性</li>
 </ul>
 <ol>
 <li>
@@ -516,7 +518,7 @@
 <ol>
 <li>
 <p>Architecture(架构)：GFL的架构由IPFS和区块链组成。对于区块链，GFL利用Ethereum作为区块链的实施平台。在GFL中，区块链由所有数据节点组成，IPFS由可信节点组成。可信数据节点是构成IPFS和区块链的节点，而不可信节点只是构成区块链的节点。</p>
-<p>智能合约(一种旨在以信息化方式传播、验证或执行合同的计算机协议)是部署在区块链上的协议，通过该协议，区块链可以执行比数字交易更多的功能。数据节点通过使用智能合约，将模型的IPFS hash以交易的形式发送到区块链。区块链首先执行共识机制，验证交易是否被篡改，如果验证通过，交易将打包到区块中。</p>
+<p>智能合约(一种旨在以信息化方式传播、验证或执行合同的计算机协议)是部署在区块链上的协议，通过该协议，区块链可以执行比数字交易更多的功能。数据节点通过使用智能合约，将模型的IPFS hash以交易的形式发送到区块链。区块链首先执行共识机制，验证交易是否被篡改，如果验证通过，交易将打包到区块中。<strong>智能合约</strong>是以太坊生态系统搭建的关键角色。 当有人想要在以太坊完成某项任务时，他们会与一个或多个人发起一个<strong>智能合约</strong>。 这个合约其实是一系列的指令，使用编程语言“solidity”编写，这些语言在IFTTT逻辑（也就是IF-THIS-THEN-THAT逻辑）的基础上工作。 基本上，如果第一组指令已经完成，那么执行下一个功能，然后继续下一个功能，直到达到合同结束。</p>
 <p>GFL中有两种类型的智能合约。控制器合约负责控制所有FL任务的流程。存储合约负责存储模型的IPFS hash，每个FL任务都有一个独立的存储合约。</p>
 <p><img src="/images/202112/39.png" alt=""></p>
 </li>

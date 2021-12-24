@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习综述">
 <meta itemprop="description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务"><meta itemprop="datePublished" content="2021-12-18T17:03:03+08:00" />
 <meta itemprop="dateModified" content="2021-12-18T17:03:03+08:00" />
-<meta itemprop="wordCount" content="7534">
+<meta itemprop="wordCount" content="7572">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习综述"/>
 <meta name="twitter:description" content="原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2021-12-18 </span>
         
-          <span class="more-meta"> 7534 words </span>
+          <span class="more-meta"> 7572 words </span>
           <span class="more-meta"> 16 mins read </span>
         
       </div>
@@ -240,7 +240,7 @@
 <li>
 <p>FedAvg算法的流程？</p>
 <ol>
-<li>**客户端选择:**服务器从一组符合资格要求的客户端中采样。例如，为避免影响设备用户，移动电话可能仅在未计量的wi-fi连接上插入且处于空闲状态时才签入服务器。</li>
+<li><strong>客户端选择:</strong> 服务器从一组符合资格要求的客户端中采样。例如，为避免影响设备用户，移动电话可能仅在未计量的wi-fi连接上插入且处于空闲状态时才签入服务器。</li>
 <li><strong>传播：</strong> 选定的客户端从服务器下载当前模型权重和训练程序。</li>
 <li><strong>客户端计算：</strong> 每个选定的设备都通过执行训练程序在本地计算对模型的更新，例如，可以在本地数据上运行SGD。</li>
 <li><strong>聚合：</strong> 服务器收集设备更新的汇总。为了提高效率，一旦有足够数量的设备报告了结果，用户就可以在此处放散手。此阶段也是许多其他技术的集成点，这些技术将在后面讨论，可能包括：用于增加隐私的安全聚合，为了通信效率而对聚合进行有损压缩，以及针对差分隐私的噪声添加和更新限幅。</li>
@@ -471,7 +471,7 @@
 <p>处理Non-IID数据有什么策略？</p>
 <ul>
 <li>修改现有的算法（普通机器学习算法的前提是独立同分布）</li>
-<li>创建一个可以全局共享的小数据集</li>
+<li>创建一个可以全局共享的小数据集&ndash;数据不流通，数据集不平衡：创建虚拟的公共数据集，不涉及隐私，但包含特征</li>
 <li>不同客户端提供不同的模型（Non-IID变成一种特性）&mdash;聚合的时候，知识蒸馏</li>
 </ul>
 </li>
