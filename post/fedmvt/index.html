@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>FedMVT - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/fedmvt/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="FedMVT" />
+<meta property="og:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/fedmvt/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-02T13:34:50+08:00" />
+<meta property="article:modified_time" content="2022-01-02T13:34:50+08:00" />
+
+<meta itemprop="name" content="FedMVT">
+<meta itemprop="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"><meta itemprop="datePublished" content="2022-01-02T13:34:50+08:00" />
+<meta itemprop="dateModified" content="2022-01-02T13:34:50+08:00" />
+<meta itemprop="wordCount" content="1715">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="FedMVT"/>
+<meta name="twitter:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">FedMVT</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-02 </span>
+        
+          <span class="more-meta"> 1715 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#related-work">Related Work</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>Semi-supervised Vertical Federated Learning with MultiView Training</strong></p>
+<p><strong>FedMVT：带多视图训练的半监督垂直联合学习</strong></p>
+<h2 id="abstract">Abstract</h2>
+<p>垂直联邦学习(VFL)使各方能够基于<code>相同样本的分布特征</code>构建健壮的共享机器学习模型。然而，VFL要求各方共享足够数量的重叠样本。 实际上，重叠样本集可能很小，导致大多数非重叠数据未使用。 在本文中，我们提出了联邦多视图训练（FedMVT），这是一种半监督学习方法，可以在有限的重叠样本下提高VFL的性能。 FedMVT估计缺失特征的表示，预测无标记样本的伪标签，以扩展训练集，并根据输入的不同视图联合训练三个分类器，以提高模型的表示学习。</p>
+<p><code>semi-supervised Learning：</code>半监督学习，是监督学习与<a href="https://baike.baidu.com/item/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/810193">无监督学习</a>相结合的一种学习方法。半监督学习使用大量的未标记数据，以及同时使用标记数据，来进行模式识别工作。让学习器不依赖外界交互、自动利用未标记样本来提升学习性能的学习方法。</p>
+<ul>
+<li>场景：传统的学习方式是大量的贴标签数据进行分类学习。但由于资源有限，只有少量的有标签的数据和大量的无标签数据时，就要用到半监督学习。</li>
+<li>前提：做一些未标记样本所揭示的数据分布信息与类别标记相联系的假设。基本假设：相似的样本有相似的输出，聚类假设，流形假设。</li>
+<li>分类：纯(pure)半监督学习，假设训练数据中的未标记样本并非预测的数据，学得模型适用于训练过程未观察到的数据。直推学习(transductive learning),假定学习过程中的未标记样本恰是带预测数据，只预测学习过程观察到的未标记数据。</li>
+</ul>
+<p><img src="/images/202201/1.png" alt=""></p>
+<p><img src="/images/202201/2.png" alt=""></p>
+<p><img src="/images/202201/3.png" alt=""></p>
+<p><img src="/images/202201/4.png" alt=""></p>
+<p><img src="/images/202201/5.png" alt=""></p>
+<p><img src="/images/202201/6.jpg" alt=""></p>
+<p><code>Pseudo-Labelling:</code><a href="https://zhuanlan.zhihu.com/p/157325083?from_voters_page=true">伪标签</a></p>
+<h2 id="introduction">Introduction</h2>
+<p>联邦学习的实践已经从基于数百万移动设备中的数据构建强大的移动应用程序扩展到解决组织之间或组织内部的数据碎片和隔离问题。例如，银行的许多业务决策可能依赖于其客户的购买偏好。该银行可能与拥有当地居民购买偏好数据的当地零售公司共享一些客户。因此，银行可以邀请零售公司合作构建一个共享模型，利用双方的数据功能来改善其业务。零售公司也可以从共享模式中受益。</p>
+<p>垂直联邦学习（VFL），使参与方能够通过充分利用其重叠样本的分散特征而不公开数据来协作训练机器学习模型。然而，VFL的一个关键先决条件是，它要求各方共享足够数量的重叠样本，以实现良好的性能。 [Liu等人，2018]提出了一个联邦迁移学习框架，以解决VFL设置中的监督薄弱（标签较少）问题。 它并没有利用所有标记数据进行监督训练，也没有充分利用未标记样本来提高学习质量。 许多其他类似的方法，如领域自适应和知识蒸馏，已经应用于联邦学习环境中。然而，它们主要关注各方共享相同特征空间的场景（也称为水平联邦学习）</p>
+<p>在本文中，我们提出了一种新的VFL环境下的半监督算法，称为FedMVT，以解决现有垂直联邦学习方法的局限性。</p>
+<ul>
+<li>当各方之间的重叠样本有限时，FedMVT显著提高了联邦模型的性能；</li>
+<li>FedMVT有助于提高拥有标签方的本地分类器的性能，从而使该方更有信心地进行本地预测;</li>
+<li>FedMVT处理各种类型的数据。这在实践中很重要，因为现实中的VFL应用程序经常需要处理异构特性;</li>
+<li>FedMVT不要求参与者共享其原始数据和模型参数，只要求中间表示和梯度，而FATE实现的VFL-DNN(深度神经网络)框架可以进一步保护这一点。</li>
+</ul>
+<h2 id="related-work">Related Work</h2>
+<ul>
+<li>Vertical Federated Learning (VFL).垂直联邦学习。</li>
+</ul>
+<p>VFL在一些文献中也称为特征分割机器学习。</p>
+<p>在特征空间中划分数据的安全线性机器学习在[Gascón等人，2016]中得到了很好的研究;他们使用混合MPC(安全多方计算)协议或加性同态加密来进行安全线性模型训练。Cheng et  al.，2019]在VFL设置中提出了一种安全的联合树增强（SecureBoost）方法，该方法使具有不同功能的参与方能够协作构建一组增强树，并且他们证明SecureBoost提供了与其非隐私保护的集中式对等方相同的准确度。FATE设计并实现了一个VFL-DNN(深度神经网络)框架，该框架支持VFL设置中的DNN。VFL-DNN在VFL训练过程的前阶段和后阶段利用一种混合加密方案来保护数据隐私和模型安全。[Vepakomma et  al.，2018]提出了几种分离深层神经网络的配置，以支持健康实体之间的各种形式的协作，每个健康实体都拥有一个部分深层网络并拥有不同的患者数据模式。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-01-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/federated-learning/">
+            <span class="next-text nav-default">联邦学习(Federated Learning)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

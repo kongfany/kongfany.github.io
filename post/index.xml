@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Dec 2021 19:22:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Jan 2022 13:34:50 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FedMVT</title>
+      <link>https://kongfany.github.io/post/fedmvt/</link>
+      <pubDate>Sun, 02 Jan 2022 13:34:50 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fedmvt/</guid>
+      <description>Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模</description>
+    </item>
+    
     <item>
       <title>联邦学习(Federated Learning)</title>
       <link>https://kongfany.github.io/post/federated-learning/</link>

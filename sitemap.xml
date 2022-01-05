@@ -3,28 +3,35 @@
   
   <url>
     <loc>https://kongfany.github.io/tags/federated-learning/</loc>
-    <lastmod>2021-12-20T19:22:19+08:00</lastmod>
+    <lastmod>2022-01-02T13:34:50+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/fedmvt/</loc>
+    <lastmod>2022-01-02T13:34:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2021-12-20T19:22:19+08:00</lastmod>
+    <lastmod>2022-01-02T13:34:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/tags/</loc>
-    <lastmod>2021-12-20T19:22:19+08:00</lastmod>
+    <lastmod>2022-01-02T13:34:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/</loc>
-    <lastmod>2021-12-20T19:22:19+08:00</lastmod>
+    <lastmod>2022-01-02T13:34:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
