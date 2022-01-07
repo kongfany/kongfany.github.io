@@ -49,8 +49,8 @@
 <meta itemprop="name" content="FedMVT">
 <meta itemprop="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"><meta itemprop="datePublished" content="2022-01-02T13:34:50+08:00" />
 <meta itemprop="dateModified" content="2022-01-02T13:34:50+08:00" />
-<meta itemprop="wordCount" content="1715">
-<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="3650">
+<meta itemprop="keywords" content="Federated Learning,Semi-supervised Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FedMVT"/>
 <meta name="twitter:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"/>
 
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-01-02 </span>
         
-          <span class="more-meta"> 1715 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 3650 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -150,6 +150,7 @@
         <li><a href="#abstract">Abstract</a></li>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#related-work">Related Work</a></li>
+        <li><a href="#problem-definition">Problem Definition</a></li>
       </ul>
     </li>
   </ul>
@@ -173,7 +174,45 @@
 <p><img src="/images/202201/4.png" alt=""></p>
 <p><img src="/images/202201/5.png" alt=""></p>
 <p><img src="/images/202201/6.jpg" alt=""></p>
-<p><code>Pseudo-Labelling:</code><a href="https://zhuanlan.zhihu.com/p/157325083?from_voters_page=true">伪标签</a></p>
+<p><code>Pseudo-Labelling:</code><a href="https://zhuanlan.zhihu.com/p/157325083?from_voters_page=true">伪标签</a>。粗略来讲，伪标签技术就是利用在已标注数据所训练的模型在未标注的数据上进行预测，根据预测结果对样本进行筛选，再次输入模型中进行训练的一个过程。</p>
+<p>具体用法：</p>
+<ol>
+<li>
+<p><em>1.</em> <em>使用标记数据训练有监督模型M</em></p>
+<p><em>2.</em> <em>使用有监督模型M对无标签数据进行预测，得出预测概率P</em></p>
+<p><em>3.</em> <em>通过预测概率P筛选高置信度样本</em></p>
+<p><em>4.</em> 使用有标记数据以及伪标签数据训练新模型M’</p>
+<p><img src="/images/202201/7.jpg" alt=""></p>
+</li>
+<li>
+<p><em>1.</em> <em>使用标记数据训练有监督模型M</em></p>
+<p><em>2.</em> <em>使用有监督模型M对无标签数据进行预测，得出预测概率P</em></p>
+<p><em>3.</em> <em>通过预测概率P筛选高置信度样本</em></p>
+<p><em>4.</em> <em>使用有标记数据以及伪标签数据训练新模型M’</em></p>
+<p><em>5.</em> 将M替换为M’，重复以上步骤直至模型效果不出现提升</p>
+<p><img src="/images/202201/8.jpg" alt=""></p>
+</li>
+<li>
+<p><em>1.</em> <em>使用标记数据训练有监督模型M</em></p>
+<p><em>2.</em> <em>使用有监督模型M对无标签数据进行预测，得出预测概率P</em></p>
+<p><em>3.</em> <em>将模型损失函数改为Loss = loss(labeled_data) + alpha*loss(unlabeled_data)</em></p>
+<p><em>4.</em> 使用有标记数据以及伪标签数据训练新模型M’</p>
+<p><img src="/images/202201/9.jpg" alt=""></p>
+</li>
+</ol>
+<p>伪标签为何有用？</p>
+<ul>
+<li>
+<p>根据聚类假设（cluster assumption），这些概率较高的点，通常在相同类别的可能性较大，所以其pseudo-label是可信度非常高的。<strong>（合理性）</strong></p>
+</li>
+<li>
+<p>熵正则化是在最大后验估计框架内从未标记数据中获取信息的一种方法，通过最小化未标记数据的类概率的条件熵，促进了类之间的低密度分离，而无需对密度进行任何建模，通过熵正则化与伪标签具有相同的作用效果，都是希望利用未标签数据的分布的重叠程度的信息。<strong>（有效性）</strong></p>
+<p><img src="/images/202201/10.png" alt=""></p>
+</li>
+<li>
+<p><strong>值得注意的是</strong>：当场景不满足 聚类假设 、熵正则化失效（样本空间覆盖密集）情况下，伪标签技术很有可能失效。在用之前判断适用条件，对症下药，才能将伪标签这把匕首的作用发挥出来。</p>
+</li>
+</ul>
 <h2 id="introduction">Introduction</h2>
 <p>联邦学习的实践已经从基于数百万移动设备中的数据构建强大的移动应用程序扩展到解决组织之间或组织内部的数据碎片和隔离问题。例如，银行的许多业务决策可能依赖于其客户的购买偏好。该银行可能与拥有当地居民购买偏好数据的当地零售公司共享一些客户。因此，银行可以邀请零售公司合作构建一个共享模型，利用双方的数据功能来改善其业务。零售公司也可以从共享模式中受益。</p>
 <p>垂直联邦学习（VFL），使参与方能够通过充分利用其重叠样本的分散特征而不公开数据来协作训练机器学习模型。然而，VFL的一个关键先决条件是，它要求各方共享足够数量的重叠样本，以实现良好的性能。 [Liu等人，2018]提出了一个联邦迁移学习框架，以解决VFL设置中的监督薄弱（标签较少）问题。 它并没有利用所有标记数据进行监督训练，也没有充分利用未标记样本来提高学习质量。 许多其他类似的方法，如领域自适应和知识蒸馏，已经应用于联邦学习环境中。然而，它们主要关注各方共享相同特征空间的场景（也称为水平联邦学习）</p>
@@ -190,6 +229,46 @@
 </ul>
 <p>VFL在一些文献中也称为特征分割机器学习。</p>
 <p>在特征空间中划分数据的安全线性机器学习在[Gascón等人，2016]中得到了很好的研究;他们使用混合MPC(安全多方计算)协议或加性同态加密来进行安全线性模型训练。Cheng et  al.，2019]在VFL设置中提出了一种安全的联合树增强（SecureBoost）方法，该方法使具有不同功能的参与方能够协作构建一组增强树，并且他们证明SecureBoost提供了与其非隐私保护的集中式对等方相同的准确度。FATE设计并实现了一个VFL-DNN(深度神经网络)框架，该框架支持VFL设置中的DNN。VFL-DNN在VFL训练过程的前阶段和后阶段利用一种混合加密方案来保护数据隐私和模型安全。[Vepakomma et  al.，2018]提出了几种分离深层神经网络的配置，以支持健康实体之间的各种形式的协作，每个健康实体都拥有一个部分深层网络并拥有不同的患者数据模式。</p>
+<p><code>SecureBoost</code><a href="https://blog.csdn.net/u013714645/article/details/104821958">https://blog.csdn.net/u013714645/article/details/104821958</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/114461884">https://zhuanlan.zhihu.com/p/114461884</a></p>
+<ul>
+<li>Semi-supervised Learning (SSL).半监督学习</li>
+</ul>
+<p>SSL旨在通过允许模型利用未标记的数据来缓解对大量标记数据的需求。 许多最近的半监督学习方法使用transfer learning迁移学习[Pan等人，2010年]、consistency regularization一致性正则化[Tarvainen和Valpola，2017年；Laine和Aila，2017年]或pseudo-labeling 伪标签[hyun  Lee，2013年；Clark等人，2018年]从未标记数据中学习。[Berthelot et al.，2019]提出了混合匹配，它统一了三种主要的半监督方法：熵最小化[Grandvalet and  Bengio，2004]，一致性正则化和一般正则化。 他们证明，混合匹配可以接近完全监督训练所获得的错误率，数据量明显减少。 [Clark et al.，2018]提出了一种半监督交叉视图训练（CVT）方法，该方法基于所有标记数据和多个只看到未标记数据受限视图的辅助模型，同时训练完整模型。 在训练期间，CVT辅助模型匹配完整模型的预测，以改进representation learning(表示学习)，进而改进完整模型。 [Liu等人，2018]提出了一个安全的联邦迁移学习（FTL）框架，这是第一个使VFL能够从转移学习中获益的框架。 FTL利用源域丰富的标签资源，帮助目标域中的一方建立预测模型。</p>
+<h2 id="problem-definition">Problem Definition</h2>
+<p>party A having dataset DA := {(x^A,i, y^A,i)}^(N^A) _i=1</p>
+<p><img src="/images/202201/11.png" alt=""></p>
+<ul>
+<li>
+<p>x^A，i∈ R^a 是第i个样本的特征</p>
+</li>
+<li>
+<p>y^A,i∈ {0, 1}^C 是对应于x的一个复数C类，对应的one-hot encoding ground-truth 标签。</p>
+<p>one-hot encoding：(<a href="https://www.cnblogs.com/zongfa/p/9305657.html">独热编码</a>)。离散特征的取值之间没有大小的意义，比如color：[red,blue],那么就使用one-hot编码。独热编码即 One-Hot 编码，又称一位有效编码，其方法是使用N位状态寄存器来对N个状态进行编码，每个状态都由他独立的寄存器位，并且在任意时候，其中只有一位有效。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">自然状态码为：000,001,010,011,100,101
+
+独热编码为：000001,000010,000100,001000,010000,100000
+</code></pre></td></tr></table>
+</div>
+</div><p>ground-truth：大概的意思就是参考答案或参考标准或真实值的意思。比如，在有监督的学习中，数据通常是（data, label），其中label表示的就是data的标签，也就是预测时需要进行对比的真实值</p>
+</li>
+</ul>
+<p>party B having DB := {x^B,i}^(N^B) _i=1,x^B,i∈ R^a</p>
+<p><img src="/images/202201/12.png" alt=""></p>
+<p>DA和DB由双方私下持有，不得相互接触。N A和N B分别是DA和DB的样本数。</p>
+<p>我们假设双方之间存在一组有限的重叠样本Dol,<img src="/images/202201/13.png" alt="">,其中分区DBol为乙方所有,<img src="/images/202201/14.png" alt="">，其余DAol为甲方所有,<img src="/images/202201/15.png" alt="">。Nol为重叠样本数。人们可以在隐私保护设置中通过加密实体对齐技术找到重叠样本集[Nock等人，2018]。在此，我们假设甲乙双方已经找到或知道重叠样本的id。我们表示DAnl为甲方非重叠样本，<img src="/images/202201/16.png" alt="">，DBnl为乙方非重叠样本，<img src="/images/202201/17.png" alt="">。</p>
+<p>如果我们在一个表格视图中将DA和DB连接为一个大的虚拟数据集，那么这个虚拟数据集是垂直分区的，并且每一方都拥有这个数据集的一个垂直分区。这就是“垂直联合学习”一词的由来。图中显示了由A和B两方拥有的垂直分区虚拟数据集的表格视图。</p>
+<p><img src="/images/202201/18.png" alt=""></p>
+<blockquote>
+<p><a href="https://arxiv.53yu.com/abs/2008.10838">论文</a></p>
+</blockquote>
 
     </div>
 
@@ -211,9 +290,14 @@
 <footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/federated-learning/">Federated Learning</a>
+          <a href="/tags/semi-supervised-learning/">Semi-supervised Learning</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/pseudo-labelling/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Pseudo Labelling</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/federated-learning/">
             <span class="next-text nav-default">联邦学习(Federated Learning)</span>
             <span class="next-text nav-mobile">Next</span>

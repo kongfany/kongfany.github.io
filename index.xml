@@ -6,7 +6,20 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 02 Jan 2022 13:34:50 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jan 2022 16:44:57 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pseudo Labelling</title>
+      <link>https://kongfany.github.io/post/pseudo-labelling/</link>
+      <pubDate>Thu, 06 Jan 2022 16:44:57 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/pseudo-labelling/</guid>
+      <description> https://cloud.tencent.com/developer/article/1050723
+https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/
+https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique
+https://zhuanlan.zhihu.com/p/252343352
+ </description>
+    </item>
+    
     <item>
       <title>FedMVT</title>
       <link>https://kongfany.github.io/post/fedmvt/</link>

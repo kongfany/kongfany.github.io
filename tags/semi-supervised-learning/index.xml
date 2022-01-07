@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Semi-supervised Learning on 大胖狗来了</title>
+    <link>https://kongfany.github.io/tags/semi-supervised-learning/</link>
+    <description>Recent content in Semi-supervised Learning on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 06 Jan 2022 16:44:57 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/semi-supervised-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pseudo Labelling</title>
+      <link>https://kongfany.github.io/post/pseudo-labelling/</link>
+      <pubDate>Thu, 06 Jan 2022 16:44:57 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/pseudo-labelling/</guid>
+      <description> https://cloud.tencent.com/developer/article/1050723
+https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/
+https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique
+https://zhuanlan.zhihu.com/p/252343352
+ </description>
+    </item>
+    
+    <item>
+      <title>FedMVT</title>
+      <link>https://kongfany.github.io/post/fedmvt/</link>
+      <pubDate>Sun, 02 Jan 2022 13:34:50 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fedmvt/</guid>
+      <description>Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模</description>
+    </item>
+    
+  </channel>
+</rss>
