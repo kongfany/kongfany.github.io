@@ -16,11 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content=" https://cloud.tencent.com/developer/article/1050723
-https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/
-https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique
-https://zhuanlan.zhihu.com/p/252343352
- " /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="伪标签 半监督学习，即使用标签数据(受监督的学习)和不加标签的数据(无监督的学习)。 我们不需要手动标记不加标签的数据，而是根据标签的数据给出近" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -44,31 +40,19 @@ https://zhuanlan.zhihu.com/p/252343352
 
 
 <meta property="og:title" content="Pseudo Labelling" />
-<meta property="og:description" content=" https://cloud.tencent.com/developer/article/1050723
-https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/
-https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique
-https://zhuanlan.zhihu.com/p/252343352
- " />
+<meta property="og:description" content="伪标签 半监督学习，即使用标签数据(受监督的学习)和不加标签的数据(无监督的学习)。 我们不需要手动标记不加标签的数据，而是根据标签的数据给出近" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/pseudo-labelling/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-01-06T16:44:57+08:00" />
 <meta property="article:modified_time" content="2022-01-06T16:44:57+08:00" />
 
 <meta itemprop="name" content="Pseudo Labelling">
-<meta itemprop="description" content=" https://cloud.tencent.com/developer/article/1050723
-https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/
-https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique
-https://zhuanlan.zhihu.com/p/252343352
- "><meta itemprop="datePublished" content="2022-01-06T16:44:57+08:00" />
+<meta itemprop="description" content="伪标签 半监督学习，即使用标签数据(受监督的学习)和不加标签的数据(无监督的学习)。 我们不需要手动标记不加标签的数据，而是根据标签的数据给出近"><meta itemprop="datePublished" content="2022-01-06T16:44:57+08:00" />
 <meta itemprop="dateModified" content="2022-01-06T16:44:57+08:00" />
-<meta itemprop="wordCount" content="4">
+<meta itemprop="wordCount" content="1667">
 <meta itemprop="keywords" content="Semi-supervised Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Pseudo Labelling"/>
-<meta name="twitter:description" content=" https://cloud.tencent.com/developer/article/1050723
-https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/
-https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique
-https://zhuanlan.zhihu.com/p/252343352
- "/>
+<meta name="twitter:description" content="伪标签 半监督学习，即使用标签数据(受监督的学习)和不加标签的数据(无监督的学习)。 我们不需要手动标记不加标签的数据，而是根据标签的数据给出近"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -150,8 +134,8 @@ https://zhuanlan.zhihu.com/p/252343352
       <div class="post-meta">
         <span class="post-time"> 2022-01-06 </span>
         
-          <span class="more-meta"> 4 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 1667 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
@@ -159,11 +143,807 @@ https://zhuanlan.zhihu.com/p/252343352
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#伪标签">伪标签</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <blockquote>
+      <h1 id="伪标签">伪标签</h1>
+<p>半监督学习，即使用标签数据(受监督的学习)和不加标签的数据(无监督的学习)。</p>
+<p><img src="/images/202201/23.jpg" alt=""></p>
+<p>我们不需要手动标记不加标签的数据，而是根据标签的数据给出近似的标签。</p>
+<ul>
+<li>
+<p>第一步：使用标签数据训练模型</p>
+</li>
+<li>
+<p>第二步：使用训练的模型为不加标签的数据预测标签</p>
+</li>
+<li>
+<p>第三步：同时使用pseudo和标签数据集重新训练模型</p>
+<p>在第三步中训练的最终模型用于对测试数据的最终预测。</p>
+</li>
+</ul>
+<p><img src="/images/202201/24.jpeg" alt=""></p>
+<p>我们将使用来自AV数据处理平台的大市场销售（Big Mart Sales）问题。因此，让我们从下载数据部分中的训练和测试文件开始。</p>
+<p>导入库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span> 
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/jupyternotebook/Pseudo-Labelling/train.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/jupyternotebook/Pseudo-Labelling/test.csv&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:right">Item_Identifier</th>
+<th style="text-align:right">Item_Weight</th>
+<th style="text-align:right">Item_Fat_Content</th>
+<th style="text-align:right">Item_Visibility</th>
+<th style="text-align:right">Item_Type</th>
+<th style="text-align:right">Item_MRP</th>
+<th style="text-align:right">Outlet_Identifier</th>
+<th style="text-align:right">Outlet_Establishment_Year</th>
+<th style="text-align:right">Outlet_Size</th>
+<th style="text-align:right">Outlet_Location_Type</th>
+<th style="text-align:right">Outlet_Type</th>
+<th style="text-align:right">Item_Outlet_Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">FDA15</td>
+<td style="text-align:right">9.30</td>
+<td style="text-align:right">Low Fat</td>
+<td style="text-align:right">0.016047</td>
+<td style="text-align:right">Dairy</td>
+<td style="text-align:right">249.8092</td>
+<td style="text-align:right">OUT049</td>
+<td style="text-align:right">1999</td>
+<td style="text-align:right">Medium</td>
+<td style="text-align:right">Tier 1</td>
+<td style="text-align:right">Supermarket Type1</td>
+<td style="text-align:right">3735.1380</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">DRC01</td>
+<td style="text-align:right">5.92</td>
+<td style="text-align:right">Regular</td>
+<td style="text-align:right">0.019278</td>
+<td style="text-align:right">Soft Drinks</td>
+<td style="text-align:right">48.2692</td>
+<td style="text-align:right">OUT018</td>
+<td style="text-align:right">2009</td>
+<td style="text-align:right">Medium</td>
+<td style="text-align:right">Tier 3</td>
+<td style="text-align:right">Supermarket Type2</td>
+<td style="text-align:right">443.4228</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">FDN15</td>
+<td style="text-align:right">17.50</td>
+<td style="text-align:right">Low Fat</td>
+<td style="text-align:right">0.016760</td>
+<td style="text-align:right">Meat</td>
+<td style="text-align:right">141.6180</td>
+<td style="text-align:right">OUT049</td>
+<td style="text-align:right">1999</td>
+<td style="text-align:right">Medium</td>
+<td style="text-align:right">Tier 1</td>
+<td style="text-align:right">Supermarket Type1</td>
+<td style="text-align:right">2097.2700</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">FDX07</td>
+<td style="text-align:right">19.20</td>
+<td style="text-align:right">Regular</td>
+<td style="text-align:right">0.000000</td>
+<td style="text-align:right">Fruits and Vegetables</td>
+<td style="text-align:right">182.0950</td>
+<td style="text-align:right">OUT010</td>
+<td style="text-align:right">1998</td>
+<td style="text-align:right">NaN</td>
+<td style="text-align:right">Tier 3</td>
+<td style="text-align:right">Grocery Store</td>
+<td style="text-align:right">732.3800</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">NCD19</td>
+<td style="text-align:right">8.93</td>
+<td style="text-align:right">Low Fat</td>
+<td style="text-align:right">0.000000</td>
+<td style="text-align:right">Household</td>
+<td style="text-align:right">53.8614</td>
+<td style="text-align:right">OUT013</td>
+<td style="text-align:right">1987</td>
+<td style="text-align:right">High</td>
+<td style="text-align:right">Tier 3</td>
+<td style="text-align:right">Supermarket Type1</td>
+<td style="text-align:right">994.7052</td>
+</tr>
+</tbody>
+</table>
+<p>看一下我们下载的训练和测试文件，并进行一些基本的预处理，以形成模型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">train</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">test</span><span class="o">=</span><span class="n">test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;Item_Weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">((</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Item_Weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">((</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;low fat&#39;</span><span class="p">,</span><span class="s1">&#39;LF&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Low Fat&#39;</span><span class="p">,</span><span class="s1">&#39;Low Fat&#39;</span><span class="p">])</span> 
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;reg&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Regular&#39;</span><span class="p">])</span> 
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;low fat&#39;</span><span class="p">,</span><span class="s1">&#39;LF&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Low Fat&#39;</span><span class="p">,</span><span class="s1">&#39;Low Fat&#39;</span><span class="p">])</span> 
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;reg&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Regular&#39;</span><span class="p">])</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;Outlet_Establishment_Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2013</span> <span class="o">-</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Outlet_Establishment_Year&#39;</span><span class="p">]</span> 
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;Outlet_Establishment_Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2013</span> <span class="o">-</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Outlet_Establishment_Year&#39;</span><span class="p">]</span> 
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;Outlet_Size&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;Small&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;Outlet_Size&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;Small&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">## label encoding cate. var.</span>
+<span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Outlet_Size&#39;</span><span class="p">,</span><span class="s1">&#39;Outlet_Location_Type&#39;</span><span class="p">,</span><span class="s1">&#39;Outlet_Type&#39;</span><span class="p">,</span><span class="s1">&#39;Item_Fat_Content&#39;</span><span class="p">]</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Outlet_Sales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">combi</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="n">number</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">col</span><span class="p">:</span>
+    <span class="n">combi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">combi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">))</span>
+    <span class="n">combi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">combi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">combi</span><span class="p">[:</span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">combi</span><span class="p">[</span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:]</span>
+<span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Item_Outlet_Sales&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">## removing id variables </span>
+<span class="n">training</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Outlet_Identifier&#39;</span><span class="p">,</span><span class="s1">&#39;Item_Type&#39;</span><span class="p">,</span><span class="s1">&#39;Item_Identifier&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">testing</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Outlet_Identifier&#39;</span><span class="p">,</span><span class="s1">&#39;Item_Type&#39;</span><span class="p">,</span><span class="s1">&#39;Item_Identifier&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="s1">&#39;Item_Outlet_Sales&#39;</span><span class="p">]</span>
+<span class="n">training</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Item_Outlet_Sales&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="n">training</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;Item_Outlet_Sales&#39;</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">training</span><span class="p">,</span> <span class="n">testing</span>
+<span class="n">X_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style="text-align:right">Item_Weight</th>
+<th style="text-align:right">Item_Fat_Content</th>
+<th style="text-align:right">Item_Visibility</th>
+<th style="text-align:right">Item_MRP</th>
+<th style="text-align:right">Outlet_Establishment_Year</th>
+<th style="text-align:right">Outlet_Size</th>
+<th style="text-align:right">Outlet_Location_Type</th>
+<th style="text-align:right">Outlet_Type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">9.30</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0.016047</td>
+<td style="text-align:right">249.8092</td>
+<td style="text-align:right">1999</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td>1</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5.92</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.019278</td>
+<td style="text-align:right">48.2692</td>
+<td style="text-align:right">2009</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td>2</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">17.50</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0.016760</td>
+<td style="text-align:right">141.6180</td>
+<td style="text-align:right">1999</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td>1</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">19.20</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.000000</td>
+<td style="text-align:right">182.0950</td>
+<td style="text-align:right">1998</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">2</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8.93</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0.000000</td>
+<td style="text-align:right">53.8614</td>
+<td style="text-align:right">1987</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>从不同的监督学习算法开始，让我们来看看哪一种算法给了我们最好的结果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">BayesianRidge</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">ElasticNet</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span><span class="p">,</span> <span class="n">ExtraTreesRegressor</span><span class="p">,</span> <span class="n">GradientBoostingRegressor</span>
+<span class="c1">#from sklearn.neural_network import MLPRegressor</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">model_factory</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">RandomForestRegressor</span><span class="p">(),</span>
+    <span class="n">XGBRegressor</span><span class="p">(</span><span class="n">nthread</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="c1">#MLPRegressor(),</span>
+    <span class="n">Ridge</span><span class="p">(),</span>
+    <span class="n">BayesianRidge</span><span class="p">(),</span>
+    <span class="n">ExtraTreesRegressor</span><span class="p">(),</span>
+    <span class="n">ElasticNet</span><span class="p">(),</span>
+    <span class="c1">#KNeighborsRegressor(),</span>
+    <span class="n">GradientBoostingRegressor</span><span class="p">()</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_factory</span><span class="p">:</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span>
+    <span class="n">num_folds</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">)</span>
+    <span class="n">score_description</span> <span class="o">=</span> <span class="s2">&#34; </span><span class="si">%0.2f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*-</span><span class="mi">1</span><span class="p">),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{model:25}</span><span class="s1"> CV-5 RMSE: </span><span class="si">{score}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+        <span class="n">score</span><span class="o">=</span><span class="n">score_description</span>
+    <span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202201/24.png" alt=""> <img src="/images/202201/26.png" alt=""></p>
+<p><img src="/images/202201/25.png" alt=""></p>
+<p><code>！！！</code>和原文跑出不一样。。GradientBoostingRegressor算法最好</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">## normal submission using xgb</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1">## saving file</span>
+<span class="n">sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">pred</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Item_Outlet_Sales&#39;</span><span class="p">])</span>
+<span class="n">sub</span><span class="p">[</span><span class="s1">&#39;Item_Identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Identifier&#39;</span><span class="p">]</span>
+<span class="n">sub</span><span class="p">[</span><span class="s1">&#39;Outlet_Identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Outlet_Identifier&#39;</span><span class="p">]</span>
+<span class="c1">#sub.to_csv(&#39;bigmart-xgb.csv&#39;, index=&#39;False&#39;)</span>
+
+<span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">array([-1372948.19121721, -1343108.22041029, -1367535.73125354])
+</code></pre></td></tr></table>
+</div>
+</div><p>现在，让我们来实现伪标签，为了这个目的，我将使用测试数据作为不加标签的数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">RegressorMixin</span>
+
+<span class="k">class</span> <span class="nc">PseudoLabeler</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">RegressorMixin</span><span class="p">):</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    Sci-kit learn wrapper for creating pseudo-lebeled estimators.
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">unlabled_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+        <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">        @sample_rate - percent of samples used as pseudo-labelled data
+</span><span class="s1">                       from the unlabled dataset
+</span><span class="s1">        &#39;&#39;&#39;</span>
+        <span class="k">assert</span> <span class="n">sample_rate</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Sample_rate should be between 0.0 and 1.0.&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">unlabled_data</span> <span class="o">=</span> <span class="n">unlabled_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">target</span>
+        
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&#34;sample_rate&#34;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">,</span>
+            <span class="s2">&#34;seed&#34;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">,</span>
+            <span class="s2">&#34;model&#34;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+            <span class="s2">&#34;unlabled_data&#34;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">unlabled_data</span><span class="p">,</span>
+            <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">,</span>
+            <span class="s2">&#34;target&#34;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">set_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+        
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">        Fit the data using pseudo labeling.
+</span><span class="s1">        &#39;&#39;&#39;</span>
+
+        <span class="n">augemented_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_augmented_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">augemented_train</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">],</span>
+            <span class="n">augemented_train</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">]</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">self</span>
+
+
+    <span class="k">def</span> <span class="nf">__create_augmented_train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">        Create and return the augmented_train set that consists
+</span><span class="s1">        of pseudo-labeled and labeled data.
+</span><span class="s1">        &#39;&#39;&#39;</span>        
+        <span class="n">num_of_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unlabled_data</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">)</span>
+        
+        <span class="c1"># Train the model and creat the pseudo-labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">pseudo_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unlabled_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">])</span>
+        
+        <span class="c1"># Add the pseudo-labels to the test set</span>
+        <span class="n">pseudo_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unlabled_data</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">pseudo_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">]</span> <span class="o">=</span> <span class="n">pseudo_labels</span>
+        
+        <span class="c1"># Take a subset of the test set with pseudo-labels and append in onto</span>
+        <span class="c1"># the training set</span>
+        <span class="n">sampled_pseudo_data</span> <span class="o">=</span> <span class="n">pseudo_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">num_of_samples</span><span class="p">)</span>
+        <span class="n">temp_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">augemented_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">sampled_pseudo_data</span><span class="p">,</span> <span class="n">temp_train</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">augemented_train</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">        Returns the predicted values.
+</span><span class="s1">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_model_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在，让我们来检查一下数据集上的伪标签的结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">model</span> <span class="o">=</span> <span class="n">PseudoLabeler</span><span class="p">(</span>
+    <span class="n">XGBRegressor</span><span class="p">(</span><span class="n">nthread</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">test</span><span class="p">,</span>
+    <span class="n">features</span><span class="p">,</span>
+    <span class="n">target</span><span class="p">,</span>
+    <span class="n">sample_rate</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">array([-1337801.54092482, -1330386.52423261, -1331611.82216471])
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">pred</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Item_Outlet_Sales&#39;</span><span class="p">])</span>
+<span class="n">sub</span><span class="p">[</span><span class="s1">&#39;Item_Identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Item_Identifier&#39;</span><span class="p">]</span>
+<span class="n">sub</span><span class="p">[</span><span class="s1">&#39;Outlet_Identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Outlet_Identifier&#39;</span><span class="p">]</span>
+<span class="n">sub</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;pseudo-labelling.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;False&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">model_factory</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">XGBRegressor</span><span class="p">(</span><span class="n">nthread</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    
+    <span class="n">PseudoLabeler</span><span class="p">(</span>
+        <span class="n">XGBRegressor</span><span class="p">(</span><span class="n">nthread</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">test</span><span class="p">,</span>
+        <span class="n">features</span><span class="p">,</span>
+        <span class="n">target</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="o">=</span><span class="mf">0.3</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_factory</span><span class="p">:</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span>
+    <span class="n">num_folds</span> <span class="o">=</span> <span class="mi">8</span>
+    
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">score_description</span> <span class="o">=</span> <span class="s2">&#34;MSE: </span><span class="si">%0.4f</span><span class="s2"> (+/- </span><span class="si">%0.4f</span><span class="s2">)&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*-</span><span class="mi">1</span><span class="p">),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{model:25}</span><span class="s1"> CV-</span><span class="si">{num_folds}</span><span class="s1"> </span><span class="si">{score_cv}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+        <span class="n">num_folds</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span>
+        <span class="n">score_cv</span><span class="o">=</span><span class="n">score_description</span>
+    <span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202201/27.png" alt=""></p>
+<p>在这种情况下，我们得到了一个rmse值，这个值比任何受监督的学习算法都要小。sample_rate（采样率）是其中一个参数，它表示不加标签数据的百分比被用作建模目的的伪标签。</p>
+<p>因此，让我们检查一下采样率对伪标签性能的依赖性。</p>
+<p><code>采样率的依赖</code></p>
+<p>为了找出样本率对伪标签性能的依赖，让我们在这两者之间画一个图。在这里，我只使用了两种算法来表示对时间约束（time constraint）的依赖，但你也可以尝试其他算法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">sample_rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pseudo_label_wrapper</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">PseudoLabeler</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+<span class="c1"># List of all models to test</span>
+<span class="n">model_factory</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">XGBRegressor</span><span class="p">(),</span>
+<span class="p">]</span>
+
+<span class="c1"># Apply the PseudoLabeler class to each model</span>
+<span class="n">model_factory</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">pseudo_label_wrapper</span><span class="p">,</span> <span class="n">model_factory</span><span class="p">)</span>
+
+<span class="c1"># Train each model with different sample rates</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">num_folds</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_factory</span><span class="p">:</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_model_name</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">model_name</span><span class="p">)</span>
+
+    <span class="n">results</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">sample_rate</span> <span class="ow">in</span> <span class="n">sample_rates</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
+        
+        <span class="c1"># Calculate the CV-3 R2 score and store it</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*-</span><span class="mi">1</span><span class="p">))</span>
+        
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">performance</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>    
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sample_rates</span><span class="p">,</span> <span class="n">performance</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;sample_rate&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;RMSE&#39;</span><span class="p">)</span>
+    
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202201/28.png" alt=""></p>
+<blockquote>
 <p><a href="https://cloud.tencent.com/developer/article/1050723">https://cloud.tencent.com/developer/article/1050723</a></p>
 <p><a href="https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/">https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/</a></p>
 <p><a href="https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique">https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique</a></p>

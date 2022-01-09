@@ -49,7 +49,7 @@
 <meta itemprop="name" content="FedMVT">
 <meta itemprop="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"><meta itemprop="datePublished" content="2022-01-02T13:34:50+08:00" />
 <meta itemprop="dateModified" content="2022-01-02T13:34:50+08:00" />
-<meta itemprop="wordCount" content="3650">
+<meta itemprop="wordCount" content="5189">
 <meta itemprop="keywords" content="Federated Learning,Semi-supervised Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FedMVT"/>
 <meta name="twitter:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-01-02 </span>
         
-          <span class="more-meta"> 3650 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 5189 words </span>
+          <span class="more-meta"> 11 mins read </span>
         
       </div>
     </header>
@@ -151,6 +151,14 @@
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#related-work">Related Work</a></li>
         <li><a href="#problem-definition">Problem Definition</a></li>
+        <li><a href="#the-proposed-approach">The Proposed Approach</a>
+          <ul>
+            <li><a href="#feature-representation-estimation">Feature Representation Estimation</a></li>
+            <li><a href="#pseudo-label-prediction">Pseudo-label Prediction</a></li>
+            <li><a href="#security-analysis">Security Analysis</a></li>
+          </ul>
+        </li>
+        <li><a href="#conclusion">Conclusion</a></li>
       </ul>
     </li>
   </ul>
@@ -266,6 +274,24 @@
 <p>我们假设双方之间存在一组有限的重叠样本Dol,<img src="/images/202201/13.png" alt="">,其中分区DBol为乙方所有,<img src="/images/202201/14.png" alt="">，其余DAol为甲方所有,<img src="/images/202201/15.png" alt="">。Nol为重叠样本数。人们可以在隐私保护设置中通过加密实体对齐技术找到重叠样本集[Nock等人，2018]。在此，我们假设甲乙双方已经找到或知道重叠样本的id。我们表示DAnl为甲方非重叠样本，<img src="/images/202201/16.png" alt="">，DBnl为乙方非重叠样本，<img src="/images/202201/17.png" alt="">。</p>
 <p>如果我们在一个表格视图中将DA和DB连接为一个大的虚拟数据集，那么这个虚拟数据集是垂直分区的，并且每一方都拥有这个数据集的一个垂直分区。这就是“垂直联合学习”一词的由来。图中显示了由A和B两方拥有的垂直分区虚拟数据集的表格视图。</p>
 <p><img src="/images/202201/18.png" alt=""></p>
+<p>普通的VFL试图建立一个联邦机器学习模型，只使用重叠的样本Dol，而不使用不重叠的样本DAnl和DBnl。因此,提出一种带多视图训练的半监督VFL（FedMVT）方法，该方法不仅充分利用所有可用数据，还估计缺失特征的表示（如图1所示），不仅显著提高联邦模型的性能，而且有助于提高甲方本地模型的性能。</p>
+<h2 id="the-proposed-approach">The Proposed Approach</h2>
+<p>深度神经网络已被广泛用于表征学习。对于每一方，我们利用两个神经网络从原始输入数据学习特征表示。一种是学习双方之间弱共享的特征表示，另一种是学习双方独有的特征表示。</p>
+<p><code>表征学习</code>（representation learning、feature learning）是指自动的从原始数据中学习、提炼数据特征的一类技术或者方法。比如，深度学习就是表征学习的一种方法，深度神经网络中间隐层的输出结果就是原始数据的抽象特征。再比如，PCA 可以将高维数据映射到低维空间，也可以作为表征学习的一种方法。</p>
+<p>更具体地说，我们表示用rpu，作为独特的特征表示,<img src="/images/202201/19.png" alt="">。rpc作为共享特征表示，<img src="/images/202201/20.png" alt="">，分别在p∈{A, B}中通过神经网络hpu和hpc学习的特征xp，<img src="/images/202201/21.png" alt="">,dp是p方神经网络的上隐表示层的维数。然后，xp的完整特征表示表示为rp = [rpu;rpc],其中[；]是沿特征轴连接两个矩阵的连接运算符。为了方便起见，我们将rp u，ol和rp c，ol表示为从p∈ {A，B} 方的重叠样本xp ol中学习到的特征表示。而rp-u,nl和rp-c,nl作为非重叠样本xp-nl的特征表示。相应地，xp ol和xp ul的完整特征表示分别表示为rp ol=[rp u，ol；rp c，ol]和rp nl=[rp u，nl；rp c，nl]。</p>
+<p><img src="/images/202201/22.png" alt=""></p>
+<p>学习图，从D中的原始特征中估计和选择表示，然后形成一个扩大的训练集χ。(a)从甲乙双方的重叠样本中表征学习。(b)从乙方的非重叠样本中学习表征，并估计甲方对应缺失特征的表征(红线虚线部分)。(c)从甲方的非重叠样本中学习表征，并估计乙方对应缺失特征(蓝虚线的条带)的表征。</p>
+<p>直观地说，h pc的目标是捕获双方之间的共同特征表示，而h pu则帮助学习特定领域的表示。我们提出以下三个损失项来加强神经网络学习所需的表示。。。</p>
+<p>受多视图学习[Clark等人，2018]的启发，为了跨模型共享表示并改进模型的表示学习，我们培训了三个softmax分类器fA，fB和fAB联合使用，各自将从虚拟数据集的不同视图（图1）中学习到的特征表示作为输入，并输出估计的类分布。</p>
+<h3 id="feature-representation-estimation">Feature Representation Estimation</h3>
+<p><strong>特征表示估计</strong></p>
+<h3 id="pseudo-label-prediction">Pseudo-label Prediction</h3>
+<p><strong>伪标签</strong></p>
+<p>算法1概述了完整的FedMVT算法，其中concat函数沿特征轴连接输入矩阵，而combine函数沿样本轴连接输入矩阵。</p>
+<h3 id="security-analysis">Security Analysis</h3>
+<p>FedMVT不要求各方共享其原始数据和模型参数，而只要求中间表示和梯度。中间表示是原始特征通过具有多层转换函数的深度神经网络转换的结果。因此，另一方几乎没有机会对原始特征进行逆向工程[Gupta和Raskar,  2018]。最近，有很多关于通过梯度泄露隐私的潜在风险的讨论[Bonawitz等人，2017;Phong等，2018。为了防止中间表示和梯度被暴露，FATE设计并实现了一个VFL- dnn(深度神经网络)框架，该框架可以在VFL训练过程的前阶段和后阶段有效地执行加密。为了实验方便，我们没有使用FATE来实现FedMVT。然而，FedMVT与VFL-DNN框架兼容，可以轻松迁移到FATE。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>我们提出了联邦多视图训练(federalmultiview Training,  FedMVT)，这是一种半监督学习方法，可以在有限重叠样本的情况下提高VFL的性能。FedMVT利用特征表示估计和伪标签预测来扩展训练集，并联合训练三个分类器来提高模型的表示学习。FedMVT不仅显著提高了VFL中联邦模型的性能，而且提高了标签方的本地模型的性能。</p>
 <blockquote>
 <p><a href="https://arxiv.53yu.com/abs/2008.10838">论文</a></p>
 </blockquote>

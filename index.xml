@@ -13,11 +13,7 @@
       <pubDate>Thu, 06 Jan 2022 16:44:57 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/pseudo-labelling/</guid>
-      <description> https://cloud.tencent.com/developer/article/1050723
-https://www.analyticsvidhya.com/blog/2017/09/pseudo-labelling-semi-supervised-learning-technique/
-https://github.com/shubhamjn1/Pseudo-Labelling---A-Semi-supervised-learning-technique
-https://zhuanlan.zhihu.com/p/252343352
- </description>
+      <description>伪标签 半监督学习，即使用标签数据(受监督的学习)和不加标签的数据(无监督的学习)。 我们不需要手动标记不加标签的数据，而是根据标签的数据给出近</description>
     </item>
     
     <item>
