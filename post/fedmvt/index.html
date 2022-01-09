@@ -49,7 +49,7 @@
 <meta itemprop="name" content="FedMVT">
 <meta itemprop="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"><meta itemprop="datePublished" content="2022-01-02T13:34:50+08:00" />
 <meta itemprop="dateModified" content="2022-01-02T13:34:50+08:00" />
-<meta itemprop="wordCount" content="5189">
+<meta itemprop="wordCount" content="5433">
 <meta itemprop="keywords" content="Federated Learning,Semi-supervised Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FedMVT"/>
 <meta name="twitter:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022-01-02 </span>
         
-          <span class="more-meta"> 5189 words </span>
+          <span class="more-meta"> 5433 words </span>
           <span class="more-meta"> 11 mins read </span>
         
       </div>
@@ -276,13 +276,16 @@
 <p><img src="/images/202201/18.png" alt=""></p>
 <p>普通的VFL试图建立一个联邦机器学习模型，只使用重叠的样本Dol，而不使用不重叠的样本DAnl和DBnl。因此,提出一种带多视图训练的半监督VFL（FedMVT）方法，该方法不仅充分利用所有可用数据，还估计缺失特征的表示（如图1所示），不仅显著提高联邦模型的性能，而且有助于提高甲方本地模型的性能。</p>
 <h2 id="the-proposed-approach">The Proposed Approach</h2>
-<p>深度神经网络已被广泛用于表征学习。对于每一方，我们利用两个神经网络从原始输入数据学习特征表示。一种是学习双方之间弱共享的特征表示，另一种是学习双方独有的特征表示。</p>
+<p>深度神经网络已被广泛用于表征学习。对于每一方，我们利用两个神经网络从原始输入数据学习特征表示。一种是学习双方之间弱共享的特征表示hpu，另一种是学习双方独有的特征表示hpc。</p>
 <p><code>表征学习</code>（representation learning、feature learning）是指自动的从原始数据中学习、提炼数据特征的一类技术或者方法。比如，深度学习就是表征学习的一种方法，深度神经网络中间隐层的输出结果就是原始数据的抽象特征。再比如，PCA 可以将高维数据映射到低维空间，也可以作为表征学习的一种方法。</p>
-<p>更具体地说，我们表示用rpu，作为独特的特征表示,<img src="/images/202201/19.png" alt="">。rpc作为共享特征表示，<img src="/images/202201/20.png" alt="">，分别在p∈{A, B}中通过神经网络hpu和hpc学习的特征xp，<img src="/images/202201/21.png" alt="">,dp是p方神经网络的上隐表示层的维数。然后，xp的完整特征表示表示为rp = [rpu;rpc],其中[；]是沿特征轴连接两个矩阵的连接运算符。为了方便起见，我们将rp u，ol和rp c，ol表示为从p∈ {A，B} 方的重叠样本xp ol中学习到的特征表示。而rp-u,nl和rp-c,nl作为非重叠样本xp-nl的特征表示。相应地，xp ol和xp ul的完整特征表示分别表示为rp ol=[rp u，ol；rp c，ol]和rp nl=[rp u，nl；rp c，nl]。</p>
+<p>更具体地说，我们表示用rpu，作为独特的特征表示,<img src="/images/202201/19.png" alt="">。rpc作为共享特征表示，<img src="/images/202201/20.png" alt="">，分别在p∈{A, B}中通过神经网络hpu和hpc学习的特征xp，<img src="/images/202201/21.png" alt="">,dp是p方神经网络的上隐表示层的维数。然后，xp的完整特征表示表示为rp = [rpu;rpc],其中[；]是沿特征轴连接两个矩阵的连接运算符。</p>
+<p>为了方便起见，我们将rp u，ol和rp c，ol表示为从p∈ {A，B} 方的重叠样本xp ol中学习到的特征表示。而rp-u,nl和rp-c,nl作为非重叠样本xp-nl的特征表示。相应地，xp ol和xp ul的完整特征表示分别表示为rp ol=[rp u，ol；rp c，ol]和rp nl=[rp u，nl；rp c，nl]。<img src="/images/202201/29.png" alt="">.</p>
+<p><code>大概就是</code>先按照特征进行区分（独特的特征u和共享的特征c），然后通过两个不同的神经网络(hpu,hpc)进行表征学习，得到表征rpu和rpc，而表征又可以分为重叠样本ol和非重叠样本nl的表征。</p>
 <p><img src="/images/202201/22.png" alt=""></p>
+<p><img src="/images/202201/30.png" alt="">,</p>
 <p>学习图，从D中的原始特征中估计和选择表示，然后形成一个扩大的训练集χ。(a)从甲乙双方的重叠样本中表征学习。(b)从乙方的非重叠样本中学习表征，并估计甲方对应缺失特征的表征(红线虚线部分)。(c)从甲方的非重叠样本中学习表征，并估计乙方对应缺失特征(蓝虚线的条带)的表征。</p>
-<p>直观地说，h pc的目标是捕获双方之间的共同特征表示，而h pu则帮助学习特定领域的表示。我们提出以下三个损失项来加强神经网络学习所需的表示。。。</p>
-<p>受多视图学习[Clark等人，2018]的启发，为了跨模型共享表示并改进模型的表示学习，我们培训了三个softmax分类器fA，fB和fAB联合使用，各自将从虚拟数据集的不同视图（图1）中学习到的特征表示作为输入，并输出估计的类分布。</p>
+<p>直观地说，h pc的目标是捕获双方之间的共同特征表示，而h pu则帮助学习特定领域的表示。我们提出以下三个损失项来加强神经网络学习所需的表示(1)(2)(3)。。。通过最小化(1)，推入神经网络hAc和hBc，从双方的原始数据中学习共同的特征表示。(2)、(3)为正交约束,鼓励属于p∈{A, B}的神经网络hpc和hpu学习不同的特征表示。</p>
+<p>受多视图学习的启发[Clark等人，2018]在模型之间共享表征，并改善模型的表征学习，我们联合训练三个softmax分类器f A、f B和f AB，每个分类器都以从虚拟数据集的不同视图学习的特征表示作为输入(图1)，并输出估计的类分布。在4.1和4.2节中，我们将详细阐述如何估计缺失特征的表示，并为未标记的样本确定伪标签。</p>
 <h3 id="feature-representation-estimation">Feature Representation Estimation</h3>
 <p><strong>特征表示估计</strong></p>
 <h3 id="pseudo-label-prediction">Pseudo-label Prediction</h3>
