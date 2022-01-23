@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>MMVFL - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="Multi-Participant Multi-Class Vertical Federated Learning 多参与者多类纵向联邦学习 Abstract 联邦学习(FL)是一种使用本地存储的来自多个参与者的数据来训练集体机器学习模型的隐私保护范例。纵向联邦学" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/mmvfl/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="MMVFL" />
+<meta property="og:description" content="Multi-Participant Multi-Class Vertical Federated Learning 多参与者多类纵向联邦学习 Abstract 联邦学习(FL)是一种使用本地存储的来自多个参与者的数据来训练集体机器学习模型的隐私保护范例。纵向联邦学" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/mmvfl/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-11T15:54:32+08:00" />
+<meta property="article:modified_time" content="2022-01-11T15:54:32+08:00" />
+
+<meta itemprop="name" content="MMVFL">
+<meta itemprop="description" content="Multi-Participant Multi-Class Vertical Federated Learning 多参与者多类纵向联邦学习 Abstract 联邦学习(FL)是一种使用本地存储的来自多个参与者的数据来训练集体机器学习模型的隐私保护范例。纵向联邦学"><meta itemprop="datePublished" content="2022-01-11T15:54:32+08:00" />
+<meta itemprop="dateModified" content="2022-01-11T15:54:32+08:00" />
+<meta itemprop="wordCount" content="4472">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MMVFL"/>
+<meta name="twitter:description" content="Multi-Participant Multi-Class Vertical Federated Learning 多参与者多类纵向联邦学习 Abstract 联邦学习(FL)是一种使用本地存储的来自多个参与者的数据来训练集体机器学习模型的隐私保护范例。纵向联邦学"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">MMVFL</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-11 </span>
+        
+          <span class="more-meta"> 4472 words </span>
+          <span class="more-meta"> 9 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#related-work">Related Work</a></li>
+        <li><a href="#preliminaries">Preliminaries</a>
+          <ul>
+            <li><a href="#multi-view-learning">Multi-View Learning</a></li>
+            <li><a href="#feature-selection">Feature Selection</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-proposed-mmvfl-framework">The Proposed MMVFL Framework</a>
+          <ul>
+            <li><a href="#notations-and-problem-definition">Notations and Problem Definition</a></li>
+            <li><a href="#sparse-learning-based-unsupervised-feature-selection">Sparse Learning-based Unsupervised Feature Selection</a></li>
+            <li><a href="#privacy-preserving-label-sharing">Privacy-Preserving Label Sharing</a></li>
+            <li><a href="#optimization">Optimization</a></li>
+          </ul>
+        </li>
+        <li><a href="#analysis">Analysis</a>
+          <ul>
+            <li><a href="#convergence">Convergence</a></li>
+            <li><a href="#time-complexity">Time Complexity</a></li>
+            <li><a href="#privacy-preservation">Privacy Preservation</a></li>
+          </ul>
+        </li>
+        <li><a href="#conclusions-and-future-work">Conclusions and Future Work</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>Multi-Participant Multi-Class Vertical Federated Learning</strong></p>
+<p><strong>多参与者多类纵向联邦学习</strong></p>
+<h2 id="abstract">Abstract</h2>
+<p>联邦学习(FL)是一种使用本地存储的来自多个参与者的数据来训练集体机器学习模型的隐私保护范例。<code>纵向联邦学习(VFL)处理的是参与者共享相同的样本ID空间，但拥有不同的特征空间，而标签信息由一个参与者拥有的情况。</code>目前的VFL研究仅支持两名参与者，且多集中在二元类逻辑回归问题上。在本文中，我们<code>提出了一个多参与者多类纵向联邦学习(MMVFL)框架来解决涉及多方的多类VFL问题，MMVFL扩展了多视图学习(MVL)的思想，以一种隐私保护的方式实现了从其所有者到其他VFL参与者的标签共享</code>。为了验证MMVFL的有效性，在MMVFL中加入了一种特征选择方案，并将其性能与监督特征选择supervised feature selection和MVL-based方法进行了比较。 在真实数据集上的实验结果表明，MMVFL能够有效地在多个VFL参与者之间共享标签信息，并与现有方法的多类分类性能相匹配。</p>
+<h2 id="introduction">Introduction</h2>
+<p>传统的机器学习（ML）方法要求所有数据和学习过程都集中在一个中心实体中。 这限制了他们处理真实世界应用程序的能力，在这些应用程序中，数据在不同的组织中被隔离，并且数据隐私受到强调。 联邦学习（FL）是一种分布式的、保护隐私的ML范式，非常适合这种场景，并吸引了越来越多的关注。</p>
+<p>现有的FL方法主要关注横向联邦学习（HFL），该方法假设来自不同参与者的数据集共享相同的特征空间，但可能不共享相同的样本ID空间（图1-Left）。大多数现有的HFL方法旨在为所有参与者培训一个单一的全球模型，而少数方法侧重于为每个参与者学习单独的模型。<code>纵向联合学习（VFL）假设来自不同参与者的数据集不共享相同的特征空间，但可能共享相同的样本ID空间。此外，假设标签信息由一个参与者持有。</code>例如，两家电子商务公司和一家银行都为来自同一城市的用户提供服务，它们可以通过VFL培训一个模型，根据用户的在线购物行为为用户推荐个性化贷款。在这种情况下，只有银行持有预期VFL任务的标签信息。VFL中的一个关键挑战是如何使来自一个参与者的本地标签信息以<code>保护隐私</code>的方式用于训练FL模型。</p>
+<p><img src="/images/202201/38.png" alt=""></p>
+<p>现有的VFL方法只能处理两个VFL参与者，并且通常专注于二进制分类任务。这使得它们不适用于涉及多个参与者的VFL应用程序中的复杂分类任务。为了解决这一局限性，本文提出了多参与者多类纵向联邦学习（MMVFL）框架。 它扩展了多视图学习（MVL）的思想，<code>该思想针对同一输入数据的多个独立视图的任务联合学习多个模型</code>，以建立适用于多个参与者的多类问题的VFL框架。与[Smith等人，2017]中提出的多任务FL框架一样，MMVFL<code>为每个参与者学习一个单独的模型</code>，而不是为所有参与者学习一个单一的全局模型，以使学习过程更加<code>个性化</code>。 此外，MMVFL<code>允许标签所有者向其他参与者共享标签</code>，以促进联合模型训练。 值得一提的是，MMVFL保护隐私，这意味着数据和标签在培训过程中不会离开其所有者。</p>
+<p>此外，我们还提出了一种基于MMVFL的特征重要性评估方案。它可以<code>量化</code>每个参与者的不同特征对FL模型的贡献。通过在初始训练期间<code>丢弃冗余和有害的特征</code>，VFL系统的通信、计算和存储成本可以在增量学习设置下的后续训练中降低。 据我们所知，MMVFL是第一个针对多个参与者的多类问题的VFL框架。 通过广泛的实验评估，我们证明MMVFL可以有效地在多个VFL参与者之间共享标签信息，并匹配现有方法的多类分类性能。</p>
+<h2 id="related-work">Related Work</h2>
+<p>VFL适用于参与者<code>拥有共享相同样本ID空间但具有不同特征空间</code>的数据集的FL场景。 VFL的想法最早是在[Hardy等人，2017]中提出的，其中联邦逻辑回归方案是用加性同态方案加密的消息来设计的。它还提供了实体解析错误对学习影响的正式分析。[Nock等人，2018]然后扩展[Hardy等人，2017]，提供了实体解析错误对学习的影响的正式评估，涵盖了一系列广泛的损失。[Yang et al.， 2019a]和[Yang et al.， 2019d]是[Hardy et al.，  2017]的两个扩展，假设样本id已经匹配。前者通过提出一种基于有限内存的BFGS算法的隐私保护优化框架来减少所需的通信次数。后者通过删除第三方协调器来构建并行分布式系统，降低了数据泄漏的风险，降低了系统的复杂性。</p>
+<p>在[Wang et al.， 2019]中，作者提出了一种在VFL参与者的本地数据集中评估特征重要性的方法。该方法采用基于Shapley值的方法，动态去除不同的特征组，以评估对FL模型性能的影响。它能够在特征组的粒度上评估特征的重要性。此外，Shapley值的计算产生了指数计算复杂度，使其难以扩大。</p>
+<p>然而，这些方法只能处理两个VFL参与者，并且通常侧重于二元分类任务。这限制了这些方法在实际应用场景中的适用性。提议的MMVFL比这些最先进的方法更有优势，因为它被设计为支持多类多参与者的VFL设置，这使得通过VFL出现更复杂的业务协作成为可能。</p>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>正文前书页</p>
+<h3 id="multi-view-learning">Multi-View Learning</h3>
+<p><strong>多视图学习</strong></p>
+<p>MVL方法的目标是学习一个函数对每个视图建模，并联合优化所有函数以提高泛化性能	。假设来自每个视图的数据共享相同的示例ID空间，但具有不同的特性，这使得MVL非常适合VFL场景。遗憾的是，现有的MVL方法在学习过程中需要来自不同视图的原始数据进行交互，由于违反了隐私保护的要求，不适合直接应用到FL中。</p>
+<p>多视图用于表示数据的不同特征集,多视图还可以用于表示数据的不同来源;例如对于同一个数据源,用不同的采集装置进行采集,这多个采集结果构成了数据的不同视图;另外,多视图还可以用于表示数据间的不同关系;例如,学术论文的分类问题中,论文间既有参考文献的引用关系,也有作者的合作关系。!!!!!</p>
+<h3 id="feature-selection">Feature Selection</h3>
+<p><strong>特征选择</strong></p>
+<p>特征选择是一组常用的降维方法，用于从给定学习任务的数据集中选择有用的特征子集。根据特征的重要性对数据进行压缩，可以节省通信成本。特征选择的一种常见做法是首先测量每个特征对学习任务的重要性，并丢弃不太重要的特征。</p>
+<h2 id="the-proposed-mmvfl-framework">The Proposed MMVFL Framework</h2>
+<p>MMVFL的传递途径如图2所示。根据设计，只有本地预测的标签才能跨越隐私壁垒到达VFL服务器。 在训练全局FL模型时，无需原始数据、标签或本地模型离开其所有者的机器。在本节中，我们将介绍MMVFL的问题定义和细节。</p>
+<p><img src="/images/202201/39.png" alt=""></p>
+<h3 id="notations-and-problem-definition">Notations and Problem Definition</h3>
+<p><strong>符号和问题定义</strong></p>
+<p><img src="/images/202201/40.png" alt=""></p>
+<p>对于一个涉及K个参与者的Nc类问题的VFL任务，每个参与者都拥有一个本地存储的数据集Xk ∈ R N×dk，用于FL模型训练。dk为数据集的维数，N为数据集中的样本个数。假设标签信息为一个参与者所有。在不丧失一般性的情况下，我们假设第一个参与者拥有这些标签。 这里的研究问题是如何将标签信息从第一个参与者转移到其他参与者进行VFL模型训练，同时对每个参与者进行特征重要性评估。 本文假设样本ID已经匹配。</p>
+<h3 id="sparse-learning-based-unsupervised-feature-selection">Sparse Learning-based Unsupervised Feature Selection</h3>
+<p><strong>基于稀疏学习的无监督特征选择</strong></p>
+<p>对于无法访问标签信息的参与者，采用无监督特征选择来选择代表数据底层子空间结构的特征。设计了一个变换矩阵，将数据投影到一个新的空间，并根据变换矩阵的稀疏性指导特征选择。</p>
+<p>MMVFL通过优化以下目标函数对第k个参与者执行功能选择：</p>
+<p><img src="/images/202201/41.png" alt=""></p>
+<p>其中βk是一个平衡参数，Wk∈ R dk×Nc是变换矩阵，Zk∈ RN×Nc是一个嵌入矩阵，其中每一行表示对应数据点的表示。第二项作为正则化函数用于增强特征重要性度量，这两个约束使Zk能够充当Xk的伪标签矩阵。</p>
+<p>一旦产生Wk，则每个特征的重要度得分由Wk对应行的2-1范数值来计算。尽管近年来提出了复杂的基于稀疏学习的无监督特征选择算法，但由于其简单性，我们采用了线性变换方法，因为我们的重点是提供概念证明，而不是穷尽所有可能的特征选择方案。</p>
+<h3 id="privacy-preserving-label-sharing">Privacy-Preserving Label Sharing</h3>
+<p><strong>保护隐私的标签共享</strong></p>
+<p>由于大多数的MVL方法都假设所有的视图共享相同的标签空间，并且通过标签空间相互关联，所以式（1）中的局部特征选择方案可以适应于MVL，如下所示:</p>
+<p><img src="/images/202201/42.png" alt=""></p>
+<p>然而，Z的优化需要从不同的视图访问原始数据。因此，它不能直接应用于VFL。为了使等式（2）适应VFL，我们提出以下目标函数：</p>
+<p><img src="/images/202201/43.png" alt=""></p>
+<p>其中，Y∈{0,1}N ×N c是包含第一个参与者拥有的标签信息的一个独热one-hot 矩阵。</p>
+<p>根据等式（3），每个参与者在本地训练伪标签矩阵Zk。约束条件Zk=Z确保这些局部学习矩阵相等 (Z是一个实现，来自所有参与者的数据共享相同的标签空间)。约束条件Z1=Y确保第一个参与者学习的伪标签与真实标签相等。 请注意，两个约束条件Zk=Z和Z1=Y的组合间接确保了Zk等于Y。 这实现了标签共享，而无需直接访问来自不同参与者的原始数据，因此适合VFL操作。</p>
+<h3 id="optimization">Optimization</h3>
+<p><strong>最优化</strong></p>
+<p>我们通过分别向其添加足够大的惩罚项ζk和η来放松Zk=Z和Z1=Y的约束。等式（3）可以改写为：</p>
+<p><img src="/images/202201/44.png" alt=""></p>
+<p>注意，ZT_k Zk=I和Zk&gt;0的约束被忽略，因为ζk和η的大值确保Zk接近Y。Y满足Y^TY=I和Y&gt;0这一事实使得这两个约束是多余的。</p>
+<p>由于“2,1-范数正则化项”，等式（4）中优化问题的闭式解很难获得。 为了解决这个问题，我们设计了一种替代的优化方法，所有参数迭代更新，直到（4）中的目标函数值收敛或达到最大迭代次数。</p>
+<p>。。。。。。</p>
+<h2 id="analysis">Analysis</h2>
+<h3 id="convergence">Convergence</h3>
+<p><strong>聚合</strong></p>
+<p>Z1，Zk（k=1，2，···，k）和Z的优化问题，在其他参数不变的情况下，都是具有全局极小值的简单凸优化问题。根据[Hou等人，2014]中的相同分析，可以很容易地证明Wk的优化方案能够使等式（5）持续下降，直到收敛。 这样，目标函数在优化过程中始终保持不变。</p>
+<h3 id="time-complexity">Time Complexity</h3>
+<p>对于VFL的第k个参与者，MMVFL下本地培训期间最耗时的部分是按照式（8）优化工作。 时间复杂度为O（d^3_k）。 由于所提出的优化方案需要所有参与者之间的每次迭代通信，联邦学习的每次迭代的时间复杂度为O（（maxk（dk））3，这意味着在MMVFL下进行FL训练所需的时间取决于每轮中最慢的参与者（称为掉队者）。</p>
+<h3 id="privacy-preservation">Privacy Preservation</h3>
+<p>MMVFL的主要思想是，每个参与者在本地学习自己的模型参数Wk和Zk，而Z以联合方式更新，如等式（14）所示。在此过程中，只需要将来自所有参与者的Zk值传输到FL服务器，而Xk和Y值由其所有者本地存储。 因此，MMVFL提供了一种隐私保护标签共享，因为转换矩阵不足以用于派生原始数据，即使它们在多轮中被恶意实体截获。</p>
+<h2 id="conclusions-and-future-work">Conclusions and Future Work</h2>
+<p>在本文中，我们提出了一个多参与者多类纵向联邦学习（MMVFL）框架，该框架将其所有者的标签信息共享给所有其他参与者，而不会造成数据泄漏。 与现有的只能支持两个参与者的类似技术不同，MMVFL可以在更复杂的场景中工作，因此适合更广泛的应用。据我们所知，这是第一次尝试将多视角学习方法转移到VFL环境中。 实验结果表明，该算法在特征选择方面的性能可以与有监督的算法相媲美。</p>
+<p>在后续的研究中，我们将重点关注三个主要方向来进一步提高MMVFL。首先，我们计划探索如何将更复杂的分类技术纳入这个框架，以扩大其适用性。其次，我们将提高MMVFL的通信效率，并探索其更有效地处理掉队者的方法。最后，我们将探讨VFL中不同参与者在任务间的关系对整体FL模型表现的影响。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-01-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/pseudo-labelling/">
+            <span class="next-text nav-default">Pseudo Labelling</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

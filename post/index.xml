@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 06 Jan 2022 16:44:57 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Jan 2022 15:54:32 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MMVFL</title>
+      <link>https://kongfany.github.io/post/mmvfl/</link>
+      <pubDate>Tue, 11 Jan 2022 15:54:32 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/mmvfl/</guid>
+      <description>Multi-Participant Multi-Class Vertical Federated Learning 多参与者多类纵向联邦学习 Abstract 联邦学习(FL)是一种使用本地存储的来自多个参与者的数据来训练集体机器学习模型的隐私保护范例。纵向联邦学</description>
+    </item>
+    
     <item>
       <title>Pseudo Labelling</title>
       <link>https://kongfany.github.io/post/pseudo-labelling/</link>
@@ -22,7 +31,7 @@
       <pubDate>Sun, 02 Jan 2022 13:34:50 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/fedmvt/</guid>
-      <description>Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模</description>
+      <description>Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督纵向联邦学习 Abstract 纵向联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模</description>
     </item>
     
     <item>

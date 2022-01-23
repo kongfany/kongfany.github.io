@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督纵向联邦学习 Abstract 纵向联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="FedMVT" />
-<meta property="og:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模" />
+<meta property="og:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督纵向联邦学习 Abstract 纵向联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/fedmvt/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-01-02T13:34:50+08:00" />
 <meta property="article:modified_time" content="2022-01-02T13:34:50+08:00" />
 
 <meta itemprop="name" content="FedMVT">
-<meta itemprop="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"><meta itemprop="datePublished" content="2022-01-02T13:34:50+08:00" />
+<meta itemprop="description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督纵向联邦学习 Abstract 纵向联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"><meta itemprop="datePublished" content="2022-01-02T13:34:50+08:00" />
 <meta itemprop="dateModified" content="2022-01-02T13:34:50+08:00" />
-<meta itemprop="wordCount" content="6049">
+<meta itemprop="wordCount" content="6060">
 <meta itemprop="keywords" content="Federated Learning,Semi-supervised Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FedMVT"/>
-<meta name="twitter:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督垂直联合学习 Abstract 垂直联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"/>
+<meta name="twitter:description" content="Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督纵向联邦学习 Abstract 纵向联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022-01-02 </span>
         
-          <span class="more-meta"> 6049 words </span>
+          <span class="more-meta"> 6060 words </span>
           <span class="more-meta"> 13 mins read </span>
         
       </div>
@@ -167,9 +167,9 @@
 </div>
     <div class="post-content">
       <p><strong>Semi-supervised Vertical Federated Learning with MultiView Training</strong></p>
-<p><strong>FedMVT：带多视图训练的半监督垂直联合学习</strong></p>
+<p><strong>FedMVT：带多视图训练的半监督纵向联邦学习</strong></p>
 <h2 id="abstract">Abstract</h2>
-<p>垂直联邦学习(VFL)使各方能够基于<code>相同样本的分布特征</code>构建健壮的共享机器学习模型。然而，VFL要求各方共享足够数量的重叠样本。 实际上，重叠样本集可能很小，导致大多数非重叠数据未使用。 <strong>在本文中，我们提出了联邦多视图训练（FedMVT），这是一种半监督学习方法，可以在有限的重叠样本下提高VFL的性能。 FedMVT估计缺失特征的表示，预测无标记样本的伪标签，以扩展训练集，并根据输入的不同视图联合训练三个分类器，以提高模型的表示学习</strong>。</p>
+<p>纵向联邦学习(VFL)使各方能够基于<code>相同样本的分布特征</code>构建健壮的共享机器学习模型。然而，VFL要求各方共享足够数量的重叠样本(同地区的银行和商场)。 实际上，重叠样本集可能很小，导致大多数非重叠数据未使用。 <strong>在本文中，我们提出了联邦多视图训练（FedMVT），这是一种半监督学习方法，可以在有限的重叠样本下提高VFL的性能。 FedMVT估计缺失特征的表示，预测无标记样本的伪标签，以扩展训练集，并根据输入的不同视图联合训练三个分类器，以提高模型的表示学习</strong>。</p>
 <p><code>semi-supervised Learning：</code>半监督学习，是监督学习与<a href="https://baike.baidu.com/item/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/810193">无监督学习</a>相结合的一种学习方法。半监督学习使用大量的未标记数据，以及同时使用标记数据，来进行模式识别工作。让学习器不依赖外界交互、自动利用未标记样本来提升学习性能的学习方法。</p>
 <ul>
 <li>场景：传统的学习方式是大量的贴标签数据进行分类学习。但由于资源有限，只有少量的有标签的数据和大量的无标签数据时，就要用到半监督学习。</li>
@@ -272,7 +272,7 @@
 <p><img src="/images/202201/12.png" alt=""></p>
 <p>DA和DB由双方私下持有，不得相互接触。N A和N B分别是DA和DB的样本数。</p>
 <p>我们假设双方之间存在一组有限的重叠样本Dol,<img src="/images/202201/13.png" alt="">,其中分区DBol为乙方所有,<img src="/images/202201/14.png" alt="">，其余DAol为甲方所有,<img src="/images/202201/15.png" alt="">。Nol为重叠样本数。人们可以在隐私保护设置中通过加密实体对齐技术找到重叠样本集[Nock等人，2018]。在此，我们假设甲乙双方已经找到或知道重叠样本的id。我们表示DAnl为甲方非重叠样本，<img src="/images/202201/16.png" alt="">，DBnl为乙方非重叠样本，<img src="/images/202201/17.png" alt="">。</p>
-<p>如果我们在一个表格视图中将DA和DB连接为一个大的虚拟数据集，那么这个虚拟数据集是垂直分区的，并且每一方都拥有这个数据集的一个垂直分区。这就是“垂直联合学习”一词的由来。图中显示了由A和B两方拥有的垂直分区虚拟数据集的表格视图。</p>
+<p>如果我们在一个表格视图中将DA和DB连接为一个大的虚拟数据集，那么这个虚拟数据集是垂直分区的，并且每一方都拥有这个数据集的一个垂直分区。这就是“纵向联邦学习”一词的由来。图中显示了由A和B两方拥有的垂直分区虚拟数据集的表格视图。</p>
 <p><img src="/images/202201/18.png" alt=""></p>
 <p>普通的VFL试图建立一个联邦机器学习模型，只使用重叠的样本Dol，而不使用不重叠的样本DAnl和DBnl。因此,提出一种带多视图训练的半监督VFL（FedMVT）方法，<strong>该方法不仅充分利用所有可用数据，还估计缺失特征的表示（如图1所示），不仅显著提高联邦模型的性能，而且有助于提高甲方本地模型的性能。</strong></p>
 <h2 id="the-proposed-approach">The Proposed Approach</h2>
@@ -298,7 +298,7 @@
 <p>其中，χ AB ol是从A和B的重叠样本中学习到的;χ AB~ nl从甲方的非重叠样本中学习，并估计出乙方相应缺失特征的表示。χ AB ol and χ AB~ nl在甲方有ground-truth标签,而χ A~B nl没有标签。我们将在下面估计χ A~B nl中的标签。</p>
 <h3 id="pseudo-label-prediction">Pseudo-label Prediction</h3>
 <p><strong>伪标签</strong></p>
-<p>应用训练好的softmax分类器fA、fB和f AB分别为χ A~B nl中每个未标记的样本产生三个候选伪标签，只有当三个候选伪标签中至少有两个是相等的，并且它们的概率高于预定义的阈值t时，我们才将这个伪标签样本添加到训练集中。当χ内所有样本均有标签时，f A、f B和f AB分别在训练集上接受χ Aol +nl、χBol+nl和χ的训练，</p>
+<p>应用训练好的softmax分类器fA、fB和f AB分别为χ A~B nl中每个未标记的样本产生三个候选伪标签，只有当三个候选伪标签中至少有两个是相等的，并且它们的概率高于预定义的阈值t时，我们才将这个伪标签样本添加到训练集中。当χ内所有样本均有标签时，f A、f B和f AB分别在训练集上接受χ Aol +nl、χBol+nl和χ的训练。</p>
 <p>算法1概述了完整的FedMVT算法，其中concat函数沿特征轴连接输入矩阵，而combine函数沿样本轴连接输入矩阵。</p>
 <h3 id="security-analysis">Security Analysis</h3>
 <p>FedMVT<strong>不要求各方共享其原始数据和模型参数，而只要求中间表示和梯度</strong>。中间表示是原始特征通过具有多层转换函数的深度神经网络转换的结果。因此，另一方几乎没有机会对原始特征进行逆向工程。最近，有很多关于通过梯度泄露隐私的潜在风险的讨论。为了防止中间表示和梯度被暴露，FATE设计并实现了一个VFL- dnn(深度神经网络)框架，该框架可以在VFL训练过程的前阶段和后阶段有效地执行加密。为了实验方便，我们没有使用FATE来实现FedMVT。然而，FedMVT与VFL-DNN框架兼容，可以轻松迁移到FATE。</p>
