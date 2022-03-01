@@ -6,7 +6,16 @@
     <description>Recent content in Federated Learning on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 11 Jan 2022 15:54:32 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/federated-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jan 2022 12:47:11 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/federated-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FedMood</title>
+      <link>https://kongfany.github.io/post/fedmood/</link>
+      <pubDate>Mon, 24 Jan 2022 12:47:11 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fedmood/</guid>
+      <description>Federated Learning on Mobile Health Data for Mood Detection 基于移动健康数据的联邦学习情绪检测 Abstract 虽然研究者希望人工智能能够帮助诊断和治疗抑郁症，但传统的集中式机器学习需要对患者数据进</description>
+    </item>
+    
     <item>
       <title>MMVFL</title>
       <link>https://kongfany.github.io/post/mmvfl/</link>

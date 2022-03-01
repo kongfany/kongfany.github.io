@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>FedMood - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="Federated Learning on Mobile Health Data for Mood Detection 基于移动健康数据的联邦学习情绪检测 Abstract 虽然研究者希望人工智能能够帮助诊断和治疗抑郁症，但传统的集中式机器学习需要对患者数据进" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/fedmood/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="FedMood" />
+<meta property="og:description" content="Federated Learning on Mobile Health Data for Mood Detection 基于移动健康数据的联邦学习情绪检测 Abstract 虽然研究者希望人工智能能够帮助诊断和治疗抑郁症，但传统的集中式机器学习需要对患者数据进" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/fedmood/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-24T12:47:11+08:00" />
+<meta property="article:modified_time" content="2022-01-24T12:47:11+08:00" />
+
+<meta itemprop="name" content="FedMood">
+<meta itemprop="description" content="Federated Learning on Mobile Health Data for Mood Detection 基于移动健康数据的联邦学习情绪检测 Abstract 虽然研究者希望人工智能能够帮助诊断和治疗抑郁症，但传统的集中式机器学习需要对患者数据进"><meta itemprop="datePublished" content="2022-01-24T12:47:11+08:00" />
+<meta itemprop="dateModified" content="2022-01-24T12:47:11+08:00" />
+<meta itemprop="wordCount" content="2488">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="FedMood"/>
+<meta name="twitter:description" content="Federated Learning on Mobile Health Data for Mood Detection 基于移动健康数据的联邦学习情绪检测 Abstract 虽然研究者希望人工智能能够帮助诊断和治疗抑郁症，但传统的集中式机器学习需要对患者数据进"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">FedMood</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-24 </span>
+        
+          <span class="more-meta"> 2488 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#introduction">INTRODUCTION</a></li>
+        <li><a href="#background">BACKGROUND</a>
+          <ul>
+            <li><a href="#related-work">Related Work</a></li>
+            <li><a href="#later-fusion-model">Later Fusion Model</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>Federated Learning on Mobile Health Data for Mood Detection</strong></p>
+<p><strong>基于移动健康数据的联邦学习情绪检测</strong></p>
+<h2 id="abstract">Abstract</h2>
+<p>虽然研究者希望人工智能能够帮助诊断和治疗抑郁症，但传统的集中式机器学习需要对患者数据进行汇总，精神疾病患者的数据隐私需要严格保密，这阻碍了机器学习算法的临床应用。为了解决抑郁症患者的病史隐私问题，我们实现了联合学习来分析和诊断抑郁症。首先，我们提出了一个基于多源数据的通用多视图联合学习框架，该框架可以扩展任何传统的机器学习模型，以支持跨不同机构或团体的联合学习。其次，采用后期融合方法解决多视图数据时间序列不一致的问题。最后，我们比较了联合学习框架与其他合作学习框架的性能，并讨论了相关结果。</p>
+<h2 id="introduction">INTRODUCTION</h2>
+<p>为了更好地帮助医生诊断抑郁症，研究人员通过引入机器学习技术来分析患者数据。但在使用机器学习技术时，模型的性能与数据隐私保护之间存在矛盾。</p>
+<p>首先，机器学习训练的模型的质量与数据量密切相关。深度神经网络(DNN)在各种医学应用中都取得了良好的效果，但它在很大程度上取决于训练数据的数量和多样性。虽然Wang  et  al.提出了集中式学习下避免数据隐私泄露的方案，但医院需要保护患者诊断数据的隐私，因此不同的医疗机构无法收集和共享数据，这极大地影响了模型的准确性。例如在心电图的工作中，由于单一医疗机构无法收集到足够的高质量数据，模型的预测能力无法达到临床辅助的作用。</p>
+<p>第二，虽然有很多机器学习算法涉及到隐私保护，但是很难达到良好的训练效果。在隐私保护方面，有很多机器学习的应用场景，如推荐系统、人脸识别等。然而，隐私保护机器学习方法需要根据算法中间产品的敏感性增加噪声，因此在有限的隐私预算下，隐私算法的预测性能往往较差。第三，由于各医疗机构之间的巨大差距，患者数据存在较大差异。为了应对各种情况，要求算法和软件具有较高的泛化能力，如果不进行数据交换，模型很难获得足够的准确性和特异性。</p>
+<p>为了解决上述局限性，谷歌在2016年提出了一种名为联邦学习的方法，以打破因患者数据隐私而导致的医疗数据竖井问题。每个医疗机构不需要集中患者数据来训练机器学习模型。相反，它将训练有素的模型聚集在一个地方，并使用联邦平均技术不断优化模型，以便所有医疗机构都能获得数据。然而，目前医学领域使用联邦学习框架的研究大多是基于医院现有的数据。它主要包括对特定疾病患者的特征诊断、降低诊疗成本、医学图像处理等问题。</p>
+<p>根据现有的研究，手机作为患者生活中最重要的信息传递工具之一，也可以成为疾病预测的重要数据源。我们认为，键盘击键，例如两次击键之间的间隔，可以作为一种生物特征识别的形式，通过分析抑郁症患者的击键习惯来预测抑郁症。抑郁症患者的打字速度通常与正常人不同，这可能是由于发病时情绪不稳定造成的。</p>
+<p>我们的工作使用了一个为移动电话定制的虚拟键盘来收集元数据(包括关键字母、特殊字符和手机加速度计值)。使用来自20个用户的多于130万次按键，每个用户另外完成了至少1份患者健康问卷。我们将用户的键击间隔至少5秒作为开始，并且在最后一次键击5秒后没有操作作为会话执行。会话的持续时间通常在1分钟内。我们在会话级使用联邦学习架构来建模DeepMood，这是一个基于后期融合的深度学习架构。</p>
+<p>然而，在现实生活中，不同的医疗机构所持有的数据量有很大的不同，不同地区的医疗机构数量也不同。为此，我们将工作分为两部分。首先，我们根据IID(Independent and identical  Distributed，独立同分布)方法将数据分发给不同的参与方进行训练，但是每个参与方在每次训练中拥有的数据量并不相同，每次参加训练的参与方数量也不相同。这个设置模拟了不同地区和不同医疗机构的真实情况。同时，为了验证联邦学习对模型训练的影响，我们模拟了一个数据岛环境，为没有参与联邦学习的各方建立了局部训练。此外，我们将数据按照non-IID分配给各方，并讨论了non-IID对预测结果的影响。实验结果表明，在IID情况下，模型预测精度达到85.13%，在non-IID情况下，模型预测精度达到76.95%。</p>
+<p>本文的其余部分组织如下。第二部分介绍了多视角学习、联邦学习和隐私保护的背景。同时，对后期融合模型的原理进行了分析。任务定义和联邦学习框架将在第三节中描述。第四节概述了本文的数据来源、实验设置和结果。最后在第五节对本文进行总结。</p>
+<h2 id="background">BACKGROUND</h2>
+<h3 id="related-work">Related Work</h3>
+<ul>
+<li>Multi-View learning：Xu等人指出，多视角学习需要使用一个函数对一个视角建模，并使用其他视角共同优化所有功能。Cao等人采用张量积处理多视图数据。Yao等人将CNN、LSTM和Graph  embedding结合在一起，以多角度的方式处理复杂的非线性时空依赖关系。此外，还有一些工作将多视角融入到深度学习和迁移学习的过程中，从而帮助从数据中扩展样本。</li>
+<li>Federated learning：Lee等人提出了一种联邦环境下的隐私保护平台，该平台可以在不共享患者级信息的情况下找到不同医院的相似患者。Huang  L等人通过使用特征自编码器和患者聚类，改善了联合学习预测死亡率和住院时间的性能。然而，现有研究中联合学习与多视图数据相结合的方法仍处于发展阶段。Adrian  Flanagan等人提出了联邦多视图矩阵分解方法，解决了冷启动问题。Huang等人提出了FL-MV-DSSM，这是第一个通用的基于内容的联合多视图框架，成功地将传统的联合学习扩展到联合多视图学习。Kang等提出了用于半监督学习的FedMVT算法，该算法可以在有限重叠样本的情况下提高垂直联邦学习的性能。这些利用公共数据集的相关方法主要用于推荐系统以解决冷启动问题。然而，我们的框架使用从移动设备收集的数据来解决医疗情绪预测问题。</li>
+<li>Federated privacy protection：在联邦学习框架中，保护数据隐私的方式主要有三种:安全多方计算(SMC)、差分隐私机制(DP)和同态加密(HE)。</li>
+</ul>
+<h3 id="later-fusion-model">Later Fusion Model</h3>
+<p><strong>融合模型</strong></p>
+<p>由于我们使用的数据集存在三个视图下的时间序列频率不同，无法对齐的问题，在本节中，我们介绍了模型后期采用的融合策略，使数据的时间序列一致。</p>
+<p>设p-th视图序列末尾的输出向量为k(p)，设{k(p)∈Rdk}^n_p=1为多视图数据，其中m为视图数。</p>
+<ul>
+<li>Fully connected layer</li>
+<li>Factorization Machine layer</li>
+<li>Multi-view Machine layer</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-01-24
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/feature-selection/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Feature Selection</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/mmvfl/">
+            <span class="next-text nav-default">MMVFL</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Semi-supervised Learning on 大胖狗来了</title>
-    <link>https://kongfany.github.io/tags/semi-supervised-learning/</link>
-    <description>Recent content in Semi-supervised Learning on 大胖狗来了</description>
+    <title>Multi-View Learning on 大胖狗来了</title>
+    <link>https://kongfany.github.io/tags/multi-view-learning/</link>
+    <description>Recent content in Multi-View Learning on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 26 Jan 2022 10:49:34 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/semi-supervised-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Jan 2022 10:49:34 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/multi-view-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Feature Selection</title>
       <link>https://kongfany.github.io/post/feature-selection/</link>
@@ -17,12 +17,12 @@
     </item>
     
     <item>
-      <title>Pseudo Labelling</title>
-      <link>https://kongfany.github.io/post/pseudo-labelling/</link>
-      <pubDate>Thu, 06 Jan 2022 16:44:57 +0800</pubDate>
+      <title>MMVFL</title>
+      <link>https://kongfany.github.io/post/mmvfl/</link>
+      <pubDate>Tue, 11 Jan 2022 15:54:32 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/pseudo-labelling/</guid>
-      <description>伪标签 半监督学习，即使用标签数据(受监督的学习)和不加标签的数据(无监督的学习)。 我们不需要手动标记不加标签的数据，而是根据标签的数据给出近</description>
+      <guid>https://kongfany.github.io/post/mmvfl/</guid>
+      <description>Multi-Participant Multi-Class Vertical Federated Learning 多参与者多类纵向联邦学习 Abstract 联邦学习(FL)是一种使用本地存储的来自多个参与者的数据来训练集体机器学习模型的隐私保护范例。纵向联邦学</description>
     </item>
     
     <item>

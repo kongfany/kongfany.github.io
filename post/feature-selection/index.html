@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Feature Selection - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="网络空间图像标注中半监督稀疏特征选择算法研究 Research on Semi-supervised Sparse Feature Selection for Image Annotation in Web Space 摘要 面对这些不断增加的网络空间图像数据，如何有效地对其进行浏览、检索和管" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/feature-selection/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Feature Selection" />
+<meta property="og:description" content="网络空间图像标注中半监督稀疏特征选择算法研究 Research on Semi-supervised Sparse Feature Selection for Image Annotation in Web Space 摘要 面对这些不断增加的网络空间图像数据，如何有效地对其进行浏览、检索和管" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/feature-selection/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-26T10:49:34+08:00" />
+<meta property="article:modified_time" content="2022-01-26T10:49:34+08:00" />
+
+<meta itemprop="name" content="Feature Selection">
+<meta itemprop="description" content="网络空间图像标注中半监督稀疏特征选择算法研究 Research on Semi-supervised Sparse Feature Selection for Image Annotation in Web Space 摘要 面对这些不断增加的网络空间图像数据，如何有效地对其进行浏览、检索和管"><meta itemprop="datePublished" content="2022-01-26T10:49:34+08:00" />
+<meta itemprop="dateModified" content="2022-01-26T10:49:34+08:00" />
+<meta itemprop="wordCount" content="4300">
+<meta itemprop="keywords" content="Feature Selection,Semi-supervised Learning,Multi-View Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Feature Selection"/>
+<meta name="twitter:description" content="网络空间图像标注中半监督稀疏特征选择算法研究 Research on Semi-supervised Sparse Feature Selection for Image Annotation in Web Space 摘要 面对这些不断增加的网络空间图像数据，如何有效地对其进行浏览、检索和管"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Feature Selection</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-26 </span>
+        
+          <span class="more-meta"> 4300 words </span>
+          <span class="more-meta"> 9 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#摘要">摘要</a></li>
+        <li><a href="#绪论">绪论</a>
+          <ul>
+            <li><a href="#研究背景和意义">研究背景和意义</a></li>
+            <li><a href="#国内外研究概况">国内外研究概况</a></li>
+            <li><a href="#论文主要研究工作">论文主要研究工作</a></li>
+          </ul>
+        </li>
+        <li><a href="#半监督稀疏特征选择算法研究的相关知识">半监督稀疏特征选择算法研究的相关知识</a>
+          <ul>
+            <li><a href="#图像视觉特征">图像视觉特征</a></li>
+            <li><a href="#稀疏表示理论">稀疏表示理论</a></li>
+            <li><a href="#半监督学习">半监督学习</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>网络空间图像标注中半监督稀疏特征选择算法研究</strong></p>
+<p><strong>Research on Semi-supervised Sparse Feature Selection for Image Annotation in Web Space</strong></p>
+<h2 id="摘要">摘要</h2>
+<p>面对这些不断增加的网络空间图像数据，如何有效地对其进行浏览、检索和管理，成为当前多媒体内容理解和计算机视觉领域面临的一项亟待解决的研究问题。<code>自动图像标注技术</code>(Automatice Image Annotation)，将关键词或者相关文档描述与图像联系起来，成为对大规模网络空间图像进行有效索引、检索、组织和管理的一个重要途径。然而，面对呈几何级数增长的网络空间图像数据，现有的自动图像标注技术面临着两个关键问题：一个是面对大规模网络空间图像，如何有效<code>提高标注效率</code>，另一个是如何利用大量的<code>无标签图像</code>来提升网络空间图像标注的准确度。</p>
+<p>作为一种重要的手段，<code>特征选择</code>在网络空间图像标注中发挥着重要作用。近年，<code>半监督稀疏特征选择</code>成为特征选择技术中一个研究热点，它能够更好的提高网络空间图像标注的性能。本论文对现有半监督稀疏特征选择方法进行了深入研究，从<code>稀疏表示理论</code>、<code>半监督学习方法</code>以及<code>多视图学习</code>三个方面出发，提出了几种新的半监督稀疏特征选择算法，主要的研究成果及贡献包括：</p>
+<ul>
+<li>
+<p>提出了一种基于 l₂,½ 矩阵范数半监督稀疏特征选择算法</p>
+<p>对新近提出的<code>稀疏性惩罚 l₂,p (0&lt;p&lt;=1)矩阵范数</code>进行了深入研究，基于具有最好性能的稀疏性惩罚 l₂,½ 矩阵范数提出了一种新的<code>半监督稀疏特征选择算法</code>FSLG。l₂,½ 矩阵范数不仅考虑了不同特征之间的关联，同时具有更好的稀疏性，使提取的特征更具判别性、更加稀疏，从而可以降低计算的复杂度，提高效率。本文给出了基于矩阵范数的半监督稀疏特征选择算法框架PSLG以及详细的求解方法。将所提半监督稀疏特征选择算法FSLG应用到了网络空间图像标注任务中，提高了网络空间图像标注的性能和效率。</p>
+</li>
+<li>
+<p>提出了一种基于Hessian正则化半监督稀疏特征选择算法</p>
+<p>现有的半监督学习方法中最具代表性的工作是基于拉普拉斯半监督学习方法，然而图拉普拉斯正则化不具有很好的推断能力，无标签数据的几何结构信息没能被很好的利用。相对于拉普拉斯正则化，正则化可以使函数值随着测地距离线性变化更好的保持局部流形结构具有很好的推断能力，因此，<code>基于Hessian正则化的半监督学习</code>具有更好的学习性能。本文将Hessian正则化引入到半监督稀疏特征选择算法中，提出了基于Hessian正则化半监督稀疏特征选择算法HFSL，给出了算法的迭代求解方法，并将其应用到了网络空间图像标注任务，结果表明所提算法能够很好的提高网络空间图像标注的性能。</p>
+</li>
+<li>
+<p>提出了两种基于多视图学习的半监督稀疏特征选择算法</p>
+<p>目前大多数特征选择方法都是针对单一视图(Single-view)数据的，当其面对多视图(Multi-view)数据时，一般是将多视图数据简单地串接为一个长的特征向量进行处理。然而，这种直接串接的方法不能充分利用多视图之间的互补和一致性信息，同时忽略了不同视图的物理解释。近年，多视图学习(Multi-view Learning)得到了广泛关注及研究，多视图学习可以很好的利用不同视图之间的互补属性和一致性。基于不同视图之间的互补属性，论文提出了多视图Hessian半监督稀疏特征选择算法MHSFS，基于一致性提出了基于 l₂,½ 矩阵范数和共享子空间的半监督稀疏特征选择算法SFSLS,并分别给出了两种算法的详细求解过程。将所提基于多视图学习的半监督稀疏特征选择算法应用到了网络空间图像标注任务，结果表明所提算法优于现有的半监督稀疏特征选择算法，能够提高网络空间图像标注的性能。</p>
+</li>
+</ul>
+<h2 id="绪论">绪论</h2>
+<h3 id="研究背景和意义">研究背景和意义</h3>
+<p>面对这些不断增加的网络空间图像数据，如何有效的对其进行浏览、检索和管理成为了当前多媒体内容理解和计算机视觉领域面临的一项亟待解决的热点研究问题。</p>
+<p><code>自动图像标注</code>将关键词或者相关文档描述与图像联系起来，成为了对大规模网络空间图像进行有效索引、检索、组织和管理的一个重要途径，在网络空间图像检索、家庭影集的组织和管理、媒体数据分析等方面都有广泛的应用。图像标注最初也是最直接的研究动力是为了更加方便
+的进行图像检索。面对爆炸性增长的网络空间图像，图像标注在网络空间图像检索中发挥了越来越大的作用。随着互联网及数码设备的普及以及广泛应用，人们随时拍照并将图片上传到网络空间与人分享，形成了庞大的家庭影集，这对有效地组织和管理网络空间的家庭影集提出了重要的挑战。目前己经有工作尝试通过对家庭影集中的图像进行标注，以方便用户查找图像和对图像进行整理归类。另外，随着互联网社区共享网站的迅猛发展，社会媒体数据急剧增长，虽然有的用
+户在上传图像数据时提供了一定的描述词，但是这些描述词比较片面或者不完整，使网络空间的媒体数据分析面临着巨大的挑战。目前己有工作利用用户提供的描述词和图像本身的特征，通过图像标注技术来更好的进行网络空间的媒体数据分析。当然，图像标注技术在其他领域也有着广泛的应用，如商标检索、医学图像检索、行为分析等。</p>
+<p>然而，面对呈几何级数增长的网络空间图像数据，现有的自动图像标注技术面临着两个关键问题：一个是面对大规模的网络空间图像，如何提高标注效率，另一个是如何利用大量的无标签网络空间图像来提升标注的准确度。</p>
+<p>作为一种重要的桥梁和手段，特征选择技术在网络空间图像标注中发挥着重要作用。面对大规模网络空间图像，如何有效去除冗余特征，获得更加稀疏、更具判别性的特征子集，将直接影响网络空间图像标注的准确度和效率。<code>特征选择</code>是指从原始特征集中选择最具判别性的特征子集，降低原始数据中的噪声干扰。选择好的特征不仅可以减小图像标注的复杂度，提升图像标注的效率，还可以提高图像标注的准确度。网络空间图像数量呈爆炸性增长，特别是其中包含大量的无标签图像。另外，随着应用领域的不断扩大，网络空间图像数据一般釆用多视图数据形式来更全面的表达图像内容。由于<strong>半监督稀疏特征选择算法能够同时利用少量有标签图像以及大量无标签图像提取更具判别性、更加稀疏的特征，从而更好的提升网络空间图像标注的性能，因此，半监</strong>
+<strong>督稀疏特征选择算法成为了当前特征选择技术中研究热点。</strong></p>
+<p>针对不断增长的网络空间图像数据，网络空间图像标注中半监督稀疏特征选择技术能够更好的推动图像处理、多媒体内容理解、计算机视觉、模式识别以及机器学习等领域的发展，因此具有重要的理论研究价值；另外，半监督稀疏特征选择技术不仅仅是进行网络空间图像标注的一项关键技术，同时可以被广泛应用到不同的领域，如图像分类、图像检索、视频标注、行为识别等，因此，网络空间图像标注中半监督稀疏特征选择技术具有广泛的应用前景。</p>
+<h3 id="国内外研究概况">国内外研究概况</h3>
+<ul>
+<li>
+<p>图像标注</p>
+<p>自动图像标注将关键词或者相关文档描述与图像联系起来，成为了对大规模网络空间图像进行有效索引、检索、组织和管理的一个重要途径。自动图像标注方法可以分为三大类：基于概率模型的方法、基于图像检索的方法和基于分类的方法。</p>
+</li>
+<li>
+<p>特征选择</p>
+<p>根据不同的分类依据，特征选择方法可以分为传统与稀疏特征选择方法，监督、非监督和半监督
+特征选择方法，以及单一视图和多视图特征选择方法。</p>
+</li>
+</ul>
+<h3 id="论文主要研究工作">论文主要研究工作</h3>
+<p>论文主要针对半监督稀疏特征选择算法进行了深入研究，分别从稀疏表示理论、半监督学习以及多视图学习三个方面提出了多种更加有效的半监督稀疏特征选择方法。另外，将所提半监督稀疏特征选择方法应用到网络空间图像标注任务，从而提升网络空间图像标注的性能。</p>
+<p><img src="/images/202202/1.png" alt=""></p>
+<p>首先，针对网络空间图像数据量大、维度高的特点，对稀疏表示理论进行深入研究，将具有最好性能的稀疏性惩罚应用到半监督稀疏特征选择算法之中，使选择的特征子集更具判别性，更加稀疏，从而提升半监督稀疏特征选择算法性能。</p>
+<p>其次，针对网络空间图像中无标签数据易于获取的特点，对现有的半监督学习算法进行深入研究，探索能够充分利用大量无标签数据的几何结构信息来提升半监督学习性能的半监督学习方法，并将其应用到半监督稀疏特征选择算法之中，从而进一步提升半监督稀疏特征选择的性能。</p>
+<p>最后，针对网络空间图像的多视图表示形式，在特征选择算法中采用多视图学习方法进行特征选择，充分利用不同视图间的一致和互补属性来提升半监督稀疏特征选择的性能。</p>
+<h2 id="半监督稀疏特征选择算法研究的相关知识">半监督稀疏特征选择算法研究的相关知识</h2>
+<h3 id="图像视觉特征">图像视觉特征</h3>
+<p>图像底层视觉特征是进行图像标注和图像检索的基础和前提，底层视觉特征能够客观的表达图像内容，在一定程度上可以描述图像所表达旳意义。常用的底层图像特征包括颜色、纹理、形状等全局特征以及近年引起广泛关注的基于关键点的特征。</p>
+<ul>
+<li>
+<p>颜色特征</p>
+</li>
+<li>
+<p>纹理特征</p>
+<p>纹理（特征是一种统计特征，描述了图像和图像区域所对应物体的表面性质，有旋转不变性和较强的抗噪能力，常应用在检索具有粗细、疏密等有较大差别的纹理图像。提取纹理特征的方法大致分为三类：结构方法、统计方法及频谱方法。</p>
+</li>
+<li>
+<p>形状特征</p>
+</li>
+<li>
+<p>基于关键点的特征</p>
+<p>基于关键点的特征通过提取图像的显著区域或关键点来灵活地描述图像的局部信息和细节内容，从而对图像缩放、旋转以及视角、光照变化有很强的鲁棒性。</p>
+</li>
+</ul>
+<h3 id="稀疏表示理论">稀疏表示理论</h3>
+<p>信号的稀疏表示被证明是一个用于采集、压缩和表达髙维信号有效的工具。近几年，稀疏表示理论被广泛地应用于图像处理的多个方面，如图像压缩、图像去噪、图像检索和图像识别等，成为当前国际上的一个研究热点。通过稀疏表示，图像可以釆用字典中少数原子的线性组合进行表示。稀疏表示系数和相应的原子能够很好地揭示图像的内在本质，同时，这也符合人类的视觉特性。</p>
+<ul>
+<li>
+<p>生理学基础</p>
+</li>
+<li>
+<p>稀疏表示理论</p>
+<p><img src="/images/202202/2.png" alt=""></p>
+<p><a href="https://blog.csdn.net/zouxy09/article/details/24971995/">https://blog.csdn.net/zouxy09/article/details/24971995/</a></p>
+<p><img src="/images/202202/3.png" alt=""></p>
+</li>
+<li>
+<p>稀疏表示求解&hellip;</p>
+<p>不难看出，式(2-2)和(2-4)是一个组合优化问题，但是由于其非凸且高度不可微，从而导致它们的求解是一个典型的<a href="https://blog.csdn.net/sinat_21591675/article/details/86521190">NP-hard</a>(Nondeterministic Polynomial- time Hard)问题。正是因为这种限制的存在，研究者们提出了稀疏表示逼近算法来求解。稀疏表示逼近求解算法主要可以分为两类：贪麥算法和松弛算法。</p>
+</li>
+<li>
+<p>字典构造&hellip;</p>
+<p>字典构造是稀疏表示理论中另一个核心问题。字典不仅关系到图像稀疏表示的有效性，同时也影响各种稀疏表示求解算法的性能。</p>
+<p>前最常用的是基于样本学习来构造字典，字典学习的主要任务就是从训练样本集 X={xi} 中学习出字典A，使得字典A对每个训练样本都能进行有效的稀疏表示。从数学角度上说，字典学习是寻找字典A和稀疏系数矩阵G使得它们的乘积能有效地逼近训练样本X,即 X=AG 。下面介绍几种经典的用于超完备稀疏表示的学习式字典。</p>
+<ul>
+<li>MOD字典学习</li>
+<li>K-SVD字典学习</li>
+<li>在线字典学习算法</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h3 id="半监督学习">半监督学习</h3>
+<p>人们提出了能够同时利用少量的可靠的有标记样本和大量无标记样本的半监督学习，希望通过挖掘无标记样本所揭示的内在本质结构来提升学习的性能。</p>
+<ul>
+<li>
+<p>监督、非监督与半监督学习概述</p>
+<p><img src="/images/202202/4.png" alt=""></p>
+<ul>
+<li>监督学习</li>
+<li>非监督学习</li>
+<li>半监督学习</li>
+</ul>
+</li>
+<li></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-01-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/feature-selection/">Feature Selection</a>
+          <a href="/tags/semi-supervised-learning/">Semi-supervised Learning</a>
+          <a href="/tags/multi-view-learning/">Multi-View Learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/sentence/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">我们由奇迹构成</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/fedmood/">
+            <span class="next-text nav-default">FedMood</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
