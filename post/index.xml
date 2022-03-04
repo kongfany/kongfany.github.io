@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Mar 2022 22:42:13 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Mar 2022 10:09:09 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Numpy</title>
+      <link>https://kongfany.github.io/post/numpy/</link>
+      <pubDate>Fri, 04 Mar 2022 10:09:09 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/numpy/</guid>
+      <description>https://cs231n.github.io/python-numpy-tutorial/#distance-between-points python 1 2 3 4 5 6 7 8 9 def quicksort(arr):#快排 if len(arr)&amp;lt;= 1: return arr pivot=arr[len(arr)//2] left = [x for x in arr if x &amp;lt; pivot] middle = [x for x in arr if x == pivot] right = [x for x in arr if x &amp;gt; pivot] return</description>
+    </item>
+    
     <item>
       <title>计算机视觉发展史</title>
       <link>https://kongfany.github.io/post/cv1/</link>

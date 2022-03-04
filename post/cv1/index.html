@@ -178,11 +178,13 @@
 <p>生物学家开始研究视觉的机制，最具影响力并且启发了计算机视觉的一项研究是在五六十年代，Hubel和Wiesel使用电生理学完成的研究，他们提出了“哺乳动物的视觉处理机制是怎样的”。</p>
 <p>通过观察何种刺激会引起视觉皮层神经的激烈反应，他们发现猫的大脑的初级视觉皮层有各种各样的细胞，其中最重要的是当它们朝着某个特定方向运动时，对面向边缘产生回应的细胞。他们发现视觉处理是始于视觉世界的简单结构，面向边缘，沿着视觉处理的途径的移动信息也在变化，大脑建立了复杂的视觉信息，直到它可以识别更为复杂的视觉世界。</p>
 <p><img src="/images/202203/1.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C1.png" alt=""></p>
 </li>
 <li>
 <p>计算机视觉始于60年代初，Larry Roberts的计算机视觉的第一篇论文开始。</p>
 <p>视觉世界被简化为简单的几何形状，目的是能够识别他们，重建这些形状是什么。</p>
 <p><img src="/images/202203/2.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C2.png" alt=""></p>
 </li>
 <li>
 <p>1966年，一个如今非常著名的MIT暑期项目“Summer Vision Project”。</p>
@@ -193,16 +195,19 @@
 <p>内容包括了他是如何理解计算机视觉和应该如何开发可以使计算机识别世界的算法，他指出了为了拍摄一幅图像并获得视觉世界的最终全面3D表现必须经历的几个过程，如下图所示：</p>
 <p>第一个过程就是他所说“原始草图”，大部分边缘、端点、虚拟线条、曲线、边界等都被用其他元素来表示。视觉处理的早期阶段有很多关于像边缘的简单结构，然后，边缘和曲线的下一步是2.5维草图，我们开始将表面深度信息、层或者视觉场景的不连续性拼凑在一起，然后将所有的内容放在一起，并在表面和体积图等分层组织了一个3d模型，这是一个非常理想化的思想过程，也是一个非常直观化的方式并考虑如何解构视觉息。</p>
 <p><img src="/images/202203/3.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C3.png" alt=""></p>
 </li>
 <li>
 <p>70年代另一个重要的开创性问题：如何越过简单的块状世界并开始识别或表示现实世界的对象？</p>
 <p>一个被称为“广义圆柱体”，一个被称为“图形结构”，他们的基本思想是每个对象都是由简单的几何图形单位组成，所以任何一种表示方法是将物体的复杂结构简约成一个集合体。例如一个人可以通过广义的圆柱形形状拼接在一起，或者人也可以由一些关键元素按照不同的间距组合在一起，所以任何一种表示方法是将物体的复杂结构简约成一个集合体，有更简单的形状和几何结构。</p>
 <p><img src="/images/202203/4.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C4.png" alt=""></p>
 </li>
 <li>
 <p>80年代David lowe思考的如何重建或识别由简单的物体结构组成的视觉空间</p>
 <p>它尝试识别剃须刀，通过线和边缘进行构建，其中大部分是直线之间的组合。</p>
 <p><img src="/images/202203/5.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C5.png" alt=""></p>
 </li>
 <li>
 <p>从60年代到80年代，考虑的问题是计算机视觉的任务是什么，要解决物体识别的问题非常难。所以，当思考解决视觉问题过程中出现的问题时，另一个重要的问题产生：如果识别目标太难，首先要做的是目标分割。</p>
@@ -210,6 +215,7 @@
 <p>归一化切割Normalized cut 是一种分群(cluster grouping)技术，在数据处理和图像处理方面有很广的运用</p>
 <p>其实现图像分割的思路是，把一个图片看成一个图(graph), 然后计算权重图(weighted graph)，然后分割成一些具有相同特征（纹理， 颜色，明度等）的区域。</p>
 <p><img src="/images/202203/6.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C6.png" alt=""></p>
 </li>
 <li>
 <p>Malik和Jianbo shi完成的用一个算法对图像进行分割：</p>
@@ -225,6 +231,7 @@
 <p>由David Lowe完成的叫做SIFT特征，目的是匹配整个目标。</p>
 <p>通过观察目标的某些部分、某些特征，它们往往能够在变化中具有表现性和不变性，所以目标识别的首要任务是在目标上确认这些关键的特征，然后把这些特征与相似的目标进行匹配，它比匹配整个目标要容易的多。例如，上图中一个stop标识中的SIFT特征与另一个stop标识中的SIFT特征相匹配。</p>
 <p><img src="/images/202203/7.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C7.png" alt=""></p>
 </li>
 <li>
 <p>空间金字塔匹配</p>
@@ -269,7 +276,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/numpy/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Numpy</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/sentence/">
             <span class="next-text nav-default">我们由奇迹构成</span>
             <span class="next-text nav-mobile">Next</span>

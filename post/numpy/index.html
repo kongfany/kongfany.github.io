@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Numpy - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="https://cs231n.github.io/python-numpy-tutorial/#distance-between-points python 1 2 3 4 5 6 7 8 9 def quicksort(arr):#快排 if len(arr)&amp;lt;= 1: return arr pivot=arr[len(arr)//2] left = [x for x in arr if x &amp;lt; pivot] middle = [x for x in arr if x == pivot] right = [x for x in arr if x &amp;gt; pivot] return" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/numpy/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Numpy" />
+<meta property="og:description" content="https://cs231n.github.io/python-numpy-tutorial/#distance-between-points python 1 2 3 4 5 6 7 8 9 def quicksort(arr):#快排 if len(arr)&lt;= 1: return arr pivot=arr[len(arr)//2] left = [x for x in arr if x &lt; pivot] middle = [x for x in arr if x == pivot] right = [x for x in arr if x &gt; pivot] return" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/numpy/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-04T10:09:09+08:00" />
+<meta property="article:modified_time" content="2022-03-04T10:09:09+08:00" />
+
+<meta itemprop="name" content="Numpy">
+<meta itemprop="description" content="https://cs231n.github.io/python-numpy-tutorial/#distance-between-points python 1 2 3 4 5 6 7 8 9 def quicksort(arr):#快排 if len(arr)&lt;= 1: return arr pivot=arr[len(arr)//2] left = [x for x in arr if x &lt; pivot] middle = [x for x in arr if x == pivot] right = [x for x in arr if x &gt; pivot] return"><meta itemprop="datePublished" content="2022-03-04T10:09:09+08:00" />
+<meta itemprop="dateModified" content="2022-03-04T10:09:09+08:00" />
+<meta itemprop="wordCount" content="7665">
+<meta itemprop="keywords" content="Python,Numpy," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Numpy"/>
+<meta name="twitter:description" content="https://cs231n.github.io/python-numpy-tutorial/#distance-between-points python 1 2 3 4 5 6 7 8 9 def quicksort(arr):#快排 if len(arr)&lt;= 1: return arr pivot=arr[len(arr)//2] left = [x for x in arr if x &lt; pivot] middle = [x for x in arr if x == pivot] right = [x for x in arr if x &gt; pivot] return"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Numpy</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-04 </span>
+        
+          <span class="more-meta"> 7665 words </span>
+          <span class="more-meta"> 16 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#python">python</a></li>
+        <li><a href="#lists">Lists</a>
+          <ul>
+            <li><a href="#遍历">遍历</a></li>
+            <li><a href="#遍历访问每个元素的索引enumerate">遍历访问每个元素的索引enumerate</a></li>
+            <li><a href="#列表推导式生成式语法">列表推导式（生成式语法）</a></li>
+          </ul>
+        </li>
+        <li><a href="#dictionaries">Dictionaries</a>
+          <ul>
+            <li><a href="#遍历-1">遍历</a></li>
+            <li><a href="#如果您想访问键及其对应的值请使用-items-方法">如果您想访问键及其对应的值，请使用 items 方法:</a></li>
+            <li><a href="#生成式语法">生成式语法</a></li>
+          </ul>
+        </li>
+        <li><a href="#sets">Sets</a>
+          <ul>
+            <li><a href="#遍历-2">遍历</a></li>
+            <li><a href="#enumerate">enumerate</a></li>
+            <li><a href="#生成式">生成式</a></li>
+          </ul>
+        </li>
+        <li><a href="#tuples">Tuples</a></li>
+        <li><a href="#functions">Functions</a></li>
+        <li><a href="#classes">Classes</a></li>
+      </ul>
+    </li>
+    <li><a href="#numpy">NumPy</a>
+      <ul>
+        <li><a href="#arrays">Arrays</a></li>
+        <li><a href="#array-indexing">Array indexing</a></li>
+        <li><a href="#datatypes">Datatypes</a></li>
+        <li><a href="#array-math">Array math</a></li>
+        <li><a href="#broadcasting">Broadcasting</a></li>
+      </ul>
+    </li>
+    <li><a href="#scipy">SciPy</a>
+      <ul>
+        <li><a href="#image-operations">Image operations</a></li>
+        <li><a href="#distance-between-points">Distance between points</a></li>
+      </ul>
+    </li>
+    <li><a href="#matplotlib">Matplotlib</a>
+      <ul>
+        <li><a href="#plotting">Plotting</a></li>
+        <li><a href="#subplots">Subplots</a></li>
+        <li><a href="#images">Images</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p><a href="https://cs231n.github.io/python-numpy-tutorial/#distance-between-points">https://cs231n.github.io/python-numpy-tutorial/#distance-between-points</a></p>
+</blockquote>
+<h2 id="python">python</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">quicksort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span><span class="c1">#快排</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">arr</span>
+    <span class="n">pivot</span><span class="o">=</span><span class="n">arr</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="n">middle</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">left</span><span class="p">)</span><span class="o">+</span><span class="n">middle</span><span class="o">+</span><span class="n">quicksort</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">quicksort</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[1, 1, 2, 3, 6, 8, 10]
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># Prints &#34;&lt;class &#39;int&#39;&gt;&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>       <span class="c1"># Prints &#34;3&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># Addition; prints &#34;4&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># Subtraction; prints &#34;2&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># Multiplication; prints &#34;6&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Exponentiation; prints &#34;9&#34;</span>
+<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Prints &#34;4&#34;</span>
+<span class="n">x</span> <span class="o">*=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Prints &#34;8&#34;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="c1"># Prints &#34;&lt;class &#39;float&#39;&gt;&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Prints &#34;2.5 3.5 5.0 6.25&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>&lt;class 'int'&gt;
+3
+4
+2
+6
+9
+4
+8
+&lt;class 'float'&gt;
+2.5 3.5 5.0 6.25
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">t</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">f</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="c1"># Prints &#34;&lt;class &#39;bool&#39;&gt;&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span> <span class="ow">and</span> <span class="n">f</span><span class="p">)</span> <span class="c1"># Logical AND; prints &#34;False&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span> <span class="ow">or</span> <span class="n">f</span><span class="p">)</span>  <span class="c1"># Logical OR; prints &#34;True&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="ow">not</span> <span class="n">t</span><span class="p">)</span>   <span class="c1"># Logical NOT; prints &#34;False&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="n">f</span><span class="p">)</span>  <span class="c1"># Logical XOR; prints &#34;True&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>&lt;class 'bool'&gt;
+False
+True
+False
+True
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">hello</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>    <span class="c1"># String literals can use single quotes</span>
+<span class="n">world</span> <span class="o">=</span> <span class="s2">&#34;world&#34;</span>    <span class="c1"># or double quotes; it does not matter.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>       <span class="c1"># Prints &#34;hello&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hello</span><span class="p">))</span>  <span class="c1"># String length; prints &#34;5&#34;</span>
+<span class="n">hw</span> <span class="o">=</span> <span class="n">hello</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">world</span>  <span class="c1"># String concatenation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hw</span><span class="p">)</span>  <span class="c1"># prints &#34;hello world&#34;</span>
+<span class="n">hw12</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hello</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>  <span class="c1"># sprintf style string formatting</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hw12</span><span class="p">)</span>  <span class="c1"># prints &#34;hello world 12&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>hello
+5
+hello world
+hello world 12
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;hello&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>  <span class="c1"># Capitalize a string; prints &#34;Hello&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>       <span class="c1"># Convert a string to uppercase; prints &#34;HELLO&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>      <span class="c1"># Right-justify a string, padding with spaces; prints &#34;  hello&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>     <span class="c1"># Center a string, padding with spaces; prints &#34; hello &#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;(ell)&#39;</span><span class="p">))</span>  <span class="c1"># Replace all instances of one substring with another;</span>
+                                <span class="c1"># prints &#34;he(ell)(ell)o&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  world &#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c1"># Strip leading and trailing whitespace; prints &#34;world&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>Hello
+HELLO
+  hello
+ hello 
+he(ell)(ell)o
+world
+</code></pre>
+<h2 id="lists">Lists</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>    <span class="c1"># Create a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">xs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Prints &#34;[3, 1, 2] 2&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>     <span class="c1"># Negative indices count from the end of the list; prints &#34;2&#34;</span>
+<span class="n">xs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>     <span class="c1"># Lists can contain elements of different types</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>         <span class="c1"># Prints &#34;[3, 1, &#39;foo&#39;]&#34;</span>
+<span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>  <span class="c1"># Add a new element to the end of the list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>         <span class="c1"># Prints &#34;[3, 1, &#39;foo&#39;, &#39;bar&#39;]&#34;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>      <span class="c1"># Remove and return the last element of the list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>      <span class="c1"># Prints &#34;bar [3, 1, &#39;foo&#39;]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[3, 1, 2] 2
+2
+[3, 1, 'foo']
+[3, 1, 'foo', 'bar']
+bar [3, 1, 'foo']
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#切片</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>     <span class="c1"># range is a built-in function that creates a list of integers</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>               <span class="c1"># Prints &#34;[0, 1, 2, 3, 4]&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>          <span class="c1"># Get a slice from index 2 to 4 (exclusive); prints &#34;[2, 3]&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>           <span class="c1"># Get a slice from index 2 to the end; prints &#34;[2, 3, 4]&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>           <span class="c1"># Get a slice from the start to index 2 (exclusive); prints &#34;[0, 1]&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[:])</span>            <span class="c1"># Get a slice of the whole list; prints &#34;[0, 1, 2, 3, 4]&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>          <span class="c1"># Slice indices can be negative; prints &#34;[0, 1, 2, 3]&#34;</span>
+<span class="n">nums</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>        <span class="c1"># Assign a new sublist to a slice</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[0, 1, 2, 3, 4]
+[2, 3]
+[2, 3, 4]
+[0, 1]
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3]
+[0, 1, 8, 9, 4]
+</code></pre>
+<h3 id="遍历">遍历</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python">
+<span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;monkey&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">animal</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>cat
+dog
+monkey
+</code></pre>
+<h3 id="遍历访问每个元素的索引enumerate">遍历访问每个元素的索引enumerate</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;monkey&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">animal</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">animals</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#</span><span class="si">%d</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">animal</span><span class="p">))</span>
+<span class="c1"># Prints &#34;#1: cat&#34;, &#34;#2: dog&#34;, &#34;#3: monkey&#34;, each on its own line</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>#1: cat
+#2: dog
+#3: monkey
+</code></pre>
+<h3 id="列表推导式生成式语法">列表推导式（生成式语法）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>   <span class="c1"># Prints [0, 1, 4, 9, 16]</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[0, 1, 4, 9, 16]
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>   <span class="c1"># Prints [0, 1, 4, 9, 16]</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[0, 1, 4, 9, 16]
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#也可以包含条件</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">even_squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">even_squares</span><span class="p">)</span>  <span class="c1"># Prints &#34;[0, 4, 16]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[0, 4, 16]
+</code></pre>
+<h2 id="dictionaries">Dictionaries</h2>
+<p>字典存储(键、值)对 (key, value)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="s1">&#39;cute&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span> <span class="s1">&#39;furry&#39;</span><span class="p">}</span>  <span class="c1"># Create a new dictionary with some data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">])</span>       <span class="c1"># Get an entry from a dictionary; prints &#34;cute&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">)</span>     <span class="c1"># Check if a dictionary has a given key; prints &#34;True&#34;</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;wet&#39;</span>     <span class="c1"># Set an entry in a dictionary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">])</span>      <span class="c1"># Prints &#34;wet&#34;</span>
+<span class="c1"># print(d[&#39;monkey&#39;])  # KeyError: &#39;monkey&#39; not a key of d</span>
+<span class="c1">#使用get方法通过键获取对应的值，如果取不到不会引发KeyError异常而是返回None或设定的默认值</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;monkey&#39;</span><span class="p">,</span> <span class="s1">&#39;N/A&#39;</span><span class="p">))</span>  <span class="c1"># Get an element with a default; prints &#34;N/A&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span><span class="p">,</span> <span class="s1">&#39;N/A&#39;</span><span class="p">))</span>    <span class="c1"># Get an element with a default; prints &#34;wet&#34;</span>
+<span class="k">del</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">]</span>         <span class="c1"># Remove an element from a dictionary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span><span class="p">,</span> <span class="s1">&#39;N/A&#39;</span><span class="p">))</span> <span class="c1"># &#34;fish&#34; is no longer a key; prints &#34;N/A&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>cute
+True
+wet
+N/A
+wet
+N/A
+</code></pre>
+<h3 id="遍历-1">遍历</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;person&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;spider&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+    <span class="n">legs</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">animal</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A </span><span class="si">%s</span><span class="s1"> has </span><span class="si">%d</span><span class="s1"> legs&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">animal</span><span class="p">,</span> <span class="n">legs</span><span class="p">))</span>
+<span class="c1"># Prints &#34;A person has 2 legs&#34;, &#34;A cat has 4 legs&#34;, &#34;A spider has 8 legs&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>A person has 2 legs
+A cat has 4 legs
+A spider has 8 legs
+</code></pre>
+<h3 id="如果您想访问键及其对应的值请使用-items-方法">如果您想访问键及其对应的值，请使用 items 方法:</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;person&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;spider&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">animal</span><span class="p">,</span> <span class="n">legs</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A </span><span class="si">%s</span><span class="s1"> has </span><span class="si">%d</span><span class="s1"> legs&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">animal</span><span class="p">,</span> <span class="n">legs</span><span class="p">))</span>
+<span class="c1"># Prints &#34;A person has 2 legs&#34;, &#34;A cat has 4 legs&#34;, &#34;A spider has 8 legs&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>A person has 2 legs
+A cat has 4 legs
+A spider has 8 legs
+</code></pre>
+<h3 id="生成式语法">生成式语法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">even_num_to_square</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">even_num_to_square</span><span class="p">)</span>  <span class="c1"># Prints &#34;{0: 0, 2: 4, 4: 16}&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>{0: 0, 2: 4, 4: 16}
+</code></pre>
+<h2 id="sets">Sets</h2>
+<p>集合是不同元素的无序集合。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">animals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">)</span>   <span class="c1"># Check if an element is in a set; prints &#34;True&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">)</span>  <span class="c1"># prints &#34;False&#34;</span>
+<span class="n">animals</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span><span class="p">)</span>       <span class="c1"># Add an element to a set</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">)</span>  <span class="c1"># Prints &#34;True&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">animals</span><span class="p">))</span>       <span class="c1"># Number of elements in a set; prints &#34;3&#34;</span>
+<span class="c1">#添加已经存在的元素，不会发生什么变化</span>
+<span class="n">animals</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">)</span>        <span class="c1"># Adding an element that is already in the set does nothing</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">animals</span><span class="p">))</span>       <span class="c1"># Prints &#34;3&#34;</span>
+<span class="n">animals</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">)</span>     <span class="c1"># Remove an element from a set</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">animals</span><span class="p">))</span>       <span class="c1"># Prints &#34;2&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>True
+False
+True
+3
+3
+2
+</code></pre>
+<h3 id="遍历-2">遍历</h3>
+<p>遍历一个集合和遍历一个列表具有相同的语法; 但是由于集合是无序的，你不能对访问集合元素的顺序做出假设:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">animals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;fish&#39;</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">animal</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">animals</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#</span><span class="si">%d</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">animal</span><span class="p">))</span>
+<span class="c1"># Prints &#34;#1: fish&#34;, &#34;#2: dog&#34;, &#34;#3: cat&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>cat
+dog
+fish
+#1: cat
+#2: dog
+#3: fish
+</code></pre>
+<h3 id="enumerate">enumerate</h3>
+<p>enumerate() 函数字面上是枚举、列举的意思，用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。</p>
+<p>enumerate(sequence,[start=0])</p>
+<p>sequence &ndash; 一个序列、迭代器或其他支持迭代对象。</p>
+<p>start &ndash; 下标起始位置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">seasons</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;Fall&#39;</span><span class="p">,</span> <span class="s1">&#39;Winter&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">seasons</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">seasons</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>  <span class="c1"># 下标从 1 开始</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">seasons</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[(0, 'Spring'), (1, 'Summer'), (2, 'Fall'), (3, 'Winter')]
+[(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
+0 Spring
+1 Summer
+2 Fall
+3 Winter
+</code></pre>
+<h3 id="生成式">生成式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">)}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>  <span class="c1"># Prints &#34;{0, 1, 2, 3, 4, 5}&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>{0, 1, 2, 3, 4, 5}
+</code></pre>
+<h2 id="tuples">Tuples</h2>
+<p>元组是一个(不可变的)有序的值列表。元组在许多方面类似于列表; 最重要的区别之一是，元组可以用作字典中的键和集合的元素，而列表不能。</p>
+<p>元组也是多个元素按照一定的顺序构成的序列。元组和列表的不同之处在于，元组是不可变类型，这就意味着元组类型的变量一旦定义，其中的元素不能再添加或删除，而且元素的值也不能进行修改。定义元组通常使用()字面量语法，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#用元组创建一个字典</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span>  <span class="c1"># Create a dictionary with tuple keys</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>        <span class="c1"># Create a tuple</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>    <span class="c1"># Prints &#34;&lt;class &#39;tuple&#39;&gt;&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>       <span class="c1"># Prints &#34;5&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>  <span class="c1"># Prints &#34;1&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>{(0, 1): 0, (1, 2): 1, (2, 3): 2, (3, 4): 3, (4, 5): 4, (5, 6): 5, (6, 7): 6, (7, 8): 7, (8, 9): 8, (9, 10): 9}
+&lt;class 'tuple'&gt;
+5
+1
+</code></pre>
+<h2 id="functions">Functions</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;positive&#39;</span>
+    <span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;negative&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;zero&#39;</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="c1"># Prints &#34;negative&#34;, &#34;zero&#34;, &#34;positive&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>negative
+zero
+positive
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">loud</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HELLO, </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="n">hello</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span> <span class="c1"># Prints &#34;Hello, Bob&#34;</span>
+<span class="n">hello</span><span class="p">(</span><span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Prints &#34;HELLO, FRED!&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>Hello, Bob
+HELLO, FRED!
+</code></pre>
+<h2 id="classes">Classes</h2>
+<p>用 Python 定义类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="c1"># Constructor</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>  <span class="c1"># Create an instance variable</span>
+
+    <span class="c1"># Instance method 实例方法</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">loud</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HELLO, </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">Greeter</span><span class="p">(</span><span class="s1">&#39;Fred&#39;</span><span class="p">)</span>  <span class="c1"># Construct an instance of the Greeter class</span>
+<span class="n">g</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>            <span class="c1"># Call an instance method; prints &#34;Hello, Fred&#34;</span>
+<span class="n">g</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># Call an instance method; prints &#34;HELLO, FRED!&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>Hello, Fred
+HELLO, FRED!
+</code></pre>
+<h1 id="numpy">NumPy</h1>
+<p>NumPy(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库。</p>
+<p><a href="https://www.runoob.com/numpy/numpy-tutorial.html">https://www.runoob.com/numpy/numpy-tutorial.html</a></p>
+<h2 id="arrays">Arrays</h2>
+<p>Numpy 数组是一个值网格，所有值的类型都相同，并由一组非负整数进行索引。维数是数组的秩; 数组的形状是一组整数，给出了数组在每个维度上的大小。</p>
+<p>我们可以从嵌套的 Python 列表中初始化 numpy 数组，并使用方括号访问元素:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>   <span class="c1"># Create a rank 1 array</span>
+<span class="c1">#秩为1，即维数，创建一维数组</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>            <span class="c1"># Prints &#34;&lt;class &#39;numpy.ndarray&#39;&gt;&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>            <span class="c1"># Prints &#34;(3,)&#34;</span>
+<span class="c1">#表示数组的维度，返回一个元组，这个元组的长度就是维度的数目，即 ndim 属性(秩)。</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>   <span class="c1"># Prints &#34;1 2 3&#34;</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>                  <span class="c1"># Change an element of the array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>                  <span class="c1"># Prints &#34;[5, 2, 3]&#34;</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>    <span class="c1"># Create a rank 2 array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>                     <span class="c1"># Prints &#34;(2, 3)&#34;</span>
+<span class="c1">#数组的维度，对于矩阵，n 行 m 列</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>   <span class="c1"># Prints &#34;1 2 4&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>&lt;class 'numpy.ndarray'&gt;
+(3,)
+1 2 3
+[5 2 3]
+(2, 3)
+1 2 4
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>   <span class="c1"># Create an array of all zeros</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>              <span class="c1"># Prints &#34;[[ 0.  0.]</span>
+                      <span class="c1">#          [ 0.  0.]]&#34;</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>    <span class="c1"># Create an array of all ones</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>              <span class="c1"># Prints &#34;[[ 1.  1.]]&#34;</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="mi">7</span><span class="p">)</span>  <span class="c1"># Create a constant array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>               <span class="c1"># Prints &#34;[[ 7.  7.]</span>
+                       <span class="c1">#          [ 7.  7.]]&#34;</span>
+
+<span class="c1">#创建2*2的单位矩阵</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>         <span class="c1"># Create a 2x2 identity matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>              <span class="c1"># Prints &#34;[[ 1.  0.]</span>
+                      <span class="c1">#          [ 0.  1.]]&#34;</span>
+
+<span class="c1">#创建一个2*2的随机矩阵</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># Create an array filled with random values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>                     <span class="c1"># Might print &#34;[[ 0.91940167  0.08143941]</span>
+                             <span class="c1">#               [ 0.68744134  0.87236687]]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[0. 0.]
+ [0. 0.]]
+[[1. 1.]]
+[[7 7]
+ [7 7]]
+[[1. 0.]
+ [0. 1.]]
+[[0.69843379 0.7441049 ]
+ [0.54347292 0.01288906]]
+</code></pre>
+<h2 id="array-indexing">Array indexing</h2>
+<p>切片: 类似于 Python 列表，numpy 数组可以被切片。由于数组可能是多维的，所以必须为数组的每个维度指定一个切片</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Create the following rank 2 array with shape (3, 4)</span>
+<span class="c1"># [[ 1  2  3  4]</span>
+<span class="c1">#  [ 5  6  7  8]</span>
+<span class="c1">#  [ 9 10 11 12]]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;数组a的秩为</span><span class="si">%s</span><span class="s1">,形状为</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="c1"># Use slicing to pull out the subarray consisting of the first 2 rows</span>
+<span class="c1"># and columns 1 and 2; b is the following array of shape (2, 2):</span>
+<span class="c1"># [[2 3]</span>
+<span class="c1">#  [6 7]]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="c1">#使用切片提取由前2行组成的子数组和列1和列2; b 是下面的形状数组(2,2)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1"># A slice of an array is a view into the same data, so modifying it</span>
+<span class="c1"># will modify the original array.</span>
+<span class="c1">#数组的一个片段是相同数据的视图，因此要修改它将修改原始数组。</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>   <span class="c1"># Prints &#34;2&#34;</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">77</span>     <span class="c1"># b[0, 0] is the same piece of data as a[0, 1]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>   <span class="c1"># Prints &#34;77&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>数组a的秩为2,形状为(3, 4)
+[[2 3]
+ [6 7]] (2, 2)
+2
+77
+</code></pre>
+<p>还可以将整数索引和切片索引混合使用。但是，这样做将产生比原始数组更低秩的数组。</p>
+<p>访问数组中间行数据的两种方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Create the following rank 2 array with shape (3, 4)</span>
+<span class="c1"># [[ 1  2  3  4]</span>
+<span class="c1">#  [ 5  6  7  8]</span>
+<span class="c1">#  [ 9 10 11 12]]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]])</span>
+
+<span class="c1"># Two ways of accessing the data in the middle row of the array.</span>
+<span class="c1"># Mixing integer indexing with slices yields an array of lower rank,</span>
+<span class="c1"># while using only slices yields an array of the same rank as the</span>
+<span class="c1"># original array:</span>
+<span class="n">row_r1</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>    <span class="c1"># Rank 1 view of the second row of a</span>
+<span class="n">row_r2</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1"># Rank 2 view of the second row of a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row_r1</span><span class="p">,</span> <span class="n">row_r1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Prints &#34;[5 6 7 8] (4,)&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row_r2</span><span class="p">,</span> <span class="n">row_r2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Prints &#34;[[5 6 7 8]] (1, 4)&#34;</span>
+
+<span class="c1"># We can make the same distinction when accessing columns of an array:</span>
+<span class="n">col_r1</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">col_r2</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">col_r1</span><span class="p">,</span> <span class="n">col_r1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Prints &#34;[ 2  6 10] (3,)&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">col_r2</span><span class="p">,</span> <span class="n">col_r2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Prints &#34;[[ 2]</span>
+                             <span class="c1">#          [ 6]</span>
+                             <span class="c1">#          [10]] (3, 1)&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[5 6 7 8] (4,)
+[[5 6 7 8]] (1, 4)
+[ 2  6 10] (3,)
+[[ 2]
+ [ 6]
+ [10]] (3, 1)
+</code></pre>
+<p>整数数组索引: 当您使用切片索引到 numpy 数组时，生成的数组视图将始终是原始数组的子数组。相比之下，整数数组索引允许您使用来自另一个数组的数据构造任意数组。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+
+<span class="c1"># An example of integer array indexing.</span>
+<span class="c1"># The returned array will have shape (3,) and</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>  <span class="c1"># Prints &#34;[1 4 5]&#34;</span>
+<span class="c1">#a[x,y]:打印第x行y列。而x=[0,1,2],y=[0,1,0],即分别打印第0,1,2行,对应的第0,1,0列</span>
+
+<span class="c1"># The above example of integer array indexing is equivalent to this:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]))</span>  <span class="c1"># Prints &#34;[1 4 5]&#34;</span>
+
+<span class="c1"># When using integer array indexing, you can reuse the same</span>
+<span class="c1"># element from the source array:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>  <span class="c1"># Prints &#34;[2 2]&#34;</span>
+
+<span class="c1"># Equivalent to the previous integer array indexing example</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]))</span>  <span class="c1"># Prints &#34;[2 2]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[1 4 5]
+[1 4 5]
+[2 2]
+[2 2]
+</code></pre>
+<p>整数数组索引的一个有用的技巧是从矩阵的每一行中选择或修改一个元素:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Create a new array from which we will select elements</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># prints &#34;array([[ 1,  2,  3],</span>
+          <span class="c1">#                [ 4,  5,  6],</span>
+          <span class="c1">#                [ 7,  8,  9],</span>
+          <span class="c1">#                [10, 11, 12]])&#34;</span>
+
+<span class="c1"># Create an array of indices 创建数组的索引</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Select one element from each row of a using the indices in b</span>
+<span class="c1">#使用 b 中的索引从 a 的每一行中选择一个元素</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">b</span><span class="p">])</span>  <span class="c1"># Prints &#34;[ 1  6  7 11]&#34;</span>
+
+<span class="c1"># Mutate one element from each row of a using the indices in b</span>
+<span class="c1">#使用 b 中的索引从 a 的每一行变换一个元素</span>
+<span class="n">a</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">b</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># prints &#34;array([[11,  2,  3],</span>
+          <span class="c1">#                [ 4,  5, 16],</span>
+          <span class="c1">#                [17,  8,  9],</span>
+          <span class="c1">#                [10, 21, 12]])</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[ 1  2  3]
+ [ 4  5  6]
+ [ 7  8  9]
+ [10 11 12]]
+[ 1  6  7 11]
+[[11  2  3]
+ [ 4  5 16]
+ [17  8  9]
+ [10 21 12]]
+</code></pre>
+<p>布尔数组索引: 布尔数组索引允许您挑选数组的任意元素。这种类型的索引通常用于选择满足某些条件的数组元素。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+
+<span class="c1">#Find the elements of a that are bigger than 2;</span>
+<span class="n">bool_idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># Find the elements of a that are bigger than 2;</span>
+                     <span class="c1"># this returns a numpy array of Booleans of the same</span>
+                     <span class="c1"># shape as a, where each slot of bool_idx tells</span>
+                     <span class="c1"># whether that element of a is &gt; 2.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">bool_idx</span><span class="p">)</span>      <span class="c1"># Prints &#34;[[False False]</span>
+                     <span class="c1">#          [ True  True]</span>
+                     <span class="c1">#          [ True  True]]&#34;</span>
+
+<span class="c1"># We use boolean array indexing to construct a rank 1 array</span>
+<span class="c1"># consisting of the elements of a corresponding to the True values</span>
+<span class="c1"># of bool_idx</span>
+<span class="c1">##我们使用布尔数组索引来构造一个秩1数组，由对应于 True 值的元素组成</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">bool_idx</span><span class="p">])</span>  <span class="c1"># Prints &#34;[3 4 5 6]&#34;</span>
+
+<span class="c1">#我们可以用一句简洁的话来概括以上所有的内容</span>
+<span class="c1"># We can do all of the above in a single concise statement:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">])</span>     <span class="c1"># Prints &#34;[3 4 5 6]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[False False]
+ [ True  True]
+ [ True  True]]
+[3 4 5 6]
+[3 4 5 6]
+</code></pre>
+<h2 id="datatypes">Datatypes</h2>
+<p>每个 numpy 数组都是由相同类型的元素组成的网格。Numpy 提供了一个大型的数字数据类型集，您可以使用它来构造数组。在创建数组时，Numpy 试图猜测数据类型，但构造数组的函数通常还包含一个可选参数，以显式指定数据类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>   <span class="c1"># Let numpy choose the datatype</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>         <span class="c1"># Prints &#34;int64&#34;</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>   <span class="c1"># Let numpy choose the datatype</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>             <span class="c1"># Prints &#34;float64&#34;</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>   <span class="c1"># Force a particular datatype</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>                         <span class="c1"># Prints &#34;int64&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>int32
+float64
+int64
+</code></pre>
+<h2 id="array-math">Array math</h2>
+<p>基本的数学函数在数组上以元素形式运行，可以作为操作符重载和 numpy 模块中的函数:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="c1"># Elementwise sum; both produce the array</span>
+<span class="c1"># [[ 6.0  8.0]</span>
+<span class="c1">#  [10.0 12.0]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+<span class="c1"># Elementwise difference; both produce the array</span>
+<span class="c1"># [[-4.0 -4.0]</span>
+<span class="c1">#  [-4.0 -4.0]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+<span class="c1"># Elementwise product; both produce the array</span>
+<span class="c1"># [[ 5.0 12.0]</span>
+<span class="c1">#  [21.0 32.0]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span><span class="c1">#* 是各个元素对应的乘法，而不是矩阵乘法</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+<span class="c1"># Elementwise division; both produce the array</span>
+<span class="c1"># [[ 0.2         0.33333333]</span>
+<span class="c1">#  [ 0.42857143  0.5       ]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+<span class="c1"># Elementwise square root; produces the array</span>
+<span class="c1"># [[ 1.          1.41421356]</span>
+<span class="c1">#  [ 1.73205081  2.        ]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[ 6.  8.]
+ [10. 12.]]
+[[ 6.  8.]
+ [10. 12.]]
+[[-4. -4.]
+ [-4. -4.]]
+[[-4. -4.]
+ [-4. -4.]]
+[[ 5. 12.]
+ [21. 32.]]
+[[ 5. 12.]
+ [21. 32.]]
+[[0.2        0.33333333]
+ [0.42857143 0.5       ]]
+[[0.2        0.33333333]
+ [0.42857143 0.5       ]]
+[[1.         1.41421356]
+ [1.73205081 2.        ]]
+</code></pre>
+<p>用<code>dot</code>函数来计算向量的内积，向量与矩阵的乘积</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+
+<span class="c1"># Inner product of vectors; both produce 219</span>
+<span class="c1">#向量的内积</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+
+<span class="c1"># Matrix / vector product; both produce the rank 1 array [29 67]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="c1">#9+20,27+40</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="c1">#9+30,18+40</span>
+
+<span class="c1"># Matrix / matrix product; both produce the rank 2 array</span>
+<span class="c1"># [[19 22]</span>
+<span class="c1">#  [43 50]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>219
+219
+[29 67]
+[29 67]
+[39 58]
+[[19 22]
+ [43 50]]
+[[19 22]
+ [43 50]]
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># Compute sum of all elements; prints &#34;10&#34;</span>
+<span class="c1">#axis=0，表示沿着第 0 轴进行操作，即对每一列进行操作；</span>
+<span class="c1">#axis=1，表示沿着第1轴进行操作，即对每一行进行操作。</span>
+<span class="c1">#列和</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># Compute sum of each column; prints &#34;[4 6]&#34;</span>
+<span class="c1">#行和</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># Compute sum of each row; prints &#34;[3 7]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>10
+[4 6]
+[3 7]
+</code></pre>
+<p>除了使用数组计算数学函数之外，我们还经常需要对数组中的数据进行重塑或以其他方式操作。这类操作最简单的例子是移位矩阵; 要移位矩阵，只需使用数组对象的 T 属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># Prints &#34;[[1 2]</span>
+            <span class="c1">#          [3 4]]&#34;</span>
+<span class="c1">#类似于转置</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="c1"># Prints &#34;[[1 3]</span>
+            <span class="c1">#          [2 4]]&#34;</span>
+
+<span class="c1"># Note that taking the transpose of a rank 1 array does nothing:</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>    <span class="c1"># Prints &#34;[1 2 3]&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="c1"># Prints &#34;[1 2 3]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[1 2]
+ [3 4]]
+[[1 3]
+ [2 4]]
+[1 2 3]
+[1 2 3]
+</code></pre>
+<h2 id="broadcasting">Broadcasting</h2>
+<p>广播是一种强大的机制，允许 numpy 在执行算术运算时使用不同形状的数组。通常我们有一个较小的数组和一个较大的数组，我们希望多次使用较小的数组来对较大的数组执行一些操作。</p>
+<p>例如，假设我们要向矩阵的每一行添加一个常量向量。我们可以这样做:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># We will add the vector v to each row of the matrix x,</span>
+<span class="c1"># storing the result in the matrix y</span>
+<span class="c1">#我们将向量 v 加到矩阵 x 的每一行,</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="c1">#创建一个和x相同形状的空矩阵</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1"># Create an empty matrix with the same shape as x</span>
+
+<span class="c1"># Add the vector v to each row of the matrix x with an explicit loop</span>
+<span class="c1">#通过显式循环将向量 v 添加到矩阵 x 的每一行</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">v</span>
+
+<span class="c1"># Now y is the following</span>
+<span class="c1"># [[ 2  2  4]</span>
+<span class="c1">#  [ 5  5  7]</span>
+<span class="c1">#  [ 8  8 10]</span>
+<span class="c1">#  [11 11 13]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[ 2  2  4]
+ [ 5  5  7]
+ [ 8  8 10]
+ [11 11 13]]
+</code></pre>
+<p>然而，当矩阵 x 非常大时，在 Python 中计算显式循环可能会很慢。注意，将向量 v 加到矩阵 x 的每一行等价于形成一个垂直叠加 v 的多个副本，然后求 x 和 v 的元素相加的矩阵 v。我们可以这样实施这个方法:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># We will add the vector v to each row of the matrix x,</span>
+<span class="c1"># storing the result in the matrix y</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="c1">#将v的四个副本放在一起</span>
+<span class="n">vv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>   <span class="c1"># Stack 4 copies of v on top of each other</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vv</span><span class="p">)</span>                 <span class="c1"># Prints &#34;[[1 0 1]</span>
+                          <span class="c1">#          [1 0 1]</span>
+                          <span class="c1">#          [1 0 1]</span>
+                          <span class="c1">#          [1 0 1]]&#34;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">vv</span>  <span class="c1"># Add x and vv elementwise</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># Prints &#34;[[ 2  2  4</span>
+          <span class="c1">#          [ 5  5  7]</span>
+          <span class="c1">#          [ 8  8 10]</span>
+          <span class="c1">#          [11 11 13]]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[1 0 1]
+ [1 0 1]
+ [1 0 1]
+ [1 0 1]]
+[[ 2  2  4]
+ [ 5  5  7]
+ [ 8  8 10]
+ [11 11 13]]
+</code></pre>
+<p>使用 Numpy 广播，我们可以在不创建 v 的多个副本的情况下执行这个计算:</p>
+<p>尽管由于广播，x 具有形状(4,3) ，v 具有形状(3,) ，y = x + v 仍然可以工作; 这条线的工作方式就好像 v 实际上具有形状(4,3) ，其中每一行都是 v 的副本，并且求和是逐项执行的。</p>
+<p>广播通常使您的代码更简洁、更快捷，因此您应该尽可能地使用它</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># We will add the vector v to each row of the matrix x,</span>
+<span class="c1"># storing the result in the matrix y</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">v</span>  <span class="c1"># Add v to each row of x using broadcasting</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># Prints &#34;[[ 2  2  4]</span>
+          <span class="c1">#          [ 5  5  7]</span>
+          <span class="c1">#          [ 8  8 10]</span>
+          <span class="c1">#          [11 11 13]]&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[ 2  2  4]
+ [ 5  5  7]
+ [ 8  8 10]
+ [11 11 13]]
+</code></pre>
+<p>将两个阵列同时广播遵循以下规则:</p>
+<p>如果数组不具有相同的秩，则用1预置低秩数组的形状，直到两个形状具有相同的长度。</p>
+<p>如果两个数组的维度大小相同，或者其中一个数组的维度大小为1，则称这两个数组在维度上是兼容的。</p>
+<p>如果阵列在所有维度都兼容，那么它们可以一起广播。</p>
+<p>广播之后，每个数组的行为就好像它的形状等于两个输入数组的元素最大形状一样。</p>
+<p>在任何维度中，如果一个数组的大小为1，而另一个数组的大小大于1，那么第一个数组的行为就好像是沿着该维度复制的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Compute outer product of vectors计算外积，即为矩阵的乘积</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># v has shape (3,)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>    <span class="c1"># w has shape (2,)</span>
+<span class="c1"># To compute an outer product, we first reshape v to be a column</span>
+<span class="c1"># vector of shape (3, 1); we can then broadcast it against w to yield</span>
+<span class="c1"># an output of shape (3, 2), which is the outer product of v and w:</span>
+<span class="c1"># [[ 4  5]</span>
+<span class="c1">#  [ 8 10]</span>
+<span class="c1">#  [12 15]]</span>
+<span class="c1">#为了计算外积，我们首先将 v 重塑为形状为 (3, 1) 的列向量； </span>
+<span class="c1">#然后我们可以针对 w 广播它以产生形状 (3, 2) 的输出，它是 v 和 w 的外积：</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">w</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[ 4  5]
+ [ 8 10]
+ [12 15]]
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Add a vector to each row of a matrix</span>
+<span class="c1">#向矩阵的每一行添加一个向量</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+<span class="c1"># x has shape (2, 3) and v has shape (3,) so they broadcast to (2, 3),</span>
+<span class="c1"># giving the following matrix:</span>
+<span class="c1"># [[2 4 6]</span>
+<span class="c1">#  [5 7 9]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">v</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[2 4 6]
+ [5 7 9]]
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Add a vector to each column of a matrix</span>
+<span class="c1"># x has shape (2, 3) and w has shape (2,).</span>
+<span class="c1"># If we transpose x then it has shape (3, 2) and can be broadcast</span>
+<span class="c1"># against w to yield a result of shape (3, 2); transposing this result</span>
+<span class="c1"># yields the final result of shape (2, 3) which is the matrix x with</span>
+<span class="c1"># the vector w added to each column. Gives the following matrix:</span>
+<span class="c1"># [[ 5  6  7]</span>
+<span class="c1">#  [ 9 10 11]]</span>
+<span class="c1">#向矩阵的每一列添加一个向量，如果我们转置 x，那么它就有形状(3,2)并且可以广播</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[ 5  6  7]
+ [ 9 10 11]]
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Another solution is to reshape w to be a column vector of shape (2, 1);</span>
+<span class="c1"># we can then broadcast it directly against x to produce the same</span>
+<span class="c1"># output.</span>
+<span class="c1">#另一种解决方案是将 w 重塑为形状(2,1)的列向量;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[ 5  6  7]
+ [ 9 10 11]]
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Multiply a matrix by a constant:</span>
+<span class="c1"># x has shape (2, 3). Numpy treats scalars as arrays of shape ();</span>
+<span class="c1"># these can be broadcast together to shape (2, 3), producing the</span>
+<span class="c1"># following array:</span>
+<span class="c1"># [[ 2  4  6]</span>
+<span class="c1">#  [ 8 10 12]]</span>
+<span class="c1">#用一个常数乘以一个矩阵</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[ 2  4  6]
+ [ 8 10 12]]
+</code></pre>
+<p>Numpy的更多资料 <a href="https://numpy.org/doc/stable/reference/">https://numpy.org/doc/stable/reference/</a></p>
+<h1 id="scipy">SciPy</h1>
+<p>Numpy 提供了一个高性能的多维数组和基本工具，可以使用这些数组进行计算和操作。SciPy 以此为基础，提供了大量的函数，这些函数可以在 numpy 数组上运行，并且对于不同类型的科学和工程应用程序非常有用。</p>
+<p>官方文档：https://docs.scipy.org/doc/scipy/reference/index.html</p>
+<h2 id="image-operations">Image operations</h2>
+<p>SciPy 提供了一些处理图像的基本函数。例如，它具有将磁盘中的映像读入 numpy 数组、将 numpy 数组作为映像写入磁盘以及调整映像大小的功能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">imread</span><span class="p">,</span> <span class="n">imsave</span><span class="p">,</span> <span class="n">imresize</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>---------------------------------------------------------------------------
+
+ImportError                               Traceback (most recent call last)
+
+~\AppData\Local\Temp/ipykernel_16772/1637721638.py in &lt;module&gt;
+----&gt; 1 from scipy.misc import imread, imsave, imresize
+
+
+ImportError: cannot import name 'imread' from 'scipy.misc' (d:\python\python37\lib\site-packages\scipy\misc\__init__.py)
+</code></pre>
+<blockquote>
+<p>报错：scipy已经将imread等命令删除，需要换另一个库使用imageio
+<a href="https://blog.csdn.net/weixin_45798684/article/details/106333756">https://blog.csdn.net/weixin_45798684/article/details/106333756</a></p>
+<p>解决方案：https://blog.csdn.net/qq_38835585/article/details/105489085</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#from scipy.misc import imread, imsave, imresize</span>
+
+<span class="c1"># Read an JPEG image into a numpy array</span>
+<span class="c1">#img = imread(&#39;assets/cat.jpg&#39;)</span>
+<span class="kn">import</span> <span class="nn">imageio</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;cat.jpg&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Prints &#34;uint8 (400, 248, 3)&#34;</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>uint8 (400, 248, 3)
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># We can tint the image by scaling each of the color channels</span>
+<span class="c1"># by a different scalar constant. The image has shape (400, 248, 3);</span>
+<span class="c1"># we multiply it by the array [1, 0.95, 0.9] of shape (3,);</span>
+<span class="c1"># numpy broadcasting means that this leaves the red channel unchanged,</span>
+<span class="c1"># and multiplies the green and blue channels by 0.95 and 0.9</span>
+<span class="c1"># respectively.</span>
+<span class="n">img_tinted</span> <span class="o">=</span> <span class="n">img</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+
+<span class="c1"># Resize the tinted image to be 300 by 300 pixels.</span>
+<span class="kn">from</span> <span class="nn">skimage.transform</span> <span class="kn">import</span> <span class="n">resize</span>
+<span class="n">img_tinted</span> <span class="o">=</span> <span class="n">resize</span><span class="p">(</span><span class="n">img_tinted</span><span class="p">,</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Write the tinted image back to disk</span>
+<span class="n">imageio</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s1">&#39;cat_tinted.jpg&#39;</span><span class="p">,</span> <span class="n">img_tinted</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>Lossy conversion from float64 to uint8. Range [0.0, 255.0]. Convert image to uint8 prior to saving to suppress this warning.
+</code></pre>
+<p><img src="/images/202203/cat.jpg" alt=""><img src="/images/202203/cat_tinted.jpg" alt=""></p>
+<h2 id="distance-between-points">Distance between points</h2>
+<p>SciPy 定义了一些用于计算点集之间距离的有用函数。</p>
+<p>函数 scipy.spatial.distance.pdist 计算给定集合中所有点对之间的距离</p>
+<p>类似的函数(scipy.spatial.distance.cdist)计算两组点之间的所有对之间的距离</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
+
+<span class="c1"># Create the following array where each row is a point in 2D space:</span>
+<span class="c1">#创建以下数组，其中每一行都是二维空间中的一个点</span>
+<span class="c1"># [[0 1]</span>
+<span class="c1">#  [1 0]</span>
+<span class="c1">#  [2 0]]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Compute the Euclidean distance between all rows of x.计算所有行之间的欧氏距离</span>
+<span class="c1"># d[i, j] is the Euclidean distance between x[i, :] and x[j, :],</span>
+<span class="c1">#D [ i，j ]是 x [ i，: ]和 x [ j，: ]之间的欧几里得度量,</span>
+<span class="c1"># and d is the following array:</span>
+<span class="c1"># [[ 0.          1.41421356  2.23606798]</span>
+<span class="c1">#  [ 1.41421356  0.          1.        ]</span>
+<span class="c1">#  [ 2.23606798  1.          0.        ]]</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;euclidean&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>[[0 1]
+ [1 0]
+ [2 0]]
+[[0.         1.41421356 2.23606798]
+ [1.41421356 0.         1.        ]
+ [2.23606798 1.         0.        ]]
+</code></pre>
+<h1 id="matplotlib">Matplotlib</h1>
+<p>Matplotlib 是一个绘图库。本节简要介绍 matplotlib.pyplot 模块，该模块提供了一个类似于 MATLAB 的绘图系统。</p>
+<h2 id="plotting">Plotting</h2>
+<p>Matplotlib 中最重要的函数是 plot，它允许您绘制2d 数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Compute the x and y coordinates for points on a sine curve</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Plot the points using matplotlib</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># You must call plt.show() to make graphics appear.</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202203/8.png" alt=""></p>
+<p>​</p>
+<p>只需要一点额外的工作，我们就可以很容易地同时绘制多条线，并添加标题、图例和轴标签:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Compute the x and y coordinates for points on sine and cosine curves</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_cos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Plot the points using matplotlib</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_sin</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_cos</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x axis label&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y axis label&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sine and Cosine&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Sine&#39;</span><span class="p">,</span> <span class="s1">&#39;Cosine&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202203/9.png" alt=""></p>
+<h2 id="subplots">Subplots</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Compute the x and y coordinates for points on sine and cosine curves</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_cos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Set up a subplot grid that has height 2 and width 1,</span>
+<span class="c1"># and set the first such subplot as active.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Make the first plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_sin</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sine&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set the second subplot as active, and make the second plot.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_cos</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cosine&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show the figure.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202203/10.png" alt=""></p>
+<h2 id="images">Images</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">imageio</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;cat.jpg&#39;</span><span class="p">)</span>
+<span class="n">img_tinted</span> <span class="o">=</span> <span class="n">img</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+
+<span class="c1"># Show the original image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="c1"># Show the tinted image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># A slight gotcha with imshow is that it might give strange results</span>
+<span class="c1"># if presented with data that is not uint8. To work around this, we</span>
+<span class="c1"># explicitly cast the image to uint8 before displaying it.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="n">img_tinted</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202203/11.png" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-04
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">Python</a>
+          <a href="/tags/numpy/">Numpy</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/cv1/">
+            <span class="next-text nav-default">计算机视觉发展史</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

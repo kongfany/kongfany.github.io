@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on 大胖狗来了</title>
+    <link>https://kongfany.github.io/tags/python/</link>
+    <description>Recent content in Python on 大胖狗来了</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 04 Mar 2022 10:09:09 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Numpy</title>
+      <link>https://kongfany.github.io/post/numpy/</link>
+      <pubDate>Fri, 04 Mar 2022 10:09:09 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/numpy/</guid>
+      <description>https://cs231n.github.io/python-numpy-tutorial/#distance-between-points python 1 2 3 4 5 6 7 8 9 def quicksort(arr):#快排 if len(arr)&amp;lt;= 1: return arr pivot=arr[len(arr)//2] left = [x for x in arr if x &amp;lt; pivot] middle = [x for x in arr if x == pivot] right = [x for x in arr if x &amp;gt; pivot] return</description>
+    </item>
+    
+  </channel>
+</rss>

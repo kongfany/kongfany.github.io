@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://kongfany.github.io/tags/numpy/</loc>
+    <lastmod>2022-03-04T10:09:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/numpy/</loc>
+    <lastmod>2022-03-04T10:09:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/</loc>
+    <lastmod>2022-03-04T10:09:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/python/</loc>
+    <lastmod>2022-03-04T10:09:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/</loc>
+    <lastmod>2022-03-04T10:09:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/</loc>
+    <lastmod>2022-03-04T10:09:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://kongfany.github.io/categories/</loc>
     <lastmod>2022-03-01T22:42:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -10,20 +52,6 @@
   
   <url>
     <loc>https://kongfany.github.io/categories/computer-vision/</loc>
-    <lastmod>2022-03-01T22:42:13+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2022-03-01T22:42:13+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/</loc>
     <lastmod>2022-03-01T22:42:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -66,13 +94,6 @@
   
   <url>
     <loc>https://kongfany.github.io/tags/semi-supervised-learning/</loc>
-    <lastmod>2022-01-26T10:49:34+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/tags/</loc>
     <lastmod>2022-01-26T10:49:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
