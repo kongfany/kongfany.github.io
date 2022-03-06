@@ -6,7 +6,16 @@
     <description>Recent content in Computer-Vision on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Mar 2022 22:42:13 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/computer-vision/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Mar 2022 09:42:44 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/computer-vision/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>图像分类</title>
+      <link>https://kongfany.github.io/post/cv2/</link>
+      <pubDate>Sat, 05 Mar 2022 09:42:44 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv2/</guid>
+      <description>以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的</description>
+    </item>
+    
     <item>
       <title>计算机视觉发展史</title>
       <link>https://kongfany.github.io/post/cv1/</link>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>图像分类 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/cv2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="图像分类" />
+<meta property="og:description" content="以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/cv2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-05T09:42:44+08:00" />
+<meta property="article:modified_time" content="2022-03-05T09:42:44+08:00" />
+
+<meta itemprop="name" content="图像分类">
+<meta itemprop="description" content="以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的"><meta itemprop="datePublished" content="2022-03-05T09:42:44+08:00" />
+<meta itemprop="dateModified" content="2022-03-05T09:42:44+08:00" />
+<meta itemprop="wordCount" content="5166">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="图像分类"/>
+<meta name="twitter:description" content="以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">图像分类</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-05 </span>
+        <div class="post-category">
+            <a href="/categories/computer-vision/"> Computer-Vision </a>
+            </div>
+          <span class="more-meta"> 5166 words </span>
+          <span class="more-meta"> 11 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#挑战">挑战</a></li>
+        <li><a href="#分类算法">分类算法</a>
+          <ul>
+            <li><a href="#数据驱动">数据驱动</a></li>
+            <li><a href="#nearest-neighbor最近邻">Nearest Neighbor（最近邻）</a></li>
+            <li><a href="#l1-distance曼哈顿距离--用于比较图像的距离度量">L1 distance（曼哈顿距离）&ndash;用于比较图像的距离度量</a></li>
+            <li><a href="#k-nearest-neighborsknn-">K-Nearest Neighbors(KNN )</a></li>
+            <li><a href="#l2-distance欧式距离">L2 distance（欧式距离）</a></li>
+            <li><a href="#knn分类器k的选择">KNN分类器k的选择</a></li>
+            <li><a href="#linear-classification线性分类">Linear Classification(线性分类)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的巨大的3维数组。在这个例子中，猫的图像大小是宽248像素，高400像素，有3个颜色通道，分别是红、绿和蓝（简称RGB）。如此，该图像就包含了248X400X3=297600个数字，每个数字都是在范围0-255之间的整型，其中0表示全黑，255表示全白。我们的任务就是把这些上百万的数字变成一个简单的标签，比如“猫”。
+图像分类的任务，就是对于一个给定的图像，预测它属于的那个分类标签（或者给出属于一系列不同标签的可能性）。图像是3维数组，数组元素是取值范围从0到255的整数。数组的尺寸是宽度x高度x3，其中这个3代表的是红、绿和蓝3个颜色通道。</p>
+<p><img src="/images/202203/12.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C12.png" alt=""></p>
+<p><code>语义鸿沟：</code>对于猫咪的概念或者标签，是我们赋给图像的一个语义标签，一只猫咪的语义概念和计算机实际看到的像素值之间有着巨大的差距。</p>
+<h2 id="挑战">挑战</h2>
+<ul>
+<li>视角变化</li>
+<li>照明问题</li>
+<li>形变</li>
+<li>遮挡</li>
+<li>背景</li>
+<li>类内差异：（猫有不听的外形，大小，颜色，年龄。。。）</li>
+</ul>
+<h2 id="分类算法">分类算法</h2>
+<h3 id="数据驱动">数据驱动</h3>
+<ul>
+<li>收集图像和标签的数据集</li>
+<li>使用机器学习训练分类器</li>
+<li>在新图像上评估分类器</li>
+</ul>
+<p>可以定义两个函数，一个是训练函数，用来接收图片和标签，然后输出模型；另一个数预测函数，接收一个模型，对图片种类进行预测。</p>
+<h3 id="nearest-neighbor最近邻">Nearest Neighbor（最近邻）</h3>
+<p>在训练过程中，我们只是单纯的记录所有的训练数据；在预测过程中，拿新的图像与已训练好的训练对比，进行预测。</p>
+<p><img src="/images/202203/13.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C13.png" alt=""></p>
+<p><code>CIFAR-10数据集：</code>这个数据集包含了60000张32X32的小图像。每张图像都有10种分类标签中的一种。这60000张图像被分为包含50000张图像的训练集和包含10000张图像的测试集。http://www.cs.toronto.edu/~kriz/cifar.html</p>
+<p><img src="/images/202203/14.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C14.png" alt=""></p>
+<h3 id="l1-distance曼哈顿距离--用于比较图像的距离度量">L1 distance（曼哈顿距离）&ndash;用于比较图像的距离度量</h3>
+<p><img src="/images/202203/15.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C15.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ 
+<span class="k">class</span> <span class="nc">NearestNeight</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+ 
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34; 
+</span><span class="s2">    memorize the training data.
+</span><span class="s2">    Inputs:
+</span><span class="s2">    - X: 一个形状为 (num_train, D) 的 numpy 数组，其中包含由 num_train 个样本组成的训练数据，每个样本维度为 D。
+</span><span class="s2">    - y:包含训练标签的 numpy 形状 (N,) 数组，其中 y[i] 是 X[i] 的标签。
+</span><span class="s2">    &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span>
+ 
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">   	使用 L1 距离计算 x 中每个测试点与 self.X_train 中每个训练点之间的距离
+</span><span class="s2">    Inputs:
+</span><span class="s2">    - x: 包含测试数据的 numpy 形状数组 (num_test, D)
+</span><span class="s2">    Returns:
+</span><span class="s2">    - y_pred: 一个形状为 (num_test, num_train) 的 numpy 数组
+</span><span class="s2">    &#34;&#34;&#34;</span>
+        <span class="n">num_test</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_test</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_test</span><span class="p">):</span>
+            <span class="c1"># 求和</span>
+            <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1">#求最小索引</span>
+            <span class="n">min_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+            <span class="c1">#排序</span>
+            <span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">[</span><span class="n">min_index</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">y_pred</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>train:O(1),predict:O(N)&ndash;&gt;这是不好的：我们需要预测速度快的分类器；慢点训练也可以</p>
+<h4 id="最近邻分类器的决策区域">最近邻分类器的决策区域</h4>
+<p>训练集包含二维平面中的这些点，点的颜色代表不同的类别或不同的标签，这里有五种类型的点。对于这些点来说，将计算这些训练数据中最近的实例，然后在这些点的背景上着色，标示出它的类标签，可以发现最近邻分类器是根据相邻的点来切割空间并进行着色。（区域边界就是点连线的垂直平分）</p>
+<p>但是通过上述图片中，可以看到绿色区域中间的黄色区域（事实上该点应该是绿色的），蓝色区域中有绿色区域的一部分，这些都说明了最近邻分类器的处理是有问题的。（这里的意思是可能训练集中的数据有label错误的情况，就是中间的黄点。就是有点在中心黄色圈里邻近算法可能无法正确预测）</p>
+<p><img src="/images/202203/16.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C16.png" alt=""></p>
+<h3 id="k-nearest-neighborsknn-">K-Nearest Neighbors(KNN )</h3>
+<p>它不仅是寻找最近的点，还会做一些特殊的操作，根据距离度量，找到最近的K个点，然后在这些相邻点中进行投票，票数多的近邻点预测出结果。</p>
+<p><img src="/images/202203/17.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C17.png" alt=""></p>
+<p>在K=3时，可以看到绿色区域中的黄色点不再会导致周围的区域被划分成黄色，因为使用了多数投票，中间的这个绿色区域都会被划分成绿色；在K=5时，可以看到蓝色和红色区域间的决策边界变得更加平滑好看。</p>
+<p>白色区域表示这个区域没有获得K-最近邻的投票，可以做大胆的假设，把它划分为一个不同的类别。</p>
+<p>所以使用最近邻分类器时，总会给K赋一个比较大的值，这会是决策边界变得更加平滑，从而得到更好的结果。</p>
+<h3 id="l2-distance欧式距离">L2 distance（欧式距离）</h3>
+<p><img src="/images/202203/18.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C18.png" alt=""></p>
+<p>L1取决于你选择的坐标系统，所以如果转动坐标轴，将会改变点之间的L1距离；而改变坐标轴对L2距离无影响。</p>
+<p>主要和解决的问题相关，很难说哪一种更好，因为L1有坐标依赖，其依赖于数据的坐标系统，如果你有一个向量，如出于某种原因要对员工进行分类，向量的不同元素对应员工的不同特征，如果向量中的各个元素有着实际意义，那么L1可能更加好一点。最佳的方法就是两个都尝试下，看看哪个效果更佳。</p>
+<p>通过使用不同的距离度量，可以将K-最近邻分类器泛化到许多不同的数据类型上，而不仅仅是向量和图像。例如，假设想对文本进行分类，那么要做的就是对KNN指定一个距离函数，这个函数可以测量两段、两句话之间的距离。</p>
+<p>因此，通过指定不同的距离度量，就可以很好地应用这个算法在基本上任何数据类型的数据上
+下面不同距离的决策边界的形状变化很大，L1中这些决策边界趋于跟随坐标轴，又是因为L1取决于我们选择的坐标系，L2对距离的排序不会受到坐标轴的影响，只是吧边界放置在最自然的地方。</p>
+<p><img src="/images/202203/19.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C19.png" alt=""></p>
+<p>可以在http://vision.stanford.edu/teaching/cs231n-demos/knn/尝试这个KNN，实际上是非常有趣的，可以很好地培养决策边界的直觉。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span><span class="lnt">98
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ 
+<span class="k">class</span> <span class="nc">KNN_L2</span><span class="p">:</span>
+ 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+ 
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span>
+ 
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">num_loops</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num_loops</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">dists</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compute_distances_no_loops</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">num_loops</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">dists</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compute_distances_one_loops</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">num_loops</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">dists</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compute_distances_one_loops</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict_labels</span><span class="p">(</span><span class="n">dists</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+ 
+    <span class="c1">#双重循环</span>
+    <span class="k">def</span> <span class="nf">compute_distances_two_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+     <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Compute the distance between each test point in X and each training point
+</span><span class="s2">    in self.X_train using a nested loop over both the training data and the 
+</span><span class="s2">    test data.
+</span><span class="s2">    Inputs:
+</span><span class="s2">    - X: A numpy array of shape (num_test, D) containing test data.
+</span><span class="s2">    Returns:
+</span><span class="s2">    - dists: A numpy array of shape (num_test, num_train) where dists[i, j]
+</span><span class="s2">      is the Euclidean distance between the ith test point and the jth training
+</span><span class="s2">      point.
+</span><span class="s2">    &#34;&#34;&#34;</span>
+        <span class="n">num_test</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">num_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_test</span><span class="p">,</span><span class="n">num_train</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_test</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_train</span><span class="p">):</span>
+                <span class="c1">#X[i,:]是取第i维中下标为i的元素的所有数据，第i行（从0开始）</span>
+                <span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:])</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">dists</span>
+ 
+    <span class="c1"># 一层循环</span>
+    <span class="k">def</span> <span class="nf">compute_distances_one_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Compute the distance between each test point in X and each training point
+</span><span class="s2">    in self.X_train using a single loop over the test data.
+</span><span class="s2">    Input / Output: Same as compute_distances_two_loops
+</span><span class="s2">    &#34;&#34;&#34;</span>
+        <span class="n">num_test</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">num_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_test</span><span class="p">,</span> <span class="n">num_train</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_test</span><span class="p">):</span>
+            <span class="c1">#np.square(x) ： 计算数组各元素的平方</span>
+            <span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">dists</span>
+ 
+    <span class="c1">#无循环</span>
+    <span class="k">def</span> <span class="nf">compute_distances_no_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+   <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Compute the distance between each test point in X and each training point
+</span><span class="s2">    in self.X_train using no explicit loops.
+</span><span class="s2">    Input / Output: Same as compute_distances_two_loops
+</span><span class="s2">    &#34;&#34;&#34;</span>
+        <span class="n">num_test</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">num_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_test</span><span class="p">,</span> <span class="n">num_train</span><span class="p">))</span>
+        <span class="n">test_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">train_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">inner_product</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">inner_product</span> <span class="o">+</span> <span class="n">test_sum</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">train_sum</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dists</span>
+ 
+    <span class="k">def</span> <span class="nf">predict_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dists</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+  <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Given a matrix of distances between test points and training points,
+</span><span class="s2">    predict a label for each test point.
+</span><span class="s2">    Inputs:
+</span><span class="s2">    - dists: A numpy array of shape (num_test, num_train) where dists[i, j]
+</span><span class="s2">      gives the distance betwen the ith test point and the jth training point.
+</span><span class="s2">    Returns:
+</span><span class="s2">    - y: A numpy array of shape (num_test,) containing predicted labels for the
+</span><span class="s2">      test data, where y[i] is the predicted label for the test point X[i].  
+</span><span class="s2">    &#34;&#34;&#34;</span>
+        <span class="n">num_test</span> <span class="o">=</span> <span class="n">dists</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_test</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_test</span><span class="p">):</span>
+       <span class="c1"># # A list of length k storing the labels of the k nearest neighbors to</span>
+      <span class="c1"># the ith test point.</span>
+            <span class="n">closest_y</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="c1"># Use the distance matrix to find the k nearest neighbors of the ith    #</span>
+      <span class="c1"># testing point, and use self.y_train to find the labels of these       #</span>
+      <span class="c1"># neighbors. Store these labels in closest_y.                           #</span>
+      <span class="c1"># Hint: Look up the function numpy.argsort.</span>
+            <span class="n">y_indicies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">closest_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">[</span><span class="n">y_indicies</span><span class="p">[:</span> <span class="n">k</span><span class="p">]]</span>
+            <span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">closest_y</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">y_pred</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="knn分类器k的选择">KNN分类器k的选择</h3>
+<p>错误的策略：</p>
+<ul>
+<li>
+<p>选择能对训练集给出最高的准确率、表现最佳的超参数；</p>
+<p>不要这么做，在机器学习中，不是要尽可能拟合训练集，而是要让分类器在训练集以外的未知数据上表现更好。如在k最近邻算法中，假设k=1，我们总能完美的分类训练集数据，在实践中，让k取更大的值，尽管会在训练集中分错个别数据，但对于训练集中未出现过的数据分类性能更佳。</p>
+</li>
+<li>
+<p>所有的数据分成两部分：一部分是训练集，另一部分是测试集，然后在训练集上使用不同的超参数来训练算法，将训练好的分类器用在测试集上，再选择一组在测试集上表现最好的超参数；</p>
+<p>同样不要这么做，机器学习系统的目的是让我们了解算法表现究竟如何，所以测试集的目的是给我们一种预估方法，如果采用这种方法，只能让我们算法在这组测试集上表现良好，但它无法代表在未见过的数据上的表现。</p>
+</li>
+</ul>
+<p><img src="/images/202203/20.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C20.png" alt=""></p>
+<p>正确的策略：</p>
+<ul>
+<li>所有数据分成三部分：训练集、验证集和测试集，大部分数据作为训练集，通常所做的是在训练集上用不同的超参数来训练算法，在验证集上进行评估，然后用一组超参选择在验证集上表现最好的，再把这组验证集上表现最好的分类器拿出来在测试集上运行，这才是正确的方法。</li>
+<li>交叉验证：在深度学习中不太常见。有时候，训练集数量较小（因此验证集的数量更小），这种方法更加复杂些。还是用刚才的例子，如果是交叉验证集，我们就不是取1000个图像，而是将训练集平均分成5份，其中4份用来训练，1份用来验证。然后我们循环着取其中4份来训练，其中1份来验证，最后取所有5次验证结果的平均值作为算法验证结果。</li>
+</ul>
+<p><img src="/images/202203/21.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C21.png" alt=""></p>
+<p>问题：训练集和验证集的区别是什么？</p>
+<p>答：算法可以看到训练集中的各个标签，但是在验证集中，只是用验证其中的标签来检查算法的表现。</p>
+<p>问题：测试集不能很好的代表真实的数据？</p>
+<p>答：统计学假设数据都相互独立，服从同一分布，数据中所有的点都来自同一概率分布，当然现实中不可能总是这样，肯定会遇到一些例外，也就是测试集代表性不佳，不能很好的反应真实世界。</p>
+<p><img src="/images/202203/22.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C22.png" alt=""></p>
+<p>横轴表示K-近邻分类器中的参数K值，纵轴表示分类器对不同K值在数据上的准确率。5份交叉验证对k值调优的例子，对每个K值，得到5个准确率结果，取其平均值，然后对不同k值的平均表现画线连接。本例中，当k=7的时算法表现最好（对应图中的准确率峰值）。如果我们将训练集分成更多份数，直线一般会更加平滑（噪音更少）。所以当训练一个机器学习的模型时，最后要画这样一张图，从中可以看出算法的表现以及各个超参数之间的关系，最终可以选出在验证集上最好的模型以及相应的超参数。</p>
+<p>其实，KNN在图像分类中很少用到。</p>
+<ul>
+<li>
+<p>它的测试时间非常慢；</p>
+</li>
+<li>
+<p>像欧式距离或者L1距离这样的衡量标准用在比较图像上不太合适；这种向量化的距离函数不太适合表示图像之间视觉的相似度。</p>
+</li>
+<li>
+<p>维度灾难：KNN有点像把样本空间分成几块，意味着如果希望分类器有好的效果，需要训练数据密集的分布在空间中；而问题在于，想要密集的分布在样本空间中，需要指数倍的训练数据，然而不可能拿到这样高维空间中的像素。</p>
+<p>（这里的维度是不是可以理解为特征，如果有三个特征想要稠密覆盖就需要立方体那么多的点。我感觉这里的维度相当于特征数，特征越多，在训练的时候出现过拟合的风险越高（数据数量一定），所以为了避免这种情况，纬度越高时所需要的数据量应该呈指数倍增长。KNN需要和训练集比较，所以如果训练集不够稠密的话，新的预测会和已有的分类距离太远导致无法预测）</p>
+</li>
+</ul>
+<p><img src="/images/202203/23.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C23.png" alt=""></p>
+<p>最左边是最原始的图片，右边是经过处理的图片，如遮住嘴，向下平移几个像素的距离，或者把整幅图染的偏蓝，如果计算原图和遮挡的图、平移、染色的图之间的欧几里得距离，结果是一样的，L2确实不适合表示图像之间视觉感知的差异。</p>
+<h3 id="linear-classification线性分类">Linear Classification(线性分类)</h3>
+<p>在线性分类中，将采用与K-最近邻稍有不同的方法，线性分类是参数模型中最简单的例子，以下图为例：</p>
+<p><img src="/images/202203/24.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C24.png" alt=""></p>
+<p>通常把输入数据设为x，权重设为w，现在写一些函数包含了输入参数x和参数w，然后就会有10个数字描述的输出，即在CIFAR-10中对应的10个类别所对应的分数。</p>
+<p>图像中的3:指的是3种颜色通道，红绿蓝。因为经常和彩色图像打交道，所以这3种通道信息就是不想丢掉的好信息。</p>
+<p>现在，在这个参数化的方法中，我们总结对训练数据的认知并把它都用到这些参数w中。在测试的时候，不再需要实际的训练数据，只需要这些参数W，这使得模型更有效率。</p>
+<p>在深度学习中，整个描述都是关于函数F正确的结构，可以来编写不同的函数形式用不同的、复杂的方式组合权重和数据，这些对应于不同的神经网络体系结构，将他们相乘是最简单的组合方式，这就是一个线性分类器。</p>
+<p><img src="/images/202203/25.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C25.png" alt=""></p>
+<ul>
+<li>b：偏置项，他是一个10元素的常数向量，它不遇训练数据交互，而只给我们一些数据独立的偏好值。如果数据集是不平衡的，即猫的数量多于狗的数量的时候，那么与猫对应的偏差元素就会比其他的要高。</li>
+</ul>
+<p><img src="/images/202203/26.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C26.png" alt=""></p>
+<p>我们把2*2的图像拉伸成一个有4个元素的列向量，在这个例子中，只限制了3类：猫，狗，船；权重矩阵w是3行4列（4个像素3个类）；加上一个3元偏差向量，它提供了每个类别的数据独立偏差项；现在可以看到猫的分数是图像像素和权重矩阵之间的输入乘积加上偏置项。</p>
+<p>线性分类器的另一个观点是回归到图像，作为点和高维空间的概念，可以想像每一张图像都是类似高维空间中的一个点，现在线性分类器尝试在线性决策边界上画一个线性分类面来划分一个类别和剩余其他类别，如下图所示：</p>
+<p><img src="/images/202203/27.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C27.png" alt=""></p>
+<p>在训练过程中，这些线条会随机地开始，然后快速变化，试图将数据正确区分开，但是从这个高维的角度考虑线性分类器，就能再次看到线性分类器中出现的问题。</p>
+<p>假设有一个两类别的数据集，蓝色和红色，蓝色类别是图像中像素数量大于0且都是奇数；红色类别是图像中像素数量大于0且都是偶数，如果去画这些不同的决策，能看到奇数像素点的蓝色类别在平面上有两个象限，所以没有办法能够绘制一条单独的直线来划分蓝色和红色，这就是线性分类器的问题所在。当然线性分类器还有其他难以解决的情况，比如多分类问题。</p>
+<p><img src="/images/202203/28.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C28.png" alt=""></p>
+<p>因此，线性分类器的确存在很多问题，但它是一个非常简单的算法，易于使用和理解。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/hawkl123/article/details/83542223">https://blog.csdn.net/hawkl123/article/details/83542223</a></p>
+<p><a href="https://blog.csdn.net/Nicht_sehen/article/details/80506655">https://blog.csdn.net/Nicht_sehen/article/details/80506655</a></p>
+<p><a href="https://blog.csdn.net/zhangxb35/article/details/55223825">https://blog.csdn.net/zhangxb35/article/details/55223825</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-05
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/numpy/">
+            <span class="next-text nav-default">Numpy</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
