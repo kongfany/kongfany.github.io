@@ -49,7 +49,7 @@
 <meta itemprop="name" content="图像分类">
 <meta itemprop="description" content="以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的"><meta itemprop="datePublished" content="2022-03-05T09:42:44+08:00" />
 <meta itemprop="dateModified" content="2022-03-05T09:42:44+08:00" />
-<meta itemprop="wordCount" content="5166">
+<meta itemprop="wordCount" content="7030">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="图像分类"/>
 <meta name="twitter:description" content="以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/computer-vision/"> Computer-Vision </a>
             </div>
-          <span class="more-meta"> 5166 words </span>
-          <span class="more-meta"> 11 mins read </span>
+          <span class="more-meta"> 7030 words </span>
+          <span class="more-meta"> 15 mins read </span>
         
       </div>
     </header>
@@ -290,7 +290,15 @@
 <h3 id="l2-distance欧式距离">L2 distance（欧式距离）</h3>
 <p><img src="/images/202203/18.png" alt=""></p>
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C18.png" alt=""></p>
-<p>L1取决于你选择的坐标系统，所以如果转动坐标轴，将会改变点之间的L1距离；而改变坐标轴对L2距离无影响。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Xtr</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,:]),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>L1取决于你选择的坐标系统，所以如果转动坐标轴，将会改变点之间的L1距离；而改变坐标轴对L2距离无影响。</p>
 <p>主要和解决的问题相关，很难说哪一种更好，因为L1有坐标依赖，其依赖于数据的坐标系统，如果你有一个向量，如出于某种原因要对员工进行分类，向量的不同元素对应员工的不同特征，如果向量中的各个元素有着实际意义，那么L1可能更加好一点。最佳的方法就是两个都尝试下，看看哪个效果更佳。</p>
 <p>通过使用不同的距离度量，可以将K-最近邻分类器泛化到许多不同的数据类型上，而不仅仅是向量和图像。例如，假设想对文本进行分类，那么要做的就是对KNN指定一个距离函数，这个函数可以测量两段、两句话之间的距离。</p>
 <p>因此，通过指定不同的距离度量，就可以很好地应用这个算法在基本上任何数据类型的数据上
@@ -556,14 +564,45 @@
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C25.png" alt=""></p>
 <ul>
 <li>b：偏置项，他是一个10元素的常数向量，它不遇训练数据交互，而只给我们一些数据独立的偏好值。如果数据集是不平衡的，即猫的数量多于狗的数量的时候，那么与猫对应的偏差元素就会比其他的要高。</li>
+<li>注意单个矩阵乘法分类器 Wxi 实际上并行计算了10个独立的分类器(每个类一个) ，其中每个分类器是一行 w。</li>
+<li>我们认为输入数据(xi，yi)是已知的和固定的，但是我们可以控制参数 w，b 的设置。我们的目标将是设置这些在这样的方式，计算得分匹配地面真相标签跨越整个培训集。直观地说，我们希望正确的类的得分高于不正确的类的得分。</li>
+<li>这种方法的一个优点是利用训练数据学习参数 w，b，但一旦学习完成，我们可以丢弃整个训练集，只保留学习参数。这是因为可以简单地通过函数转发一个新的测试图像，并根据计算得分进行分类。</li>
+<li>请注意，对测试图像进行分类涉及单个矩阵乘法和加法，这比将测试图像与所有训练图像进行比较要快得多。</li>
 </ul>
 <p><img src="/images/202203/26.png" alt=""></p>
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C26.png" alt=""></p>
-<p>我们把2*2的图像拉伸成一个有4个元素的列向量，在这个例子中，只限制了3类：猫，狗，船；权重矩阵w是3行4列（4个像素3个类）；加上一个3元偏差向量，它提供了每个类别的数据独立偏差项；现在可以看到猫的分数是图像像素和权重矩阵之间的输入乘积加上偏置项。</p>
-<p>线性分类器的另一个观点是回归到图像，作为点和高维空间的概念，可以想像每一张图像都是类似高维空间中的一个点，现在线性分类器尝试在线性决策边界上画一个线性分类面来划分一个类别和剩余其他类别，如下图所示：</p>
+<ul>
+<li>线性分类器通过计算一个类的所有像素值在所有3个颜色通道上的加权和来计算该类的得分。根据我们为这些权重设置的精确值，函数具有在图像的某些位置喜欢或不喜欢某些颜色(取决于每个权重的符号)的能力。</li>
+<li>例如，您可以想象，如果图像的侧面有很多蓝色(这可能与水相对应) ，那么“船”类更有可能出现。</li>
+<li>您可能会期望“船”分类器在其蓝色通道权重上会有很多正权重(蓝色的存在会增加船的得分) ，而在红色/绿色通道上会有负权重(红色/绿色的存在会减少船的得分)。</li>
+</ul>
+<p>我们将图像像素拉伸成一列，然后执行矩阵乘法分析来得到每个类的得分。我们把2*2的图像拉伸成一个有4个元素的列向量(4个单色像素，为了简洁起见，我们没有考虑这个例子中的颜色通道。这里的颜色只表示3个类，与 RGB 通道没有关系。)，在这个例子中，只限制了3类：猫，狗，船；权重矩阵w是3行4列（4个像素3个类）；加上一个3元偏差向量，它提供了每个类别的数据独立偏差项；现在可以看到猫的分数是图像像素和权重矩阵之间的输入乘积加上偏置项。</p>
+<p>注意，这个特殊的权重集 w 一点都不好: 权重分配给我们的猫图像一个非常低的猫得分。特别是，这组重量似乎确信它看到的是一条狗。</p>
+<p>线性分类器的另一个观点是回归到图像，作为点和高维空间的概念，可以想像每一张图像都是类似高维空间中的一个点。</p>
+<p>由于图像被拉伸成高维的列向量，我们可以将每个图像解释为这个空间中的一个点(例如 cifar-10中的每个图像是3072维空间中的一个点，32x32x3像素)。类似地，整个数据集是一组(带标签的)点。</p>
+<p>由于我们将每个类的得分定义为所有图像像素的加权和，因此每个类的得分都是该空间上的线性函数。我们无法将3072维空间可视化，但如果我们想象将所有这些维度压缩成只有两个维度，那么我们就可以尝试将分类器可能在做什么可视化:</p>
+<p>现在线性分类器尝试在线性决策边界上画一个线性分类面来划分一个类别和剩余其他类别，如下图所示：</p>
 <p><img src="/images/202203/27.png" alt=""></p>
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C27.png" alt=""></p>
+<p>正如我们在上面看到的，W 的每一行都是其中一个类的分类器。对这些数字的几何解释是，当我们改变 W 的一行时，像素空间中相应的线将向不同的方向旋转。另一方面，偏差 b 允许我们的分类器翻译这些行。特别要注意的是，如果没有偏差项，插入 xi = 0，那么不管权重如何，得分都是0，所以所有的直线都会被迫穿过原点。</p>
 <p>在训练过程中，这些线条会随机地开始，然后快速变化，试图将数据正确区分开，但是从这个高维的角度考虑线性分类器，就能再次看到线性分类器中出现的问题。</p>
+<p><img src="/images/202203/29.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C29.png" alt=""></p>
+<p>线性分类器的模板匹配解释：</p>
+<ul>
+<li>对于权重 W 的另一种解释是，W 的每一行对应于其中一个类的模板(或者有时也称为原型)。</li>
+<li>通过将每个模板与使用内积(或点积)的图像逐一进行比较，找到最适合的图像，从而获得图像的每个类的得分。</li>
+<li>另一种思考方式是，我们仍然在有效地做最近的邻居，但不是有成千上万的训练图像，我们只使用一个单一的图像每类(虽然我们会学习它，它不一定是一个图像在训练集) ，我们使用(负)内积作为距离，而不是 l1或 l2的距离。</li>
+<li>例如，ship 模板如预期一样包含大量的蓝色像素。因此，这个模板将给出一个高分，一旦它与图像的船舶在海洋与内部的产品。</li>
+<li>线性分类器太弱了，无法正确解释不同颜色的汽车，但正如我们将在后面看到的神经网络将允许我们执行这项任务。</li>
+</ul>
+<p><code>bias trick</code>（偏置技巧）</p>
+<p><img src="/images/202203/30.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C30.png" alt=""></p>
+<p>做一个矩阵乘法，然后添加一个偏向量(左)等价于添加一个常数为1的偏向维度到所有的输入向量和扩大1列的权重矩阵&ndash;一个偏向列(右)。因此，如果我们对数据进行预处理，在所有的向量后面加上一个，我们只需要学习一个单一的权重矩阵，而不需要学习两个矩阵，这两个矩阵包含权重和偏差。</p>
+<p>一个常用的技巧是将两组参数组合成一个矩阵，通过将向量 xi 扩展为一个始终保持常数 1 的附加维度（默认偏差维度），从而将这两个参数组合到一个矩阵中。 有了额外的维度，新的得分函数将简化为单个矩阵乘法。</p>
+<p><code>Image data preprocessing</code>(图像数据预处理)</p>
+<p>简单地说，在上面的示例中，我们使用了原始像素值(范围从[0&hellip; 255])。在机器学习中，总是执行输入特征的标准化是一种非常常见的做法(对于图像，每个像素都被认为是一个特征)。特别是，通过从每个特征中减去平均值来确定数据的中心是很重要的。在图像的情况下，这相当于计算一个平均图像跨训练图像和减去它从每个图像得到的像素范围大约[-127&hellip; 127]。进一步常见的预处理是缩放每个输入特征，使其值范围从[-1,1]。其中，零均值中心可以说是更重要的，但我们将不得不等待它的证明，直到我们了解动态的梯度下降法。</p>
 <p>假设有一个两类别的数据集，蓝色和红色，蓝色类别是图像中像素数量大于0且都是奇数；红色类别是图像中像素数量大于0且都是偶数，如果去画这些不同的决策，能看到奇数像素点的蓝色类别在平面上有两个象限，所以没有办法能够绘制一条单独的直线来划分蓝色和红色，这就是线性分类器的问题所在。当然线性分类器还有其他难以解决的情况，比如多分类问题。</p>
 <p><img src="/images/202203/28.png" alt=""></p>
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C28.png" alt=""></p>
@@ -594,7 +633,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/cv3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">损失函数和最优化</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/numpy/">
             <span class="next-text nav-default">Numpy</span>
             <span class="next-text nav-mobile">Next</span>

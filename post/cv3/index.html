@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>损失函数和最优化 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="损失函数 回到一个猫的示例图像及其在“ cat”、“ dog”和“ ship”类别中的得分，我们看到该示例中的特定权重组合一点都不好: 我们输入了描述" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/cv3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="损失函数和最优化" />
+<meta property="og:description" content="损失函数 回到一个猫的示例图像及其在“ cat”、“ dog”和“ ship”类别中的得分，我们看到该示例中的特定权重组合一点都不好: 我们输入了描述" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/cv3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-06T16:09:18+08:00" />
+<meta property="article:modified_time" content="2022-03-06T16:09:18+08:00" />
+
+<meta itemprop="name" content="损失函数和最优化">
+<meta itemprop="description" content="损失函数 回到一个猫的示例图像及其在“ cat”、“ dog”和“ ship”类别中的得分，我们看到该示例中的特定权重组合一点都不好: 我们输入了描述"><meta itemprop="datePublished" content="2022-03-06T16:09:18+08:00" />
+<meta itemprop="dateModified" content="2022-03-06T16:09:18+08:00" />
+<meta itemprop="wordCount" content="2774">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="损失函数和最优化"/>
+<meta name="twitter:description" content="损失函数 回到一个猫的示例图像及其在“ cat”、“ dog”和“ ship”类别中的得分，我们看到该示例中的特定权重组合一点都不好: 我们输入了描述"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">损失函数和最优化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-06 </span>
+        <div class="post-category">
+            <a href="/categories/computer-vision/"> Computer-Vision </a>
+            </div>
+          <span class="more-meta"> 2774 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#损失函数">损失函数</a></li>
+        <li><a href="#multiclass-svm-loss">Multiclass SVM loss</a>
+          <ul>
+            <li><a href="#hinge-loss">Hinge loss</a></li>
+          </ul>
+        </li>
+        <li><a href="#正则化">正则化</a></li>
+        <li><a href="#softmax-classifier">Softmax Classifier</a></li>
+        <li><a href="#optimization">Optimization</a></li>
+        <li><a href="#图像特征">图像特征</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="损失函数">损失函数</h2>
+<p>回到一个猫的示例图像及其在“ cat”、“ dog”和“ ship”类别中的得分，我们看到该示例中的特定权重组合一点都不好: 我们输入了描述猫的像素，但与其他类别相比，猫的得分非常低(- 96.8)(狗得分437.9，船得分61.95)。我们将用损失函数(有时也称为成本函数或目标)来衡量我们对结果的不满。直观地说，如果我们对培训数据分类不当，损失会很大，如果我们做得好，损失会很小。</p>
+<p><img src="/images/202203/31.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C31.png" alt=""></p>
+<ul>
+<li>3个训练样本，三个类，预测函数f(x,W)=Wx,W的分数如图</li>
+<li>损失函数告诉我们当前的分类器有多好</li>
+<li>训练数据集x，y。有N个样本，x是算法的输入，即为图片每个像素点所构成的数据集。y是希望算法预测出来的东西，标签或目标（即真值），y是尝试将图片分类到十个中的一个，即为一个1-10的整数，或0-9。这个整数表明，对于图片x哪个分类是正确的。</li>
+<li>有了这个关于x的预测函数f（通过样本x和权重矩阵W给出y的预测）之后，即可定义损失函数Li，即通过预测函数f给出的预测的分数，和真实的目标或者说是标签y可以定量的描述训练样本预测的好不好</li>
+<li>损失函数L在整个数据集中N个样本的损失函数的总和的平均。</li>
+<li>想要用某个损失函数定量的描述参数W是否令人满意，然后在所有的W中，找到训练集上损失函数极小化的W</li>
+</ul>
+<h2 id="multiclass-svm-loss">Multiclass SVM loss</h2>
+<p><strong>Multiclass Support Vector Machine</strong> (SVM) loss：多类支持向量机的损失</p>
+<p>单个例子的损失函数Li</p>
+<ul>
+<li>除了真实的分类Yi以外，对所有分类Y都做加和，也就是说我们在所有错误的分类上做和，然后比较正确分类的分数和错误分类的分数，如果正确分类的分数比错误分类的分数高，且高出某个安全的边距，这里把边际设为1。</li>
+<li>如果真实的分数很高，或者真实分类的分数比其他错误分类的分数都要高很多，那么损失为0</li>
+<li>把图片对每个错误分类的损失加起来，就可以得到数据集中这个样本的最终损失。</li>
+<li>然后对整个训练集取平均</li>
+</ul>
+<h3 id="hinge-loss">Hinge loss</h3>
+<p>合页损失函数</p>
+<p><img src="/images/202203/32.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C32.png" alt=""></p>
+<ul>
+<li>x轴表示Syi，是训练样本真实分类的分数。Sj是通过分类器预测出来类的分数。y轴是损失</li>
+<li>随着真实分类的分数提升,损失会线性下降，一直到分数超过了一个阈值，损失函数就会是0。因为我们已经为这个样本成功的分类。</li>
+<li>L(cat)=max(0,5.1-3.2+1)+max(0,-1.7-3.2+1)=max(0,2.9)+max(0,-3.9)=2.9</li>
+<li>这也一定程度上表明2.9是分类器对于这一训练样例，训练得多好的一个量化衡量指标。</li>
+<li>L(car)=max(0,1.3-4.9+1)+max(0，2.0-4.9+1)=0</li>
+<li>完整数据集放入损失为平均值。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">L_i_vectorized</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+  <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">  A faster half-vectorized implementation. half-vectorized
+</span><span class="s2">  refers to the fact that for a single example the implementation contains
+</span><span class="s2">  no for loops, but there is still one loop over the examples (outside this function)
+</span><span class="s2">  &#34;&#34;&#34;</span>
+  <span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0</span>
+  <span class="n">scores</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="c1"># compute the margins for all classes in one vector operation</span>
+  <span class="n">margins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">scores</span> <span class="o">-</span> <span class="n">scores</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span>
+  <span class="c1"># on y-th position scores[y] - scores[y] canceled and gave delta. We want</span>
+  <span class="c1"># to ignore the y-th position and only consider margin on max wrong class</span>
+  <span class="n">margins</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">loss_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">margins</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">loss_i</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="正则化">正则化</h2>
+<p>假设我们找到了一个W，使得L=0。但是W并不唯一。如何进行选择W。</p>
+<p>我们仅仅告诉分类器，他需要找到可以拟合训练集的W，但实际上我们并不关心拟合训练数据。机器学习的重点是，我们使用训练数据来找到一些分类器，然后将这个东西应用于测试数据。所以我们并不关心训练集的表现，只关心这个分类器的测试数据的表现。</p>
+<p>所以如果仅仅告诉分类器，只需要拟合训练集的话，就有可能陷入尴尬的境地。分类器可能会行为反常。</p>
+<p>假设我们有这样的数据集，就是图中的蓝点，并且我们将会为训练数据拟合一些曲线。如果我们告诉分类器做的唯一的事情就是尝试和适合训练数据，他可能会成为非常曲折的曲线，尝试完美分类所有的训练数据点，这很糟糕，因为我们实际并不关心（过拟合）。我们关心测试数据的性能，新的数据进来后，蓝色分类就错误了，实际上更希望分类器可能是预测的绿色的直线。而不是非常复杂的完全适合所有的训练数据的蓝线。</p>
+<p><img src="/images/202203/33.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C33.png" alt=""></p>
+<p>解决方法：正则化。所以要为损失函数添加一个附加的项，除了数据丢失外（告诉分类器需要拟合数据集外），通常会添加一个项到损失函数中，这个项称为正则项，鼓励模型以某种方式选择更简单的W，这里所谓的简约，取决于任务的规模和模型的种类。体现了Occam’s Razor的理念，要让理论的应用更广泛，也就是说，如果你有很多个可以解释你观察结果的假设，一般来说，你应该选择最简约的。因为这样可以在未来将其用于解释新的观察结果。直接假设正则化惩罚项，R。超参数λ来平衡这两个项。</p>
+<h2 id="softmax-classifier">Softmax Classifier</h2>
+<p>多项式逻辑回归</p>
+<p><img src="/images/202203/34.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C34.png" alt=""></p>
+<p>指数化&ndash;归一化&ndash;损失函数-logp</p>
+<p>svm损失函数：只关心的是正确的分值要比不正确的分值高出一个边际。</p>
+<p>softmax：目标是将概率质量函数（离散分布值）等于1。</p>
+<h2 id="optimization">Optimization</h2>
+<p>最优化</p>
+<p>（1）在实践中，倾向于从某个解决方案开始，使用多种不同的迭代方法，然后逐步对它进行改进，一种方法就是随机搜索：需要有很多的权重值随机采样，然后将它们输入损失函数，看看效果如何，但这不是一个好的方法。</p>
+<p>（2）另一种方法是梯度下降：梯度是偏导数的向量，它指向函数增加最快的方向，相应的负梯度方向就指向了函数下降最快的方向；梯度给出了函数当前点的一阶线性逼近，很多深度学习应用都是在计算函数的梯度，然后利用这些梯度迭代更新参数向量。</p>
+<p>总结：</p>
+<p>（1）使用数值梯度的方法：近似值、速度慢、容易写；</p>
+<p>（2）使用分析梯度的方法：精确值、速度快、容易出错。</p>
+<h2 id="图像特征">图像特征</h2>
+<p>计算图片的各种特征代表，比如计算与图片形象有关的数值，然后将不同的特征向量合到一起，得到图像的特征表述。关于图像的特征表述会作为输入源传入线性分类器，而不是将原始像素传入分类器。</p>
+<p><img src="/images/202203/35.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C35.png" alt=""></p>
+<p>使用图像特征的原因：如上图，有一个训练数据集如左侧所示，红点分布在中间，蓝点分布在周围，对于这种类型的数据集，不能用一个线性决策边界，来将红点从蓝点中分开。但是可以采用一个灵活的特征转换，极坐标转换。就可以把复杂的数据集变成线性可分的，然后由线性分类器正确分类。</p>
+<ul>
+<li>颜色直方图</li>
+</ul>
+<p>获取每个像素值对应的光谱，把它分到柱状里，将每一个像素，都映射到这些柱状里，然后计算出每一个不同柱状中像素点出现的频次，这个从全局上告诉我们图像中有哪些颜色，</p>
+<p><img src="/images/202203/36.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C36.png" alt=""></p>
+<ul>
+<li>梯度方向直方图</li>
+</ul>
+<p>Histogram of Oriented Gradients</p>
+<p>获取图像，然后将图像按八个像素区分为八份，然后在八个像素区的每一个部分，计算每个像素值的主要边缘方向，把这些边缘方向量化到几个组，然后在每一个区域内，计算不同的边缘方向从而得到一个直方图。现在，全特征向量就是这些不同的组的边缘方向直方图，</p>
+<p><img src="/images/202203/37.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C37.png" alt=""></p>
+<ul>
+<li>Bag of Words：词</li>
+</ul>
+<p>这是从自然语言处理中获得的灵感，用一个特征向量表示一段话的方式是计算不同词在这段胡中出现的次数；将这种方式应用于图像，将图像转换为一段话并不容易，所以要定义一个视觉单词字典。首先获得一堆图像，从这些图像中进行小的随机块的采样，然后采用k均值等方法将它们聚合成簇，从而得到不同的簇中心，这些簇中心可能代表了图像中视觉单词的不同类型。</p>
+<p><img src="/images/202203/38.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C38.png" alt=""></p>
+<p>卷积神经网络：直接从数据中学习特征，而不需要提前记录，将获取的像素值输入卷积神经网络，经过多层计算，最终得到一些数据驱动的特征表示的类型，然后在整个网络中训练所有的权重，而不是最上层线性分类器的权重。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_34611579/article/details/81008878">笔记</a></p>
+<p><a href="https://cs231n.github.io/linear-classify/">官方笔记</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/cv2/">
+            <span class="next-text nav-default">图像分类</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
