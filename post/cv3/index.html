@@ -49,7 +49,7 @@
 <meta itemprop="name" content="损失函数和最优化">
 <meta itemprop="description" content="损失函数 回到一个猫的示例图像及其在“ cat”、“ dog”和“ ship”类别中的得分，我们看到该示例中的特定权重组合一点都不好: 我们输入了描述"><meta itemprop="datePublished" content="2022-03-06T16:09:18+08:00" />
 <meta itemprop="dateModified" content="2022-03-06T16:09:18+08:00" />
-<meta itemprop="wordCount" content="2774">
+<meta itemprop="wordCount" content="3229">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="损失函数和最优化"/>
 <meta name="twitter:description" content="损失函数 回到一个猫的示例图像及其在“ cat”、“ dog”和“ ship”类别中的得分，我们看到该示例中的特定权重组合一点都不好: 我们输入了描述"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/computer-vision/"> Computer-Vision </a>
             </div>
-          <span class="more-meta"> 2774 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 3229 words </span>
+          <span class="more-meta"> 7 mins read </span>
         
       </div>
     </header>
@@ -248,8 +248,12 @@
 <p><img src="/images/202203/34.png" alt=""></p>
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C34.png" alt=""></p>
 <p>指数化&ndash;归一化&ndash;损失函数-logp</p>
+<p><img src="/images/202203/40.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C40.png" alt=""></p>
 <p>svm损失函数：只关心的是正确的分值要比不正确的分值高出一个边际。</p>
 <p>softmax：目标是将概率质量函数（离散分布值）等于1。</p>
+<p>在这两种情况下，我们都计算出相同的分数向量 f (例如，在这一节中，我们用矩阵乘法表示)。不同之处在于对 f 中分数的解释: SVM 将这些分数解释为类分数，其损失函数鼓励正确的类(2类，蓝色)获得比其他类分数更高的分数。而 Softmax 分类器将分数解释为每个类的(非标准化)对数概率，然后鼓励正确类的(标准化)对数概率为高(相当于负值为低)。这个例子的最终损失是1.58的支持向量机和1.04(注意这是1.04使用自然对数分类器，而不是基2或基10)的 Softmax 分类器，但请注意，这些数字是不可比较的; 他们只是有意义的损失计算在相同的分类器和相同的数据。</p>
+<p>softmax分类器允许我们计算“概率”的所有标签。例如，给定一幅图像，SVM 分类器可能会给出“ cat”、“ dog”和“ ship”类的分数[12.5,0.6,-23.0]。Softmax 分类器可以代替计算三个标签的概率为[0.9,0.09,0.01] ，这允许您解释它在每个类中的置信度。然而，我们之所以在引号中加上概率这个词，是因为这些概率有多大直接取决于正则化强度 λ-你负责的系统的输入。</p>
 <h2 id="optimization">Optimization</h2>
 <p>最优化</p>
 <p>（1）在实践中，倾向于从某个解决方案开始，使用多种不同的迭代方法，然后逐步对它进行改进，一种方法就是随机搜索：需要有很多的权重值随机采样，然后将它们输入损失函数，看看效果如何，但这不是一个好的方法。</p>
@@ -307,7 +311,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/fl_facerecgnition/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">利用差分隐私聚类提升联邦人脸识别</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/cv2/">
             <span class="next-text nav-default">图像分类</span>
             <span class="next-text nav-mobile">Next</span>

@@ -3,28 +3,56 @@
   
   <url>
     <loc>https://kongfany.github.io/categories/</loc>
-    <lastmod>2022-03-06T16:09:18+08:00</lastmod>
+    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/categories/computer-vision/</loc>
-    <lastmod>2022-03-06T16:09:18+08:00</lastmod>
+    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2022-03-06T16:09:18+08:00</lastmod>
+    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/cv4/</loc>
+    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/</loc>
-    <lastmod>2022-03-06T16:09:18+08:00</lastmod>
+    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/federated-learning/</loc>
+    <lastmod>2022-03-10T17:41:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/</loc>
+    <lastmod>2022-03-10T17:41:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/fl_facerecgnition/</loc>
+    <lastmod>2022-03-10T17:41:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -59,13 +87,6 @@
   
   <url>
     <loc>https://kongfany.github.io/tags/python/</loc>
-    <lastmod>2022-03-04T10:09:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/tags/</loc>
     <lastmod>2022-03-04T10:09:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -109,13 +130,6 @@
   <url>
     <loc>https://kongfany.github.io/tags/semi-supervised-learning/</loc>
     <lastmod>2022-01-26T10:49:34+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/tags/federated-learning/</loc>
-    <lastmod>2022-01-24T12:47:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

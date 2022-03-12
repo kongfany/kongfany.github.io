@@ -6,7 +6,16 @@
     <description>Recent content in Computer-Vision on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 06 Mar 2022 16:09:18 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/computer-vision/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Mar 2022 13:47:25 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/computer-vision/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>反向传播和神经网络</title>
+      <link>https://kongfany.github.io/post/cv4/</link>
+      <pubDate>Sat, 12 Mar 2022 13:47:25 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv4/</guid>
+      <description>反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个</description>
+    </item>
+    
     <item>
       <title>损失函数和最优化</title>
       <link>https://kongfany.github.io/post/cv3/</link>

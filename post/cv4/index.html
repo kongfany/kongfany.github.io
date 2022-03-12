@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>反向传播和神经网络 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/cv4/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="反向传播和神经网络" />
+<meta property="og:description" content="反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/cv4/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-12T13:47:25+08:00" />
+<meta property="article:modified_time" content="2022-03-12T13:47:25+08:00" />
+
+<meta itemprop="name" content="反向传播和神经网络">
+<meta itemprop="description" content="反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个"><meta itemprop="datePublished" content="2022-03-12T13:47:25+08:00" />
+<meta itemprop="dateModified" content="2022-03-12T13:47:25+08:00" />
+<meta itemprop="wordCount" content="729">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="反向传播和神经网络"/>
+<meta name="twitter:description" content="反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">反向传播和神经网络</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-12 </span>
+        <div class="post-category">
+            <a href="/categories/computer-vision/"> Computer-Vision </a>
+            </div>
+          <span class="more-meta"> 729 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#反向传播">反向传播</a></li>
+        <li><a href="#神经网络">神经网络</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="反向传播">反向传播</h2>
+<p>已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个损失函数（svm）对模型预测结果满意或是不满意的程度，然后用它定义一个总的损失函数L，L是由训练数据带来的损失结合一个正则项得到的，正则项表示模型的复杂程度，为了更好地泛化，我们倾向取简单的模型，所以现在想要找到与最小损失对应的参数W。想要最小化损失函数，为了做到这一点，我们想要找到L在W方向的梯度。即为最优化，沿着最陡的下降方向，即梯度的负方向，来一步步迭代，这样就能沿着损失函数从上往下，走到最低点。</p>
+<p>梯度计算：有限差分估计，解析梯度计算。</p>
+<p>如何计算复杂函数的解析梯度，用到一个叫计算图的框架。大体上，计算图就是我们用这类图来表示任意函数，其中图的节点，表示我们要执行的每一步计算。</p>
+<p>好处：用计算图来表示一个函数，就能用反向传播技术，递归地调用链式法则来计算计算图中每个变量的梯度。</p>
+<p><img src="/images/202203/41.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C41.png" alt=""></p>
+<p><img src="/images/202203/42.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C42.png" alt=""></p>
+<p><img src="/images/202203/1.jpg" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C1.jpg" alt=""></p>
+<p>在每一个节点上计算我们所需的本地梯度，然后跟踪这个梯度，在反向传播过程中，我们接收从上游传回来的这个梯度值，我们直接用这个值乘以本地梯度，然后得到我们想要传回连接点的值，在下一个节点进行反向传播时，我们不考虑除了直接相连的节点之外的任何东西。</p>
+<p><img src="/images/202203/43.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C43.png" alt=""></p>
+<p><img src="/images/202203/44.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C44.png" alt=""></p>
+<p><img src="/images/202203/45.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C45.png" alt=""></p>
+<p><img src="/images/202203/2.jpg" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C2.jpg" alt=""></p>
+<h2 id="神经网络">神经网络</h2>
+<p>一般来说，神经网络就是由简单函数构成的一组函数在顶层堆叠在一起，我们用一种层次化的方式将它们堆叠起来，为了形成一个更复杂的非线性函数。这就是最基本的多阶段分层计算。</p>
+<p><img src="/images/202203/46.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C46.png" alt=""></p>
+<p>计算图里的节点相互连接，我们需要输入“信号x”，所有x的输入量比如x0、x1、x2等，采用比如赋予权重W的方法，叠加汇合到一起，将结果整合起来后得到一个激活函数，将激活函数应用在神经元的端部，得到的值作为输出。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_34611579/article/details/81023228">笔记</a></p>
+<p><a href="https://cs231n.github.io/optimization-2/">官方笔记</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-12
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/fl_facerecgnition/">
+            <span class="next-text nav-default">利用差分隐私聚类提升联邦人脸识别</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
