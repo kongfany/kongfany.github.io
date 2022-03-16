@@ -3,34 +3,41 @@
   
   <url>
     <loc>https://kongfany.github.io/categories/</loc>
-    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
+    <lastmod>2022-03-12T20:35:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/categories/computer-vision/</loc>
-    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
+    <lastmod>2022-03-12T20:35:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
+    <lastmod>2022-03-12T20:35:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/post/cv4/</loc>
-    <lastmod>2022-03-12T13:47:25+08:00</lastmod>
+    <loc>https://kongfany.github.io/post/cv5/</loc>
+    <lastmod>2022-03-12T20:35:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/</loc>
+    <lastmod>2022-03-12T20:35:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/cv4/</loc>
     <lastmod>2022-03-12T13:47:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
