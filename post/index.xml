@@ -6,7 +6,25 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 16 Mar 2022 15:05:54 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Mar 2022 15:44:15 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FedAvg</title>
+      <link>https://kongfany.github.io/post/fl_fedavg/</link>
+      <pubDate>Thu, 17 Mar 2022 15:44:15 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fl_fedavg/</guid>
+      <description>Communication-Efficient Learning of Deep Networksfrom Decentralized Data 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 代码： https://github.com/shaoxiongji/federated-learning https://zhuanlan.zhihu.com/p/359060612 python main_fed.py python main_fed.py &amp;ndash;dataset mnist &amp;ndash;iid &amp;ndash;num_channels 1 &amp;ndash;model cnn &amp;ndash;epochs 50 &amp;ndash;gpu 0 python main_nn.py</description>
+    </item>
+    
+    <item>
+      <title>联邦学习路线</title>
+      <link>https://kongfany.github.io/post/fl_route/</link>
+      <pubDate>Thu, 17 Mar 2022 13:00:04 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fl_route/</guid>
+      <description>https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当</description>
+    </item>
+    
     <item>
       <title>深度学习入门-基于python</title>
       <link>https://kongfany.github.io/post/deep-learning/</link>
@@ -40,7 +58,7 @@
       <pubDate>Thu, 10 Mar 2022 17:41:47 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/fl_facerecgnition/</guid>
-      <description>论文 项目(并未开源，仅有简介) ReadPaper 知乎 !!!3.16-19:00b站直播 ICLR2022 (Spotlight) ABSTRACT 联邦学习（FL）可以极大地解决公众对人脸识别中数据隐私的日益关注</description>
+      <description>论文 项目(并未开源，仅有简介) ReadPaper 知乎 视频 !!!3.16-19:00b站直播 ICLR2022 (Spotlight) ABSTRACT 联邦学习（FL）可以极大地解决公众对人脸识别中数据隐私的日益</description>
     </item>
     
     <item>

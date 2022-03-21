@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>大胖狗来了</title>
+  <title>联邦学习路线 - 大胖狗来了</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
-<link rel="canonical" href="https://kongfany.github.io/" />
-  <link href="https://kongfany.github.io/index.xml" rel="alternate" type="application/rss+xml" title="大胖狗来了" />
-  <link href="https://kongfany.github.io/index.xml" rel="feed" type="application/rss+xml" title="大胖狗来了" />
+<link rel="canonical" href="https://kongfany.github.io/post/fl_route/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,15 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="大胖狗来了" />
-<meta property="og:description" content="Hugo theme even example site." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kongfany.github.io/" />
+<meta property="og:title" content="联邦学习路线" />
+<meta property="og:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/fl_route/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-17T13:00:04+08:00" />
+<meta property="article:modified_time" content="2022-03-17T13:00:04+08:00" />
 
-<meta itemprop="name" content="大胖狗来了">
-<meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="大胖狗来了"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+<meta itemprop="name" content="联邦学习路线">
+<meta itemprop="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当"><meta itemprop="datePublished" content="2022-03-17T13:00:04+08:00" />
+<meta itemprop="dateModified" content="2022-03-17T13:00:04+08:00" />
+<meta itemprop="wordCount" content="160">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="联邦学习路线"/>
+<meta name="twitter:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -123,126 +126,85 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/fedmvt/">FedMVT</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-01-02 </span>
-      
-        <span class="more-meta"> 6061 words </span>
-        <span class="more-meta"> 13 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Semi-supervised Vertical Federated Learning with MultiView Training FedMVT：带多视图训练的半监督纵向联邦学习 Abstract 纵向联邦学习(VFL)使各方能够基于相同样本的分布特征构建健壮的共享机器学习模
-    </div>
-    <div class="read-more">
-      <a href="/post/fedmvt/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">联邦学习路线</h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/federated-learning/">联邦学习(Federated Learning)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-20 </span>
-      
-        <span class="more-meta"> 4484 words </span>
-        <span class="more-meta"> 9 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An
-    </div>
-    <div class="read-more">
-      <a href="/post/federated-learning/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-17 </span>
+        
+          <span class="more-meta"> 160 words </span>
+          <span class="more-meta"> 1 min read </span>
+        
+      </div>
+    </header>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/fl_faq/">联邦学习综述</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-18 </span>
-      
-        <span class="more-meta"> 7572 words </span>
-        <span class="more-meta"> 16 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      原论文 原论文翻译 视频总结 视频文档 概念 什么是联邦学习？ 联邦学习（FL）是一种机器学习设定，其中许多客户端（例如，移动设备或整个组织）在中央服务
-    </div>
-    <div class="read-more">
-      <a href="/post/fl_faq/" class="read-more-link">Read more...</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
   </div>
-</article>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p><a href="https://www.zhihu.com/question/422320791/answer/1805628004">https://www.zhihu.com/question/422320791/answer/1805628004</a></p>
+</blockquote>
+<ul>
+<li>
+<p>Communication-Efficient Learning of Deep Networks from Decentralized Data</p>
+<p>开山之作，FedAvg。</p>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/22c50ded4cf7?from=groupmessage">三个概念：Epoch, Batch, Iteration</a></p>
+</blockquote>
+<ul>
+<li>epoch:一个Epoch就是<strong>将所有训练样本训练一次</strong>的过程</li>
+<li>batch:当一个Epoch的样本（也就是所有的训练样本）数量可能太过庞大（对于计算机而言），就需要把它分成多个小块，也就是就是分成多个Batch 来进行训练。将整个训练样本分成若干个Batch。</li>
+</ul>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/fl_pfl/">PFL联邦学习开源框架</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-17 </span>
-      
-        <span class="more-meta"> 7681 words </span>
-        <span class="more-meta"> 16 mins read </span>
     </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个
-    </div>
-    <div class="read-more">
-      <a href="/post/fl_pfl/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%9B%BE%E5%83%8F%E9%87%8D%E5%BB%BA/">3D人体重建</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-15 </span>
-      
-        <span class="more-meta"> 2596 words </span>
-        <span class="more-meta"> 6 mins read </span>
-    </div>
-  </header>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-17
+        
+    </span>
+  </p>
   
-  <div class="post-content">
-    <div class="post-summary">
-      图像重建 图像重建：通过物体外部测量的数据，经数字处理获得三维物体的形状信息的技术。 SMPL模型 它是通过输入一张RGB 的人体图像和由openp
-    </div>
-    <div class="read-more">
-      <a href="/post/%E5%9B%BE%E5%83%8F%E9%87%8D%E5%BB%BA/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    </section>
   
-  <nav class="pagination">
-    <a class="prev" href="/page/3/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">Prev</span>
-      </a>
-    <a class="next" href="/page/5/">
-        <span class="next-text">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/fl_fedavg/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">FedAvg</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/deep-learning/">
+            <span class="next-text nav-default">深度学习入门-基于python</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
 
       </div>
     </main>
