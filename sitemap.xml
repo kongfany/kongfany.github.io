@@ -2,35 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://kongfany.github.io/post/fl_fedavg/</loc>
-    <lastmod>2022-03-17T15:44:15+08:00</lastmod>
+    <loc>https://kongfany.github.io/tags/federated-learning/</loc>
+    <lastmod>2022-03-21T21:48:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/tags/federated-learning/</loc>
-    <lastmod>2022-03-17T15:44:15+08:00</lastmod>
+    <loc>https://kongfany.github.io/tags/knowledge-distillation/</loc>
+    <lastmod>2022-03-21T21:48:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2022-03-17T15:44:15+08:00</lastmod>
+    <lastmod>2022-03-21T21:48:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/tags/</loc>
-    <lastmod>2022-03-17T15:44:15+08:00</lastmod>
+    <lastmod>2022-03-21T21:48:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://kongfany.github.io/</loc>
+    <lastmod>2022-03-21T21:48:26+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/fl_fd/</loc>
+    <lastmod>2022-03-21T21:48:26+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/fl_fedavg/</loc>
     <lastmod>2022-03-17T15:44:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
