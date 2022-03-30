@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="笔记 官方笔记 通俗理解卷积神经网络 卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="卷积神经网络" />
-<meta property="og:description" content="笔记 官方笔记 通俗理解卷积神经网络 卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层" />
+<meta property="og:description" content="卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/cv5/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-12T20:35:55+08:00" />
 <meta property="article:modified_time" content="2022-03-12T20:35:55+08:00" />
 
 <meta itemprop="name" content="卷积神经网络">
-<meta itemprop="description" content="笔记 官方笔记 通俗理解卷积神经网络 卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层"><meta itemprop="datePublished" content="2022-03-12T20:35:55+08:00" />
+<meta itemprop="description" content="卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效"><meta itemprop="datePublished" content="2022-03-12T20:35:55+08:00" />
 <meta itemprop="dateModified" content="2022-03-12T20:35:55+08:00" />
-<meta itemprop="wordCount" content="1920">
+<meta itemprop="wordCount" content="2672">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="卷积神经网络"/>
-<meta name="twitter:description" content="笔记 官方笔记 通俗理解卷积神经网络 卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层"/>
+<meta name="twitter:description" content="卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/computer-vision/"> Computer-Vision </a>
             </div>
-          <span class="more-meta"> 1920 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 2672 words </span>
+          <span class="more-meta"> 6 mins read </span>
         
       </div>
     </header>
@@ -164,12 +164,7 @@
   </div>
 </div>
     <div class="post-content">
-      <blockquote>
-<p><a href="https://blog.csdn.net/qq_34611579/article/details/81055813">笔记</a></p>
-<p><a href="https://cs231n.github.io/neural-networks-1/">官方笔记</a></p>
-<p><a href="https://blog.csdn.net/v_JULY_v/article/details/51812459">通俗理解卷积神经网络</a></p>
-</blockquote>
-<h2 id="卷积神经网络">卷积神经网络</h2>
+      <h2 id="卷积神经网络">卷积神经网络</h2>
 <h3 id="通俗理解1httpswwwbilibilicomvideobv1al4y1b7erfromsearchseid2752827029660498833spm_id_from33333700"><a href="https://www.bilibili.com/video/BV1AL4y1b7er?from=search&amp;seid=2752827029660498833&amp;spm_id_from=333.337.0.0">通俗理解1</a></h3>
 <p>卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效率，全连接层用来识别判断。</p>
 <p>卷积层：图像上一个黄色的X，黄色的像素设为1，白色的像素点设为0，要想识别这个X，只要识别出一个右下的斜线，和一个左下的斜线就可以了。首先识别右下斜线，这时我们找一个3×3的卷积核（局部特征，即需要识别的线条），这个卷积核也是一个右下斜线。用图像左上角3×3的区域与卷积核相应的像素点相乘再相加，得到结果2，依次计算得到表格。表格中的数值越大，表示越符合卷积核右下斜线的特征，基本上数值较大的部分，就是原图像右下斜线的部分。</p>
@@ -220,9 +215,30 @@
 <p><img src="/images/202203/85.png" alt=""></p>
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C85.png" alt=""></p>
 <p>总结卷积层：</p>
-<p>（1）有特定维数的输入W1<em>H1</em>D1；</p>
+<p>（1）有特定维数的输入<code>W1*H1*D1</code>；</p>
 <p>（2）各种参数：卷积核大小，步长大小，0填充大小。</p>
 <h3 id="视觉之外的神经网络">视觉之外的神经网络</h3>
+<p>从大脑神经元的角度分析一个卷积层。</p>
+<p>在每个位置，会取一个卷积核与图像的特定部分之间的一个点积，从而得到一个数值结果；基于同样的想法，取输入值和权值矩阵W之间的点积，然后得到一个输出值；但是它们的主要区别在于神经元具有局部的连接性，所以不关注所输入图片的全部而是关注图像空间的一个局部区域。</p>
+<p>假设有一个<code>5*5</code>的卷积核，也可以称为<code>5*5</code>的接收区域，也就是输入区域，对一个<code>5*5</code>的滤波器，都将让他们划过整个图像空间，但是这些卷积核都具有相同的权重和参数。</p>
+<p>卷积核的数量就是所谓的深度，假设有5层的卷积核，那么从这个网格中就得到了一个<code>5*28*28</code>尺寸的输出，这些不同的卷积核作用于图像的相同区域当中。</p>
+<p><img src="/images/202203/86.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202203\86.png" style="zoom: 67%;" /></p>
+<p>另一个需要提到的方面是每隔几个卷积层就有一个池化层夹在中间。</p>
+<p>一开始有一个图像，经过卷积层，得到的是每一个滑过输入图像的卷积核的激活映射。把激活映射送进ReLU得到一些这样的值，在池化层得到的数据就是前面ReLU层输出，这就做了降采样，取出所有卷积核对应位置上的最大值，每一层的输出都是一个积累的结果。这样得到的全连接层把所有的信息聚合到一起，得到一组分类的分值，每个值代表复合的复杂概念的受激程度。</p>
+<p>这些池化层所要做的是要让所生成的表示更小且更容易控制，且降低采样率处理，比如进行一个空间的降采样，然而并不在深度方向上的池化处理，只在平面上做：</p>
+<p><img src="/images/202203/87.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202203\87.png" style="zoom: 67%;" /></p>
+<p>最常见的方法是最大池化法，例如下面的例子中，池化层也有一个卷积核的大小，如果使用一个步长为2的2*2的滤波器，让这个卷积核滑过整个输入部分，取滑过区域中的最大值。</p>
+<p><img src="/images/202203/88.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202203\88.png" style="zoom: 67%;" /></p>
+<p>对于池化层来说是的，通常是让它们没有任何重叠，可以通过降采样的处理，对一个给定区域避免重叠的处理。</p>
+<p>下面是训练卷积网络的<a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html">演示程序</a>，可以点进去用它在CIFAR-10上训练卷积网络，这样可以对激活映射有更多的了解。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_34611579/article/details/81055813">笔记</a></p>
+<p><a href="https://cs231n.github.io/neural-networks-1/">官方笔记</a></p>
+<p><a href="https://blog.csdn.net/v_JULY_v/article/details/51812459">通俗理解卷积神经网络</a></p>
+</blockquote>
 
     </div>
 

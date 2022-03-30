@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>医学图像分割 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="基于传统方法的医学图像分割 阈值法： 阈值法具有计算量小、实现简单、稳定性较好等优点，成为医学图像分割领域中运用最广泛的分割技术。 基本原理是通过" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/medical-imagesegmentation/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="医学图像分割" />
+<meta property="og:description" content="基于传统方法的医学图像分割 阈值法： 阈值法具有计算量小、实现简单、稳定性较好等优点，成为医学图像分割领域中运用最广泛的分割技术。 基本原理是通过" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/medical-imagesegmentation/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-30T16:35:58+08:00" />
+<meta property="article:modified_time" content="2022-03-30T16:35:58+08:00" />
+
+<meta itemprop="name" content="医学图像分割">
+<meta itemprop="description" content="基于传统方法的医学图像分割 阈值法： 阈值法具有计算量小、实现简单、稳定性较好等优点，成为医学图像分割领域中运用最广泛的分割技术。 基本原理是通过"><meta itemprop="datePublished" content="2022-03-30T16:35:58+08:00" />
+<meta itemprop="dateModified" content="2022-03-30T16:35:58+08:00" />
+<meta itemprop="wordCount" content="1705">
+<meta itemprop="keywords" content="Medical,Imagesegmentation," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="医学图像分割"/>
+<meta name="twitter:description" content="基于传统方法的医学图像分割 阈值法： 阈值法具有计算量小、实现简单、稳定性较好等优点，成为医学图像分割领域中运用最广泛的分割技术。 基本原理是通过"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">医学图像分割</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-30 </span>
+        
+          <span class="more-meta"> 1705 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#基于传统方法的医学图像分割">基于传统方法的医学图像分割</a>
+          <ul>
+            <li><a href="#阈值法">阈值法：</a></li>
+            <li><a href="#区域生成法">区域生成法：</a></li>
+            <li><a href="#边缘检测法">边缘检测法</a></li>
+            <li><a href="#聚类法">聚类法</a></li>
+          </ul>
+        </li>
+        <li><a href="#基于深度学习方法的医学图像分割">基于深度学习方法的医学图像分割</a>
+          <ul>
+            <li><a href="#全卷积神经网络">全卷积神经网络</a></li>
+            <li><a href="#u-net-网络结构">U-net 网络结构</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="基于传统方法的医学图像分割">基于传统方法的医学图像分割</h2>
+<h3 id="阈值法">阈值法：</h3>
+<ul>
+<li>阈值法具有计算量小、实现简单、稳定性较好等优点，成为医学图像分割领域中运用最广泛的分割技术。</li>
+<li>基本原理是<code>通过设定阈值的不同，把像素点分为不同灰度级的背景区和目标区</code>，所以它更适用于背景和目标灰度相差较大的图像。</li>
+<li>如果图像只有目标和背景两大类，就只需要设置一个阈值。</li>
+<li>如果图像中有多个目标需要分割，就要设置多个阈值， 所以其分割的准确度多依赖于阈值的选择。</li>
+<li>这种方法就是运用像素点灰度值的特征，并没有考虑其空间特性，此方法对噪声也比较敏感，但是目前出现了许多基于阈值法的改进算法，分割准确度有了进一步提高。</li>
+</ul>
+<h3 id="区域生成法">区域生成法：</h3>
+<ul>
+<li>区域生长法是根据像素的相似性质来聚集像素点所形成的区域，这种方法是<code>从单个像素出发，逐步合并形成所需要的区域</code>。</li>
+<li>区域生长是从待分割区域中选取种子像素开始，作为生长起点，将种子像素邻 域里符合条件的像素合并到种子像素里，形成新的种子像素，继续合并，直到找不到符合条件的像素，其关键是种子像素的选择、确定生长规则和终止条件。</li>
+<li>区域生长法计算简单，对分割具有相同特征的连通区域效果较好，但是由于噪声和灰度不均的问题，容易产生空洞和过分割。</li>
+</ul>
+<h3 id="边缘检测法">边缘检测法</h3>
+<ul>
+<li>通过检测包含不同区域的边缘来解决问题，不同区域之间边界的灰度值变化比较剧烈，<code>一般利用一阶导数的极大值或二阶导数的过零点信息来判断边缘点</code>。</li>
+<li>在医学图像领域中，最简单常用的检测方法包括：Roberts 梯度算子、Wills 算子、 Prewitt 算子、Canny 算子等。</li>
+<li>不同的算子有不同的提取效果，但两大难点限制了其在医学图像分割中的应用，一个是不能保证边缘的连续性和封闭性；另一个是在高细节区容易出现大量碎边缘，难以形成一个大区域。</li>
+</ul>
+<h3 id="聚类法">聚类法</h3>
+<ul>
+<li><code>将图像中相似灰度合并的方法称为聚类</code>，通过聚类将图像表示为不同的区域即聚类分割方法.</li>
+<li>由于多数医学图像具有<code>模糊性</code>、图像质量 低等特性，所以在医学分割领域最常用的聚类算法是模糊 C-均值算法（FCM），该方法将模糊集理论和聚类算法结合，通过“隶属度”来确定像素点属于某个聚类的程度。</li>
+<li>模糊集(很快，快，慢，很慢)&ndash;&gt;隶属度函数&ndash;&gt;隶属度</li>
+</ul>
+<h2 id="基于深度学习方法的医学图像分割">基于深度学习方法的医学图像分割</h2>
+<h3 id="全卷积神经网络">全卷积神经网络</h3>
+<ul>
+<li>
+<p>将经典 CNN 模型中的<code>全连接层替换成了卷积层</code>，整个网络由卷积层和池化层组成。</p>
+</li>
+<li>
+<p>FCN 可以看成一个<code>编码器-解码器</code>的结构，编码部分是进行高维特征提取的过程，解码部分利用反卷积进行上采样，使得到的分割结果图像大小和输入图像大小相同，实现了像素级的分类。</p>
+</li>
+<li>
+<p>FCN 模型对输入图像的大小没有要求，但其缺点是没有考虑全局上下文信息且只采用一次上采样操作，容易忽视细节信息。</p>
+<p><img src="/images/202203/111.png" alt=""></p>
+<p><img src="/images/202203/112.png" alt=""></p>
+<p><img src="/images/202203/113.png" alt=""></p>
+<p>经过多次卷积后，图像的分辨率越来越低，为了从低分辨率的热图heatmap恢复到原图大小，以便对原图上每一个像素点进行分类预测，需要对热图heatmap<code>进行反卷积，也就是上采样</code>。</p>
+<p>论文中首先进行了一个上池化操作，再进行反卷积（上述所提到的<code>上池化操作和反卷积操作</code>，其实可以理解为上卷积操作），使得图像分辨率提高到原图大小。</p>
+<ol>
+<li>
+<p>反卷积上采样</p>
+<p><img src="/images/202203/114.png" alt=""></p>
+</li>
+<li>
+<p>反池化上采样</p>
+<p><img src="/images/202203/115.png" alt=""></p>
+</li>
+</ol>
+<blockquote>
+<p>参考:<a href="https://blog.csdn.net/qq_41760767/article/details/97521397?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_default&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_default&amp;utm_relevant_index=1">全卷积网络FCN详细讲解</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="u-net-网络结构">U-net 网络结构</h3>
+<ul>
+<li>在小规模数据集下有良好的表现，更适合于医学图像的分割。</li>
+<li>是由卷积、下采样、上采样和拼接操作组成的编码器—解码器对称网络。</li>
+<li>应用于视网膜血管图像、肺部计算机断层扫描 (computed tomography,CT)图像和脑肿瘤的磁共振成像(MRI)图像分割。</li>
+</ul>
+<p><img src="/images/202203/116.png" alt=""></p>
+<ul>
+<li>
+<p>U-Net 网络收缩路径<code>提取图像的重要特征</code>并降低图像分辨率。</p>
+<p>U-Net 网络对输入尺寸 388 × 388 像素的图像进行镜像边缘操作。 镜像操作是给图像边缘添加一圈与边缘像素镜像对称的边,优点是网络能更好地处理图像边缘信息。 经过这一操作,输入图像尺寸变为 572 × 572 像素。</p>
+</li>
+<li>
+<p>U-Net 网络扩展路径<code>逐步修复图像细节</code>,精确定位病灶位置,将图像恢复输入图像尺寸大小。</p>
+</li>
+<li>
+<p>收缩路径和扩展路径之间添加了跳跃连接用于像素点的定位,U-Net 使用拼接操作(concatenation) ,将同一层收缩路径的特征图裁剪到与扩展路径大小相同,然后<code>进行拼接操作,有助于还原下采样过程中的信息损失</code>。</p>
+</li>
+</ul>
+<blockquote>
+<p>[1]周涛,董雅丽,霍兵强,刘珊,马宗军.U-Net网络医学图像分割应用综述[J].中国图象图形学报,2021,26(09):2058-2077.</p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.sohu.com/a/533482881_455817">https://www.sohu.com/a/533482881_455817</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/medical/">Medical</a>
+          <a href="/tags/imagesegmentation/">Imagesegmentation</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/cv9/">
+            <span class="next-text nav-default">CNN框架</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

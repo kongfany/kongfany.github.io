@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CNN框架 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="CNN框架 LeNet 它可以看作是通信网络的第一个实例，并在实际应用中取得成功，使用步长为1、大小为5*5的卷积核来对第一层进行输入，并且同样的卷积层" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/cv9/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="CNN框架" />
+<meta property="og:description" content="CNN框架 LeNet 它可以看作是通信网络的第一个实例，并在实际应用中取得成功，使用步长为1、大小为5*5的卷积核来对第一层进行输入，并且同样的卷积层" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/cv9/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-27T18:21:28+08:00" />
+<meta property="article:modified_time" content="2022-03-27T18:21:28+08:00" />
+
+<meta itemprop="name" content="CNN框架">
+<meta itemprop="description" content="CNN框架 LeNet 它可以看作是通信网络的第一个实例，并在实际应用中取得成功，使用步长为1、大小为5*5的卷积核来对第一层进行输入，并且同样的卷积层"><meta itemprop="datePublished" content="2022-03-27T18:21:28+08:00" />
+<meta itemprop="dateModified" content="2022-03-27T18:21:28+08:00" />
+<meta itemprop="wordCount" content="1951">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CNN框架"/>
+<meta name="twitter:description" content="CNN框架 LeNet 它可以看作是通信网络的第一个实例，并在实际应用中取得成功，使用步长为1、大小为5*5的卷积核来对第一层进行输入，并且同样的卷积层"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CNN框架</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-27 </span>
+        <div class="post-category">
+            <a href="/categories/computer-vision/"> Computer-Vision </a>
+            </div>
+          <span class="more-meta"> 1951 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#cnn框架">CNN框架</a>
+          <ul>
+            <li><a href="#lenet">LeNet</a></li>
+            <li><a href="#alexnet">AlexNet</a></li>
+            <li><a href="#vggnet">VGGNet</a></li>
+            <li><a href="#googlenet">GoogleNet</a></li>
+            <li><a href="#resnet">ResNet</a></li>
+            <li><a href="#其他的架构">其他的架构</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="cnn框架">CNN框架</h2>
+<h3 id="lenet">LeNet</h3>
+<p><img src="/images/202203/106.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C106.png" alt=""></p>
+<p>它可以看作是通信网络的第一个实例，并在实际应用中取得成功，使用步长为1、大小为5*5的卷积核来对第一层进行输入，并且同样的卷积层和池化层有好几层以及在网络的最后有一些全连接层，它在数字识别领域方面的应用去得到了成功。</p>
+<h3 id="alexnet">AlexNet</h3>
+<p><img src="/images/202203/107.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C107.png" alt=""></p>
+<p>它是第一个在ImageNet的分类比赛中获得成功的大型卷积神经网络，同样也是第一个基于深度学习的网络结构；它的基础架构是卷积层、池化层、归一化层的混合，最后是一个全连接层。</p>
+<p>它的输入是<code>227*227*3</code>的图像矩阵，步长为4，大小为<code>11*11</code>的卷积核有96个，算出第一个卷积层的输出数据体积为：（227-11）/4+1=55，那么最后输出的空间维度是<code>55*55*96</code>；输出的参数为<code>11*11*3*96=35K</code>。</p>
+<p>这个架构中第一次使用了ReLU非线性函数；使用本地相应归一化层，通过相邻通道来归一化响应，但是这并不太有效果，因为它增加了大量的数据；为了得到更好的效果，还使用了模型集成训练多个模型对它们取平均从而获得性能上的提升。</p>
+<h3 id="vggnet">VGGNet</h3>
+<p><img src="/images/202203/108.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C108.png" alt=""></p>
+<p>VGG的思想是一个非常深的网络，包含非常小的卷积核，它从AlexNet的8层扩展到了16~19层，关键是它使用很小的卷积核，只用3*3的卷积核。</p>
+<p>当使用小的卷积核可以得到比较小的参数量，然后可以利用堆栈更多的参数不使用大的卷积核，这样可以尝试而更多的网络和卷积，最终的效果比用7*7的卷积核有效接收范围更好些。</p>
+<h3 id="googlenet">GoogleNet</h3>
+<p>GoogleNet是一个更深的网络结构，它有22层，它尝试设计一个网络结构可以进行高效计算，采用了inception模块，然后简单在每一层的顶部搭这个模块，网络中没有全连接层，节省了大量参数，比AlexNet少了12倍。</p>
+<p><img src="/images/202203/109.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202203\109.png" style="zoom:67%;" /></p>
+<p>Inception模块中隐含的思想是想要设计一个好的局部网络拓扑，有了拓扑的想法就可以把它视为一个网络，然后堆放大量局部拓扑在每一层的顶部；在局部网络中调用inception模块要做的是对进入相同层的相同输入并行应用不同的滤波操作，来自前面一层的输入然后进行不同的卷积和池化操作，这样就可以在不同的层得到不同的输出，这些层将所有的滤波器输出并在深度层上串联起来，然后在最后得到一个张量输出。</p>
+<h3 id="resnet">ResNet</h3>
+<p>ResNet这个想法是深度网络的一次革命，它比之前提到的所有神经网络架构都要深，有152层，也叫做残差网络。</p>
+<p><img src="/images/202203/110.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C110.png" alt=""></p>
+<p>当在普通卷积神经网络上堆叠越来越多的层时，会发生什么？仅仅是通过持续扩展就能得到更深的层以及取得更好的效果吗？</p>
+<p>显然不是，模型虽然更深却也会变现的更差。</p>
+<p>所以解决方法是不仅仅堆叠这些层而是让每层都尝试学习一些所需函数的底层映射，残差块的输入只是传输进来的输入，使用这些块尝试并拟合残差映射而不是直接映射；与其直接学习H(x)，需要在输入上加上或减去什么，F(x)=H(x)-x，F(x)就是所说的残差。</p>
+<h3 id="其他的架构">其他的架构</h3>
+<p>ResNet的改进：</p>
+<p>通过改进ResNet的模型设计，调整了ResNet块路径中的层，并且这个新的结构能够实现一种更直接的路径以便于在整个信息网络中传播，然后就可以得到能够实现整个网络传播的路径，并且能再次反向传播回去，这样模型可以提供更好的性能。</p>
+<p>虽然ResNet使网络层数变得更深，也增加了这些残差网络的连接，另一种想法是残差量是是一个十分重要的影响因素，存在这种残差结构并不一定代表这个网络层数就很多，所以使用更宽的残差模块，这就意味着转换成有更多的卷积核，结果表明使用更宽的残差模块仅使用50层的宽残差网络，它的表现就能优于ResNet原来的152层网络。</p>
+<p>ResNeXt这是另一种改进结构，为了解决宽度问题，但它并不是通过增加架构中的卷积核来增加残差模块的宽度，而是在每个残差模块内建立多分支，这样也可以达到宽网络的效果同时与Inception模块也有些相似，运动了一些平行运算对各层进行并行运算。</p>
+<p>另一种改善ResNet的思路是运用随机深度的思想，当网络越来越深，往往会碰到梯度消失的问题；因此，最初的想法是在训练时让网络变得更“浅”，会随机抛弃一组子层集，对于一个子层集会抛弃其权重，只把它们作为恒等连接，现在网络更浅了就可以更好地进行反向传播。这就是一种随机抛弃法。</p>
+<p>这里有一种叫FractaNet的网络结构，它的观点是引入残差并不是必须的，关键在于有效的从浅网络转型为深层网络；因此，使用了一种分形结构：</p>
+<p>同时存在浅层和深层路径到达输出值，这里不同的路径通过抛弃子路径的方式来训练具有了dropout的特色。</p>
+<p>DenseNet即密集连接卷积网络是另一具有特色的网络结构，它使用称为密集块，每个块中每层都与其后所有层连接，以前馈的形式连接，因此，在这一区块内，对区块的输入也是对其他所有其他各卷积层的输入，会计算出每个卷积层的输出值，然后这些值集中共同作为下一个卷积层的输入；这一方法能够缓解梯度消失的问题。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/medical-imagesegmentation/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">医学图像分割</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/cv8/">
+            <span class="next-text nav-default">深度学习软件</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,7 +6,52 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 21 Mar 2022 21:48:26 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Mar 2022 16:35:58 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>医学图像分割</title>
+      <link>https://kongfany.github.io/post/medical-imagesegmentation/</link>
+      <pubDate>Wed, 30 Mar 2022 16:35:58 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/medical-imagesegmentation/</guid>
+      <description>基于传统方法的医学图像分割 阈值法： 阈值法具有计算量小、实现简单、稳定性较好等优点，成为医学图像分割领域中运用最广泛的分割技术。 基本原理是通过</description>
+    </item>
+    
+    <item>
+      <title>CNN框架</title>
+      <link>https://kongfany.github.io/post/cv9/</link>
+      <pubDate>Sun, 27 Mar 2022 18:21:28 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv9/</guid>
+      <description>CNN框架 LeNet 它可以看作是通信网络的第一个实例，并在实际应用中取得成功，使用步长为1、大小为5*5的卷积核来对第一层进行输入，并且同样的卷积层</description>
+    </item>
+    
+    <item>
+      <title>深度学习软件</title>
+      <link>https://kongfany.github.io/post/cv8/</link>
+      <pubDate>Sun, 27 Mar 2022 17:42:48 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv8/</guid>
+      <description>深度学习软件 CPU vs GPU 深度学习中一般使用到的是GPU，GPU被称作显卡或者图形处理单元，最初适用于渲染计算机图形，在深度学习中一般选用的是NVI</description>
+    </item>
+    
+    <item>
+      <title>训练神经网络(下)</title>
+      <link>https://kongfany.github.io/post/cv7/</link>
+      <pubDate>Sun, 27 Mar 2022 15:24:24 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv7/</guid>
+      <description>训练神经网络(下) 更好的优化 上一章中讨论了一些激活函数和它们不同的属性，由于sigmoid函数和tanh函数在两端都存在梯度消失的问题，所以</description>
+    </item>
+    
+    <item>
+      <title>训练神经网络(上)</title>
+      <link>https://kongfany.github.io/post/cv6/</link>
+      <pubDate>Sun, 27 Mar 2022 13:46:57 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv6/</guid>
+      <description>训练神经网络(上) 激活函数 任意特定层产生的输出是输入数据在全连接层或者卷积层乘上权重值，然后将结果输入一个激活函数或者非线性单元，下面给出了</description>
+    </item>
+    
     <item>
       <title>联邦知识蒸馏</title>
       <link>https://kongfany.github.io/post/fl_fd/</link>
@@ -49,7 +94,7 @@
       <pubDate>Sat, 12 Mar 2022 20:35:55 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/cv5/</guid>
-      <description>笔记 官方笔记 通俗理解卷积神经网络 卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层</description>
+      <description>卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效</description>
     </item>
     
     <item>
