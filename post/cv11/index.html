@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>图像识别和分割 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="图像识别和分割 分割 我们希望输入图像，并对图像中每个像素做分类，对于每个像素，确定它属于猫、草地、天空或者背景亦或者其他分类，首先确定分类，就" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/cv11/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="图像识别和分割" />
+<meta property="og:description" content="图像识别和分割 分割 我们希望输入图像，并对图像中每个像素做分类，对于每个像素，确定它属于猫、草地、天空或者背景亦或者其他分类，首先确定分类，就" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/cv11/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-07T13:29:56+08:00" />
+<meta property="article:modified_time" content="2022-04-07T13:29:56+08:00" />
+
+<meta itemprop="name" content="图像识别和分割">
+<meta itemprop="description" content="图像识别和分割 分割 我们希望输入图像，并对图像中每个像素做分类，对于每个像素，确定它属于猫、草地、天空或者背景亦或者其他分类，首先确定分类，就"><meta itemprop="datePublished" content="2022-04-07T13:29:56+08:00" />
+<meta itemprop="dateModified" content="2022-04-07T13:29:56+08:00" />
+<meta itemprop="wordCount" content="2200">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="图像识别和分割"/>
+<meta name="twitter:description" content="图像识别和分割 分割 我们希望输入图像，并对图像中每个像素做分类，对于每个像素，确定它属于猫、草地、天空或者背景亦或者其他分类，首先确定分类，就"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">图像识别和分割</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-07 </span>
+        <div class="post-category">
+            <a href="/categories/computer-vision/"> Computer-Vision </a>
+            </div>
+          <span class="more-meta"> 2200 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#图像识别和分割">图像识别和分割</a>
+          <ul>
+            <li><a href="#分割">分割</a></li>
+            <li><a href="#定位">定位</a></li>
+            <li><a href="#识别">识别</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="图像识别和分割">图像识别和分割</h2>
+<h3 id="分割">分割</h3>
+<p>我们希望输入图像，并对图像中每个像素做分类，对于每个像素，确定它属于猫、草地、天空或者背景亦或者其他分类，首先确定分类，就像做图像分类一样，不过现在不能简单地分一类给整个图像，希望能为每个像素产生一个分类类标，这就叫语义分割。</p>
+<p>语义分割并不区分同类目标，例如下图中的两头牛并排站立，解决这个问题的时候是为每个像素分类；而在之前的例子中，输出并不能区分结果，也就是说不会区分这两头牛。</p>
+<p><img src="/images/202204/6.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202204\6.png" style="zoom:50%;" /></p>
+<p>语义分割可能仅通过分类实现，这就是问题所在，可以用滑动窗口来实现语义分割，可以想象用输入图像将其打碎为许多小的、局部的图像块，如下：</p>
+<p><img src="/images/202204/7.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202204\7.png" style="zoom:50%;" /></p>
+<p>可以用这些小块做分类，但这只能在一定程度上起到作用，并不是完美的解决方案，并且这个方法的计算复杂度很高。</p>
+<p>另一个方法是全连接卷积网络，不仅是从图像中提取各个图像块并且分类，还可以把网络当成很多的卷积堆叠在一起。</p>
+<p><img src="/images/202204/8.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202204\8.png" style="zoom:50%;" /></p>
+<p>但是如果有比如64或128甚至256个卷积通道，这样运行卷积层在这样高的清晰度逐层训练，可想而知计算量很大会很耗内存；所以我们会在图像内做下采样，之后对特征做上采样，与其全部卷积基于整个图像的全维度，仅仅对一部分的卷积层做原清晰度处理，下采样用包括最大池化或跨卷积。</p>
+<p>其中一个方法是去池化，上采样做的是最近距离去池化或者钉床函数去池化：</p>
+<p><img src="/images/202204/9.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202204\9.png" style="zoom:50%;" /></p>
+<p>另一个要关注的是转置卷积的概念：</p>
+<p>跨卷积就是一种可学习的层，可学习如何下采样针对某一层来做；类比一下叫转置卷积的层，可以用它来做上采样，既上采样特征图又能学习权重，这就是另一种卷积的方式。</p>
+<p>跨卷积的过程如下：</p>
+<p><img src="/images/202204/10.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202204\10.png" style="zoom:50%;" /></p>
+<p>跨卷积的定义是不依次向下放置过滤单元，而是每隔两个像素单元做一次，在输入中，卷积核每次移动一格，输出也这样；所以一个比值为输入中移动距离和输出中移动距离的比。</p>
+<p>转置卷积的过程如下：</p>
+<p><img src="/images/202204/11.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202204\11.png" style="zoom:50%;" /></p>
+<p>它正好相反，转置卷积不做内乘，而是取特征池的输入值，用这个值乘以卷积核，以3*3的区域的方式复制这些值作为输出。</p>
+<p>从一维的角度看卷积转置，如果做3*1的一维转置卷积，可以看到输出是对输入的加权，依次去下移输出中的加权卷积核，跨度为2，最后对的输出中的感受野重叠部分进行叠加。</p>
+<p><img src="/images/202204/12.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202204\12.png" style="zoom:50%;" /></p>
+<h3 id="定位">定位</h3>
+<p>接下来我们要讨论的问题是图像分类和定位，刚刚已经谈到过了图像分类，做的是给输入图像分类标签，但有时候也想知道更多关于图像的事，除了预测分类，也想知道图像中内容的定位问题。</p>
+<p>定位的情况是提前知道会有一个或几个物体是需要找的，但是预先知道要对这个图像做分类决策，只产生一个边界，这个边界告诉我们物体在图像中的哪里。</p>
+<p>预测图像中固定几个点的位置的想法可以应用到除分类与定位的其他问题上，比如姿态估计。</p>
+<p>如下图中，拿一张人像作为输入图片，想输出这个人的关节在图中的点位，这样一来就可以在网络中预测这个人的姿态：</p>
+<p><img src="/images/202204/13.png" alt=""></p>
+<p><img src="D:\Hugo\blog\static\images\202204\13.png" style="zoom:50%;" /></p>
+<p>输入这张人像后，将输出14个关节点的参数，逐一给出14个关节点的x、y坐标，然后用回归损失（通常是L2损失）来评估这14个点的表现，运用反向传播方法再次训练这个网络。</p>
+<h3 id="识别">识别</h3>
+<p>对象识别主要研究是一开始有固定几个类别，比如猫、狗或其他种类，任务是根据输入的图像，每当在图像中出现其中一类对象时，围绕对象划定一个框并预测该对象从属的类别，因为不知道图像中有多少个对象，所以这个问题是很有挑战性的。</p>
+<p>因此，如果把对象识别等同于回归问题考虑会非常棘手，尝试用滑动窗口的方法，类似于图像分割中的将图像划分为小块一样，也可以将其应用到对象识别中去；将图像切分为小块，然后输入到神经网络中，之后网络会对输入的图块进行分类决策。</p>
+<p>问题在于如何选择图块，因为图像里的对象数量是不定的，并且它们可能在任何位置，拥有任意尺寸，以任意比例出现，如果想用蛮力，滑动窗口法可能需要测试成千上万次才能处理这个问题，同时计算的复杂度也会很高。</p>
+<p>所以相应的会用一种叫做候选区域选择的方法，它更多采用了类似于信号处理、图像处理等方法来建立候选清单，所以对给定的输入图像，候选区域网络在对象周围会给出上千个框，这时就可以进行定位，也就是寻找图像的边界，划定闭合的限定框，区域选择网络会在输入图像中寻找点状的候选区域，也就是对象可能出现的区域。</p>
+<p>不同于分类网络在图像的各个位置和范围内进行搜索，首先采取候选区域网络找到物体可能存在的备选区域，再应用卷积神经网络对这些备选区域进行分类，这样做比穷尽所有可能位置的位置和范围要来的更容易一些。</p>
+<p>对于候选区域选择有一个改进的方法，不再按感兴趣区域处理，而是通过一些卷积层，整个图像去运行，得到整个图像的高分辨率特征映射，仍旧要用一些备选区域，但不是固定算法（比如选择搜索），而是针对备选区域切分图像的像素，考虑基于备选区域的投影到卷积特征映射，之后从卷积特征映射提取属于备选区域的卷积块而不是直接截取备选区域，通过对整个图像进行处理，当有很多小块时可以重用很多卷积计算。</p>
+<p>需要强调的是在下游有很多全连接层，这些全连接层的输入应该是固定尺寸的，所以需要对从卷积映射提取出来的图像块进行整形；当通过卷积特征映射得到这些小块，可以通过全连接层运行这些输入预测分类结果以及对线性分类的回归补偿；当训练这个的时候，在反向传播阶段有一个多任务损失，要在这两个约束之间取舍，可以基于全局反向传播同时学习。</p>
+<p>还有一种用于目标检测的模型，是一种前馈模型；其中一个模型是YOLO，还有一个是SSD。这类模型的思想不是对这些候选框分别进行处理，而是尝试将其作为回归问题处理，借助于大型卷积网络，所有预测一次完成。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-04-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/cv12/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">可视化和理解卷积神经网络</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/cv10/">
+            <span class="next-text nav-default">循环神经网络</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

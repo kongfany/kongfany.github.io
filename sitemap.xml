@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://kongfany.github.io/categories/</loc>
+    <lastmod>2022-04-07T14:02:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/categories/computer-vision/</loc>
+    <lastmod>2022-04-07T14:02:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/</loc>
+    <lastmod>2022-04-07T14:02:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/cv12/</loc>
+    <lastmod>2022-04-07T14:02:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/</loc>
+    <lastmod>2022-04-07T14:02:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/cv11/</loc>
+    <lastmod>2022-04-07T13:29:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/cv10/</loc>
+    <lastmod>2022-04-07T12:55:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://kongfany.github.io/tags/imagesegmentation/</loc>
     <lastmod>2022-03-30T16:35:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -10,13 +59,6 @@
   
   <url>
     <loc>https://kongfany.github.io/tags/medical/</loc>
-    <lastmod>2022-03-30T16:35:58+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/post/</loc>
     <lastmod>2022-03-30T16:35:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -37,28 +79,7 @@
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/</loc>
-    <lastmod>2022-03-30T16:35:58+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/categories/</loc>
-    <lastmod>2022-03-27T18:21:28+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://kongfany.github.io/post/cv9/</loc>
-    <lastmod>2022-03-27T18:21:28+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/categories/computer-vision/</loc>
     <lastmod>2022-03-27T18:21:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

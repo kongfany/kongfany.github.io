@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>反向传播和神经网络 - 大胖狗来了</title>
+  <title>可视化和理解卷积神经网络 - 大胖狗来了</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="可视化和理解卷积神经网络 特征可视化、倒置、对抗样本 第一层：由许多卷积核组成，每个卷积核是11113，这些卷积核在输入图像上来回滑动，取图像块" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
-<link rel="canonical" href="https://kongfany.github.io/post/cv4/" />
+<link rel="canonical" href="https://kongfany.github.io/post/cv12/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="反向传播和神经网络" />
-<meta property="og:description" content="反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个" />
+<meta property="og:title" content="可视化和理解卷积神经网络" />
+<meta property="og:description" content="可视化和理解卷积神经网络 特征可视化、倒置、对抗样本 第一层：由许多卷积核组成，每个卷积核是11113，这些卷积核在输入图像上来回滑动，取图像块" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kongfany.github.io/post/cv4/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-03-12T13:47:25+08:00" />
-<meta property="article:modified_time" content="2022-03-12T13:47:25+08:00" />
+<meta property="og:url" content="https://kongfany.github.io/post/cv12/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-07T14:02:19+08:00" />
+<meta property="article:modified_time" content="2022-04-07T14:02:19+08:00" />
 
-<meta itemprop="name" content="反向传播和神经网络">
-<meta itemprop="description" content="反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个"><meta itemprop="datePublished" content="2022-03-12T13:47:25+08:00" />
-<meta itemprop="dateModified" content="2022-03-12T13:47:25+08:00" />
-<meta itemprop="wordCount" content="729">
+<meta itemprop="name" content="可视化和理解卷积神经网络">
+<meta itemprop="description" content="可视化和理解卷积神经网络 特征可视化、倒置、对抗样本 第一层：由许多卷积核组成，每个卷积核是11113，这些卷积核在输入图像上来回滑动，取图像块"><meta itemprop="datePublished" content="2022-04-07T14:02:19+08:00" />
+<meta itemprop="dateModified" content="2022-04-07T14:02:19+08:00" />
+<meta itemprop="wordCount" content="1203">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="反向传播和神经网络"/>
-<meta name="twitter:description" content="反向传播 已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个"/>
+<meta name="twitter:title" content="可视化和理解卷积神经网络"/>
+<meta name="twitter:description" content="可视化和理解卷积神经网络 特征可视化、倒置、对抗样本 第一层：由许多卷积核组成，每个卷积核是11113，这些卷积核在输入图像上来回滑动，取图像块"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -129,15 +129,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">反向传播和神经网络</h1>
+      <h1 class="post-title">可视化和理解卷积神经网络</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2022-03-12 </span>
+        <span class="post-time"> 2022-04-07 </span>
         <div class="post-category">
             <a href="/categories/computer-vision/"> Computer-Vision </a>
             </div>
-          <span class="more-meta"> 729 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 1203 words </span>
+          <span class="more-meta"> 3 mins read </span>
         
       </div>
     </header>
@@ -149,8 +149,12 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#反向传播">反向传播</a></li>
-        <li><a href="#神经网络">神经网络</a></li>
+        <li><a href="#可视化和理解卷积神经网络">可视化和理解卷积神经网络</a>
+          <ul>
+            <li><a href="#特征可视化倒置对抗样本">特征可视化、倒置、对抗样本</a></li>
+            <li><a href="#deepdream和风格迁移">DeepDream和风格迁移</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -158,35 +162,25 @@
   </div>
 </div>
     <div class="post-content">
-      <h2 id="反向传播">反向传播</h2>
-<p><code>已经讲过用函数f定义一个分类器，函数f的参数是权重矩阵W，输入数据x并对你想要分类的每个类别都输出一个对应的得分向量。还可以定义一个损失函数（svm）对模型预测结果满意或是不满意的程度，然后用它定义一个总的损失函数L，L是由训练数据带来的损失结合一个正则项得到的，正则项表示模型的复杂程度，为了更好地泛化，我们倾向取简单的模型，所以现在想要找到与最小损失对应的参数W。</code>想要最小化损失函数，为了做到这一点，我们想要找到L在W方向的梯度。即为最优化，沿着最陡的下降方向，即梯度的负方向，来一步步迭代，这样就能沿着损失函数从上往下，走到最低点。</p>
-<p>梯度计算：有限差分估计，解析梯度计算。</p>
-<p>如何计算复杂函数的解析梯度，用到一个叫计算图的框架。大体上，计算图就是我们用这类图来表示任意函数，其中图的节点，表示我们要执行的每一步计算。</p>
-<p>好处：用计算图来表示一个函数，就能用反向传播技术，递归地调用链式法则来计算计算图中每个变量的梯度。</p>
-<p><img src="/images/202203/41.png" alt=""></p>
-<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C41.png" alt=""></p>
-<p><img src="/images/202203/42.png" alt=""></p>
-<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C42.png" alt=""></p>
-<p><img src="/images/202203/1.jpg" alt=""></p>
-<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C1.jpg" alt=""></p>
-<p>在每一个节点上计算我们所需的本地梯度，然后跟踪这个梯度，在反向传播过程中，我们接收从上游传回来的这个梯度值，我们直接用这个值乘以本地梯度，然后得到我们想要传回连接点的值，在下一个节点进行反向传播时，我们不考虑除了直接相连的节点之外的任何东西。</p>
-<p><img src="/images/202203/43.png" alt=""></p>
-<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C43.png" alt=""></p>
-<p><img src="/images/202203/44.png" alt=""></p>
-<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C44.png" alt=""></p>
-<p><img src="/images/202203/45.png" alt=""></p>
-<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C45.png" alt=""></p>
-<p><img src="/images/202203/2.jpg" alt=""></p>
-<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C2.jpg" alt=""></p>
-<h2 id="神经网络">神经网络</h2>
-<p>一般来说，神经网络就是由简单函数构成的一组函数在顶层堆叠在一起，我们用一种层次化的方式将它们堆叠起来，为了形成一个更复杂的非线性函数。这就是最基本的多阶段分层计算。</p>
-<p><img src="/images/202203/46.png" alt=""></p>
-<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C46.png" alt=""></p>
-<p>计算图里的节点相互连接，我们需要输入“信号x”，所有x的输入量比如x0、x1、x2等，采用比如赋予权重W的方法，叠加汇合到一起，将结果整合起来后得到一个激活函数，将激活函数应用在神经元的端部，得到的值作为输出。</p>
-<blockquote>
-<p><a href="https://blog.csdn.net/qq_34611579/article/details/81023228">笔记</a></p>
-<p><a href="https://cs231n.github.io/optimization-2/">官方笔记</a></p>
-</blockquote>
+      <h2 id="可视化和理解卷积神经网络">可视化和理解卷积神经网络</h2>
+<h3 id="特征可视化倒置对抗样本">特征可视化、倒置、对抗样本</h3>
+<p>第一层：由许多卷积核组成，每个卷积核是11<em>11</em>3，这些卷积核在输入图像上来回滑动，取图像块和卷积核权重的内积，这就是第一层的输出；可以把这个卷积核看成有3个通道的形状为11*11的图像，并且给定红色、绿色、蓝色的值，如图所示的第一层的可视化：</p>
+<p><img src="/images/202204/14.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202204%5C14.png" alt=""></p>
+<p>可以看到卷积核正在寻找什么，它们都在寻找有向边，比如明暗线条，从不同的角度和位置来观察输入图像，可以看到完全相反的颜色。</p>
+<p>中间层：如果对中间的层进行相同的可视化，但是实际上它的解释性会差很多，第二层的权重经过卷积之后，这里有一些ReLU激活函数和一些其他的非线性激活函数，但不能从卷积核权重里面得到太多的信息，这里的做法是可以把卷积核平面展开成灰度图像；这些灰度图像显示了第二层某个卷积核的权重。</p>
+<p>对于可视化中间层的特征，可以做一件每场有用的事情是可视化输入图像中什么类型的图像块可以最大限度地激活不同的特征、不同的神经元；这里的做法是选取AlexNet的卷积层，记住每一个激活量提供了128<em>13</em>13的三维数据，然后选择128个通道其中的一个，通过神经网络运行很多图像，对于每个图像记录它们的卷积特征，可以观察到那个特征映射图的部分已经被图像的数据集最大地激活，然后对这些最大化激活的图像块进行可视化。</p>
+<p>最后一层：神经网络的最后一层通过大概1000个类的得分来得到数据集中每个类的得分，而在最后一层之前通常有一些完全连接的层，以AlexNet为例，用4096维的特征向量来表示图像，将其输入到最后一层来预测最终类的得分；可以用近邻算法可视化最后的结果。</p>
+<p><img src="/images/202204/15.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202204%5C15.png" alt=""></p>
+<p>从另一个角度来看最后一层到底发生了什么，通过降维的方法，比如PCA可以让你把像4096维的特征向量的高维表示压缩到二维空间，以便能更加直观地可视化这个特征空间；还有一种强大的算法叫t-SNE，即t-分布领域嵌入，它是人们经常在深度学习里面可视化特征的非线性降维方法，如下图的实例：</p>
+<p><img src="/images/202204/16.png" alt=""></p>
+<p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202204%5C16.png" alt=""></p>
+<h3 id="deepdream和风格迁移">DeepDream和风格迁移</h3>
+<p>另一件可以做的基于梯度的图像优化是DeepDream，它的思想：提取输入图像通过神经网络运行到某一层，接着进行反向传播并且设置该层的梯度等于激活值，然后反向传播到图像并不断更新图像。</p>
+<p>Deepdream的展示：</p>
+<p>另一件可以做的非常有用的事情是特征反演，这让我们再次了解到神经网络的不同层可以捕获图像的哪些类型的元素。</p>
+<p>我们需要做的是选取一张图像，通过神经网络运行该图像，记录其中一个图像的特征值，然后根据它的特征表示重构那个图像，基于重建图像的样子这将给我们一些关于在该特征向量中捕获的图像类型的信息，可以通过梯度上升和正则化来做到这点，与其最大化某些分值，不如最小化捕获到的特征向量之间的距离，并且在生成图像的特征之间尝试合成一个新的与之前计算过的图像特征相匹配的图像；这里用到了全变差正则化将左右相邻像素之间的差异拼凑成上下相邻以尝试增加生成图像中特殊的平滑度。</p>
 
     </div>
 
@@ -198,7 +192,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2022-03-12
+        2022-04-07
         
     </span>
   </p>
@@ -208,13 +202,9 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/cv5/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">卷积神经网络</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/fl_facerecgnition/">
-            <span class="next-text nav-default">利用差分隐私聚类提升联邦人脸识别</span>
+        
+        <a class="next" href="/post/cv11/">
+            <span class="next-text nav-default">图像识别和分割</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

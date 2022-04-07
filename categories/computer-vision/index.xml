@@ -6,7 +6,34 @@
     <description>Recent content in Computer-Vision on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 27 Mar 2022 18:21:28 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/computer-vision/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Apr 2022 14:02:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/computer-vision/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>可视化和理解卷积神经网络</title>
+      <link>https://kongfany.github.io/post/cv12/</link>
+      <pubDate>Thu, 07 Apr 2022 14:02:19 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv12/</guid>
+      <description>可视化和理解卷积神经网络 特征可视化、倒置、对抗样本 第一层：由许多卷积核组成，每个卷积核是11113，这些卷积核在输入图像上来回滑动，取图像块</description>
+    </item>
+    
+    <item>
+      <title>图像识别和分割</title>
+      <link>https://kongfany.github.io/post/cv11/</link>
+      <pubDate>Thu, 07 Apr 2022 13:29:56 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv11/</guid>
+      <description>图像识别和分割 分割 我们希望输入图像，并对图像中每个像素做分类，对于每个像素，确定它属于猫、草地、天空或者背景亦或者其他分类，首先确定分类，就</description>
+    </item>
+    
+    <item>
+      <title>循环神经网络</title>
+      <link>https://kongfany.github.io/post/cv10/</link>
+      <pubDate>Thu, 07 Apr 2022 12:55:01 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cv10/</guid>
+      <description>循环神经网络 RNN,LSTM,GRU 在之前的学习中，提到了一种称为vanilla的前馈网络，所有网络架构都有这种基础架构，会接收一些输入，输入是固定尺寸的对象，比</description>
+    </item>
+    
     <item>
       <title>CNN框架</title>
       <link>https://kongfany.github.io/post/cv9/</link>

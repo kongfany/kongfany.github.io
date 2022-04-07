@@ -49,7 +49,7 @@
 <meta itemprop="name" content="卷积神经网络">
 <meta itemprop="description" content="卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效"><meta itemprop="datePublished" content="2022-03-12T20:35:55+08:00" />
 <meta itemprop="dateModified" content="2022-03-12T20:35:55+08:00" />
-<meta itemprop="wordCount" content="2672">
+<meta itemprop="wordCount" content="2677">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="卷积神经网络"/>
 <meta name="twitter:description" content="卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/computer-vision/"> Computer-Vision </a>
             </div>
-          <span class="more-meta"> 2672 words </span>
+          <span class="more-meta"> 2677 words </span>
           <span class="more-meta"> 6 mins read </span>
         
       </div>
@@ -189,7 +189,7 @@
 <p>对于卷积层而言，它和全连接的主要差别是它可以保全空间结构，例如下图中就可以保持图片的结构，这个三维输入的结构：</p>
 <p><img src="/images/202203/77.png" alt=""></p>
 <p><img src="D:\Hugo\blog\static\images\202203\77.png" style="zoom:50%;" /></p>
-<p>然后将<code>5*5*3</code>的卷积核在整个图像上滑动，计算出每一个空间定位时的点积结果。首先，采用卷积核总是会将输入量扩展至整个卷积层，所以它们都是一个很小的空间区域，它们通常会遍历所有通道。就像下图中将卷积核的每个位置元素和与之对应图像区域的像素值相乘，经过运算后得到的点积，结果是<img src="https://img-blog.csdn.net/20180715190056212?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NjExNTc5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img">。</p>
+<p>然后将<code>5*5*3</code>的卷积核在整个图像上滑动，计算出每一个空间定位时的点积结果。首先，采用卷积核总是会将输入量扩展至整个卷积层，所以它们都是一个很小的空间区域，它们通常会遍历所有通道。就像下图中将卷积核的每个位置元素和与之对应图像区域的像素值相乘，经过运算后得到的点积，结果是W^T+b。</p>
 <p>接下来继续讨论如何滑动卷积核并遍历所有空间位置，我们将这个卷积核从左上方边角处开始，让卷积核遍历输入的所有像素点，在每一个位置都进行点积运算，以最简单的方式一个像素一个像素的滑动，持续相应的操作并相应的填满输出激活映射。我们可以按照同样的方法使用多个卷积核进行计算，将会得到多层的激活映射。</p>
 <p>简单描述一下在卷积神经网络中是如何使用这些卷积层的，ConvNet基本上是由多个卷积层组成的一个序列，它们依次堆叠，然后用激活函数对其进行逐一处理，比如说一个ReLU激活函数；然后将得到一些比如Conv和ReLU的东西以及一些池化层；</p>
 <p><img src="/images/202203/78.png" alt=""></p>
