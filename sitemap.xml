@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://kongfany.github.io/tags/deep-learning/</loc>
+    <lastmod>2022-04-07T14:42:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/</loc>
+    <lastmod>2022-04-07T14:42:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/unet/</loc>
+    <lastmod>2022-04-07T14:42:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/</loc>
+    <lastmod>2022-04-07T14:42:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/</loc>
+    <lastmod>2022-04-07T14:42:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://kongfany.github.io/categories/</loc>
     <lastmod>2022-04-07T14:02:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -16,21 +51,7 @@
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2022-04-07T14:02:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://kongfany.github.io/post/cv12/</loc>
-    <lastmod>2022-04-07T14:02:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/</loc>
     <lastmod>2022-04-07T14:02:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -59,13 +80,6 @@
   
   <url>
     <loc>https://kongfany.github.io/tags/medical/</loc>
-    <lastmod>2022-03-30T16:35:58+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/tags/</loc>
     <lastmod>2022-03-30T16:35:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -137,13 +151,6 @@
   <url>
     <loc>https://kongfany.github.io/post/fl_route/</loc>
     <lastmod>2022-03-17T13:00:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/tags/deep-learning/</loc>
-    <lastmod>2022-03-16T15:05:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

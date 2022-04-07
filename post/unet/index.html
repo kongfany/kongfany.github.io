@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Pytorch深度学习实战 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/unet/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Pytorch深度学习实战" />
+<meta property="og:description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/unet/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-07T14:42:29+08:00" />
+<meta property="article:modified_time" content="2022-04-07T14:42:29+08:00" />
+
+<meta itemprop="name" content="Pytorch深度学习实战">
+<meta itemprop="description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类"><meta itemprop="datePublished" content="2022-04-07T14:42:29+08:00" />
+<meta itemprop="dateModified" content="2022-04-07T14:42:29+08:00" />
+<meta itemprop="wordCount" content="7701">
+<meta itemprop="keywords" content="Deep-Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pytorch深度学习实战"/>
+<meta name="twitter:description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Pytorch深度学习实战</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-07 </span>
+        
+          <span class="more-meta"> 7701 words </span>
+          <span class="more-meta"> 16 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#语义分割基础与环境搭建">语义分割基础与环境搭建</a>
+          <ul>
+            <li><a href="#语义分割">语义分割</a></li>
+            <li><a href="#数据集">数据集</a></li>
+            <li><a href="#开发环境搭建">开发环境搭建</a></li>
+          </ul>
+        </li>
+        <li><a href="#unet语义分割网络">UNet语义分割网络</a>
+          <ul>
+            <li><a href="#unet网络结构">UNet网络结构</a></li>
+          </ul>
+        </li>
+        <li><a href="#unet模型训练">UNet模型训练</a>
+          <ul>
+            <li><a href="#unet训练">UNet训练</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p><a href="https://cuijiahua.com/blog/2019/11/dl-14.html">语义分割基础与环境搭建</a></p>
+<p><a href="https://github.com/Jack-Cherish/Deep-Learning">代码</a></p>
+</blockquote>
+<h2 id="语义分割基础与环境搭建">语义分割基础与环境搭建</h2>
+<h3 id="语义分割">语义分割</h3>
+<p>语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类别中的每一点打一个标签，使得不同种类的东西在图像上被区分开来。可以理解成像素级别的分类任务，直白点，就是对每个像素点进行分类。</p>
+<p>简而言之，我们的目标是给定一幅RGB彩色图像（高x宽x3）或一幅灰度图像（高x宽x1），输出一个分割图谱，其中包括每个像素的类别标注（高x宽x1）。具体如下图所示：</p>
+<p><img src="/images/202204/17.png" alt=""></p>
+<p><strong>注意</strong>：为了视觉上清晰，上面的预测图是一个低分辨率的图。在实际应用中，分割标注的分辨率需要与原始图像的分辨率相同。</p>
+<p>这里对图片分为<strong>五类</strong>：Person（人）、Purse（包）、Plants/Grass（植物/草）、Sidewalk（人行道）、Building/Structures（建筑物）。</p>
+<p>与标准分类值（standard categorical values）的做法相似，这里也是创建一个<strong>one-hot编码</strong>的目标类别标注——本质上即为<strong>每个类别创建一个输出通道</strong>。因为上图有5个类别，所以网络输出的通道数也为5，如下图所示：</p>
+<p><img src="/images/202204/18.png" alt=""></p>
+<p>如上图所示，预测的结果可以通过对每个像素在深度上求<strong>argmax的方式</strong>被整合到一张分割图中。进而，我们可以轻松地通过重叠的方式观察到每个目标。</p>
+<p>argmax的方式也很好理解。如上图所示，每个通道只有0或1，以Person的通道为例，<strong>红色的1</strong>表示为Person的像素，其他像素均为0。其他通道也是如此，并且不存在同一个像素点在两个以上的通道均为1的情况。因此，<code>通过argmax就找到每个像素点的最大索引通道值</code>。最终得到结果为：</p>
+<p><img src="/images/202204/19.png" alt=""></p>
+<p>当只有一层通道被重叠至原始图像时，我们称之为mask，即只指示某一特定类别所存在的区域。</p>
+<p>高分辨率的结果如下图所示，不同的颜色代表不同的类别：</p>
+<p><img src="/images/202204/20.png" alt=""></p>
+<h3 id="数据集">数据集</h3>
+<h3 id="开发环境搭建">开发环境搭建</h3>
+<ol>
+<li>
+<p>CUDA</p>
+</li>
+<li>
+<p>Anaconda3</p>
+</li>
+<li>
+<p>cuDNN和Pytorch安装</p>
+<p>cuDNN是用于深度神经网络的GPU加速库。它强调性能、易用性和低内存开销。</p>
+</li>
+</ol>
+<h2 id="unet语义分割网络">UNet语义分割网络</h2>
+<blockquote>
+<p><a href="https://github.com/Jack-Cherish/Deep-Learning/tree/master/Pytorch-Seg/lesson-1">代码</a></p>
+<p><a href="https://arxiv.org/pdf/1505.04597.pdf">UNet论文</a></p>
+<p><a href="https://github.com/yunjey/pytorch-tutorial">pytorch教程</a></p>
+</blockquote>
+<h3 id="unet网络结构">UNet网络结构</h3>
+<p>在语义分割领域，基于深度学习的语义分割算法开山之作是FCN（Fully Convolutional Networks for Semantic Segmentation），而UNet是遵循FCN的原理，并进行了相应的改进，使其适应小样本的简单分割问题。</p>
+<p>研究一个深度学习算法，可以先看网络结构，看懂网络结构后，再Loss计算方法、训练方法等。本文主要针对UNet的网络结构进行讲解，<strong>其它内容</strong>会在后续章节进行说明。</p>
+<h4 id="原理">原理</h4>
+<p>UNet成为了大多做医疗影像语义分割任务的baseline。</p>
+<p>UNet网络结构，最主要的两个特点是：U型网络结构和Skip Connection跳层连接。</p>
+<p><img src="/images/202204/21.png" alt=""></p>
+<ul>
+<li>
+<p>UNet是一个对称的网络结构，左侧为下采样，右侧为上采样。</p>
+</li>
+<li>
+<p>按照功能可以将左侧的一系列下采样操作称为encoder，将右侧的一系列上采样操作称为decoder。</p>
+</li>
+<li>
+<p>Skip Connection中间四条灰色的平行线，Skip Connection就是在上采样的过程中，融合下采样过过程中的feature map。</p>
+</li>
+<li>
+<p>Skip Connection用到的融合的操作也很简单，就是将feature map的通道进行叠加，俗称Concat。</p>
+</li>
+<li>
+<p>Concat操作也很好理解，举个例子：一本大小为<code>10cm*10cm</code>，厚度为3cm的书A，和一本大小为10cm*10cm，厚度为4cm的书B。</p>
+<p>将书A和书B，边缘对齐地摞在一起。这样就得到了，大小为10cm*10cm厚度为7cm的一摞书，类似这种“摞在一起”的操作，就是Concat。</p>
+</li>
+<li>
+<p>同样道理，对于feature map，一个大小为<code>256*256*64</code>的feature map，即feature map的w（宽）为256，h（高）为256，c（通道数）为64。和一个大小为<code>256*256*32</code>的feature map进行Concat融合，就会得到一个大小为<code>256*256*96</code>的feature map。</p>
+</li>
+</ul>
+<p>在实际使用中，Concat融合的两个feature map的大小不一定相同，例如<code>256*256*64</code>的feature map和<code>240*240*32</code>的feature map进行Concat。</p>
+<ul>
+<li>将大<code>256*256*64</code>的feature map进行裁剪，裁剪为<code>240*240*64</code>的feature map，比如上下左右，各舍弃8 pixel，裁剪后再进行Concat，得到<code>240*240*96</code>的feature map。</li>
+<li>将小<code>240*240*32</code>的feature map进行padding操作，padding为<code>256*256*32</code>的feature map，比如上下左右，各补8 pixel，padding后再进行Concat，得到<code>256*256*96</code>的feature map。</li>
+<li>UNet采用的Concat方案就是第二种，将小的feature map进行padding，padding的方式是补0，一种常规的常量填充。</li>
+</ul>
+<h4 id="代码">代码</h4>
+<p>我们将整个UNet网络拆分为多个模块进行讲解。</p>
+<ul>
+<li><strong>DoubleConv模块：</strong></li>
+</ul>
+<p>连续两次的卷积操作。</p>
+<p><img src="/images/202204/22.png" alt=""></p>
+<p>从UNet网络中可以看出，不管是下采样过程还是上采样过程，每一层都会连续进行两次卷积操作，这种操作在UNet网络中重复很多次，可以单独写一个DoubleConv模块：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="k">class</span> <span class="nc">DoubleConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;(convolution =&gt; [BN] =&gt; ReLU) * 2&#34;&#34;&#34;</span>
+	<span class="c1"># torch.nn.Sequential是一个时序容器，Module会以他们传入的顺序被添加到容器中</span>
+    <span class="c1"># 卷积-&gt;BN-&gt;RELU-&gt;卷积-&gt;BN-&gt;RELU</span>
+    <span class="c1"># DoubleConv模块的in_channels和out_channels可以灵活设定，以便扩展使用。</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">double_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">double_conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如上图所示的网络，in_channels设为1，out_channels为64。输入图片大小为<code>572*572</code>，经过步长为1，padding为0的<code>3*3</code>卷积，得到<code>570*570</code>的feature map，再经过一次卷积得到568*568的feature map。</p>
+<p>计算公式：O=(H−F+2×P)/S+1</p>
+<p>H为输入feature map的大小，O为输出feature map的大小，F为卷积核的大小，P为padding的大小，S为步长。</p>
+<ul>
+<li><strong>Down模块：</strong></li>
+</ul>
+<p><img src="/images/202204/23.png" alt=""></p>
+<p>UNet网络一共有4次下采样过程，模块化代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Down</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Downscaling with maxpool then double conv&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxpool_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+            <span class="n">DoubleConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxpool_conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里的代码很简单，就是一个maxpool池化层，进行下采样，然后接一个DoubleConv模块。</p>
+<ul>
+<li><strong>Up模块：</strong></li>
+</ul>
+<p>上采样过程用到的最多的当然就是上采样了，除了常规的上采样操作，还有进行特征的融合。</p>
+<p><img src="/images/202204/24.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Up</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Upscaling then double conv&#34;&#34;&#34;</span>
+    <span class="c1"># 定义的上采样方法以及卷积采用DoubleConv。上采样，定义了两种方法：Upsample和ConvTranspose2d，也就是双线性插值和反卷积。</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">bilinear</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># if bilinear, use the normal convolutions to reduce the number of channels</span>
+        <span class="k">if</span> <span class="n">bilinear</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">in_channels</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="c1"># input is CHW</span>
+        <span class="n">diffY</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">x2</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">x1</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">2</span><span class="p">]])</span>
+        <span class="n">diffX</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">x2</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">x1</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">3</span><span class="p">]])</span>
+
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="p">[</span><span class="n">diffX</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diffX</span> <span class="o">-</span> <span class="n">diffX</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                        <span class="n">diffY</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diffY</span> <span class="o">-</span> <span class="n">diffY</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="c1"># if you have padding issues, see</span>
+        <span class="c1"># https://github.com/HaiyongJiang/U-Net-Pytorch-Unstructured-Buggy/commit/0e854509c2cea854e247a9c615f175f76fbb2e3a</span>
+        <span class="c1"># https://github.com/xiaopeng-liao/Pytorch-UNet/commit/8ebac70e633bac59fc22bb5195e513d5832fb3bd</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x2</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上采样，定义了两种方法：Upsample和ConvTranspose2d，也就是<strong>双线性插值</strong>和<strong>反卷积</strong>。</p>
+<p>双线性插值：</p>
+<p><img src="/images/202204/25.png" alt=""></p>
+<p>简单地讲：已知Q11、Q12、Q21、Q22四个点坐标，通过Q11和Q21求R1，再通过Q12和Q22求R2，最后通过R1和R2求P，这个过程就是双线性插值。</p>
+<p>对于一个feature map而言，其实就是在像素点中间补点，补的点的值是多少，是由相邻像素点的值决定的。</p>
+<p>反卷积，顾名思义，就是反着卷积。卷积是让featuer map越来越小，反卷积就是让feature map越来越大，示意图：</p>
+<p><img src="/images/202204/1.gif" alt=""></p>
+<p>下面蓝色为原始图片，周围白色的虚线方块为padding结果，通常为0，上面绿色为卷积后的图片。</p>
+<p>这个示意图，就是一个从<code>2*2</code>的feature map-&gt;<code>4*4</code>的feature map过程。</p>
+<p>在forward前向传播函数中，x1接收的是<strong>上采样</strong>的数据，x2接收的是<strong>特征融合</strong>的数据。特征融合方法就是，上文提到的，先对小的feature map进行padding，再进行concat。</p>
+<ul>
+<li><strong>OutConv模块：</strong></li>
+</ul>
+<p>用上述的DoubleConv模块、Down模块、Up模块就可以拼出UNet的主体网络结构了。UNet网络的输出需要根据分割数量，整合输出通道，结果如下图所示：</p>
+<p><img src="/images/202204/26.png" alt=""></p>
+<p>至此，UNet网络用到的模块都已经写好，我们可以将上述的模块代码都放到一个unet_parts.py文件里，然后再创建unet_model.py，根据UNet网络结构，设置每个模块的输入输出通道个数以及调用顺序，编写如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="kn">from</span> <span class="nn">unet_parts</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">UNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_channels</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">bilinear</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UNet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_channels</span> <span class="o">=</span> <span class="n">n_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_classes</span> <span class="o">=</span> <span class="n">n_classes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bilinear</span> <span class="o">=</span> <span class="n">bilinear</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">inc</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="n">n_channels</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down1</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down2</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down3</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down4</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up1</span> <span class="o">=</span> <span class="n">Up</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">bilinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up2</span> <span class="o">=</span> <span class="n">Up</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">bilinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up3</span> <span class="o">=</span> <span class="n">Up</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">bilinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up4</span> <span class="o">=</span> <span class="n">Up</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">bilinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outc</span> <span class="o">=</span> <span class="n">OutConv</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down1</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="n">x3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down2</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+        <span class="n">x4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down3</span><span class="p">(</span><span class="n">x3</span><span class="p">)</span>
+        <span class="n">x5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down4</span><span class="p">(</span><span class="n">x4</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up1</span><span class="p">(</span><span class="n">x5</span><span class="p">,</span> <span class="n">x4</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x3</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up4</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">logits</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">UNet</span><span class="p">(</span><span class="n">n_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用命令python unet_model.py，如果没有错误，你会得到如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">UNet</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">inc</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+      <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+      <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">down1</span><span class="p">):</span> <span class="n">Down</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">maxpool_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+          <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+          <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">down2</span><span class="p">):</span> <span class="n">Down</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">maxpool_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+          <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+          <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">down3</span><span class="p">):</span> <span class="n">Down</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">maxpool_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+          <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+          <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">down4</span><span class="p">):</span> <span class="n">Down</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">maxpool_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+          <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+          <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">up1</span><span class="p">):</span> <span class="n">Up</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">up</span><span class="p">):</span> <span class="n">ConvTranspose2d</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">up2</span><span class="p">):</span> <span class="n">Up</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">up</span><span class="p">):</span> <span class="n">ConvTranspose2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">up3</span><span class="p">):</span> <span class="n">Up</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">up</span><span class="p">):</span> <span class="n">ConvTranspose2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">up4</span><span class="p">):</span> <span class="n">Up</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">up</span><span class="p">):</span> <span class="n">ConvTranspose2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">DoubleConv</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">double_conv</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-05</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">outc</span><span class="p">):</span> <span class="n">OutConv</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="unet模型训练">UNet模型训练</h2>
+<p>深度学习算法，无非就是我们解决一个问题的方法。选择什么样的网络去训练，进行什么样的预处理，采用什么Loss和优化方法，都是根据具体的任务而定的。</p>
+<p>UNet 论文中的经典任务：医学图像分割。</p>
+<p>简单描述一个这个任务：如动图所示，给一张细胞结构图，我们要把每个细胞互相分割开来。</p>
+<p>这个训练数据只有30张，分辨率为512x512，这些图片是果蝇的电镜图。</p>
+<h3 id="unet训练">UNet训练</h3>
+<p>想要训练一个深度学习模型，可以简单分为三个步骤：</p>
+<ul>
+<li>数据加载：数据怎么加载，标签怎么定义，用什么数据增强方法，都是这一步进行。</li>
+<li>模型选择：模型我们已经准备好了，就是该系列上篇文章讲到的 UNet 网络。</li>
+<li>算法选择：算法选择也就是我们选什么 loss ，用什么优化算法。</li>
+</ul>
+<p>每个步骤说的比较笼统，我们结合今天的医学图像分割任务，展开说明。</p>
+<h4 id="数据加载">数据加载</h4>
+<p>这一步，可以做很多事情，说白了，无非就是图片怎么加载，标签怎么定义，为了增加算法的鲁棒性或者增加数据集，可以做一些数据增强的操作。</p>
+<p><a href="https://github.com/Jack-Cherish/Deep-Learning/tree/master/Pytorch-Seg/lesson-2">ISBI数据集</a></p>
+<p>数据分为训练集和测试集，各30张，训练集有标签，测试集没有标签。</p>
+<p>数据加载要做哪些处理，是根据任务和数据集而决定的，对于我们的分割任务，不用做太多处理，但由于数据量很少，仅30张，我们可以使用一些数据增强方法，来扩大我们的数据集。</p>
+<p>Pytorch 给我们提供了一个方法，方便我们加载数据，我们可以使用这个框架，去加载我们的数据。看下伪代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># ================================================================== #</span>
+<span class="c1">#                Input pipeline for custom dataset                 #</span>
+<span class="c1"># ================================================================== #</span>
+
+<span class="c1"># You should build your custom dataset as below.</span>
+<span class="k">class</span> <span class="nc">CustomDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO</span>
+        <span class="c1"># 1. Initialize file paths or a list of file names. </span>
+        <span class="k">pass</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="c1"># TODO</span>
+        <span class="c1"># 1. Read one data from file (e.g. using numpy.fromfile, PIL.Image.open).</span>
+        <span class="c1"># 2. Preprocess the data (e.g. torchvision.Transform).</span>
+        <span class="c1"># 3. Return a data pair (e.g. image and label).</span>
+        <span class="k">pass</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># You should change 0 to the total size of your dataset.</span>
+        <span class="k">return</span> <span class="mi">0</span> 
+
+<span class="c1"># You can then use the prebuilt data loader. </span>
+<span class="n">custom_dataset</span> <span class="o">=</span> <span class="n">CustomDataset</span><span class="p">()</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">custom_dataset</span><span class="p">,</span>
+                                           <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> 
+                                           <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这是一个标准的模板，我们就使用这个模板，来加载数据，定义标签，以及进行数据增强。</p>
+<p>创建一个dataset.py文件，编写代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="k">class</span> <span class="nc">ISBI_Loader</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_path</span><span class="p">):</span>
+        <span class="c1"># 初始化函数，读取所有data_path下的图片</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="n">data_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imgs_path</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;image/*.png&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">flipCode</span><span class="p">):</span>
+        <span class="c1"># 使用cv2.flip进行数据增强，filpCode为1水平翻转，0垂直翻转，-1水平+垂直翻转</span>
+        <span class="n">flip</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">flipCode</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">flip</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="c1"># 根据index读取图片</span>
+        <span class="n">image_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imgs_path</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="c1"># 根据image_path生成label_path</span>
+        <span class="n">label_path</span> <span class="o">=</span> <span class="n">image_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">)</span>
+        <span class="c1"># 读取训练图片和标签图片</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">label_path</span><span class="p">)</span>
+        <span class="c1"># 将数据转为单通道的图片</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># 处理标签，将像素值为255的改为1</span>
+        <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="o">/</span> <span class="mi">255</span>
+        <span class="c1"># 随机进行数据增强，为2时不做处理</span>
+        <span class="n">flipCode</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">flipCode</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">flipCode</span><span class="p">)</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">flipCode</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 返回训练集大小</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imgs_path</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">isbi_dataset</span> <span class="o">=</span> <span class="n">ISBI_Loader</span><span class="p">(</span><span class="s2">&#34;data/train/&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;数据个数：&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbi_dataset</span><span class="p">))</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">isbi_dataset</span><span class="p">,</span>
+                                               <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                               <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">数据个数： 30
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+torch.Size([2, 1, 512, 512])
+</code></pre></td></tr></table>
+</div>
+</div><p>__init__函数是这个类的初始化函数，根据指定的图片路径，读取所有图片数据，存放到self.imgs_path列表中。</p>
+<p>__len__函数可以返回数据的多少，这个类实例化后，通过len()函数调用。</p>
+<p>__getitem__函数是数据获取函数，在这个函数里你可以写数据怎么读，怎么处理，并且可以一些数据预处理、数据增强都可以在这里进行。我这里的处理很简单，只是将图片读取，并处理成单通道图片。同时，因为 label 的图片像素点是0和255，因此需要除以255，变成0和1。同时，随机进行了数据增强。</p>
+<p>augment函数是定义的数据增强函数，怎么处理都行，我这里只是进行了简单的旋转操作。</p>
+<p>在这个类中，你不用进行一些打乱数据集的操作，也不用管怎么按照 batchsize 读取数据。因为实例化这个类后，我们可以用 torch.utils.data.DataLoader 方法指定 batchsize 的大小，决定是否打乱数据。</p>
+<p>Pytorch 提供给给我们的 DataLoader 很强大，我们甚至可以指定使用多少个进程加载数据，数据是否加载到 CUDA 内存中等高级用法，本文不涉及，就不再展开讲解了。</p>
+<h4 id="模型选择">模型选择</h4>
+<p>但是我们需要对网络进行微调，完全按照论文的结构，模型输出的尺寸会稍微小于图片输入的尺寸，如果使用论文的网络结构需要在结果输出后，做一个 resize 操作。为了省去这一步，我们可以修改网络，使网络的输出尺寸正好等于图片的输入尺寸。</p>
+<p>创建unet_parts.py文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="k">class</span> <span class="nc">DoubleConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;(convolution =&gt; [BN] =&gt; ReLU) * 2&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">double_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">double_conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Down</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Downscaling with maxpool then double conv&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxpool_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+            <span class="n">DoubleConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxpool_conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Up</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Upscaling then double conv&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">bilinear</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># if bilinear, use the normal convolutions to reduce the number of channels</span>
+        <span class="k">if</span> <span class="n">bilinear</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose2d</span><span class="p">(</span><span class="n">in_channels</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">in_channels</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="c1"># input is CHW</span>
+        <span class="n">diffY</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">x2</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">x1</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">2</span><span class="p">]])</span>
+        <span class="n">diffX</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">x2</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">x1</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">3</span><span class="p">]])</span>
+
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="p">[</span><span class="n">diffX</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diffX</span> <span class="o">-</span> <span class="n">diffX</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diffY</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diffY</span> <span class="o">-</span> <span class="n">diffY</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x2</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">OutConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OutConv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建unet_model.py文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">model.unet_parts</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">UNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_channels</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">bilinear</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UNet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_channels</span> <span class="o">=</span> <span class="n">n_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_classes</span> <span class="o">=</span> <span class="n">n_classes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bilinear</span> <span class="o">=</span> <span class="n">bilinear</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">inc</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="n">n_channels</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down1</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down2</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down3</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down4</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up1</span> <span class="o">=</span> <span class="n">Up</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">bilinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up2</span> <span class="o">=</span> <span class="n">Up</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">bilinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up3</span> <span class="o">=</span> <span class="n">Up</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">bilinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up4</span> <span class="o">=</span> <span class="n">Up</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">bilinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outc</span> <span class="o">=</span> <span class="n">OutConv</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down1</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="n">x3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down2</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+        <span class="n">x4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down3</span><span class="p">(</span><span class="n">x3</span><span class="p">)</span>
+        <span class="n">x5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down4</span><span class="p">(</span><span class="n">x4</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up1</span><span class="p">(</span><span class="n">x5</span><span class="p">,</span> <span class="n">x4</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x3</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up4</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">logits</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">UNet</span><span class="p">(</span><span class="n">n_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样调整过后，网络的输出尺寸就与图片的输入尺寸相同了。</p>
+<h4 id="算法选择">算法选择</h4>
+<p>选择什么 Loss 很重要，Loss 选择的好坏，都会影响算法拟合数据的效果。</p>
+<p>选择什么 Loss 也是根据任务而决定的。我们今天的任务，只需要分割出细胞边缘，也就是一个很简单的二分类任务，所以我们可以使用 BCEWithLogitsLoss。</p>
+<p>啥是 BCEWithLogitsLoss？BCEWithLogitsLoss 是 Pytorch 提供的用来计算二分类交叉熵的函数。</p>
+<p><img src="/images/202204/28.png" alt=""></p>
+<p>具体的公式推导，可以看我的机器学习系列教程《<a href="https://cuijiahua.com/blog/2017/11/ml_6_logistic_1.html">机器学习实战教程（六）：Logistic回归基础篇之梯度上升算法</a>》，这里就不再累述。</p>
+<p>目标函数，也就是 Loss 确定好了，怎么去优化这个目标呢？</p>
+<p>最简单的方法就是，我们耳熟能详的梯度下降算法，逐渐逼近局部的极值。但是这种简单的优化算法，求解速度慢。各种优化算法，本质上其实都是梯度下降，例如最常规的 SGD，就是基于梯度下降改进的随机梯度下降算法，Momentum 就是引入了动量的 SGD，以指数衰减的形式累计历史梯度。</p>
+<p>除了这些最基本的优化算法，还有自适应参数的优化算法。这类算法最大的特点就是，每个参数有不同的学习率，在整个学习过程中自动适应这些学习率，从而达到更好的收敛效果。</p>
+<p>本文就是选择了一种自适应的优化算法 RMSProp。RMSProp 是基于 AdaGrad 的改进。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">model.unet_model</span> <span class="kn">import</span> <span class="n">UNet</span>
+<span class="kn">from</span> <span class="nn">utils.dataset</span> <span class="kn">import</span> <span class="n">ISBI_Loader</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">optim</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="k">def</span> <span class="nf">train_net</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.00001</span><span class="p">):</span>
+    <span class="c1"># 加载训练集</span>
+    <span class="n">isbi_dataset</span> <span class="o">=</span> <span class="n">ISBI_Loader</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">isbi_dataset</span><span class="p">,</span>
+                                               <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> 
+                                               <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># 定义RMSprop算法</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">RMSprop</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="c1"># 定义Loss算法</span>
+    <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCEWithLogitsLoss</span><span class="p">()</span>
+    <span class="c1"># best_loss统计，初始化为正无穷</span>
+    <span class="n">best_loss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+    <span class="c1"># 训练epochs次</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="c1"># 训练模式</span>
+        <span class="n">net</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="c1"># 按照batch_size开始训练</span>
+        <span class="k">for</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="c1"># 将数据拷贝到device中</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="c1"># 使用网络参数，输出预测结果</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+            <span class="c1"># 计算loss</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loss/train&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="c1"># 保存loss值最小的网络参数</span>
+            <span class="k">if</span> <span class="n">loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
+                <span class="n">best_loss</span> <span class="o">=</span> <span class="n">loss</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s1">&#39;best_model.pth&#39;</span><span class="p">)</span>
+            <span class="c1"># 更新参数</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="c1"># 选择设备，有cuda用cuda，没有就用cpu</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+    <span class="c1"># 加载网络，图片单通道1，分类为1。</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">UNet</span><span class="p">(</span><span class="n">n_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># 将网络拷贝到deivce中</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="c1"># 指定训练集地址，开始训练</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&#34;data/train/&#34;</span>
+    <span class="n">train_net</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">data_path</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="预测">预测</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">model.unet_model</span> <span class="kn">import</span> <span class="n">UNet</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="c1"># 选择设备，有cuda用cuda，没有就用cpu</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+    <span class="c1"># 加载网络，图片单通道，分类为1。</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">UNet</span><span class="p">(</span><span class="n">n_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># 将网络拷贝到deivce中</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="c1"># 加载模型参数</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;best_model.pth&#39;</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">device</span><span class="p">))</span>
+    <span class="c1"># 测试模式</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="c1"># 读取所有图片路径</span>
+    <span class="n">tests_path</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;data/test/*.png&#39;</span><span class="p">)</span>
+    <span class="c1"># 遍历所有图片</span>
+    <span class="k">for</span> <span class="n">test_path</span> <span class="ow">in</span> <span class="n">tests_path</span><span class="p">:</span>
+        <span class="c1"># 保存结果地址</span>
+        <span class="n">save_res_path</span> <span class="o">=</span> <span class="n">test_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_res.png&#39;</span>
+        <span class="c1"># 读取图片</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">test_path</span><span class="p">)</span>
+        <span class="c1"># 转为灰度图</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2GRAY</span><span class="p">)</span>
+        <span class="c1"># 转为batch为1，通道为1，大小为512*512的数组</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># 转为tensor</span>
+        <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="c1"># 将tensor拷贝到device中，只用cpu就是拷贝到cpu中，用cuda就是拷贝到cuda中。</span>
+        <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">img_tensor</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="c1"># 预测</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
+        <span class="c1"># 提取结果</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">()[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 处理结果</span>
+        <span class="n">pred</span><span class="p">[</span><span class="n">pred</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+        <span class="n">pred</span><span class="p">[</span><span class="n">pred</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 保存图片</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">save_res_path</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/202204/27.png" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-04-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/deep-learning/">Deep-Learning</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/cv12/">
+            <span class="next-text nav-default">可视化和理解卷积神经网络</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
