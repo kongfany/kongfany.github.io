@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Pytorch深度学习实战 - 大胖狗来了</title>
+  <title>语义分割实战 - 大胖狗来了</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -39,19 +39,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Pytorch深度学习实战" />
+<meta property="og:title" content="语义分割实战" />
 <meta property="og:description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/unet/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-04-07T14:42:29+08:00" />
 <meta property="article:modified_time" content="2022-04-07T14:42:29+08:00" />
 
-<meta itemprop="name" content="Pytorch深度学习实战">
+<meta itemprop="name" content="语义分割实战">
 <meta itemprop="description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类"><meta itemprop="datePublished" content="2022-04-07T14:42:29+08:00" />
 <meta itemprop="dateModified" content="2022-04-07T14:42:29+08:00" />
-<meta itemprop="wordCount" content="7701">
+<meta itemprop="wordCount" content="9312">
 <meta itemprop="keywords" content="Deep-Learning," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Pytorch深度学习实战"/>
+<meta name="twitter:title" content="语义分割实战"/>
 <meta name="twitter:description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类"/>
 
 <!--[if lte IE 9]>
@@ -129,13 +129,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Pytorch深度学习实战</h1>
+      <h1 class="post-title">语义分割实战</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2022-04-07 </span>
         
-          <span class="more-meta"> 7701 words </span>
-          <span class="more-meta"> 16 mins read </span>
+          <span class="more-meta"> 9312 words </span>
+          <span class="more-meta"> 19 mins read </span>
         
       </div>
     </header>
@@ -162,6 +162,14 @@
         <li><a href="#unet模型训练">UNet模型训练</a>
           <ul>
             <li><a href="#unet训练">UNet训练</a></li>
+          </ul>
+        </li>
+        <li><a href="#查看loss">查看loss</a>
+          <ul>
+            <li><a href="#sysstdout">sys.stdout</a></li>
+            <li><a href="#matplotlib">matplotlib</a></li>
+            <li><a href="#logging">Logging</a></li>
+            <li><a href="#tensorboardx">TensorboardX</a></li>
           </ul>
         </li>
       </ul>
@@ -1438,6 +1446,273 @@ torch.Size([2, 1, 512, 512])
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/202204/27.png" alt=""></p>
+<h2 id="查看loss">查看loss</h2>
+<blockquote>
+<p><a href="https://cuijiahua.com/blog/2020/05/dl-17.html">https://cuijiahua.com/blog/2020/05/dl-17.html</a></p>
+</blockquote>
+<p>训练模型，最常看的指标就是 Loss。我们可以根据 Loss 的收敛情况，初步判断模型训练的好坏。</p>
+<p>如果，Loss 值突然上升了，那说明训练有问题，需要检查数据和代码。</p>
+<p>如果，Loss 值趋于稳定，那说明训练完毕了。</p>
+<p>观察 Loss 情况，最直观的方法，就是绘制 Loss 曲线图。</p>
+<h3 id="sysstdout">sys.stdout</h3>
+<p>通过 Loss 曲线，我们可以分析模型训练的好坏，模型是否训练完成，起到一个很好的“监控”作用。</p>
+<p>绘制 Loss 曲线图，第一步就是需要保存训练过程中的 Loss 值。</p>
+<p>一个最简单的方法是使用，sys.stdout 标准输出重定向，简单好用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">class</span> <span class="nc">Logger</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;log.txt&#34;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;123456&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;https://cuijiahua.com&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>代码很简单，创建一个 log.py 文件，自己写一个 Logger 类，并采用 sys.stdout 重定向输出。</p>
+<p>在 Terminal 中，不仅可以使用 print 打印结果，同时也会将结果保存到 log.txt 文件中。</p>
+<p>运行 log.py，打印 print 内容的同时，也将内容写入了 log.txt 文件中。</p>
+<p>使用这个代码，就可以在打印 Loss 的同时，将结果保存到指定的 txt 中，比如保存上篇文章训练 UNet 的 Loss。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">log</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="matplotlib">matplotlib</h3>
+<p>Matplotlib 是一个 Python 的绘图库，简单好用。</p>
+<p>简单几行命令，就可以绘制曲线图、散点图、条形图、直方图、饼图等等。</p>
+<p>在深度学习中，一般就是绘制曲线图，比如 Loss 曲线、Acc 曲线。</p>
+<p>使用 sys.stdout 保存的 train_loss.txt，绘制 Loss 曲线。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;train_loss.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()),</span> <span class="n">train_loss</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_loss</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">train_loss</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train loss&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="logging">Logging</h3>
+<p>说到保存日志，那不得不提 Python 的内置标准模块 Logging，它主要用于输出运行日志，可以设置输出日志的等级、日志保存路径、日志文件回滚等，同时，我们也可以设置日志的输出格式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="k">def</span> <span class="nf">get_logger</span><span class="p">(</span><span class="n">LEVEL</span><span class="p">,</span> <span class="n">log_file</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">head</span> <span class="o">=</span> <span class="s1">&#39;[</span><span class="si">%(asctime)-15s</span><span class="s1">] [</span><span class="si">%(levelname)s</span><span class="s1">] </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+    <span class="k">if</span> <span class="n">LEVEL</span> <span class="o">==</span> <span class="s1">&#39;info&#39;</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">head</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">LEVEL</span> <span class="o">==</span> <span class="s1">&#39;debug&#39;</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">head</span><span class="p">)</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">log_file</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">log_file</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logger</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">)</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;123456&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;https://cuijiahua.com&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>只需要几行代码，进行一个简单的封装使用。使用函数 get_logger 创建一个级别为 info 的 logger，如果指定 log_file，则会对日志进行保存。</p>
+<p><img src="/images/202204/29.png" alt=""></p>
+<p><img src="/images/202204/30.png" alt=""></p>
+<p>当然，我们可以通过，logging.basicConfig 的 format 参数，设置日志格式。</p>
+<p><img src="/images/202204/31.png" alt=""></p>
+<h3 id="tensorboardx">TensorboardX</h3>
+<p>TensorboardX ，它是专门用于深度学习“炼丹”的高级“法宝”。</p>
+<p>在 Pytorch 中，这个可视化工具叫做 TensorBoardX，其实就是针对 Tensorboard 的一个封装，使得 PyTorch 用户也能够调用 Tensorboard。</p>
+<p>TensorboardX 安装也非常简单，使用 pip 即可安装，需要注意的是 Pytorch 的版本需要大于 1.1.0。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">pip install tensorboardX
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">tensorboardX</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
+
+<span class="c1"># 创建 writer1 对象</span>
+<span class="c1"># log 会保存到 runs/exp 文件夹中</span>
+<span class="n">writer1</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="s1">&#39;runs/exp&#39;</span><span class="p">)</span>
+
+<span class="c1"># 使用默认参数创建 writer2 对象</span>
+<span class="c1"># 自动创建runs文件夹</span>
+<span class="c1"># log 会保存到 runs/日期_用户名 格式的文件夹中</span>
+<span class="n">writer2</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">()</span>
+
+<span class="c1"># 使用 commet 参数，创建 writer3 对象</span>
+<span class="c1"># log 会保存到 runs/日期_用户名_resnet 格式的文件中</span>
+<span class="n">writer3</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="n">comment</span><span class="o">=</span><span class="s1">&#39;_resnet&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用的时候，创建一个 SummaryWriter 对象即可，以上展示了三种初始化 SummaryWriter 的方法：</p>
+<ul>
+<li>提供一个路径，将使用该路径来保存日志</li>
+<li>无参数，默认将使用 runs/日期_用户名 路径来保存日志</li>
+<li>提供一个 comment 参数，将使用 runs/日期_用户名+comment 路径来保存日志</li>
+</ul>
+<p>运行结果：</p>
+<p><img src="/images/202204/32.png" alt=""></p>
+<p>有了 writer 我们就可以往日志里写入数字、图片、甚至声音等数据。</p>
+<ul>
+<li><strong>数字(scalar)</strong></li>
+</ul>
+<p>这个是最简单的，使用 add_scalar 方法来记录数字常量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">add_scalar</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">scalar_value</span><span class="p">,</span> <span class="n">global_step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">walltime</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>总共 4 个参数。</p>
+<ul>
+<li>tag (string): 数据名称，不同名称的数据使用不同曲线展示</li>
+<li>scalar_value (float): 数字常量值</li>
+<li>global_step (int, optional): 训练的 step</li>
+<li>walltime (float, optional): 记录发生的时间，默认为 time.time()</li>
+</ul>
+<p>需要注意，这里的 scalar_value 一定是 float 类型，如果是 PyTorch scalar tensor，则需要调用 .item() 方法获取其数值。我们一般会使用 add_scalar 方法来记录训练过程的 loss、accuracy、learning rate 等数值的变化，直观地监控训练过程。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">tensorboardX</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>    
+<span class="n">writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="s1">&#39;runs/scalar_example&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;quadratic&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">global_step</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;exponential&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">,</span> <span class="n">global_step</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过 add_scalar 往日志里写入数字，日志保存到 runs/scalar_example中，writer 用完要记得 close，否则无法保存数据。</p>
+<p>在 cmd 中使用如下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">tensorboard --logdir=runs/scalar_example --port=8088
+</code></pre></td></tr></table>
+</div>
+</div><p>指定日志地址，使用端口号，在浏览器中，就可以使用如下地址，打开 Tensorboad。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost:8088/
+</code></pre></td></tr></table>
+</div>
+</div><p>不&hellip;太&hellip;行&hellip;</p>
 
     </div>
 
