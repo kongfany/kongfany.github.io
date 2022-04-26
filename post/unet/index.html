@@ -49,8 +49,8 @@
 <meta itemprop="name" content="语义分割实战">
 <meta itemprop="description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类"><meta itemprop="datePublished" content="2022-04-07T14:42:29+08:00" />
 <meta itemprop="dateModified" content="2022-04-07T14:42:29+08:00" />
-<meta itemprop="wordCount" content="9312">
-<meta itemprop="keywords" content="Deep-Learning,Project," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="9916">
+<meta itemprop="keywords" content="Deep-Learning,Project,Medical," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="语义分割实战"/>
 <meta name="twitter:description" content="语义分割基础与环境搭建 代码 语义分割基础与环境搭建 语义分割 语义分割（semantic segmentation） : 就是按照“语义”给图像上目标类"/>
 
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-04-07 </span>
         
-          <span class="more-meta"> 9312 words </span>
-          <span class="more-meta"> 19 mins read </span>
+          <span class="more-meta"> 9916 words </span>
+          <span class="more-meta"> 20 mins read </span>
         
       </div>
     </header>
@@ -199,6 +199,20 @@
 <p>高分辨率的结果如下图所示，不同的颜色代表不同的类别：</p>
 <p><img src="/images/202204/20.png" alt=""></p>
 <h3 id="数据集">数据集</h3>
+<p>第一个常用的数据集是Pascal VOC系列。这个系列中目前较流行的是VOC2012，Pascal Context等类似的数据集也有用到。</p>
+<p>第二个常用的数据集是Microsoft COCO。COCO一共有80个类别，虽然有很详细的像素级别的标注，但是官方没有专门对语义分割的评测。这个数据集主要用于实例级别的分割以及图片描述。所以COCO数据集往往被当成是额外的训练数据集用于模型的训练。</p>
+<p>第三个数据集是辅助驾驶（自动驾驶）环境的Cityscapes，使用比较常见的19个类别用于评测。</p>
+<p>可以用于语义分割训练的数据集有很多：</p>
+<ul>
+<li>Pascal Voc 2012：比较常见的物体分类，共21个类别；</li>
+<li>MS COCO：由微软赞助，几乎成为了图像语义理解算法性能评价的“标准”数据集，共80个类别；</li>
+<li>Cityscapes：包含50个欧洲城市不同场景、不同背景、不同季节的街景的33类标注物体；</li>
+<li>Pascal-Context：对于PASCAL-VOC 2010识别竞赛的扩展，共59个类别；</li>
+<li>KITTI：用于移动机器人及自动驾驶研究的最受欢迎的数据集之一，共11个类别；</li>
+<li>NYUDv2：2.5维数据集，它包含1449张由微软Kinect设备捕获的室内的RGB-D图像；</li>
+<li>SUN-RGBD：由四个RGB-D传感器得来，包含10000张RGB-D图像，尺寸与PASCAL VOC一致；</li>
+<li>ADE20K_MIT：一个场景理解的新的数据集，这个数据集是可以免费下载的，共151个类别。</li>
+</ul>
 <h3 id="开发环境搭建">开发环境搭建</h3>
 <ol>
 <li>
@@ -1736,6 +1750,7 @@ torch.Size([2, 1, 512, 512])
       <div class="post-tags">
           <a href="/tags/deep-learning/">Deep-Learning</a>
           <a href="/tags/project/">Project</a>
+          <a href="/tags/medical/">Medical</a>
           </div>
       <nav class="post-nav">
         <a class="prev" href="/post/resnet50/">

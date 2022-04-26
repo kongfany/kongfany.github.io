@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习(Federated Learning)">
 <meta itemprop="description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An"><meta itemprop="datePublished" content="2021-12-20T19:22:19+08:00" />
 <meta itemprop="dateModified" content="2021-12-20T19:22:19+08:00" />
-<meta itemprop="wordCount" content="4484">
+<meta itemprop="wordCount" content="5751">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习(Federated Learning)"/>
 <meta name="twitter:description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2021-12-20 </span>
         
-          <span class="more-meta"> 4484 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 5751 words </span>
+          <span class="more-meta"> 12 mins read </span>
         
       </div>
     </header>
@@ -157,6 +157,7 @@
             <li><a href="#联邦学习的优势和前景">联邦学习的优势和前景</a></li>
           </ul>
         </li>
+        <li><a href="#联邦学习王树森httpswwwyoutubecomwatchvstxtrucv_zo"><a href="https://www.youtube.com/watch?v=STxtRucv_zo">联邦学习王树森</a></a></li>
       </ul>
     </li>
   </ul>
@@ -209,11 +210,39 @@
 <li>在<strong>智慧城市</strong>中，实现各政府机构之间、企业与政府之间的联合，实现更准确的实时交通预测，更简化的机关办事步骤，更高效的信息内容查询，更全面的安全防控检测等；</li>
 <li>在<strong>智慧医疗</strong>中，联邦学习可以综合各医院之间的数据，提高医疗影像诊断的准确性，预警病人的身体情况等。</li>
 </ul>
-<blockquote>
-<p>？？？</p>
-<p>中心化和去中心化？？</p>
-<p>跨孤岛型和跨设备型</p>
-</blockquote>
+<h2 id="联邦学习王树森httpswwwyoutubecomwatchvstxtrucv_zo"><a href="https://www.youtube.com/watch?v=STxtRucv_zo">联邦学习王树森</a></h2>
+<p><img src="/images/202204/51.png" alt=""></p>
+<p>联邦学习是分布式学习的一种</p>
+<p>由于2.3，设计联邦学习算法的时候，最重要的是减少通信的次数。</p>
+<p>研究方向：</p>
+<ol>
+<li>
+<p><code>通信效率</code>：用新的算法算出更好的下降方向，需要更少的迭代次数</p>
+<p>并行梯度下降：server把模型参数分发给每个worker结点。worker接收到参数w，然后用w和本地数据计算梯度gi，然后发送给server。server接收到所有的worker发来的梯度后，把所有的梯度求和得到梯度g，然后server作梯度下降更新参数w&lt;-w-αg。α指步长或者学习率。然后进行下一轮迭代。直到算法收敛。</p>
+<p>Federated Averaging Algorithm:server把参数发给worker结点。worker结点接收到w之后，重复(w和local data计算g，在本地作梯度下降w&lt;-w-αg)1-5个epoch，把wi~=w发送给server。server接收到全部的wi~之后，做一个平均或者是加权平均。</p>
+<p>相同次数的通信，fedavg收敛的更快。相同次数的epochs，fedavg的损失函数大于梯度下降的，即意味着worker结点做相同数量的计算fedavg收敛的更慢。即说明减少了通信量，但是增加了worker结点的计算量。</p>
+<p><img src="/images/202204/1.jpg" alt=""></p>
+<p>(1)第一个提出FL，只有算法和实验，没有理论分析。</p>
+<p>(2)证明的fedavg确实可以收敛，而且通信量要比随机梯度下降要小，但是假设数据是独立同分布的IID。但FL基本假设数据不是IID，non-IID。</p>
+<p>(3)证明fedavg收敛而且不需要独立同分布的假设。</p>
+<p>(4)类似3</p>
+</li>
+<li>
+<p><code>隐私保护</code>：用户的数据被间接的泄露出去。随机梯度是用户本地一个batch的数据计算出来的，算梯度的时候实际就是用一个函数将本地的数据做一个函数变换。将数据映射到了梯度。</p>
+<p><img src="/images/202204/52.png" alt=""></p>
+<p>以最小二乘回归为例。损失函数l，数据xi和模型参数w的内积减去标签yi求平方。随机梯度gi是l对w的偏导。实际上随机梯度相当于对数据xi进行了一个放缩。梯度几乎携带了所有的数据信息，从梯度是可以反推出数据信息的。</p>
+<p>保护隐私：首先想到differential privacy(差分隐私)，加噪声。通常是往梯度里加噪声，可是实验证明加噪声不够，还是能反推出用户数据。噪声太强了，学习的过程就进行不下去了，损失函数不再往下降。。。<strong>但如今确实很多文章利用差分隐私去实现fl隐私保护。</strong></p>
+<p><img src="/images/202204/53.png" alt=""></p>
+<p>(1)(3)用模型参数或者梯度来反推出用户的隐私数据。</p>
+<p>(1):得到梯度就可以推出用户数据的一些属性，比如性别，种族，年龄。。把一个用户的梯度作为输入的特征向量，然后用一个分类器来判断用户的属性。</p>
+</li>
+<li>
+<p><code>鲁棒性robust</code>：让FL可以抵御拜占庭错误，和恶意的攻击。</p>
+<p>拜占庭将军问题：针对的是分布式系统中出现异常结点的情况。我们一起去攻城，但是有一个叛徒忽悠我们，让我们去执行错误的战术，导致被团灭。FL中有一个结点故意使坏，把自己的数据和标签做修改，那么给server的梯度就是有害的，可能会让学到的模型犯错误。</p>
+<p><img src="/images/202204/54.png" alt=""></p>
+<p>多个用户参与联邦学习，可能其中会出现叛徒，这些叛徒可以对FL进行多种多样的攻击，可以让学习变慢，也可以让学习变差，可以让学习到的模型有个后门。FL存在一些潜在的风险。</p>
+</li>
+</ol>
 <blockquote>
 <p>相关文献：</p>
 <p><a href="https://baijiahao.baidu.com/s?id=1688157460145615660&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1688157460145615660&amp;wfr=spider&amp;for=pc</a></p>
