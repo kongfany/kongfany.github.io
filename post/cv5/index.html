@@ -49,7 +49,7 @@
 <meta itemprop="name" content="卷积神经网络">
 <meta itemprop="description" content="卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效"><meta itemprop="datePublished" content="2022-03-12T20:35:55+08:00" />
 <meta itemprop="dateModified" content="2022-03-12T20:35:55+08:00" />
-<meta itemprop="wordCount" content="2677">
+<meta itemprop="wordCount" content="2788">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="卷积神经网络"/>
 <meta name="twitter:description" content="卷积神经网络 通俗理解1 卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/computer-vision/"> Computer-Vision </a>
             </div>
-          <span class="more-meta"> 2677 words </span>
+          <span class="more-meta"> 2788 words </span>
           <span class="more-meta"> 6 mins read </span>
         
       </div>
@@ -167,7 +167,7 @@
       <h2 id="卷积神经网络">卷积神经网络</h2>
 <h3 id="通俗理解1httpswwwbilibilicomvideobv1al4y1b7erfromsearchseid2752827029660498833spm_id_from33333700"><a href="https://www.bilibili.com/video/BV1AL4y1b7er?from=search&amp;seid=2752827029660498833&amp;spm_id_from=333.337.0.0">通俗理解1</a></h3>
 <p>卷积神经网络主要包括卷积层，池化层和全连接层三部分。卷积层用来识别这些特定线条，池化层用来减少图像的数据量，提升识别效率，全连接层用来识别判断。</p>
-<p>卷积层：图像上一个黄色的X，黄色的像素设为1，白色的像素点设为0，要想识别这个X，只要识别出一个右下的斜线，和一个左下的斜线就可以了。首先识别右下斜线，这时我们找一个3×3的卷积核（局部特征，即需要识别的线条），这个卷积核也是一个右下斜线。用图像左上角3×3的区域与卷积核相应的像素点相乘再相加，得到结果2，依次计算得到表格。表格中的数值越大，表示越符合卷积核右下斜线的特征，基本上数值较大的部分，就是原图像右下斜线的部分。</p>
+<p>卷积层：图像上一个黄色的X，黄色的像素设为1，白色的像素点设为0，要想识别这个X，只要识别出一个右下的斜线，和一个左下的斜线就可以了。首先识别右下斜线，这时我们找一个3×3的卷积核（局部特征，即需要识别的线条），这个卷积核也是一个右下斜线。用图像左上角3×3的区域与卷积核相应的像素点相乘再相加，得到结果2，依次计算得到表格。表格中的数值越大，表示越符合卷积核右下斜线的特征，基本上数值较大的部分，就是原图像右下斜线的部分。（数值计算是内积计算。向量的内积的几何意义就是投影，可以理解为A线投影在B线的长度与B线长度的乘积。数值越大就代表特征越相似）</p>
 <p><img src="/images/202203/47.png" alt=""></p>
 <p><img src="D:\Hugo\blog\static\images\202203\47.png"  /></p>
 <p>池化层：对图像进行压缩。将四个像素点的最大值保留就可以了（最大池化）。可以看到压缩后的图像依旧保持原来的特征。（也叫下采样）</p>
@@ -198,6 +198,7 @@
 <p>卷积神经网络整体上来看就是输入一个图片，让它通过很多层，比如卷积层、非线性层、池化层，经过这些处理后，最终得到卷积层输出，然后就可以用全连接层连接所有的卷积层输出，用其获得一个最终的分值函数。</p>
 <p><img src="/images/202203/79.png" alt=""></p>
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C79.png" alt=""></p>
+<p>（卷积神经网络的层数&ndash;应用权值的次数。6个卷积+1fc全连接-&gt;7层）</p>
 <p>接下来用一个例子来理解这个过程，还是用刚才前面提到的这个<code>32*32*3</code>的图像，用<code>5*5*3</code>的卷积核在图像上滑过：</p>
 <p><img src="/images/202203/80.png" alt=""></p>
 <p><img src="D:%5CHugo%5Cblog%5Cstatic%5Cimages%5C202203%5C80.png" alt=""></p>
@@ -238,6 +239,7 @@
 <p><a href="https://blog.csdn.net/qq_34611579/article/details/81055813">笔记</a></p>
 <p><a href="https://cs231n.github.io/neural-networks-1/">官方笔记</a></p>
 <p><a href="https://blog.csdn.net/v_JULY_v/article/details/51812459">通俗理解卷积神经网络</a></p>
+<p><a href="https://blog.csdn.net/BlueBlueSkyZ/article/details/80558252">全连接层</a></p>
 </blockquote>
 
     </div>

@@ -94,7 +94,7 @@
       <pubDate>Sun, 06 Mar 2022 16:09:18 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/cv3/</guid>
-      <description>损失函数 回到一个猫的示例图像及其在“ cat”、“ dog”和“ ship”类别中的得分，我们看到该示例中的特定权重组合一点都不好: 我们输入了描述</description>
+      <description>损失函数 损失函数：预测结果和真实结果的差距&amp;ndash;即判断训练模型的好坏 最优化：求损失函数最优化的过程&amp;ndash;优化训练模型的过程 回</description>
     </item>
     
     <item>

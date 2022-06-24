@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>医学图像分割学习路线 - 大胖狗来了</title>
+  <title>联邦学习-吴方照 - 大胖狗来了</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="语义分割-Unet(果蝇分割)-Resnet(垃圾分类) [blog],[unet-blog],[unet-paper] FCN,SegNet&amp;hellip;主流分割网络(19年)-医学图像分割(脑区域，" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="浙大的吴超主持 联邦学习核心挑战 效率 通信，计算 异构性 数据的异构性，设备的异构性 隐私保护 处理之后的隐私低于不处理的，MPC 安全 Communication-efficient federated learning via knowledge distillation,Nature Communications Fe" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
-<link rel="canonical" href="https://kongfany.github.io/post/medicalcv/" />
+<link rel="canonical" href="https://kongfany.github.io/post/fl_wufangzhao/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="医学图像分割学习路线" />
-<meta property="og:description" content="语义分割-Unet(果蝇分割)-Resnet(垃圾分类) [blog],[unet-blog],[unet-paper] FCN,SegNet&hellip;主流分割网络(19年)-医学图像分割(脑区域，" />
+<meta property="og:title" content="联邦学习-吴方照" />
+<meta property="og:description" content="浙大的吴超主持 联邦学习核心挑战 效率 通信，计算 异构性 数据的异构性，设备的异构性 隐私保护 处理之后的隐私低于不处理的，MPC 安全 Communication-efficient federated learning via knowledge distillation,Nature Communications Fe" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kongfany.github.io/post/medicalcv/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-04-21T16:04:32+08:00" />
-<meta property="article:modified_time" content="2022-04-21T16:04:32+08:00" />
+<meta property="og:url" content="https://kongfany.github.io/post/fl_wufangzhao/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-24T21:56:12+08:00" />
+<meta property="article:modified_time" content="2022-06-24T21:56:12+08:00" />
 
-<meta itemprop="name" content="医学图像分割学习路线">
-<meta itemprop="description" content="语义分割-Unet(果蝇分割)-Resnet(垃圾分类) [blog],[unet-blog],[unet-paper] FCN,SegNet&hellip;主流分割网络(19年)-医学图像分割(脑区域，"><meta itemprop="datePublished" content="2022-04-21T16:04:32+08:00" />
-<meta itemprop="dateModified" content="2022-04-21T16:04:32+08:00" />
-<meta itemprop="wordCount" content="313">
-<meta itemprop="keywords" content="Medical," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="医学图像分割学习路线"/>
-<meta name="twitter:description" content="语义分割-Unet(果蝇分割)-Resnet(垃圾分类) [blog],[unet-blog],[unet-paper] FCN,SegNet&hellip;主流分割网络(19年)-医学图像分割(脑区域，"/>
+<meta itemprop="name" content="联邦学习-吴方照">
+<meta itemprop="description" content="浙大的吴超主持 联邦学习核心挑战 效率 通信，计算 异构性 数据的异构性，设备的异构性 隐私保护 处理之后的隐私低于不处理的，MPC 安全 Communication-efficient federated learning via knowledge distillation,Nature Communications Fe"><meta itemprop="datePublished" content="2022-06-24T21:56:12+08:00" />
+<meta itemprop="dateModified" content="2022-06-24T21:56:12+08:00" />
+<meta itemprop="wordCount" content="479">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="联邦学习-吴方照"/>
+<meta name="twitter:description" content="浙大的吴超主持 联邦学习核心挑战 效率 通信，计算 异构性 数据的异构性，设备的异构性 隐私保护 处理之后的隐私低于不处理的，MPC 安全 Communication-efficient federated learning via knowledge distillation,Nature Communications Fe"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -129,12 +129,12 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">医学图像分割学习路线</h1>
+      <h1 class="post-title">联邦学习-吴方照</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2022-04-21 </span>
+        <span class="post-time"> 2022-06-24 </span>
         
-          <span class="more-meta"> 313 words </span>
+          <span class="more-meta"> 479 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -147,38 +147,47 @@
   </div>
 </div>
     <div class="post-content">
-      <ol>
+      <p>浙大的吴超主持</p>
+<p>联邦学习核心挑战</p>
+<ul>
+<li>效率  通信，计算</li>
+<li>异构性  数据的异构性，设备的异构性</li>
+<li>隐私保护  处理之后的隐私低于不处理的，MPC</li>
+<li>安全</li>
+</ul>
+<p><img src="/images/202206/2.png" alt=""></p>
+<ul>
 <li>
-<p>语义分割-Unet(果蝇分割)-Resnet(垃圾分类)</p>
-<p>[<a href="https://cuijiahua.com/blog/2019/11/dl-14.html">blog</a>],[<a href="https://zhuanlan.zhihu.com/p/313283141">unet-blog</a>],[<a href="https://arxiv.org/pdf/1505.04597.pdf">unet-paper</a>]</p>
+<p><code>Communication-efficient federated learning via knowledge distillation,Nature Communications</code></p>
+<p>FedKD:解决通信开销—》压缩模型-》通过知识蒸馏</p>
 </li>
 <li>
-<p>FCN,SegNet&hellip;主流分割网络(19年)-医学图像分割(脑区域，心脏，肿瘤)-&hellip;</p>
-<p>[<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA3NDIyMjM1NA==&amp;action=getalbum&amp;album_id=1571290489138577411&amp;scene=173&amp;from_msgid=2649033668&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect">blog</a>]</p>
+<p><code>Efficient-FedRec:Efficient Federated Learning Framework for Privacy-Preserving News Recommendation,EMNLP 2021</code></p>
+<p>Efficient-FedRec：计算上更加高效，利用任务的特性，特殊场景—新闻推荐</p>
+<p>新闻的内容公开的可以训练一个大的新闻模型，用户读过的内容，隐私要求高的用户模型</p>
 </li>
 <li>
-<p>dicom，nrrd，NIDTI数据格式-医学影像数据集-图像预处理-图像增强-。。。</p>
-<p>[<a href="https://blog.csdn.net/juluwangriyue/category_11356122.html">blog</a>],[<a href="https://github.com/linhandev/dataset/">dataset</a>]</p>
+<p><code>No One Left Behind:Inclusive Federated Learning over Heterogeneous Devices,KDD 2022</code></p>
+<p>InclusiveFL：设备的异构性</p>
+<p>共享一个底层，知识融合更加方便</p>
 </li>
 <li>
-<p>入门(脑部MRI综述)-TransUNet(医学图像分割的Transformers)</p>
-<p>[<a href="https://blog.csdn.net/jalexdooo/category_10964290.html">blog</a>],[<a href="https://link.springer.com/article/10.1007/s10278-017-9983-4">Brain MRI-paper</a>],[<a href="https://arxiv.org/abs/2102.04306">TransUNet-paper</a>]</p>
+<p>FedPrompt：隐私方面</p>
+<p>DP/LDP对模型进行扰动，，LDP+Prompt-tuning</p>
 </li>
 <li>
-<p>医学图像分割实操(新冠ct数据集，unet)</p>
-<p>[<a href="https://blog.csdn.net/weixin_51098391/article/details/123833504">blog</a>],[<a href="https://zenodo.org/record/3757476">dataset</a>]</p>
+<p><code>FedAttack:Effective and Covert Poisoning Attack on Federated Recommendation via Hard Sampling,KDD 2022</code></p>
+<p>FedAttack：安全性</p>
 </li>
-<li>
-<p>GAN医学图像-医学图像分析(CT,MRI,US&hellip;)</p>
-<p>[<a href="https://github.com/tony0914/Medical-Image-Analysis-MIPAV">paperlist</a>]</p>
-</li>
-<li>
-<p>半监督学习</p>
-<p>[<a href="https://github.com/HiLab-git/SSL4MIS">paperlist</a>]</p>
-</li>
-</ol>
-<p><strong>。。。计划搁浅，转战联邦学习。</strong></p>
-<p><strong>查看综述，通过综述了解发展的历程，然后分别就是学习，模型，以及对于前者的改进。看完总结每篇文章的创新点，要解决的主要问题。</strong></p>
+</ul>
+<p><a href="https://blog.csdn.net/qq_33976344/article/details/121156727"><strong>machine unlearning</strong></a>:这是一篇关于机器遗忘学习的paper, 顾名思义, machine unlearning就是让训练好的模型遗忘掉特定数据训练效果/特定参数, 以达到保护模型中隐含数据的目的.</p>
+<p>激励机制 — 吸引用户参与联邦学习，真实大众用户</p>
+<p>通信上&ndash;理论上保障解耦，指标-》通信开销（单轮通信量，总轮数），准确率性能。数据集和模型大一些，使得通信开销降低明显些。</p>
+<blockquote>
+<p><a href="https://www.bilibili.com/video/BV1Fv4y137W6?spm_id_from=333.788.top_right_bar_window_dynamic.content.click&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">视频回放</a></p>
+</blockquote>
+<p><img src="/images/202206/1.jpg" alt=""></p>
+<p><img src="/images/202206/3.png" alt=""></p>
 
     </div>
 
@@ -190,7 +199,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2022-04-21
+        2022-06-24
         
     </span>
   </p>
@@ -199,16 +208,12 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/medical/">Medical</a>
+          <a href="/tags/federated-learning/">Federated Learning</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/mmvfl2/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">MMVFL2</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/ccfcv112/">
-            <span class="next-text nav-default">CCFCV112</span>
+        
+        <a class="next" href="/post/mmvfl2/">
+            <span class="next-text nav-default">MMVFL2</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
