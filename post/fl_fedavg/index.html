@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 代码： https://github.com/shaoxiongji/federated-learning https://zhuanlan.zhihu.com/p/359060612 python main_fed.py python main_fed.py &amp;ndash;dataset mnist &amp;ndash;iid &amp;ndash;num_channels 1 &amp;ndash;model cnn &amp;ndash;epochs 50 &amp;ndash;gpu 0 python main_nn.py" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="FedAvg" />
-<meta property="og:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 代码： https://github.com/shaoxiongji/federated-learning https://zhuanlan.zhihu.com/p/359060612 python main_fed.py python main_fed.py &ndash;dataset mnist &ndash;iid &ndash;num_channels 1 &ndash;model cnn &ndash;epochs 50 &ndash;gpu 0 python main_nn.py" />
+<meta property="og:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/fl_fedavg/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-17T15:44:15+08:00" />
 <meta property="article:modified_time" content="2022-03-17T15:44:15+08:00" />
 
 <meta itemprop="name" content="FedAvg">
-<meta itemprop="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 代码： https://github.com/shaoxiongji/federated-learning https://zhuanlan.zhihu.com/p/359060612 python main_fed.py python main_fed.py &ndash;dataset mnist &ndash;iid &ndash;num_channels 1 &ndash;model cnn &ndash;epochs 50 &ndash;gpu 0 python main_nn.py"><meta itemprop="datePublished" content="2022-03-17T15:44:15+08:00" />
+<meta itemprop="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该"><meta itemprop="datePublished" content="2022-03-17T15:44:15+08:00" />
 <meta itemprop="dateModified" content="2022-03-17T15:44:15+08:00" />
-<meta itemprop="wordCount" content="38">
+<meta itemprop="wordCount" content="2326">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FedAvg"/>
-<meta name="twitter:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 代码： https://github.com/shaoxiongji/federated-learning https://zhuanlan.zhihu.com/p/359060612 python main_fed.py python main_fed.py &ndash;dataset mnist &ndash;iid &ndash;num_channels 1 &ndash;model cnn &ndash;epochs 50 &ndash;gpu 0 python main_nn.py"/>
+<meta name="twitter:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-03-17 </span>
         
-          <span class="more-meta"> 38 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 2326 words </span>
+          <span class="more-meta"> 5 mins read </span>
         
       </div>
     </header>
@@ -143,17 +143,29 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#论文解析">论文解析</a></li>
+        <li><a href="#pdb">pdb</a></li>
+        <li><a href="#代码解析">代码解析</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <p><code>Communication-Efficient Learning of Deep Networksfrom Decentralized Data</code></p>
+      <p><code>Communication-Efficient Learning of Deep Networksfrom Decentralized Data</code>[<a href="https://arxiv.org/abs/1602.05629">paper</a>]</p>
+<h2 id="论文解析">论文解析</h2>
 <p>开山之作</p>
 <blockquote>
 <p>笔记：</p>
 <p><a href="https://zhuanlan.zhihu.com/p/445458807">https://zhuanlan.zhihu.com/p/445458807</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/370198194">https://zhuanlan.zhihu.com/p/370198194</a></p>
 </blockquote>
+<p>将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该算法将每个客户端的局部随机梯度下降(SGD)与执行模型平均的服务器相结合。证明了它对不平衡和非IID数据分布的鲁棒性，并可以将训练分散数据的深度网络所需的通信轮数减少几个数量级。数据上的标签可以从用户交互中自然推断出来。</p>
 <p><img src="/images/202203/3.jpg" alt=""></p>
 <p><img src="/images/202203/4.jpg" alt=""></p>
 <blockquote>
@@ -163,7 +175,7 @@
 </blockquote>
 <ul>
 <li>
-<p>python <a href="https://github.com/shaoxiongji/federated-learning/blob/master/main_fed.py">main_fed.py</a></p>
+<p>python main_fed.py</p>
 <p><img src="/images/202203/55.png" alt=""></p>
 <p><img src="/images/202203/57.png" alt=""></p>
 </li>
@@ -173,11 +185,493 @@
 <p><img src="/images/202203/58.png" alt=""></p>
 </li>
 <li>
-<p>python <a href="https://github.com/shaoxiongji/federated-learning/blob/master/main_nn.py">main_nn.py</a></p>
+<p>python main_nn.py</p>
 <p><img src="/images/202203/59.png" alt=""></p>
 <p><img src="/images/202203/60.png" alt=""></p>
 </li>
 </ul>
+<h2 id="pdb">pdb</h2>
+<p>pdb：一个断点工具。是python自带的一个包，为python提供了一种交互的源代码调试功能</p>
+<p>主要特征是包括设置断点，单步调试，进入函数模式，查看当前代码，查找栈片段，动态改变变量的值等。</p>
+<p><a href="https://blog.csdn.net/qq_43799400/article/details/122582895">基本命令</a></p>
+<ul>
+<li>查看训练集的信息，数量，位置，格式，归一化</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="p">(</span>Pdb<span class="p">)</span> dataset_train
+Dataset MNIST
+    Number of datapoints: 60000
+    Split: train
+    Root Location: ../data/mnist/
+    Transforms (if any): Compose(
+                             ToTensor()
+                             Normalize(mean=(0.1307,), std=(0.3081,))
+                         <span class="c1">)</span>
+    Target Transforms (if any): None
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>打印一个图片 p：print。图片的像素是28*28的。数字大小是归一化后的数字大小，第一行就是白色的部分，对应于不同的灰度。tensor(5)：这个图片的标签是5。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="p">(</span>Pdb<span class="p">)</span> p dataset_train[0]
+<span class="p">(</span>tensor([[[-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.3860, -0.1951,
+          -0.1951, -0.1951,  1.1795,  1.3068,  1.8032, -0.0933,  1.6887,
+           2.8215,  2.7197,  1.1923, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.0424,  0.0340,  0.7722,  1.5359,  1.7396,  2.7960,
+           2.7960,  2.7960,  2.7960,  2.7960,  2.4396,  1.7650,  2.7960,
+           2.6560,  2.0578,  0.3904, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+           0.1995,  2.6051,  2.7960,  2.7960,  2.7960,  2.7960,  2.7960,
+           2.7960,  2.7960,  2.7960,  2.7706,  0.7595,  0.6195,  0.6195,
+           0.2886,  0.0722, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.1951,  2.3633,  2.7960,  2.7960,  2.7960,  2.7960,  2.7960,
+           2.0960,  1.8923,  2.7197,  2.6433, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242,  0.5940,  1.5614,  0.9377,  2.7960,  2.7960,  2.1851,
+          -0.2842, -0.4242,  0.1231,  1.5359, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.2460, -0.4115,  1.5359,  2.7960,  0.7213,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242,  1.3450,  2.7960,  1.9942,
+          -0.3988, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.2842,  1.9942,  2.7960,
+           0.4668, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,  0.0213,  2.6433,
+           2.4396,  1.6123,  0.9504, -0.4115, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,  0.6068,
+           2.6306,  2.7960,  2.7960,  1.0904, -0.1060, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+           0.1486,  1.9432,  2.7960,  2.7960,  1.4850, -0.0806, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.2206,  0.7595,  2.7833,  2.7960,  1.9560, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242,  2.7451,  2.7960,  2.7451,  0.3904,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+           0.1613,  1.2305,  1.9051,  2.7960,  2.7960,  2.2105, -0.3988,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,  0.0722,  1.4596,
+           2.4906,  2.7960,  2.7960,  2.7960,  2.7578,  1.8923, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.1187,  1.0268,  2.3887,  2.7960,
+           2.7960,  2.7960,  2.7960,  2.1342,  0.5686, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.1315,  0.4159,  2.2869,  2.7960,  2.7960,  2.7960,
+           2.7960,  2.0960,  0.6068, -0.3988, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.1951,
+           1.7523,  2.3633,  2.7960,  2.7960,  2.7960,  2.7960,  2.0578,
+           0.5940, -0.3097, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242,  0.2758,  1.7650,  2.4524,
+           2.7960,  2.7960,  2.7960,  2.7960,  2.6815,  1.2686, -0.2842,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242,  1.3068,  2.7960,  2.7960,
+           2.7960,  2.2742,  1.2941,  1.2559, -0.2206, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242],
+         [-0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242,
+          -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242, -0.4242]]]<span class="p">)</span>, tensor(5))
+<span class="p">(</span>Pdb<span class="p">)</span> p dataset_train[0][1]
+tensor(5)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>训练集分发给用户后，查看第二个用户的数据集。共600个数字，对应于图片在数据集中处于的位置。shape是对矩阵形状的描述，600行1列。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="p">(</span>Pdb<span class="p">)</span> p dict_users[1]
+array([ 8097, 28228,  8102, 11346, 50756, 11344, 38547, 28218, 37053,
+       28214, 28212, 50802, 28210, 38542,  8133, 11319, 53391, 53390,
+       11339,  8078, 50753, 53434, 53473, 28268, 50695, 28266, 26340,
+       50700, 26341, 11420, 50705,  8043, 37015, 50716, 37020, 53455,
+       26348, 50720, 50722,  8058, 11394, 26355, 50733, 26357, 50736,
+       11384, 11380, 50744, 50748, 53388, 50812, 50814, 37063, 50875,
+       53343, 38509, 53340, 11230,  8226, 26431, 26434,  8229, 37103,
+       28156, 28155, 28154, 50897, 50898, 50899, 50901, 26447, 11203,
+       53323, 53322, 50913,  8251, 26454, 11193,  8257, 37120,  8212,
+       28140,  8211, 11243, 11306, 53377,  8152, 11299, 11298,  8154,
+       38530, 50826, 28200, 53373, 11286, 53367, 53366, 38527, 28189,
+       11271, 28185, 50840, 37083, 37084, 11257,  8201,  8202, 11251,
+       11250,  8204, 28169, 11242, 10472, 38359, 28021, 26817, 27880,
+        8707, 26821, 27878, 37360, 10629, 27874, 51379, 10620, 10616,
+       38171, 52938, 38170,  8727, 27864, 10603, 37367, 27860, 51398,
+       51399,  8740,  8742, 26850,  8743, 52898, 27869, 38195, 27883,
+       38197, 51340, 52971, 10688, 10687,  8670, 38216, 26779, 10680,
+       26782, 27898, 27897, 10673, 26788, 38208, 52959, 52956, 52953,
+       26794,  8691, 51356, 51357, 10657, 51359, 37347, 26800, 27888,
+       52942, 52894, 51418, 10583, 10582, 38127, 10514, 52851, 38124,
+       52841, 52840,  8810, 38120, 10502, 52839, 26899, 27810, 10497,
+       52835, 52834, 26907, 52829, 37412, 51506,  8831, 38108, 38107,
+       27797, 51517,  8833,  8834, 10477, 26888, 38221, 37403, 10526,
+        8749, 27852, 51419,  8752, 52889, 10574, 38148, 10570, 10567,
+       26863, 27844, 38143, 52874, 10554, 51435, 51443, 38140, 27834,
+       51448, 52869, 26875, 51458, 10535,  8784, 37386, 10528, 26883,
+        8793,  8474, 26770, 52975, 37241, 37243, 26646, 53072, 27989,
+       38326, 26649, 51171, 38319, 26658,  8552, 37258, 38330, 53056,
+        8564,  8565, 26669, 38307, 27957, 37274,  8573, 10825, 10824,
+       51212, 51214, 51216, 10846, 53076, 51151, 37234, 38356, 51117,
+       53121, 51118, 10931, 51119,  8480, 26613,  8490, 38354, 10920,
+        8493, 28013, 37210, 53105, 37214, 26624, 51131, 26626, 26630,
+       10898, 53089, 26632, 38339, 26635, 53088, 26638, 38288,  8582,
+       26688, 26689, 53019,  5168,  3900, 33498, 58991, 32465, 35587,
+       28153,  8529, 29974,   993, 37110, 32462, 30667,  1230,  8530,
+       33600,  1197, 55846, 55832,  5123,  1123, 35552, 53233, 30007,
+       35538, 59074, 59071, 56772, 28056, 32392, 33580, 53176, 33577,
+       59044, 56779, 55819,  8351,  3963, 53162,  3962, 35554,  8348,
+       56757, 32358, 32365,  1115,  8422, 59085, 28090,  1118, 53168,
+        8418, 33586,  8423, 53177, 32367,  1131,  8394,  1148, 53206,
+       59060, 32378,  3955, 53194, 33567,  5107,  8379, 56764,  8388,
+        3954, 35000, 28069,  8382, 53199, 59041, 55825, 35001, 53178,
+        1132, 53180, 30695, 37182, 33556, 37179,  3956,  5114, 59052,
+        8402, 28063, 33558,  8373, 53187,  1155, 56768, 27961, 37155,
+        3966, 34990, 59114, 59033, 34992, 35527,  8452, 35558,  8451,
+        8319, 28035,  1080,  1081,  5090, 59112, 56744, 37200, 59028,
+        1192,  8456,  5073, 33516,  1060, 56734,  5075, 56737, 30684,
+        1084, 37201, 33596, 53135, 30031, 53273,  1069, 28110, 59116,
+        1065, 56783,  8330,  8331, 37191,  1181, 37190,  4089,  5132,
+       30711,  3971, 59102, 56750, 35008,  5128,  1174, 35006,  8430,
+       53160, 32406, 28094, 37154, 32411, 37196,  8332,  8445, 28100,
+        3926, 53140,  1085, 28038, 32413, 53143, 28099, 33535,  1095,
+       35009, 28098, 32353, 53147, 59036,  8218, 37232, 32535,  4972,
+       33646,   871, 55768, 59247, 33440, 59248,  8595, 58935,  8615,
+        4971, 29968,   920,  8177,   870,  8652,   919,  3889,   891,
+       52984,  8160,  1293,  8161,  4049,  4970,  5012,  8203,  8588,
+        4064, 32496,  8589, 32530,  1259, 37330, 33456, 59233, 30737,
+       33480, 56660, 30089,  8176, 37290, 55784, 35052,  8162,  8660,
+       33658,  8633, 55931, 59289,  1287, 33654, 52990, 29957, 33462,
+        8189, 53361, 58963,  8610, 33458, 53375, 35600, 56656, 27933,
+        4976,  3885, 32540, 29961, 30639, 33457, 27920,  8185, 28184,
+        4998,  4978, 27913, 37081,  4979, 58944, 56668,  5006,  5004,
+       33467, 35596,  8648, 32543, 30649, 28187,   905, 37305,  8180,
+       33441, 59266,  8602,  5189,  8156, 30742, 27924, 35048, 58965,
+        8194, 35496, 32528, 52967,  5204,  3878, 53040, 32534, 55901,
+        8578, 53394, 55786, 56834,   951, 59297, 53016, 53395, 33433,
+        4070, 37337, 58953,   961, 28167,  8664], dtype=int64)
+<span class="p">(</span>Pdb<span class="p">)</span> p dict_users[1].shape
+<span class="p">(</span>600,<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>默认数据是非独立同分布的</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="p">(</span>Pdb<span class="p">)</span> p args.iid
+False
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>n：调试跳转下一部，打印img_size,大小是28*28</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="p">(</span>Pdb<span class="p">)</span> n
+<span class="p">&gt;</span> d:\python\pycharmprojects\fedavg\federated-learning\main_fed.py(68)<span class="p">&lt;</span>module<span class="p">&gt;</span>()
+-<span class="p">&gt;</span> if args.model == &#39;cnn&#39; and args.dataset == &#39;cifar&#39;:
+<span class="p">(</span>Pdb<span class="p">)</span> n
+<span class="p">&gt;</span> d:\python\pycharmprojects\fedavg\federated-learning\main_fed.py(70)<span class="p">&lt;</span>module<span class="p">&gt;</span>()
+-<span class="p">&gt;</span> elif args.model == &#39;cnn&#39; and args.dataset == &#39;mnist&#39;:
+<span class="p">(</span>Pdb<span class="p">)</span> n
+<span class="p">&gt;</span> d:\python\pycharmprojects\fedavg\federated-learning\main_fed.py(72)<span class="p">&lt;</span>module<span class="p">&gt;</span>()
+-<span class="p">&gt;</span> elif args.model == &#39;mlp&#39;:
+<span class="p">(</span>Pdb<span class="p">)</span> p img_size
+torch.Size([1, 28, 28])
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="代码解析">代码解析</h2>
+<p><a href="https://www.bilibili.com/video/BV1tv411g7tp?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">视频</a></p>
+<p>nets中mlp的网络结构：</p>
+<p><img src="/images/202206/4.png" alt=""></p>
+<p>输入层是一维的，将28*28二维的拉成一维的</p>
+<p>隐藏层定位为200个维度</p>
+<p>输出层是10,0-9这十个数字</p>
+<p>激励函数：</p>
+<p><img src="/images/202206/5.png" alt=""></p>
+<p>softmax：归一化的操作，将数值转化为百分比，哪个占比最高相当于我们训练的模型对于这个图片的判断是几。</p>
+<p><img src="/images/202206/6.png" alt=""></p>
+<p>训练过程：</p>
+<p><img src="/images/202206/7.png" alt=""></p>
+<p><img src="/images/202206/8.png" alt=""></p>
+<p><img src="/images/202206/9.png" alt=""></p>
 
     </div>
 

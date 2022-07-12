@@ -49,7 +49,7 @@
 <meta itemprop="name" content="My First Post">
 <meta itemprop="description" content="hugo创建blog &#34;可以加类似于引言的格式-- 网工172-陈迪荣 2021/6/5 9:48:03 搭建博客可以看这篇下面的reference： https://www.lttzz.cn/post/hello-world/ https://olowolo.com/post/hugo-quick-start/ hugo new不是可以新建博"><meta itemprop="datePublished" content="2021-06-05T15:48:11+08:00" />
 <meta itemprop="dateModified" content="2021-06-05T15:48:11+08:00" />
-<meta itemprop="wordCount" content="1829">
+<meta itemprop="wordCount" content="1977">
 <meta itemprop="keywords" content="Hugo,Github,New," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="My First Post"/>
 <meta name="twitter:description" content="hugo创建blog &#34;可以加类似于引言的格式-- 网工172-陈迪荣 2021/6/5 9:48:03 搭建博客可以看这篇下面的reference： https://www.lttzz.cn/post/hello-world/ https://olowolo.com/post/hugo-quick-start/ hugo new不是可以新建博"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2021-06-05 </span>
         
-          <span class="more-meta"> 1829 words </span>
+          <span class="more-meta"> 1977 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -342,10 +342,20 @@ git branch -M main
 git push -u origin main		#第一次推送时
 </code></pre></td></tr></table>
 </div>
-</div><p>推送后出错？</p>
+</div><blockquote>
+<p>推送后出错？</p>
 <p>出现错误的主要原因是github中的README.md文件不在本地代码目录中</p>
 <p>进行合并<strong>git pull &ndash;rebase origin main</strong></p>
 <p>合并之后再重新推送。</p>
+</blockquote>
+<blockquote>
+<p>如果你clone下来一个别人的仓库，在此基础上完成你的代码，推送到自己的仓库可能遇到如下问题：
+error: remote origin already exists.表示远程仓库已存在。
+因此你要进行以下操作：
+1、先输入git remote rm origin 删除关联的origin的远程库
+2、关联自己的仓库 git remote add origin <a href="https://gitee.com/xxxxxx.git">https://gitee.com/xxxxxx.git</a>
+3、最后git push origin master，这样就推送到自己的仓库了。</p>
+</blockquote>
 <p><a href="https://blog.csdn.net/wangsen329027415/article/details/79861841">https://blog.csdn.net/wangsen329027415/article/details/79861841</a></p>
 
     </div>
