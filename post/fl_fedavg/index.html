@@ -49,7 +49,7 @@
 <meta itemprop="name" content="FedAvg">
 <meta itemprop="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该"><meta itemprop="datePublished" content="2022-03-17T15:44:15+08:00" />
 <meta itemprop="dateModified" content="2022-03-17T15:44:15+08:00" />
-<meta itemprop="wordCount" content="2326">
+<meta itemprop="wordCount" content="4392">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FedAvg"/>
 <meta name="twitter:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-03-17 </span>
         
-          <span class="more-meta"> 2326 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 4392 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -178,17 +178,639 @@
 <p>python main_fed.py</p>
 <p><img src="/images/202203/55.png" alt=""></p>
 <p><img src="/images/202203/57.png" alt=""></p>
-</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&gt; d:\python\pycharmprojects\fedavg\federated-learning\main_fed.py(65)&lt;module&gt;()
+-&gt; img_size = dataset_train[0][0].shape
+(Pdb) c
+MLP(
+  (layer_input): Linear(in_features=784, out_features=200, bias=True)
+  (relu): ReLU()
+  (dropout): Dropout(p=0.5, inplace=False)
+  (layer_hidden): Linear(in_features=200, out_features=10, bias=True)
+)
+Round   0, Average loss 0.081
+Round   1, Average loss 0.093
+Round   2, Average loss 0.075
+Round   3, Average loss 0.072
+Round   4, Average loss 0.053
+Round   5, Average loss 0.065
+Round   6, Average loss 0.045
+Round   7, Average loss 0.053
+Round   8, Average loss 0.063
+Round   9, Average loss 0.075
+Training accuracy: 69.21
+Testing accuracy: 69.20
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>python main_fed.py &ndash;dataset mnist &ndash;iid &ndash;num_channels 1 &ndash;model cnn &ndash;epochs 50 &ndash;gpu 0</p>
 <p><img src="/images/202203/56.png" alt=""></p>
 <p><img src="/images/202203/58.png" alt=""></p>
-</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">D:\Python\PycharmProjects\FedAvg\federated-learning&gt;python main_fed.py --dataset mnist --iid --num_channels 1 --model cnn --epochs 50 --gpu 0
+CNNMnist(
+  (conv1): Conv2d(1, 10, kernel_size=(5, 5), stride=(1, 1))
+  (conv2): Conv2d(10, 20, kernel_size=(5, 5), stride=(1, 1))
+  (conv2_drop): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=320, out_features=50, bias=True)
+  (fc2): Linear(in_features=50, out_features=10, bias=True)
+)
+Round   0, Average loss 1.630
+Round   1, Average loss 0.841
+Round   2, Average loss 0.600
+Round   3, Average loss 0.497
+Round   4, Average loss 0.428
+Round   5, Average loss 0.377
+Round   6, Average loss 0.337
+Round   7, Average loss 0.324
+Round   8, Average loss 0.307
+Round   9, Average loss 0.289
+Round  10, Average loss 0.273
+Round  11, Average loss 0.273
+Round  12, Average loss 0.268
+Round  13, Average loss 0.253
+Round  14, Average loss 0.248
+Round  15, Average loss 0.235
+Round  16, Average loss 0.239
+Round  17, Average loss 0.215
+Round  18, Average loss 0.209
+Round  19, Average loss 0.204
+Round  20, Average loss 0.206
+Round  21, Average loss 0.213
+Round  22, Average loss 0.193
+Round  23, Average loss 0.203
+Round  24, Average loss 0.204
+Round  25, Average loss 0.187
+Round  26, Average loss 0.198
+Round  27, Average loss 0.182
+Round  28, Average loss 0.180
+Round  29, Average loss 0.175
+Round  30, Average loss 0.173
+Round  31, Average loss 0.192
+Round  32, Average loss 0.174
+Round  33, Average loss 0.167
+Round  34, Average loss 0.178
+Round  35, Average loss 0.163
+Round  36, Average loss 0.150
+Round  37, Average loss 0.177
+Round  38, Average loss 0.172
+Round  39, Average loss 0.157
+Round  40, Average loss 0.154
+Round  41, Average loss 0.146
+Round  42, Average loss 0.144
+Round  43, Average loss 0.141
+Round  44, Average loss 0.145
+Round  45, Average loss 0.151
+Round  46, Average loss 0.136
+Round  47, Average loss 0.155
+Round  48, Average loss 0.150
+Round  49, Average loss 0.142
+Training accuracy: 98.42
+Testing accuracy: 98.48
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>python main_nn.py</p>
 <p><img src="/images/202203/59.png" alt=""></p>
 <p><img src="/images/202203/60.png" alt=""></p>
-</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">D:\Python\PycharmProjects\FedAvg\federated-learning&gt;python main_nn.py
+MLP(
+  (layer_input): Linear(in_features=784, out_features=64, bias=True)
+  (relu): ReLU()
+  (dropout): Dropout(p=0.5, inplace=False)
+  (layer_hidden): Linear(in_features=64, out_features=10, bias=True)
+)
+Train Epoch: 0 [0/60000 (0%)]   Loss: 2.382788
+Train Epoch: 0 [3200/60000 (5%)]        Loss: 1.377547
+Train Epoch: 0 [6400/60000 (11%)]       Loss: 1.040499
+Train Epoch: 0 [9600/60000 (16%)]       Loss: 0.801196
+Train Epoch: 0 [12800/60000 (21%)]      Loss: 0.649839
+Train Epoch: 0 [16000/60000 (27%)]      Loss: 0.579395
+Train Epoch: 0 [19200/60000 (32%)]      Loss: 0.774160
+Train Epoch: 0 [22400/60000 (37%)]      Loss: 0.453726
+Train Epoch: 0 [25600/60000 (43%)]      Loss: 0.668951
+Train Epoch: 0 [28800/60000 (48%)]      Loss: 0.530153
+Train Epoch: 0 [32000/60000 (53%)]      Loss: 0.632806
+Train Epoch: 0 [35200/60000 (59%)]      Loss: 0.585639
+Train Epoch: 0 [38400/60000 (64%)]      Loss: 0.397279
+Train Epoch: 0 [41600/60000 (69%)]      Loss: 0.631374
+Train Epoch: 0 [44800/60000 (75%)]      Loss: 0.422581
+Train Epoch: 0 [48000/60000 (80%)]      Loss: 0.423022
+Train Epoch: 0 [51200/60000 (85%)]      Loss: 0.381796
+Train Epoch: 0 [54400/60000 (91%)]      Loss: 0.760502
+Train Epoch: 0 [57600/60000 (96%)]      Loss: 0.506489
+
+Train loss: 0.6550482136608441
+Train Epoch: 1 [0/60000 (0%)]   Loss: 0.318453
+Train Epoch: 1 [3200/60000 (5%)]        Loss: 0.364851
+Train Epoch: 1 [6400/60000 (11%)]       Loss: 0.367190
+Train Epoch: 1 [9600/60000 (16%)]       Loss: 0.386182
+Train Epoch: 1 [12800/60000 (21%)]      Loss: 0.467612
+Train Epoch: 1 [16000/60000 (27%)]      Loss: 0.438048
+Train Epoch: 1 [19200/60000 (32%)]      Loss: 0.446184
+Train Epoch: 1 [22400/60000 (37%)]      Loss: 0.440449
+Train Epoch: 1 [25600/60000 (43%)]      Loss: 0.380581
+Train Epoch: 1 [28800/60000 (48%)]      Loss: 0.673389
+Train Epoch: 1 [32000/60000 (53%)]      Loss: 0.562654
+Train Epoch: 1 [35200/60000 (59%)]      Loss: 0.361667
+Train Epoch: 1 [38400/60000 (64%)]      Loss: 0.357094
+Train Epoch: 1 [41600/60000 (69%)]      Loss: 0.370722
+Train Epoch: 1 [44800/60000 (75%)]      Loss: 0.482470
+Train Epoch: 1 [48000/60000 (80%)]      Loss: 0.365681
+Train Epoch: 1 [51200/60000 (85%)]      Loss: 0.346680
+Train Epoch: 1 [54400/60000 (91%)]      Loss: 0.554997
+Train Epoch: 1 [57600/60000 (96%)]      Loss: 0.373696
+
+Train loss: 0.39213755361433983
+Train Epoch: 2 [0/60000 (0%)]   Loss: 0.269020
+Train Epoch: 2 [3200/60000 (5%)]        Loss: 0.424938
+Train Epoch: 2 [6400/60000 (11%)]       Loss: 0.501854
+Train Epoch: 2 [9600/60000 (16%)]       Loss: 0.444985
+Train Epoch: 2 [12800/60000 (21%)]      Loss: 0.395568
+Train Epoch: 2 [16000/60000 (27%)]      Loss: 0.240778
+Train Epoch: 2 [19200/60000 (32%)]      Loss: 0.279499
+Train Epoch: 2 [22400/60000 (37%)]      Loss: 0.126053
+Train Epoch: 2 [25600/60000 (43%)]      Loss: 0.307477
+Train Epoch: 2 [28800/60000 (48%)]      Loss: 0.387789
+Train Epoch: 2 [32000/60000 (53%)]      Loss: 0.261300
+Train Epoch: 2 [35200/60000 (59%)]      Loss: 0.183429
+Train Epoch: 2 [38400/60000 (64%)]      Loss: 0.237269
+Train Epoch: 2 [41600/60000 (69%)]      Loss: 0.151103
+Train Epoch: 2 [44800/60000 (75%)]      Loss: 0.258133
+Train Epoch: 2 [48000/60000 (80%)]      Loss: 0.192494
+Train Epoch: 2 [51200/60000 (85%)]      Loss: 0.302599
+Train Epoch: 2 [54400/60000 (91%)]      Loss: 0.331346
+Train Epoch: 2 [57600/60000 (96%)]      Loss: 0.295655
+
+Train loss: 0.3434041797526991
+Train Epoch: 3 [0/60000 (0%)]   Loss: 0.249048
+Train Epoch: 3 [3200/60000 (5%)]        Loss: 0.352690
+Train Epoch: 3 [6400/60000 (11%)]       Loss: 0.207267
+Train Epoch: 3 [9600/60000 (16%)]       Loss: 0.284693
+Train Epoch: 3 [12800/60000 (21%)]      Loss: 0.431070
+Train Epoch: 3 [16000/60000 (27%)]      Loss: 0.441519
+Train Epoch: 3 [19200/60000 (32%)]      Loss: 0.423299
+Train Epoch: 3 [22400/60000 (37%)]      Loss: 0.311703
+Train Epoch: 3 [25600/60000 (43%)]      Loss: 0.207815
+Train Epoch: 3 [28800/60000 (48%)]      Loss: 0.316640
+Train Epoch: 3 [32000/60000 (53%)]      Loss: 0.371618
+Train Epoch: 3 [35200/60000 (59%)]      Loss: 0.245004
+Train Epoch: 3 [38400/60000 (64%)]      Loss: 0.292778
+Train Epoch: 3 [41600/60000 (69%)]      Loss: 0.345176
+Train Epoch: 3 [44800/60000 (75%)]      Loss: 0.246085
+Train Epoch: 3 [48000/60000 (80%)]      Loss: 0.280428
+Train Epoch: 3 [51200/60000 (85%)]      Loss: 0.479609
+Train Epoch: 3 [54400/60000 (91%)]      Loss: 0.264962
+Train Epoch: 3 [57600/60000 (96%)]      Loss: 0.250311
+
+Train loss: 0.312608087558482
+Train Epoch: 4 [0/60000 (0%)]   Loss: 0.310402
+Train Epoch: 4 [3200/60000 (5%)]        Loss: 0.336302
+Train Epoch: 4 [6400/60000 (11%)]       Loss: 0.153214
+Train Epoch: 4 [9600/60000 (16%)]       Loss: 0.277832
+Train Epoch: 4 [12800/60000 (21%)]      Loss: 0.130915
+Train Epoch: 4 [16000/60000 (27%)]      Loss: 0.318101
+Train Epoch: 4 [19200/60000 (32%)]      Loss: 0.425775
+Train Epoch: 4 [22400/60000 (37%)]      Loss: 0.365087
+Train Epoch: 4 [25600/60000 (43%)]      Loss: 0.243406
+Train Epoch: 4 [28800/60000 (48%)]      Loss: 0.159906
+Train Epoch: 4 [32000/60000 (53%)]      Loss: 0.313192
+Train Epoch: 4 [35200/60000 (59%)]      Loss: 0.270967
+Train Epoch: 4 [38400/60000 (64%)]      Loss: 0.548697
+Train Epoch: 4 [41600/60000 (69%)]      Loss: 0.366319
+Train Epoch: 4 [44800/60000 (75%)]      Loss: 0.265159
+Train Epoch: 4 [48000/60000 (80%)]      Loss: 0.322257
+Train Epoch: 4 [51200/60000 (85%)]      Loss: 0.225261
+Train Epoch: 4 [54400/60000 (91%)]      Loss: 0.214001
+Train Epoch: 4 [57600/60000 (96%)]      Loss: 0.318979
+
+Train loss: 0.29650619769814424
+Train Epoch: 5 [0/60000 (0%)]   Loss: 0.310624
+Train Epoch: 5 [3200/60000 (5%)]        Loss: 0.341441
+Train Epoch: 5 [6400/60000 (11%)]       Loss: 0.239370
+Train Epoch: 5 [9600/60000 (16%)]       Loss: 0.278191
+Train Epoch: 5 [12800/60000 (21%)]      Loss: 0.287788
+Train Epoch: 5 [16000/60000 (27%)]      Loss: 0.173155
+Train Epoch: 5 [19200/60000 (32%)]      Loss: 0.240729
+Train Epoch: 5 [22400/60000 (37%)]      Loss: 0.161884
+Train Epoch: 5 [25600/60000 (43%)]      Loss: 0.232861
+Train Epoch: 5 [28800/60000 (48%)]      Loss: 0.295267
+Train Epoch: 5 [32000/60000 (53%)]      Loss: 0.227393
+Train Epoch: 5 [35200/60000 (59%)]      Loss: 0.294346
+Train Epoch: 5 [38400/60000 (64%)]      Loss: 0.202981
+Train Epoch: 5 [41600/60000 (69%)]      Loss: 0.251558
+Train Epoch: 5 [44800/60000 (75%)]      Loss: 0.244267
+Train Epoch: 5 [48000/60000 (80%)]      Loss: 0.383483
+Train Epoch: 5 [51200/60000 (85%)]      Loss: 0.298123
+Train Epoch: 5 [54400/60000 (91%)]      Loss: 0.308985
+Train Epoch: 5 [57600/60000 (96%)]      Loss: 0.473712
+
+Train loss: 0.2828775059058468
+Train Epoch: 6 [0/60000 (0%)]   Loss: 0.243838
+Train Epoch: 6 [3200/60000 (5%)]        Loss: 0.220742
+Train Epoch: 6 [6400/60000 (11%)]       Loss: 0.089961
+Train Epoch: 6 [9600/60000 (16%)]       Loss: 0.205233
+Train Epoch: 6 [12800/60000 (21%)]      Loss: 0.389221
+Train Epoch: 6 [16000/60000 (27%)]      Loss: 0.318107
+Train Epoch: 6 [19200/60000 (32%)]      Loss: 0.378846
+Train Epoch: 6 [22400/60000 (37%)]      Loss: 0.307503
+Train Epoch: 6 [25600/60000 (43%)]      Loss: 0.119020
+Train Epoch: 6 [28800/60000 (48%)]      Loss: 0.360318
+Train Epoch: 6 [32000/60000 (53%)]      Loss: 0.213947
+Train Epoch: 6 [35200/60000 (59%)]      Loss: 0.343688
+Train Epoch: 6 [38400/60000 (64%)]      Loss: 0.199512
+Train Epoch: 6 [41600/60000 (69%)]      Loss: 0.279146
+Train Epoch: 6 [44800/60000 (75%)]      Loss: 0.331717
+Train Epoch: 6 [48000/60000 (80%)]      Loss: 0.281463
+Train Epoch: 6 [51200/60000 (85%)]      Loss: 0.216211
+Train Epoch: 6 [54400/60000 (91%)]      Loss: 0.350641
+Train Epoch: 6 [57600/60000 (96%)]      Loss: 0.333605
+
+Train loss: 0.26997971273005517
+Train Epoch: 7 [0/60000 (0%)]   Loss: 0.385539
+Train Epoch: 7 [3200/60000 (5%)]        Loss: 0.350820
+Train Epoch: 7 [6400/60000 (11%)]       Loss: 0.166582
+Train Epoch: 7 [9600/60000 (16%)]       Loss: 0.358578
+Train Epoch: 7 [12800/60000 (21%)]      Loss: 0.277666
+Train Epoch: 7 [16000/60000 (27%)]      Loss: 0.141554
+Train Epoch: 7 [19200/60000 (32%)]      Loss: 0.280924
+Train Epoch: 7 [22400/60000 (37%)]      Loss: 0.248621
+Train Epoch: 7 [25600/60000 (43%)]      Loss: 0.340090
+Train Epoch: 7 [28800/60000 (48%)]      Loss: 0.310846
+Train Epoch: 7 [32000/60000 (53%)]      Loss: 0.326671
+Train Epoch: 7 [35200/60000 (59%)]      Loss: 0.232063
+Train Epoch: 7 [38400/60000 (64%)]      Loss: 0.254690
+Train Epoch: 7 [41600/60000 (69%)]      Loss: 0.566192
+Train Epoch: 7 [44800/60000 (75%)]      Loss: 0.225977
+Train Epoch: 7 [48000/60000 (80%)]      Loss: 0.504349
+Train Epoch: 7 [51200/60000 (85%)]      Loss: 0.269759
+Train Epoch: 7 [54400/60000 (91%)]      Loss: 0.156826
+Train Epoch: 7 [57600/60000 (96%)]      Loss: 0.184405
+
+Train loss: 0.2583980952451097
+Train Epoch: 8 [0/60000 (0%)]   Loss: 0.393707
+Train Epoch: 8 [3200/60000 (5%)]        Loss: 0.296386
+Train Epoch: 8 [6400/60000 (11%)]       Loss: 0.220201
+Train Epoch: 8 [9600/60000 (16%)]       Loss: 0.275108
+Train Epoch: 8 [12800/60000 (21%)]      Loss: 0.303884
+Train Epoch: 8 [16000/60000 (27%)]      Loss: 0.264850
+Train Epoch: 8 [19200/60000 (32%)]      Loss: 0.172773
+Train Epoch: 8 [22400/60000 (37%)]      Loss: 0.258944
+Train Epoch: 8 [25600/60000 (43%)]      Loss: 0.175459
+Train Epoch: 8 [28800/60000 (48%)]      Loss: 0.353995
+Train Epoch: 8 [32000/60000 (53%)]      Loss: 0.238126
+Train Epoch: 8 [35200/60000 (59%)]      Loss: 0.429915
+Train Epoch: 8 [38400/60000 (64%)]      Loss: 0.123635
+Train Epoch: 8 [41600/60000 (69%)]      Loss: 0.271555
+Train Epoch: 8 [44800/60000 (75%)]      Loss: 0.190366
+Train Epoch: 8 [48000/60000 (80%)]      Loss: 0.188578
+Train Epoch: 8 [51200/60000 (85%)]      Loss: 0.317133
+Train Epoch: 8 [54400/60000 (91%)]      Loss: 0.251918
+Train Epoch: 8 [57600/60000 (96%)]      Loss: 0.260449
+
+Train loss: 0.2549204707685818
+Train Epoch: 9 [0/60000 (0%)]   Loss: 0.259996
+Train Epoch: 9 [3200/60000 (5%)]        Loss: 0.113057
+Train Epoch: 9 [6400/60000 (11%)]       Loss: 0.137881
+Train Epoch: 9 [9600/60000 (16%)]       Loss: 0.180240
+Train Epoch: 9 [12800/60000 (21%)]      Loss: 0.278744
+Train Epoch: 9 [16000/60000 (27%)]      Loss: 0.293762
+Train Epoch: 9 [19200/60000 (32%)]      Loss: 0.385209
+Train Epoch: 9 [22400/60000 (37%)]      Loss: 0.225448
+Train Epoch: 9 [25600/60000 (43%)]      Loss: 0.207232
+Train Epoch: 9 [28800/60000 (48%)]      Loss: 0.151411
+Train Epoch: 9 [32000/60000 (53%)]      Loss: 0.144787
+Train Epoch: 9 [35200/60000 (59%)]      Loss: 0.428082
+Train Epoch: 9 [38400/60000 (64%)]      Loss: 0.221369
+Train Epoch: 9 [41600/60000 (69%)]      Loss: 0.220435
+Train Epoch: 9 [44800/60000 (75%)]      Loss: 0.206271
+Train Epoch: 9 [48000/60000 (80%)]      Loss: 0.275636
+Train Epoch: 9 [51200/60000 (85%)]      Loss: 0.222783
+Train Epoch: 9 [54400/60000 (91%)]      Loss: 0.409510
+Train Epoch: 9 [57600/60000 (96%)]      Loss: 0.325869
+
+Train loss: 0.24870677012751605
+test on 10000 samples
+
+Test set: Average loss: 0.0001
+Accuracy: 9568/10000 (95.68%)
+</code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 <h2 id="pdb">pdb</h2>
 <p>pdb：一个断点工具。是python自带的一个包，为python提供了一种交互的源代码调试功能</p>
