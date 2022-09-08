@@ -6,14 +6,32 @@
     <description>Recent content in Posts on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 24 Jun 2022 21:56:12 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Sep 2022 19:22:49 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project</title>
+      <link>https://kongfany.github.io/post/project/</link>
+      <pubDate>Thu, 08 Sep 2022 19:22:49 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/project/</guid>
+      <description>参考链接 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 1 2 3 4 conda env list conda create -n syft_env python=3.9 --y#创</description>
+    </item>
+    
+    <item>
+      <title>医学图像联邦学习</title>
+      <link>https://kongfany.github.io/post/fl_medical/</link>
+      <pubDate>Thu, 18 Aug 2022 13:44:31 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fl_medical/</guid>
+      <description>医学成像中的联邦学习：第一部分：迈向多中心医疗保健生态系统 - ScienceDirect 医学成像中的联邦学习：第二部分：方法，挑战和考虑因素 - ScienceDirect FedDG: Federated Domain Generalization on Medical Image Segmentationcvpr2021 基于连</description>
+    </item>
+    
     <item>
       <title>联邦学习-吴方照</title>
       <link>https://kongfany.github.io/post/fl_wufangzhao/</link>
       <pubDate>Fri, 24 Jun 2022 21:56:12 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/fl_wufangzhao/</guid>
-      <description>浙大的吴超主持 联邦学习核心挑战 效率 通信，计算 异构性 数据的异构性，设备的异构性 隐私保护 处理之后的隐私低于不处理的，MPC 安全 Communication-efficient federated learning via knowledge distillation,Nature Communications Fe</description>
+      <description>微软 吴方照 浙大 吴超主持 联邦学习核心挑战 效率 通信，计算 异构性 数据的异构性，设备的异构性 隐私保护 处理之后的隐私泄露低于不处理的，MPC 安全 Communication-efficient federated learning</description>
     </item>
     
     <item>
@@ -157,7 +175,7 @@
       <pubDate>Thu, 17 Mar 2022 15:44:15 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/fl_fedavg/</guid>
-      <description>Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该</description>
+      <description>Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 https://www.zhihu.com/question/315844487/answer/1100845525 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，</description>
     </item>
     
     <item>
@@ -166,7 +184,7 @@
       <pubDate>Thu, 17 Mar 2022 13:00:04 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/fl_route/</guid>
-      <description>https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 https://www.zhihu.com/search?q=fedavg&amp;amp;utm_content=search_history&amp;amp;type=content 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:</description>
+      <description>https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当</description>
     </item>
     
     <item>

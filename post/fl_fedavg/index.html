@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 https://www.zhihu.com/question/315844487/answer/1100845525 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="FedAvg" />
-<meta property="og:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该" />
+<meta property="og:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 https://www.zhihu.com/question/315844487/answer/1100845525 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/fl_fedavg/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-17T15:44:15+08:00" />
 <meta property="article:modified_time" content="2022-03-17T15:44:15+08:00" />
 
 <meta itemprop="name" content="FedAvg">
-<meta itemprop="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该"><meta itemprop="datePublished" content="2022-03-17T15:44:15+08:00" />
+<meta itemprop="description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 https://www.zhihu.com/question/315844487/answer/1100845525 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，"><meta itemprop="datePublished" content="2022-03-17T15:44:15+08:00" />
 <meta itemprop="dateModified" content="2022-03-17T15:44:15+08:00" />
-<meta itemprop="wordCount" content="4392">
+<meta itemprop="wordCount" content="4698">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FedAvg"/>
-<meta name="twitter:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该"/>
+<meta name="twitter:description" content="Communication-Efficient Learning of Deep Networksfrom Decentralized Data[paper] 论文解析 开山之作 笔记： https://zhuanlan.zhihu.com/p/445458807 https://zhuanlan.zhihu.com/p/370198194 https://www.zhihu.com/question/315844487/answer/1100845525 将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-03-17 </span>
         
-          <span class="more-meta"> 4392 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 4698 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
@@ -164,14 +164,23 @@
 <p>笔记：</p>
 <p><a href="https://zhuanlan.zhihu.com/p/445458807">https://zhuanlan.zhihu.com/p/445458807</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/370198194">https://zhuanlan.zhihu.com/p/370198194</a></p>
+<p><a href="https://www.zhihu.com/question/315844487/answer/1100845525">https://www.zhihu.com/question/315844487/answer/1100845525</a></p>
 </blockquote>
 <p>将训练数据分布在一定设备上，通过聚合本地更新来学习共享模型。仅传递模型的更新。介绍了联邦平均算法，该算法将每个客户端的局部随机梯度下降(SGD)与执行模型平均的服务器相结合。证明了它对不平衡和非IID数据分布的鲁棒性，并可以将训练分散数据的深度网络所需的通信轮数减少几个数量级。数据上的标签可以从用户交互中自然推断出来。</p>
 <p><img src="/images/202203/3.jpg" alt=""></p>
 <p><img src="/images/202203/4.jpg" alt=""></p>
+<p><a href="https://www.zhihu.com/question/315844487/answer/1100845525">数据划分</a>：</p>
+<p>那么可能在 Federated Learning 的情况下（假设正好有 10 个 local users），就是有个用户只有 0 的图片，另外一个用户只有 8 的图片，&hellip;.。虽然总量没变，但是每个用户手里的数据是 biased 的，是 Non-IID（非独立同分布） 的，这会对优化造成很大的影响。</p>
+<p>MNIST 有两种数据分割的模式：</p>
+<p>IID 数据分割</p>
+<p>MNIST 总共有 60,000 训练数据，有 100 个 local device，那么每个上面就是有 600 个 sample，抽取方式是随机。</p>
+<p>Non-IID 数据分割</p>
+<p>我们首先根据 label 来对数据进行一个排序，然后把 60,000 个 sample 分成 200 个小块，每个小块里面有 300 个 sample。注意这里排序的目的，是人为的让每个小块里面，都是同一种数据。然后每个 local device 将随机的得到两个小块。这样分割完之后，每个 local device 都只有两种数字。</p>
 <blockquote>
 <p>代码：</p>
 <p><a href="https://github.com/shaoxiongji/federated-learning">https://github.com/shaoxiongji/federated-learning</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/359060612">https://zhuanlan.zhihu.com/p/359060612</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/438065296">https://zhuanlan.zhihu.com/p/438065296</a></p>
 </blockquote>
 <ul>
 <li>

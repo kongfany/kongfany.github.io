@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 https://www.zhihu.com/search?q=fedavg&amp;amp;utm_content=search_history&amp;amp;type=content 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="联邦学习路线" />
-<meta property="og:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 https://www.zhihu.com/search?q=fedavg&amp;utm_content=search_history&amp;type=content 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:" />
+<meta property="og:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/fl_route/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-17T13:00:04+08:00" />
 <meta property="article:modified_time" content="2022-03-17T13:00:04+08:00" />
 
 <meta itemprop="name" content="联邦学习路线">
-<meta itemprop="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 https://www.zhihu.com/search?q=fedavg&amp;utm_content=search_history&amp;type=content 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:"><meta itemprop="datePublished" content="2022-03-17T13:00:04+08:00" />
+<meta itemprop="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当"><meta itemprop="datePublished" content="2022-03-17T13:00:04+08:00" />
 <meta itemprop="dateModified" content="2022-03-17T13:00:04+08:00" />
-<meta itemprop="wordCount" content="264">
+<meta itemprop="wordCount" content="675">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习路线"/>
-<meta name="twitter:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 https://www.zhihu.com/search?q=fedavg&amp;utm_content=search_history&amp;type=content 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:"/>
+<meta name="twitter:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-03-17 </span>
         
-          <span class="more-meta"> 264 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 675 words </span>
+          <span class="more-meta"> 2 mins read </span>
         
       </div>
     </header>
@@ -143,7 +143,15 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#中文论文整理">中文论文整理：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
@@ -156,7 +164,6 @@
 <p>开山之作，FedAvg。</p>
 </li>
 </ul>
-<p><a href="https://www.zhihu.com/search?q=fedavg&amp;utm_content=search_history&amp;type=content">https://www.zhihu.com/search?q=fedavg&amp;utm_content=search_history&amp;type=content</a></p>
 <blockquote>
 <p><a href="https://www.jianshu.com/p/22c50ded4cf7?from=groupmessage">三个概念：Epoch, Batch, Iteration</a></p>
 </blockquote>
@@ -164,11 +171,15 @@
 <li>epoch:一个Epoch就是<strong>将所有训练样本训练一次</strong>的过程</li>
 <li>batch:当一个Epoch的样本（也就是所有的训练样本）数量可能太过庞大（对于计算机而言），就需要把它分成多个小块，也就是就是分成多个Batch 来进行训练。将整个训练样本分成若干个Batch。</li>
 </ul>
-<blockquote>
-<p>一些论文：</p>
-</blockquote>
+<h2 id="中文论文整理">中文论文整理：</h2>
 <ul>
-<li></li>
+<li>
+<p>面向隐私保护联邦学习的医学影像目标检测算法</p>
+<p>服务器的时刻计算（MA）计算隐私损失，若超过阈值则意味着隐私预算已经消耗殆尽，则停止训练，返回当前轮参数。</p>
+<p>为防止来自不可靠第三方的攻击, 服务器在更新全局模型参数时, 引入高斯噪声对其进行差分隐私保护. 在服务器聚合客户端局部模型的参数更新时 引入高斯噪声, 实现对全局模型参数的保护, 攻击 者即使访问到扰动后的参数也无法直接获取各客 户端的参与度和对模型的贡献, 因此可实现对全 部客户端私有数据的保护.</p>
+<p>本文选择使用 RetinaNet 检测器进行 CT 影像综合性病灶检测。可以通过特征金字塔结构( FPN)结合不同语义级别的特征图来进行多尺度的目标检测,其低层特征图具有较高分辨率, 但特征呈现出低语义级别的特点; 而高层特征图的分辨率虽然较低, 但其特征包含的语义信息丰富.特别地, 本文借助上下文信息来提取自适应特征, 并引入注意力机制合理 利用不同分辨率的特征图, 通过这 2 个方面的改进 有效地提高了 RetinaNet 检测器的病灶检测精度.</p>
+<p><code>RetinaNet </code>:[<a href="https://blog.csdn.net/weixin_41981679/article/details/123823507">1</a>],[<a href="https://blog.csdn.net/weixin_54546190/article/details/123558365">2</a>],[<a href="https://zhuanlan.zhihu.com/p/410436667">3</a>],[<a href="https://zhuanlan.zhihu.com/p/143877125">4</a>]</p>
+</li>
 </ul>
 <blockquote>
 <p><a href="https://baijiahao.baidu.com/s?id=1731530035463540612&amp;wfr=spider&amp;for=pc">常用插件</a></p>
