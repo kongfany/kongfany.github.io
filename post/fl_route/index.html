@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习路线">
 <meta itemprop="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当"><meta itemprop="datePublished" content="2022-03-17T13:00:04+08:00" />
 <meta itemprop="dateModified" content="2022-03-17T13:00:04+08:00" />
-<meta itemprop="wordCount" content="675">
+<meta itemprop="wordCount" content="2492">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习路线"/>
 <meta name="twitter:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-03-17 </span>
         
-          <span class="more-meta"> 675 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 2492 words </span>
+          <span class="more-meta"> 5 mins read </span>
         
       </div>
     </header>
@@ -147,6 +147,7 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#英文论文整理">英文论文整理</a></li>
         <li><a href="#中文论文整理">中文论文整理：</a></li>
       </ul>
     </li>
@@ -171,14 +172,291 @@
 <li>epoch:一个Epoch就是<strong>将所有训练样本训练一次</strong>的过程</li>
 <li>batch:当一个Epoch的样本（也就是所有的训练样本）数量可能太过庞大（对于计算机而言），就需要把它分成多个小块，也就是就是分成多个Batch 来进行训练。将整个训练样本分成若干个Batch。</li>
 </ul>
+<h2 id="英文论文整理">英文论文整理</h2>
+<ul>
+<li>
+<p><code>Trading Redundancy for Communication: Speeding up Distributed SGD for Non-convex Optimization</code>为通信交换冗余：加速非凸优化的分布式SGD</p>
+<p><a href="http://proceedings.mlr.press/v97/haddadpour19a.html">paper</a>，<a href="https://github.com/mmkamani7/RI-SGD">code</a></p>
+<p>已经有大量研究通过压缩梯度向量或使用局部更新和周期模型平均来降低通信成本。在本文中，我们提倡使用冗余实现非凸优化的通信高效分布式随机算法。通过适当地将冗余注入到具有模型平均的训练数据中，可以显著减少通信循环的数量。我们表明冗余减少了局部平均中的残余误差，从而与以前的算法相比，通过更少的通信循环达到相同的精度水平。</p>
+<p>第3节中介绍了冗余注入SGD（RI-SGD）算法，它是分布式SGD的一种变体。在RI-SGD中，数据被划分为碎片；每个节点都有自己的数据碎片，并允许部分访问其他工作人员子集的碎片，达到强制冗余预算的水平（通过数据复制显式地或通过从其他工作人员的碎片中采样数据隐式地）。RI-SGD通过执行局部更新并周期性地平均节点上的模型来运行。</p>
+<p>分布式SGD的周期模型平均技术中使用数据冗余。通过理论收敛性证明，我们表明，与没有冗余的传统算法相比，冗余减少了残余误差。通过实验结果，我们表明，冗余度非常值得隐含的较高计算成本。残余误差减少导致较低的通信开销，因此更快的收敛。</p>
+</li>
+<li>
+<p>python main.py &ndash;data-dir=./cifar10  &ndash;num-gpus=8  &ndash;train-steps=45000 &ndash;variable-strategy GPU &ndash;job-dir=./log/ri-sgd/cifar10-ri-redun25-step50 &ndash;run-type multi  &ndash;redundancy=0.25   &ndash;sync-step=50  &ndash;dataset cifar10  &ndash;eval-batch-size=128</p>
+<p>python main.py &ndash;data-dir=./cifar10 &ndash;num-gpus=8  &ndash;train-steps=45000 &ndash;variable-strategy GPU  &ndash;job-dir=./log/ri-sgd/cifar10-ri-sync  &ndash;run-type sync  &ndash;redundancy=0.0  &ndash;dataset cifar10 &ndash;eval-batch-size=128</p>
+<p><code>ImageNet data set loader</code>.</p>
+<p>2022-09-11 14:35:14.906706: E tensorflow/stream_executor/cuda/cuda_event.cc:29] Error polling for event status: failed to query event: CUDA_ERROR_OUT_OF_MEMORY: out of memory
+2022-09-11 14:35:14.907062: F tensorflow/core/common_runtime/gpu/gpu_event_mgr.cc:273] Unexpected Event status: 1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">INFO:tensorflow:Using config: {&#39;_model_dir&#39;: &#39;./log/ri-sgd/cifar10-ri-redun25-step50&#39;, &#39;_tf_random_seed&#39;: None, &#39;_save_summary_steps&#39;: 100, &#39;                  _save_checkpoints_steps&#39;: None, &#39;_save_checkpoints_secs&#39;: 600, &#39;_session_config&#39;: gpu_options {
+  force_gpu_compatible: true
+}
+allow_soft_placement: true
+, &#39;_keep_checkpoint_max&#39;: 5, &#39;_keep_checkpoint_every_n_hours&#39;: 10000, &#39;_log_step_count_steps&#39;: 100, &#39;_train_distribute&#39;: None, &#39;_device_fn&#39;:                   None, &#39;_protocol&#39;: None, &#39;_eval_distribute&#39;: None, &#39;_experimental_distribute&#39;: None, &#39;_experimental_max_worker_delay_secs&#39;: None, &#39;_service&#39;:                   None, &#39;_cluster_spec&#39;: &lt;tensorflow.python.training.server_lib.ClusterSpec object at 0x7f7c0875d3c8&gt;, &#39;_task_type&#39;: &#39;worker&#39;, &#39;_task_id&#39;: 0,                   &#39;_global_id_in_cluster&#39;: 0, &#39;_master&#39;: &#39;&#39;, &#39;_evaluation_master&#39;: &#39;&#39;, &#39;_is_chief&#39;: True, &#39;_num_ps_replicas&#39;: 0, &#39;_num_worker_replicas&#39;: 1}
+INFO:tensorflow:Not using Distribute Coordinator.
+INFO:tensorflow:Running training and evaluation locally (non-distributed).
+INFO:tensorflow:Start train and evaluate loop. The evaluate will happen after every checkpoint. Checkpoint frequency is determined based on R                  unConfig arguments: save_checkpoints_steps None or save_checkpoints_secs 600.
+
+
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:image after unit resnet_0/tower_0/stage/residual_v1/: (?, 16, 32, 32)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage/residual_v1_1/: (?, 16, 32, 32)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage/residual_v1_2/: (?, 16, 32, 32)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage/residual_v1_3/: (?, 16, 32, 32)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage/residual_v1_4/: (?, 16, 32, 32)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage/residual_v1_5/: (?, 16, 32, 32)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage/residual_v1_6/: (?, 16, 32, 32)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage/residual_v1_7/: (?, 16, 32, 32)
+
+
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1/avg_pool/: (?, 16, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1/: (?, 32, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1_1/: (?, 32, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1_2/: (?, 32, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1_3/: (?, 32, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1_4/: (?, 32, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1_5/: (?, 32, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1_6/: (?, 32, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_1/residual_v1_7/: (?, 32, 16, 16)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1/avg_pool/: (?, 32, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1/: (?, 64, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1_1/: (?, 64, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1_2/: (?, 64, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1_3/: (?, 64, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1_4/: (?, 64, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1_5/: (?, 64, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1_6/: (?, 64, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/stage_2/residual_v1_7/: (?, 64, 8, 8)
+INFO:tensorflow:image after unit resnet_0/tower_0/global_avg_pool/: (?, 64)
+INFO:tensorflow:image after unit resnet_0/tower_0/fully_connected/: (?, 11)
+....
+INFO:tensorflow:image after unit resnet_7/tower_7/fully_connected/: (?, 11)
+
+
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Graph was finalized.
+
+
+INFO:tensorflow:Restoring parameters from ./log/ri-sgd/cifar10-ri-redun25-step50/model.ckpt-0
+
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Evaluation [10/100]
+INFO:tensorflow:Evaluation [20/100]
+INFO:tensorflow:Evaluation [30/100]
+INFO:tensorflow:Evaluation [40/100]
+INFO:tensorflow:Evaluation [50/100]
+INFO:tensorflow:Evaluation [60/100]
+INFO:tensorflow:Evaluation [70/100]
+INFO:tensorflow:Evaluation [80/100]
+INFO:tensorflow:Evaluation [90/100]
+INFO:tensorflow:Evaluation [100/100]
+INFO:tensorflow:Finished evaluation at 2022-09-12-11:31:19
+INFO:tensorflow:Saving dict for global step 15968: accuracy = 0.6301465, global_step = 15968, loss = 1.5022674
+INFO:tensorflow:Saving &#39;checkpoint_path&#39; summary for global step 15968: ./log/ri-sgd/cifar10-ri-redun25-step50/model.ckpt-15968
+INFO:tensorflow:Average examples/sec: 8519.77 (36.1553), step = 15968
+INFO:tensorflow:Average examples/sec: 8522.79 (13192.8), step = 15984
+INFO:tensorflow:loss = 1.036586, step = 16000 (194.717 sec)
+INFO:tensorflow:learning_rate = 0.1, loss = 1.036586 (194.717 sec)
+INFO:tensorflow:Average examples/sec: 8526.14 (14038.3), step = 16000
+INFO:tensorflow:Parameters sync in progress for step: 16016
+INFO:tensorflow:global_step/sec: 0.648187
+INFO:tensorflow:Average examples/sec: 8528.51 (11820.3), step = 16016
+INFO:tensorflow:Average examples/sec: 8532.07 (14665.4), step = 16032
+INFO:tensorflow:Average examples/sec: 8535.52 (14336.2), step = 16048
+INFO:tensorflow:Average examples/sec: 8539.39 (15664.3), step = 16064
+INFO:tensorflow:Parameters sync in progress for step: 16072
+INFO:tensorflow:Average examples/sec: 8541.96 (12247.8), step = 16080
+INFO:tensorflow:Average examples/sec: 8545.82 (15637.8), step = 16096
+INFO:tensorflow:Average examples/sec: 8549.6 (15410.1), step = 16112
+INFO:tensorflow:Parameters sync in progress for step: 16128
+
+INFO:tensorflow:global_step/sec: 36.6612
+INFO:tensorflow:loss = 0.40698615, step = 44800 (21.542 sec)
+INFO:tensorflow:learning_rate = 0.01, loss = 0.40698615 (21.542 sec)
+INFO:tensorflow:Average examples/sec: 11149.1 (12165.7), step = 44800
+INFO:tensorflow:Average examples/sec: 11150.1 (15085.6), step = 44816
+INFO:tensorflow:Average examples/sec: 11151.3 (15706.3), step = 44832
+INFO:tensorflow:Average examples/sec: 11152.5 (15819.3), step = 44848
+INFO:tensorflow:Parameters sync in progress for step: 44856
+INFO:tensorflow:Average examples/sec: 11152.9 (12614.2), step = 44864
+INFO:tensorflow:Average examples/sec: 11154.1 (15997), step = 44880
+INFO:tensorflow:Average examples/sec: 11155.3 (15720.3), step = 44896
+INFO:tensorflow:Parameters sync in progress for step: 44912
+INFO:tensorflow:global_step/sec: 38.2743
+INFO:tensorflow:Average examples/sec: 11155.8 (12877), step = 44912
+INFO:tensorflow:Average examples/sec: 11156.8 (14990.5), step = 44928
+INFO:tensorflow:Average examples/sec: 11157.8 (14665.5), step = 44944
+INFO:tensorflow:Average examples/sec: 11158.9 (15379), step = 44960
+INFO:tensorflow:Parameters sync in progress for step: 44968
+INFO:tensorflow:Average examples/sec: 11159.4 (12940.7), step = 44976
+INFO:tensorflow:Average examples/sec: 11160.6 (15711.6), step = 44992
+
+
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Evaluation [10/100]
+INFO:tensorflow:Evaluation [20/100]
+INFO:tensorflow:Evaluation [30/100]
+INFO:tensorflow:Evaluation [40/100]
+INFO:tensorflow:Evaluation [50/100]
+INFO:tensorflow:Evaluation [60/100]
+INFO:tensorflow:Evaluation [70/100]
+INFO:tensorflow:Evaluation [80/100]
+INFO:tensorflow:Evaluation [90/100]
+INFO:tensorflow:Evaluation [100/100]
+INFO:tensorflow:Finished evaluation at 2022-09-12-11:48:01
+INFO:tensorflow:Saving dict for global step 45008: accuracy = 0.88703126, global_step = 45008, loss = 0.6188442
+INFO:tensorflow:Saving &#39;checkpoint_path&#39; summary for global step 45008: ./log/ri-sgd/cifar10-ri-redun25-step50/model.ckpt-45008
+INFO:tensorflow:Loss for final step: 0.35805476.
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>Local SGD with Periodic Averaging: Tighter Analysis and Adaptive Synchronization</code>具有周期平均的局部SGD：更严格的分析和自适应同步</p>
+<p><a href="https://arxiv.org/abs/1910.13598">paper</a>,<a href="https://github.com/mmkamani7/LUPA-SGD?utm_source=catalyzex.com">code</a></p>
+<p>我们加强了局部SGD的收敛性分析，并表明局部SGD比当前理论所建议的成本低得多，应用范围也广得多。还开发了一种自适应同步方案，为线性加速提供了一般条件。</p>
+<p>我们加强了分布式非凸优化的周期平均局部更新理论。我们改进了先前已知的局部更新次数的界限，同时保持了线性速度，并通过实验验证了我们的结果。我们还提出了一种自适应算法来决定算法进行时的局部更新次数。</p>
+</li>
+</ul>
 <h2 id="中文论文整理">中文论文整理：</h2>
 <ul>
 <li>
-<p>面向隐私保护联邦学习的医学影像目标检测算法</p>
+<p><code>面向隐私保护联邦学习的医学影像目标检测算法</code></p>
 <p>服务器的时刻计算（MA）计算隐私损失，若超过阈值则意味着隐私预算已经消耗殆尽，则停止训练，返回当前轮参数。</p>
 <p>为防止来自不可靠第三方的攻击, 服务器在更新全局模型参数时, 引入高斯噪声对其进行差分隐私保护. 在服务器聚合客户端局部模型的参数更新时 引入高斯噪声, 实现对全局模型参数的保护, 攻击 者即使访问到扰动后的参数也无法直接获取各客 户端的参与度和对模型的贡献, 因此可实现对全 部客户端私有数据的保护.</p>
 <p>本文选择使用 RetinaNet 检测器进行 CT 影像综合性病灶检测。可以通过特征金字塔结构( FPN)结合不同语义级别的特征图来进行多尺度的目标检测,其低层特征图具有较高分辨率, 但特征呈现出低语义级别的特点; 而高层特征图的分辨率虽然较低, 但其特征包含的语义信息丰富.特别地, 本文借助上下文信息来提取自适应特征, 并引入注意力机制合理 利用不同分辨率的特征图, 通过这 2 个方面的改进 有效地提高了 RetinaNet 检测器的病灶检测精度.</p>
 <p><code>RetinaNet </code>:[<a href="https://blog.csdn.net/weixin_41981679/article/details/123823507">1</a>],[<a href="https://blog.csdn.net/weixin_54546190/article/details/123558365">2</a>],[<a href="https://zhuanlan.zhihu.com/p/410436667">3</a>],[<a href="https://zhuanlan.zhihu.com/p/143877125">4</a>]</p>
+<p>在客户端为折中考虑通信效率与隐 私保护, 从 2 个方面采取措施, 一是按照自适应的 训练周期进行训练以加速模型收敛; 二是在其局 部目标函数中加入限制项, 以防止局部模型和全 局模型之间产生巨大偏差, 保证收敛.</p>
+<p>因数据量有限, 在完成对客户端 的初始数据分配后, 对其私有数据进行数据增强操 作, 将分配后的数据集以 6∶2∶2 的比例划分为训 练集、验证集和测试集. 本文采用翻转、平移、旋 转、仿射和裁剪等数据增强方式对各客户端数据进 行扩充, 令各类型数据扩充为原来的 5 倍.</p>
 </li>
 </ul>
 <blockquote>
@@ -188,6 +466,11 @@
 <li>CCFrank</li>
 </ul>
 <p>Chrome 扩展程序、Firefox 和 Edge 附加组件，在 dblp、Google 学术、Connected Papers、Semantic Scholar 和 Web of Science 的搜索结果中显示中国计算机学会推荐的国际会议和期刊排名。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>联邦学习书籍</p>
+<p><a href="https://www.zhihu.com/column/c_1392436990781046784">深入浅出</a></p>
 </blockquote>
 
     </div>
