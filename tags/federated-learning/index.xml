@@ -6,7 +6,16 @@
     <description>Recent content in Federated Learning on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 11 Sep 2022 20:49:20 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/federated-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Sep 2022 16:46:52 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/federated-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>联邦半监督学习</title>
+      <link>https://kongfany.github.io/post/fl_fssl/</link>
+      <pubDate>Wed, 28 Sep 2022 16:46:52 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fl_fssl/</guid>
+      <description>国自然 现实场景中，如医疗、金融、法律等领 域没有大量的有标签数据，而对数据进行标注需要大量的人力和时间，特别是在些领域只有专家才能对样本进行有</description>
+    </item>
+    
     <item>
       <title>Pysyft</title>
       <link>https://kongfany.github.io/post/fl_pysyft/</link>
@@ -67,7 +76,7 @@
       <pubDate>Thu, 17 Mar 2022 13:00:04 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/fl_route/</guid>
-      <description>https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当</description>
+      <description>https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc</description>
     </item>
     
     <item>

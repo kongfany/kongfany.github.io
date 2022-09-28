@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Project">
 <meta itemprop="description" content="参考链接 2 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 blog 删除 1 2 3 4 conda env list conda create -n syft_env python=3.9 -"><meta itemprop="datePublished" content="2022-09-08T19:22:49+08:00" />
 <meta itemprop="dateModified" content="2022-09-08T19:22:49+08:00" />
-<meta itemprop="wordCount" content="313">
+<meta itemprop="wordCount" content="360">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Project"/>
 <meta name="twitter:description" content="参考链接 2 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 blog 删除 1 2 3 4 conda env list conda create -n syft_env python=3.9 -"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022-09-08 </span>
         
-          <span class="more-meta"> 313 words </span>
+          <span class="more-meta"> 360 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -258,11 +258,29 @@ conda config --set show_channel_urls yes
 pip install syft[udacity]==0.2.4 -i https://pypi.doubanio.com/simple/
 </code></pre></td></tr></table>
 </div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install 包名 -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
+</code></pre></td></tr></table>
+</div>
 </div><hr>
 <p>pycharm连接服务器：<a href="https://blog.csdn.net/hehedadaq/article/details/118737855">【blog】</a><a href="http://t.zoukankan.com/lemon-feng-p-11302314.html">2</a></p>
 <p><img src="/images/202206/16.png" alt=""></p>
 <p><img src="/images/202206/17.png" alt=""></p>
-<blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">nvidia-smi# 查看空闲显卡
+CUDA_VISIBLE_DEVICES=0,1#指定显卡
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <p>wsl</p>
 <p><a href="https://blog.csdn.net/weixin_52802958/article/details/122631592">https://blog.csdn.net/weixin_52802958/article/details/122631592</a></p>
 <p><a href="https://blog.csdn.net/weixin_50321412/article/details/124592284">https://blog.csdn.net/weixin_50321412/article/details/124592284</a></p>

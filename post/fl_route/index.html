@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="联邦学习路线" />
-<meta property="og:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当" />
+<meta property="og:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/fl_route/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-17T13:00:04+08:00" />
 <meta property="article:modified_time" content="2022-03-17T13:00:04+08:00" />
 
 <meta itemprop="name" content="联邦学习路线">
-<meta itemprop="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当"><meta itemprop="datePublished" content="2022-03-17T13:00:04+08:00" />
+<meta itemprop="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc"><meta itemprop="datePublished" content="2022-03-17T13:00:04+08:00" />
 <meta itemprop="dateModified" content="2022-03-17T13:00:04+08:00" />
-<meta itemprop="wordCount" content="2492">
+<meta itemprop="wordCount" content="4501">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习路线"/>
-<meta name="twitter:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration epoch:一个Epoch就是将所有训练样本训练一次的过程 batch:当"/>
+<meta name="twitter:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-03-17 </span>
         
-          <span class="more-meta"> 2492 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 4501 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -167,6 +167,7 @@
 </ul>
 <blockquote>
 <p><a href="https://www.jianshu.com/p/22c50ded4cf7?from=groupmessage">三个概念：Epoch, Batch, Iteration</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/66021413?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_oi=1188913128606576640&amp;utm_psn=1552348883346403328&amp;utm_source=wechat_session">参考2</a></p>
 </blockquote>
 <ul>
 <li>epoch:一个Epoch就是<strong>将所有训练样本训练一次</strong>的过程</li>
@@ -457,6 +458,31 @@ INFO:tensorflow:Loss for final step: 0.35805476.
 <p><code>RetinaNet </code>:[<a href="https://blog.csdn.net/weixin_41981679/article/details/123823507">1</a>],[<a href="https://blog.csdn.net/weixin_54546190/article/details/123558365">2</a>],[<a href="https://zhuanlan.zhihu.com/p/410436667">3</a>],[<a href="https://zhuanlan.zhihu.com/p/143877125">4</a>]</p>
 <p>在客户端为折中考虑通信效率与隐 私保护, 从 2 个方面采取措施, 一是按照自适应的 训练周期进行训练以加速模型收敛; 二是在其局 部目标函数中加入限制项, 以防止局部模型和全 局模型之间产生巨大偏差, 保证收敛.</p>
 <p>因数据量有限, 在完成对客户端 的初始数据分配后, 对其私有数据进行数据增强操 作, 将分配后的数据集以 6∶2∶2 的比例划分为训 练集、验证集和测试集. 本文采用翻转、平移、旋 转、仿射和裁剪等数据增强方式对各客户端数据进 行扩充, 令各类型数据扩充为原来的 5 倍.</p>
+<p>联邦平均算法 FedAvg[1]是一种基于局部随机梯度下降平均更新 的方法, 在非凸问题上表现良好, 但没有收敛性保 证. 基于 FedAvg 改进的 FedProx 方法[14]则提供了 理论和实践上的收敛性保证. 在现有的机器学习 方法中, 局部更新的方式得到了广泛应用. 除了灵 活的局部更新策略外, 采用自适应的局部训练周 期可以实现快速收敛, 并降低损失[15].本文一方面在客户端的目标函数中加 入了限制项防止局部模型和全局模型差异过大,  从而保证收敛性; 另一方面采用自适应训练周期 和局部更新的思想提升模型的收敛速度. 实验结 果表明, 该方式在保证收敛性的前提下, 提高了模 型的收敛速度, 并整体提升了通信效率.</p>
+</li>
+<li>
+<p><code>基于联邦学习和改进 ResNet 的肺炎辅助诊断</code></p>
+<p>本文方法利用改进残差网络能提取更深层次的图像特征, 嵌入压缩激励模块关注通道特征, 并进行特征重标定增强有效特征的提取, 能够提高联邦共享模型的准确性, 同时本文方法具有本地数据不对外共享的优势, 能够有效保护医疗数据的隐私, 从而打破医疗数据孤岛现象。</p>
+<p>为了提取更深层次的特征同时避免梯度消失, 本文以残差网络作为基础模型, 在联邦学习过程中, 各个客户端在本地进行独立训练, 为了避免批处理数量对于联邦共享模型的影响, 本文将传统的批量归一化方式转换为<code>组归一</code>化方式, 对输入特征的通道进行分组运算,提高了模型的稳定性, 同时引入激励压缩网络关注通道间的相关性.</p>
+<p>BN,GN:<a href="https://www.cnblogs.com/dengshunge/p/12513712.html">1</a></p>
+</li>
+<li>
+<p><code>一种 Unet 图像分割模型的联邦蒸馏优化算法 </code></p>
+<p>在算法中，首先设计本地教师模型-全局学生模型的框架，重构轻量的Unet 作为学生模型，并用蒸馏损失保证模型性能的稳定。然后，在服务器上部署调节器筛选聚合的参与方，缓解数据不平衡对模型的影响</p>
+<p>首先在联邦平均算法（Federated Averaging，FedAvg）的基础上使用教师-学生模型，其中在参与方中有一个经典的 Unet 模型作为教师模型，还有一个轻量的 U-net 模型结构作为学生模型，通过教师-学生的框架保证本地参与方性能的稳定；然后本文在服务器上还部署调节器，并设定设置相关的约束条件与权重设置机制。</p>
+<p>本次设计的 U-FedDO 算法主要有服务器、调节器、参与方的学生模型与参与方的教师模型。服务器负责全局权重
+的聚合与输出给本地模型，调节器是本地传递的权重进行筛选，参与方中有教师模型保留本地模型的权重，学生模型主要负责训练服务器传递的权重与结合本地教师模型的损失。</p>
+</li>
+<li>
+<p>经实践表明FedAvg 有很好的表现, 特别是对于求解非凸问题, 它的效果很好, 但是 McMahan 等人在提出这一算法的时候没有给出 FedAvg 算法在理论上的收敛性保证, 并且他们是在数据独立同分布 (IID) 的情况下进行的研究. 不过目前对于 FedAvg 算法的收敛性, Huo 等人在 [9] 中已给出理论性的证明, 另外, 他们还提出了一种带动量加速的 FedAvg 算法, 并说明该算法在数值上较之先前的 FedAvg 有更快的收敛速度.</p>
+<p>数据异质性会影响算法的收敛性.Li 等人在 [25] 中基于基本的 FedAvg 算法考虑异质性, 提出了一个叫做 FedProx 的算法,该算法在 FedAvg 的基础上对每个设备的局部目标函数添加了一项邻近项以控制本地更新的模型与全局模型的偏离程度. 他们证明了在目标函数为非凸情况下的 FedProx 的收敛性, 并通过实验表明了<code>FedProx</code>在处理异质数据时训练的模型精度更高</p>
+<p>提取图像特征, 然后将这些图像特征输入分类器. 最后, 分类器输出这些图像的识别结果.</p>
+<p>针对联邦学习中通信效率以及数据异质性上的问题, 本文提出了一种带压缩及梯度追踪的方差缩减的联邦优化算法框架, 称作 FedCOMGATE-VR. 该算法一方面为了提高通信效率, 降低通信成本, 使用了本地更新与压缩梯度两种思想; 另一方面, 为了处理数据异质性的问题, 算法中还引入了一种梯度追踪的思想. 此外, 算法在局部梯度
+更新中还采用了方差缩减且无偏的随机梯度法, 以减少每次梯度更新的计算量.</p>
+<p>FedCOM 的每次更新都严重依靠于局部的 SGD 方向, 在同质的情况下, 由于所有的数据的分布都是一致的, 按局部梯度方向走能够很好地训练出一个全局模型, 但是在异质的情况下, 如果仅仅依靠于局部的梯度来更新局部的模型会导致局部梯度方向与全局梯度方向产生很大的差异.</p>
+<p>FedCOMGATE使用了一种局部梯度追踪的思想, 该思想保证了每个节点都能用全局的梯度方向来更新局部的模型. 具体实现就是利用每次记录的局部梯度方向与全局梯度方向之间的差异来矫正每次局部模型更新.在算法的本地更新阶段使用的是 SGD 的随机梯度下降法. SGD 的操作虽较为简单, 但是它由于常数方差上界的干扰, 收敛效果不太理想, 因此本文考虑使用<code>方差缩减的随机梯度估计法</code>来进行局部梯度的更新..FedCOMGATE-VR</p>
+<p>对于优化算法的效果分析, 一个很重要的指标就是观察它的收敛率情况. 损失值下降越快表示算法收敛越快.在分类效果的评价指标选择上, 我们选择了准确率 (Accuracy)、精确率 (Precision)、召回率 (Recall) 和 FI 值这四个指标</p>
+<p>对于数据异质的情况, 为了生成类似于真实的联邦学习背景下的异质性数据, 我们采取和 [8] 中类似的方法: 每个设备仅被分配有来自两个类别的数据, 这一数据分配方法使得各个设备上的数据具有高度异质性.</p>
 </li>
 </ul>
 <blockquote>

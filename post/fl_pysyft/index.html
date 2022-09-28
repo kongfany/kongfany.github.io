@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Pysyft">
 <meta itemprop="description" content="PySyft是用于安全和隐私深度学习的Python库，它在主流深度学习框架（例如PyTorch和TensorFlow）中使用联邦学习，差分隐"><meta itemprop="datePublished" content="2022-09-11T20:49:20+08:00" />
 <meta itemprop="dateModified" content="2022-09-11T20:49:20+08:00" />
-<meta itemprop="wordCount" content="4882">
+<meta itemprop="wordCount" content="6811">
 <meta itemprop="keywords" content="Federated Learning,Pysyft," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Pysyft"/>
 <meta name="twitter:description" content="PySyft是用于安全和隐私深度学习的Python库，它在主流深度学习框架（例如PyTorch和TensorFlow）中使用联邦学习，差分隐"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-09-11 </span>
         
-          <span class="more-meta"> 4882 words </span>
-          <span class="more-meta"> 10 mins read </span>
+          <span class="more-meta"> 6811 words </span>
+          <span class="more-meta"> 14 mins read </span>
         
       </div>
     </header>
@@ -154,6 +154,7 @@
         <li><a href="#简介-基本函数">简介-基本函数</a></li>
         <li><a href="#以minist识别为例">以Minist识别为例</a></li>
         <li><a href="#minist">Minist</a></li>
+        <li><a href="#并行训练">并行训练</a></li>
       </ul>
     </li>
   </ul>
@@ -1235,7 +1236,706 @@ Test set: Average loss: 0.0435, Accuracy: 9855/10000 (99%)
 <p><a href="https://blog.csdn.net/qq_45931661/article/details/122537726">参考</a></p>
 <p>把初始模型发送到客户端，客户端用自己所拥有的数据进行训练后，再将模型返回给服务器。服务器将两个模型进行整合，得到一个对双方数据都有较好预测效果的模型。</p>
 <p>但是合并后确实没有下发模型。</p>
+<h2 id="并行训练">并行训练</h2>
+<p><a href="https://blog.csdn.net/Yohuna/article/details/123789715">参考。4</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">optim</span><span class="p">,</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">syft</span> <span class="k">as</span> <span class="nn">sy</span>
+<span class="kn">import</span> <span class="nn">copy</span>
 
+<span class="n">hook</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">TorchHook</span><span class="p">(</span><span class="n">torch</span><span class="p">)</span>
+
+<span class="c1"># 创建一对工作机</span>
+<span class="n">bob</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">VirtualWorker</span><span class="p">(</span><span class="n">hook</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;bob&#39;</span><span class="p">)</span>
+<span class="n">alice</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">VirtualWorker</span><span class="p">(</span><span class="n">hook</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;alice&#39;</span><span class="p">)</span>
+<span class="c1"># 中央服务器</span>
+<span class="n">secure_worker</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">VirtualWorker</span><span class="p">(</span><span class="n">hook</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;secure_worker&#39;</span><span class="p">)</span>
+
+<span class="c1"># 数据集</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mf">1.</span><span class="p">]],</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mf">1.</span><span class="p">]],</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 通过以下方式获取每个工作机的训练数据的指针</span>
+<span class="c1"># 向bob和alice发送一些训练数据</span>
+<span class="n">bob_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span>
+<span class="n">bob_target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span>
+<span class="n">alice_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">alice</span><span class="p">)</span>
+<span class="n">alice_target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">alice</span><span class="p">)</span>
+
+<span class="c1"># 建立模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 设置epoch和iter数目</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">worker_iters</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="c1"># 发送模型给工作机</span>
+    <span class="n">bob_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span>
+    <span class="n">alice_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">alice</span><span class="p">)</span>
+    <span class="c1"># 每个epoch本地模型复制全局模型实现了模型的下发！！！</span>
+
+    <span class="c1"># 给每个工作机设置优化器</span>
+    <span class="n">bob_opt</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">bob_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">alice_opt</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">alice_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+
+    <span class="c1"># 并行进行训练两个工作机的模型</span>
+    <span class="k">for</span> <span class="n">worker_iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">worker_iters</span><span class="p">):</span>
+        <span class="c1"># 训练bob的模型</span>
+        <span class="n">bob_opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">bob_pred</span> <span class="o">=</span> <span class="n">bob_model</span><span class="p">(</span><span class="n">bob_data</span><span class="p">)</span>
+        <span class="n">bob_loss</span> <span class="o">=</span> <span class="p">((</span><span class="n">bob_pred</span> <span class="o">-</span> <span class="n">bob_target</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">bob_loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="n">bob_opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">bob_loss</span> <span class="o">=</span> <span class="n">bob_loss</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+
+        <span class="c1"># 训练alice的模型</span>
+        <span class="n">alice_opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">alice_pred</span> <span class="o">=</span> <span class="n">alice_model</span><span class="p">(</span><span class="n">alice_data</span><span class="p">)</span>
+        <span class="n">alice_loss</span> <span class="o">=</span> <span class="p">((</span><span class="n">alice_pred</span> <span class="o">-</span> <span class="n">alice_target</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">alice_loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="n">alice_opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">alice_loss</span> <span class="o">=</span> <span class="n">alice_loss</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="c1"># 将训练好的模型都发送到中央服务器去</span>
+    <span class="n">bob_model</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">secure_worker</span><span class="p">)</span>
+    <span class="n">alice_model</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">secure_worker</span><span class="p">)</span>
+
+    <span class="c1"># 进行模型平均</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">set_</span><span class="p">(((</span><span class="n">alice_model</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">bob_model</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">set_</span><span class="p">(((</span><span class="n">alice_model</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">bob_model</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="c1"># print(model,model.state_dict())</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;bob loss: </span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bob_loss</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;alice loss: </span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alice_loss</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">param_tensor</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">():</span>
+    <span class="c1"># pdb.set_trace()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">param_tensor</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()[</span><span class="n">param_tensor</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 初始模型： OrderedDict([(&#39;weight&#39;, tensor([[ 0.8489, -0.0207]])), (&#39;bias&#39;, tensor([0.0791]))])
+# 平均后的模型参数 OrderedDict([(&#39;weight&#39;, tensor([[ 0.8669, -0.0167]])), (&#39;bias&#39;, tensor([0.0686]))])
+# bob loss: 0.000730528321582824
+# alice loss: 3.90692775908974e-08
+# 初始模型： OrderedDict([(&#39;weight&#39;, tensor([[ 0.8669, -0.0167]])), (&#39;bias&#39;, tensor([0.0686]))])
+# 平均后的模型参数 OrderedDict([(&#39;weight&#39;, tensor([[ 0.8829, -0.0137]])), (&#39;bias&#39;, tensor([0.0597]))])
+# bob loss: 0.0005283153150230646
+# alice loss: 3.646576942628599e-07
+# weight 	 tensor([[ 0.8829, -0.0137]])
+# bias 	 tensor([0.0597])
+</code></pre></td></tr></table>
+</div>
+</div><p>MNIST并行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">imaplib</span> <span class="kn">import</span> <span class="n">Time2Internaldate</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">process_time</span>
+
+<span class="c1"># 用于构建NN</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="c1"># 需要用到这个库里面的激活函数</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="c1"># 用于构建优化器</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+
+<span class="c1"># 用于初始化数据</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+
+<span class="c1"># 用于分布式训练</span>
+<span class="kn">import</span> <span class="nn">syft</span> <span class="k">as</span> <span class="nn">sy</span>
+
+<span class="n">hook</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">TorchHook</span><span class="p">(</span><span class="n">torch</span><span class="p">)</span>
+<span class="n">Bob</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">VirtualWorker</span><span class="p">(</span><span class="n">hook</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
+<span class="n">Alice</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">VirtualWorker</span><span class="p">(</span><span class="n">hook</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Arguments</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_batch_size</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="mf">0.01</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_model</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="c1"># 实例化参数类</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">Arguments</span><span class="p">()</span>
+
+<span class="c1"># 固定化随机数种子，使得每次训练的随机数都是固定的</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+<span class="c1"># 定义联邦训练数据集，定义转换器为 x=(x-mean)/标准差</span>
+<span class="n">fed_dataset_Bob</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s1">&#39;./mnist_data&#39;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+                                     <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.1307</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.3081</span><span class="p">,))]))</span>
+
+<span class="c1"># 定义数据加载器，shuffle是采用随机的方式抽取数据</span>
+<span class="n">fed_loader_Bob</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">fed_dataset_Bob</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 定义联邦训练数据集，定义转换器为 x=(x-mean)/标准差</span>
+<span class="n">fed_dataset_Alice</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s1">&#39;./mnist_data&#39;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+                                       <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.1307</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.3081</span><span class="p">,))]))</span>
+
+<span class="c1"># 定义数据加载器，shuffle是采用随机的方式抽取数据</span>
+<span class="n">fed_loader_Alice</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">fed_dataset_Alice</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 定义测试集</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                              <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+                                  <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.1307</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.3081</span><span class="p">,))]))</span>
+
+<span class="c1"># 定义测试集加载器</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">test_batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># 构建神经网络模型</span>
+<span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 输入维度为1，输出维度为20，卷积核大小为：5*5，步幅为1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="c1"># 最后映射到10维上</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># print(x.shape)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># 28*28*1 -&gt; 24*24*20</span>
+        <span class="c1"># print(x.shape)</span>
+        <span class="c1"># 卷机核：2*2 步幅：2</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 24*24*20 -&gt; 12*12*20</span>
+        <span class="c1"># print(x.shape)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># 12*12*20 -&gt; 8*8*30</span>
+        <span class="c1"># print(x.shape)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 8*8*30 -&gt; 4*4*50</span>
+        <span class="c1"># print(x.shape)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># 使用logistic函数作为softmax进行激活吗就</span>
+        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">fedavg_updata_weight</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Net</span><span class="p">,</span> <span class="n">Alice_model</span><span class="p">:</span> <span class="n">Net</span><span class="p">,</span> <span class="n">Bob_model</span><span class="p">:</span> <span class="n">Net</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    训练中需要修改的参数如下，对以下参数进行avg
+</span><span class="s2">    conv1.weight
+</span><span class="s2">    conv1.bias
+</span><span class="s2">    conv2.weight
+</span><span class="s2">    conv2.bias
+</span><span class="s2">    fc1.weight
+</span><span class="s2">    fc1.bias
+</span><span class="s2">    fc2.weight
+</span><span class="s2">    fc2.bias
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">conv1</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">set_</span><span class="p">((</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">conv1</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">Alice_model</span><span class="o">.</span><span class="n">conv1</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">conv1</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">set_</span><span class="p">((</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">conv1</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">Alice_model</span><span class="o">.</span><span class="n">conv1</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">conv2</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">set_</span><span class="p">((</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">conv2</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">Alice_model</span><span class="o">.</span><span class="n">conv2</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">conv2</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">set_</span><span class="p">((</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">conv2</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">Alice_model</span><span class="o">.</span><span class="n">conv2</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">set_</span><span class="p">((</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">Alice_model</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">set_</span><span class="p">((</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">Alice_model</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">set_</span><span class="p">((</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">Alice_model</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">set_</span><span class="p">((</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">Alice_model</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;更新一次&#34;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Net</span><span class="p">,</span> <span class="n">fed_loader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">Bob_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">Alice_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+    <span class="n">Bob_model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">Alice_model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="c1"># Bob_model.send(Bob)</span>
+    <span class="c1"># Alice_model.send(Alice)</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">epochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># 传递模型</span>
+        <span class="n">Bob_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">Alice_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">Bob_model</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">Bob</span><span class="p">)</span>
+        <span class="n">Alice_model</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">Alice</span><span class="p">)</span>
+        <span class="c1"># 定义Bob的优化器</span>
+        <span class="n">Bob_opt</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">Bob_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">lr</span><span class="p">)</span>
+        <span class="c1"># 定义Alice的优化器</span>
+        <span class="n">Alice_opt</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">Alice_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">lr</span><span class="p">)</span>
+        <span class="c1"># Alice_loss = 0</span>
+        <span class="c1"># Bob_loss = 0</span>
+
+        <span class="c1"># 模拟Bob训练数据</span>
+        <span class="k">for</span> <span class="n">epoch_ind</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fed_loader</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">Bob</span><span class="p">)</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">Bob</span><span class="p">)</span>
+
+            <span class="n">Bob_opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">Bob_model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">Bob_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">nll_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+            <span class="c1"># Bob_loss.requires_grad_()</span>
+            <span class="n">Bob_loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+            <span class="n">Bob_opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">epoch_ind</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;There is epoch:</span><span class="si">{}</span><span class="s2"> epoch_ind:</span><span class="si">{}</span><span class="s2"> in Bob loss:</span><span class="si">{:.6f}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">epoch_ind</span><span class="p">,</span>
+                                                                                 <span class="n">Bob_loss</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
+
+        <span class="c1"># 模拟Alice训练模型</span>
+        <span class="k">for</span> <span class="n">epoch_ind</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fed_loader</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">Alice</span><span class="p">)</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">Alice</span><span class="p">)</span>
+
+            <span class="n">Alice_opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">Alice_model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">Alice_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">nll_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+            <span class="c1"># Alice_loss.requires_grad_()</span>
+            <span class="n">Alice_loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">Alice_opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">epoch_ind</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;There is epoch:</span><span class="si">{}</span><span class="s2"> epoch_ind:</span><span class="si">{}</span><span class="s2"> in Alice loss:</span><span class="si">{:.6f}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">epoch_ind</span><span class="p">,</span>
+                                                                                   <span class="n">Alice_loss</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
+
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">Bob_model</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">Alice_model</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="c1"># 更新权重</span>
+            <span class="n">fedavg_updata_weight</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Alice_model</span><span class="p">,</span> <span class="n">Bob_model</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="c1"># Bob_model = model.copy().send(Bob)</span>
+
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="n">args</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># 获得loss</span>
+            <span class="c1"># 模型的loss</span>
+            <span class="c1"># pred = model(fed_loader)</span>
+            <span class="c1"># Loss = F.nll_loss(pred,target)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Bob in train:&#34;</span><span class="p">)</span>
+            <span class="n">test</span><span class="p">(</span><span class="n">Bob_model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Alice in train:&#34;</span><span class="p">)</span>
+            <span class="n">test</span><span class="p">(</span><span class="n">Alice_model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;model in train:&#34;</span><span class="p">)</span>
+            <span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+
+
+<span class="c1"># 定义测试函数</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">test_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">data</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">test_loader</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">test_loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">nll_loss</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="n">pred</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">view_as</span><span class="p">(</span><span class="n">pred</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">test_loss</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Test set : Average loss : </span><span class="si">{:.4f}</span><span class="s1">, Accuracy: </span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1"> ( </span><span class="si">{:.0f}</span><span class="s1">%)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">test_loss</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">),</span>
+            <span class="mf">100.</span> <span class="o">*</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
+    <span class="c1"># start=time.clock()</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">process_time</span><span class="p">()</span>
+
+    <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">fed_loader_Bob</span><span class="p">)</span>
+    <span class="c1"># mid=time.clock()</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">process_time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;model in test:&#34;</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+    <span class="c1"># end=time.clock()</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">process_time</span><span class="p">()</span>
+    <span class="n">time1</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="n">time2</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">mid</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;训练时间：</span><span class="si">{}</span><span class="s2">h</span><span class="si">{}</span><span class="s2">m</span><span class="si">{}</span><span class="s2">s 测试时间为：</span><span class="si">{}</span><span class="s2">h</span><span class="si">{}</span><span class="s2">m</span><span class="si">{}</span><span class="s2">s&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time1</span> <span class="o">//</span> <span class="mi">60</span> <span class="o">//</span> <span class="mi">60</span><span class="p">,</span> <span class="n">time1</span> <span class="o">//</span> <span class="mi">60</span><span class="p">,</span> <span class="n">time1</span> <span class="o">%</span> <span class="mi">60</span><span class="p">,</span> <span class="n">time2</span> <span class="o">//</span> <span class="mi">60</span> <span class="o">//</span> <span class="mi">60</span><span class="p">,</span>
+                                                  <span class="n">time2</span> <span class="o">//</span> <span class="mi">60</span><span class="p">,</span> <span class="n">time2</span> <span class="o">%</span> <span class="mi">60</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_model</span><span class="p">):</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&#34;Net.weight&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># Bob in train:
+#
+# Test set : Average loss : 0.0938, Accuracy: 9730/10000 ( 97%)
+#
+# Alice in train:
+#
+# Test set : Average loss : 0.1088, Accuracy: 9657/10000 ( 97%)
+#
+# model in train:
+#
+# Test set : Average loss : 0.0965, Accuracy: 9720/10000 ( 97%)
+#
+# model in test:
+#
+# Test set : Average loss : 0.0965, Accuracy: 9720/10000 ( 97%)
+#
+# 训练时间：0.0h43.0m24.889736254000127s 测试时间为：0.0h0.0m27.157271203000164s
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
@@ -1259,7 +1959,11 @@ Test set: Average loss: 0.0435, Accuracy: 9855/10000 (99%)
           <a href="/tags/pysyft/">Pysyft</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/fl_fssl/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">联邦半监督学习</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/project/">
             <span class="next-text nav-default">Project</span>
             <span class="next-text nav-mobile">Next</span>
