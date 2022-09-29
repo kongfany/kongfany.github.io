@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习路线">
 <meta itemprop="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc"><meta itemprop="datePublished" content="2022-03-17T13:00:04+08:00" />
 <meta itemprop="dateModified" content="2022-03-17T13:00:04+08:00" />
-<meta itemprop="wordCount" content="4501">
+<meta itemprop="wordCount" content="4810">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习路线"/>
 <meta name="twitter:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-03-17 </span>
         
-          <span class="more-meta"> 4501 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 4810 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
@@ -446,6 +446,12 @@ INFO:tensorflow:Loss for final step: 0.35805476.
 <p><a href="https://arxiv.org/abs/1910.13598">paper</a>,<a href="https://github.com/mmkamani7/LUPA-SGD?utm_source=catalyzex.com">code</a></p>
 <p>我们加强了局部SGD的收敛性分析，并表明局部SGD比当前理论所建议的成本低得多，应用范围也广得多。还开发了一种自适应同步方案，为线性加速提供了一般条件。</p>
 <p>我们加强了分布式非凸优化的周期平均局部更新理论。我们改进了先前已知的局部更新次数的界限，同时保持了线性速度，并通过实验验证了我们的结果。我们还提出了一种自适应算法来决定算法进行时的局部更新次数。</p>
+</li>
+<li>
+<p>Distributionally Robust Federated Averaging</p>
+<p>我们通过<code>自适应</code>采样的周期性平均来研究用于分布式鲁棒联邦学习的通信高效分布式算法。</p>
+<p>提出了一种分布式鲁棒联合平均 (DRFA) 算法，该算法采用一种新颖的快照方案来近似混合参数的历史梯度的累积。我们分析了 DRFA 在凸线性和非凸线性设置中的收敛速度。我们还将提出的想法推广到对混合参数进行正则化的目标，并提出了一种近端变体，称为 DRFA-Prox，具有可证明的收敛速度。我们还分析了在强凸-强-凹和非凸（在 PL 条件下）-强-凹设置中的正则化情况的替代优化方法。</p>
+<p>提出的 DRFA 算法是第一个以通信有效的方式解决联邦学习的分布式鲁棒优化问题，并对异构（非 IID）数据分布进行理论分析。提出的将 w 的更新与 λ 解耦的想法可以作为构建块集成到其他联合优化方法</p>
 </li>
 </ul>
 <h2 id="中文论文整理">中文论文整理：</h2>
