@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>联邦学习paper - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="blog:[1],[2] FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data code:[1],[2] fedprox,1 **FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/fl_paper/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="联邦学习paper" />
+<meta property="og:description" content="blog:[1],[2] FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data code:[1],[2] fedprox,1 **FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/fl_paper/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-14T19:57:38+08:00" />
+<meta property="article:modified_time" content="2022-10-14T19:57:38+08:00" />
+
+<meta itemprop="name" content="联邦学习paper">
+<meta itemprop="description" content="blog:[1],[2] FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data code:[1],[2] fedprox,1 **FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局"><meta itemprop="datePublished" content="2022-10-14T19:57:38+08:00" />
+<meta itemprop="dateModified" content="2022-10-14T19:57:38+08:00" />
+<meta itemprop="wordCount" content="509">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="联邦学习paper"/>
+<meta name="twitter:description" content="blog:[1],[2] FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data code:[1],[2] fedprox,1 **FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">联邦学习paper</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-10-14 </span>
+        
+          <span class="more-meta"> 509 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#fedavg">FedAvg</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>blog:[<a href="https://blog.csdn.net/wuxing610/article/details/123400276">1</a>],[<a href="https://blog.csdn.net/weixin_42567789/article/details/124120498?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-124120498-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-124120498-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=2">2</a>]</p>
+<h2 id="fedavg">FedAvg</h2>
+<p><code>Communication-Efficient Learning of Deep Networks from Decentralized Data</code></p>
+<p>code:[<a href="https://github.com/shaoxiongji/federated-learning">1</a>],[<a href="https://github.com/AshwinRJ/Federated-Learning-PyTorch">2</a>]</p>
+<hr>
+<p>fedprox,<a href="https://zhuanlan.zhihu.com/p/360185253">1</a></p>
+<p>**FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局部目标函数中引入了一个附加的L2正则化项，从而限制局部模型与全局模型之间的优化距离，这是一种限制局部更新的直接方法，因此平均模型离全局最优值之间的距离被缩短，并引入了超参数μ来控制L2正则化的权值。</p>
+<p>总体而言，其对FedAvg的修改是轻量级的且易于实现，FedProx会带来额外的计算开销，而不会带来额外的通信开销。然而，其中一个问题是用户可能需要仔细调整μ才能获得良好的准确性：如果μ太小，则正则化项几乎没有影响；如果μ太大，则局部更新很小，收敛速度较慢。</p>
+<p>FedNova,<a href="https://zhuanlan.zhihu.com/p/449164981">1</a>,<a href="https://zhuanlan.zhihu.com/p/557553708">2</a></p>
+<p>最近的另一项研究FedNova对FedAvg的模型聚合阶段进行了改进，其认为当各方具有不同的计算能力时(时间限制或不同的本地数据集大小)，不同客户端参与方可能在每轮需要执行不同数量的局部步骤(自适应调整)。</p>
+<p>因此，为了确保全局更新没有偏差，FedNova在更新全局模型之前，根据其局部迭代次数对每一方的局部更新进行归一化和缩放。FedNova也只对FedAvg进行了轻量级的修改，并且在更新全局模型时计算开销可以忽略不计。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-10-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/fl_fssl/">
+            <span class="next-text nav-default">联邦半监督学习</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
