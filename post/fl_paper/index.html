@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="blog:[1],[2] FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data code:[1],[2] fedprox,1 **FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data blog:[1],[2] code:[1],[2] 1-&amp;gt;blog:[1],[2] baseline:FedSGD,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="联邦学习paper" />
-<meta property="og:description" content="blog:[1],[2] FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data code:[1],[2] fedprox,1 **FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局" />
+<meta property="og:description" content="FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data blog:[1],[2] code:[1],[2] 1-&gt;blog:[1],[2] baseline:FedSGD,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/fl_paper/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-10-14T19:57:38+08:00" />
 <meta property="article:modified_time" content="2022-10-14T19:57:38+08:00" />
 
 <meta itemprop="name" content="联邦学习paper">
-<meta itemprop="description" content="blog:[1],[2] FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data code:[1],[2] fedprox,1 **FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局"><meta itemprop="datePublished" content="2022-10-14T19:57:38+08:00" />
+<meta itemprop="description" content="FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data blog:[1],[2] code:[1],[2] 1-&gt;blog:[1],[2] baseline:FedSGD,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，"><meta itemprop="datePublished" content="2022-10-14T19:57:38+08:00" />
 <meta itemprop="dateModified" content="2022-10-14T19:57:38+08:00" />
-<meta itemprop="wordCount" content="509">
+<meta itemprop="wordCount" content="4130">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习paper"/>
-<meta name="twitter:description" content="blog:[1],[2] FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data code:[1],[2] fedprox,1 **FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局"/>
+<meta name="twitter:description" content="FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data blog:[1],[2] code:[1],[2] 1-&gt;blog:[1],[2] baseline:FedSGD,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-10-14 </span>
         
-          <span class="more-meta"> 509 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 4130 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -148,6 +148,8 @@
     <li>
       <ul>
         <li><a href="#fedavg">FedAvg</a></li>
+        <li><a href="#fedprox">FedProx</a></li>
+        <li><a href="#noiid">NOIID</a></li>
       </ul>
     </li>
   </ul>
@@ -155,17 +157,186 @@
   </div>
 </div>
     <div class="post-content">
-      <p>blog:[<a href="https://blog.csdn.net/wuxing610/article/details/123400276">1</a>],[<a href="https://blog.csdn.net/weixin_42567789/article/details/124120498?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-124120498-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-124120498-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=2">2</a>]</p>
-<h2 id="fedavg">FedAvg</h2>
+      <h2 id="fedavg">FedAvg</h2>
 <p><code>Communication-Efficient Learning of Deep Networks from Decentralized Data</code></p>
+<p>blog:[<a href="https://zhuanlan.zhihu.com/p/445458807">1</a>],[<a href="https://www.zhihu.com/question/315844487/answer/1100845525">2</a>]</p>
 <p>code:[<a href="https://github.com/shaoxiongji/federated-learning">1</a>],[<a href="https://github.com/AshwinRJ/Federated-Learning-PyTorch">2</a>]</p>
+<p>1-&gt;blog:[<a href="https://zhuanlan.zhihu.com/p/359060612">1</a>],[<a href="https://zhuanlan.zhihu.com/p/438065296">2</a>]</p>
+<p>baseline:<strong>FedSGD</strong>,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，传给server最终聚合。</p>
+<p>对于一般的非凸目标函数，<strong>参数空间中的平均模型可能会产生任意不好的模型结果</strong>。 当我们平均两个<strong>从不同初始条件训练</strong>的MNIST数字识别模型时，我们恰好看到了这种不良结果。在<strong>共享初始化</strong>的情况下，对模型求平均值会显著减少整个训练集的损失(比任何一个父模型的损失都好得多)。</p>
+<p>mnist数据划分：</p>
+<p>iid：打乱划分100个客户端</p>
+<p>no-iid：按数字标签对数据排序，将其划分为200个大小为300的碎片，并为100个客户端中的每个分配2个碎片。最终每个客户端只有两种label</p>
+<p>C，在每轮上执行计算的客户端的比例；E，那么每个客户端在每轮上对其本地数据集进行的训练通过数，本地客户端训练多少epoch；以及B，用于客户端更新的本地小批量大小，本地数据上的batch size。对于具有nk个本地数据的客户端来说，每轮本地更新次数为：uk=E*nk/B</p>
+<p>C：每轮选择客户端的比例。将 C 从0.0（代表每轮计算只选取一个客户端）调整到1.0（选取全部客户端），计算达到要求精确度需要的<strong>通信回合数</strong>&ndash;<strong>达到预先设定好的 test accuracy需要多少个 round。如果是横线，代表这种方法永远无法达到预先设定的 accuracy。</strong></p>
+<p>当FedAvg使用<strong>相对较少的交流轮次来训练高质量的模型时，联邦学习是实际可行的</strong>。</p>
+<p>从这个表我们观察出来的这些信息：</p>
+<ol>
+<li>Local Batch Size, B 小一点反而有利于 Global Model 的收敛。</li>
+<li>增加 C 对 Full Batch Size （B 是正无穷）帮助不大。</li>
+<li>相对于 IID 的情况，Non-IID 情况下，增加 C 对网络收敛帮助更大。</li>
+<li>从上面看，增加 C 对收敛的提速作用并不是线性的</li>
+</ol>
+<p>E 确实不是越大越好。这件事情说来也好理解，如果在每个 local device 优化的太远的话，那么在 local dataset 就 over-optimized 了，而且这样的话，每个 local model 之间的 bias 也太大了。</p>
+<p>?随机是随机一次固定还是每次都随机</p>
+<p>&ndash;&gt;</p>
+<p>blog:[<a href="https://zhuanlan.zhihu.com/p/561201965">1</a>],[<a href="https://zhuanlan.zhihu.com/p/563299474">2</a>],[3]</p>
+<p>每轮训练开始时，中心服务器随机选出m个客户端，将当前的模型参数wt发给这些客户端。在这些客户端上，将本地数据随机分成 B 份，选取其中的一份，进行E次迭代训练，算出本地的 wt+1 k发送给中心服务器。中心服务器收到所有客户端发来的局部模型更新 wt+1 k之后，通过∑nk*wt+1 k/n来进行聚合运算，计算出全局的模型更新 wt+1 。</p>
+<p>[6]中介绍了几种数据偏离同分布的常见方式，包括：特征分布倾斜（协变量偏移）；标签分布倾斜（先验概率偏移）；标签相同、特征不同（概念偏移）；特征相同，标签不同（概念偏移）；数量倾斜。真实世界中的联邦学习数据集可能包含这些影响的混合，学术研究时都是对某些情况做模拟，而且不同的情况可能也要求不同的聚合策略。</p>
+<h2 id="fedprox">FedProx</h2>
+<p><code>Federated Optimization in Heterogeneous Networks</code></p>
+<p>blog:[<a href="https://zhuanlan.zhihu.com/p/360185253">1</a>],[<a href="https://blog.csdn.net/weixin_51306020/article/details/126319734?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-126319734-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-126319734-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=2">2</a>],[<a href="https://blog.csdn.net/weixin_42534493/article/details/118446292?spm=1001.2101.3001.6650.8&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-118446292-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-118446292-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=12">3</a>]</p>
+<p>code:[<a href="https://github.com/litian96/FedProx">1</a>],[<a href="https://github.com/ki-ljl/FedProx-PyTorch">2</a>]-&gt;blog:[<a href="https://blog.csdn.net/Cyril_KI/article/details/123285307">1.1</a>],[<a href="https://blog.csdn.net/qq_45478482/article/details/120837734?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=FedProx&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-120837734.nonecase&amp;spm=1018.2226.3001.4187">1.2</a>]</p>
+<p>联邦学习在使用过程中面临的两大挑战：</p>
+<p><strong>数据异构（主要是用户间数据Non-IID）
+系统异构（设备间通信和计算能力的差异）</strong></p>
+<p>本文在对 FedAvg 更新策略上稍作调整设计了 FedProx 算法并给出了收敛性证明。</p>
+<p>一方面，本地迭代次数 E 的增大能减少通信成本；另一方面，不同 local objectives Fk 在本地迭代次数过多后容易偏离全局最优解，影响收敛。</p>
+<p>并且 FedAvg 这种固定 E 的操作没考虑到不同硬件间的差异，如果在固定时间内未完成 E epochs 的迭代就会被系统 drop 掉。</p>
+<p>文章指出<strong>直接 drop 掉这些用户或者单纯把他们未迭代完成的模型进行聚合都会严重影响收敛的表现</strong>。因为丢掉的这些设备可能导致模型产生 bias，并且减少了设备数量也会对结果精度造成影响。</p>
+<p>文章提出了 proximal term 来保证对这些未完成计算的 partial information 进行聚合</p>
+<p><img src="/images/202206/22.png" alt=""></p>
+<p>文章将 FedAvg 作为 FedProx 的特殊情况 (μ=0) ，对原有算法进行了微调，考虑到了数据异构和系统异构的情况，并推导了收敛证明。</p>
+<p>通过加入 proximal term 修正项，提高了整体收敛的稳定性。通过对本地设备动态调整迭代轮数，保证了对系统异构的容忍性。</p>
+<p>&ndash;</p>
+<p>FedProx对clients端的Loss加了修正项，使得模型效果更好收敛更快。</p>
+<p>1.它通过限制本地更新，使其更接近初始(全局)模型，而不需要手动设置本地epochs的数量，解决了统计异质性的问题。（限制）</p>
+<p>2.它允许安全地合并由系统异构性产生的可变数量的本地工作。（辅助）</p>
+<p>在FedProx中，将FedAvg泛化，允许根据本地数据和可用的系统资源在本地执行可变数量的工作（相比于丢弃设备，该机制会聚合从掉线设备发送的部分结果。）</p>
+<p>&ndash;</p>
+<p>FedProx的特点
+1、可以应用于Non-IID场景。
+2、可以选择任意的local server，而不单单局限于SGD。
+3、允许某些设备使用inexact update。
+4、不要求所有设备都参与每轮global update。
+5、当μ=0，local solver选择SGD，不同设备在每轮global update都使用相同的local epoch，FedProx就变成了FedAvg，所以实际上，FedProx是FedAvg的一种泛化形式。</p>
+<p>文章提出了一个基于FedAvg的优化框架Fedprox，用于解决联邦学习中的数据异构和设备异构问题。
+通过加入 proximal term，缓解了数据异构性，提高了全局模型收敛的稳定性。
+通过Tolerating partial work，缓解了设备异构性。</p>
+<p>&ndash;</p>
+<p>本文提出了称之为tolerating partial work得工作方式，意为把固定工作量变为可变工作量来进行更新，来防止由于硬件、网络等问题导致的不能按时更新的问题</p>
+<p>在针对于损失函数加了一个余项后，可以有两个优点： 1.通过限制本地更新，也就是得到一个不精确的解不用手动调整E轮次； 2.允许系统异构的设备算力等因素存在，可以完成部分任务，而不是指定的全部任务；</p>
+<p>能够处理异构联邦数据，同时保持类似的隐私和计算优势；
+分析了框架的收敛性，不仅考虑局部函数间存在统计异构表征，还考虑到实际的系统约束；
+对统计异构的处理方法，受到求解线性方程组的随机化Kaczmarz方法的启发，该方法的类似假设已被用于分析其他情况下的SGD变种；
+所提框架在异构联邦网络中有更好的鲁棒性和稳定性。</p>
+<p>fedprox就是，但这俩paper的出发点不一样。fedprox是通过正则缓解local update时的weight divergence.但moon的motivation是global效果好，local不行。区别在于在moon里不仅要靠近 global，还要远离上一步的local model</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">FedProxOptimizer</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">lamda</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.001</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">lr</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;Invalid learning rate: </span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lr</span><span class="p">))</span>
+        <span class="n">defaults</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span> <span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FedProxOptimizer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vstar</span><span class="p">,</span> <span class="n">closure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">loss</span><span class="o">=</span><span class="kc">None</span>
+        <span class="k">if</span> <span class="n">closure</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">loss</span><span class="o">=</span><span class="n">closure</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_groups</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">pstar</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">],</span> <span class="n">vstar</span><span class="p">):</span>
+                <span class="c1"># w &lt;=== w - lr * ( w&#39;  + lambda * (w - w* ) + mu * w )</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="n">p</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;lamda&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="n">pstar</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span> <span class="o">+</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">],</span> <span class="n">loss</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="noiid">NOIID</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/554878748">BLOG</a>,<a href="https://github.com/Xtra-Computing/NIID-Bench">CODE</a></p>
+<p>数据分割的方式：</p>
+<p>1.Label distribution skew 标签分布倾斜</p>
+<ul>
+<li>
+<p>Quantity-based label imbalance：基于数量的标签不平衡</p>
+<p>每一方只能获得特定个数的标签（例如在MNIST中，只能获得任意2个标签的样本构成数据集）</p>
+<p>对于有相同标签的一组参与方，将对应标签的数据集随机并平均地分配到参与方手中</p>
+</li>
+<li>
+<p>Distribution-based label imbalance：基于分布的标签不平衡</p>
+<p>根据狄利克雷分布，每一方将获得对应地数据集，具体来说： pk∼DirN(β)</p>
+<p>其中 pk,i 记为类别k分到第i方的数据量</p>
+</li>
+</ul>
+<p>2.Feature distribution skew 特征分布倾斜</p>
+<ul>
+<li>
+<p>Noise-based feature imbalance 基于噪声的</p>
+<p>首先将数据平均并随机分配至各参与方手中</p>
+<p>对图像数据集加上x ∼ Gau(σ · i/N ) 均值为0，方差为σ · i/N的高斯噪声</p>
+</li>
+<li>
+<p>Synthetic feature imbalance 生成特征不平衡</p>
+<p>文章中生成了一个feature imbalance的数据集FCUBE</p>
+</li>
+<li>
+<p>Real-world feature imbalance 现实世界的特征不平衡</p>
+<p>EMNIST数据集中，手写数字来自于不同的人，因此将不同的人的数据分发给不同的参与方，即可实现天然的feature imbalance</p>
+</li>
+</ul>
+<p>3.Quantity skew 数量偏移</p>
+<ul>
+<li>各参与方数据集大小不同</li>
+</ul>
 <hr>
-<p>fedprox,<a href="https://zhuanlan.zhihu.com/p/360185253">1</a></p>
-<p>**FedProx算法：**FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局部目标函数中引入了一个附加的L2正则化项，从而限制局部模型与全局模型之间的优化距离，这是一种限制局部更新的直接方法，因此平均模型离全局最优值之间的距离被缩短，并引入了超参数μ来控制L2正则化的权值。</p>
+<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA5NTQ0MTI4OA==&amp;action=getalbum&amp;album_id=2537375991384473601&amp;scene=173&amp;from_msgid=2456920023&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect">隐语小课</a></p>
+<p>模型聚合、梯度聚合</p>
+<p>通信优化：client采样&ndash;RiberoM, Vikalo H. Communication-efficient federated learning via optimalclient sampling[J]. arXiv preprint arXiv:2007.15197, 2020.</p>
+<p>noiid：</p>
+<p>据client和server端的样本分布得到对应的JS散度，并以JS散度作为client端模型更新时的权重系数</p>
+<p>根据client端模型和server端模型的差异，对权重系数进行迭代更新</p>
+<p>在进行server端模型聚合时，将client模型在client验证集上的score而非样本数量作为该模型的权重进行聚合。ww</p>
+<hr>
+<p><strong>FedProx</strong>算法：FedProx基于FedAvg改进了局部目标，直接限制了本地更新的大小，具体而言，它在局部目标函数中引入了一个附加的L2正则化项，从而限制局部模型与全局模型之间的优化距离，这是一种限制局部更新的直接方法，因此平均模型离全局最优值之间的距离被缩短，并引入了超参数μ来控制L2正则化的权值。</p>
 <p>总体而言，其对FedAvg的修改是轻量级的且易于实现，FedProx会带来额外的计算开销，而不会带来额外的通信开销。然而，其中一个问题是用户可能需要仔细调整μ才能获得良好的准确性：如果μ太小，则正则化项几乎没有影响；如果μ太大，则局部更新很小，收敛速度较慢。</p>
-<p>FedNova,<a href="https://zhuanlan.zhihu.com/p/449164981">1</a>,<a href="https://zhuanlan.zhihu.com/p/557553708">2</a></p>
+<p><strong>FedNova</strong>,<a href="https://zhuanlan.zhihu.com/p/449164981">1</a>,<a href="https://zhuanlan.zhihu.com/p/557553708">2</a></p>
 <p>最近的另一项研究FedNova对FedAvg的模型聚合阶段进行了改进，其认为当各方具有不同的计算能力时(时间限制或不同的本地数据集大小)，不同客户端参与方可能在每轮需要执行不同数量的局部步骤(自适应调整)。</p>
 <p>因此，为了确保全局更新没有偏差，FedNova在更新全局模型之前，根据其局部迭代次数对每一方的局部更新进行归一化和缩放。FedNova也只对FedAvg进行了轻量级的修改，并且在更新全局模型时计算开销可以忽略不计。</p>
+<p><a href="https://blog.csdn.net/qq_43663979/article/details/120214084?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-11-120214084-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">SCAFFOLD</a>,<a href="https://blog.csdn.net/Cyril_KI/article/details/123108780?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-20-123108780-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">2</a>,<a href="https://zhuanlan.zhihu.com/p/538941775">3</a></p>
+<p>pfedme</p>
+<p><a href="https://blog.csdn.net/weixin_42534493/article/details/118556509?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-12-118556509-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">DITTO</a></p>
+<p><a href="https://blog.csdn.net/hhhhhhhhhhwwwwwwwwww/article/details/118606345?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-16-118606345-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">MOON</a>：模型对比联邦学习,<a href="https://blog.csdn.net/qq_43827595/article/details/122358161?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-24-122358161-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">2</a></p>
+<p><a href="https://blog.csdn.net/Cyril_KI/article/details/123079207?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590843316782248529045%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590843316782248529045&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-3-123079207-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">FedAsync</a>：异步联邦优化</p>
+<p><a href="https://blog.csdn.net/m0_69580723/article/details/126244558?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590843316782248529045%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590843316782248529045&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-5-126244558-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">FedBN</a>,<a href="https://mp.weixin.qq.com/s?__biz=MzA5NTQ0MTI4OA==&amp;mid=2456918252&amp;idx=1&amp;sn=b98926399a246a3ff37c14c8d78f5013&amp;chksm=873a600bb04de91d6fda90f3f1a228c1fbc8b3ec9d509295b0b4fed88da836c27da03c4b5f35&amp;scene=178&amp;cur_album_id=2537375991384473601#rd">2</a></p>
+<p><a href="https://blog.csdn.net/qq_41444809/article/details/125707616?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=FedProx&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-5-125707616.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;spm=1018.2226.3001.4187">元学习</a></p>
+<p><a href="https://blog.csdn.net/moxibingdao/article/details/126697156?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590843316782248529045%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590843316782248529045&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-8-126697156-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">FedIC</a>: 通过校准蒸馏对非独立同分布和长尾数据进行联合学习（ICME 2022）</p>
+<p><a href="https://github.com/Xtra-Computing/NIID-Bench">NIID-Bench</a></p>
+<p><a href="https://www.zhihu.com/question/503333724/answer/2502682613">fedsim</a>:根据梯度聚类，每个聚类先聚合，然后再聚合。在iid下一般。</p>
+<p>PENS：<a href="https://zhuanlan.zhihu.com/p/542022337">blog</a>，<a href="https://link.zhihu.com/?target=https%3A//fl-icml.github.io/2021/papers/FL-ICML21_paper_3.pdf">PDF</a><a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/2107.08517">PDF</a><a href="https://link.zhihu.com/?target=https%3A//github.com/guskarls/dfl-pens">Code</a>去中心化的fl，没有服务器端，每个客户端在网络中与若干个邻居结点随机通信，分别用本地数据测试这n个模型的loss，选择性能最好的前m个客户端作为具有类似数据分布的邻居，然后聚合成一个新的模型。本文提出的方法在去中心化联邦学习架构下能够有效地帮助客户端节点识别具有相似数据分布的相邻节点，并以这种方式指导客户端节点的学习以实现高性能。PENS的工作原理是利用训练损失在网络中找到类似数据分布的客户端，然后专注于彼此之间的通信，而不是随机的邻居。</p>
+<blockquote>
+<p>blog:[<a href="https://blog.csdn.net/wuxing610/article/details/123400276">1</a>],[<a href="https://blog.csdn.net/weixin_42567789/article/details/124120498?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-124120498-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-124120498-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=2">2</a>]</p>
+<p>paperlist：</p>
+<p>[<a href="https://blog.csdn.net/Shawn2134123/article/details/121145105?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-10-121145105-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">1</a>]</p>
+<p>[<a href="https://blog.csdn.net/m0_51562349/article/details/127223635?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-18-127223635-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">2</a>]</p>
+<p>[<a href="https://blog.csdn.net/weixin_42137700/article/details/105902750?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-19-105902750-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">3</a>]</p>
+<p>[<a href="https://blog.csdn.net/weixin_42567789/category_11740927.html">4</a>]</p>
+<p>[<a href="https://blog.csdn.net/qq_41444809/article/details/125707616?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=FedProx&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-5-125707616.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;spm=1018.2226.3001.4187">5</a>]</p>
+<p>[<a href="https://www.zhihu.com/collection/788303534">6</a>]</p>
+<p>综述：<a href="https://blog.csdn.net/weixin_45585364/article/details/123124109?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=FedProx&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-123124109.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;spm=1018.2226.3001.4187">1</a>，<a href="https://blog.csdn.net/m0_51928767/article/details/125944723?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=FedProx&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-7-125944723.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;spm=1018.2226.3001.4187">2</a>，<a href="https://blog.csdn.net/qq_33932782/article/details/117081631?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=FedProx&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-117081631.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;spm=1018.2226.3001.4187">3</a>，<a href="https://blog.csdn.net/cherreggy/article/details/122053520?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=FedProx&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-6-122053520.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;spm=1018.2226.3001.4187">4</a></p>
+</blockquote>
+<hr>
+<p>code:[<a href="https://github.com/Xtra-Computing/NIID-Bench">1</a>]-[<a href="https://zhuanlan.zhihu.com/p/554878748">blog</a>]</p>
+<p>[<a href="https://github.com/lxcnju/FedRepo">2</a>]-[<a href="https://zhuanlan.zhihu.com/p/502972718">blog</a>]</p>
+<p>[<a href="https://github.com/SMILELab-FL/FedLab">fedlab</a>]-<a href="https://zhuanlan.zhihu.com/p/477341491">blog</a>-&gt;<a href="https://github.com/SMILELab-FL/Dive-into-Federated-Learning">github</a></p>
 
     </div>
 
@@ -189,7 +360,11 @@
           <a href="/tags/federated-learning/">Federated Learning</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/fl_fedlab/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">fedlab</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/fl_fssl/">
             <span class="next-text nav-default">联邦半监督学习</span>
             <span class="next-text nav-mobile">Next</span>

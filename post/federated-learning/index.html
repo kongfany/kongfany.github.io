@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习(Federated Learning)">
 <meta itemprop="description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An"><meta itemprop="datePublished" content="2021-12-20T19:22:19+08:00" />
 <meta itemprop="dateModified" content="2021-12-20T19:22:19+08:00" />
-<meta itemprop="wordCount" content="5755">
+<meta itemprop="wordCount" content="5970">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习(Federated Learning)"/>
 <meta name="twitter:description" content="简要分析 数据是属于用户的，我们既不能不作申请的使用它们，还要保护数据的私密性，有没有什么颁发安全高效的实现数据合作呢？2016年，为解决An"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2021-12-20 </span>
         
-          <span class="more-meta"> 5755 words </span>
+          <span class="more-meta"> 5970 words </span>
           <span class="more-meta"> 12 mins read </span>
         
       </div>
@@ -245,6 +245,12 @@
 <p><img src="/images/202204/54.png" alt=""></p>
 <p>多个用户参与联邦学习，可能其中会出现叛徒，这些叛徒可以对FL进行多种多样的攻击，可以让学习变慢，也可以让学习变差，可以让学习到的模型有个后门。FL存在一些潜在的风险。</p>
 </li>
+</ol>
+<p>联邦学习有这几个方向可以研究，做得好了肯定可以在顶会上发论文：</p>
+<ol>
+<li>降低算法通信次数，用少量的通信达到收敛。数据是IID的，已经被研究比较透彻了。联邦学习的困难在于数据不是IID的。</li>
+<li>研究联邦学习中的隐私问题。联邦学习其实不会保护隐私，很容易从梯度、模型参数中反推出用户数据。提出攻击和防御的方法都可以发表出论文。</li>
+<li>研究联邦学习的鲁棒性。比如有节点恶意发送错误的梯度给服务器，让训练的模型变差。设计新的攻击方法和防御方法都可以发表出来论文。</li>
 </ol>
 <blockquote>
 <p>相关文献：</p>

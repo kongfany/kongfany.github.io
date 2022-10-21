@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦半监督学习">
 <meta itemprop="description" content="国自然 现实场景中，如医疗、金融、法律等领 域没有大量的有标签数据，而对数据进行标注需要大量的人力和时间，特别是在些领域只有专家才能对样本进行有"><meta itemprop="datePublished" content="2022-09-28T16:46:52+08:00" />
 <meta itemprop="dateModified" content="2022-09-28T16:46:52+08:00" />
-<meta itemprop="wordCount" content="33862">
+<meta itemprop="wordCount" content="35172">
 <meta itemprop="keywords" content="Federated Learning,Semi-Supervised Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦半监督学习"/>
 <meta name="twitter:description" content="国自然 现实场景中，如医疗、金融、法律等领 域没有大量的有标签数据，而对数据进行标注需要大量的人力和时间，特别是在些领域只有专家才能对样本进行有"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-09-28 </span>
         
-          <span class="more-meta"> 33862 words </span>
-          <span class="more-meta"> 68 mins read </span>
+          <span class="more-meta"> 35172 words </span>
+          <span class="more-meta"> 71 mins read </span>
         
       </div>
     </header>
@@ -163,6 +163,7 @@
         <li><a href="#自步学习">自步学习</a></li>
         <li><a href="#开题主要研究">开题主要研究</a></li>
         <li><a href="#相关疑问">相关疑问</a></li>
+        <li><a href="#learning-with-noisy-label">learning with <code>noisy label</code></a></li>
       </ul>
     </li>
   </ul>
@@ -201,12 +202,14 @@
 <hr>
 <h2 id="半监督学习">半监督学习</h2>
 <p>参考<a href="https://mp.weixin.qq.com/s?__biz=MzI3ODgwODA2MA%3D%3D&amp;chksm=eb53e4d0dc246dc6b45f5e59ab0e2bd29b2b670ca9a75c4be7c7e709fd63f16c86e67a767574&amp;idx=2&amp;mid=2247495747&amp;scene=21&amp;sn=26292ffa46539f51980be8bc32416de7#wechat_redirect">1</a>，<a href="https://mp.weixin.qq.com/s/XC0anFixcKqejHMsUTfLyQ">2</a>,<a href="https://www.cnblogs.com/501731wyb/p/15721442.html">3</a>，<a href="https://zhuanlan.zhihu.com/p/46893709">4</a></p>
+<p><a href="https://mp.weixin.qq.com/s/OAN9QYKc3zYuiQ7hVcDFXg">https://mp.weixin.qq.com/s/OAN9QYKc3zYuiQ7hVcDFXg</a></p>
 <p><strong>半监督式学习(SSL)</strong>，正如其名称所示，介于两个极端之间(监督式是指整个数据集被标记，而非监督式是指没有标记)。半监督学习任务具有一个标记和一个未标记的数据集。它使用未标记的数据来获得对数据结构的更多理解。通常，SSL使用小的带标签数据集和较大的未带标签数据集来进行学习。目标是学习一个预测器来预测未来的测试数据，这个预测器比单独从有标记的训练数据中学习的预测器更好。</p>
 <p>典型的监督学习算法在标记数据集较小的情况下，容易出现过拟合问题。SSL通过在训练过程中依借未标记数据的结构来缓解这个问题。此外，这种学习技术减轻了构建大量标记数据集来学习任务的负担。SSL方法更接近我们人类的学习方式。</p>
 <p>SSL的流行方法是在训练期间往典型的监督学习中添加一个新的损失项。通常使用三个概念来实现半监督学习，即一致性正则化、熵最小化和伪标签。在进一步讨论之前，让我们先理解这些概念。</p>
 <p><strong>一致性正则化</strong>：强制数据点的实际扰动不应显著改变预测器的输出。简单地说，模型应该为输入及其实际扰动变量给出一致的输出。我们人类对于小的干扰是相当鲁棒的。例如，给图像添加小的噪声(例如改变一些像素值)对我们来说是察觉不到的。机器学习模型也应该对这种扰动具有鲁棒性。这通常通过最小化对原始输入的预测与对该输入的扰动版本的预测之间的差异来实现。一致性正则化是利用未标记数据找到数据集所在的平滑流形的一种方法。</p>
 <p><strong>熵最小化</strong> 鼓励对未标记数据进行更有信心的预测，即预测应该具有低熵，而与ground truth无关(因为ground truth对于未标记数据是未知的)。理想情况下，熵的最小化将阻止决策边界通过附近的数据点，否则它将被迫产生一个低可信的预测。</p>
 <p><strong>伪标签</strong> 是实现半监督学习最简单的方法。一个模型一开始在有标记的数据集上进行训练，然后用来对没有标记的数据进行预测。它从未标记的数据集中选择那些具有高置信度(高于预定义的阈值)的样本，并将其预测视为伪标签。然后将这个伪标签数据集添加到标记数据集，然后在扩展的标记数据集上再次训练模型。这些步骤可以执行多次。这和自训练很相关。</p>
+<p><strong>标签锐化（Sharpen Label）</strong>：标签锐化也是在半监督学习方面常用的一个技巧，模型预测某个样本得出结果logit，这是一个矩阵，矩阵的每一列代表该数据样本所对应类别的概率。为了防止噪音等因素干扰，使用标签锐化操作，其实就是一个基于softmax函数的放大最高概率的方法，特别地，当锐化因子T→0的时候，趋于one-hot。</p>
 <p>视觉上的扰动：翻转，旋转，裁剪，镜像等是图像常用的扰动。</p>
 <p><img src="/images/202206/19.png" alt=""></p>
 <p>语言上：反向翻译是语言中最常见的扰动方式。在这里，输入被翻译成不同的语言，然后再翻译成相同的语言。这样就获得了具有相同语义属性的新输入。</p>
@@ -546,6 +549,13 @@
 <hr>
 <h2 id="自适应">自适应？</h2>
 <p>自适应选择，自适应分配权重?</p>
+<p><a href="https://github.com/lokinko/Federated-Learning">4.4 Adaptive Aggregation</a></p>
+<ul>
+<li><a href="https://link.springer.com.remotexs.ntu.edu.sg/chapter/10.1007/978-3-030-14880-5_2">Asynchronous Federated Learning for Geospatial Applications</a> (ECML PKDD Workshop 2018）</li>
+<li><a href="https://arxiv.org/abs/1903.03934">Asynchronous Federated Optimization</a></li>
+<li><a href="https://arxiv.org/abs/1804.05271">Adaptive Federated Learning in Resource Constrained Edge Computing Systems</a> (IEEE Journal on Selected Areas in Communications, 2019）</li>
+<li><a href="https://arxiv.org/abs/2102.06387">The Distributed Discrete Gaussian Mechanism for Federated Learning with Secure Aggregation</a> (ICML 2021)</li>
+</ul>
 <h2 id="自步学习">自步学习</h2>
 <p>参考<a href="https://blog.csdn.net/weixin_37805505/article/details/79144854">1</a>，<a href="https://blog.csdn.net/selous/article/details/78144377">2</a>,<a href="https://zhuanlan.zhihu.com/p/365559870">3</a>,<a href="https://blog.csdn.net/bear_kai/article/details/77771127">4</a>,<a href="https://www.codetd.com/article/12556964">5</a>,</p>
 <p>自步学习：学习算法在每一步迭代中决定下一步学习样本。</p>
@@ -582,6 +592,10 @@
 <p>FedAvg，FedProx，SCAFFOLD和 FedNova  <a href="https://blog.csdn.net/weixin_42534493/article/details/118051289">1</a>，<a href="https://blog.csdn.net/wuxing610/article/details/123400276">2</a></p>
 <p>客户端选择的数量</p>
 <p>异步有点自步学习的感觉，每次选择部分客户端。</p>
+<p>客户端的数量？</p>
+<p><a href="https://mp.weixin.qq.com/s/ZjP-55H19xrVQOOL0eqbeg">NOIID</a></p>
+<p>NOIID-<a href="https://zhuanlan.zhihu.com/p/468992765">dirichlet</a></p>
+<p><a href="https://www.zhihu.com/people/orion_orion/posts?page=2">fl数据集</a></p>
 <hr>
 <p>近期计划</p>
 <p>2.fedlab框架
@@ -595,6 +609,11 @@
 <a href="https://zhuanlan.zhihu.com/p/502972718">https://zhuanlan.zhihu.com/p/502972718</a>
 <a href="https://github.com/lxcnju/FedRepo">https://github.com/lxcnju/FedRepo</a></p>
 <hr>
+<p>家人们！！！设备选择方面的论文 有没有有代码的 我目前只看到贪婪算法的FedCS 而且没有开源。。。</p>
+<p>很多框架都是用随机选择设备的选择方法，（如果别人论文没开源的话可以在框架的设备选择那里魔改</p>
+<p>（比如大佬们的Fedlab就在这里</p>
+<p>感觉要实现设备选择策略的话可以自己在这里做微调</p>
+<p><img src="/images/202206/23.png" alt=""></p>
 <p>联邦学习里资源分配相关文章 都是怎么仿真的呀 第一次接触这方面 大家有推荐好上手的代码吗可以参考下FedScale：https://github.com/SymbioticLab/FedScale，之前我们做过一些资源分配（如客户端选择）的工作</p>
 <p>我自己看过的一些，可以关注一下cmu的virginia组</p>
 <ol>
@@ -607,6 +626,14 @@
 <p>单机simulation的时候用fedlab的standalone样例改改就行了</p>
 <p>现在比较推荐master分支的版本，联邦数据集定义的话需要自己写dataloader，接口可以参考https://github.com/SMILELab-FL/FedLab/blob/master/fedlab/contrib/dataset/basic_dataset.py，同目录下有其他实现的划分数据集，可以看看。</p>
 <p><a href="https://github.com/SMILELab-FL/FedLab/tree/master/tutorials">https://github.com/SMILELab-FL/FedLab/tree/master/tutorials</a> 这路径下有些tutorial可以学习自定义算法流程</p>
+<p>&ndash;</p>
+<p>fedlab有封装好的</p>
+<p>我打算用来当baseline&hellip;</p>
+<p><a href="https://github.com/SMILELab-FL/FedLab">https://github.com/SMILELab-FL/FedLab</a></p>
+<p>他们baseline的实现在这里</p>
+<p><a href="https://github.com/SMILELab-FL/FedLab-benchmarks">https://github.com/SMILELab-FL/FedLab-benchmarks</a></p>
+<p>FedScale</p>
+<p>&ndash;</p>
 <p>Mr.Gulugulumaopao:
 请问大家有支持graph split learning framework的repo么(每一方有全部节点的部分特征），刚刚看了federated scope,貌似都是每一方拥有部分节点的横向图联邦</p>
 <p>要是我再聪明一点就好了:
@@ -639,6 +666,35 @@ Towards Representation Identical Privacy-Preserving Graph Neural Network via Spl
 国内风投行业有个隐私计算四小龙的说法</p>
 <p>PeterZHY🇭🇰:
 蚂蚁金服 腾讯微众 华控清交 翼方健数</p>
+<hr>
+<p>感觉可以关注一下MLsys会议，有FL投稿，这个会收的论文不多，但都比较硬.</p>
+<hr>
+<h2 id="learning-with-noisy-label">learning with <code>noisy label</code></h2>
+<p><a href="https://zhuanlan.zhihu.com/p/110959020">blog</a>：</p>
+<ol>
+<li>有一定量的标注数据。&ndash; 通过搜索引擎、公开数据集等，很容易拿到。</li>
+<li>标注数据的质量不高，存在或高或低的标注错误。</li>
+</ol>
+<p><a href="https://zhuanlan.zhihu.com/p/403925518">blog2</a></p>
+<p>fl+nosiy lable:<a href="https://zhuanlan.zhihu.com/p/404854366">1</a>,<a href="https://zhuanlan.zhihu.com/p/405577845">2</a>,<a href="https://zhuanlan.zhihu.com/p/406292207">3</a></p>
+<p>基于局部自正则化的抗噪声标签联邦学习 <a href="https://www.bilibili.com/video/BV1He4y1E7Cb/?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">video</a></p>
+<p><code>Towards Federated Learning against Noisy Labels via Local Self-Regularization</code></p>
+<p><a href="https://github.com/Sprinter1999/FedLSR">code</a></p>
+<p>噪声记忆效应：正确标记的样本会被神经网络优先拟合，随后去拟合标签错误的样本。拟合正确的样本会降低的loss大一点，所以可能会偏向于先拟合正确的样本，再慢慢去拟合错误的样本</p>
+<p>预实验，在fl场景下，也会出现这种现象，优先去学习正确的容易的模式</p>
+<p>标签生成的方法，网络数据中的上下文，淘宝衣服的标题，上下文过滤的方式标签的识别；机器自动生成的标注，在小数据集下预训练的模型，会不可避免的带来标注的错误。</p>
+<p>原始图像和增强后的图像，喂到同一个网络中，分别得到两个output的logits，送到两个组分（成分）中，一个去做混合预测，一个去做自蒸馏。将两种方式概括为，一个是隐私的约束：通过锐化运算和熵正则化提高模型识别的置信度；另一个是显示的约束：通过自蒸馏缩小原始实例和扩充实例的模型输出的差异</p>
+<p>1、隐式</p>
+<p>把预测进行混合。输出两个logits，o1，o2，通过softmax输入伪标签，p1，p2作为判别，然后做融合。</p>
+<p>锐化操作：五分类，模型可以给出正确的预测结果为第二类，无论是增强后的图像还是原始图像都可以给出正确的结果，但是原始给出的标签是第一类，错误的。所以想通过这种方式，去加强模型对于自身判别的信心，从而抑制模型过度的拟合错误的标注。</p>
+<p>然后拿出sharpen后的判别ps，去做交叉熵。能够尽可能的减少对于错误样本的拟合。</p>
+<p>熵正则化：额外的优化</p>
+<p>2、显式</p>
+<p>希望对于原始数据和增强后的数据给出的判别比较接近。</p>
+<p>知识蒸馏：实例级自蒸馏，通过知识蒸馏的温度去调整模型输出，以JS散度或L1 loss为度量</p>
+<p>对logit做一个倍数的调整，调整后再去做softmax，得到概率输出定义为q1,q2。然后得出一个约束项，使得调整后的q1,2比较接近。具体采用JS散度或L1 loss为度量。</p>
+<p>常见的两种噪声情况：对称噪声，Pairwise 对偶噪声。</p>
+<p><code>respect</code></p>
 
     </div>
 
