@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习路线">
 <meta itemprop="description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc"><meta itemprop="datePublished" content="2022-03-17T13:00:04+08:00" />
 <meta itemprop="dateModified" content="2022-03-17T13:00:04+08:00" />
-<meta itemprop="wordCount" content="4810">
+<meta itemprop="wordCount" content="4926">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习路线"/>
 <meta name="twitter:description" content="https://www.zhihu.com/question/422320791/answer/1805628004 Communication-Efficient Learning of Deep Networks from Decentralized Data 开山之作，FedAvg。 三个概念：Epoch, Batch, Iteration 参考2 epoch:一个Epoch就是将所有训练样本训练一次的过程 batc"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022-03-17 </span>
         
-          <span class="more-meta"> 4810 words </span>
+          <span class="more-meta"> 4926 words </span>
           <span class="more-meta"> 10 mins read </span>
         
       </div>
@@ -452,6 +452,11 @@ INFO:tensorflow:Loss for final step: 0.35805476.
 <p>我们通过<code>自适应</code>采样的周期性平均来研究用于分布式鲁棒联邦学习的通信高效分布式算法。</p>
 <p>提出了一种分布式鲁棒联合平均 (DRFA) 算法，该算法采用一种新颖的快照方案来近似混合参数的历史梯度的累积。我们分析了 DRFA 在凸线性和非凸线性设置中的收敛速度。我们还将提出的想法推广到对混合参数进行正则化的目标，并提出了一种近端变体，称为 DRFA-Prox，具有可证明的收敛速度。我们还分析了在强凸-强-凹和非凸（在 PL 条件下）-强-凹设置中的正则化情况的替代优化方法。</p>
 <p>提出的 DRFA 算法是第一个以通信有效的方式解决联邦学习的分布式鲁棒优化问题，并对异构（非 IID）数据分布进行理论分析。提出的将 w 的更新与 λ 解耦的想法可以作为构建块集成到其他联合优化方法</p>
+<p>&ndash;</p>
+<p>Federated Class-Incremental Learning</p>
+<p>Global-Local Forgetting Compensation (GLFC) model, to learn a global class incremental model for alleviating the catastrophic forgetting from both local and global perspectives. 全局-局部遗忘补偿（GLFC）模型，从局部和全局的角度学习一个全局类增量模型来缓解灾难性的遗忘问题。</p>
+<p>链接：</p>
+<p><a href="http://arxiv.org/abs/2203.11473">http://arxiv.org/abs/2203.11473</a> 作者：OpenMPC开放隐私计算 <a href="https://www.bilibili.com/read/cv18409025">https://www.bilibili.com/read/cv18409025</a> 出处：bilibili</p>
 </li>
 </ul>
 <h2 id="中文论文整理">中文论文整理：</h2>
@@ -503,6 +508,13 @@ INFO:tensorflow:Loss for final step: 0.35805476.
 <blockquote>
 <p>联邦学习书籍</p>
 <p><a href="https://www.zhihu.com/column/c_1392436990781046784">深入浅出</a></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>论文查询</p>
+<p><a href="https://ai-paper-collector.vercel.app/">https://ai-paper-collector.vercel.app/</a></p>
+<p><a href="https://dblp.uni-trier.de/">https://dblp.uni-trier.de/</a></p>
+<p><a href="https://youngfish42.github.io/Awesome-Federated-Learning-on-Graph-and-Tabular-Data/">https://youngfish42.github.io/Awesome-Federated-Learning-on-Graph-and-Tabular-Data/</a></p>
 </blockquote>
 
     </div>
@@ -575,7 +587,7 @@ INFO:tensorflow:Loss for final step: 0.35805476.
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
   </span>
 </div>
 

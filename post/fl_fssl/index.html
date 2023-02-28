@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦半监督学习">
 <meta itemprop="description" content="国自然 现实场景中，如医疗、金融、法律等领 域没有大量的有标签数据，而对数据进行标注需要大量的人力和时间，特别是在些领域只有专家才能对样本进行有"><meta itemprop="datePublished" content="2022-09-28T16:46:52+08:00" />
 <meta itemprop="dateModified" content="2022-09-28T16:46:52+08:00" />
-<meta itemprop="wordCount" content="35172">
+<meta itemprop="wordCount" content="40127">
 <meta itemprop="keywords" content="Federated Learning,Semi-Supervised Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦半监督学习"/>
 <meta name="twitter:description" content="国自然 现实场景中，如医疗、金融、法律等领 域没有大量的有标签数据，而对数据进行标注需要大量的人力和时间，特别是在些领域只有专家才能对样本进行有"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-09-28 </span>
         
-          <span class="more-meta"> 35172 words </span>
-          <span class="more-meta"> 71 mins read </span>
+          <span class="more-meta"> 40127 words </span>
+          <span class="more-meta"> 81 mins read </span>
         
       </div>
     </header>
@@ -153,12 +153,14 @@
         <li><a href="#一种鲁棒的半监督联邦学习系统"><code>一种鲁棒的半监督联邦学习系统</code></a></li>
         <li><a href="#基于自编码神经网络的半监督联邦学习模型">基于自编码神经网络的半监督联邦学习模型</a></li>
         <li><a href="#fedmatch">※FedMatch</a></li>
-        <li><a href="#聚合到组再聚合">聚合到组再聚合</a></li>
+        <li><a href="#聚合到组再聚合benchmarking">聚合到组再聚合、Benchmarking</a></li>
         <li><a href="#知识蒸馏">知识蒸馏</a></li>
         <li><a href="#fedirm">FedIRM</a></li>
         <li><a href="#rscfed随机抽样共识联邦半监督学习">※RSCFed：随机抽样共识联邦半监督学习</a></li>
+        <li><a href="#semifed">SemiFed</a></li>
         <li><a href="#imfed-semi">imFed-Semi</a></li>
         <li><a href="#客户端选择相关">客户端选择相关</a></li>
+        <li><a href="#fedcor"><code>FedCor</code></a></li>
         <li><a href="#自适应">自适应？</a></li>
         <li><a href="#自步学习">自步学习</a></li>
         <li><a href="#开题主要研究">开题主要研究</a></li>
@@ -223,6 +225,7 @@
 </ul>
 <p>这个方法的目标也是一致性正则化。众所周知，与单一模型相比，模型集成通常能提供更好的预测。通过在训练期间使用单个模型在不同训练时期的输出来形成集成预测，这一思想得到了扩展。简单来说，不是比较模型的相同输入的两个扰动的预测(如π模型)，模型的预测与之前的epoch中模型对该输入的预测的加权平均进行比较。这种方法克服了π模型的两个缺点。它在每个epoch中，单个输入只进入一次，而且训练目标zĩ 的噪声更小，因为会进行滑动平均。这种方法的缺点是需要存储数据集中所有的zĩ 。</p>
 <p>这在现实世界中是很常见的。由于标注是很昂贵的，特别是大规模数据集，特别是企业用途的，可能只有几个标签。例如，<code>考虑确定用户活动是否具有欺诈性</code>。在100万用户中，该公司知道有1万用户是这样的，但其他9万用户可能是恶意的，也可能是良性的。半监督学习允许我们操作这些类型的数据集，而不必在选择监督学习或非监督学习时做出权衡。</p>
+<p>半监督聚类？<a href="https://zhuanlan.zhihu.com/p/412090424">1</a>，<a href="https://blog.csdn.net/qq_39183034/article/details/126794079">2</a></p>
 <hr>
 <h2 id="联邦半监督"><code>联邦半监督</code></h2>
 <p>减少被损坏的风险！！！</p>
@@ -259,7 +262,6 @@
 <p>模型结构：主要包括自编码网 络和分类器两部分。 自编码神经网络是一种试图接近恒等函 数的无监督学习算法，其目的是使其输出尽可能接近输入。 换 句话说，<code>自编码主要目的是从原始输入数据中学习潜在表示 （ｌａｔｅｎｔ ｒｅｐｒｅｓｅｎｔａｔｉｏｎ）来重建输入数据。 编码器包含学习潜在 表示的编码器（潜在表示也称为代码）和重建输入数据的解码 器</code>。 从编码器中学习的潜在表示是由 ｓｏｆｔｍａｘ 分类器预测的特 征，同时该预测器能够很好地发挥作用。</p>
 <p>自编码强制编码器 ｅ（·）学习隐式表示（ ｈｉｄｄｅｎ ｒｅｐｒｅｓｅｎｔ⁃ ａｔｉｏｎ）和解码器 ｄ（·）重建原始输入。 通过最小化重建损失， 使得重建输入 ｘ＾ 接近原始输入 ｘ，并利用均方差项计算重建 误差。进一步，ｅ（·）可以看成是一个特征提取器，该特征提取 器将分类损失 ＬＣＥ 和重建损失 ＬＭＳＥ 联合进行优化。 同时， ｄ（·）是通过优化重建损失 ＬＭＳＥ学习的解码器。</p>
 <p>与传统的半监督联邦学习模 型（ＳＳＦＬ） ［１７ ～ ２４］相比，本文并没有将半监督学习的技术（如伪 标签和一致性损失）直接移植于联邦学习系统的构建中，而是 从自编码网络和分类器的构造出发，提出一种更为通用的 ＳＳ⁃ ＦＬ 模型架构。 这种思想考虑了全局数据（标签数据和无标签 数据）模型，具有更好的理论意义</p>
-<hr>
 <p>自编码器，<a href="http://www.360doc.com/showweb/0/0/1049796367.aspx">1</a>，<a href="https://zhuanlan.zhihu.com/p/133207206">2</a>，<a href="https://blog.csdn.net/qq_53144843/article/details/122958467">3</a>：通常包括一个编码器一个解码器，编码器的主要特点就是吸收输入数据的“特点”，然后再释放出来，也讲自编码器理解为降维的过程。自编码器属于无监督学习，不同于神经网络，自编码器不需要任何其他的数据，只需要对输入的特征进行提取就行，当然要添加一些二外的限制条件来“强迫”自编码器提取我们想要的东西。</p>
 <p>自编码器我们想要它能够对输入的数据进行分析获取一些特性，而不是简单的输入输出，所以我们通过限制的维度来实现，强迫自编码器去寻找训练数据中最显著的特征。编码器和PCA(PCA是一个简单的机器学习算法，通过寻找矩阵中最大的特征向量来寻找输入数据的&quot;特点”)很像。都是通过编码和解码来得到训练数据的隐含信息，但是如果这个隐含层是线性层（上图提到的）或者隐含层的容量很大，那么自编码器就无法学习到我们输入数据的有用信息。仅仅起一个复制的作用。</p>
 <blockquote>
@@ -271,7 +273,12 @@
 <li>Jeong W, Yoon J, Yang E, et al. Federated Semi-supervised Learning with Inter-client Consistency &amp; Disjoint Learning[C]//9th International Conference on Learning Representations, <code>ICLR 2021</code>. International Conference on Learning Representations, ICLR, 2021</li>
 <li><a href="https://github.com/wyjeong/FedMatch">code</a>,<a href="https://zhuanlan.zhihu.com/p/324582696">blog</a>，<a href="https://blog.csdn.net/weixin_39531374/article/details/111233562">2</a></li>
 </ul>
-<p>标签在客户端场景:有标签和无标签的数据都可以在本地客户端上使用。（本地即包括有标签数据也包括无标签的数据）(b)服务器上的标签场景:有标签的实例只在服务器上可用，而没有标签的数据在本地客户端可用。FedMatch 改进了联邦学习和半监督学习方法的简单组合，<code>增加了新的客户端间一致性损失和参数分解</code>，用于标记和未标记数据的不相交学习。</p>
+<p>标签在客户端场景:有标签和无标签的数据都可以在本地客户端上使用。（本地即包括有标签数据也包括无标签的数据）(b)服务器上的标签场景:有标签的实例只在服务器上可用，而没有标签的数据在本地客户端可用。</p>
+<p><img src="/images/202206/25.png" alt=""></p>
+<blockquote>
+<p>本地训练模型后，根据模型相似性创建k维二叉树，进而选择helper client 进行客户端一致性训练。</p>
+</blockquote>
+<p>FedMatch 改进了联邦学习和半监督学习方法的简单组合，<code>增加了新的客户端间一致性损失和参数分解</code>，用于标记和未标记数据的不相交学习。</p>
 <p>它强制跨多个模型做出的预测之间的一致性。此外，即使标记数据在客户端可用（图 1 (a)），从未标记数据中学习也可能导致模型忘记模型从标记数据中学到的内容。为了解决这些问题，我们将模型参数分解为两个，一个用于监督学习的密集参数和一个用于无监督学习的稀疏参数。这种稀疏的加性参数分解确保了对标记和未标记数据的训练是有效分离的，从而最大限度地减少了两个任务之间的干扰。我们通过仅在通信轮次中发送参数的差异，进一步降低了分解参数的通信成本。</p>
 <p>研究了两种不同的场景，即局部数据被部分标记（Labels-at-Client）或完全未标记（Labels-at -server）。学习多个客户端之间的客户端间一致性，并分解模型参数以减少监督和非监督任务之间的干扰以及通信成本。展示了我们的方法FedMatch 在传统的客户端标签和新的服务器标签场景下，跨多个具有非i.i.d.和 i.i.d.数据。</p>
 <p>传统的一致性正则化方法<code>强制来自增广实例和原始（或弱增广）实例的预测，以输出相同的类标签</code>。基于类语义不受小输入扰动影响的假设，这些方法基本上确保了同一输入的多个扰动之间预测的一致性。对于我们的联邦半监督学习方法，我们还提出了一种新的一致性损失，它将<code>在多个客户机上学习的模型正则化，以输出相同的预测。</code>服务器在每一轮通信中选择并广播 H 个助手代理。我们还在每个本地客户端使用数据级一致性正则化，类似于 FixMatch。在生成伪标签时，我们丢弃低于置信阈值 τ 的低置信预测的实例。然后我们使用伪标签 y 执行标准交叉熵最小化。</p>
@@ -289,10 +296,13 @@
 <li>不相交学习：在联邦半监督学习中，标记数据可以位于客户端或服务器，这需要模型的学习过程具有灵活性。我们的分解技术允许监督训练的模型在别处单独完成。</li>
 </ul>
 <p>labels at client:用户有一部分标签，大部分数据没有标签。本地学习σlr1:A 和 ψlr1:A，本地训练完成后，客户端将学习到的知识 σlr1:A 和 ψlr1:A 更新到服务器。然后，服务器在嵌入基于模型相似性的局部模型之后分别聚合 σl1:A 和 ψl1:A 并创建 KD-Tree 以快速检索每个客户端的前 H 个最近邻居 ψh1:H。在下一轮，服务器传输聚合的 σr+1 和 ψr+1。对于辅助代理，服务器每 10 轮检索 H 个辅助代理 ψh1:H 给每个客户端。</p>
-<p>labels at server：标记的数据仅在服务器上可用，因此服务器上的全局模型学习标记数据，而客户端的本地模型仅学习未标记数据。全局模型 G 在服务器上的标记数据 SG 上学习 σ，本地客户端 学习 ψl1:A，本地训练完成后，客户端将学习到的知识ψl1:A更新到服务器。然后，服务器根据模型相似性嵌入本地模型，并创建一个 KD-Tree，用于快速最近邻搜索，为每个客户端搜索前 H 个最相似的 ψh1:H 模型。在下一轮，服务器传输其学习的 σr+1 和聚合的 ψr+1。服务器每 10 轮通信向每个客户端传输 top-H 相似ψh1:H。</p>
+<p>labels at server：标记的数据仅在服务器上可用，因此服务器上的全局模型学习标记数据，而客户端的本地模型仅学习未标记数据。全局模型 G 在服务器上的标记数据 SG 上学习 σ，本地客户端 学习 ψl1:A，本地训练完成后，客户端将学习到的知识ψl1:A更新到服务器。然后，服务器根据模型相似性嵌入本地模型，并创建一个 KD-Tree，用于快速最近邻搜索，<code>为每个客户端搜索前 H 个最相似的 ψh1:H 模型</code>。在下一轮，服务器传输其学习的 σr+1 和聚合的 ψr+1。服务器每 10 轮通信向每个客户端传输 top-H 相似ψh1:H。</p>
 <p>在这项工作中，我们介绍了联邦半监督学习（FSSL）的两个实际场景，其中每个客户端只使用部分标记的数据学习（客户端的标签场景），或者仅在服务器上使用受监督的标签，而客户端使用完全未标记的数据（服务器上的标签场景”）。为了解决这个问题，我们提出了一种新的方法，联邦匹配（FedMatch），它<code>引入了客户端间的一致性损失，旨在最大限度地提高针对不同客户端训练的模型之间的一致性</code>，<code>不相交学习的参数分解，将参数分解为一个用于标记数据，另一个用于未标记数据，以保存可靠的知识，降低通信成本</code>，以及不相交学习。</p>
-<p>模型聚合：由上式可以看出，该聚合方法其实就是基于模型在公共验证集上的分类准确度来对各个模型进行加权聚合。 除此之外，在服务器端的模型可靠性计算也为之前所讲解的一致性正则化损失函数提供了helper agent的选择机制，即helper agent是每轮各个本地模型的集合中可靠性最大的模型的集合。此处的可靠性衡量其实就是一种各个客户端间所达成的共识机制。</p>
+<p>模型聚合：由上式可以看出，该聚合方法其实就是<code>基于模型在公共验证集上的分类准确度来对各个模型进行加权聚合</code>。 除此之外，在服务器端的模型可靠性计算也为之前所讲解的一致性正则化损失函数提供了helper agent的选择机制，即helper agent是每轮各个本地模型的集合中可靠性最大的模型的集合。此处的可靠性衡量其实就是一种各个客户端间所达成的共识机制。</p>
 <p>resnet</p>
+<p>数据划分：</p>
+<p>batch-iid：将60000个实例分成训练集(54000)、有效集(3000)和测试集(3000)。我们为每个客户端(K=100)每个类(C=10)提取5个标记实例作为标记集S，其余的实例(49000)用作未标记数据au，这样我们就可以将S和U均匀地分成Sl1:100和Ul1:100，这样局部模型在训练时就可以在相应的标记和未标记数据上学习</p>
+<p>Batch-NonIID(类不平衡):这个任务的设置与Batch-IID任务基本相同，除了我们任意控制每个客户端每个类的实例数量的分布，以模拟类不平衡的环境。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -327,7 +337,148 @@
 # [2022/09/22-19:09:05][fedmatch][ls-biid-c10][server] all client threads have been destroyed.
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="聚合到组再聚合">聚合到组再聚合</h2>
+</div><p>&ndash;</p>
+<p>CODE:</p>
+<p>数据增强之RandAugment，blog：[<a href="https://blog.csdn.net/weixin_42990464/article/details/107669200">1</a>],[<a href="https://jishuin.proginn.com/p/763bfbd6c9bf">2</a>],[<a href="https://blog.csdn.net/weixin_44211968/article/details/120995096">3</a>]。code:[<a href="https://github.com/heartInsert/Randaugment">1</a>]</p>
+<p>这就有了深度学习天生的一个短板：<strong>数据不够多、不够好</strong>。而<strong>数据增强</strong>就是解决这一问题的有效办法。</p>
+<p>数据增广可以显著提高深度学习的范化性能，与此同时，在半监督机制下因为对原有数据集进行了扩充，从而增加了数据集的鲁棒性</p>
+<p>tensorflow:<a href="https://blog.csdn.net/jediael_lu/article/details/118851887">1</a></p>
+<p>with tf.GradientTape() as tape 梯度带 Tensorflow自动求导API,[<a href="https://blog.csdn.net/wangheng673/article/details/109237515">1</a>],[<a href="https://www.it610.com/article/1274685953415331840.htm">2</a>],[<a href="https://blog.csdn.net/phily123/article/details/117787468">3</a>]</p>
+<p>scipy.spatial.KDTree 二叉树结构，[<a href="https://blog.csdn.net/u014265088/article/details/53579539">1</a>],[<a href="http://www.manongjc.com/detail/30-zhrvtxisdgfvtcs.html">2</a>],[<a href="https://zhuanlan.zhihu.com/p/112246942">3</a>]</p>
+<p>helpclient</p>
+<p>网络层layers：<a href="http://events.jianshu.io/p/4d21b988f36f">1</a></p>
+<p><img src="/images/202206/24.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python3 main.py  --gpu 0,1 --work-type train --model fedmatch --frac-client 0.05 --task ls-biid-c10 2&gt;&amp;1 | tee ./outputs/output.log
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[2022/10/24-14:22:26][fedmatch][ls-biid-c10][server] server process has been started
+[2022/10/24-14:22:28][fedmatch][ls-biid-c10][server] creating client processes on gpus ...
+[2022/10/24-14:22:30][fedmatch][ls-biid-c10][server] training global_model
+
+[2022/10/24-14:22:35][fedmatch][ls-biid-c10][server] rnd:0, ep:0, n_train:1000, n_test:2000 tlss:2.2461, tacc:0.1615 (s_cifar_10, 4.2s)
+[2022/10/24-14:22:35][fedmatch][ls-biid-c10][server] training clients (round:0, connected:[60, 47, 71, 91, 54])
+[2022/10/24-14:22:36][fedmatch][ls-biid-c10][client-60] r:0,e:0,lss:2.2395,acc:0.1585, n_train:545(s:0,u:545,c:0), n_test:2000, S2C:2(s:1,p:1                       ,h:0), C2S:0.99(s:0.0,p:0.99 (cifar_10_60, 1.6s)
+[2022/10/24-14:22:38][fedmatch][ls-biid-c10][client-47] r:0,e:0,lss:2.2395,acc:0.1585, n_train:545(s:0,u:545,c:0), n_test:2000, S2C:2(s:1,p:1                       ,h:0), C2S:0.99(s:0.0,p:0.99 (cifar_10_47, 3.4s)
+[2022/10/24-14:22:41][fedmatch][ls-biid-c10][client-91] r:0,e:0,lss:2.2395,acc:0.1585, n_train:545(s:0,u:545,c:0), n_test:2000, S2C:2(s:1,p:1                       ,h:0), C2S:0.99(s:0.0,p:0.99 (cifar_10_91, 1.9s)
+[2022/10/24-14:22:41][fedmatch][ls-biid-c10][client-71] r:0,e:0,lss:2.2395,acc:0.1585, n_train:545(s:0,u:545,c:0), n_test:2000, S2C:2(s:1,p:1                       ,h:0), C2S:0.99(s:0.0,p:0.99 (cifar_10_71, 2.0s)
+[2022/10/24-14:22:42][fedmatch][ls-biid-c10][client-54] r:0,e:0,lss:2.2395,acc:0.1585, n_train:545(s:0,u:545,c:0), n_test:2000, S2C:2(s:1,p:1                       ,h:0), C2S:0.99(s:0.0,p:0.99 (cifar_10_54, 0.9s)
+[2022/10/24-14:22:43][fedmatch][ls-biid-c10][server] aggr_lss:2.2395, aggr_acc:0.1585
+[2022/10/24-14:22:43][fedmatch][ls-biid-c10][server] training global_model
+
+[2022/10/24-15:03:47][fedmatch][ls-biid-c10][server] rnd:199, ep:0, n_train:1000, n_test:2000 tlss:2.4877, tacc:0.447 (s_cifar_10, 1.1s)
+[2022/10/24-15:03:47][fedmatch][ls-biid-c10][server] training clients (round:199, connected:[89, 30, 87, 78, 93])
+[2022/10/24-15:03:51][fedmatch][ls-biid-c10][client-89] r:199,e:0,lss:2.4901,acc:0.4475, n_train:545(s:0,u:545,c:273), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_89, 2.7s)
+[2022/10/24-15:03:52][fedmatch][ls-biid-c10][client-30] r:199,e:0,lss:2.4918,acc:0.4475, n_train:545(s:0,u:545,c:293), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_30, 3.6s)
+[2022/10/24-15:03:57][fedmatch][ls-biid-c10][client-87] r:199,e:0,lss:2.4909,acc:0.449, n_train:545(s:0,u:545,c:299), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_87, 3.9s)
+[2022/10/24-15:03:57][fedmatch][ls-biid-c10][client-78] r:199,e:0,lss:2.4924,acc:0.448, n_train:545(s:0,u:545,c:282), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_78, 3.7s)
+[2022/10/24-15:03:59][fedmatch][ls-biid-c10][client-93] r:199,e:0,lss:2.4899,acc:0.447, n_train:545(s:0,u:545,c:287), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_93, 1.6s)
+[2022/10/24-15:04:00][fedmatch][ls-biid-c10][server] aggr_lss:2.4877, aggr_acc:0.447
+[2022/10/24-15:04:00][fedmatch][ls-biid-c10][server] all clients done
+[2022/10/24-15:04:00][fedmatch][ls-biid-c10][server] server done. (2489.7244119644165s)
+[2022/10/24-15:04:00][fedmatch][ls-biid-c10][server] all client threads have been destroyed.
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python3 main.py  --gpu 0,1 --work-type train --model fedmatch --frac-client 0.05 --task ls-bimb-c10
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[2022/10/24-15:27:33][fedmatch][ls-bimb-c10][server] server process has been started
+[2022/10/24-15:27:35][fedmatch][ls-bimb-c10][server] creating client processes on gpus ...
+[2022/10/24-15:27:37][fedmatch][ls-bimb-c10][server] training global_model
+
+[2022/10/24-15:27:40][fedmatch][ls-bimb-c10][server] rnd:0, ep:0, n_train:1000, n_test:2000 tlss:2.2423, tacc:0.152 (s_cifar_10, 3.1s)
+[2022/10/24-15:27:40][fedmatch][ls-bimb-c10][server] training clients (round:0, connected:[29, 51, 14, 92, 87])
+[2022/10/24-15:27:43][fedmatch][ls-bimb-c10][client-29] r:0,e:0,lss:2.2177,acc:0.163, n_train:550(s:0,u:550,c:0), n_test:2000, S2C:2(s:1,p:1,h:0), C2S:1.0(s:0.0,p:1.0 (cifar_10_29, 2.5s)
+[2022/10/24-15:27:44][fedmatch][ls-bimb-c10][client-51] r:0,e:0,lss:2.2177,acc:0.163, n_train:550(s:0,u:550,c:0), n_test:2000, S2C:2(s:1,p:1,h:0), C2S:1.0(s:0.0,p:1.0 (cifar_10_51, 3.2s)
+[2022/10/24-15:27:46][fedmatch][ls-bimb-c10][client-92] r:0,e:0,lss:2.2177,acc:0.163, n_train:550(s:0,u:550,c:0), n_test:2000, S2C:2(s:1,p:1,h:0), C2S:1.0(s:0.0,p:1.0 (cifar_10_92, 2.0s)
+[2022/10/24-15:27:46][fedmatch][ls-bimb-c10][client-14] r:0,e:0,lss:2.2177,acc:0.163, n_train:550(s:0,u:550,c:0), n_test:2000, S2C:2(s:1,p:1,h:0), C2S:1.0(s:0.0,p:1.0 (cifar_10_14, 2.0s)
+[2022/10/24-15:27:47][fedmatch][ls-bimb-c10][client-87] r:0,e:0,lss:2.2177,acc:0.163, n_train:550(s:0,u:550,c:0), n_test:2000, S2C:2(s:1,p:1,h:0), C2S:1.0(s:0.0,p:1.0 (cifar_10_87, 1.1s)
+[2022/10/24-15:27:48][fedmatch][ls-bimb-c10][server] aggr_lss:2.2177, aggr_acc:0.163
+[2022/10/24-15:27:48][fedmatch][ls-bimb-c10][server] training global_model
+
+[2022/10/24-16:08:21][fedmatch][ls-bimb-c10][server] rnd:199, ep:0, n_train:1000, n_test:2000 tlss:2.4293, tacc:0.435 (s_cifar_10, 1.1s)
+[2022/10/24-16:08:21][fedmatch][ls-bimb-c10][server] training clients (round:199, connected:[72, 41, 28, 38, 2])
+[2022/10/24-16:08:25][fedmatch][ls-bimb-c10][client-72] r:199,e:0,lss:2.4332,acc:0.436, n_train:550(s:0,u:550,c:280), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_72, 3.0s)
+[2022/10/24-16:08:26][fedmatch][ls-bimb-c10][client-41] r:199,e:0,lss:2.432,acc:0.435, n_train:550(s:0,u:550,c:349), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_41, 4.1s)
+[2022/10/24-16:08:30][fedmatch][ls-bimb-c10][client-28] r:199,e:0,lss:2.432,acc:0.436, n_train:550(s:0,u:550,c:331), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_28, 2.9s)
+[2022/10/24-16:08:31][fedmatch][ls-bimb-c10][client-38] r:199,e:0,lss:2.4318,acc:0.434, n_train:550(s:0,u:550,c:360), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_38, 4.0s)
+[2022/10/24-16:08:35][fedmatch][ls-bimb-c10][client-2] r:199,e:0,lss:2.4333,acc:0.438, n_train:550(s:0,u:550,c:310), n_test:2000, S2C:0.0(s:0.0,p:0.0,h:0.0), C2S:0.0(s:0.0,p:0.0 (cifar_10_2, 2.9s)
+[2022/10/24-16:08:36][fedmatch][ls-bimb-c10][server] aggr_lss:2.4292, aggr_acc:0.435
+[2022/10/24-16:08:36][fedmatch][ls-bimb-c10][server] all clients done
+[2022/10/24-16:08:36][fedmatch][ls-bimb-c10][server] server done. (2459.0625751018524s)
+[2022/10/24-16:08:36][fedmatch][ls-bimb-c10][server] all client threads have been destroyed.
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="聚合到组再聚合benchmarking">聚合到组再聚合、Benchmarking</h2>
 <ul>
 <li>
 <p><code>Improving Semi-supervised Federated Learning by Reducing the Gradient Diversity of Models</code></p>
@@ -413,6 +564,13 @@
 <p><a href="https://github.com/XMed-Lab/RSCFed?utm_source=catalyzex.com">code</a></p>
 </li>
 </ul>
+<p><img src="/images/202206/26.png" alt=""></p>
+<blockquote>
+<p>标记客户端：采用交叉熵损失 未标记客户端：采用基于Mean Teacher的一致性正则化</p>
+<p>从选定的客户端收集模型，执行距离重加权模型聚合（DMA），得到子共识模型</p>
+<p>DMA：动态增加接近平均模型的模型的权重-&gt;更接近平均模型的模型权重大一点</p>
+<p>该场景下 标记和未标记已经分开，所以没必要使用参数分离的</p>
+</blockquote>
 <p>resnet、cnn</p>
 <p>在本文中，我们通过考虑来自完全标记的客户端、完全未标记的客户端或部分标记的客户端的模型之间的不均匀可靠性，提出了<code>一种随机采样共识联邦学习，即 RSCFed</code>。我们的主要动机是，给定模型与标记客户端或未标记客户端的偏差很大，可以通过<code>对客户端执行随机子采样来达成共识</code>。为了实现这一点，<code>我们不是直接聚合局部模型，而是首先通过对客户端的随机子采样提取几个子共识模型，然后将子共识模型聚合到全局模型</code>。为了增强子共识模型的鲁棒性，我们还<code>开发了一种新的距离重加权模型聚合方法</code>。实验结果表明，我们的方法在三个基准数据集（包括自然图像和医学图像）上优于最先进的方法。</p>
 <p>#研究其在医学图像诊断[10、14、28]、图像分类[16]和目标检测[22]中的应用。</p>
@@ -430,8 +588,9 @@
 <p>RSCFed 概述。标记和未标记的客户端分别通过监督交叉熵损失 LCE 和基于均值教师的一致性损失 LM SE 进行优化。我们的 RSCFed 使用距离重加权模型聚合 (DMA) 在所有客户端中执行多个随机子采样，以增加接近子共识模型的客户端的权重，反之亦然。该模块可以帮助避免偏离的局部模型对全局模型的影响。</p>
 <p>在该方法中，我们<code>考虑了具有完全标记和完全未标记客户端的 FSSL</code>。有标记的客户端有m个，未标记的客户端n个。</p>
 <p>本地训练：在第 t 轮同步开始时，所有局部模型都使用当前全局模型 θt glob 进行初始化。我们提出的 RSCFed <code>分别对标记和未标记的客户端采用标准的监督和无监督训练</code>。为简化起见，我们默认本节中的所有表示都发生在第 t 轮同步中。</p>
-<p>标记客户端：<code>采用交叉熵损失 LCE 作为目标函数</code>，然后客户端在训练后将 θl 返回给服务器。未标记客户端：采用基于均值教师的一致性正则化框架，并<code>将学生模型视为本地模型</code>。当这个客户第一次被选中时，教师模型 θtea 被初始化为 θ0glob。在未标记客户端的每次局部迭代中，<code>一批输入图像被增强两次，并分别输入学生和教师模型</code>。在生成了他们的预测pstu和ptea之后，我们利用[1]中定义的“锐化”来提高教师预测的温度，因此 ptea 被“锐化”为 ^ptea，样本被推离决策边界以生成更好的一致性对齐目标。<code>通过对不同增强输入的两种预测，均方误差损失被用作未标记客户端的局部目标</code>。只有学生模型通过局部函数更新。教师模型在每次局部迭代后通过指数移动平均接收学生模型参数：<code>未标记的客户端最终将学生模型作为其本地模型 θu 返回</code>。</p>
-<p><code>--&gt;</code>从服务器端接收的为教师模型，然后将（经过知识蒸馏？）学生模型作为本地模型，然后更新学生模型，上传学生模型。</p>
+<p>标记客户端：<code>采用交叉熵损失 LCE 作为目标函数</code>，然后客户端在训练后将 θl 返回给服务器。未标记客户端：采用基于<code>Mean Teacher</code>均值教师的一致性正则化框架[<a href="https://zhuanlan.zhihu.com/p/541607446">blog</a>]，并<code>将学生模型视为本地模型</code>。当这个客户第一次被选中时，教师模型 θtea 被初始化为 θ0glob。在未标记客户端的每次局部迭代中，<code>一批输入图像被增强两次，并分别输入学生和教师模型</code>。在生成了他们的预测pstu和ptea之后，我们利用[1]中定义的“锐化”来提高教师预测的温度，因此 ptea 被“锐化”为 ^ptea，样本被推离决策边界以生成更好的一致性对齐目标。<code>通过对不同增强输入的两种预测，均方误差损失被用作未标记客户端的局部目标</code>。只有学生模型通过局部函数更新。教师模型在每次局部迭代后通过指数移动平均接收学生模型参数：<code>未标记的客户端最终将学生模型作为其本地模型 θu 返回</code>。</p>
+<p>一致性正则化损失是Student模型和Teacher 模型的预测之间的距离，并且该差距应该最小化。</p>
+<p><code>--&gt;</code>从服务器端接收的为教师模型，然后将（经过知识蒸馏？并不是）学生模型作为本地模型，然后更新学生模型，上传学生模型。</p>
 <p>t越大，结果越平滑，让本来t=1时大的结果变小一点，小的变大一点，得到的概率分布更“平滑”，相应的t越小，得到的概率分布更“尖锐”，这就是t的作用</p>
 <p>随机抽样共识 FL：我们提出了 RSCFed，一种<code>具有随机子集采样和距离重加权模型聚合</code>的新型 FSSL 框架，以<code>从严重偏差的局部模型中获得更稳健的全局模型</code>。更具体地说，我们<code>对所有客户进行随机抽样，并收集他们上传的模型以挖掘他们的基本共识</code>。然后，我们<code>通过聚合收集的模型获得子共识模型，其中引入了距离重加权模型聚合（DMA）策略来动态调整它们的权重</code>。我们将这两个步骤重复 M 次，得到一组子共识模型。最后，我们<code>聚合子共识模型集以获得每一轮的全局模型</code>。</p>
 <p>多重随机子采样。<code>提出了随机子采样来提取子共识模型</code>。我们建议执行多个随机子采样以获得多个子共识模型。为了实现它，在同步轮 t 开始时，我们执行 M 次独立随机子采样以对 K 个客户端进行采样。然后服务器将全局模型 θt glob 发送给采样客户端，然后对采样客户端执行本地训练。请注意，如果客户端在一轮中被多次采样，我们不需要再次发送全局模型进行初始化，以节省通信成本。</p>
@@ -452,6 +611,8 @@
 <p>超参数。请注意，我们的网络有两个主要的超参数，它们是子采样操作的数量 (M) 和每个子采样操作中使用的本地客户端的数量 (K)。显然，我们根据经验设置 M = 3 和 K = 5。</p>
 <p>这项工作提出了一个重要、实用但被忽视的联邦学习问题：非 IID 本地客户端的联邦半监督学习。考虑到标记和未标记客户端之间的可靠性不平衡，我们的关键思想是可以通过对客户端执行多次子抽样来达成共识。我们不是简单地聚合本地模型，而是通过对客户端进行随机子采样来设计子共识模型，并引入距离重加权模型聚合模块来聚合每个同步轮中的子采样模型。三个基准数据集的实验结果表明，我们的网络始终优于最先进的方法，这证明了我们方法的有效性。</p>
 <p><code>对比了FedIRM</code></p>
+<h2 id="semifed">SemiFed</h2>
+<p>无代码</p>
 <h2 id="imfed-semi">imFed-Semi</h2>
 <ul>
 <li>
@@ -511,30 +672,23 @@
 <p>自监督：iclr22https://mp.weixin.qq.com/s/A52lAKEaifC8W0nul7zt7g</p>
 <h2 id="客户端选择相关">客户端选择相关</h2>
 <p>客户端选择：https://www.baidu.com/s?ie=UTF-8&amp;wd=%E9%9A%8F%E6%9C%BA%E6%8A%BD%E6%A0%B7%20%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0</p>
+<p><a href="https://www.cnblogs.com/AmbitiousMice/p/14787079.html">数据采样</a>：采样就是按照某种规则从数据集中挑选样本数据，大致分为3类：随机采样、系统采样和分层采样。</p>
+<p>随机采样：就是从数据集中随机的抽取特定数量的数据，分为有放回和无放回两种。</p>
+<p>系统采样：一般是无放回抽样，又称等距采样，先将总体数据集按顺序分成n小份，再从每小份抽取第k个数据。</p>
+<p>分层采样：就是先将数据分成若干个类别，再从每一层内随机抽取一定数量的样本，然后将这些样本组合起来。</p>
 <p><a href="https://www.cnblogs.com/orion-orion/archive/2021/12/05/15646187.html">猎户座</a></p>
 <p>客户端选择的起因是因为数据的异构性</p>
 <p>联邦学习在使用过程中面临的两大挑战：</p>
 <p><strong>数据异构（主要是用户间数据Non-IID）
 系统异构（设备间通信和计算能力的差异）</strong></p>
-<p><a href="https://baijiahao.baidu.com/s?id=1689217744608518370&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1689217744608518370&amp;wfr=spider&amp;for=pc</a></p>
+<p>通信效率https://baijiahao.baidu.com/s?id=1689217744608518370&amp;wfr=spider&amp;for=pc</p>
 <p><a href="https://www.baidu.com/s?ie=UTF-8&amp;wd=%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%89%E6%8B%A9%20%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0">https://www.baidu.com/s?ie=UTF-8&amp;wd=%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%89%E6%8B%A9%20%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0</a></p>
 <p><a href="http://news.sohu.com/a/569383572_455817">异质性</a></p>
 <p><a href="https://mp.weixin.qq.com/s/rifIvdTtjFrXzdy-0xFxBw">通信开销问题</a></p>
-<p><a href="https://blog.csdn.net/weixin_42534493/article/details/119330027">基于聚类抽样进行客户选择</a> 无偏抽样，</p>
-<p>FedAvg和MD抽样是仅有的能保持最小server-clients通信代价的节点选择策略。FedAvg算法在每轮聚合时都只选择部分节点进行聚合，但它的选择方式是随机的，这将导致有偏抽样，且一些具有独特数据分布的客户可能难以被选中，进而影响全局模型的收敛。</p>
-<p>(MD)抽样的节点选择概率与该节点的相对样本数量（样本数量在所有客户样本数量中的比例）相关。实验证明，MD抽样的表现优于FedAvg，且可实现无偏抽样。这可能使每一轮参与聚合的客户的数据分布与上一轮的存在巨大差异，且一些客户可能从头到尾未被抽到，<strong>进而降低了一些客户的代表性，并使全局模型的收敛存在较大的不稳定性</strong>。</p>
-<p>聚类抽样是一种对MD抽样进行改进的新的无偏客户抽样方案，在保持最小的sever-clients通信代价的基础上，保证更小的节点选择差异性。同时为提高模型聚合时每个客户的代表性，聚类抽样保证了那些具有独特数据分布的客户可以被选中，从而实现更平滑、更快速的全局模型收敛。</p>
-<p>MD根据相同的客户分布w 0 抽样m次，以获得m个客户并根据客户的相对样本数量进行全局聚合
-，聚类抽样则是根据<strong>m个客户分布</strong>每个分布抽样一次，获得m个客户并以 “客户 i 的样本数量在该分布w k ( t ) 中的比例” r k , i 作为聚合权重参与第 t 轮全局聚合。</p>
-<p>满足命题1的聚类抽样算法有很多，文章提出了两种算法，分别是“基于样本数量”和“基于模型相似度”的聚类抽样。</p>
-<p>根据“代表性梯度”，通过层次聚类将客户聚成k个类</p>
-<p><a href="https://blog.csdn.net/weixin_51306020/article/details/126375150">TrisaFed：异步联邦学习框架</a>在<strong>异步联邦学习</strong>（AFL）中，其模型汇聚服务器在收集到少量本地模型后立即进行全局聚合，避免受到速度较慢设备的拖累。</p>
-<p><strong>相当于只选择部分客户端进行运行</strong></p>
-<p><a href="https://zhuanlan.zhihu.com/p/497034591">联邦学习中基于Context-Aware 选择策略</a></p>
 <p><a href="https://blog.csdn.net/weixin_51306020/article/details/126232455">面向异构资源的客户端选择问题</a></p>
 <p><a href="https://www.cnblogs.com/AmbitiousMice/p/14787079.html">数据预处理</a>，<a href="https://www.cnblogs.com/AmbitiousMice/p/14786507.html">2</a></p>
 <p><a href="https://bbs.huaweicloud.com/blogs/235209">非独立同分布</a></p>
-<p><a href="https://blog.csdn.net/qq_41444809/article/details/125707616">https://blog.csdn.net/qq_41444809/article/details/125707616</a></p>
+<p>元学习https://blog.csdn.net/qq_41444809/article/details/125707616</p>
 <hr>
 <p><a href="https://blog.csdn.net/weixin_42534493/article/details/118051289">联邦学习中的数据异构性问题综述</a>Federated Learning on Non-IID Data Silos: An Experimental Study</p>
 <p><strong>NIID-Bench提供了全面的划分策略和数据集来覆盖不同的Non-IID场景</strong>，文章还对几种算法进行了系统的比较，并讨论了机器学习在分布式数据中存在的问题及其未来的研究方向。具体的划分策略参考《Advances and Open Problems in Federated Learning》这篇文章中对Non-IID场景的分类。</p>
@@ -545,19 +699,90 @@
 <p>提出了一个基于强化学习的经验驱动的联邦学习框架（Favor），它可以智能地选择参与每轮联邦学习的客户端设备，以抵消非独立同分布数据（Non-IID）引入的偏差，并加快收敛速度[6]。</p>
 <p>提出了一个混合式联邦学习框架（Hybrid Federated Learning ，HFL），该框架包括一个同步内核和一个异步更新器，其主要目的是当 FL 环境中存在 stragglers 时增强 FL 的学习性能[7]。与经典联邦学习类似，同步内核局部更新序列的加权求和。异步更新器将 stragglers 的模型更新纳入到联邦模型训练过程中，这些 stragglers 可能比同步内核晚几步。</p>
 <p>针对有偏客户端选择的联邦学习进行了收敛性分析。作者发现，偏向选择本地损失较高的客户端会提高整个模型的收敛速度。同时，作者提出了一种 Power-of-Choice 的客户端选择方法[9]。</p>
+<p><a href="https://blog.csdn.net/weixin_42534493/article/details/119330027">基于聚类抽样进行客户选择</a> 无偏抽样，</p>
+<p>FedAvg和MD抽样是仅有的能保持最小server-clients通信代价的节点选择策略。FedAvg算法在每轮聚合时都只选择部分节点进行聚合，但它的选择方式是随机的，这将导致有偏抽样，且一些具有独特数据分布的客户可能难以被选中，进而影响全局模型的收敛。</p>
+<p>(MD)抽样的节点选择概率与该节点的相对样本数量（样本数量在所有客户样本数量中的比例）相关。实验证明，MD抽样的表现优于FedAvg，且可实现无偏抽样。这可能使每一轮参与聚合的客户的数据分布与上一轮的存在巨大差异，且一些客户可能从头到尾未被抽到，<strong>进而降低了一些客户的代表性，并使全局模型的收敛存在较大的不稳定性</strong>。</p>
+<p>聚类抽样是一种对MD抽样进行改进的新的无偏客户抽样方案，在保持最小的sever-clients通信代价的基础上，保证更小的节点选择差异性。同时为提高模型聚合时每个客户的代表性，聚类抽样保证了那些具有独特数据分布的客户可以被选中，从而实现更平滑、更快速的全局模型收敛。</p>
+<p>MD根据相同的客户分布w 0 抽样m次，以获得m个客户并根据客户的相对样本数量进行全局聚合
+，聚类抽样则是根据<strong>m个客户分布</strong>每个分布抽样一次，获得m个客户并以 “客户 i 的样本数量在该分布w k ( t ) 中的比例” r k , i 作为聚合权重参与第 t 轮全局聚合。</p>
+<p>满足命题1的聚类抽样算法有很多，文章提出了两种算法，分别是“基于样本数量”和“基于模型相似度”的聚类抽样。</p>
+<p>根据“代表性梯度”，通过层次聚类将客户聚成k个类</p>
+<p><a href="https://www.pudn.com/news/6228daf09ddf223e1ad26aeb.html">聚类抽样</a></p>
 <p>Clustered Sampling: Low-Variance and Improved Representativity for Clients Selection in Federated Learning ：这篇文章提出采用<strong>聚类抽样</strong>的方法进行节点选择，并证明了<strong>聚类抽样能提高用户的代表性、减少不同客户聚合时的权重方差</strong>。本文提出了<strong>基于样本数量</strong>和<strong>基于相似性</strong>的两种聚合抽样方法，并通过实验证明，<strong>采用聚类抽样的方法进行节点选择可以使聚合模型在训练和测试时取得更快更平滑的收敛性</strong>。</p>
+<p><a href="https://blog.csdn.net/weixin_51306020/article/details/126375150">TrisaFed：异步联邦学习框架</a>在<strong>异步联邦学习</strong>（AFL）中，其模型汇聚服务器在收集到少量本地模型后立即进行全局聚合，避免受到速度较慢设备的拖累。</p>
+<p><strong>相当于只选择部分客户端进行运行</strong></p>
+<p><a href="https://zhuanlan.zhihu.com/p/497034591">联邦学习中基于Context-Aware 选择策略</a>，本文主要研究了客户端的选择问题。即每一轮尽可能多地选择客户，并且在每个客户端预算有限的情况下。提出了一种COCS策略，该算法观察客户端本地计算和传输的辅助信息，作出客户端的决策，以在有限预算的情况下最大化网络运营商的效用。本文主要研究了HFL的客户选择问题，提出一种名为COCS的基于学习的策略。该算法基于MAB框架开发。通过获取客户端的<strong>计算信息</strong>，如计算资源、客户-边缘传输信息、带宽和距离等。能否成功地参与到相应的ES中<strong>取决于多方面的因素，这些因素被称为环境（context）</strong>。本文根据环境决定选择的客户端。</p>
+<p>Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge</p>
+<p>论文提出了<a href="https://blog.csdn.net/whitevegetable/article/details/121194892">FedCS</a>协议，将传统联邦学习的随机选取参与用户改为由用户的资源情况选择尽可能多的“优质”用户来进行模型更新</p>
+<p>FedCS协议的具体步骤：</p>
+<ol>
+<li>Resource Request 让随机的C*100%个clients给服务器发送自己的资源信息（无线信道状态、计算能力、任务相关数据集的大小等）</li>
+<li>Client Selection 服务器根据这些信息来评估模型分发、计算、上传步骤所需的时间，并选择参与本轮计算的用户</li>
+<li>Distribution 通过多播来将当前全局模型发送给选中的用户们</li>
+<li>Scheduled Update and Upload 用户们同时进行模型计算，然后依次上传updates</li>
+<li>Aggregation 服务器聚合updates并测试模型。
+重复以上步骤直到模型收敛或到deadline。</li>
+</ol>
+<hr>
+<p><a href="https://www.bilibili.com/read/cv18409025">https://www.bilibili.com/read/cv18409025</a></p>
+<p>Active Federated Learning.</p>
+<p>在每一轮客户端的选择不是随机的，而是以当前模型和客户端数据为条件的概率，以最大限度地提高效率。</p>
+<p>首先提出给局部损失较大的客户分配较高的选择概率。</p>
+<p>Client Selection in Federated Learning: Convergence Analysis and Power-of-Choice Selection Strategies</p>
+<p>在本文中，我们提出了有偏客户选择策略的联邦优化的第一次收敛性分析，并量化了选择偏差对收敛速度的影响。我们发现偏向局部损耗较高的客户端选择可以获得更快的误差收敛。基于这种观点，我们提出了 Power-of-Choice，这是一种通信和计算效率高的客户选择框架，可以灵活地在收敛速度和解决方案偏差之间进行权衡。</p>
+<p>选择随机抽样子集a⊆U中损失最大的tc客户，以减少选择偏差。</p>
+<p>FedCor: Correlation-Based Active Client Selection Strategy for Heterogeneous Federated Learning。<a href="https://github.com/Xu-Jingyi/FedCorr">code</a></p>
+<h2 id="fedcor"><code>FedCor</code></h2>
+<p>an FL framework built on a correlation-based client selection strategy, to boost the convergence rate of FL. <a href="https://www.bilibili.com/read/cv18409025">FedCor</a> 一个建立在<code>基于相关性的客户选择策略</code>上的FL框架，以提高FL的收敛率。基于相关性的异构联邦学习主动客户选择策略</p>
+<p>基于客户端的数据异构是阻碍联邦学习(FL)中有效训练的主要问题之一。在这项工作中，我们提出了基于相关性客户选择策略的fedcor FL框架，以提高FL的收敛速度。我们首先用高斯过程(GP)建模客户之间的损失相关性。在GP模型的基础上，我们推导出了在每一轮中都能显著降低全局预期损失的客户选择策略。此外，我们利用协方差平稳性，在FL场景下开发了一种高效的GP训练方法，且具有较低的通信开销。</p>
+<p>我们提出了一种基于相关性的主动客户选择策略，该策略可以有效缓解数据异质性导致的准确性下降，并显著提高FL的收敛性。我们的关键思想主要基于以下直觉：</p>
+<p>客户的贡献并不相等。例如，在“好”客户机上使用大型且平衡的数据集进行训练可以减少大多数客户机的损失，而在“坏”客户机中使用小型且极为偏颇的数据集训练可能会增加其他客户机的损耗。</p>
+<p>客户端不独立贡献。选择一个客户机的影响取决于其他所选客户机，因为它们的本地更新将被聚合。</p>
+<p>任务是选择两个客户机(不同的标记表示不同策略的客户机选择)来训练二进制分类器(如行所示)。独立选择两个局部损失最大的客户端(“Ind Result”)的选择策略不能减少全局损失。相比之下，我们的方法考虑了客户机之间的相关性(“Cor Result”)，并得出了一个可以实现几乎最小全局损失的客户机选择(“Opt Result”)。</p>
+<p>我们用高斯过程(GP)对客户流失变化进行建模，并提出了一种可解释的客户选择策略，在每一轮通信中显著降低了预期的全局损失。提出了一种利用协方差平稳性降低通信成本的GP训练方法。实验表明，采用该方法训练的GP能够很好地捕获客户端相关性。</p>
+<p>主动客户选择，即尝试在每一轮中有策略地选择培训客户，而不是千篇一律地选择。Goetz等[6]首先提出给局部损失较大的客户分配较高的选择概率。Cho等人[4]选择随机抽样子集a⊆U中损失最大的tc客户，大小为d &gt; C，以减少选择偏差。然而，两者在客户选择时都没有考虑到客户之间的相关性。</p>
+<p>考虑到隐私和通信的限制，FL算法通常假设客户端部分参与并执行局部模型更新。</p>
+<p>使第4.1节中损失减少的后视期望最大化。然后，第4.2节展示了经验证据，表明每一轮通信中损耗变化的先验分布可以建模为高斯过程(GP)。基于这一观察结果，我们利用GP来解决优化问题，并在第4.3节中获得了针对异构FL的有效客户选择策略。我们进一步分析了客户选择策略的选择标准，并在第4.4节给出了直观的解释。最后，在第4.5节中，我们描述了如何在通信约束FL中训练GP参数。</p>
+<p>为了实现快速收敛，我们希望在每轮通信结束后找到能使全局损失减少最大的客户选择策略。在FL中，通过对不同客户端选择的多次试验来寻找最佳客户端选择是不切实际的，因为它引入了大量的通信和计算开销。因此，我们需要一种有效的方法来预测不同客户选择的全局损失减少量，并在非常有限的试验下做出决策。如果我们能够预测所选训练客户端的损失变化(∆ltKt (Kt))，我们就可以利用其后验均值预测全局损失变化并据此做出决策。</p>
+<p>在贝叶斯优化中假设GP优先于未知目标函数是一种常见的做法。在一个通信轮中损失变化的先验分布遵循GP。具体来说，我们随机抽样一些客户选择，并执行一轮训练，以获得损失变化的样本。然后，我们对这些损失变化样本进行主成分分析，并绘制前几个主成分的直方图。图2中的红线是带有样本均值和样本方差的高斯PDF。我们可以看到这个高斯分布可以很好地近似样本的分布。</p>
+<p>虽然我们已经得到了计算后验期望的概率模型，但仍然没有确定如何预测所选训练客户的损失变化。我们开发了一种预测损失变化的迭代方法，每次迭代选择一个客户端，如算法1所示。在一次迭代中有三个步骤:</p>
+<p>1.在每次迭代中，我们首先为每个客户端k(如果它被选中的话)做出一个预测∆__ lt k。一般情况下，所选客户直接参与模型更新，损失减少较大。</p>
+<p>2.客户端k *的选择是根据最后一步中所做的损失变化预测来最小化总体损失的后验期望</p>
+<p>3.在选择客户端k *之后，我们更新GP以k *的损失变化预测为条件进行下一次迭代</p>
+<p>我们的方法与传统的贝叶斯优化方法有一些相似之处:使用GP作为目标函数的先验，使用UCB和后验分布进行迭代选择。有一个关键的区别:在每一轮通信中，我们只使用预测而不是对全局损失变化的测量来确定客户选择，而传统的贝叶斯优化需要一系列的测量作为新信息来做出决策。对全局损失变化的测量将引入巨大的通信开销，在FL中是不可行的。</p>
+<p>我们的选择准则考虑了客户之间的相关性，与那些只独立考虑每个客户损失的算法相比，我们的选择准则可以进行更好的选择</p>
+<p>k &lsquo;的选择不仅考虑它与其他客户端(rik &lsquo;)的相关性，而且更倾向于与之前选择的客户端k1具有较小相关性的客户端rk1k &lsquo;。这个准则惩罚了选择冗余，导致了数据多样化的客户端选择，从而减少了方差，使训练过程更加稳定。</p>
+<p>实际上，不同客户损失变化之间的相关性主要来自于他们的数据集之间的相似性，这些相似性在FL过程中是不变的。</p>
+<p>MDA: Availability-Aware Federated Learning Client Selection</p>
+<p>Data Heterogeneity-Robust Federated Learning via Group Client Selection in Industrial IoT</p>
 <hr>
 <h2 id="自适应">自适应？</h2>
+<p>自适应学习率衰减：<a href="https://zhuanlan.zhihu.com/p/376030295">blog</a>，<a href="https://www.jianshu.com/p/dfeba2ac6559">2</a>梯度下降的步长</p>
 <p>自适应选择，自适应分配权重?</p>
-<p><a href="https://github.com/lokinko/Federated-Learning">4.4 Adaptive Aggregation</a></p>
+<p><a href="https://github.com/lokinko/Federated-Learning">Adaptive Aggregation</a>自适应聚合</p>
 <ul>
-<li><a href="https://link.springer.com.remotexs.ntu.edu.sg/chapter/10.1007/978-3-030-14880-5_2">Asynchronous Federated Learning for Geospatial Applications</a> (ECML PKDD Workshop 2018）</li>
-<li><a href="https://arxiv.org/abs/1903.03934">Asynchronous Federated Optimization</a></li>
-<li><a href="https://arxiv.org/abs/1804.05271">Adaptive Federated Learning in Resource Constrained Edge Computing Systems</a> (IEEE Journal on Selected Areas in Communications, 2019）</li>
-<li><a href="https://arxiv.org/abs/2102.06387">The Distributed Discrete Gaussian Mechanism for Federated Learning with Secure Aggregation</a> (ICML 2021)</li>
+<li>
+<p><a href="https://link.springer.com.remotexs.ntu.edu.sg/chapter/10.1007/978-3-030-14880-5_2">Asynchronous Federated Learning for Geospatial Applications</a> (ECML PKDD Workshop 2018）<a href="https://www.fx361.com/page/2021/0420/8154810.shtml">1</a></p>
+<p>联邦学习需要移动设备上传模型参数到联邦学习服务器进行聚合。传统的全局聚合的方法是同步的，即在一个固定的时间间隔内所有的设备都在本地进行一定轮数的训练，之后再聚合。对于给定的资源限制，需要研究如何通过调整聚合为适应性聚合，即能够根据资源限制和训练效率动态调整聚合时间来最大化训练效率</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/1903.03934">Asynchronous Federated Optimization</a> <a href="https://zhuanlan.zhihu.com/p/538944421">1</a></p>
+<p>异步：在处理大量边缘设备时，可能会有大量掉队者。由于可用性和完成时间因设备而异，由于计算容量和电池时间有限，全局同步很困难，尤其是在联合学习场景中。异步训练相对更加灵活，在系统存在离散和异构延迟的情况下展现出了更通用的优势：无需等待其它设备参与全局聚合。然而，聚合权重由于某些设备模型的延迟上载需要被慎重考虑。</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/1804.05271">Adaptive Federated Learning in Resource Constrained Edge Computing Systems</a> (IEEE Journal on Selected Areas in Communications, 2019） <a href="https://zhuanlan.zhihu.com/p/409062581">1</a></p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/2102.06387">The Distributed Discrete Gaussian Mechanism for Federated Learning with Secure Aggregation</a> (ICML 2021)</p>
+</li>
 </ul>
+<p>Adaptive Federated Learning in Resource
+Constrained Edge Computing Systems</p>
+<ol>
+<li>Wei Wan, Shengshan Hu, Jianrong Lu, LEO YU ZHANG, Hai Jin and Yuanyuan He. <a href="https://arxiv.org/pdf/2204.13256.pdf">Shielding Federated Learning: Robust Aggregation with Adaptive Client Selection</a></li>
+</ol>
 <h2 id="自步学习">自步学习</h2>
-<p>参考<a href="https://blog.csdn.net/weixin_37805505/article/details/79144854">1</a>，<a href="https://blog.csdn.net/selous/article/details/78144377">2</a>,<a href="https://zhuanlan.zhihu.com/p/365559870">3</a>,<a href="https://blog.csdn.net/bear_kai/article/details/77771127">4</a>,<a href="https://www.codetd.com/article/12556964">5</a>,</p>
+<p>参考<a href="https://blog.csdn.net/weixin_37805505/article/details/79144854">1</a>,<a href="https://blog.csdn.net/selous/article/details/78144377">2</a>,<a href="https://zhuanlan.zhihu.com/p/365559870">3</a>,<a href="https://blog.csdn.net/bear_kai/article/details/77771127">4</a>,<a href="https://www.codetd.com/article/12556964">5</a>,</p>
 <p>自步学习：学习算法在每一步迭代中决定下一步学习样本。</p>
 <p>样本的选择在自步学习中并不是随机的，或是在一次迭代中全部纳入训练过程中，而是通过一种<strong>由简到难的</strong>有意义的方式进行选择的。那么，选择<strong>简单的</strong>样本，也就是选择<strong>损失小的</strong>样本，也就是在线性回归问题中，<strong>和模型间距离近的</strong>样本。</p>
 <p>SPL不是模型,只是一种不同的带权loss函数,所以在实现之前你需要选择一个model</p>
@@ -584,7 +809,7 @@
 <p>再研究一下</p>
 <p>模型复杂程度对于性能的影响</p>
 <p>隐私保护对性能的影响</p>
-<p>通信效率？</p>
+<p>通信效率？实际上联邦学习更看重communication round这个参数，<a href="https://developer.aliyun.com/article/822552">1</a></p>
 <p>客户端价值评价?</p>
 <p><code>！！！！</code>模型聚合？<a href="https://www.cnblogs.com/orion-orion/archive/2021/12/02/15635803.html">1</a>，<a href="https://www.ab62.cn/article/15250.html">2</a></p>
 <p>加权平均</p>
@@ -595,7 +820,7 @@
 <p>客户端的数量？</p>
 <p><a href="https://mp.weixin.qq.com/s/ZjP-55H19xrVQOOL0eqbeg">NOIID</a></p>
 <p>NOIID-<a href="https://zhuanlan.zhihu.com/p/468992765">dirichlet</a></p>
-<p><a href="https://www.zhihu.com/people/orion_orion/posts?page=2">fl数据集</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/468486092">fl数据集</a></p>
 <hr>
 <p>近期计划</p>
 <p>2.fedlab框架
@@ -614,6 +839,22 @@
 <p>（比如大佬们的Fedlab就在这里</p>
 <p>感觉要实现设备选择策略的话可以自己在这里做微调</p>
 <p><img src="/images/202206/23.png" alt=""></p>
+<p>&ndash;</p>
+<p>The Non-IID Data Quagmire of Decentralized Machine Learning
+On the Convergence of FedAvg on Non-IID Data
+这两篇</p>
+<p>按照这个第一篇文章提供的参数尝试一下。</p>
+<p>这是一个涉及深度学习随机性的深坑，尽量复刻前人的操作。</p>
+<p>&ndash;</p>
+<p>差分隐私：</p>
+<p>Federated Learning With Differential Privacy: Algorithms and Performance Analysis</p>
+<p>这篇很经典</p>
+<p>流程，看他的那个算法我觉得挺清楚的。梯度下降用的fedprox</p>
+<ul>
+<li></li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/s/v9jMH6fbYhSs2wr1YfumvQ">https://mp.weixin.qq.com/s/v9jMH6fbYhSs2wr1YfumvQ</a></p>
+<p>&ndash;</p>
 <p>联邦学习里资源分配相关文章 都是怎么仿真的呀 第一次接触这方面 大家有推荐好上手的代码吗可以参考下FedScale：https://github.com/SymbioticLab/FedScale，之前我们做过一些资源分配（如客户端选择）的工作</p>
 <p>我自己看过的一些，可以关注一下cmu的virginia组</p>
 <ol>
@@ -681,20 +922,21 @@ Towards Representation Identical Privacy-Preserving Graph Neural Network via Spl
 <p><code>Towards Federated Learning against Noisy Labels via Local Self-Regularization</code></p>
 <p><a href="https://github.com/Sprinter1999/FedLSR">code</a></p>
 <p>噪声记忆效应：正确标记的样本会被神经网络优先拟合，随后去拟合标签错误的样本。拟合正确的样本会降低的loss大一点，所以可能会偏向于先拟合正确的样本，再慢慢去拟合错误的样本</p>
+<p><img src="/images/202206/27.png" alt=""></p>
 <p>预实验，在fl场景下，也会出现这种现象，优先去学习正确的容易的模式</p>
 <p>标签生成的方法，网络数据中的上下文，淘宝衣服的标题，上下文过滤的方式标签的识别；机器自动生成的标注，在小数据集下预训练的模型，会不可避免的带来标注的错误。</p>
+<p><img src="/images/202206/28.png" alt=""></p>
 <p>原始图像和增强后的图像，喂到同一个网络中，分别得到两个output的logits，送到两个组分（成分）中，一个去做混合预测，一个去做自蒸馏。将两种方式概括为，一个是隐私的约束：通过锐化运算和熵正则化提高模型识别的置信度；另一个是显示的约束：通过自蒸馏缩小原始实例和扩充实例的模型输出的差异</p>
 <p>1、隐式</p>
 <p>把预测进行混合。输出两个logits，o1，o2，通过softmax输入伪标签，p1，p2作为判别，然后做融合。</p>
-<p>锐化操作：五分类，模型可以给出正确的预测结果为第二类，无论是增强后的图像还是原始图像都可以给出正确的结果，但是原始给出的标签是第一类，错误的。所以想通过这种方式，去加强模型对于自身判别的信心，从而抑制模型过度的拟合错误的标注。</p>
+<p>锐化操作：五分类，模型可以给出正确的预测结果为第二类，无论是增强后的图像还是原始图像都可以给出正确的结果，但是原始给出的标签是第一类，错误的。所以想通过这种方式，去<code>加强模型对于自身判别的信心</code>，从而抑制模型过度的拟合错误的标注。</p>
 <p>然后拿出sharpen后的判别ps，去做交叉熵。能够尽可能的减少对于错误样本的拟合。</p>
 <p>熵正则化：额外的优化</p>
 <p>2、显式</p>
-<p>希望对于原始数据和增强后的数据给出的判别比较接近。</p>
+<p>希望<code>对于原始数据和增强后的数据给出的判别比较接近</code>。</p>
 <p>知识蒸馏：实例级自蒸馏，通过知识蒸馏的温度去调整模型输出，以JS散度或L1 loss为度量</p>
 <p>对logit做一个倍数的调整，调整后再去做softmax，得到概率输出定义为q1,q2。然后得出一个约束项，使得调整后的q1,2比较接近。具体采用JS散度或L1 loss为度量。</p>
 <p>常见的两种噪声情况：对称噪声，Pairwise 对偶噪声。</p>
-<p><code>respect</code></p>
 
     </div>
 
@@ -767,7 +1009,7 @@ Towards Representation Identical Privacy-Preserving Graph Neural Network via Spl
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
   </span>
 </div>
 

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习paper">
 <meta itemprop="description" content="FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data blog:[1],[2] code:[1],[2] 1-&gt;blog:[1],[2] baseline:FedSGD,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，"><meta itemprop="datePublished" content="2022-10-14T19:57:38+08:00" />
 <meta itemprop="dateModified" content="2022-10-14T19:57:38+08:00" />
-<meta itemprop="wordCount" content="4130">
+<meta itemprop="wordCount" content="4955">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习paper"/>
 <meta name="twitter:description" content="FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data blog:[1],[2] code:[1],[2] 1-&gt;blog:[1],[2] baseline:FedSGD,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-10-14 </span>
         
-          <span class="more-meta"> 4130 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 4955 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
@@ -149,7 +149,12 @@
       <ul>
         <li><a href="#fedavg">FedAvg</a></li>
         <li><a href="#fedprox">FedProx</a></li>
-        <li><a href="#noiid">NOIID</a></li>
+        <li><a href="#noiid">NOIID</a>
+          <ul>
+            <li><a href="#狄利克雷分布dirichlet-distribution">狄利克雷分布(Dirichlet Distribution)</a></li>
+          </ul>
+        </li>
+        <li><a href="#paperlist">Paperlist</a></li>
       </ul>
     </li>
   </ul>
@@ -185,7 +190,7 @@
 <p>[6]中介绍了几种数据偏离同分布的常见方式，包括：特征分布倾斜（协变量偏移）；标签分布倾斜（先验概率偏移）；标签相同、特征不同（概念偏移）；特征相同，标签不同（概念偏移）；数量倾斜。真实世界中的联邦学习数据集可能包含这些影响的混合，学术研究时都是对某些情况做模拟，而且不同的情况可能也要求不同的聚合策略。</p>
 <h2 id="fedprox">FedProx</h2>
 <p><code>Federated Optimization in Heterogeneous Networks</code></p>
-<p>blog:[<a href="https://zhuanlan.zhihu.com/p/360185253">1</a>],[<a href="https://blog.csdn.net/weixin_51306020/article/details/126319734?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-126319734-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-126319734-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=2">2</a>],[<a href="https://blog.csdn.net/weixin_42534493/article/details/118446292?spm=1001.2101.3001.6650.8&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-118446292-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-118446292-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=12">3</a>]</p>
+<p>blog:[<a href="https://zhuanlan.zhihu.com/p/360185253">1</a>],[<a href="https://blog.csdn.net/weixin_51306020/article/details/126319734?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-126319734-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-126319734-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=2">2</a>],[<a href="https://blog.csdn.net/weixin_42534493/article/details/118446292?spm=1001.2101.3001.6650.8&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-118446292-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-118446292-blog-123400276.pc_relevant_multi_platform_whitelistv3&amp;utm_relevant_index=12">3</a>],[<a href="https://zhuanlan.zhihu.com/p/538201600">4</a>]</p>
 <p>code:[<a href="https://github.com/litian96/FedProx">1</a>],[<a href="https://github.com/ki-ljl/FedProx-PyTorch">2</a>]-&gt;blog:[<a href="https://blog.csdn.net/Cyril_KI/article/details/123285307">1.1</a>],[<a href="https://blog.csdn.net/qq_45478482/article/details/120837734?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=FedProx&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-120837734.nonecase&amp;spm=1018.2226.3001.4187">1.2</a>]</p>
 <p>联邦学习在使用过程中面临的两大挑战：</p>
 <p><strong>数据异构（主要是用户间数据Non-IID）
@@ -297,6 +302,13 @@
 <ul>
 <li>各参与方数据集大小不同</li>
 </ul>
+<p>&ndash;</p>
+<h3 id="狄利克雷分布dirichlet-distribution">狄利克雷分布(Dirichlet Distribution)</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/78743630?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_oi=693565951899074560&amp;utm_psn=1565622651724464128&amp;utm_source=wechat_session">BLOG</a></p>
+<p><a href="https://www.cnblogs.com/orion-orion/p/15897853.html">可视化</a></p>
+<p>Yasaman Khazaeni. Bayesian nonparametric federated learning of neural networks. In InternationalConference on Machine Learning, pp. 7252–7261. PMLR, 2019.这篇文章带的好头</p>
+<p>fedavg+finetune yyds?</p>
+<p>Rethinking Data Heterogeneity in Federated Learning: Introducing a New Notion and Standard Benchmarks</p>
 <hr>
 <p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA5NTQ0MTI4OA==&amp;action=getalbum&amp;album_id=2537375991384473601&amp;scene=173&amp;from_msgid=2456920023&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect">隐语小课</a></p>
 <p>模型聚合、梯度聚合</p>
@@ -312,6 +324,10 @@
 <p>最近的另一项研究FedNova对FedAvg的模型聚合阶段进行了改进，其认为当各方具有不同的计算能力时(时间限制或不同的本地数据集大小)，不同客户端参与方可能在每轮需要执行不同数量的局部步骤(自适应调整)。</p>
 <p>因此，为了确保全局更新没有偏差，FedNova在更新全局模型之前，根据其局部迭代次数对每一方的局部更新进行归一化和缩放。FedNova也只对FedAvg进行了轻量级的修改，并且在更新全局模型时计算开销可以忽略不计。</p>
 <p><a href="https://blog.csdn.net/qq_43663979/article/details/120214084?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-11-120214084-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">SCAFFOLD</a>,<a href="https://blog.csdn.net/Cyril_KI/article/details/123108780?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-20-123108780-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">2</a>,<a href="https://zhuanlan.zhihu.com/p/538941775">3</a></p>
+<p>当客户端数据是非独立同分布时，FedAvg的收敛速度会受到所谓client-drift的影响。作为一种解决方案，本文作者提出了SCAFFOLD，该算法使用控制变量（方差缩减）来纠正其局部更新中的client-drift。</p>
+<p>client-drift在之前的一篇文章中实际上已经提到过了：如果数据是独立同分布的，那么本地模型训练较多的epoch会加快全局模型的收敛；如果不是独立同分布的，不同设备在利用非IID的本地数据进行训练并且训练轮数较大时，本地模型将会偏离初始的全局模型。</p>
+<p>如果客户端数据分布不一致，那么本地模型在更新时会朝着不同方向进行优化，这会使得我们很难得到一个普适的全局模型。</p>
+<p>为了缓解client-drift，本文作者提出了一种新的联邦优化算法SCAFFOLD，SCAFFOLD引入了服务器控制变量c和客户端控制变量ci，控制变量中含有模型的更新方向信息，通过在本地模型的更新公式中添加一个修正项c−ci，SCAFFOLD克服了梯度差异，有效缓解了client-drift。</p>
 <p>pfedme</p>
 <p><a href="https://blog.csdn.net/weixin_42534493/article/details/118556509?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-12-118556509-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">DITTO</a></p>
 <p><a href="https://blog.csdn.net/hhhhhhhhhhwwwwwwwwww/article/details/118606345?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-16-118606345-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">MOON</a>：模型对比联邦学习,<a href="https://blog.csdn.net/qq_43827595/article/details/122358161?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-24-122358161-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">2</a></p>
@@ -337,6 +353,18 @@
 <p>code:[<a href="https://github.com/Xtra-Computing/NIID-Bench">1</a>]-[<a href="https://zhuanlan.zhihu.com/p/554878748">blog</a>]</p>
 <p>[<a href="https://github.com/lxcnju/FedRepo">2</a>]-[<a href="https://zhuanlan.zhihu.com/p/502972718">blog</a>]</p>
 <p>[<a href="https://github.com/SMILELab-FL/FedLab">fedlab</a>]-<a href="https://zhuanlan.zhihu.com/p/477341491">blog</a>-&gt;<a href="https://github.com/SMILELab-FL/Dive-into-Federated-Learning">github</a></p>
+<p><code>cvpr2022</code></p>
+<p>[1] Federated Class-Incremental Learning(联邦类增量学习)
+paper：<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/2203.11473">https://arxiv.org/abs/2203.11473</a>
+code：<a href="https://link.zhihu.com/?target=https%3A//github.com/conditionWang/FCIL">https://github.com/conditionWang/FCIL</a></p>
+<p>[2] FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction(通过局部漂移解耦和校正与非 IID 数据进行联邦学习)
+paper：<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/2203.11751">https://arxiv.org/abs/2203.11751</a>
+code：<a href="https://link.zhihu.com/?target=https%3A//github.com/gaoliang13/FedDC">https://github.com/gaoliang13/FedDC</a></p>
+<p>[3] FedCor: Correlation-Based Active Client Selection Strategy for Heterogeneous Federated Learning(用于异构联邦学习的基于相关性的主动客户端选择策略)
+paper：<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/2103.13822">https://arxiv.org/abs/2103.1382</a></p>
+<hr>
+<h2 id="paperlist">Paperlist</h2>
+<p><a href="https://www.bilibili.com/read/cv18409025">1</a></p>
 
     </div>
 
@@ -408,7 +436,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
   </span>
 </div>
 

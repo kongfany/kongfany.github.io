@@ -6,14 +6,23 @@
     <description>Recent content on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 20 Oct 2022 14:22:33 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Nov 2022 09:58:50 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>域适应联邦学习</title>
+      <link>https://kongfany.github.io/post/fl_da/</link>
+      <pubDate>Tue, 22 Nov 2022 09:58:50 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fl_da/</guid>
+      <description>域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati</description>
+    </item>
+    
     <item>
       <title>fedlab</title>
       <link>https://kongfany.github.io/post/fl_fedlab/</link>
       <pubDate>Thu, 20 Oct 2022 14:22:33 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/fl_fedlab/</guid>
-      <description>[fedlab]-blog-&amp;gt;github benchmarks 数据划分，整合 fcube 专栏</description>
+      <description>[fedlab]-blog-&amp;gt;github benchmarks 数据划分，整合 fcube 专栏 https://www.bilibili.com/video/BV1pG4y1t7t5/?spm_id_from=333.999.list.card_archive.click&amp;amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac &amp;ndash; 侧重点在 adaptive semi https://ijcai2022.scimeeting.cn/cn/web/program/15678 https://ijcaipcfl2022.scimeeting.cn/cn/web/index/15792_1264754__ Adaptive: 之前一篇待看Adaptive Federated Learning in Resource Constrained Edge Computing Systems Source-Adaptive Discriminative Kernels based Network for Remote Sensing Pansharpening Adaptive Convolutional Dictionary Network for CT Metal Artifact Reduction ER-SAN: Enhanced-Adaptive Relation Self-Attention Network for Image</description>
     </item>
     
     <item>

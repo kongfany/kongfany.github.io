@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>域适应联邦学习 - 大胖狗来了</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/fl_da/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="域适应联邦学习" />
+<meta property="og:description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/fl_da/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-22T09:58:50+08:00" />
+<meta property="article:modified_time" content="2022-11-22T09:58:50+08:00" />
+
+<meta itemprop="name" content="域适应联邦学习">
+<meta itemprop="description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati"><meta itemprop="datePublished" content="2022-11-22T09:58:50+08:00" />
+<meta itemprop="dateModified" content="2022-11-22T09:58:50+08:00" />
+<meta itemprop="wordCount" content="10744">
+<meta itemprop="keywords" content="Federated Learning,Domain Adaptation," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="域适应联邦学习"/>
+<meta name="twitter:description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">大胖狗来了</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">大胖狗来了</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">域适应联邦学习</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-11-22 </span>
+        
+          <span class="more-meta"> 10744 words </span>
+          <span class="more-meta"> 22 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#域适应">域适应</a>
+          <ul>
+            <li><a href="#类别">类别</a></li>
+            <li><a href="#任务相关性">任务相关性</a></li>
+            <li><a href="#三种基本技术">三种基本技术</a></li>
+          </ul>
+        </li>
+        <li><a href="#域适应-联邦学习">域适应 联邦学习</a>
+          <ul>
+            <li><a href="#federated-adversarial-domain-adaptation">Federated Adversarial Domain Adaptation</a></li>
+            <li><a href="#federated-adversarial-debiasing">Federated Adversarial Debiasing</a></li>
+            <li><a href="#kd3a-unsupervised-multi-source-decentralized-domain-adaptation-via-knowledge-distillation">KD3A: Unsupervised Multi-Source Decentralized Domain Adaptation via Knowledge Distillation</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="域适应">域适应</h2>
+<p>blog：[<a href="https://blog.csdn.net/weixin_42990464/article/details/117149006">1</a>]</p>
+<p>在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptation，DA ）。因为其任务相同，域适应属于一种直推式迁移学习。</p>
+<p>另一方面，如果你没有为特定问题提供手动注释的大型数据集，卷积神经网络还允许利用已经通过迁移学习训练一个类似问题的网络的其他数据集。在这种情况下，你可以使用一个在大型数据集上预训练的网络，并使用你自己的带注释的小型数据集对其一些上层进行调优。</p>
+<p>假定你的训练数据（无论大小）都代表了基本分布。但是，如果测试时的输入与训练数据有显著差异，那么模型的性能可能不会很好。在这些场景中表现不佳的原因是问题域发生了变化。</p>
+<p>在这种特殊情况下，输入数据的域发生了变化，而任务域（标签）保持不变。在其他情况下，你可能希望使用来自相同域的数据（针对相同的基本分布绘制）来完成新任务。同样，<code>输入域和任务域可以同时发生变化</code>。在这些情况下，域适应 就会来拯救你。域适应是机器学习的一个子学科，它处理的 场景是，在不同（但相关）的目标分布的背景下，使用在源分布上训练的模型。通常，<code>域适应使用一个或多个源域中的标记数据来解决目标域中的新任务</code>。因此，源域和目标域之间的关联程度通常决定了适应的成功程度。</p>
+<h3 id="类别">类别</h3>
+<p>域适应有多种方法。在“浅层（不是深度）”域适应中，通常使用两种方法：重新加权源样本，在重新加权样本上进行训练，并尝试 学习共享空间来匹配 源和目标数据集的 分布。虽然这些技术也可以应用于深度学习，深度神经网络 学习的深度特征，通常会产生更多的可转移表示。</p>
+<p>作者区分不同类型的域适应，<code>取决于任务的复杂性、可用的标记 / 未标记数据的数量以及输入特征空间的差异</code>。它们特别定义了域适应问题，<code>即任务空间相同，区别仅在与输入域的散度（divergence）</code>。根据这个定义，域适应可以是同构（homogeneous）的（输入特征空间相同，但数据分布不同），也可以是异构（heterogeneous）的（特征空间及其维度可能不同）。
+根据你从<code>目标域获得的数据</code>，域适应可以进一步分类为 监督（supervised）域适应（你确实标记了来自目标域的数据，尽管这些数据的数量，对于训练整个模型来说还是太小了）、半监督（semi-supervised）域适应（你既有已标记的数据，也有未标记的数据）、无监督（unsupervised）域适应（你没有来自目标域的任何标记数据）。</p>
+<h3 id="任务相关性">任务相关性</h3>
+<p>我们如何确定在源域中训练的模型是否可以适应我们的目标域呢？</p>
+<p>如果两个任务都使用相同的特征进行决策，我们就可以将它们定义为相似的任务。另一种可能性是，如果两个任务的参数向量（即分类边界）很接近，则将它们定义为相似的。</p>
+<p>如果两个任务的数据都可以通过一组变换 F 从固定的概率分布中生成，则这两个任务是 F 相关的。</p>
+<p>尽管有这些理论上的考虑，但在实践中，可能有必要尝试在自己的数据集上进行域适应，看看是否可以通过使用源任务的模型为目标任务获得一些好处。通常，任务相关性可以通过简单的推理来确定，例如来自不同视角或不同光照条件的图像，或者在医学领域中来自不同设备的图像等。</p>
+<h3 id="三种基本技术">三种基本技术</h3>
+<h4 id="基于散度的域适应">基于散度的域适应</h4>
+<p>基于散度的域适应，通过 最小化源和目标数据分布之间的散度准则来实现，从而实现 域不变的特征表示。如果我们找到这样一种特征表示，分类器将能够在这两个域上执行得同样好。当然，这是假设存在这样一种表示，而这种表示又假设任务以某种方式相关。</p>
+<p>最常用的四种散度度量是：最大均值差异（Maximum Mean Discrepancy，MMD）、相关对齐（Correlation Alignment，CORAL）、对比域差异（Contrastive Domain Discrepancy，CCD）和 Wasserstein 度量。</p>
+<h4 id="基于对抗的域适应">基于对抗的域适应</h4>
+<p>这种技术是尝试通过对抗训练来实现域适应。</p>
+<p>一种方法是使用 生成对抗网络 来生成与源域相关的合成目标数据（例如通过保留标签）。然后将这些合成数据用来训练目标模型。</p>
+<h4 id="基于重建的域适应">基于重建的域适应</h4>
+<h2 id="域适应-联邦学习">域适应 联邦学习</h2>
+<p>联邦学习➕域自适应
+源域和目标域  目标域是无标签的也就是无监督学习  迁移学习
+目标域上迁移精度≤源域上的损失+源域和目标域上的特征距离(源域和目标域的特征分布对齐)
+对齐:MMD距离(计算分布距离，取一个batch的目标域和源域映射到特征空间计算距离，要求最小化距离
+问题:需要源域和目标域的数据&ndash;Fl
+源域和目标域的数据保存在本地
+同时迁移学习也是一种noiid问题(源域和目标域)
+&mdash;联邦迁移学习
+如何对齐？通信损失和隐私安全？负迁移问题(每个源域的贡献大小？
+不考虑目标域源域，将目标域扩展成同等地位源域，在源域上做联邦学习，信息共享，完成对没有标注的目标域的知识迁移其实也就和之前的联邦半监督学习的场景很类似，一部分客户端有标签，一部分没有。</p>
+<p><a href="https://www.bilibili.com/video/BV1pG4y1q7qd/?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">https://www.bilibili.com/video/BV1pG4y1q7qd/?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac</a></p>
+<h3 id="federated-adversarial-domain-adaptation">Federated Adversarial Domain Adaptation</h3>
+<p><a href="https://openreview.net/forum?id=HJezF3VYPB">paper</a></p>
+<p><a href="https://drive.google.com/file/d/1OekTpqB6qLfjlE2XUjQPm3F110KDMFc0/view">code</a></p>
+<p>blog：<a href="https://zhuanlan.zhihu.com/p/497987724">1</a>,<a href="https://ereebay.me/posts/62459/">2</a>,<a href="https://baijiahao.baidu.com/s?id=1683687966022769742&amp;wfr=spider&amp;for=pc">3</a>,<a href="https://www.thepaper.cn/newsDetail_forward_7214027">4</a></p>
+<p>联邦学习背后的主要思想是让每个节点学习自己的本地数据，而不共享数据或模型参数。 虽然联邦学习承诺更好的隐私和效率，但现有方法忽略了每个节点上的数据以非独立同分布的方式收集的事实，导致节点之间的<strong>domain shift（邻域偏移）</strong>。 例如，一台设备可能主要在室内拍照，而另一台设备主要在室外拍照。</p>
+<p>本文解决了将知识从分散节点转移到具有不同数据域的新节点的问题，而不需要用户的任何额外监督。 文章定义了这个新问题：<strong>无监督联邦领域自适应 (UFDA)</strong></p>
+<p>联邦设置提出了几个额外的挑战：</p>
+<ul>
+<li>首先，数据存储在本地，<strong>无法共享</strong>，这阻碍了主流领域适应方法，因为它们需要访问标记的源数据和未标记的目标数据；</li>
+<li>其次，模型参数针对每个节点分别进行训练，并以<strong>不同的速度收敛</strong>，同时还根据两个域的接近程度为目标节点提供不同的贡献；</li>
+<li>最后，从源域节点学习到的知识是高度耦合的entangled，这可能会导致<strong>负迁移</strong>。</li>
+</ul>
+<p>disentanglement：<a href="https://zhuanlan.zhihu.com/p/337361837">解耦</a> 一句话概括就是：解耦的特征中，每一个维度都表示具体的、不相干的意义。其中最重要的是要让学到的表征具备人类可理解的意义。但是最核心且不变的诉求是要让表征可读！</p>
+<ul>
+<li>一个问题，或者数据集中，一定存在某种控制它们的变量（因子）。每一个变量都独立地影响结果。人有五官，它们都对容貌产生影响并且相互独立。嘴巴歪了和眼睛歪不歪没有关系。但是当我们得到一张人脸的照片时，所有的这些因子都被隐含在图片上，我们不再能直接获取这些因子。这个时候，我们说因子耦合了。我们所有的观察（observation）都是耦合的结果。因为没有耦合就没有变量，没有变量也就没有不同。所以<code>解耦的目的就是把这些耦合了的变量重新拆开</code>。解耦可以理解为某种程度上的降维。</li>
+</ul>
+<p>Feature Disentanglement:特征解耦</p>
+<p>团队针对上述问题提出了一种称为<strong>联邦对抗域适应 (Federated Adversarial Domain Adaptation, FADA)</strong> 的解决方案，旨在通过对抗性技术解决联邦学习系统中的域偏移问题。 团队的方法通过为每个源域节点训练一个模型并使用源域梯度的聚合更新目标模型来保护数据隐私，与经典联邦学习不同，FADA 在保证数据分散学习模型的同时实现了减少域偏移。首先，<code>文章从理论角度分析联邦域适应问题并提供泛化界限</code>。 基于理论分析的结果，作者提出了一种有效的基于对抗性自适应和表示分离的自适应算法。此外，作者还设计了一个动态注意力模型来处理联邦学习中不同的收敛速度问题。</p>
+<p>FADA 是指：在联邦学习的架构中使用对抗性适应技术，通过在每个源节点上训练一个模型并通过源梯度（source gradients）的聚合来更新目标模型，同时保护数据隐私、减少域迁移。</p>
+<p>图 1. （a） 本文针对 UFDA 问题提出了一种方法，令模型在每个源域上分别训练，并利用动态注意力机制聚合其梯度来更新目标模型；（b） FADA 模型学习使用对抗性域对齐（红线）和特征分解器（蓝线）来提取域不变特征。</p>
+<p>图 1（b）中提到 FADA 使用对抗域对齐和特征分离器来提取域不变特征。关于提取域不变特征的问题，主要是指深度神经网络能够在多个隐藏因素高度纠缠的情况下提取特征。学习分离表示有助于去除不相关和特定领域的特征，从而只对数据变化的相关因素建模。</p>
+<p>联邦域自适应的泛化界：</p>
+<p>联邦对抗域适应：</p>
+<p>我们提出了动态注意模型来学习权重 α 和联合对抗性对齐，以最小化源域和目标域之间的差异，如图 1 所示。此外，我们利用表示解缠结来提取域不变表示以进一步 加强知识转移。</p>
+<p>注意力机制：在联邦域自适应系统中，<code>不同节点上的模型具有不同的收敛速度</code>。另外，源域和目标域之间的<code>域迁移是不同的，导致一些节点对目标域没有贡献甚至是负迁移</code>。为了解决这个问题，作者提出了动态注意力，它是源域梯度上的一个掩模。<code>纳入动态注意力机制的原理是增加那些梯度对目标域有利的节点的权重</code>，而限制那些梯度对目标域不利的节点的权重。具体来说，利用<code>间隙统计</code>（Gap Statistics）来评估无监督聚类算法（K-Means）对目标特征 f^t 的聚类效果。</p>
+<p>直观地说，较小的间隙统计值表明特征分布具有较小的类内方差。通过两个连续迭代之间的间隙统计增益来衡量每个源域的贡献，表示在目标模型用第 i 个源模型梯度更新之前和之后</p>
+<p>联邦对抗对齐:由于域差异的存在，机器学习模型的性能急剧下降。作者提出了联邦对抗性对齐，将优化分为两个独立的步骤，一个特定领域的局部特征抽取器和一个全局鉴别器。具 体包括：（1）对于每个域，训练一个本地特征提取器，Gi 对应 Di，Gt 对应 Dt，（2）对于每个(Di , Dt) 源域 - 目标域对，训练一个对抗性域标识符 DI，以对抗性的方式对齐分布。</p>
+<p>首先，训练 DI 来识别特征来自哪个领域，然后训练生成器(G_i , G_t) 来混淆 DI。值得注意的是，D 只访问 G_i 和 G_t 的输出向量，而不违反 UFDA 的规则。</p>
+<p>表征分解:使用对抗性分解来提取域不变特征，将(G_i , G_t) 提取的特征分解为领域不变特征和领域特定特征。如图 1（b）所示，分离器 Di 将提取的特征分为两个分支。首先分别基于 f_di 和 f_ds 特征训练 K 路分类器 Ci 和 K 路类别标识符 CI_i 正确地预测具有交叉熵损失的标签。其中 f_di 和 f_ds 分别表示域不变和域特定特征。</p>
+<blockquote>
+<p>这篇文章代码造假，写的代码根本不是federated learning，更有意思的是，把他文章中提出的所有模块删掉以后，整体会提5个点https://www.zhihu.com/question/348016090/answer/897469095</p>
+</blockquote>
+<h3 id="federated-adversarial-debiasing">Federated Adversarial Debiasing</h3>
+<p>Federated Adversarial Debiasing for Fair and Trasnferable Representations</p>
+<p><a href="https://jyhong.gitlab.io/publication/fade2021kdd/">homepage</a> <a href="https://github.com/illidanlab/FADE">code</a></p>
+<p>然对抗性学习通常用于集中式学习以减轻偏见，但当把它扩展到联邦式框架中时，会有很大的障碍。 在这项工作中，我们研究了这些障碍，并通过提出一种新的方法 Federated Adversarial DEbiasing（FADE）来解决它们。FADE不需要用户的敏感群体信息来进行去偏，并且当隐私或计算成本成为一个问题时，用户可以自由地选择退出对抗性部分。</p>
+<h3 id="kd3a-unsupervised-multi-source-decentralized-domain-adaptation-via-knowledge-distillation">KD3A: Unsupervised Multi-Source Decentralized Domain Adaptation via Knowledge Distillation</h3>
+<p>一种满足隐私保护要求的去中心化无监督域适应范式</p>
+<p>KD3A:基于知识蒸馏的无监督多源分散域适应</p>
+<p><a href="https://github.com/FengHZ/KD3A">CODE</a> <a href="https://zhuanlan.zhihu.com/p/386610200">blog</a> <a href="https://zhuanlan.zhihu.com/p/393932813">2</a> <a href="https://blog.csdn.net/weixin_42534493/article/details/119080973">3</a> <a href="https://www.bilibili.com/video/BV1pG4y1q7qd/?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">BILI</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(base) root@autodl-container-8eb211b4ac-da493d08:~/KD3A# python main.py --config DigitFive.yaml --target-domain clipart -bp base_path load target domain clipart
+Traceback (most recent call last):
+  File &#34;main.py&#34;, line 337, in &lt;module&gt;
+    main()
+  File &#34;main.py&#34;, line 81, in main
+    target_train_dloader, target_test_dloader = digit5_dataset_read(args.base_path,
+  File &#34;/root/KD3A/datasets/DigitFive.py&#34;, line 164, in digit5_dataset_read
+    raise NotImplementedError(&#34;Domain {} Not Implemented&#34;.format(domain))
+NotImplementedError: Domain clipart Not Implemented
+(base) root@autodl-container-8eb211b4ac-da493d08:~/KD3A# 
+</code></pre></td></tr></table>
+</div>
+</div><p>KD3A/dataset/DomainNet/splits/clipart_test.txt</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(base) root@autodl-container-8eb211b4ac-da493d08:~/KD3A# python main.py --config DomainNet.yaml --target-domain clipart 
+create writer in /root/autodl-tmp/KD3A/DomainNet/runs/train_time:1_clipart_infograph_painting_quickdraw_real_sketch
+Begin the 1 time&#39;s training, Dataset:DomainNet, Source Domains [&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Target Domain clipart
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(base) root@autodl-container-8eb211b4ac-da493d08:~/KD3A# python main.py --config DomainNet.yaml --target-domain clipart 
+create writer in /root/autodl-tmp/KD3A/DomainNet/runs/train_time:1_clipart_infograph_painting_quickdraw_real_sketch
+DomainNet train_time:1 will be removed, input yes to continue:yes
+Begin the 1 time&#39;s training, Dataset:DomainNet, Source Domains [&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Target Domain clipart
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0575, 0.2355, 0.0859, 0.2909, 0.2766]
+Target Domain clipart Accuracy Top1 :0.314 Top5:0.474
+/root/miniconda3/lib/python3.8/site-packages/torch/optim/lr_scheduler.py:143: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0609, 0.2344, 0.0872, 0.2882, 0.2745]
+Target Domain clipart Accuracy Top1 :0.442 Top5:0.649
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0632, 0.2332, 0.0891, 0.2833, 0.2745]
+Target Domain clipart Accuracy Top1 :0.506 Top5:0.713
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.065, 0.2314, 0.0914, 0.2801, 0.2739]
+Target Domain clipart Accuracy Top1 :0.523 Top5:0.735
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0688, 0.2291, 0.0929, 0.2753, 0.274]
+Target Domain clipart Accuracy Top1 :0.558 Top5:0.768
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0715, 0.2279, 0.0932, 0.2708, 0.2747]
+Target Domain clipart Accuracy Top1 :0.584 Top5:0.774
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0734, 0.227, 0.0951, 0.2665, 0.2743]
+Target Domain clipart Accuracy Top1 :0.586 Top5:0.778
+Traceback (most recent call last):
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0755, 0.2255, 0.0963, 0.2635, 0.274]
+Target Domain clipart Accuracy Top1 :0.596 Top5:0.793
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0762, 0.2238, 0.0967, 0.2624, 0.2741]
+Target Domain clipart Accuracy Top1 :0.595 Top5:0.795
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0779, 0.2237, 0.0968, 0.2593, 0.274]
+Target Domain clipart Accuracy Top1 :0.600 Top5:0.800
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0799, 0.2237, 0.0972, 0.2563, 0.2734]
+Target Domain clipart Accuracy Top1 :0.606 Top5:0.804
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0816, 0.2234, 0.0969, 0.2527, 0.2747]
+Target Domain clipart Accuracy Top1 :0.614 Top5:0.806
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0813, 0.2223, 0.097, 0.2519, 0.2759]
+Target Domain clipart Accuracy Top1 :0.617 Top5:0.808
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0807, 0.2225, 0.0973, 0.2501, 0.277]
+Target Domain clipart Accuracy Top1 :0.624 Top5:0.817
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0814, 0.2213, 0.0973, 0.2485, 0.2782]
+Target Domain clipart Accuracy Top1 :0.631 Top5:0.821
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0833, 0.221, 0.0976, 0.2458, 0.2784]
+Target Domain clipart Accuracy Top1 :0.638 Top5:0.823
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0837, 0.2191, 0.0983, 0.2446, 0.2797]
+Target Domain clipart Accuracy Top1 :0.640 Top5:0.824
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0851, 0.219, 0.099, 0.2433, 0.2783]
+Target Domain clipart Accuracy Top1 :0.635 Top5:0.825
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0864, 0.2189, 0.099, 0.2413, 0.2786]
+Target Domain clipart Accuracy Top1 :0.635 Top5:0.823
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0867, 0.2178, 0.0989, 0.2407, 0.2793]
+Target Domain clipart Accuracy Top1 :0.642 Top5:0.826 
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0872, 0.2183, 0.0982, 0.2398, 0.2794]
+Target Domain clipart Accuracy Top1 :0.645 Top5:0.828
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0864, 0.2192, 0.0985, 0.2387, 0.2795]
+Target Domain clipart Accuracy Top1 :0.651 Top5:0.837
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">^C^C^CProcess Process-2712:
+^CException ignored in: &lt;function _MultiProcessingDataLoaderIter.__del__ at 0x7f79d8eb7f70&gt;
+Exception ignored in sys.unraisablehook: &lt;built-in function unraisablehook&gt;
+^C^C^C^C^C^C^C^C^C^C^C^C^C^C^CProcess Process-2709:
+Process Process-2711:
+^C^C
+
+
+During handling of the above exception, another exception occurred:
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 318, in _bootstrap
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 318, in _bootstrap
+^C
+
+
+
+Process Process-2706:
+KeyboardInterrupt
+Exception ignored in: &lt;function WeakValueDictionary.__init__.&lt;locals&gt;.remove at 0x7f79d94f1940&gt;
+Traceback (most recent call last):
+  File &#34;/root/miniconda3/lib/python3.8/weakref.py&#34;, line 103, in remove
+    def remove(wr, selfref=ref(self), _atomic_removal=_remove_dead_weakref):
+KeyboardInterrupt: 
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/util.py&#34;, line 320, in _exit_function
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/util.py&#34;, line 333, in _exit_function
+Traceback (most recent call last):
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/autograd/grad_mode.py&#34;, line 15, in decorate_context
+Traceback (most recent call last):
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 315, in _bootstrap
+    self.run()
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/_utils/worker.py&#34;, line 197, in _worker_loop
+    if done_event.is_set():
+KeyboardInterrupt
+    return func(*args, **kwargs)
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/optim/sgd.py&#34;, line 97, in step
+    debug(&#39;running all &#34;atexit&#34; finalizers with priority &gt;= 0&#39;)
+    def _exit_function(info=info, debug=debug, _run_finalizers=_run_finalizers,
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/util.py&#34;, line 49, in debug
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 330, in _bootstrap
+    if _logger:
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 330, in _bootstrap
+    sys.stderr.write(&#39;Process %s:\n&#39; % self.name)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/popen_fork.py&#34;, line 75, in _launch
+    sys.stderr.write(&#39;Process %s:\n&#39; % self.name)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/popen_fork.py&#34;, line 75, in _launch
+    code = process_obj._bootstrap(parent_sentinel=child_r)
+    code = process_obj._bootstrap(parent_sentinel=child_r)
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 333, in _bootstrap
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 335, in _bootstrap
+    threading._shutdown()
+  File &#34;/root/miniconda3/lib/python3.8/threading.py&#34;, line 1375, in _shutdown
+    util._flush_std_streams()
+  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/util.py&#34;, line 435, in _flush_std_streams
+    sys.stdout.flush()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;main.py&#34;, line 343, in &lt;module&gt;
+    d_p = p.grad
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/tensor.py&#34;, line 745, in grad
+    if self.requires_grad and not hasattr(self, &#34;retains_grad&#34;) and not self.is_leaf and self._grad is None:
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;main.py&#34;, line 343, in &lt;module&gt;
+    
+  File &#34;main.py&#34;, line 303, in main
+    
+  File &#34;main.py&#34;, line 303, in main
+    _main_thread._stop()
+  File &#34;/root/miniconda3/lib/python3.8/threading.py&#34;, line 967, in _stop
+    
+  File &#34;/root/KD3A/train/train.py&#34;, line 41, in train
+    with _shutdown_locks_lock:
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;main.py&#34;, line 343, in &lt;module&gt;
+    
+  File &#34;/root/KD3A/train/train.py&#34;, line 59, in train
+    
+  File &#34;main.py&#34;, line 303, in main
+    
+  File &#34;/root/KD3A/train/train.py&#34;, line 41, in train
+    for i, (image_s, label_s) in enumerate(train_dloader):
+    for i, (image_s, label_s) in enumerate(train_dloader):
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py&#34;, line 279, in __iter__
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py&#34;, line 279, in __iter__
+    optimizer.step()
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/optim/lr_scheduler.py&#34;, line 67, in wrapper
+    return _MultiProcessingDataLoaderIter(self)
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py&#34;, line 719, in __init__
+    return _MultiProcessingDataLoaderIter(self)
+    return wrapped(*args, **kwargs)
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py&#34;, line 719, in __init__
+  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/autograd/grad_mode.py&#34;, line 15, in decorate_context
+    return func(*args, **kwargs)
+KeyboardInterrupt
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(base) root@autodl-container-8eb211b4ac-da493d08:~/KD3A# python main.py --config DomainNet.yaml --target-domain clipart 
+create writer in /root/autodl-tmp/KD3A/DomainNet/runs/train_time:1_clipart_infograph_painting_quickdraw_real_sketch
+DomainNet train_time:1 will be removed, input yes to continue:yes
+Begin the 1 time&#39;s training, Dataset:DomainNet, Source Domains [&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Target Domain clipart
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0676, 0.2342, 0.0829, 0.2792, 0.2834]
+Target Domain clipart Accuracy Top1 :0.324 Top5:0.492
+/root/miniconda3/lib/python3.8/site-packages/torch/optim/lr_scheduler.py:143: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0687, 0.2339, 0.0848, 0.2776, 0.2811]
+Target Domain clipart Accuracy Top1 :0.435 Top5:0.650
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.07, 0.233, 0.087, 0.2739, 0.2804]
+Target Domain clipart Accuracy Top1 :0.516 Top5:0.707
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0714, 0.2314, 0.0893, 0.2715, 0.279]
+Target Domain clipart Accuracy Top1 :0.520 Top5:0.732
+Traceback (most recent call last):
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0742, 0.229, 0.0909, 0.267, 0.2796]
+Target Domain clipart Accuracy Top1 :0.558 Top5:0.768
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0763, 0.2273, 0.091, 0.2644, 0.2798]
+Target Domain clipart Accuracy Top1 :0.585 Top5:0.778
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.077, 0.2271, 0.0931, 0.2607, 0.2792]
+Target Domain clipart Accuracy Top1 :0.584 Top5:0.778
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0785, 0.226, 0.0944, 0.2582, 0.2783]
+Target Domain clipart Accuracy Top1 :0.605 Top5:0.795
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0785, 0.2248, 0.0949, 0.2573, 0.2783]
+Target Domain clipart Accuracy Top1 :0.598 Top5:0.793
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0803, 0.2244, 0.0954, 0.254, 0.2781]
+Target Domain clipart Accuracy Top1 :0.610 Top5:0.807
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0815, 0.223, 0.0965, 0.2524, 0.2776]
+Target Domain clipart Accuracy Top1 :0.610 Top5:0.808
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0832, 0.2222, 0.0959, 0.2493, 0.2791]
+Target Domain clipart Accuracy Top1 :0.619 Top5:0.812
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0823, 0.2211, 0.0963, 0.2486, 0.2803]
+Target Domain clipart Accuracy Top1 :0.624 Top5:0.810
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0823, 0.22, 0.0969, 0.247, 0.2814]
+Target Domain clipart Accuracy Top1 :0.630 Top5:0.818
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0832, 0.2189, 0.0972, 0.2456, 0.2818]
+Target Domain clipart Accuracy Top1 :0.630 Top5:0.822
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0844, 0.2185, 0.0973, 0.2438, 0.2818]
+Target Domain clipart Accuracy Top1 :0.638 Top5:0.820
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0847, 0.2176, 0.0979, 0.2426, 0.2823]
+Target Domain clipart Accuracy Top1 :0.642 Top5:0.829
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0858, 0.2178, 0.0985, 0.2409, 0.2814]
+Target Domain clipart Accuracy Top1 :0.635 Top5:0.826
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0872, 0.218, 0.0984, 0.2393, 0.2812]
+Target Domain clipart Accuracy Top1 :0.641 Top5:0.827
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0877, 0.2179, 0.0987, 0.2388, 0.2803]
+Target Domain clipart Accuracy Top1 :0.643 Top5:0.829
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0877, 0.2186, 0.0984, 0.2379, 0.2803]
+Target Domain clipart Accuracy Top1 :0.647 Top5:0.828
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.087, 0.2194, 0.0992, 0.237, 0.2798]
+Target Domain clipart Accuracy Top1 :0.655 Top5:0.838
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0881, 0.2186, 0.0991, 0.2359, 0.2803]
+Target Domain clipart Accuracy Top1 :0.648 Top5:0.834
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0883, 0.2176, 0.0993, 0.2358, 0.2805]
+Target Domain clipart Accuracy Top1 :0.650 Top5:0.836
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.088, 0.2169, 0.0989, 0.2362, 0.2812]
+Target Domain clipart Accuracy Top1 :0.653 Top5:0.838
+Traceback (most recent call last):
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0876, 0.216, 0.0989, 0.2358, 0.2825]
+Target Domain clipart Accuracy Top1 :0.658 Top5:0.841
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0879, 0.217, 0.099, 0.2349, 0.2815]
+Target Domain clipart Accuracy Top1 :0.659 Top5:0.844
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.089, 0.217, 0.0988, 0.2336, 0.2816]
+Target Domain clipart Accuracy Top1 :0.664 Top5:0.845
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0888, 0.2175, 0.0985, 0.2331, 0.2815]
+Target Domain clipart Accuracy Top1 :0.663 Top5:0.845
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0888, 0.2168, 0.0983, 0.2339, 0.281]
+Target Domain clipart Accuracy Top1 :0.662 Top5:0.845
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.088, 0.2179, 0.0984, 0.2337, 0.2805]
+Target Domain clipart Accuracy Top1 :0.669 Top5:0.847
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0885, 0.2164, 0.0984, 0.2339, 0.2811]
+Target Domain clipart Accuracy Top1 :0.667 Top5:0.848
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0881, 0.2169, 0.0988, 0.2335, 0.2808]
+Target Domain clipart Accuracy Top1 :0.667 Top5:0.850
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0884, 0.2173, 0.0978, 0.2328, 0.2812]
+Target Domain clipart Accuracy Top1 :0.670 Top5:0.851
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0887, 0.217, 0.097, 0.2319, 0.2825]
+Target Domain clipart Accuracy Top1 :0.674 Top5:0.856
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.089, 0.2181, 0.096, 0.2307, 0.283]
+Target Domain clipart Accuracy Top1 :0.687 Top5:0.859
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0893, 0.2184, 0.0959, 0.2292, 0.2836]
+Target Domain clipart Accuracy Top1 :0.678 Top5:0.858
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0893, 0.219, 0.096, 0.2289, 0.2828]
+Target Domain clipart Accuracy Top1 :0.683 Top5:0.857
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0898, 0.2194, 0.0951, 0.2288, 0.2827]
+Target Domain clipart Accuracy Top1 :0.684 Top5:0.861
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0904, 0.2198, 0.0943, 0.228, 0.283]
+Target Domain clipart Accuracy Top1 :0.689 Top5:0.860
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0905, 0.2199, 0.0936, 0.2273, 0.2839]
+Target Domain clipart Accuracy Top1 :0.693 Top5:0.865
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0911, 0.2203, 0.0931, 0.2261, 0.2842]
+Target Domain clipart Accuracy Top1 :0.690 Top5:0.862
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0915, 0.2209, 0.0931, 0.225, 0.2839]
+Target Domain clipart Accuracy Top1 :0.697 Top5:0.867
+Traceback (most recent call last):
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0919, 0.2213, 0.0929, 0.2247, 0.2833]
+Target Domain clipart Accuracy Top1 :0.698 Top5:0.867
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0921, 0.2208, 0.0921, 0.2243, 0.2842]
+Target Domain clipart Accuracy Top1 :0.698 Top5:0.868
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0923, 0.2213, 0.0913, 0.2239, 0.2841]
+Target Domain clipart Accuracy Top1 :0.701 Top5:0.870
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0924, 0.2216, 0.0901, 0.2231, 0.2852]
+Target Domain clipart Accuracy Top1 :0.704 Top5:0.872
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0933, 0.2222, 0.0895, 0.2223, 0.2847]
+Target Domain clipart Accuracy Top1 :0.706 Top5:0.873
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0942, 0.2224, 0.0885, 0.2213, 0.2851]
+Target Domain clipart Accuracy Top1 :0.710 Top5:0.875
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0944, 0.223, 0.0877, 0.2204, 0.2852]
+Target Domain clipart Accuracy Top1 :0.714 Top5:0.875
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0952, 0.2226, 0.0869, 0.2201, 0.2852]
+Target Domain clipart Accuracy Top1 :0.711 Top5:0.876
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0956, 0.2235, 0.0858, 0.2193, 0.2853]
+Target Domain clipart Accuracy Top1 :0.714 Top5:0.877
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.097, 0.2238, 0.0851, 0.2183, 0.2848]
+Target Domain clipart Accuracy Top1 :0.719 Top5:0.880
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0975, 0.2242, 0.0842, 0.2169, 0.2855]
+Target Domain clipart Accuracy Top1 :0.712 Top5:0.879
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.099, 0.2248, 0.0834, 0.2161, 0.2842]
+Target Domain clipart Accuracy Top1 :0.717 Top5:0.882
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0998, 0.2256, 0.083, 0.2147, 0.2839]
+Target Domain clipart Accuracy Top1 :0.718 Top5:0.881
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1007, 0.2258, 0.0823, 0.2134, 0.2841]
+Target Domain clipart Accuracy Top1 :0.719 Top5:0.883
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1013, 0.2263, 0.0818, 0.2126, 0.2837]
+Target Domain clipart Accuracy Top1 :0.722 Top5:0.882
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1019, 0.2264, 0.0811, 0.2122, 0.2834]
+Target Domain clipart Accuracy Top1 :0.721 Top5:0.884
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1026, 0.2271, 0.0801, 0.2114, 0.2832]
+Target Domain clipart Accuracy Top1 :0.725 Top5:0.886
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1035, 0.2276, 0.0795, 0.2104, 0.2828]
+Target Domain clipart Accuracy Top1 :0.722 Top5:0.889
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1042, 0.228, 0.0787, 0.2097, 0.2827]
+Target Domain clipart Accuracy Top1 :0.729 Top5:0.887
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1053, 0.2281, 0.0781, 0.2094, 0.2819]
+Target Domain clipart Accuracy Top1 :0.727 Top5:0.887
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1066, 0.2283, 0.0775, 0.2085, 0.2815]
+Target Domain clipart Accuracy Top1 :0.728 Top5:0.887
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1079, 0.2285, 0.0766, 0.2081, 0.2808]
+Target Domain clipart Accuracy Top1 :0.728 Top5:0.887
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.109, 0.2291, 0.0756, 0.2076, 0.2801]
+Target Domain clipart Accuracy Top1 :0.728 Top5:0.889
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1103, 0.2291, 0.0748, 0.2076, 0.2792]
+Target Domain clipart Accuracy Top1 :0.730 Top5:0.887
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1114, 0.2293, 0.0738, 0.2074, 0.2786]
+Target Domain clipart Accuracy Top1 :0.729 Top5:0.888
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1128, 0.2293, 0.073, 0.2073, 0.2778]
+Target Domain clipart Accuracy Top1 :0.732 Top5:0.890
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1137, 0.2295, 0.0721, 0.2073, 0.2773]
+Target Domain clipart Accuracy Top1 :0.731 Top5:0.889
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.115, 0.2296, 0.0712, 0.2071, 0.2769]
+Target Domain clipart Accuracy Top1 :0.731 Top5:0.890
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1164, 0.2296, 0.0701, 0.2074, 0.2761]
+Target Domain clipart Accuracy Top1 :0.731 Top5:0.890
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1177, 0.2299, 0.0689, 0.2075, 0.2756]
+Target Domain clipart Accuracy Top1 :0.731 Top5:0.890
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1189, 0.2301, 0.0679, 0.2076, 0.275]
+Target Domain clipart Accuracy Top1 :0.732 Top5:0.890
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1201, 0.2303, 0.067, 0.2078, 0.2745]
+Target Domain clipart Accuracy Top1 :0.729 Top5:0.890
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1212, 0.2305, 0.0657, 0.208, 0.2743]
+Target Domain clipart Accuracy Top1 :0.733 Top5:0.891
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1222, 0.2308, 0.0644, 0.2084, 0.2741]
+Target Domain clipart Accuracy Top1 :0.734 Top5:0.891
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1235, 0.231, 0.063, 0.2089, 0.2737]
+Target Domain clipart Accuracy Top1 :0.730 Top5:0.889
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1246, 0.2314, 0.0616, 0.2092, 0.2735]
+Target Domain clipart Accuracy Top1 :0.733 Top5:0.890
+Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.1257, 0.2318, 0.0602, 0.2096, 0.2733]
+Target Domain clipart Accuracy Top1 :0.732 Top5:0.890
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="摘要">摘要</h4>
+<p>传统的无监督多源域适应（Multi-source Unsupervised Domain Adaptation）方法假设所有源域数据都可以直接访问。然而，<strong>隐私保护政策</strong>要求所有数据和计算都必须在本地进行，这对域适应方法提出了三个挑战：<code>首先，最小化域间距离需获取源域和目标域的数据并进行成对计算，而在隐私保护要求下，源域数据本地存储、不可访问。其次通信成本和隐私安全限制了现有域适应方法的应用。最后，由于无法鉴别源域数据质量，更易出现不相关或恶意的源域，从而导致负迁移。</code>为解决上述问题，我们提出一种满足隐私保护要求的<strong>去中心化无监督域适应范式</strong>，<code>称为基于知识蒸馏的去中心化域适应（KD3A），通过对来自多个源域的模型进行知识蒸馏来构建可迁移的共识知识</code>。大量实验表明，KD3A显著优于其他域适应方法。此外，与其他去中心化的域适应方法相比，KD3A 对<strong>负迁移具有鲁棒性</strong>，并可<strong>将通信成本降低100倍</strong>。</p>
+<p>不同数据源域存在<code>域偏移</code>（Domain Shift），简单地混合不同数据源域进行训练往往效果很差。无监督多源域适应（Unsupervised Multi-source Domain Adaptation，UMDA）构建具有迁移能力的特征，能够从多个源域迁移到某个无标注的目标域，从而解决域偏移问题。</p>
+<p>现有的无监督多源域适应范式包含两个主要步骤执行知识转移：<code>首先，结合来自源域与目标域的数据，构建源域-目标域数据对。然后，通过最小化域间分布距离（H-散度）在潜变量空间（latent space）中建立可迁移特征</code>。当所有源域数据都可以直接获取时，该域适应范式获得了很大成功。然而，在隐私保护政策下，很多敏感数据，例如来自不同公司的客户信息，或是来自不同医院的患者数据，是不可访问的。这种情况下，<strong>源域的所有数据，以及对这些数据进行的计算，都必须保持本地化</strong>，而仅有<code>三部分信息是可用的</code>：<em>K</em>个源域上训练数据集的大小 N，在源域上本地训练的<em>K</em>个模型 ℎ ，以及具有 Nt个无标注数据的目标域 DT 。利用联邦学习，一个典型的分布式域适应训练范式如下图所示：<code>首先，在各个源域本地训练模型。然后将模型参数（模型更新）发送到中央服务器，中央服务器采用联邦平均算法汇总本地模型，得到全局模型。最后，将全局模型迁移到目标域上。</code></p>
+<p>现有的域适应算法用于隐私保护的去中心化场景存在<code>三个挑战</code>：首先，最小化域间分布距离（H -散度）需要<strong>收集源域和目标域的数据进行成对计算</strong>，而源域上的数据不可访问。其次，<strong>通信成本与隐私安全</strong>也限制了模型的应用。例如，联邦对抗域迁移 (Federated Adversarial Domain Adaptation, Peng et al., 2020) 提出了去中心化的对抗训练方法。然而该方法需要每一个源域在每一个训练Batch后进行模型同步，这带来巨大的通信成本并导致隐私泄露。最后，由于原始数据不可访问，因此可能会<strong>存在一些不良域或是恶意域，从而导致负迁移</strong>（Negative Transfer）问题。例如，SHOT (Liang et al., 2020) 与Model Adaptation (Li et al., 2020) 提出无源（Source-free）域迁移来解决源域数据不可用问题，但是它们无法识别不良源域，容易受到负迁移的影响。由于难以治理数据质量，可能存在一些与目标域相差甚远的无关源域，甚至存在一些执行投毒攻击的恶意源域。有了这些坏域，就会发生负迁移。</p>
+<p>提出了一种基于知识蒸馏的去中心化域适应新范式，缩写为<strong>KD3A</strong>，即<code>通过对来自不同源域的模型进行知识蒸馏来进行分散域自适应</code>，以解决上文所总结的三个挑战。<code>KD3A由三个串联使用的组件构成</code>：首先是一种名为知识投票（<strong>Knowledge Vote</strong>）的<code>多源模型知识蒸馏方法，用以获取高质量的域共识知识</code>。然后，定义每一个源域所贡献共识知识的<strong>质量</strong>，并推导出一种<strong>可以识别无关域与恶意域的新指标</strong>,一种动态加权策略，名为共识焦点（<strong>Consensus Focus</strong>），<code>利用共识焦点对各个源域进行动态加权可以防止负迁移</code>。最后，利用深度学习模型的<strong>batch norm</strong>层中所记录的特征滑动均值与方差，提出<strong>BatchNorm MMD</strong> 距离，用于<code>对域间距离进行分布式优化</code>MMD分布距离。</p>
+<h4 id="相关工作">相关工作</h4>
+<p>无监督多源域适应：无监督多源域自适应(UMDA)通过减小源域DS和目标域dt之间的h散度建立可转移特征。提供h散度优化策略的主流范式有两种，即最大平均差异(MMD，分布距离)和对抗训练。此外，知识蒸馏也被用于执行模型级的知识转移。</p>
+<p>MMD基础方法:(Tzeng et al.， 2014)利用kernelκ构建再现核希尔伯特空间(RKHS) Hκ，并通过最小化Hκ上的MMD距离dκMMD(DS, DT)来优化h -散度。最近的研究提出了烟雾弹的变体，例如多核烟雾弹(Long等人，2015)、类加权烟雾弹(Yan等人，2017)和跨域烟雾弹(Peng等人，2019)。然而，所有这些方法都需要对来自源域和目标域的数据进行两两计算，这在去中心化约束下是不允许的。</p>
+<p>对抗性训练策略:(Saito et al.， 2018;Zhao等人，2018a)在特征空间中应用对抗训练来优化h -散度。事实证明，在对抗性训练策略下，UMDA模型可以在隐私保护策略下工作(Peng et al.， 2020)。然而，对抗性训练需要每个源域在每批处理后与目标域交换和更新模型参数，这消耗了大量的通信资源。</p>
+<p>领域适应中的知识蒸馏:自监督学习有很多应用(Zhang et al.， 2021;Chen et al.， 2021)在缺乏标签的场景中有很多应用。知识蒸馏(KD) (Hinton et al.， 2015;Chen et al.， 2020)是在不同模型之间转移知识的一种有效的自我监督方法。最近的作品(孟等人，2018;Zhou et al.， 2020)通过师生培训策略将知识蒸馏扩展到领域适应:<code>在源域上训练多个教师模型，并在目标域上集成它们，以训练一个学生模型</code>。在实践中，该策略优于其他UMDA方法。但是，由于存在不相关和恶意的源域，传统的KD策略可能无法获得适当的知识。</p>
+<p>联邦学习：最近的工作(McMahan et al.， 2017)发现了模型性能和通信效率之间的权衡，即为了使全局模型获得更好的性能，我们需要进行更多的通信轮，这提高了通信成本。此外，频繁的沟通还会造成隐私泄露(Wang et al.， 2019)，使得训练过程不安全。</p>
+<p>联邦域自适应：FADA (Peng et al.， 2020)首先提出了联邦域自适应的概念。它在不访问数据的情况下，应用对抗训练优化H-divergence。但是，FADA消耗了较高的通信成本，容易受到隐私泄露攻击。模型自适应(Li et al.， 2020)和SHOT (Liang et al.， 2020)提供了无源方法来解决单源分散域自适应。但是，在多源情况下，它们容易受到负迁移的影响。</p>
+<h4 id="kd3a">KD3A</h4>
+<p>分散场景的问题表述:在去中心化UMDA中，来自K个源域的数据存储在本地，不可用。每个通信轮的可访问信息包括:1、源域上的训练集的大小，以及模型的参数。2、目标域上NT个未标记的数据。</p>
+<p>在KD3A中，我们在不访问数据的情况下，应用知识蒸馏来执行领域自适应。</p>
+<p>用共识知识扩展源域：知识蒸馏可以通过不同的模型进行知识转移。</p>
+<p>UMDA中的知识蒸馏分为两个步骤:首先，对于每个目标域数据XT i，我们获得源域模型的推断.然后，利用集成方法获得源模型的共识知识.为了利用共识知识进行域适应，我们定义了一个扩展源域DK+1S，每个目标域数据XT i的共识知识pi</p>
+<p>整个域适应模型的<code>训练过程</code>如下图所示：</p>
+<ul>
+<li>各源域本地训练模型，并将模型发送到中央服务器。</li>
+<li>在多个源域模型上进行知识投票，构建一个额外的共识源域，包括共识知识 Pi 以及支持Pi 的源域个数 nPi ，记为D 。</li>
+<li>随后通过<strong>共识焦点</strong>聚合 K+1 个源模型得到目标模型。</li>
+<li>使用 <strong>BatchNorm MMD</strong> 来最小化域间分布距离（H -散度），将特征适应于目标域。</li>
+</ul>
+<p><strong>泛化误差分析</strong>?</p>
+<p>实验：</p>
+<p>在四个基准数据集上进行了实验：(1) <strong>Amazon Review</strong> (Ben-David et al., 2006)，这是一个情感分析数据集，包含四个源域。(2)<strong>Digit-5</strong> (Zhao et al., 2020)，这是一个数字分类数据集，包括五个源域。 (3) <strong>Office-Caltech10</strong> (Gong et al., 2012)，包含来自四个源域的十类图像。(4) <strong>DomainNet</strong> (Peng et al., 2019)，这是最近推出的具有 345 个类和 6 个域的大规模多源域适应基准数据集，如下图所示。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-11-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          <a href="/tags/domain-adaptation/">Domain Adaptation</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/fl_fedlab/">
+            <span class="next-text nav-default">fedlab</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
