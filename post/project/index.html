@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Project">
 <meta itemprop="description" content="参考链接 2 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 blog 删除 1 2 3 4 conda env list conda create -n syft_env python=3.9 -"><meta itemprop="datePublished" content="2022-09-08T19:22:49+08:00" />
 <meta itemprop="dateModified" content="2022-09-08T19:22:49+08:00" />
-<meta itemprop="wordCount" content="555">
+<meta itemprop="wordCount" content="635">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Project"/>
 <meta name="twitter:description" content="参考链接 2 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 blog 删除 1 2 3 4 conda env list conda create -n syft_env python=3.9 -"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022-09-08 </span>
         
-          <span class="more-meta"> 555 words </span>
+          <span class="more-meta"> 635 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -301,7 +301,40 @@ up 或 u	返回到上个调用点（不是上一行）
 p x	打印变量x的值
 exit 或 q	中止调试，退出程序
 help	帮助</p>
-
+<p>tensorboard</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">tensorboard --logdir=./
+</code></pre></td></tr></table>
+</div>
+</div><p>命令行打印</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python3 main.py  --gpu 0,1 --work-type train --model fedmatch --frac-client 0.05 --task ls-biid-c10 2&gt;&amp;1 | tee ./outputs/output.log
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://blog.csdn.net/weixin_44750512/article/details/122505811">screen</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">创建镜像：screen -S test
+退出镜像：ctrl+a+d
+查看列表：screen -ls
+打开：screen -r 31389.test
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">

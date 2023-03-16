@@ -49,7 +49,7 @@
 <meta itemprop="name" content="域适应联邦学习">
 <meta itemprop="description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati"><meta itemprop="datePublished" content="2022-11-22T09:58:50+08:00" />
 <meta itemprop="dateModified" content="2022-11-22T09:58:50+08:00" />
-<meta itemprop="wordCount" content="10773">
+<meta itemprop="wordCount" content="13337">
 <meta itemprop="keywords" content="Federated Learning,Domain Adaptation," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="域适应联邦学习"/>
 <meta name="twitter:description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-11-22 </span>
         
-          <span class="more-meta"> 10773 words </span>
-          <span class="more-meta"> 22 mins read </span>
+          <span class="more-meta"> 13337 words </span>
+          <span class="more-meta"> 27 mins read </span>
         
       </div>
     </header>
@@ -158,7 +158,22 @@
           <ul>
             <li><a href="#federated-adversarial-domain-adaptation">Federated Adversarial Domain Adaptation</a></li>
             <li><a href="#federated-adversarial-debiasing">Federated Adversarial Debiasing</a></li>
-            <li><a href="#kd3a-unsupervised-multi-source-decentralized-domain-adaptation-via-knowledge-distillation">KD3A: Unsupervised Multi-Source Decentralized Domain Adaptation via Knowledge Distillation</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#kd3a">KD3A</a>
+      <ul>
+        <li><a href="#简单总结">简单总结</a></li>
+        <li><a href="#摘要">摘要</a></li>
+        <li><a href="#相关工作">相关工作</a></li>
+        <li><a href="#kd3a-1">KD3A</a>
+          <ul>
+            <li><a href="#用共识知识扩展源域">用共识知识扩展源域</a></li>
+            <li><a href="#知识投票产生良好的共识">知识投票:产生良好的共识</a></li>
+            <li><a href="#共识焦点反对负转移">共识焦点:反对负转移</a></li>
+            <li><a href="#batchnorm-mmd-h散度的分散优化策略">BatchNorm MMD: H−散度的分散优化策略</a></li>
+            <li><a href="#算法">算法</a></li>
           </ul>
         </li>
       </ul>
@@ -239,7 +254,8 @@
 <p>Federated Adversarial Debiasing for Fair and Trasnferable Representations</p>
 <p><a href="https://jyhong.gitlab.io/publication/fade2021kdd/">homepage</a> <a href="https://github.com/illidanlab/FADE">code</a></p>
 <p>然对抗性学习通常用于集中式学习以减轻偏见，但当把它扩展到联邦式框架中时，会有很大的障碍。 在这项工作中，我们研究了这些障碍，并通过提出一种新的方法 Federated Adversarial DEbiasing（FADE）来解决它们。FADE不需要用户的敏感群体信息来进行去偏，并且当隐私或计算成本成为一个问题时，用户可以自由地选择退出对抗性部分。</p>
-<h3 id="kd3a-unsupervised-multi-source-decentralized-domain-adaptation-via-knowledge-distillation">KD3A: Unsupervised Multi-Source Decentralized Domain Adaptation via Knowledge Distillation</h3>
+<h1 id="kd3a">KD3A</h1>
+<p>Unsupervised Multi-Source Decentralized Domain Adaptation via Knowledge Distillation</p>
 <p>一种满足隐私保护要求的去中心化无监督域适应范式</p>
 <p>KD3A:基于知识蒸馏的无监督多源分散域适应</p>
 <p><a href="https://github.com/FengHZ/KD3A">CODE</a> <a href="https://zhuanlan.zhihu.com/p/386610200">blog</a> <a href="https://zhuanlan.zhihu.com/p/393932813">2</a> <a href="https://blog.csdn.net/weixin_42534493/article/details/119080973">3</a> <a href="https://www.bilibili.com/video/BV1pG4y1q7qd/?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">BILI</a></p>
@@ -1018,34 +1034,85 @@ Domain Weight : [0.1044, 0.3263, 0.0068, 0.2531, 0.2832]
 Target Domain clipart Accuracy Top1 : 0.726 Top5: 0.902
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="摘要">摘要</h4>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python main.py --config DomainNet.yaml --target-domain clipart -bp basepath --gpu 3,4 2&gt;&amp;1 | tee ./outputs/output.log
+</code></pre></td></tr></table>
+</div>
+</div><p>14:00开始</p>
+<hr>
+<h2 id="简单总结">简单总结</h2>
+<p>如何进行特征对齐&ndash;知识投票</p>
+<p>源域训练的模型发送给目标域，在目标域上对源域上的知识共识进行投票，得到高质量的域共识，用这个域共识做知识蒸馏的训练，然后用无标签的数据和部分共识训练得到的模型，在目标域上可以起到知识迁移的效果。</p>
+<p>训练完之后就根据共识提出了知识共识的度量，度量每个源域的知识共识的多少来进行加权</p>
+<p>计算不同源域的二次mmd距离，减少不同源域的距离损失.</p>
+<p>四个domain上训练了四个模型，有一个目标域的数据，我们将模型发到目标域，用这四个模型对数据进行预测,然后通过ensemble得到四个模型的共识知识。ensemble包含三步，inference，confident gate筛选比较相信的预测（比较相信的结果是有价值的，模棱两可的没有价值），对剩下的进行投票 同样认为是共识的模型保留下来，平均一下，并记录支持这个共识的domain的数量。以此作为训练的目标，知识蒸馏的目标知识。</p>
+<p>构造一个扩展性的source domain，数据是目标域的数据，共识是得到的共识。对这个数据和共识用知识蒸馏损失训练一个新的模型，最终模型是对这k+1个模型进行加权平均。</p>
+<p>不考虑目标域源域，把目标域扩展到了同等定位的源域，在这些源域上进行联邦学习，让他们进行知识共享，完成了对于没有标注的目标域的知识迁移。对目标域做task risk的定义，方便进行计算迁移损失bound。</p>
+<p>如果一个共识知识被很多的source domain以很高的信度支持，那么认为是一个可靠的知识。将这个知识作为知识蒸馏的目标对目标域进行训练。三步下来未必会得到有效的知识，给他一个比较低的权重0.001。为什么不直接删掉，图像本身是有信息的，揭示了分布的规律，如果删掉目标域的分布对应不上了，出现目标域上的domain-gift，所以保留。损失函数=权重乘知识蒸馏损失。</p>
+<p>负迁移：对负迁移的鲁棒&ndash;本质上界定每个源域，每个客户端对源域的贡献。</p>
+<p>之前的模型采用分布距离进行加权，源域和目标域的分布近就权重大一些。问题，数据保护的条件下没法得到数据本身，源域和目标域很像，但源域的数据是错的，被注入攻击了。</p>
+<p>如果有个source domain的知识总是和共识相符合，那么认为这个source domain贡献是多的。</p>
+<p><code>算法过程：1、本地训练模型。2、本地训练模型通过中央服务器传给目标域，要求目标域用本地训练的模型进行知识蒸馏，在目标域上知识蒸馏出一个扩展的模型。3、整个模型的分发参数</code></p>
+<p>本地训练十个epoch通信一次。</p>
+<p>最关键的是知识投票</p>
+<hr>
+<h2 id="摘要">摘要</h2>
 <p>传统的无监督多源域适应（Multi-source Unsupervised Domain Adaptation）方法假设所有源域数据都可以直接访问。然而，<strong>隐私保护政策</strong>要求所有数据和计算都必须在本地进行，这对域适应方法提出了三个挑战：<code>首先，最小化域间距离需获取源域和目标域的数据并进行成对计算，而在隐私保护要求下，源域数据本地存储、不可访问。其次通信成本和隐私安全限制了现有域适应方法的应用。最后，由于无法鉴别源域数据质量，更易出现不相关或恶意的源域，从而导致负迁移。</code>为解决上述问题，我们提出一种满足隐私保护要求的<strong>去中心化无监督域适应范式</strong>，<code>称为基于知识蒸馏的去中心化域适应（KD3A），通过对来自多个源域的模型进行知识蒸馏来构建可迁移的共识知识</code>。大量实验表明，KD3A显著优于其他域适应方法。此外，与其他去中心化的域适应方法相比，KD3A 对<strong>负迁移具有鲁棒性</strong>，并可<strong>将通信成本降低100倍</strong>。</p>
 <p>不同数据源域存在<code>域偏移</code>（Domain Shift），简单地混合不同数据源域进行训练往往效果很差。无监督多源域适应（Unsupervised Multi-source Domain Adaptation，UMDA）构建具有迁移能力的特征，能够从多个源域迁移到某个无标注的目标域，从而解决域偏移问题。</p>
 <p>现有的无监督多源域适应范式包含两个主要步骤执行知识转移：<code>首先，结合来自源域与目标域的数据，构建源域-目标域数据对。然后，通过最小化域间分布距离（H-散度）在潜变量空间（latent space）中建立可迁移特征</code>。当所有源域数据都可以直接获取时，该域适应范式获得了很大成功。然而，在隐私保护政策下，很多敏感数据，例如来自不同公司的客户信息，或是来自不同医院的患者数据，是不可访问的。这种情况下，<strong>源域的所有数据，以及对这些数据进行的计算，都必须保持本地化</strong>，而仅有<code>三部分信息是可用的</code>：<em>K</em>个源域上训练数据集的大小 N，在源域上本地训练的<em>K</em>个模型 ℎ ，以及具有 Nt个无标注数据的目标域 DT 。利用联邦学习，一个典型的分布式域适应训练范式如下图所示：<code>首先，在各个源域本地训练模型。然后将模型参数（模型更新）发送到中央服务器，中央服务器采用联邦平均算法汇总本地模型，得到全局模型。最后，将全局模型迁移到目标域上。</code></p>
 <p>现有的域适应算法用于隐私保护的去中心化场景存在<code>三个挑战</code>：首先，最小化域间分布距离（H -散度）需要<strong>收集源域和目标域的数据进行成对计算</strong>，而源域上的数据不可访问。其次，<strong>通信成本与隐私安全</strong>也限制了模型的应用。例如，联邦对抗域迁移 (Federated Adversarial Domain Adaptation, Peng et al., 2020) 提出了去中心化的对抗训练方法。然而该方法需要每一个源域在每一个训练Batch后进行模型同步，这带来巨大的通信成本并导致隐私泄露。最后，由于原始数据不可访问，因此可能会<strong>存在一些不良域或是恶意域，从而导致负迁移</strong>（Negative Transfer）问题。例如，SHOT (Liang et al., 2020) 与Model Adaptation (Li et al., 2020) 提出无源（Source-free）域迁移来解决源域数据不可用问题，但是它们无法识别不良源域，容易受到负迁移的影响。由于难以治理数据质量，可能存在一些与目标域相差甚远的无关源域，甚至存在一些执行投毒攻击的恶意源域。有了这些坏域，就会发生负迁移。</p>
 <p>提出了一种基于知识蒸馏的去中心化域适应新范式，缩写为<strong>KD3A</strong>，即<code>通过对来自不同源域的模型进行知识蒸馏来进行分散域自适应</code>，以解决上文所总结的三个挑战。<code>KD3A由三个串联使用的组件构成</code>：首先是一种名为知识投票（<strong>Knowledge Vote</strong>）的<code>多源模型知识蒸馏方法，用以获取高质量的域共识知识</code>。然后，定义每一个源域所贡献共识知识的<strong>质量</strong>，并推导出一种<strong>可以识别无关域与恶意域的新指标</strong>,一种动态加权策略，名为共识焦点（<strong>Consensus Focus</strong>），<code>利用共识焦点对各个源域进行动态加权可以防止负迁移</code>。最后，利用深度学习模型的<strong>batch norm</strong>层中所记录的特征滑动均值与方差，提出<strong>BatchNorm MMD</strong> 距离，用于<code>对域间距离进行分布式优化</code>MMD分布距离。</p>
-<h4 id="相关工作">相关工作</h4>
-<p>无监督多源域适应：无监督多源域自适应(UMDA)通过减小源域DS和目标域dt之间的h散度建立可转移特征。提供h散度优化策略的主流范式有两种，即最大平均差异(MMD，分布距离)和对抗训练。此外，知识蒸馏也被用于执行模型级的知识转移。</p>
+<h2 id="相关工作">相关工作</h2>
+<p>无监督多源域适应：无监督多源域自适应(UMDA)通过减小源域DS和目标域dt之间的h散度建立可转移特征。提供h散度优化策略的主流范式有两种（特征对齐的主流方案），即最大平均差异(MMD，分布距离，用深度学习把输入映射到特征空间，然后在特征空间上进行计算)和对抗训练（判别器就是来进行分布对齐的）。此外，知识蒸馏也被用于执行模型级的知识转移。</p>
 <p>MMD基础方法:(Tzeng et al.， 2014)利用kernelκ构建再现核希尔伯特空间(RKHS) Hκ，并通过最小化Hκ上的MMD距离dκMMD(DS, DT)来优化h -散度。最近的研究提出了烟雾弹的变体，例如多核烟雾弹(Long等人，2015)、类加权烟雾弹(Yan等人，2017)和跨域烟雾弹(Peng等人，2019)。然而，所有这些方法都需要对来自源域和目标域的数据进行两两计算，这在去中心化约束下是不允许的。</p>
 <p>对抗性训练策略:(Saito et al.， 2018;Zhao等人，2018a)在特征空间中应用对抗训练来优化h -散度。事实证明，在对抗性训练策略下，UMDA模型可以在隐私保护策略下工作(Peng et al.， 2020)。然而，对抗性训练需要每个源域在每批处理后与目标域交换和更新模型参数，这消耗了大量的通信资源。</p>
 <p>领域适应中的知识蒸馏:自监督学习有很多应用(Zhang et al.， 2021;Chen et al.， 2021)在缺乏标签的场景中有很多应用。知识蒸馏(KD) (Hinton et al.， 2015;Chen et al.， 2020)是在不同模型之间转移知识的一种有效的自我监督方法。最近的作品(孟等人，2018;Zhou et al.， 2020)通过师生培训策略将知识蒸馏扩展到领域适应:<code>在源域上训练多个教师模型，并在目标域上集成它们，以训练一个学生模型</code>。在实践中，该策略优于其他UMDA方法。但是，由于存在不相关和恶意的源域，传统的KD策略可能无法获得适当的知识。</p>
 <p>联邦学习：最近的工作(McMahan et al.， 2017)发现了模型性能和通信效率之间的权衡，即为了使全局模型获得更好的性能，我们需要进行更多的通信轮，这提高了通信成本。此外，频繁的沟通还会造成隐私泄露(Wang et al.， 2019)，使得训练过程不安全。</p>
 <p>联邦域自适应：FADA (Peng et al.， 2020)首先提出了联邦域自适应的概念。它在不访问数据的情况下，应用对抗训练优化H-divergence。但是，FADA消耗了较高的通信成本，容易受到隐私泄露攻击。模型自适应(Li et al.， 2020)和SHOT (Liang et al.， 2020)提供了无源方法来解决单源分散域自适应。但是，在多源情况下，它们容易受到负迁移的影响。</p>
-<h4 id="kd3a">KD3A</h4>
+<h2 id="kd3a-1">KD3A</h2>
+<p>theorem1 目标域上的迁移精度&lt;=源域上的损失加上源域和目标域上的特征距离。</p>
 <p>分散场景的问题表述:在去中心化UMDA中，来自K个源域的数据存储在本地，不可用。每个通信轮的可访问信息包括:1、源域上的训练集的大小，以及模型的参数。2、目标域上NT个未标记的数据。</p>
 <p>在KD3A中，我们在不访问数据的情况下，应用知识蒸馏来执行领域自适应。</p>
-<p>用共识知识扩展源域：知识蒸馏可以通过不同的模型进行知识转移。</p>
-<p>UMDA中的知识蒸馏分为两个步骤:首先，对于每个目标域数据XT i，我们获得源域模型的推断.然后，利用集成方法获得源模型的共识知识.为了利用共识知识进行域适应，我们定义了一个扩展源域DK+1S，每个目标域数据XT i的共识知识pi</p>
+<h3 id="用共识知识扩展源域">用共识知识扩展源域</h3>
+<p>知识蒸馏可以通过不同的模型进行知识转移。们用qk S (X)表示每个类的置信度，并用置信度最大的类作为标签。</p>
+<p>如图1a：UMDA中的知识蒸馏分为两个步骤:首先，对于每个目标域数据XT i，我们获得源域模型的推断.然后，利用集成方法获得源模型的共识知识.</p>
+<p><img src="/images/202206/29.png" alt=""></p>
+<p><code>为了利用共识知识进行域适应，我们定义了一个扩展源域</code>DK+1S，每个目标域数据XT i的共识知识pi。利用这个新的源域，我们可以通过知识蒸馏损失来训练源模型hk +1S。</p>
+<p>最小化KD损失可以优化新的源域的精度。有了这个认识，我们可以推导出知识蒸馏的泛化界如下。</p>
+<h3 id="知识投票产生良好的共识">知识投票:产生良好的共识</h3>
+<p>当共识知识足够好地代表地真标签时，新的源域DK+1S将改善泛化界。然而，由于源域的不相关和恶意，传统的集成策略(如最大集成和平均集成)可能无法获得适当的共识。因此，我们提出知识投票，以提供高质量的共识。</p>
+<ul>
+<li>首先使用一个高级置信门对教师模型的预测进行筛选，并剔除不可信模型。</li>
+<li>对于剩下的模型，将预测结果相加，以找到具有最大值的共识类别。然后我们放弃与共识类不一致的模型。</li>
+<li>在类投票之后，我们得到了一组都支持共识类的模型。最后，通过对这些支持模型进行均值集合，得到共识知识pi。我们还记录了支持pi的域的数量，用npi表示。对于那些被置信门排除了所有教师模型的XT，我们简单地使用均值集合来得到p，并给它们分配一个相对较低的权重，即np = 0.001。</li>
+</ul>
+<p>用npi对知识蒸馏损失进行重新加权，与其他集成策略相比，我们的知识投票使模型学习到高质量的共识知识，因为我们赋予高置信度和多个支持域的项目较高的权重。</p>
+<h3 id="共识焦点反对负转移">共识焦点:反对负转移</h3>
+<p>域权重α决定了每个源域的贡献。Ben-David et al.(2010)证明了当所有源域都同等重要时，最优α应与数据量成正比。然而，这个条件在KD3A中很难满足，因为一些源域通常与目标域非常不同，甚至带有损坏标签的恶意域。这些坏域导致负迁移。一个常见的解决方案(Zhao et al.， 2020)是<code>用h散度作为重估每个源域的权重</code>。</p>
+<p>然而，计算h散度<code>需要访问源域数据</code>。此外，H-divergence<code>只度量输入空间上的域相似度，没有利用标签信息，无法识别恶意域</code>。合理地，我们<code>提出共识焦点来识别那些不相关的和恶意的域</code>。正如知识投票中提到的，UMDA的绩效与共识知识的质量有关。有了这个动机，共识焦点的主要思想<code>是给那些提供高质量共识的域分配高权重，而惩罚那些提供糟糕共识的域</code>。为了实现共识焦点，我们首先推导出<code>共识质量</code>的定义，然后计算每个源域对共识质量的贡献。</p>
+<p>一般来说，如果一个共识类被更多的源域支持，置信度越高，那么它就越有可能代表真实的标签，这意味着共识的质量越好。</p>
+<p>共识焦点(CF)值，以量化每个源域的贡献,描述了单个源域Dk S对所有源域S的共识质量的边际贡献。</p>
+<p>在知识投票中引入了一个新的源域DK+1S，所以我们分两步计算域权值。首先，根据数据量，得到DK+1S的αK+1 = NT /(∑K K =1 Nk + NT)。然后，我们使用CF值重新加权每个原始源域。</p>
+<p>与(6)中的重加权策略相比，我们的Consensus Focus有两个优势。首先，α cf的计算不需要访问原始数据。其次，通过Consensus Focus获得的α cf基于共识的质量，既利用了数据信息，又利用了标签信息，能够识别恶意域。</p>
+<h3 id="batchnorm-mmd-h散度的分散优化策略">BatchNorm MMD: H−散度的分散优化策略</h3>
+<p>为了获得更好的UMDA性能，我们需要<code>最小化源域和目标域之间的h散度</code>，其中基于核的MMD距离被广泛使用。</p>
+<p>然而，这些方法并不适用于分散的UMDA，因为源域数据不可用。此外，仅使用fc层的高级特征可能会丢失详细的二维信息。因此，我们提出了BatchNorm MMD，它利用每个BatchNorm层中的均值和方差参数来优化h -发散，而不访问数据。</p>
+<h3 id="算法">算法</h3>
 <p>整个域适应模型的<code>训练过程</code>如下图所示：</p>
 <ul>
 <li>各源域本地训练模型，并将模型发送到中央服务器。</li>
-<li>在多个源域模型上进行知识投票，构建一个额外的共识源域，包括共识知识 Pi 以及支持Pi 的源域个数 nPi ，记为D 。</li>
+<li>在多个源域模型上进行知识投票，构建一个额外的共识源域，包括共识知识 Pi 以及支持Pi 的源域个数 nPi ，记为D 。知识蒸馏得到新的源域模型。</li>
 <li>随后通过<strong>共识焦点</strong>聚合 K+1 个源模型得到目标模型。</li>
 <li>使用 <strong>BatchNorm MMD</strong> 来最小化域间分布距离（H -散度），将特征适应于目标域。</li>
 </ul>
-<p><strong>泛化误差分析</strong>?</p>
+<p><strong>泛化误差分析</strong></p>
 <p>实验：</p>
 <p>在四个基准数据集上进行了实验：(1) <strong>Amazon Review</strong> (Ben-David et al., 2006)，这是一个情感分析数据集，包含四个源域。(2)<strong>Digit-5</strong> (Zhao et al., 2020)，这是一个数字分类数据集，包括五个源域。 (3) <strong>Office-Caltech10</strong> (Gong et al., 2012)，包含来自四个源域的十类图像。(4) <strong>DomainNet</strong> (Peng et al., 2019)，这是最近推出的具有 345 个类和 6 个域的大规模多源域适应基准数据集，如下图所示。</p>
+<p>resnet101</p>
 
     </div>
 
