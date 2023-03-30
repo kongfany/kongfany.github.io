@@ -6,7 +6,16 @@
     <description>Recent content in Federated Learning on 大胖狗来了</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 22 Nov 2022 09:58:50 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/federated-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Mar 2023 16:04:34 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/federated-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>个性化联邦学习</title>
+      <link>https://kongfany.github.io/post/fl_pfl/</link>
+      <pubDate>Fri, 24 Mar 2023 16:04:34 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fl_pfl/</guid>
+      <description>Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包</description>
+    </item>
+    
     <item>
       <title>域适应联邦学习</title>
       <link>https://kongfany.github.io/post/fl_da/</link>
@@ -162,10 +171,10 @@
     
     <item>
       <title>PFL联邦学习开源框架</title>
-      <link>https://kongfany.github.io/post/fl_pfl/</link>
+      <link>https://kongfany.github.io/post/fl_gfl/</link>
       <pubDate>Fri, 17 Dec 2021 21:05:53 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/fl_pfl/</guid>
+      <guid>https://kongfany.github.io/post/fl_gfl/</guid>
       <description>PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个</description>
     </item>
     

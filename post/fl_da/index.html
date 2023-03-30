@@ -49,7 +49,7 @@
 <meta itemprop="name" content="域适应联邦学习">
 <meta itemprop="description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati"><meta itemprop="datePublished" content="2022-11-22T09:58:50+08:00" />
 <meta itemprop="dateModified" content="2022-11-22T09:58:50+08:00" />
-<meta itemprop="wordCount" content="13337">
+<meta itemprop="wordCount" content="13330">
 <meta itemprop="keywords" content="Federated Learning,Domain Adaptation," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="域适应联邦学习"/>
 <meta name="twitter:description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022-11-22 </span>
         
-          <span class="more-meta"> 13337 words </span>
+          <span class="more-meta"> 13330 words </span>
           <span class="more-meta"> 27 mins read </span>
         
       </div>
@@ -1042,8 +1042,7 @@ Target Domain clipart Accuracy Top1 : 0.726 Top5: 0.902
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python main.py --config DomainNet.yaml --target-domain clipart -bp basepath --gpu 3,4 2&gt;&amp;1 | tee ./outputs/output.log
 </code></pre></td></tr></table>
 </div>
-</div><p>14:00开始</p>
-<hr>
+</div><hr>
 <h2 id="简单总结">简单总结</h2>
 <p>如何进行特征对齐&ndash;知识投票</p>
 <p>源域训练的模型发送给目标域，在目标域上对源域上的知识共识进行投票，得到高质量的域共识，用这个域共识做知识蒸馏的训练，然后用无标签的数据和部分共识训练得到的模型，在目标域上可以起到知识迁移的效果。</p>
@@ -1137,7 +1136,11 @@ Target Domain clipart Accuracy Top1 : 0.726 Top5: 0.902
           <a href="/tags/domain-adaptation/">Domain Adaptation</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/dl_limu/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">动手学深度学习-李沐</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/fl_fedlab/">
             <span class="next-text nav-default">fedlab</span>
             <span class="next-text nav-mobile">Next</span>

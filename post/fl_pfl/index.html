@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>PFL联邦学习开源框架 - 大胖狗来了</title>
+  <title>个性化联邦学习 - 大胖狗来了</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="kong" /><meta name="description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="kong" /><meta name="description" content="Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="PFL联邦学习开源框架" />
-<meta property="og:description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个" />
+<meta property="og:title" content="个性化联邦学习" />
+<meta property="og:description" content="Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kongfany.github.io/post/fl_pfl/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-17T21:05:53+08:00" />
-<meta property="article:modified_time" content="2021-12-17T21:05:53+08:00" />
+<meta property="article:published_time" content="2023-03-24T16:04:34+08:00" />
+<meta property="article:modified_time" content="2023-03-24T16:04:34+08:00" />
 
-<meta itemprop="name" content="PFL联邦学习开源框架">
-<meta itemprop="description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"><meta itemprop="datePublished" content="2021-12-17T21:05:53+08:00" />
-<meta itemprop="dateModified" content="2021-12-17T21:05:53+08:00" />
-<meta itemprop="wordCount" content="7683">
+<meta itemprop="name" content="个性化联邦学习">
+<meta itemprop="description" content="Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包"><meta itemprop="datePublished" content="2023-03-24T16:04:34+08:00" />
+<meta itemprop="dateModified" content="2023-03-24T16:04:34+08:00" />
+<meta itemprop="wordCount" content="4434">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="PFL联邦学习开源框架"/>
-<meta name="twitter:description" content="PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。 使用PFL框架可以通过简单的代码编写，和参数设置来完成一个"/>
+<meta name="twitter:title" content="个性化联邦学习"/>
+<meta name="twitter:description" content="Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -129,13 +129,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">PFL联邦学习开源框架</h1>
+      <h1 class="post-title">个性化联邦学习</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-12-17 </span>
+        <span class="post-time"> 2023-03-24 </span>
         
-          <span class="more-meta"> 7683 words </span>
-          <span class="more-meta"> 16 mins read </span>
+          <span class="more-meta"> 4434 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -143,396 +143,41 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#pfl框架优势">PFL框架优势</a></li>
-        <li><a href="#pfl框架设计">PFL框架设计</a></li>
-        <li><a href="#演示">演示</a>
-          <ul>
-            <li><a href="#pfl_modelpy"><code>pfl_model.py</code></a></li>
-            <li><a href="#pfl_serverpy"><code>pfl_server.py</code></a></li>
-            <li><a href="#pfl_clientpy"><code>pfl_client.py</code></a></li>
-            <li><a href="#流程分析">流程分析</a></li>
-          </ul>
-        </li>
-        <li><a href="#gfl">GFL</a>
-          <ul>
-            <li><a href="#abstract">Abstract：</a></li>
-            <li><a href="#introduction">Introduction：</a></li>
-            <li><a href="#contributions">contributions</a></li>
-            <li><a href="#related-work">Related Work</a></li>
-            <li><a href="#the-proposed-framework">The Proposed Framework</a></li>
-            <li><a href="#framework-design">Framework Design</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      <p>PFL联邦学习框架是基于pytorch开发的集成了多种联邦学习算法的联邦学习框架。</p>
-<p>使用PFL框架可以通过简单的代码编写，和参数设置来完成一个联邦学习模型训练任务。</p>
-<h2 id="pfl框架优势">PFL框架优势</h2>
-<ul>
-<li>PFL目前集成了传统的FedAvg联邦学习算法和基于知识蒸馏的联邦学习算法。</li>
-<li>即将提供基于区块链的通信支持，结合知识蒸馏的联邦学习算法，为用户提供去中心化的联邦学习服务</li>
-</ul>
-<h2 id="pfl框架设计">PFL框架设计</h2>
-<p><img src="/images/202112/40.png" alt=""></p>
-<p>在prepare_job阶段，模型方需要制定各种策略，设计好联邦学习任务。在run_time阶段，使用模型方生成的job协调fl_client客户端和fl_server服务端进行联邦学习训练。如图，PFL框架支持多对多的server和client通信模式。</p>
-<p>prepare job：模型方准备联邦学习任务阶段</p>
-<ul>
-<li>FederateSrategy:联邦学习算法策略选择，目前提供FED_AVG和FED_DISTILLATION两种选项</li>
-<li>WorkModeStrategy:工作模式选择，目前可以选择单机模式和集群模式</li>
-<li>TrainStrategy:训练策略，定义联邦学习任务的迭代次数</li>
-<li>User-Defined-Model:定义好一个运行需要的模型类，用户自定义的模型类</li>
-</ul>
-<p>FL Run-Time:使用模型方生成的job协调FLClient客户端和FLServer服务端进行联邦学习训练</p>
-<ul>
-<li>FLClient:根据FederateStrategy来执行客户端对应的操作</li>
-<li>FLServer:根据FederateStrategy来执行不同的启动策略</li>
-</ul>
-<h2 id="演示">演示</h2>
-<p>使用单例模式进行演示</p>
-<p>服务端的pfl_model,pfl_server和客户端的pfl_client</p>
-<h3 id="pfl_modelpy"><code>pfl_model.py</code></h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># pfl_model:模型文件，定义训练时使用的模型，并且生成相应的联邦学习任务</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-<span class="c1"># pfl的核心策略包，包含pfl的工作模式策略，联邦学习算法策略和训练策略</span>
-<span class="kn">import</span> <span class="nn">gfl.core.strategy</span> <span class="k">as</span> <span class="nn">strategy</span>
-<span class="c1"># pfl的任务管理包</span>
-<span class="kn">from</span> <span class="nn">gfl.core.job_manager</span> <span class="kn">import</span> <span class="n">JobManager</span>
-
-
-<span class="c1"># 定义了一个简单的模型类net</span>
-<span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">x</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-    <span class="c1"># 实例化模型model，和任务管理器job_manager</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
-    <span class="n">job_manager</span> <span class="o">=</span> <span class="n">JobManager</span><span class="p">()</span>
-    <span class="c1"># 定义一个联邦学习任务job，工作模式设为单例模式，（也可以使用集群模式），联邦学习算法策略为联邦平均法，（也可以使用联邦蒸馏算法），epoch为3，模型类型为net</span>
-    <span class="n">job</span> <span class="o">=</span> <span class="n">job_manager</span><span class="o">.</span><span class="n">generate_job</span><span class="p">(</span><span class="n">work_mode</span><span class="o">=</span><span class="n">strategy</span><span class="o">.</span><span class="n">WorkModeStrategy</span><span class="o">.</span><span class="n">WORKMODE_STANDALONE</span><span class="p">,</span>
-                                   <span class="n">fed_strategy</span><span class="o">=</span><span class="n">strategy</span><span class="o">.</span><span class="n">FederateStrategy</span><span class="o">.</span><span class="n">FED_AVG</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">Net</span><span class="p">)</span>
-    <span class="c1"># 向job_manager传入定义好的job和model</span>
-    <span class="n">job_manager</span><span class="o">.</span><span class="n">submit_job</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="pfl_serverpy"><code>pfl_server.py</code></h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 根据在pfl_model文件中设置的job参数</span>
-<span class="c1"># 从server包中导入了FLStandaloneServer，再从strategy中导入的联邦学习策略算法FederateStrategy</span>
-<span class="kn">from</span> <span class="nn">gfl.core.server</span> <span class="kn">import</span> <span class="n">FLStandaloneServer</span>
-<span class="kn">from</span> <span class="nn">gfl.core.strategy</span> <span class="kn">import</span> <span class="n">FederateStrategy</span>
-
-<span class="n">FEDERATE_STRATEGY</span> <span class="o">=</span> <span class="n">FederateStrategy</span><span class="o">.</span><span class="n">FED_AVG</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-    <span class="c1"># 定义好server的联邦学习方法策略为FederateStrategy,并启动server</span>
-    <span class="n">FLStandaloneServer</span><span class="p">(</span><span class="n">FEDERATE_STRATEGY</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-<span class="c1"># 运行后日志提示聚合开始</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="pfl_clientpy"><code>pfl_client.py</code></h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
-<span class="c1"># 导入pfl的相关包，包括客户端包，策略包，训练控制器</span>
-<span class="kn">from</span> <span class="nn">gfl.core.client</span> <span class="kn">import</span> <span class="n">FLClient</span>
-<span class="kn">from</span> <span class="nn">gfl.core.strategy</span> <span class="kn">import</span> <span class="n">WorkModeStrategy</span><span class="p">,</span> <span class="n">TrainStrategy</span><span class="p">,</span> <span class="n">LossStrategy</span>
-<span class="kn">from</span> <span class="nn">gfl.core.trainer_controller</span> <span class="kn">import</span> <span class="n">TrainerController</span>
-
-<span class="n">CLIENT_ID</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-    <span class="c1"># CLIENT_ID = int(sys.argv[1])</span>
-    <span class="c1"># 数据集mnist的导入</span>
-    <span class="c1">#手写数字数据集</span>
-    <span class="n">mnist_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s2">&#34;D:\Python\PycharmProjects\pflttt\mnist_data&#34;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
-        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
-        <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.13066062</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.30810776</span><span class="p">,))</span>
-    <span class="p">]))</span>
-    <span class="c1"># 实例化一个客户端</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">FLClient</span><span class="p">()</span>
-    <span class="c1"># 获得服务器端的模型pfl</span>
-    <span class="n">gfl_models</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_remote_gfl_models</span><span class="p">()</span>
-
-    <span class="c1"># 由于一个flclient可以参与多个job，所以获得的pflmodels也有可能是多个</span>
-    <span class="c1"># 循环遍历这些模型</span>
-    <span class="k">for</span> <span class="n">gfl_model</span> <span class="ow">in</span> <span class="n">gfl_models</span><span class="p">:</span>
-        <span class="c1"># 对于每个模型，要定义好优化集，optimize，和训练策略，train_strategy</span>
-        <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">gfl_model</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-        <span class="n">train_strategy</span> <span class="o">=</span> <span class="n">TrainStrategy</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">loss_function</span><span class="o">=</span><span class="n">LossStrategy</span><span class="o">.</span><span class="n">NLL_LOSS</span><span class="p">)</span>
-        <span class="c1"># 并将策略传入到对应的pfl_model中，(不同的模型也可以设置不同的训练策略)</span>
-        <span class="n">gfl_model</span><span class="o">.</span><span class="n">set_train_strategy</span><span class="p">(</span><span class="n">train_strategy</span><span class="p">)</span>
-
-    <span class="c1"># 调用TrainerController设置工作模式为单例模式，模型为pfl_models,数据为mnist数据集</span>
-    <span class="c1"># 客户端id为0，curve设置本地是否显示训练曲线，concurrent_num为本地线程数</span>
-    <span class="c1"># 启动TrainerController</span>
-    <span class="n">TrainerController</span><span class="p">(</span><span class="n">work_mode</span><span class="o">=</span><span class="n">WorkModeStrategy</span><span class="o">.</span><span class="n">WORKMODE_STANDALONE</span><span class="p">,</span> <span class="n">models</span><span class="o">=</span><span class="n">gfl_models</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mnist_data</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">CLIENT_ID</span><span class="p">,</span>
-                      <span class="n">curve</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">concurrent_num</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><img src="/images/202112/35.png" alt=""></p>
-<h3 id="流程分析">流程分析</h3>
-<p>运行pfl_model后可以看到，job已经生成并添加成功了。同时在日志文件中也有了相应的记录。
-编写pfl_server以及pfl_client
-先运行pfl_server，运行后日志提示聚合开始
-然后运行pfl_client,可以看到client已经获取到了job，载入模型开始进行训练
-等client完成一轮训练后，可以在server端看到第一轮的参数聚合在server端完成了。
-训练完成后，会产生一个模型文件</p>
-<p>当然pfl框架也可以使用集群模式进行训练
-只需要在client和server文件中声明地址，并选择工作模式为集群模式即可
-<a href="https://galaxylearning.github.io/quickstart/">https://galaxylearning.github.io/quickstart/</a></p>
-<h2 id="gfl">GFL</h2>
-<p>A Decentralized Federated Learning Framework Based On Blockchain</p>
-<p>GFL:一个基于<code>区块链</code>的<code>去中心化</code>联邦学习框架</p>
-<h3 id="abstract">Abstract：</h3>
-<p>当前的FL框架在恶意节点攻击下如何提高通信性能、保持安全性和鲁棒性是一个巨大的挑战。本文提出了一种基于区块链的去中心化的FL学习框架——银河联邦学习框架(Galaxy  Federated Learning Framework, GFL)。GFL引入了<code>一致哈希算法</code>来提高通信性能，并提出了一种新的<code>环形去中心化</code>FL算法(RDFL)来提高分散FL性能和带宽利用率。此外，GFL还引入了星际文件系统(InterPlanetary File System, <code>IPFS</code>)和<code>区块链</code>，进一步提高了通信效率和FL的安全性。在恶意节点和非独立同分布（非IID）数据集的数据中毒情况下，提高通信性能和分散FL性能。</p>
-<h3 id="introduction">Introduction：</h3>
-<p>传统的FL框架使用中心化的体系结构，中心结点收集梯度或模型参数来更新全局模型。传统的压力和挑战：中心结点的通信压力和通信带宽瓶颈以及通信压力带来的中心结点的稳定性挑战。</p>
-<p>提出了去中心化的FL框架：移除了中心结点，并在数据结点之间同步FL更新，然后执行聚合。在突破通信瓶颈和提高FL稳定性方面取得了一些进展，但是仍面临通信压力、分散FL性能和安全方面的挑战。用于同步FL更新的去中心化FL框架会造成更大的通信压力。由于数据节点中恶意节点的数据中毒以及非独立同分布（非IID）问题，现有去中心化FL框架中使用的聚合算法无法实现竞争性能。此外，现有去中心化FL框架的更新过程存在被篡改的安全风险，并且由于缺乏共识（协商一致）机制，无法追踪FL更新的来源。</p>
-<p>为了解决上述问题，本文提出了一种基于区块链的去中心化FL框架——银河联邦学习框架（GFL）。GFL采用一致性哈希算法构建数据节点的环形拓扑，旨在降低通信压力，提高拓扑稳定性。此外，本文还设计了一种新颖的环形去中心化FL算法（RDFL）。在RDFL中引入了<code>RingAllReduce</code>算法和<code>知识蒸馏</code>，以提高带宽利用率和去中心化FL性能。此外，还引入了星际文件系统（IPFS）和区块链，以进一步提高分散FL的通信效率和安全性。</p>
-<p><code>Consistent Hashing Algorithm:</code><a href="https://www.cnblogs.com/frankcui/p/15354596.html">一致性哈希算法</a>(<a href="https://www.cnblogs.com/xialihua1023/p/10304932.html">Consistent Hashing Algorithm</a>)。是一种分布式算法，常用于负载均衡。Memcached client也选择这种算法，解决将key-value均匀分配到众多cahce server上的问题。它可以取代传统的取模操作，解决了取模操作无法应对增删cached Server的问题 (增删server会导致同一个key,在get操作时分配不到数据真正存储的server，命中率会急剧下降)。简单来说，是将整个哈希值空间组织成一个虚拟的圆环，整个空间按顺时针方向组织。将各个服务器使用Hash进行一个哈希，具体可以选择服务器的ip或主机名作为关键字进行哈希，这样每台机器就能确定其在哈希环上的位置。将数据key使用相同的函数Hash计算出哈希值，并确定此数据在环上的位置，从此位置<strong>沿环顺时针“行走”</strong>，第一台遇到的服务器就是其应该定位到的服务器。</p>
-<p><code>RingAllReduce:</code><a href="https://blog.csdn.net/lj2048/article/details/108322931">ring allreduce</a>是一种算法，其通信成本是恒定的并且与系统中GPU的数量无关，并且仅由系统中GPU之间的最慢连接确定; 事实上，如果你只考虑带宽作为通信成本的一个因素（并忽略延迟），那么ring allreduce是一种最佳的通信算法。（当您的模型很大时，这是对通信成本的一个很好的预估，并且您只需要较少数次数发送大量数据。）Ring allreduce中的GPU排列在一个逻辑环中。 每个GPU应该有一个左邻居和一个右邻居; 它只会向其右邻居发送数据，并从其左邻居接收数据。该算法分两步进行：第一步是scatter-reduce，然后是all-gather。 在scatter-reduce步骤中，GPU将交换数据，使得每个GPU最终得到最终结果的一部分。 在all-gather步骤中，GPU将交换这些块，以便所有GPU最终得到完整的最终结果。</p>
-<p><code>IPFS:</code><a href="https://blog.csdn.net/CHYabc123456hh/article/details/105437637">IPFS</a>（InterPlanetary File System）叫星际文件传输系统，本质是一个基于点对点的分布式超媒体分发协议，它整合了分布式系统，为所有人提供全球统一的可寻址空间，因为他具有良好的安全性、较高的传输速度等特点，被认为是最有可能取代HTTP的新一代互联网协议。IPFS用基于内容的寻址替代传统的基于域名的寻址。用户不需要关心服务器的位置，不用考虑文件存储的名字和路径。我们将一个文件放到IPFS节点中，将会得到基于其内容计算出的唯一加密哈希值。哈希值直接反映文件的内容，哪怕只修改1比特，哈希值也会完全不同。当IPFS被请求一个文件哈希时，它会使用一个分布式哈希表找到文件所在的节点，取回文件并验证文件的哈希值，如果哈希值不符合，说明内容被篡改了。将传统的基于内容的地址替代基于域名的地址，也就是用户寻找的不是某个地址而是储存在某个地方的内容，不需要验证发送者的身份，而只需要验证内容的哈希，通过这样可以让网页的速度更快、更安全、更健壮、更持久。大文件会被切分成小的分块，下载的时候可以从多个服务器同时获取。IPFS的网络是不固定的、细粒度的、分布式的网络，可以很好的适应内容分发网络的要求。</p>
-<p><code>Knowledge Distillation：</code><a href="https://baijiahao.baidu.com/s?id=1683133392734090972&amp;wfr=spider&amp;for=pc">知识蒸馏</a>,培养一个能很好表现和概括的大模型。这就是所谓的教师模式。取你所有的数据，计算教师模型的预测值。包含这些预测的总数据集称为知识，而预测本身通常称为软目标。这就是知识提炼的步骤。利用之前获得的知识来训练较小的网络，称为学生模型。</p>
-<p><code>blockchain:</code><a href="http://blockchain.idcquan.com/162625.shtml">区块链</a>(<a href="https://baijiahao.baidu.com/s?id=1648712868414807289&amp;wfr=spider&amp;for=pc">Blockchain</a>)是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。”所谓共识机制是区块链系统中实现不同节点之间建立信任、获取权益的数学算法。区块链就是一种网络技术，通过程序员敲代码形成的网络，各方相互合作交易均可直接对接完成，不需要靠第三方平台，也就省去了中间的一些程序和费用(省时省力还省钱)，但为了合作或交易的安全，系统会将每一个参与者的动作广播给所有参与者，保障了整个过程的安全、透明，解决了信任问题。区块链准确的说就是“全中心”体系，就是链上的每个节点都是中心。不可删除，不可更改，这就是区块链技术。</p>
-<h3 id="contributions">contributions</h3>
-<ul>
-<li>设计了一种新的去中心化FL数据节点拓扑机制，采用了一致性哈希算法。该机制能够显著降低通信压力，提高拓扑稳定性。据我们所知，这是第一次尝试在去中心化FL框架中为数据节点拓扑设计引入一致性哈希算法。</li>
-<li>提出了一种新的环分散联邦学习（RDFL）算法，旨在提高训练中的带宽利用率和分散联邦学习性能。</li>
-<li>为了提高去中心化的FL框架的通信性能和安全性，我们引入IPFS技术来降低系统通信压力，并引入区块链来提高FL的安全性。</li>
-</ul>
-<h3 id="related-work">Related Work</h3>
-<ul>
-<li>
-<p>中心化FL：存在通信瓶颈和稳定性问题</p>
-</li>
-<li>
-<p>去中心化FL：基于八卦算法和模型分割的去中心化FL算法，点对点的去中心化FL算法，完全分散的FL算法，基于区块链的分散FL框架。在分散的FL性能和安全性方面面临挑战。</p>
-</li>
-<li>
-<p>解决通信问题：主要集中在研究新的通信压缩或模型压缩技术来降低通信压力。利用八卦算法提高带宽利用率，并通过模型分割降低通信压力。降低沟通压力的模型量化方法。通信压缩方法，以降低通信压力。</p>
-</li>
-<li>
-<p>提高Non-IID数据集上的FL性能：现有研究主要集中在集中式FL上，共享数据集，知识蒸馏。</p>
-<p>在分散FL场景中，为了提高非IID数据集上的分散FL性能和恶意数据节点的数据中毒，Li提出了一个分散FL框架，但在没有数据中毒的情况下，没有实现比联邦平均（FedAvg）更好的性能。</p>
-</li>
-<li>
-<p>保护数据隐私：现有的研究集中在新的防御方法上，如差分隐私和多方安全计算。也有研究将区块链技术应用于分散FL，以提高安全性。</p>
-</li>
-</ul>
-<h3 id="the-proposed-framework">The Proposed Framework</h3>
-<ul>
-<li>描述了GFL中设计的拓扑机制如何利用一致性哈希算法为数据节点构建环形分散FL拓扑</li>
-<li>在GFL中描述了RDFL算法</li>
-<li>描述了GFL如何利用IPFS和区块链来降低通信压力和提高FL安全性</li>
-</ul>
-<ol>
-<li>
-<p>Ring Decentralized FL Topology 环分散FL拓扑</p>
-<p>n个数据结点，可信任结点为m个，不可信任结点为n-m个。数据结点记作D={DP1,DP2,&hellip;,DPn}。GFL利用一致性散列算法构造了n个数据节点的环形拓扑。一致哈希值Hk=Hash(DPk^ip)。DPkip表示DPk的ip。数据节点分布在环上，根据一致的哈希值其值范围为[0,2^32−1] 。</p>
-<p>不受信任的数据节点将以顺时针方向将本地模型发送到环拓扑上最近的受信任数据节点。绿色数据节点表示受信任的数据节点，灰色数据节点表示不受信任的数据节点。在一致性哈希算法的帮助下，不同的不可信数据节点向不同的可信节点发送模型，有效降低了可信节点的通信压力。为了使可信节点在环上的分布更加均匀，GFL在环拓扑中引入可信节点的虚拟节点，进一步降低通信压力。带有红色虚线的绿色节点表示虚拟节点，如果不受信任的数据节点发现最近的受信任节点是顺时针方向的虚拟节点，它们将直接将模型发送到虚拟节点对应的受信任节点。</p>
-<p><img src="/images/202112/36.png" alt=""><img src="/images/202112/37.png" alt=""></p>
-</li>
-<li>
-<p>RDFL Algorithm</p>
-<p>GFL基于一致性哈希算法构建的环形分散拓扑结构，开始执行RDFL算法。</p>
-<p>为了提高可信节点之间的带宽利用率，RDFL算法在一致性哈希算法中引入了RingAllReduce算法和顺时针原理来执行模型同步。</p>
-<ul>
-<li>
-<p>Train and Synchronize Model 每个数据节点加载用于本地训练的全局模型，并按顺时针方向同步其模型</p>
-<ol>
-<li>
-<p>每个数据节点DPk首先加载上一次迭代生成的全局模型GM进行局部训练，并获得一个新的局部模型MK。</p>
-</li>
-<li>
-<p>非信任节点根据顺时针原则将本地模型发送到最近的信任节点。</p>
-</li>
-<li>
-<p>受信任节点同步模型,以便所有受信任节点获得其余受信任节点的模型。</p>
-</li>
-<li>
-<p>m-1之后轮同步（r=m−1） ，所有受信任节点都具有其他受信任节点的模型</p>
-<p><code>???：</code>已经知道是不受信任结点的模型，为何还要发给信任结点，并全部同步？</p>
-</li>
-</ol>
-</li>
-<li>
-<p>Knowledge Distillation 利用知识蒸馏将可信节点拥有的其他模型的dark knowledge收敛到本地模型，并在可信节点之间同步本地模型</p>
-<ol>
-<li>由于同步，每个受信任节点从其余受信任数据节点获取模型。</li>
-<li>每个受信任节点在本地进行知识蒸馏</li>
-<li>teacher模型中的 dark knowledge 转移到知识较少的student模型中</li>
-<li>可信节点利用RingAllReduce算法和顺时针规则同步可信节点的局部模型</li>
-<li>同步后，所有受信任节点都具有其他受信任节点的本地模型。</li>
-<li>在RDFL算法的知识蒸馏步骤中，每个可信节点DPk使用本地模型Mk作为学生，DPk拥有的剩余模型将用作教师，以将dark knowledge提取到Mk。RDFL利用KL散度来衡量模型之间的分布差异。为了避免恶意节点在不可信节点中的数据中毒，RDFL只允许前30%的模型与Mk的KL差异最小的模型作为教师模型。</li>
-<li><a href="https://blog.csdn.net/yihaizhiyan/article/details/41359957">dark knowledge</a></li>
-</ol>
-</li>
-<li>
-<p>Federated Averaging 每个受信任节点执行联合平均（FedAvg）以生成新的全局模型并开始下一次迭代</p>
-<ol>
-<li>每个受信任节点DPK执行 FedAvg以获得新的全局模型。</li>
-<li>然后，每个受信任节点根据环形拓扑将新的全局模型逆时针发送给不受信任的节点，并开始下一次迭代。</li>
-</ol>
-</li>
-</ul>
-<p><img src="/images/202112/38.png" alt=""></p>
-</li>
-<li>
-<p>IPFS and Blockchain</p>
-<p>数据节点之间的模型传输占用大量通信开销，并造成严重的通信压力。通信存在被篡改的安全风险，并且无法追踪模型的来源。</p>
-<ul>
-<li>Communication Pressure：引入IPFS作为模型存储系统。IPFS由GFL中的可信节点组成。IPFS中的文件将被分成多个存储在不同节点上的片段，IPFS将生成与该文件对应的IPFS hash值。IPFS hash是一个46字节的字符串，可以通过IPFS hash从IPFS获取相应的文件。由于模型文件以片段形式存储在受信任节点中，因此数据隐私泄漏的风险进一步降低。</li>
-<li>Communication Security：引入区块链作为通信系统。数据节点发送的IPFS hash以区块链交易的形式传输。每个交易都通过一致性算法进行验证，以降低篡改风险。由于区块链记录每个交易信息，GFL可以根据交易信息追溯到恶意节点。由于区块链的开放性，区块链上的任何节点都可以获取区块链中的交易信息。为了避免IPFS hash的泄漏，GFL对IPFS hash进行加密以保护数据节点的隐私。</li>
-</ul>
-</li>
-</ol>
-<h3 id="framework-design">Framework Design</h3>
-<ol>
-<li>
-<p>Architecture(架构)：GFL的架构由IPFS和区块链组成。对于区块链，GFL利用Ethereum作为区块链的实施平台。在GFL中，区块链由所有数据节点组成，IPFS由可信节点组成。可信数据节点是构成IPFS和区块链的节点，而不可信节点只是构成区块链的节点。</p>
-<p>智能合约(一种旨在以信息化方式传播、验证或执行合同的计算机协议)是部署在区块链上的协议，通过该协议，区块链可以执行比数字交易更多的功能。数据节点通过使用智能合约，将模型的IPFS hash以交易的形式发送到区块链。区块链首先执行共识机制，验证交易是否被篡改，如果验证通过，交易将打包到区块中。<strong>智能合约</strong>是以太坊生态系统搭建的关键角色。 当有人想要在以太坊完成某项任务时，他们会与一个或多个人发起一个<strong>智能合约</strong>。 这个合约其实是一系列的指令，使用编程语言“solidity”编写，这些语言在IFTTT逻辑（也就是IF-THIS-THEN-THAT逻辑）的基础上工作。 基本上，如果第一组指令已经完成，那么执行下一个功能，然后继续下一个功能，直到达到合同结束。</p>
-<p>GFL中有两种类型的智能合约。控制器合约负责控制所有FL任务的流程。存储合约负责存储模型的IPFS hash，每个FL任务都有一个独立的存储合约。</p>
-<p><img src="/images/202112/39.png" alt=""></p>
-</li>
-<li>
-<p>Encryption Mechanism(加密机制)：由于区块链的可见性，区块链上的节点可以访问任何区块中的交易信息，不可信数据节点中存在恶意节点可能导致数据隐私泄露。为了解决数据隐私泄露问题，GFL采用RSA非对称加密算法和AES对称加密算法对交易信息进行加密。通过GFL的加密机制，对每个区块链交易中模型的IPFS hash进行加密，防止数据隐私泄露。</p>
-<p>如果DPh和DPk是第一次通信，DPk将生成AES密钥，并使用DPh的公钥对其进行加密，并在通信之前将其发送给DPh。DPh在收到AES密钥后利用其私钥对其进行解密。然后，DPh和DPk之间传输的IPFS hash将使用AES密钥加密。A将明文使用AES密钥加密，然后使用RSA公钥将密钥加密，发送给B；B接收到后用私钥打开获取到AES的密钥。保证了密钥的安全性，之后便可以通过AES通信。</p>
-</li>
-</ol>
+      <p>Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data</p>
+<p>针对不平衡医疗数据的个性化倒退的弹性联合学习</p>
+<p>尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包括<code>每次通信后的性能下降(即倒退)和难以解决的类失衡</code>。</p>
+<p>针对<code>倒退问题</code>，我们首先在服务器端设计了渐进式傅里叶聚合(PFA)，在频域逐步整合客户端模型参数。然后，在客户端，我们设计了一个代理增强转移(DET)，以顺利地将全局知识转移到个性化的局部模型。针对<code>类不平衡问题</code>，我们提出了联合原型对齐(CPA)损失，以促进FL框架的平衡优化。考虑到FL中私有局部数据对其他参与者的不可访问性，CPA损失基于全局不平衡计算全局联合目标，然后通过原型对齐精化调整客户端局部训练，消除与这种平衡目标的不平衡差距。</p>
+<p>在现有的FL工作中，个性化FL[5]–[7]特别适合医疗场景，因为每个客户端都可以根据自己的偏好选择聚合服务器模型或本地模型。然而，当FL应用于现实世界的医疗场景时，将面临两个挑战。</p>
+<p>对于真实世界的医疗FL，成像设备、协议和区域疾病的差异可能会导致客户之间的严重数据异质性。由此产生的不同局部模型之间的巨大差异可能会使现有FL工作中的某些操作失效。FedAvg[8]）在每次服务器-客户端通信后都会遇到性能的急剧下降，这被称为倒退。<code>具有退化性的聚合模型抹杀了先前的知识，并且需要在下一次本地训练中重新适应客户端任务。这将降低客户端的本地培训和服务器的知识共享</code>。此外，个性化FML[5]中的代理模型也存在倒退问题，并进一步降低了局部模型的性能，这导致与图1（a）中的我们的曲线相比，曲线较差。</p>
+<p>具体来说，我们认为这种倒退现象可能来自以下两个<code>原因</code>。一方面，由于客户端间数据的严重异构性，不同客户端模型的参数在同一位置[10]上可能表示不同的语义模式。按元素平均这些参数是不合理的。相比之下，将参数转换到频域可以有效地将参数分量沿频率维对齐，为选择聚合频带[11]提供了可行性。另一方面，用聚合的服务器模型代替之前的局部模型，会丢弃之前局部模型学习到的知识，阻碍下一次迭代的优化。</p>
+<p>另一个挑战是医学成像中的<code>类不平衡</code>在FL场景中变得更加复杂，这可能会对本地训练和服务器聚集造成很大的影响。图1 (b)中真实世界皮肤镜FL数据集的类别比揭示了类别和客户之间的明显不平衡。分散的训练样本对其他参与者的不可访问性使得FL中的阶级不平衡更加难以处理。要解决FL中的类不平衡问题，一个合理的<code>想法</code>是，首先根据FL框架的全局不平衡制定一个平衡的目标，然后调整每个客户端的局部训练，以协作的方式消除客户端模型与平衡目标之间的不平衡差距。</p>
+<p>为了解决前面提到的倒退和类不平衡问题，我们提出了一个个性化的倒退-弹性FL框架，为每个客户生成一个优秀的个性化模型。具体来说，我们<code>首先提出了渐进式傅里叶聚合(PFA)来在服务器端集成客户端模型</code>。通过快速傅立叶变换(FFT)和逆傅立叶变换(IFFT)将客户端参数相互转换到频域，对客户端参数的低频分量进行平均，同时保留单个高频分量。通过在FL训练过程中逐步提高共享组件的频率阈值，PFA可以以符合网络学习偏好的方式有效地集成客户端知识。<code>然后，我们设计了一个代理增强传输(DET)来引入一个代理模型来接收更新的服务器模型，并保持个性化的本地模型不受污染，而不是替换客户端的本地模型</code>。为了解决代理模型的倒退问题，DET通过定制的恢复-交换-升华步骤，恢复代理模型的局部先验，并传递全局知识以促进个性化的局部模型。<code>此外，我们设计了联合原型对齐(CPA)损失来克服FL中的类不平衡问题</code>。从服务器角度，基于FL框架的全局不平衡计算全局联合目标。为了达到这样的平衡目标，局部原型对齐精化通过限制服务器上的局部原型与全局原型之间的差异，调整每个客户端的局部训练以消除不平衡的差距。</p>
+<p>•为了处理真实世界的医学FL，我们提出了一种新颖的个性化倒退-弹性FL框架，<code>在服务器端采用改进的渐进式傅里叶聚合(PFA)</code>。特别地，我们<code>设计了一种改进的频率分量聚合策略和分类器参数的分类操作</code>。</p>
+<p>•我们设计了代理增强传输(DET)来改进个性化的局部模型，在客户端使用恢复-交换-升华步骤，可以在不被服务器-客户端通信中断的情况下传输全局知识。</p>
+<p>•针对FL场景下的类不平衡问题，从全局联合目标和局部原型对齐精化两个方面提出了联合原型对齐损失。因此，FL框架可以朝着一个平衡的目标进行优化。</p>
+<p>•大量关于皮肤镜诊断和前列腺MRI分割的FL实验证明了我们个性化的逆行弹性FL框架的有效性，远远优于最先进的FL作品</p>
+<p>这项工作的初步版本已发表在MICCAI 2021[9]上。在这篇论文中，我们做了以下重点的重大扩展:1)我们设计了联合原型对齐(CPA)损失来处理现实世界医学FL中的不平衡问题;2)与会议工作[9]中的PFA相比，我们进一步聚合相位分量以整合足够的知识，并独立处理分类器的类参数以避免潜在的偏差;3)除了对皮镜图像的分类实验外，我们还进行了大量的实验来增强综合验证，包括对前列腺MRI数据集的分割实验，与现有FL失衡工作的比较，以及详细的消融研究。</p>
+<p>了克服客户端间数据异构性，FedBN[14]和SiloBN[7]对客户端模型采用了个性化归一化统计，FML[5]在客户端引入了信誉模型，在信誉模型和个性化模型之间执行相互学习[15]。最近，FedProto[16]利用类原型而不是局部梯度来执行服务器-客户端通信，并将局部原型约束到足够接近服务器上聚合的全局原型。</p>
+<p>在不平衡的数据集中，具有更多样本的主导类别会压倒稀有类别，这严重降低了有偏网络的性能。大多数不平衡研究可以分为重采样[25]-[27]和重加权[22]-[24]。根据类不平衡的程度，重采样工作旨在将类别分布调整为重新平衡的目标，例如稀有类别的过采样、主要类别的欠采样和类平衡采样[25]。通过将网络分为两部分，采用最近的解耦策略[26]、[27]首先通过实例平衡采样优化特征提取器，然后用类平衡采样重新训练分类器。这些重采样方法通常使用不同的数据采样器来制定多阶段训练过程，这对于 FL 场景来说相对繁琐。</p>
+<p>为了避免网络偏向于主要类别，重新加权工作对稀有或容易出错的类别引入了更大的惩罚。特别是，提出了焦点损失[24]来自适应地增加硬样本的惩罚，同时忽略了容易的否定。最近的工作 [22]、[23] 指出，主要类别产生的竞争梯度严重抑制了稀有类别的网络学习，并通过排除稀有类别样本的这种竞争梯度显着提高了性能。对于医学成像，基于类频率逆的损失重加权和样本重采样被广泛用于缓解不平衡问题[28]。与现有的专注于集中场景的类不平衡工作相比，我们的方法将 FL 场景中的更复杂不平衡问题制定为全局不平衡和局部不平衡差距，并在客户端保护私有数据时进一步处理这个问题。</p>
+<p>概述：</p>
+<p>对于第k个客户端，利用私有数据对个性化局部模型Pk进行E-epoch局部训练。然后，服务器收集这些训练好的客户端模型，并利用渐进式傅里叶聚合(PFA)将它们聚合成具有单独高频成分的服务器模型{Sk}K K =1。然后将这些服务器模型作为副模型Dk交付给相应的客户端。<code>该副模型通过提出的副增强转移(DET)来实现全局知识的转移</code>。此外，通过在客户端使用本地原型和在服务器端使用全局原型，联合原型对齐(CPA)损失将客户端的本地训练引导到全局平衡的目标，以解决FL中的类不平衡问题。重复这些步骤，直到本地训练达到Tepochs。我们在图2中演示了个性化的倒退-弹性FL框架。</p>
+<p>服务器中的渐进式傅里叶聚合：</p>
+<p>为了整合来自客户端模型的全局知识，现有的FL方法[7]，[8]，[13]，[14]直接对局部模型的参数按元素平均，生成聚合的服务器模型。然而，这种参数空间上的粗糙聚集突然降低了模型在客户端的性能。了解决聚合引起的倒退问题，我们设计了渐进式傅里叶聚合(Progressive Fourier aggregation, PFA)，在频域稳定地对全局知识进行整合。</p>
+<p>考虑到<code>参数的低频分量是网络能力</code>[11]的基础，我们的PFA<code>聚合了参数的相对低频分量来共享来自不同客户端的知识，同时保留了每个客户端包含特定知识的高频分量</code>。具体来说，对于第k个客户端模型中的卷积层，我们首先将其四维参数张量重塑为二维矩阵wk∈Rh1d1×h2 d2，其中d1和d2为输出和输入通道，h1和h2为核空间大小。然后，通过傅里叶变换F(wk) = FA(wk)ejFP (wk)<code>得到参数的振幅分量FA和相位分量FP</code>，</p>
+<p>客户端的代理增强传输：</p>
+<p>PFA可以克服服务器聚合不当导致的倒退，但是直接用聚合的服务器参数替换客户端模型仍然会丢失之前的局部知识，进一步干扰下一次迭代的优化。为了克服这一瓶颈，我们设计了副增强转移(DET)，<code>将全局知识与本地先验知识合并，而不是直接替换。除了个性化的本地模型P之外，每个客户端还拥有一个副模型d，用于从服务器接收聚合的参数</code>。通过进行恢复-交换-升华三个步骤，所提出的DET将全局知识从副模型D平滑地转移到个性化的局部模型P。</p>
+<p>Recover：当使用来自服务器的聚合模型S进行更新时，副模型D由于倒退而严重退化。因此，<code>我们首先采用个性化局部模型P作为教师，用局部知识还原副模型D</code>。在这一步中，个性化局部模型p使用Lsup进行独立局部训练，副模型D使用以下损失函数LD进行优化。其中Lsup是局部数据集的监督损失，如交叉熵损失或提出的CPA损失，pP和pD是个性化局部模型Pand副模型d的预测概率。LKL (pP ||pD)是KullbackLeibler散度，帮助副模型快速重新适应客户端，提高性能。这一步对于确保副模型在随后的全局知识转移中不会损害个性化的局部模型至关重要。</p>
+<p>Exchange：一旦副模型D的恢复性能接近于教师P， φval(D)≥λ1φval(P)，其中φval代表验证集上的特定性能度量(例如，F1用于分类，Dice用于分割)，<code>我们在个性化局部模型P与副模型D之间进行相互学习[15]，以交换全局知识和局部知识</code>。其中，副模型D由Eq.(5)优化，个性化局部模型P由loss LP监督:Eq.(6)中的LKL (pD ||pP)项通过副模型D平稳地将服务器全局知识传递给个性化局部模型P，因此，知识交换可以提高客户端模型[15]的泛化能力。</p>
+<p>Sublimate：最后，当副模型的性能高度接近个性化局部模型时，当φval(D)≥λ2φval(P)， 0 &lt; λ1 &lt; λ2 &lt; 1时，<code>副模型D使用Lsup保持独立的局部训练，并进一步作为教师使用Eq.(6)的LP对P进行优化。这一步使得全局知识能最大程度地从服务器转移到个性化局部模型。</code></p>
+<p>FL不平衡的联合原型对准损失：</p>
+<p>为了解决FL中复杂的类不平衡问题，我们通过引导客户端的局部训练达到全局平衡目标，设计了联合原型对齐(CPA)损失，如图3所示。具体而言，我们首先根据整个FL框架的不平衡计算全局联合目标，然后调整每个客户端的局部训练，以消除局部模型与平衡目标之间的原型测量不平衡差。</p>
 <blockquote>
-<p><a href="https://www.bilibili.com/video/BV12E411H7Lk?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click">视频</a></p>
-<p><a href="https://github.com/GalaxyLearning/GFL">项目地址</a></p>
-<p><a href="https://galaxylearning.github.io/">galaxylearning官方网站</a></p>
-<p><a href="https://arxiv.org/abs/2010.10996">论文</a></p>
+<p>个性化学习blog：<a href="https://blog.csdn.net/Cyril_KI/article/details/122820370">1</a>，<a href="https://zhuanlan.zhihu.com/p/499716652">2</a>，<a href="https://zhuanlan.zhihu.com/p/549964139">3</a>，<a href="https://m.thepaper.cn/baijiahao_9306970">4</a>，<a href="https://blog.csdn.net/weixin_42534493/article/details/117931982">5</a></p>
 </blockquote>
 
     </div>
@@ -545,7 +190,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2021-12-17
+        2023-03-24
         
     </span>
   </p>
@@ -557,13 +202,9 @@
           <a href="/tags/federated-learning/">Federated Learning</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/fl_faq/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">联邦学习综述</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/%E5%9B%BE%E5%83%8F%E9%87%8D%E5%BB%BA/">
-            <span class="next-text nav-default">3D人体重建</span>
+        
+        <a class="next" href="/post/dl_limu/">
+            <span class="next-text nav-default">动手学深度学习-李沐</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
