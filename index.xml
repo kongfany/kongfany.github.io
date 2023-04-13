@@ -22,7 +22,7 @@
       <pubDate>Wed, 22 Mar 2023 14:25:03 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/dl_limu/</guid>
-      <description>视频 课程主页 教材 github 课程论坛 pytorch论坛 BLOG</description>
+      <description>视频 课程主页 教材 github 课程论坛 pytorch论坛 BLOG 卷积层的超参数：卷积核的大小，填充和步幅，通道数 填充在输入周围添加额外的行/列，来控制输出形状</description>
     </item>
     
     <item>
@@ -869,15 +869,6 @@
       
       <guid>https://kongfany.github.io/post/my-first-post/</guid>
       <description>hugo创建blog &#34;可以加类似于引言的格式-- 网工172-陈迪荣 2021/6/5 9:48:03 搭建博客可以看这篇下面的reference： https://www.lttzz.cn/post/hello-world/ https://olowolo.com/post/hugo-quick-start/ hugo new不是可以新建博</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://kongfany.github.io/post/untitled/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kongfany.github.io/post/untitled/</guid>
-      <description></description>
     </item>
     
   </channel>

@@ -911,10 +911,4 @@
     <priority>0.5</priority>
   </url>
   
-  <url>
-    <loc>https://kongfany.github.io/post/untitled/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
 </urlset>
