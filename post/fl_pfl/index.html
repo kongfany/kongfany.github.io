@@ -49,7 +49,7 @@
 <meta itemprop="name" content="个性化联邦学习">
 <meta itemprop="description" content="Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包"><meta itemprop="datePublished" content="2023-03-24T16:04:34+08:00" />
 <meta itemprop="dateModified" content="2023-03-24T16:04:34+08:00" />
-<meta itemprop="wordCount" content="4436">
+<meta itemprop="wordCount" content="5855">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="个性化联邦学习"/>
 <meta name="twitter:description" content="Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2023-03-24 </span>
         
-          <span class="more-meta"> 4436 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 5855 words </span>
+          <span class="more-meta"> 12 mins read </span>
         
       </div>
     </header>
@@ -162,24 +162,307 @@
 <p>•大量关于皮肤镜诊断和前列腺MRI分割的FL实验证明了我们个性化的逆行弹性FL框架的有效性，远远优于最先进的FL作品</p>
 <p>这项工作的初步版本已发表在MICCAI 2021[9]上。在这篇论文中，我们做了以下重点的重大扩展:1)我们设计了联合原型对齐(CPA)损失来处理现实世界医学FL中的不平衡问题;2)与会议工作[9]中的PFA相比，我们进一步聚合相位分量以整合足够的知识，并独立处理分类器的类参数以避免潜在的偏差;3)除了对皮镜图像的分类实验外，我们还进行了大量的实验来增强综合验证，包括对前列腺MRI数据集的分割实验，与现有FL失衡工作的比较，以及详细的消融研究。</p>
 <p>了克服客户端间数据异构性，FedBN[14]和SiloBN[7]对客户端模型采用了个性化归一化统计，FML[5]在客户端引入了信誉模型，在信誉模型和个性化模型之间执行相互学习[15]。最近，FedProto[16]利用类原型而不是局部梯度来执行服务器-客户端通信，并将局部原型约束到足够接近服务器上聚合的全局原型。</p>
-<p>在不平衡的数据集中，具有更多样本的主导类别会压倒稀有类别，这严重降低了有偏网络的性能。大多数不平衡研究可以分为重采样[25]-[27]和重加权[22]-[24]。根据类不平衡的程度，重采样工作旨在将类别分布调整为重新平衡的目标，例如稀有类别的过采样、主要类别的欠采样和类平衡采样[25]。通过将网络分为两部分，采用最近的解耦策略[26]、[27]首先通过实例平衡采样优化特征提取器，然后用类平衡采样重新训练分类器。这些重采样方法通常使用不同的数据采样器来制定多阶段训练过程，这对于 FL 场景来说相对繁琐。</p>
+<p>在不平衡的数据集中，具有更多样本的主导类别会压倒稀有类别，这严重降低了有偏网络的性能。大多数不平衡研究可以分为重采样[25]-[27]和重加权[22]-[24]。根据类不平衡的程度，重采样工作旨在<code>将类别分布调整为重新平衡的目标</code>，例如稀有类别的过采样、主要类别的欠采样和类平衡采样[25]。通过将网络分为两部分，采用最近的解耦策略[26]、[27]首先通过实例平衡采样优化特征提取器，然后用类平衡采样重新训练分类器。这些重采样方法通常使用不同的数据采样器来制定多阶段训练过程，这对于 FL 场景来说相对繁琐。</p>
 <p>为了避免网络偏向于主要类别，重新加权工作对稀有或容易出错的类别引入了更大的惩罚。特别是，提出了焦点损失[24]来自适应地增加硬样本的惩罚，同时忽略了容易的否定。最近的工作 [22]、[23] 指出，主要类别产生的竞争梯度严重抑制了稀有类别的网络学习，并通过排除稀有类别样本的这种竞争梯度显着提高了性能。对于医学成像，基于类频率逆的损失重加权和样本重采样被广泛用于缓解不平衡问题[28]。与现有的专注于集中场景的类不平衡工作相比，我们的方法将 FL 场景中的更复杂不平衡问题制定为全局不平衡和局部不平衡差距，并在客户端保护私有数据时进一步处理这个问题。</p>
-<p>概述：</p>
+<p><code>概述</code>：</p>
 <p>对于第k个客户端，利用私有数据对个性化局部模型Pk进行E-epoch局部训练。然后，服务器收集这些训练好的客户端模型，并利用渐进式傅里叶聚合(PFA)将它们聚合成具有单独高频成分的服务器模型{Sk}K K =1。然后将这些服务器模型作为副模型Dk交付给相应的客户端。<code>该副模型通过提出的副增强转移(DET)来实现全局知识的转移</code>。此外，通过在客户端使用本地原型和在服务器端使用全局原型，联合原型对齐(CPA)损失将客户端的本地训练引导到全局平衡的目标，以解决FL中的类不平衡问题。重复这些步骤，直到本地训练达到Tepochs。我们在图2中演示了个性化的倒退-弹性FL框架。</p>
 <p>服务器中的渐进式傅里叶聚合：</p>
 <p>为了整合来自客户端模型的全局知识，现有的FL方法[7]，[8]，[13]，[14]直接对局部模型的参数按元素平均，生成聚合的服务器模型。然而，这种参数空间上的粗糙聚集突然降低了模型在客户端的性能。了解决聚合引起的倒退问题，我们设计了渐进式傅里叶聚合(Progressive Fourier aggregation, PFA)，在频域稳定地对全局知识进行整合。</p>
 <p>考虑到<code>参数的低频分量是网络能力</code>[11]的基础，我们的PFA<code>聚合了参数的相对低频分量来共享来自不同客户端的知识，同时保留了每个客户端包含特定知识的高频分量</code>。具体来说，对于第k个客户端模型中的卷积层，我们首先将其四维参数张量重塑为二维矩阵wk∈Rh1d1×h2 d2，其中d1和d2为输出和输入通道，h1和h2为核空间大小。然后，通过傅里叶变换F(wk) = FA(wk)ejFP (wk)<code>得到参数的振幅分量FA和相位分量FP</code>，</p>
-<p>客户端的代理增强传输：</p>
+<p>客户端的代理增强传输<code>DET</code>：</p>
 <p>PFA可以克服服务器聚合不当导致的倒退，但是直接用聚合的服务器参数替换客户端模型仍然会丢失之前的局部知识，进一步干扰下一次迭代的优化。为了克服这一瓶颈，我们设计了副增强转移(DET)，<code>将全局知识与本地先验知识合并，而不是直接替换。除了个性化的本地模型P之外，每个客户端还拥有一个副模型d，用于从服务器接收聚合的参数</code>。通过进行恢复-交换-升华三个步骤，所提出的DET将全局知识从副模型D平滑地转移到个性化的局部模型P。</p>
 <p>Recover：当使用来自服务器的聚合模型S进行更新时，副模型D由于倒退而严重退化。因此，<code>我们首先采用个性化局部模型P作为教师，用局部知识还原副模型D</code>。在这一步中，个性化局部模型p使用Lsup进行独立局部训练，副模型D使用以下损失函数LD进行优化。其中Lsup是局部数据集的监督损失，如交叉熵损失或提出的CPA损失，pP和pD是个性化局部模型Pand副模型d的预测概率。LKL (pP ||pD)是KullbackLeibler散度，帮助副模型快速重新适应客户端，提高性能。这一步对于确保副模型在随后的全局知识转移中不会损害个性化的局部模型至关重要。</p>
 <p>Exchange：一旦副模型D的恢复性能接近于教师P， φval(D)≥λ1φval(P)，其中φval代表验证集上的特定性能度量(例如，F1用于分类，Dice用于分割)，<code>我们在个性化局部模型P与副模型D之间进行相互学习[15]，以交换全局知识和局部知识</code>。其中，副模型D由Eq.(5)优化，个性化局部模型P由loss LP监督:Eq.(6)中的LKL (pD ||pP)项通过副模型D平稳地将服务器全局知识传递给个性化局部模型P，因此，知识交换可以提高客户端模型[15]的泛化能力。</p>
 <p>Sublimate：最后，当副模型的性能高度接近个性化局部模型时，当φval(D)≥λ2φval(P)， 0 &lt; λ1 &lt; λ2 &lt; 1时，<code>副模型D使用Lsup保持独立的局部训练，并进一步作为教师使用Eq.(6)的LP对P进行优化。这一步使得全局知识能最大程度地从服务器转移到个性化局部模型。</code></p>
 <p>FL不平衡的联合原型对准损失：</p>
-<p>为了解决FL中复杂的类不平衡问题，我们通过引导客户端的局部训练达到全局平衡目标，设计了联合原型对齐(CPA)损失，如图3所示。具体而言，我们首先根据整个FL框架的不平衡计算全局联合目标，然后调整每个客户端的局部训练，以消除局部模型与平衡目标之间的原型测量不平衡差。</p>
+<p>除了医学成像固有的不平衡外，真实世界的FL还涉及到客户之间类别分布的显著差异。为了解决FL中复杂的类不平衡问题，我们通过引导客户端的局部训练达到全局平衡目标，设计了联合原型对齐(CPA)损失，如图3所示。具体而言，我们首先根据整个FL框架的不平衡计算全局联合目标，然后调整每个客户端的局部训练，以消除局部模型与平衡目标之间的原型测量不平衡差距。</p>
 <blockquote>
-<p>个性化学习blog：<a href="https://blog.csdn.net/Cyril_KI/article/details/122820370">1</a>，<a href="https://zhuanlan.zhihu.com/p/499716652">2</a>，<a href="https://zhuanlan.zhihu.com/p/549964139">3</a>，<a href="https://m.thepaper.cn/baijiahao_9306970">4</a>，<a href="https://blog.csdn.net/weixin_42534493/article/details/117931982">5</a>，<a href="https://zhuanlan.zhihu.com/p/494115503">6</a></p>
+<p>个性化学习blog：<a href="https://blog.csdn.net/Cyril_KI/article/details/122820370">1</a>，<a href="https://zhuanlan.zhihu.com/p/499716652">2</a>，<a href="https://zhuanlan.zhihu.com/p/549964139">3</a>，<a href="https://m.thepaper.cn/baijiahao_9306970">4</a>，<a href="https://blog.csdn.net/weixin_42534493/article/details/117931982">5</a>，<a href="https://zhuanlan.zhihu.com/p/494115503">6</a>，<a href="https://blog.csdn.net/charlessun9/article/details/125544647">7</a></p>
 </blockquote>
+<p><code>图2</code>在服务器端，渐进式傅立叶聚合(PFA)在频域逐步整合全局知识。在客户端，代理增强传输(DET)促进了个性化的本地模型，而不被通信中断。联合原型对齐(CPA)损失指导每个客户的本地培训，以实现一个全局平衡的目标。</p>
+<p><code>优化流程</code>：在每次迭代中，服务器从每个客户端接收代理模型D和本地类别原型f，然后将这些客户端模型与Eq.(3)和Eq.(4)中的PFA进行聚合，并更新全局原型f-。当聚合模型被发送回相应的客户端时，被覆盖的代理模型D首先恢复其在私有局部数据上的性能，然后使用DET将全局知识平滑地传递给个性化的局部模型P。</p>
+<p>特别是在DET局部训练中，Eq.(13)中的CPA损失LCPA作为Eq.(5)和Eq.(6)中的监督lossLsup，通过强调那些原型差异较大的类别来消除FL任务的不平衡性。最后，个性化局部模型{Pk}K K =1朝着平衡目标进行了很好的优化。</p>
+<p><a href="https://blog.csdn.net/jacke121/article/details/128945444">f1_macro</a></p>
+<p>KD3A</p>
+<table>
+<thead>
+<tr>
+<th>DomainNet</th>
+<th>Clip</th>
+<th>info</th>
+<th>pain</th>
+<th>quic</th>
+<th>real</th>
+<th>sket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paper</td>
+<td>72.5</td>
+<td>23.4</td>
+<td>60.9</td>
+<td>16.4</td>
+<td>72.7</td>
+<td>60.6</td>
+</tr>
+<tr>
+<td>test</td>
+<td>73.17</td>
+<td>34.56</td>
+<td>67.16</td>
+<td>52.25</td>
+<td>79.01</td>
+<td>70.74</td>
+</tr>
+<tr>
+<td>test2</td>
+<td>73.4</td>
+<td>34.9</td>
+<td>67.1</td>
+<td>51.2</td>
+<td>79.0</td>
+<td>70.7</td>
+</tr>
+<tr>
+<td>40</td>
+<td>66.5</td>
+<td>31.7</td>
+<td>65.6</td>
+<td>69.1</td>
+<td>75.5</td>
+<td>65.8</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python main.py --config DigitFive.yaml --target-domain mnist -bp basepath  2&gt;&amp;1 | tee ./outputs/output.log; shutdown 
+</code></pre></td></tr></table>
+</div>
+</div><p>Digit5是一个数字分类数据集，包括MNIST (mt)、MNISTM(mm)、SVHN (sv)、Synthetic (syn)和USPS (up)</p>
+<table>
+<thead>
+<tr>
+<th>Digit</th>
+<th>mt</th>
+<th>mm</th>
+<th>sv</th>
+<th>syn</th>
+<th>usps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paper</td>
+<td>99.2</td>
+<td>87.3</td>
+<td>85.6</td>
+<td>89.4</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>test(tar=mm)</td>
+<td>95.5</td>
+<td>99.3</td>
+<td>84.8</td>
+<td>97.2</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>test(tar=mt)</td>
+<td>99.3</td>
+<td>88.4</td>
+<td>91.0</td>
+<td>97.9</td>
+<td>98.2</td>
+</tr>
+</tbody>
+</table>
+<p>知识蒸馏：</p>
+<p>使用知识蒸馏的代码实现需要以下几个步骤：</p>
+<p>\1. 准备数据集：需要准备一个原始的训练数据集和一个教师模型的输出数据集。教师模型的输出可以选择是原始模型的 softmax 输出，还是自己重新训练一个更大的模型得到的输出。</p>
+<p>\2. 定义模型：需要定义一个学生模型和一个教师模型，学生模型通常比教师模型小，但是结构应该相似，以便进行知识蒸馏。</p>
+<p>\3. 训练教师模型：用原始数据集训练一个大模型，得到教师模型的输出。如果已有预训练好的模型可直接使用。</p>
+<p>\4. 训练学生模型：用原始数据集和教师模型的输出数据集训练学生模型。这里的损失函数通常是与教师模型的输出相差的平方和，以最小化学生模型与教师模型的差距。</p>
+<p>\5. 测试和评估：用测试数据集测试学生模型的性能，并与原始模型进行比较。可以使用各种指标来评估模型的性能，如准确率、精确率、召回率等。</p>
+<p>在这个例子中，我们定义了一个教师模型和一个学生模型。在训练阶段，我们首先用原始数据集来训练教师模型，然后用教师模型的输出和原始数据集来训练学生模型，并计算学生模型的 MSE 损失。在测试阶段，我们使用测试数据集来评估学生模型的性能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
 
+<span class="c1"># 定义教师模型和学生模型</span>
+<span class="k">class</span> <span class="nc">TeacherModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TeacherModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv3</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">class</span> <span class="nc">StudentModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StudentModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv3</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">64</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># 定义损失函数和优化器</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+
+<span class="n">teacher_model</span> <span class="o">=</span> <span class="n">TeacherModel</span><span class="p">()</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="n">teacher_optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">teacher_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+<span class="n">student_model</span> <span class="o">=</span> <span class="n">StudentModel</span><span class="p">()</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="n">student_optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">student_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+<span class="c1"># 训练教师模型</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">trainloader</span><span class="p">):</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">cuda</span><span class="p">(),</span> <span class="n">targets</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">teacher_model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+        <span class="n">teacher_optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">teacher_optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="c1"># 训练学生模型</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">trainloader</span><span class="p">):</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">cuda</span><span class="p">(),</span> <span class="n">targets</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+        <span class="n">teacher_outputs</span> <span class="o">=</span> <span class="n">teacher_model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">student_outputs</span> <span class="o">=</span> <span class="n">student_model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">student_outputs</span><span class="p">,</span> <span class="n">teacher_outputs</span><span class="p">)</span>
+        <span class="n">student_optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">student_optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="c1"># 测试和评估学生模型</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="ow">in</span> <span class="n">testloader</span><span class="p">:</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">cuda</span><span class="p">(),</span> <span class="n">targets</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">student_model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">targets</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">targets</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy of the student model: </span><span class="si">%d</span><span class="s1"> </span><span class="si">%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span><span class="p">))</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">

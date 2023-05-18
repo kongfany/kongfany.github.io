@@ -22,7 +22,7 @@
       <pubDate>Wed, 22 Mar 2023 14:25:03 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/dl_limu/</guid>
-      <description>视频 课程主页 教材 github 课程论坛 pytorch论坛 BLOG 卷积层的超参数：卷积核的大小，填充和步幅，通道数 填充在输入周围添加额外的行/列，来控制输出形状</description>
+      <description>视频 课程主页 教材 github 课程论坛 pytorch论坛 BLOG 安装 映射本地端口，端口被占用1，2 1 ssh -L8888:localhost:8888 kfy@10.59.139.1 softmax-09 卷积：提取特征 卷积层的超参数：卷积核的大小，填充和</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@
       <pubDate>Thu, 08 Sep 2022 19:22:49 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/project/</guid>
-      <description>参考链接 2 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 blog 删除 1 2 3 4 conda env list conda create -n syft_env python=3.9 -</description>
+      <description>参考链接 2 ssh 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 blog 删除 1 2 3 4 conda env list conda create -n syft_env python=3.9</description>
     </item>
     
     <item>
