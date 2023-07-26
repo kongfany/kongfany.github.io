@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://kongfany.github.io/post/introspection/20230715/</loc>
+    <lastmod>2023-07-15T14:21:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/introspection/</loc>
+    <lastmod>2023-07-15T14:21:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/</loc>
+    <lastmod>2023-07-15T14:21:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/tags/</loc>
+    <lastmod>2023-07-15T14:21:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/</loc>
+    <lastmod>2023-07-15T14:21:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://kongfany.github.io/tags/federated-learning/</loc>
     <lastmod>2023-03-24T16:04:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -9,28 +44,7 @@
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/post/</loc>
-    <lastmod>2023-03-24T16:04:34+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/tags/</loc>
-    <lastmod>2023-03-24T16:04:34+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://kongfany.github.io/post/fl_pfl/</loc>
-    <lastmod>2023-03-24T16:04:34+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/</loc>
     <lastmod>2023-03-24T16:04:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -415,6 +429,13 @@
   </url>
   
   <url>
+    <loc>https://kongfany.github.io/post/introspection/20211221/</loc>
+    <lastmod>2021-12-21T21:54:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://kongfany.github.io/post/federated-learning/</loc>
     <lastmod>2021-12-20T19:22:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -536,6 +557,13 @@
   <url>
     <loc>https://kongfany.github.io/tags/matlab/</loc>
     <lastmod>2021-09-19T20:17:05+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/introspection/20210911/</loc>
+    <lastmod>2021-09-11T20:42:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

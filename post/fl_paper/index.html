@@ -49,7 +49,7 @@
 <meta itemprop="name" content="联邦学习paper">
 <meta itemprop="description" content="FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data blog:[1],[2] code:[1],[2] 1-&gt;blog:[1],[2] baseline:FedSGD,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，"><meta itemprop="datePublished" content="2022-10-14T19:57:38+08:00" />
 <meta itemprop="dateModified" content="2022-10-14T19:57:38+08:00" />
-<meta itemprop="wordCount" content="4955">
+<meta itemprop="wordCount" content="4989">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="联邦学习paper"/>
 <meta name="twitter:description" content="FedAvg Communication-Efficient Learning of Deep Networks from Decentralized Data blog:[1],[2] code:[1],[2] 1-&gt;blog:[1],[2] baseline:FedSGD,每计算一个client梯度值就传给server进行聚合。fedavg在本地聚合多次，"/>
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022-10-14 </span>
         
-          <span class="more-meta"> 4955 words </span>
+          <span class="more-meta"> 4989 words </span>
           <span class="more-meta"> 10 mins read </span>
         
       </div>
@@ -328,7 +328,7 @@
 <p>client-drift在之前的一篇文章中实际上已经提到过了：如果数据是独立同分布的，那么本地模型训练较多的epoch会加快全局模型的收敛；如果不是独立同分布的，不同设备在利用非IID的本地数据进行训练并且训练轮数较大时，本地模型将会偏离初始的全局模型。</p>
 <p>如果客户端数据分布不一致，那么本地模型在更新时会朝着不同方向进行优化，这会使得我们很难得到一个普适的全局模型。</p>
 <p>为了缓解client-drift，本文作者提出了一种新的联邦优化算法SCAFFOLD，SCAFFOLD引入了服务器控制变量c和客户端控制变量ci，控制变量中含有模型的更新方向信息，通过在本地模型的更新公式中添加一个修正项c−ci，SCAFFOLD克服了梯度差异，有效缓解了client-drift。</p>
-<p>pfedme</p>
+<p>pfedme <a href="https://zhuanlan.zhihu.com/p/494260197">blog</a></p>
 <p><a href="https://blog.csdn.net/weixin_42534493/article/details/118556509?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-12-118556509-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">DITTO</a></p>
 <p><a href="https://blog.csdn.net/hhhhhhhhhhwwwwwwwwww/article/details/118606345?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-16-118606345-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">MOON</a>：模型对比联邦学习,<a href="https://blog.csdn.net/qq_43827595/article/details/122358161?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590814616782412548900%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590814616782412548900&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-24-122358161-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">2</a></p>
 <p><a href="https://blog.csdn.net/Cyril_KI/article/details/123079207?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166590843316782248529045%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=166590843316782248529045&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-3-123079207-null-null.142%5Ev56%5Epc_search_v3,201%5Ev3%5Eadd_ask&amp;utm_term=FedProx&amp;spm=1018.2226.3001.4187">FedAsync</a>：异步联邦优化</p>
@@ -365,6 +365,11 @@ paper：<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/2103.138
 <hr>
 <h2 id="paperlist">Paperlist</h2>
 <p><a href="https://www.bilibili.com/read/cv18409025">1</a></p>
+<p>很不错的总结<a href="https://github.com/sxontheway/Keep-Learning/blob/master/Research/During_PhD/Federated_Learning.md">2</a>-<a href="https://zhuanlan.zhihu.com/p/449164981">blog</a></p>
+<hr>
+<p>FedDecorr iclr2023 <a href="https://baijiahao.baidu.com/s?id=1759505777653582168&amp;wfr=spider&amp;for=pc">blog</a></p>
+<p>数据异构性  <a href="https://blog.csdn.net/weixin_42534493/article/details/118051289">场景</a> <a href="http://cn-sec.com/archives/1478624.html">进展</a> <a href="https://www.bilibili.com/video/BV13F411z7DF/?spm_id_from=333.337.search-card.all.click&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">bili</a></p>
+<p>虚拟同构化学习 <a href="https://zhuanlan.zhihu.com/p/548508633">blog</a></p>
 
     </div>
 

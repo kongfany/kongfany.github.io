@@ -49,7 +49,7 @@
 <meta itemprop="name" content="域适应联邦学习">
 <meta itemprop="description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati"><meta itemprop="datePublished" content="2022-11-22T09:58:50+08:00" />
 <meta itemprop="dateModified" content="2022-11-22T09:58:50+08:00" />
-<meta itemprop="wordCount" content="13491">
+<meta itemprop="wordCount" content="15082">
 <meta itemprop="keywords" content="Federated Learning,Domain Adaptation," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="域适应联邦学习"/>
 <meta name="twitter:description" content="域适应 blog：[1] 在迁移学习中， 当源域和目标的数据分布不同 ，但两个任务相同时，这种特殊的迁移学习叫做域适应 （Domain Adaptati"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022-11-22 </span>
         
-          <span class="more-meta"> 13491 words </span>
-          <span class="more-meta"> 27 mins read </span>
+          <span class="more-meta"> 15082 words </span>
+          <span class="more-meta"> 31 mins read </span>
         
       </div>
     </header>
@@ -176,6 +176,7 @@
             <li><a href="#算法">算法</a></li>
           </ul>
         </li>
+        <li><a href="#model-contrastive-federated-domain-adaptation">Model-Contrastive Federated Domain Adaptation</a></li>
       </ul>
     </li>
   </ul>
@@ -219,6 +220,7 @@
 不考虑目标域源域，将目标域扩展成同等地位源域，在源域上做联邦学习，信息共享，完成对没有标注的目标域的知识迁移其实也就和之前的联邦半监督学习的场景很类似，一部分客户端有标签，一部分没有。</p>
 <p><a href="https://www.bilibili.com/video/BV1pG4y1q7qd/?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">https://www.bilibili.com/video/BV1pG4y1q7qd/?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac</a></p>
 <h3 id="federated-adversarial-domain-adaptation">Federated Adversarial Domain Adaptation</h3>
+<p>目标域作为服务器端模型</p>
 <p><a href="https://openreview.net/forum?id=HJezF3VYPB">paper</a></p>
 <p><a href="https://drive.google.com/file/d/1OekTpqB6qLfjlE2XUjQPm3F110KDMFc0/view">code</a></p>
 <p>blog：<a href="https://zhuanlan.zhihu.com/p/497987724">1</a>,<a href="https://ereebay.me/posts/62459/">2</a>,<a href="https://baijiahao.baidu.com/s?id=1683687966022769742&amp;wfr=spider&amp;for=pc">3</a>,<a href="https://www.thepaper.cn/newsDetail_forward_7214027">4</a></p>
@@ -250,6 +252,7 @@
 <blockquote>
 <p>这篇文章代码造假，写的代码根本不是federated learning，更有意思的是，把他文章中提出的所有模块删掉以后，整体会提5个点https://www.zhihu.com/question/348016090/answer/897469095</p>
 </blockquote>
+<p><a href="https://baijiahao.baidu.com/s?id=1665386416555022298&amp;wfr=spider&amp;for=pc">iclr2020 fl</a></p>
 <h3 id="federated-adversarial-debiasing">Federated Adversarial Debiasing</h3>
 <p>Federated Adversarial Debiasing for Fair and Trasnferable Representations</p>
 <p><a href="https://jyhong.gitlab.io/publication/fade2021kdd/">homepage</a> <a href="https://github.com/illidanlab/FADE">code</a></p>
@@ -420,274 +423,6 @@ Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#
 Target Domain clipart Accuracy Top1 :0.645 Top5:0.828
 Source Domains:[&#39;infograph&#39;, &#39;painting&#39;, &#39;quickdraw&#39;, &#39;real&#39;, &#39;sketch&#39;], Domain Weight :[0.0864, 0.2192, 0.0985, 0.2387, 0.2795]
 Target Domain clipart Accuracy Top1 :0.651 Top5:0.837
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">^C^C^CProcess Process-2712:
-^CException ignored in: &lt;function _MultiProcessingDataLoaderIter.__del__ at 0x7f79d8eb7f70&gt;
-Exception ignored in sys.unraisablehook: &lt;built-in function unraisablehook&gt;
-^C^C^C^C^C^C^C^C^C^C^C^C^C^C^CProcess Process-2709:
-Process Process-2711:
-^C^C
-
-
-During handling of the above exception, another exception occurred:
-
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-Traceback (most recent call last):
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 318, in _bootstrap
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 318, in _bootstrap
-^C
-
-
-
-Process Process-2706:
-KeyboardInterrupt
-Exception ignored in: &lt;function WeakValueDictionary.__init__.&lt;locals&gt;.remove at 0x7f79d94f1940&gt;
-Traceback (most recent call last):
-  File &#34;/root/miniconda3/lib/python3.8/weakref.py&#34;, line 103, in remove
-    def remove(wr, selfref=ref(self), _atomic_removal=_remove_dead_weakref):
-KeyboardInterrupt: 
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/util.py&#34;, line 320, in _exit_function
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/util.py&#34;, line 333, in _exit_function
-Traceback (most recent call last):
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/autograd/grad_mode.py&#34;, line 15, in decorate_context
-Traceback (most recent call last):
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 315, in _bootstrap
-    self.run()
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/_utils/worker.py&#34;, line 197, in _worker_loop
-    if done_event.is_set():
-KeyboardInterrupt
-    return func(*args, **kwargs)
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/optim/sgd.py&#34;, line 97, in step
-    debug(&#39;running all &#34;atexit&#34; finalizers with priority &gt;= 0&#39;)
-    def _exit_function(info=info, debug=debug, _run_finalizers=_run_finalizers,
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/util.py&#34;, line 49, in debug
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 330, in _bootstrap
-    if _logger:
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 330, in _bootstrap
-    sys.stderr.write(&#39;Process %s:\n&#39; % self.name)
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/popen_fork.py&#34;, line 75, in _launch
-    sys.stderr.write(&#39;Process %s:\n&#39; % self.name)
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/popen_fork.py&#34;, line 75, in _launch
-    code = process_obj._bootstrap(parent_sentinel=child_r)
-    code = process_obj._bootstrap(parent_sentinel=child_r)
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 333, in _bootstrap
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/process.py&#34;, line 335, in _bootstrap
-    threading._shutdown()
-  File &#34;/root/miniconda3/lib/python3.8/threading.py&#34;, line 1375, in _shutdown
-    util._flush_std_streams()
-  File &#34;/root/miniconda3/lib/python3.8/multiprocessing/util.py&#34;, line 435, in _flush_std_streams
-    sys.stdout.flush()
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;main.py&#34;, line 343, in &lt;module&gt;
-    d_p = p.grad
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/tensor.py&#34;, line 745, in grad
-    if self.requires_grad and not hasattr(self, &#34;retains_grad&#34;) and not self.is_leaf and self._grad is None:
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;main.py&#34;, line 343, in &lt;module&gt;
-    
-  File &#34;main.py&#34;, line 303, in main
-    
-  File &#34;main.py&#34;, line 303, in main
-    _main_thread._stop()
-  File &#34;/root/miniconda3/lib/python3.8/threading.py&#34;, line 967, in _stop
-    
-  File &#34;/root/KD3A/train/train.py&#34;, line 41, in train
-    with _shutdown_locks_lock:
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;main.py&#34;, line 343, in &lt;module&gt;
-    
-  File &#34;/root/KD3A/train/train.py&#34;, line 59, in train
-    
-  File &#34;main.py&#34;, line 303, in main
-    
-  File &#34;/root/KD3A/train/train.py&#34;, line 41, in train
-    for i, (image_s, label_s) in enumerate(train_dloader):
-    for i, (image_s, label_s) in enumerate(train_dloader):
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py&#34;, line 279, in __iter__
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py&#34;, line 279, in __iter__
-    optimizer.step()
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/optim/lr_scheduler.py&#34;, line 67, in wrapper
-    return _MultiProcessingDataLoaderIter(self)
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py&#34;, line 719, in __init__
-    return _MultiProcessingDataLoaderIter(self)
-    return wrapped(*args, **kwargs)
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py&#34;, line 719, in __init__
-  File &#34;/root/miniconda3/lib/python3.8/site-packages/torch/autograd/grad_mode.py&#34;, line 15, in decorate_context
-    return func(*args, **kwargs)
-KeyboardInterrupt
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1061,18 +796,6 @@ Target Domain clipart Accuracy Top1 : 0.726 Top5: 0.902
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">root@autodl-container-12da11be52-a533989f:~/KD3A# python main.py --config DomainNet.yaml --target-domain clipart
-Downloading: &#34;https://download.pytorch.org/models/resnet101-5d3b4d8f.pth&#34; to /root/.cache/torch/checkpoints/resnet101-5d3b4d8f.pth
- 24%|███████████████████████████████▋                                                                                                   | 41.2M/170M [01:39&lt;05:15, 430kB/s]
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python main.py --config DigitFive.yaml --target-domain mnist -bp basepath --gpu 9 2&gt;&amp;1 | tee ./outputs/output.log
@@ -1082,19 +805,25 @@ Downloading: &#34;https://download.pytorch.org/models/resnet101-5d3b4d8f.pth&#34
 <hr>
 <h2 id="简单总结">简单总结</h2>
 <p>如何进行特征对齐&ndash;知识投票</p>
-<p>源域训练的模型发送给目标域，在目标域上对源域上的知识共识进行投票，得到高质量的域共识，用这个域共识做知识蒸馏的训练，然后用无标签的数据和部分共识训练得到的模型，在目标域上可以起到知识迁移的效果。</p>
-<p>训练完之后就根据共识提出了知识共识的度量，度量每个源域的知识共识的多少来进行加权</p>
-<p>计算不同源域的二次mmd距离，减少不同源域的距离损失.</p>
+<p>源域训练的模型发送给目标域，在目标域上对源域上的知识共识进行投票，得到高质量的域共识，<code>用这个域共识做知识蒸馏的训练</code>，然后用无标签的数据和部分共识训练得到的模型，在目标域上可以起到知识迁移的效果。</p>
+<p>训练完之后就根据知识提出了知识共识的度量，度量每个源域的知识共识的多少来进行加权，从而来过滤不好的源域。</p>
+<p>BatchNorm MMD：通过模型保留的两种参数来计算不同源域之间的二次mmd距离，减少不同源域的距离损失，分布距离.</p>
 <p>四个domain上训练了四个模型，有一个目标域的数据，我们将模型发到目标域，用这四个模型对数据进行预测,然后通过ensemble得到四个模型的共识知识。ensemble包含三步，inference，confident gate筛选比较相信的预测（比较相信的结果是有价值的，模棱两可的没有价值），对剩下的进行投票 同样认为是共识的模型保留下来，平均一下，并记录支持这个共识的domain的数量。以此作为训练的目标，知识蒸馏的目标知识。</p>
 <p>构造一个扩展性的source domain，数据是目标域的数据，共识是得到的共识。对这个数据和共识用知识蒸馏损失训练一个新的模型，最终模型是对这k+1个模型进行加权平均。</p>
-<p>不考虑目标域源域，把目标域扩展到了同等定位的源域，在这些源域上进行联邦学习，让他们进行知识共享，完成了对于没有标注的目标域的知识迁移。对目标域做task risk的定义，方便进行计算迁移损失bound。</p>
-<p>如果一个共识知识被很多的source domain以很高的信度支持，那么认为是一个可靠的知识。将这个知识作为知识蒸馏的目标对目标域进行训练。三步下来未必会得到有效的知识，给他一个比较低的权重0.001。为什么不直接删掉，图像本身是有信息的，揭示了分布的规律，如果删掉目标域的分布对应不上了，出现目标域上的domain-gift，所以保留。损失函数=权重乘知识蒸馏损失。</p>
+<p>不考虑目标域源域，把目标域扩展到了同等定位的源域，在这些源域上进行联邦学习，让他们进行知识共享，完成了对于没有标注的目标域的知识迁移。<code>对目标域做task risk的定义，方便进行计算迁移损失bound</code>。</p>
+<p>如果一个共识知识被很多的source domain以很高的信度支持，那么认为是一个可靠的知识。将这个知识作为知识蒸馏的目标对目标域进行训练。三步下来未必会得到有效的知识，给他一个比较低的权重0.001。为什么不直接删掉，图像本身是有信息的，揭示了分布的规律，如果删掉目标域的分布对应不上了，出现目标域上的domain-gift，所以保留。<code>损失函数=权重乘知识蒸馏损失</code>。</p>
 <p>负迁移：对负迁移的鲁棒&ndash;本质上界定每个源域，每个客户端对源域的贡献。</p>
 <p>之前的模型采用分布距离进行加权，源域和目标域的分布近就权重大一些。问题，数据保护的条件下没法得到数据本身，源域和目标域很像，但源域的数据是错的，被注入攻击了。</p>
 <p>如果有个source domain的知识总是和共识相符合，那么认为这个source domain贡献是多的。</p>
-<p><code>算法过程：1、本地训练模型。2、本地训练模型通过中央服务器传给目标域，要求目标域用本地训练的模型进行知识蒸馏，在目标域上知识蒸馏出一个扩展的模型。3、整个模型的分发参数</code></p>
-<p>本地训练十个epoch通信一次。</p>
+<p>总的Consensus quality: 知识的domain个数乘以最大的信度累加，就是所有的source domain在target domain的共识质量。计算每个domain的共识质量（除去本身之后）。</p>
+<p>算法过程：1、本地训练模型。2、本地训练模型通过中央服务器传给目标域，<code>要求目标域用本地训练的模型进行知识蒸馏，在目标域上知识蒸馏出一个扩展的模型</code>。3、整个模型的分发参数。</p>
+<p>KD3A的泛化界:bound,目标域的迁移效果要好，首先源域效果要好，源域和目标域的特征距离要接近。好的源域，目标域和源域的分布特征要尽量的接近。</p>
+<p><code>---&gt;</code>目标域的迁移效果要好，首先源域效果要好，源域和目标域的特征距离要接近。（个性化来提升源域的性能&mdash;目标域的性能提升）但是个性化一方面就是会损失精度？是否有联邦迁移学习做个性化的？</p>
+<p>知识蒸馏:用共识知识扩展源域 ，用数据和共识利用知识蒸馏损失训练一个模型。</p>
+<p>本地训练十个epoch通信一次。代码中1次。</p>
 <p>最关键的是知识投票</p>
+<p>知识蒸馏代码体现在哪里？知识投票得到的域共识，然后用这些域共识进行知识蒸馏损失训练</p>
+<p>域间分布距离如何体现？</p>
 <hr>
 <h2 id="摘要">摘要</h2>
 <p>传统的无监督多源域适应（Multi-source Unsupervised Domain Adaptation）方法假设所有源域数据都可以直接访问。然而，<strong>隐私保护政策</strong>要求所有数据和计算都必须在本地进行，这对域适应方法提出了三个挑战：<code>首先，最小化域间距离需获取源域和目标域的数据并进行成对计算，而在隐私保护要求下，源域数据本地存储、不可访问。其次通信成本和隐私安全限制了现有域适应方法的应用。最后，由于无法鉴别源域数据质量，更易出现不相关或恶意的源域，从而导致负迁移。</code>为解决上述问题，我们提出一种满足隐私保护要求的<strong>去中心化无监督域适应范式</strong>，<code>称为基于知识蒸馏的去中心化域适应（KD3A），通过对来自多个源域的模型进行知识蒸馏来构建可迁移的共识知识</code>。大量实验表明，KD3A显著优于其他域适应方法。此外，与其他去中心化的域适应方法相比，KD3A 对<strong>负迁移具有鲁棒性</strong>，并可<strong>将通信成本降低100倍</strong>。</p>
@@ -1134,9 +863,12 @@ Downloading: &#34;https://download.pytorch.org/models/resnet101-5d3b4d8f.pth&#34
 <p>共识焦点(CF)值，以量化每个源域的贡献,描述了单个源域Dk S对所有源域S的共识质量的边际贡献。</p>
 <p>在知识投票中引入了一个新的源域DK+1S，所以我们分两步计算域权值。首先，根据数据量，得到DK+1S的αK+1 = NT /(∑K K =1 Nk + NT)。然后，我们使用CF值重新加权每个原始源域。</p>
 <p>与(6)中的重加权策略相比，我们的Consensus Focus有两个优势。首先，α cf的计算不需要访问原始数据。其次，通过Consensus Focus获得的α cf基于共识的质量，既利用了数据信息，又利用了标签信息，能够识别恶意域。</p>
+<p>KD3A对Clipartand Real等高质量领域提供了更好的共识知识，同时也确定了Quickdraw等不良领域。CMSS 通过使用独立的网络检查每个数据的质量来选择域。与 CMS 相比，KD3A 不会引入额外的模块，并且可以在隐私保护场景中执行源选择。</p>
 <h3 id="batchnorm-mmd-h散度的分散优化策略">BatchNorm MMD: H−散度的分散优化策略</h3>
 <p>为了获得更好的UMDA性能，我们需要<code>最小化源域和目标域之间的h散度</code>，其中基于核的MMD距离被广泛使用。</p>
 <p>然而，这些方法并不适用于分散的UMDA，因为源域数据不可用。此外，仅使用fc层的高级特征可能会丢失详细的二维信息。因此，我们提出了BatchNorm MMD，它利用每个BatchNorm层中的均值和方差参数来优化h -发散，而不访问数据。</p>
+<p>直接优化损失 (17) 需要遍历所有 Batchnorm 层，这是耗时的。受审稿人建议的启发，我们提出了一种包含两个步骤的计算效率方法。首先，我们直接推导出损失(17)的μ(πT l)的全局最优解，即∀l, 1≤l≤L。</p>
+<p>直接将这个解代入hT的每个Batchnorm层，并将其作为全局模型。尽管这种计算效率高的实现可能看起来是启发式的，但我们发现它实际上是可行的，并且可以达到与原始最大化步骤相同的性能。</p>
 <h3 id="算法">算法</h3>
 <p>整个域适应模型的<code>训练过程</code>如下图所示：</p>
 <ul>
@@ -1149,6 +881,18 @@ Downloading: &#34;https://download.pytorch.org/models/resnet101-5d3b4d8f.pth&#34
 <p>实验：</p>
 <p>在四个基准数据集上进行了实验：(1) <strong>Amazon Review</strong> (Ben-David et al., 2006)，这是一个情感分析数据集，包含四个源域。(2)<strong>Digit-5</strong> (Zhao et al., 2020)，这是一个数字分类数据集，包括五个源域。 (3) <strong>Office-Caltech10</strong> (Gong et al., 2012)，包含来自四个源域的十类图像。(4) <strong>DomainNet</strong> (Peng et al., 2019)，这是最近推出的具有 345 个类和 6 个域的大规模多源域适应基准数据集，如下图所示。</p>
 <p>resnet101</p>
+<h2 id="model-contrastive-federated-domain-adaptation">Model-Contrastive Federated Domain Adaptation</h2>
+<p>模型对比联邦域自适应</p>
+<p>在本文中，我们提出了一种名为 FCDC 的基于模型的方法，旨在解决基于对比学习和视觉transform (ViT) 的联邦域适应。特别是，对比学习可以利用未标记的数据来训练优秀的模型，ViT 架构在提取适应性特征方面比卷积神经网络 (CNN) 表现更好。据我们所知，FDAC 是第一个尝试通过在联邦设置下操纵 ViT 的潜在架构来学习可转移表示的尝试。此外，<code>基于域增强和语义匹配</code>，FDAC 可以通过补偿每个源模型和特征知识不足来增加目标数据的多样性。在几个真实数据集上的大量实验表明，FDAC在大多数情况下优于所有比较方法。此外，FDCA 还可以提高通信效率，这是联邦设置中的另一个关键因素。</p>
+<p>一些作品[5]，[6]，[18]试图在不访问源数据的情况下适应知识，但未能达到高性能。由于本地数据跨源域分布的异构性，如何利用数据隐私源模型和未标记的目标数据成为一个主要挑战。为了在FDA处理这一挑战，至少应该考虑两个问题。首先，如何提取可转移的特征以适应跨异构领域的知识?其次，如何在不访问源模型的本地数据的情况下，通过学习源模型来对齐条件分布?</p>
+<p>与传统的深度神经网络 (DNN)（如卷积神经网络 (CNN) [19]-[21]）相比，视觉 Transformer (ViT) 可以提取更具适应性和稳健的特征。然而，基于 Vit 的方法面临几个挑战 [22]。例如，它们<code>严重依赖大规模训练数据</code>。因此，由于异构数据的多样性，在联合设置中弥合大型域差距更加困难。为了解决这个问题，需要<code>域增强来考虑域之间的互补性</code>[23]。根据[24]，操纵 DNN 的隐藏层可以得到更好的特征表示。因此，<code>利用 vit 的潜在架构可以在域级别增加数据并生成可转移特征以弥合 FDA 中的域差异</code></p>
+<p>对比学习成为一种流行的基于增强数据嵌入的判别方法，并在分类等下游任务中显示出良好的效果[25]，[25]，[26]。由于一个原型可以代表一组语义相似的样本[27]，因此每个源域的原型可以在不访问本地数据的情况下基于源模型生成[18]。然后，基于对比学习，通过匹配源域和目标域的语义信息，对条件分布进行对齐。虽然已经提出了几种方法[26]，[28]-[31]来学习基于对比学习或原型的跨域可转移表示，但这些设置相对于ViT和FL下的设置相对简单，因为ViT比cnn更需要数据，并且在联邦设置中应考虑通信效率。</p>
+<p>在本文中，我们提出了一种模型感知对比方法（FAC），以解决基于对比学习和视觉 Transformer 的联合域适应。特别是，FDAC 考虑了多源单目标 FDA 设置 [6]、[32]，它比单源多目标场景更受欢迎[7]。FDAC 的一般思想如图 1 所示，其中<code>域增强和语义匹配</code>是适应不同模型知识的两个关键组件。</p>
+<p>contributions:</p>
+<p>我们利用ViT的隐藏架构进一步探索异构域之间的特征可移植性</p>
+<p>我们提出了一种新的框架，该框架集成了域增强和语义匹配，以适应来自所有源模型的知识。此外，该框架可以增加数据多样性，跨域对齐类条件分布并避免灾难性遗忘。</p>
+<p>挑战：1）在不访问每个源域本地数据的情况下增加目标数据的多样性具有挑战性。2) 由于每个类别信息不能详细描述，因此很难对齐不同领域的条件数据分布。</p>
+<p>FDAC 的框架如图 2 所示，旨在将知识从不同的源模型转移到目标模型，同时保证通信效率。FDAC 的实现分别基于域增强和语义匹配，分别对应于域级和类别级对比学习。与传统的可迁移特征学习 [29]、(3) 不同，我们利用 VT 的可配置架构来执行基于域增强的对比学习，因为 DNN 的潜在操作可以改善特征表示 [24]。此外，这种域增强可以通过补充每个源域来增加目标域的数据多样性。另一方面，为了利用类相似性将知识转移从源数据到相似的目标类别，我们基于语义匹配提取域不变特征。由于没有可用的源数据来训练目标模型，我们首先为源域生成原型，然后根据这些原型学习判别信息。因此，当利用知识从不同的来源适应目标域时，这两个组件也能够避免灾难性遗忘。</p>
 
     </div>
 

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="个性化联邦学习">
 <meta itemprop="description" content="Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包"><meta itemprop="datePublished" content="2023-03-24T16:04:34+08:00" />
 <meta itemprop="dateModified" content="2023-03-24T16:04:34+08:00" />
-<meta itemprop="wordCount" content="5855">
+<meta itemprop="wordCount" content="25826">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="个性化联邦学习"/>
 <meta name="twitter:description" content="Personalized Retrogress-Resilient Federated Learning Towards Imbalanced Medical Data 针对不平衡医疗数据的个性化倒退的弹性联合学习 尽管对FL进行了深入的研究，但在现实医疗场景中应用FL时仍然存在两个主要挑战，包"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2023-03-24 </span>
         
-          <span class="more-meta"> 5855 words </span>
-          <span class="more-meta"> 12 mins read </span>
+          <span class="more-meta"> 25826 words </span>
+          <span class="more-meta"> 52 mins read </span>
         
       </div>
     </header>
@@ -143,7 +143,21 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#深度相互学习算法">深度相互学习算法</a></li>
+        <li><a href="#个性化">个性化</a></li>
+        <li><a href="#数据异构性">数据异构性</a></li>
+        <li><a href="#个性化联邦学习综述">个性化联邦学习综述</a></li>
+        <li><a href="#实验">实验</a></li>
+        <li><a href="#实测"><code>实测</code></a></li>
+        <li><a href="#实测-1">实测</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
@@ -183,105 +197,6 @@
 <p><code>优化流程</code>：在每次迭代中，服务器从每个客户端接收代理模型D和本地类别原型f，然后将这些客户端模型与Eq.(3)和Eq.(4)中的PFA进行聚合，并更新全局原型f-。当聚合模型被发送回相应的客户端时，被覆盖的代理模型D首先恢复其在私有局部数据上的性能，然后使用DET将全局知识平滑地传递给个性化的局部模型P。</p>
 <p>特别是在DET局部训练中，Eq.(13)中的CPA损失LCPA作为Eq.(5)和Eq.(6)中的监督lossLsup，通过强调那些原型差异较大的类别来消除FL任务的不平衡性。最后，个性化局部模型{Pk}K K =1朝着平衡目标进行了很好的优化。</p>
 <p><a href="https://blog.csdn.net/jacke121/article/details/128945444">f1_macro</a></p>
-<p>KD3A</p>
-<table>
-<thead>
-<tr>
-<th>DomainNet</th>
-<th>Clip</th>
-<th>info</th>
-<th>pain</th>
-<th>quic</th>
-<th>real</th>
-<th>sket</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>paper</td>
-<td>72.5</td>
-<td>23.4</td>
-<td>60.9</td>
-<td>16.4</td>
-<td>72.7</td>
-<td>60.6</td>
-</tr>
-<tr>
-<td>test</td>
-<td>73.17</td>
-<td>34.56</td>
-<td>67.16</td>
-<td>52.25</td>
-<td>79.01</td>
-<td>70.74</td>
-</tr>
-<tr>
-<td>test2</td>
-<td>73.4</td>
-<td>34.9</td>
-<td>67.1</td>
-<td>51.2</td>
-<td>79.0</td>
-<td>70.7</td>
-</tr>
-<tr>
-<td>40</td>
-<td>66.5</td>
-<td>31.7</td>
-<td>65.6</td>
-<td>69.1</td>
-<td>75.5</td>
-<td>65.8</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python main.py --config DigitFive.yaml --target-domain mnist -bp basepath  2&gt;&amp;1 | tee ./outputs/output.log; shutdown 
-</code></pre></td></tr></table>
-</div>
-</div><p>Digit5是一个数字分类数据集，包括MNIST (mt)、MNISTM(mm)、SVHN (sv)、Synthetic (syn)和USPS (up)</p>
-<table>
-<thead>
-<tr>
-<th>Digit</th>
-<th>mt</th>
-<th>mm</th>
-<th>sv</th>
-<th>syn</th>
-<th>usps</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>paper</td>
-<td>99.2</td>
-<td>87.3</td>
-<td>85.6</td>
-<td>89.4</td>
-<td>98.5</td>
-</tr>
-<tr>
-<td>test(tar=mm)</td>
-<td>95.5</td>
-<td>99.3</td>
-<td>84.8</td>
-<td>97.2</td>
-<td>98.9</td>
-</tr>
-<tr>
-<td>test(tar=mt)</td>
-<td>99.3</td>
-<td>88.4</td>
-<td>91.0</td>
-<td>97.9</td>
-<td>98.2</td>
-</tr>
-</tbody>
-</table>
 <p>知识蒸馏：</p>
 <p>使用知识蒸馏的代码实现需要以下几个步骤：</p>
 <p>\1. 准备数据集：需要准备一个原始的训练数据集和一个教师模型的输出数据集。教师模型的输出可以选择是原始模型的 softmax 输出，还是自己重新训练一个更大的模型得到的输出。</p>
@@ -462,7 +377,1714 @@
 
 </code></pre></td></tr></table>
 </div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">loss_deputy_kl</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">kl_div</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">output_s_deputy</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                          <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">output_s</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                          <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;batchmean&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
+</div><p>计算了两个概率分布之间的KL散度（Kullback-Leibler divergence）。KL散度是一种衡量两个概率分布之间差异的度量。第一个参数是一个经过log softmax操作的输出概率分布,第二个参数是一个经过softmax操作的被克隆和分离的输出概率分布,</p>
+<p>reduction=&lsquo;batchmean&rsquo;参数表示计算KL散度的方式，这里使用的是批次平均（batch mean）。这意味着对批次中每个样本的KL散度进行求和，并对批次大小进行归一化，得到一个标量损失值。</p>
+<p>KL损失（Kullback-Leibler Loss）用于度量两个概率分布之间的差异。KL损失用于衡量较复杂模型（教师模型）的预测分布与较简单模型（学生模型）的预测分布之间的差异，并将教师模型的知识传递给学生模型。KL损失可以通过KL散度（Kullback-Leibler Divergence）来计算。KL散度用于衡量在给定真实分布下，从一个概率分布到另一个概率分布的信息损失。</p>
+<p>KL散度定义如下：</p>
+<p>KL(P || Q) = ∑ P(x) * log(P(x) / Q(x))</p>
+<p>其中，P和Q分别表示两个概率分布，x表示事件或类别。</p>
+<p>在知识蒸馏中，通常将教师模型的预测分布作为真实分布P，学生模型的预测分布作为近似分布Q。因此，KL损失可以表示为：</p>
+<p>KL损失 = KL(P || Q) = ∑ P(x) * log(P(x) / Q(x))</p>
+<p>具体到神经网络的知识蒸馏中，通常使用softmax激活函数将模型的输出转换为概率分布。因此，KL损失可以通过对教师模型和学生模型输出的softmax概率分布进行计算。</p>
+<p>可以使用PyTorch中的F.kl_div()函数来计算KL损失。这个函数接受两个概率分布作为输入，并返回计算得到的KL损失。一般情况下，<code>KL损失需要与其他损失函数结合使用，通过加权或累加的方式构建总体的损失函数，以进行模型训练和参数优化</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">kl_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">kl_div</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中，input和target是两个概率分布，表示教师模型和学生模型的预测分布。这两个输入张量的形状应该相同。reduction参数用于指定如何对计算得到的KL损失进行降维，可选的取值包括：&lsquo;none&rsquo;：不进行降维，保留每个样本的损失值。&lsquo;mean&rsquo;：对所有样本的损失值求平均。&lsquo;sum&rsquo;：对所有样本的损失值进行求和。</p>
+<p>在实际使用中，通常会将KL损失与其他损失函数结合，构建总体的损失函数。例如，可以使用加权的方式将KL损失与分类损失相结合：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">total_loss</span> <span class="o">=</span> <span class="n">kl_weight</span> <span class="o">*</span> <span class="n">kl_loss</span> <span class="o">+</span> <span class="n">ce_weight</span> <span class="o">*</span> <span class="n">ce_loss</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中，kl_weight和ce_weight分别表示KL损失和分类损失的权重，kl_loss和ce_loss分别表示对应的损失值。</p>
+<p>需要注意的是，输入的概率分布应该是经过softmax函数处理后的结果，以确保分布的概率和为1。在使用<code>F.kl_div()</code>函数计算KL损失之前，可以使用<code>F.softmax()</code>函数对模型的输出进行处理。例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="nb">input</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">kl_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">kl_div</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在 PyTorch 中，<code>F.kl_div()</code> 函数的第一个参数是学生模型的输出概率分布，而第二个参数是教师模型的输出概率分布。具体来说：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">loss_deputy_kl</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">kl_div</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">student_output</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">teacher_output</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;batchmean&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>student_output</code> 表示学生模型的输出概率分布，通常使用 <code>F.log_softmax()</code> 函数对其进行 log_softmax 操作，获得每个类别的对数概率。</li>
+<li><code>teacher_output</code> 表示教师模型的输出概率分布，通常直接使用其原始概率分布。</li>
+</ul>
+<p>通过比较学生模型和教师模型的输出概率分布，KL 散度损失用于衡量两者之间的差异。学生模型通过最小化 KL 散度损失来逼近教师模型的输出分布，从而实现知识蒸馏的目标。</p>
+<h2 id="深度相互学习算法">深度相互学习算法</h2>
+<p><a href="https://kc.sustech.edu.cn/handle/2SGJ60CL/335681?mode=full&amp;submit_simple=Show+full+item+record">paper</a>   DEep mutual learning</p>
+<p>深度互学习算法是在cvpr2017上被提出的一种简单高效的算法，互学习算法是知识蒸馏的扩展应用，同样的，算法同时训练两个模型：教师和学生模型。两个模型通过对方的soft logits进行知识迁移，互相学习。最终提高各自模型的表现。</p>
+<p>基于以上方法，本章将提出一种个性化联邦学习算法（PFML），将互学习算法的思想融入到客户端的训练过程中，每个客户端同时训练两个模型，其中，一个模型参与联邦训练，另一个用于生成本地个性化模型。，假设有一个中心服务器和多个客户端，每个客户端初始化两个模型，即本地模型和辅助模型，它们使用相同的本地数据进行训练。</p>
+<p>第一部分是客户端的互学习过程。在 PFML 模型中，每个客户端都初始化两
+个模型，分别称为本地模型和辅助模型（联邦训练完成后，客户端可选择删去这
+两个模型）。<code>设置这两个模型的目的有以下几点</code>。第一，深度互学习算法是两个模
+型通过双向知识转移来实现“双赢”的效果，已经在相关实验上验证了其有效性。
+PFML 算法通过互学习的方法希望提高客户端中本地模型和辅助模型的性能。第
+二，客户端本地模型的设置是为了参与联邦训练并捕捉全局知识，辅助模型的设</p>
+<p>置是为了充分利用客户端的历史模型知识和互学习的知识，产生最佳的个性化模
+型。第三，设置两个模型有利于解决模型的异构性问题，尽管本地模型需要与全
+局模型的网络架构一致，但互学习允许两个模型网络架构不一致，所以客户端可
+以自由地根据本地的内存和算力设置辅助模型的架构，进而决定个性化模型的架
+构。总的来说，客户端的本地模型和辅助模型这两个模型，一个带有全局知识，一
+个带有本地知识，用 KL 散度来衡量两个模型的输出差异，并加入到各自的损失函
+数作为正则化项，从而达到相互学习的目的。</p>
+<p>Mutual Learning是从Knowledge Distillation知识蒸馏中发展出的一个概念，蒸馏模型是一种将知识从教师网络（teacher）传递到学生网络（student）的有效且广泛使用的技术。通常来说，蒸馏模型是从功能强大的大型网络或集成网络转移到结构简单，运行快速的小型网络。深度互学习DML决定打破这种预先定义好的“强弱关系”，提出了一种相互学习策略，在此策略中，一组学生网络在整个训练过程中相互学习、相互指导，而不是静态的预先定义好教师和学生之间的单向转换通路。作者通过在CIFAR-100和Market-1501数据集上的实验，表明DML网络在分类和任务重识别任务中的有效性。更重要的是，DML的成功揭示了没有强大的教师网络是可行的，相互学习的对象是由一个个简单的学生网络组成的集合。互学习是没有teacher model的。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/71192348">blog2</a></p>
+<p>我们尝试探索一种能够学习到更强大小网络的训练机制—深度互学习，即采用多个网络同时进行训练，每个网络在训练过程中不仅接受来自真值标记的监督，还参考同伴网络的学习经验来进一步提升泛化能力。在整个过程中，两个网络之间不断分享学习经验，实现互相学习共同进步。</p>
+<p>每个网络在学习过程中有两个损失函数，一个是传统的监督损失函数，采用交叉熵损失来度量网络预测的目标类别与真实标签之间的差异，另一个是网络间的交互损失函数，采用KL散度来度量两个网络预测概率分布之间的差异。采用这两种损失函数，不仅可以使得网络学习到如何区分不同的类别，还能够使其参考另一个网络的概率估计来提升自身泛化能力。</p>
+<p>首先，为什么网络从头开始互学习训练也能<code>收敛到更好的解</code>而不是被互相拉低？直观解释如下：每个网络一开始采用随机初始化，类别概率估计接近于均匀分布，这使得它们在训练初期的监督损失较大，交互损失较小，每个网络主要由传统的监督损失函数引导，这样可以保证网络的性能在逐渐提升。随着模型参数更新，每个网络在自己的学习过程中获得不同的知识，它们对样本类别的概率估计也会有所不同，这时交互损失开始促进网络互相参考学习经验。</p>
+<p><a href="https://readpaper.com/pdf-annotate/note?pdfId=4557837020580290561&amp;noteId=1873553273254741504">paper</a></p>
+<p>在本文中，我们提出了一种深度相互学习 (DML) 策略，其中学生不是静态预定义教师和学生之间的一种迁移，而是在整个训练过程中协作学习并相互教授。我们的实验表明，各种网络架构受益于相互学习，并在 CIFAR-100 识别和 Market-1501 人员重新识别基准上取得了令人信服的结果。令人惊讶的是，它表明不需要先验强大的教师网络——简单学生网络集合的相互学习是有效的，并且优于从更强大但静态的教师蒸馏。</p>
+<p>为了更好地学习一个小型网络，蒸馏方法从一个强大的(深度和/或广泛的)教师网络(或网络集成)开始，然后训练一个更小的学生网络来模拟老师[7,2,16,3]。模仿老师的类概率[7]和/或特征表示[2,19]传达了传统监督学习目标之外的附加信息。学习模仿老师的优化问题比直接学习目标函数更容易，小得多的学生可以匹配甚至超过[19]更大的老师。</p>
+<p>蒸馏从一个强大的大型和预先训练的教师网络开始，并执行单向知识转移到一个小的未经训练的学生。相比之下，在相互学习中，我们从一组同时学习同时解决任务的未经训练的学生开始。具体来说，每个学生都接受了两个损失的训练：传统的监督学习损失和模仿损失，将每个学生的类后验与其他学生的类概率对齐。</p>
+<p>通过这种方式进行训练，itarXiv:1706.00384v1 [cs.CV] 1 2017 年 6 月 1 日指出，<code>这种基于对等教学的场景中的每个学生都比在传统的监督学习场景中单独学习时学习要好得多</code>。此外，<code>以这种方式训练的学生网络比从更大的预训练教师常规蒸馏训练的学生取得了更好的结果</code>。此外，虽然传统的蒸馏理解需要教师比预期的学生更大、更强大，但事实证明，在许多情况下，与独立学习相比，几个大型网络的相互学习也提高了性能。</p>
+<p>总体而言，相互学习提供了一种简单但有效的方法，<code>通过与其他一组网络协同训练来提高网络的泛化能力。与预训练静态大型网络的蒸馏相比，小型对等点的协作学习甚至取得了更好的性能。</code></p>
+<p>&ndash;</p>
+<p>Deep Mutual Learning（深度相互学习）是一种集成学习方法，旨在通过多个相互交互的模型之间的训练来提高单个模型的性能。</p>
+<p>在传统的深度学习中，通常使用独立的模型进行训练，每个模型都使用相同的训练数据。相较之下，Deep Mutual Learning 引入了多个模型之间的交互和协作。这些模型可以具有相同的结构，也可以是不同的结构。</p>
+<p>在 Deep Mutual Learning 中，模型之间的交互可以通过以下几种方式实现：</p>
+<ol>
+<li>
+<p>参数交换：模型之间可以交换参数或梯度信息，以相互影响和更新。</p>
+</li>
+<li>
+<p>特征对齐：模型可以通过特征对齐的方式，使得它们的中间层特征表示更加一致。</p>
+</li>
+<li>
+<p>知识共享：模型可以共享预测结果、类别概率或中间层表示等信息，以帮助彼此进行训练。</p>
+</li>
+</ol>
+<p>通过这种相互交互的方式，Deep Mutual Learning 可以提供以下优势：</p>
+<ol>
+<li>
+<p><code>提升泛化能力</code>：通过多个模型之间的交互和协作，可以共同学习到更鲁棒和泛化的特征表示，从而提高模型的泛化能力。</p>
+</li>
+<li>
+<p><code>减轻过拟合</code>：模型之间的交互可以减轻过拟合的风险，促使模型学习到更普适和稳定的特征。</p>
+</li>
+<li>
+<p>增强鲁棒性：多个模型之间的相互学习可以增强模型的鲁棒性，使其能够更好地适应不同的输入变化和噪声。</p>
+</li>
+</ol>
+<p>Deep Mutual Learning 是一种有效的集成学习方法，通过多个模型之间的相互学习和信息共享，能够提高单个模型的性能和表现。它在一些计算机视觉和自然语言处理任务中取得了良好的结果。</p>
+<p>以下是一些与 Deep Mutual Learning（深度相互学习）相关的论文：</p>
+<ol>
+<li>
+<p>&ldquo;Deep Mutual Learning&rdquo; (CVPR 2018) - 这篇论文首次提出了 Deep Mutual Learning 的概念，并介绍了通过多个神经网络之间的相互学习来提高性能的方法。</p>
+</li>
+<li>
+<p>&ldquo;Deep Mutual Learning via Alternate Training: A Unified Framework for Cross-Domain and Semi-Supervised Learning&rdquo; (IJCAI 2018) - 这篇论文提出了一种基于交替训练的深度相互学习方法，用于跨领域和半监督学习任务。</p>
+</li>
+<li>
+<p>&ldquo;Deep Self-Learning From Noisy Labels&rdquo; (CVPR 2019) - 这篇论文使用深度相互学习的方法，通过自学习来改善由于噪声标签引起的问题。</p>
+</li>
+<li>
+<p>&ldquo;Deep Co-Training for Domain Adaptation&rdquo; (CVPR 2019) - 这篇论文将深度相互学习应用于领域自适应任务，通过多个深度网络之间的相互学习来减轻领域偏移的问题。</p>
+</li>
+<li>
+<p>&ldquo;Dual Student: Breaking the Limits of the Teacher in Semi-Supervised Learning&rdquo; (CVPR 2020) - 这篇论文引入了 &ldquo;Dual Student&rdquo; 的概念，使用两个学生模型之间的相互学习来改进半监督学习的性能。</p>
+</li>
+</ol>
+<p>请注意，这些论文提供了关于 Deep Mutual Learning 的基本概念、方法和应用的信息。还有其他论文在深度相互学习的研究和应用方面提供了进一步的探索和发展。具体的应用和技术细节可能会因不同的任务和研究方向而有所不同。</p>
+<p>以下是一些与 Deep Mutual Learning（深度相互学习）相关的论文：</p>
+<ol>
+<li>
+<p>&ldquo;Deep Mutual Learning&rdquo; (CVPR 2018) - 这篇论文提出了深度相互学习的概念，并通过在多个模型之间交替训练和共享特征信息来提高图像分类和目标检测任务的性能。</p>
+</li>
+<li>
+<p>&ldquo;Deep Mutual Learning for Joint Denoising and Classification&rdquo; (CVPR 2019) - 这篇论文将深度相互学习应用于图像去噪和分类任务，通过多个模型之间的相互学习来提高图像的去噪和分类准确性。</p>
+</li>
+<li>
+<p>&ldquo;Deep Mutual Learning with Iterative Guidance for Multi-Object Detection&rdquo; (AAAI 2020) - 这篇论文将深度相互学习应用于多目标检测任务，通过模型之间的相互学习和迭代引导来提高检测性能。</p>
+</li>
+<li>
+<p>&ldquo;Adversarial Deep Mutual Learning&rdquo; (NeurIPS 2018) - 这篇论文提出了一种在深度相互学习中使用对抗训练的方法，通过对抗性的学习过程来增强模型的性能和鲁棒性。</p>
+</li>
+</ol>
+<p>这些论文是深度相互学习的一些代表性例子，它们探索了在不同任务和领域中应用深度相互学习的方法和技术。在研究领域中还有其他相关的论文和扩展工作，可以进一步了解深度相互学习的发展和应用。</p>
+<p>Deep Mutual Learning（深度相互学习）和知识蒸馏（Knowledge Distillation）是两种不同的学习方法，它们各自具有不同的优势和特点。</p>
+<p>以下是 Deep Mutual Learning 相对于知识蒸馏的一些优势：</p>
+<ol>
+<li>
+<p>模型集成：Deep Mutual Learning 利用多个相互交互的模型之间的训练来提高单个模型的性能。通过集成多个模型的预测结果和特征表示，可以更好地捕捉数据的多样性和复杂性，提高模型的泛化能力。</p>
+</li>
+<li>
+<p>强化特征学习：Deep Mutual Learning 可以通过模型之间的特征对齐和知识共享来增强特征学习。模型之间的交互可以促使模型学习到更鲁棒和一致的特征表示，提高模型对输入数据的表示能力。</p>
+</li>
+<li>
+<p>抗干扰能力：Deep Mutual Learning 的多模型交互训练方式可以减轻过拟合的风险，增强模型的鲁棒性和抗干扰能力。模型之间的相互学习可以通过共同抵消错误、纠正偏差以及平衡预测结果，使模型更稳定和可靠。</p>
+</li>
+<li>
+<p>灵活性和可扩展性：Deep Mutual Learning 可以适用于不同类型的模型和任务。它可以包括相同的模型架构，也可以包括不同的模型架构。这种灵活性使得 Deep Mutual Learning 在各种应用场景下具有更大的适用性和可扩展性。</p>
+</li>
+</ol>
+<p>虽然 Deep Mutual Learning 具有上述优势，但与知识蒸馏相比，也存在一些潜在的限制。知识蒸馏可以更好地将大模型的知识传递给小模型，并帮助小模型在性能和模型大小之间找到一个平衡。此外，知识蒸馏还可以通过软标签和温度参数来提供更平滑的监督信号，有助于模型的学习和泛化能力。</p>
+<p>因此，选择 Deep Mutual Learning 还是知识蒸馏取决于具体的任务需求、模型结构和数据特点。两种方法在不同的情况下可能更适合不同的应用场景。</p>
+<p>&ndash;</p>
+<p>深度互学习和知识蒸馏相比有什么优势？</p>
+<p>ChatGPT</p>
+<p>**深度互学习（**Deep Co-Training）和知识蒸馏（Knowledge Distillation）是两种不同的半监督学习方法，各自具有不同的优势和特点。</p>
+<p>优势比较如下：</p>
+<ol>
+<li>数据利用方式：深度互学习利用未标记的数据来提供额外的信息，并通过多个独立模型之间的交互和协作来提升性能。知识蒸馏则是通过从一个教师模型向学生模型传递知识来提升性能。深度互学习可以在模型之间共享信息，而知识蒸馏是一种单向传递知识的过程。</li>
+<li>模型结构：深度互学习使用多个相互独立的模型，每个模型使用不同的特征子集或视图进行训练。这种多模型的结构可以提供更多的多样性和决策独立性。知识蒸馏涉及一个教师模型和一个学生模型之间的知识传递，通常是从一个复杂的模型向一个简化的模型。</li>
+<li>效果稳定性：深度互学习在训练过程中通过多个模型的协同训练和信息交互来提升性能，可以减轻过拟合的风险，并增强模型的鲁棒性和泛化能力。知识蒸馏可以通过从教师模型传递知识来改善学生模型的性能，但学生模型可能会受到教师模型的局限性和过拟合的影响。</li>
+<li>应用范围：深度互学习更适用于少量有标签数据和大量未标记数据的情况下，可以充分利用未标记数据的信息。知识蒸馏适用于有一个较强的教师模型和一个相对简化的学生模型之间的知识传递，通常用于模型压缩和轻量化的目的。</li>
+</ol>
+<p>综上所述，深度互学习和知识蒸馏在方法和应用方面有所不同。深度互学习通过多模型的协同训练和信息交互来利用未标记数据，增强模型性能和鲁棒性。知识蒸馏通过从教师模型向学生模型传递知识来实现模型压缩和轻量化。具体使用哪种方法取决于任务需求、数据可用性和模型设计等因素。</p>
+<p>Deep Co-Training（深度互学习）和 Deep Mutual Learning（深度相互学习）是两种不同的学习方式，尽管它们在名称上有些相似，但它们具有不同的概念和方法。</p>
+<p>Deep Co-Training（深度互学习）是一种半监督学习方法，旨在利用未标记的数据来提升模型的性能。它通过同时训练多个相互独立的模型，每个模型使用不同的特征子集或视图，并使用互补的信息进行模型之间的交互和训练。</p>
+<p>Deep Mutual Learning（深度相互学习）是一种集成学习方法，旨在通过多个相互交互的模型的训练来提高单个模型的性能。这些模型可以具有相同或不同的结构，它们通过共享信息和交换参数来相互促进和提升。</p>
+<p>尽管这两种方法都涉及到多个模型之间的交互和信息共享，但它们的应用场景、实现方式和目标略有不同。深度互学习主要用于半监督学习任务，通过利用未标记数据来增强模型性能。而深度相互学习主要用于集成学习，通过多个模型之间的相互交互来提高单个模型的性能。</p>
+<p>因此，Deep Co-Training和Deep Mutual Learning是不同的学习方式，各自具有独特的概念和方法。</p>
+<h2 id="个性化">个性化</h2>
+<p>联邦知识蒸馏：<a href="https://mp.weixin.qq.com/s/qIEauTi8e37MPiQXLJSMYQ">FD_FAvg</a> <a href="https://blog.csdn.net/weixin_44008424/article/details/117048772">blog1</a> <a href="https://zhuanlan.zhihu.com/p/538016767">2</a> <a href="https://zhuanlan.zhihu.com/p/464321071?utm_id=0">fedproto</a></p>
+<p>每台设备都将自己视为学生，并将其他所有设备的平均模型输出视为其老师的输出。每个模型输出是一组通过softmax函数归一化后的logit值，此后称为logit向量，其大小由标签数给出。</p>
+<p>模型的输出精度会随着训练的进行而增加，因此，在局部logit平均过程中，最好采用加权平均值随着局部计算时间的增加而增加，即当模型采用整体损失函数：a * KDLoss(Local_Logit，Global_Logit)+CELoss(Local_Logit，Local_Lable) * (1-a)，随着迭代次数的增加，a应该逐渐减小（模型的输出精度会随着训练的进行而增加，所以本地模型比重应该增大）</p>
+<p>a 1-a</p>
+<p>a*(epoch+2) = 1</p>
+<p>a =1 / (epoch+2)</p>
+<p>&ndash;</p>
+<h2 id="数据异构性">数据异构性</h2>
+<p>data heterogeneity</p>
+<p><a href="https://blog.csdn.net/weixin_42534493/article/details/118051289">blog</a> 联邦学习中的数据异构性问题主要是由参与训练的各客户端的数据虽独立分布但不服从同一采样方法（Non-IID）所导致的，这一问题也导致<code>模型精度的严重下降</code>。<strong>如何缓解Non-IID带来的不利影响</strong>目前仍是一个开放性的问题。</p>
+<p>Federated Learning on Non-IID Data Silos: An Experimental Study <a href="https://zhuanlan.zhihu.com/p/557553708">blog</a></p>
+<p>联合学习(FL)使多方能够在不交换本地数据的情况下协作地训练机器学习模型，其中一个关键和共同的挑战是各方之间的数据分布的异构性，即各方的数据通常是非独立且非同分布的(non-IID)。此外，由于以往的研究在各方之间的数据划分策略非常固定，因此缺乏系统地了解其优缺点的实验研究，在本文中，作者提出了全面的数据划分策略来覆盖以往典型的非独立同分布数据案例，同时还进行了广泛的实验来评估最先进的FL算法。</p>
+<p>关于数据异构性主要是不同方的数据分布通常是非独立同分布的，同时标签分布也因各方而异，例如即使是同一个世界，人们也有不同的写作风格，因此各方的特征分布不同。以往研究已经表明non-IID数据设置会降低机器学习模型的有效性。</p>
+<p>由于隐私问题和数据法规的增加，训练数据越来越分散，形成了多个“数据孤岛”的分布式数据库（例如，在不同的组织和国家内）。为了开发有效的机器学习服务，必须在不交换原始数据的情况下利用来自此类分布式数据库的数据。最近，联邦学习 (FL) 是一种兴趣不断增长的解决方案，它使多方能够在不交换本地数据的情况下协同训练机器学习模型。分布式数据库的一个关键和常见挑战是各方之间数据分布(即非iid)的异质性。</p>
+<p>这种分布式数据库中的一个关键和常见的数据挑战是不同方的数据分布通常是不相同的分布(非iid)。例如，不同的领域可以有非常不同的疾病分布。由于臭氧孔，南半球的国家可能比北半球有更多的皮肤癌患者。在这种情况下，标签分布因各方而异。另一个例子是，即使对于同一个世界，人们也有不同的写作风格。在这种情况下，特征分布在各方之间有所不同。根据之前的研究[26]、[33]、[44]，非iid数据设置会降低机器学习服务的有效性。</p>
+<p>FedAvg [52] 中，arXiv:2102.02079v3 [cs.LG] 22 Jul 2021 每一方只有两类样本。在 FedNova [67] 中，每一方每个类的样本数遵循 Dirichlet 分布。上述分区策略仅涵盖标签偏斜的情况。</p>
+<p>们引入了六种非 IID 数据分区策略，该策略彻底考虑了不同的情况，包括标签分布偏斜、特征分布偏斜和数量偏斜。<a href="https://github.com/Xtra-Computing/NIID-Bench">code</a></p>
+<p>FL 的有效性与数据偏斜类型高度相关，例如，标签分布偏斜设置比数量偏斜设置更具挑战性。这表明在非IID分布上具有更全面的基准的重要性。最后，在非IID数据设置中，由于批量归一化和部分采样等技术，学习过程的不稳定性存在。这可能会损害机器学习服务对分布式数据孤岛的有效性。</p>
+<p>noiid的影响</p>
+<p>FL的一个关键挑战是各方之间的非IID数据[31]、[40]。非iid数据可以很大影响FedAvg的准确性。由于每个局部数据集的分布与全局分布有很大不同，因此每一方的局部目标与全局最优不一致。因此，本地更新[33]存在<code>漂移</code>。平均模型也可能远离全局最优，特别是当本地更新很大(例如，大量的局部历元)[33]、[42]、[66]、[67]时。最终，收敛全局模型的准确度比 IID 设置差得多。图 2 展示了 FedAvg 在非 IID 数据设置下的问题。在IID设置下，全局最优w∗接近局部最优w∗1和w∗2。因此，平均模型wt+1也接近全局最优值。然而，在非IID设置下，由于w∗远离w∗1，wt+1可以远离w∗。在非 IID 设置下设计有效的 FL 算法具有挑战性。</p>
+<p><img src="/images/202206/30.png" alt=""></p>
+<p>还有其他与非IID数据设置相关的 FL 研究，<code>例如个性化每个方的局部模型 [11], [20] 并针对局部分布的不同组合设计鲁棒算法 [9]、[10]，这超出了本文的范围</code>。</p>
+<p>具体来说，我们需要解决两个关键问题。第一个是数据集：是否使用真实世界的非 IID 数据集或合成数据集。第二个是如何设计全面的非IID场景.</p>
+<p>对于第一个问题，我们选择通过将真实数据集划分为多个较小的子集来合成分布式非 IID 数据集。对于第二个问题，我们的分区策略受到现有研究 [<a href="https://readpaper.com/paper/2995022099">31</a>] 的启发，该研究对非 IID 数据分布给出了非常好的和全面的总结。具体来说，文章总结了非 IID 数据分布的五个不同案例：（1）标签分布偏斜； (2)特征分布倾斜； (3) 相同的标签但不同的特征； (4) 相同的特征但不同的标签； (5) 数量倾斜。这里三种情况主要与垂直FL有关(各方共享相同的样本ID，但具有不同的特征)。在本文中，我们专注于水平 FL，其中每一方共享相同的特征空间，但拥有不同的样本。第四个案例不适用于大多数 FL 研究，假设各方之间存在共同的知识 P (y|x)。否则，域适应等技术可以应用于联邦学习[56]，这超出了本文的范围。因此，我们将标签分布倾斜、特征分布倾斜和数量倾斜视为可能的非iid数据。</p>
+<p>FedProx</p>
+<p>数据经常分布在网络中的异构性质中的问题。特别是，由于每个设备生成自己的本地数据，统计异质性很常见，数据在设备之间分布不相同。</p>
+<p>在所有数据集上，<code>系统的异质性对收敛有负面影响，较大的异质性导致收敛较差</code>(FedAvg)。</p>
+<p>我们首先表明随着统计异质性的增加，收敛可能会变得更差。</p>
+<p>FedNova</p>
+<p>虚拟同构化学习：抵御联邦学习中的数据异构性<a href="https://zhuanlan.zhihu.com/p/548508633">VHL</a></p>
+<p>在联邦学习中，<code>模型性能通常会受到数据异构性而引起的客户端漂移的影响</code>，主流工作侧重于纠正客户端漂移。 提出了一种名为虚拟同构性学习（VHL）的不同方法来直接“纠正”数据异构性。 VHL 使用虚拟同构数据集进行联邦学习，该数据集旨在满足两个条件：完全不包含任何隐私信息并且是可分的。虚拟数据集可以从客户端共享的纯噪声中生成，旨在校准来自异构客户端的特征。 VHL 是首次尝试使用虚拟数据集来解决数据异构性问题的工作，为联邦学习提供了新的有效工具。</p>
+<p>联邦学习面临着来自不同客户端的non-IID数据分布以及其计算和通信能力的多样性带来的异构挑战。严重的数据异构性很容易导致客户端漂移，导致不稳定的收敛和较差的模型性能。</p>
+<p>为了解决计算以及通信<code>异构性</code>问题，第一个联邦学习算法FedAvg，提出在训练期间进行更多的局部计算和更少的通信。虽然FedAvg解决了计算和通信的异构性问题，但non-IID数据分布（数据异构性）引起的客户端漂移对FedAvg有显著的负面影响。为了解决客户端漂移问题，许多工作都致力于设计新的学习范式，例如在客户端的本地训练策略，或是在服务器端的模型聚合策略。</p>
+<p>幸运的是，我们可以访问有标签的虚拟数据集（即源域）和自然数据集（即目标域），因此我们可以通过域适应（DA）来缓解分布漂移。</p>
+<p><code>缓解客户端漂移</code>。一系列工作侧重于添加正则化来校准局部模型的优化方向，将局部模型限制为离服务器模型太远，包括 FedProx (Li et al., 2020a)、FedDyn (Acar et al., 2021)、SCAFOLD (Karimireddy et al., 2020)、MOON (Li et al., 2021b) 和 FedIR (Hsu et al., 2018)。从优化的角度来看，一些方法建议纠正来自客户的更新，加速和稳定收敛，例如 FedNova (Wang et al., 2011)、FederatedM (Hsu et al., 2019)、FedAdaGrad、Fedyogi 和 FedAdam (Reddi et al., )。</p>
+<p>联邦学习：(McMahan et al., 2017) 首次提出联邦学习 (FL) 作为分布式算法，在协同训练全局模型的同时保护用户的数据隐私。<code>所有客户端的异构数据分布严重损害了联邦学习和最终性能的收敛性</code>(Zhao等人，2018;Li等人，2020b;Kairouz等人，2021年;Tang等人，2021年)。<code>在使用异构数据进行训练时，局部模型和全局模型比集中训练更不稳定（Karimireddy 等人，2020）。与IID数据的分布式训练相比，FL的局部模型之间存在更严重的分歧(Li等人，2020a；Karimireddy等人，2020)。这种不一致称为客户端漂移</code>。为了缓解客户端漂移，可能需要仔细调整超参数(Wang et al.， 2021)，如学习率和局部训练迭代，这直接决定了局部模型移动的速度，从而决定了它们所能漂移的程度。然而，太小的学习率也意味着较慢的收敛。因此，如何同时实现更快的训练速度和更温和的客户端漂移很重要。为此，许多研究工作试图设计更有效的联邦学习算法来解决客户端漂移问题。</p>
+<p>模型正则化。这一研究方向侧重于添加正则化来校准局部模型的优化方向，限制局部模型离服务器模型太远。FedProx (Li et al., 2020a) 将局部模型之间的 L2 距离惩罚添加到服务器模型中。SCAFFOLD (Karimireddy et al., 2020) 利用历史信息来减少“客户端方差”，从而减少客户端漂移。MOON (Li et al., 2021b) 在服务器模型和客户端模型之间执行对比学习，校准客户的学习表示。</p>
+<p>优化方案。从优化的角度来看，一些方法建议从客户端纠正更新，加速和稳定收敛。FedNova (Wang et al.， 2020)提出对本地更新进行归一化，以消除局部和全局优化目标函数之间的不一致。(Hsu et al., 2019) 提出了 FedAvgM，它利用服务器模型的历史更新来避免当前轮所选客户端的过度拟合。最近的工作(Reddi等人，2021)提出了FEDOPT，它将集中式优化方法推广到FL场景，如FedAdaGrad、FedYogi、FedAdam</p>
+<h2 id="个性化联邦学习综述">个性化联邦学习综述</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/499716652">blog1</a>&ndash;<a href="https://ieeexplore.ieee.org/document/9743558">综述</a> <a href="https://blog.csdn.net/charlessun9/article/details/125544647">2</a></p>
+<p>原因：在<code>高度异质性的数据上收敛性差（客户端漂移）</code>、缺乏个性化方案</p>
+<p>策略：</p>
+<p>1、全局模型个性化，意在提升在异质性数据上联邦训练的全局共享模型的性能。联邦训练＋本地适应。</p>
+<p>2、学习个性化的模型，意在提供个性化解决方案。训练单个的个性化模型。</p>
+<p>基于数据的方法：数据增强：<code>Zhao</code>等人提出了一种数据共享策略，将少量的全局数据按类别平衡分配给每个客户端。他们的实验表明，在增加少量数据的情况下，有可能获得显著的准确性提高（30%∼）。Yue Zhao, Meng Li, Liangzhen Lai, Naveen Suda, Damon Civin, and Vikas Chandra. Federated learning with non-iid data. arXiv preprint arXiv:1806.00582, 2018.</p>
+<p>客户端选择：在优化过程中基于一些准则挑选客户端，以便得到更均匀的数据分布，提高模型的泛化性能。在每个训练场中自适应地选择局部训练损失较大的客户，以加速全局模型的收敛。</p>
+<p>基于模型的方法：<code>迁移学习</code></p>
+<p>FedMD：基于TL和知识转移（KD）的FL框架，供客户使用他们自己的私人数据设计独立的模型。在FL训练和KD阶段之前，首先使用一个在公共数据集上预训练的模型进行TL。然后，每个客户在其私人数据上微调该模型。</p>
+<p>通常采用领域适应性TL技术。这些技术旨在减少训练好的全局FL模型（即源域）和给定的局部模型（即目标域）之间的域差异，以提高个性化程度。在FL领域有几项研究，在医疗领域使用TL进行模型个性化（例如FedHealth和FedSteg）。</p>
+<p>训练过程一般包括：通过fl训练全局模型；在本地数据集是上适应全局模型来训练本地模型；通过tl使用全局模型来完善本地模型来训练个性化模型。为了实现领域适应性，通常在softmax层之前添加一个对齐层，如相关对齐层（CORAL），以适应源域和目标域的二阶统计数据。</p>
+<p>基于架构的方法：旨在通过为每个客户定制模型设计来实现个性化。</p>
+<p>参数解耦方法为每个客户实现了每个个性化层，而知识蒸馏方法为每个客户支持个性化的模型架构。</p>
+<p>参数解耦：通过将本地私有模型参数和全局模型参数来实现pfl。私有参数在客户机上进行训练，不与服务器共享。基础层＋个性化层，个性化的深层保留在本地训练；每个客户端的个性化数据特征表征。</p>
+<p>知识蒸馏：现有的蒸馏方法中，知识同城表示为类分数或logit输出。将知识蒸馏到每个客户端以学习更强的个性化模型；将知识蒸馏到服务器以学习更强的服务器模型；双向蒸馏到fl客户端和服务器；客户端之间的蒸馏。</p>
+<p><a href="https://www.zhihu.com/question/473629509/answer/2381271629">blog2</a></p>
+<p>基于联邦学习global model的微调</p>
+<p>1、把特征提取层的global作为baseline，然后通过个性化head进行优化；《Exploiting Shared Representations for Personalized Federated Learning》ICML 2021</p>
+<p>2、通过联邦学习训练出元模型/hypernetwork后，针对不同任务生成不同模型《Personalized Federated Learning using Hypernetworks》ICML 2021</p>
+<p>3、在联邦学习训练出的 Global model 上加约束，得到本地模型；《Fair and Robust Federated Learning Through Personalization》 ICML 2021</p>
+<p>4、把 global model 拿来迁移做本地任务 or 多任务学习</p>
+<p>基于用户聚类的个性化联邦学习  <a href="https://www.bilibili.com/video/BV1Xq4y1j7bg/?p=1&amp;share_medium=android&amp;share_plat=android&amp;share_session_id=0986ad4f-fd02-4c45-9d7d-bfc3b3f6e06b&amp;share_source=COPY&amp;share_tag=s_i&amp;timestamp=1646809525&amp;unique_k=KXG76eL&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">pfa</a></p>
+<p>&ndash;</p>
+<p><a href="https://zhuanlan.zhihu.com/p/354527722">blog3</a>  <a href="https://arxiv.org/abs/2003.08673">paper</a></p>
+<p>由于用户数据的高度 Non-IID 以及用户对模型性能要求的不一致，单个的 Global model 很难满足所有参与者的需求，因此需要采用一种个性化的方法使得 Global model 针对每个用户进行优化。</p>
+<p>挑战：</p>
+<ol>
+<li>不同设备的存储、计算、通信性能的差异**(系统异构)**</li>
+<li>数据分布的不一致性**(统计异构)**</li>
+<li>对不同环境、不同人物所需的模型不一致**(模型异构)**</li>
+</ol>
+<p>全局模型+personalization层：<a href="https://zhuanlan.zhihu.com/p/384706200">个性化 head</a></p>
+<p>训练过程中，每个用户共同训练该 global representation learning structure, 再用各自的数据训练自己的 client-special heads</p>
+<p>超网络：pfedhn</p>
+<p>通过 pFedHN 可以为每个用户生成 unique and diverse local model</p>
+<p>迁移学习:</p>
+<p>Federated Evaluation of On-device Personalization</p>
+<p>评估全局模型个性化策略的方法,提出了工具来分析个性化的影响并评估个性化产生理想模型的条件,虚拟键盘个性化语言模型</p>
+<p>&ndash;</p>
+<p>pFedLA: <a href="https://www.bilibili.com/video/BV1P8411L7EE/?spm_id_from=333.999.0.0&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">bili1</a>,<a href="https://www.bilibili.com/video/BV1WR4y1Z7Z7/?spm_id_from=333.788.recommend_more_video.1&amp;vd_source=ad42090d7d6fcdfc144126ae0e2884ac">bili2</a></p>
+<p>&ndash;</p>
+<p>南方科技大学学位论文</p>
+<p>面向非独立同分布数据的个性化联邦学习算法研究 <a href="http://kc.sustech.edu.cn/handle/2SGJ60CL/335681">paper</a></p>
+<p>面向数据分布不平衡问题的联邦学习算法研究 <a href="http://kc.sustech.edu.cn/handle/2SGJ60CL/335781">paper</a> <code>有domainnet和digit-5</code></p>
+<p>个性化：</p>
+<p>1、迁移学习&ndash;并不是，基于架构，参数解耦</p>
+<p>federated evaluation of on-device personalization：<a href="https://readpaper.com/paper/2981738522">paper</a> 首先使用联邦学习训练后的全局模型，在客户端的本地数据上进行微调训练。提出了对全局模型进行个性化处理的策略。分类：将提出的模型分为基础层叠加个性化层的架构，客户端协同训练模型的基础层，在本地训练各自的个性化层；对全局模型进行本地的个性化处理，从得到的客户端的个性化模型。</p>
+<p><a href="https://github.com/TsingZ0/FL-IoT">code</a>：物联网环境中的数据集 &ndash;数据异构（特征偏移）</p>
+<p>（1）Fedper <a href="https://readpaper.com/paper/2990789643">paper</a>-<a href="https://drive.google.com/drive/folders/1wj-LiWYrpSG2dFhaz5wJ8T4ItIpxhN2l">code</a> <a href="https://github.com/TsingZ0/PFL-Non-IID">code</a> <a href="https://cloud.tencent.com/developer/article/2156534">blog</a>-<a href="https://github.com/ki-ljl/FedPer">code</a> 网络模型定义为基础层和个性化层组成。所有客户端共享一组基础层，基础层是具有相同参数的网络层，但是具有不同的个性化层。有利于缓解客户端数据统计异质性的不良影响。</p>
+<p>FedRep <a href="https://readpaper.com/pdf-annotate/note?pdfId=4738268680698216449&amp;noteId=1857823172814675456">paper</a>-<a href="https://github.com/lgcollins/FedRep">code</a> <a href="https://zhuanlan.zhihu.com/p/384706200">blog</a> 假设所有客户端共享一个全局特征表示空间，客户端协同训练全局特征表示空间，用本地数据训练自己的个性化层。一种共享 global representation，个性化 client-heads 的模型更新方案。</p>
+<p>pFedHN <a href="https://readpaper.com/pdf-annotate/note?pdfId=4665270677343846401&amp;noteId=1860838749783170560">paper</a>-<a href="https://github.com/AvivSham/pFedHN">code</a> <a href="https://zhuanlan.zhihu.com/p/431130945">blog</a> 在服务器上使用超网络(hypernetworks)作为全局模型，然后根据不同客户端的信息来为客户端个性化模型生成不同的初始化模型参数，客户端接收全局模型并于本地的个性化网络层组成个性化模型，再根据本地训练集进行训练。</p>
+<p>通过训练中央 HyperNetworks 模型生成一组模型，每个本地化客户端持有一个模型。这种结构提供了有效的跨客户端的参数共享，同时保证本地模型的能力。此外，由于 HyperNetworks 参数从未被传输，将通信成本与可训练的模型大小相分离。由于 HyperNetworks 在多个客户端之间共享信息，pFedHN 可以更好地推广到新加入的本地客户端。</p>
+<p>每个本地客户端拥有一个独特的嵌入向量，作为输入传递给 HyperNetworks 以产生不同本地客户端个性化的模型权重。通过使用 HyperNetworks ，可以在每个本地模型之间实现巨大的灵活性和多样性。直观地说，由于 HyperNetworks 在嵌入空间和本地模型参数空间之间的映射，它的图像可以被视为该空间的低维流形。因此可以认为 HyperNetworks 是这个流形的坐标图。每个独特的本地模型都被限制在这个流形上，并由嵌入向量来参数化。</p>
+<p>HyperNetworks 的训练参数向量通常比它产生的客户端模型的参数向量大得多，但训练参数向量不需要被传输。每个客户端只需要接收本地模型参数来进行预测和计算梯度。此外，HyperNetworks 只需要接收梯度或更新方向来进行优化。因此，可以用与以往模型相同的通信成本来训练一个大型 HyperNetworks。与此同时， HyperNetworks 可以为每个输入产生几个网络，每个网络都有不同的计算能力，允许每个客户端选择其合适的网络。</p>
+<p><code>数据异质性（数据分布的差异）为应对客户端异质性数据分布问题，个性化联邦学习（Personalized Federated Learning，PFL）允许每个客户端使用个性化的模型，而不是共享的全局模型</code>。PFL 的关键挑战是如何基于联邦学习进行模型训练，同时允许每个客户端保持自己的独特模型，并限制通信成本。</p>
+<p>Hypernetworks (HNs) 是深度神经网络，输出另一个目标网络的权重，该网络执行学习任务。其理念是，输出权重根据 HNs 的输入而变化。HNs 自然适合学习多样化的个性化模型，因为 HNs 动态地生成以输入为条件的目标网络。</p>
+<p>hypernetwork 最好能输出目标网络的特征提取部分，其中包含大部分可训练的参数，同时为每个客户端学习一个本地输出层。</p>
+<p>cifar10,cifar100</p>
+<p>(2)</p>
+<p>原论文 <a href="https://proceedings.mlr.press/v157/yang21c/yang21c.pdf">paper</a></p>
+<p>参考论文 <a href="https://zhuanlan.zhihu.com/p/494260197">pFedMe</a></p>
+<p><a href="https://blog.csdn.net/qq_45478482/article/details/121568515">Adaptive Personalized Federated Learning 论文解读+代码解析_编程龙的博客-CSDN博客</a></p>
+<p>找个数据集仅验证个性化联邦学习</p>
+<p>&ndash;</p>
+<p>transfer Learning</p>
+<p>迁移学习 <a href="https://www.zhihu.com/tardis/zm/art/438117211?source_id=1005">blog</a></p>
+<p>联邦迁移学习https://www.163.com/dy/article/FRNTTQPH0511AQHO.html</p>
+<p>A Secure Federated Transfer Learning Framework:FTL 允许在不影响用户隐私的情况下共享知识，并允许在数据联邦的跨域传输互补知识，从而使目标域方通过利用来自源域的丰富标签来构建灵活有效的模型</p>
+<p>Survey of Personalization Techniques for Federated Learning迁移学习也被用于联邦设置，例如 Wang et al. [20]，其中训练全局模型的一些或所有参数都在本地数据上重新学习。[17] 中提供了具有泛化保证的学习理论框架。通过使用经过训练的全局模型的参数来初始化本地数据的训练，迁移学习能够利用全局模型提取的知识，而不是从头开始学习。为了避免灾难性遗忘[21][22]的问题，必须注意不要在本地数据上重新训练模型太长。一种变体技术冻结全局模型的基本层，并且仅在本地数据上重新训练顶层。<code>迁移学习也被称为微调</code>，它很好地集成到典型的联邦学习生命周期中。</p>
+<p>FedMD <a href="https://zhuanlan.zhihu.com/p/589353521">blog</a>：首先，在进入协作之前，每个模型首先在公开数据上进行充分训练，然后在自己的私有数据上进行充分训练。其次，更重要的是，黑箱模型根据它们在公共数据集样本上的输出类得分进行通信。这是通过知识蒸馏[ 15 ]实现的，知识蒸馏能够以模型不可知的方式传递学习到的信息。（当每个参与者拥有不同的模型时，如何执行联邦学习）</p>
+<p>一个共享数据集，各自迁移到本地客户端模型，利用共享数据集计算预测分数，上传分数，平均分数，下发分数，知识蒸馏，每个客户端用模型蒸馏在共享数据集去拟合这个平均分数，即各个模型去学习全局共识，每个客户端设备再利用自己的私有数据训练</p>
+<p><a href="https://m.thepaper.cn/baijiahao_9306970">blog2</a></p>
+<p>图 7(a)中为 Chen 在文献 [14] 中提出的联邦迁移学习方法。首先通过经典的联邦学习训练一个全局模型，然后将全局模型发送至每个客户端设备。每个设备都能够通过使用其本地数据来改进、细化全局模型从而构建个性化模型。为了减少训练开销，只对指定层的模型参数进行微调，而不是对整个模型进行再训练。由图 7(a)可见，由于深度网络的底层侧重于学习全局（公共的）和底层特征，因此，在全局模型中的这些底层参数可以传输到局部模型中后直接复用。而传入的更高层的全局模型参数则应该根据本地数据进行微调，以便学习到针对当前设备定制的更具体的个性化特性。</p>
+<p>Arivazhagan 等在文献 [15] 中提出了另一类联邦迁移学习方法 FedPer。FedPer 主张将深度学习模型视为基础 + 个性化层，如图 7(b)所示。其中，将基本层作为共享层，使用现有的联邦学习方法（即 FedAvg 方法）以协作方式进行训练。而个人化层在本地进行训练，从而能够捕获物联网设备的个人信息。在联邦学习一个阶段的训练过程之后，可以将全局共享的基础层转移到参与的物联网设备上，以其独特的个性化层构建自己的个性化深度学习模型。因此，FedPer 能够捕捉到特定设备上的细粒度信息，以进行更好的个性化推理或分类，并在一定程度上解决数据异构性问题。此外，由于只需要上传和聚合部分模型，FedPer 需要较少的计算和通信开销，这在物联网环境中是至关重要的。</p>
+<p>FedHealth <a href="https://zhuanlan.zhihu.com/p/494115503">blog</a> 首先通过公共数据集（源域数据）在服务器上训练一个初始的云模型；2）之后将该模型分发给所有用户（可穿戴设备）；3）再在用户端上通过轻量级模型训练用户模型；4）通过同态加密将所有用户模型上传服务器进行聚合再平均得到新的云模型；5）将新的云模型分发给所有用户，并根据一个综合了全局的损失函数来进行迁移学习，以个性化本地模型；6）随着持续增入的数据（设备新采集到的信号、新的设备）重复上述步骤。</p>
+<hr>
+<p>联邦迁移学习旨在通过模型迁移和知识共享来改善分布式环境下的模型性能，同时也关注到各个参与方的个体性能提升。</p>
+<p>以下是一些关于提升迁移客户端同时提升本身客户端性能的工作方向：</p>
+<ol>
+<li><strong>联邦迁移模型的选择和组合</strong>：在联邦迁移学习中，可以根据迁移客户端的性能和特点选择最佳的迁移模型。通过使用效果较好的模型，可以提升迁移客户端的性能，并进一步提升本身客户端的性能。</li>
+<li><strong>个性化的联邦迁移学习</strong>：针对不同的迁移客户端，可以采用个性化的联邦迁移学习策略。通过针对不同客户端的数据特点和任务需求进行个性化的模型迁移和知识共享，可以提升迁移客户端的性能，同时也能够改善本身客户端的性能。</li>
+<li><strong>迁移学习中的主动学习</strong>：迁移客户端可以通过主动学习的方式主动选择有利于本身性能提升的样本进行标注和训练。通过主动选择有价值的样本，迁移客户端可以提升自身模型的性能，并在迁移过程中为其他参与方提供更有价值的知识。</li>
+<li><strong>联邦学习中的模型评估与反馈</strong>：迁移客户端可以参与模型评估和反馈的过程，提供针对本身模型性能改进的反馈信息。这样可以促使迁移客户端在迁移过程中积极调整模型，并通过模型迭代和改进来提升自身的性能。</li>
+</ol>
+<p>这些工作旨在通过联邦迁移学习的方式，同时提升迁移客户端的性能和本身客户端的性能。通过合理的模型选择、个性化策略、主动学习和模型评估与反馈等方法，可以实现在联邦迁移学习中迁移客户端和本身客户端性能的双重提升。</p>
+<p>个性化联邦迁移学习是一个活跃的研究领域，以下是几篇与个性化联邦迁移学习相关的论文，供参考：</p>
+<ol>
+<li>&ldquo;Personalized Federated Learning with Moreau Envelopes&rdquo; by A. T. Suresh, F. X. Yu, S. Kumar, et al. (2020)
+<ul>
+<li>论文链接：https://arxiv.org/abs/2002.07511</li>
+</ul>
+</li>
+<li>&ldquo;Personalized Federated Learning: A Meta-Learning Approach&rdquo; by Y. Chen, Y. Shen, W. He, et al. (2021)
+<ul>
+<li>论文链接：https://arxiv.org/abs/2103.12159</li>
+</ul>
+</li>
+<li>&ldquo;Personalized Federated Learning via Model Agnostic Meta-Learning&rdquo; by X. Yang, C. Ma, Y. Wang, et al. (2020)
+<ul>
+<li>论文链接：https://arxiv.org/abs/2007.00166</li>
+</ul>
+</li>
+<li>&ldquo;Personalized Federated Learning with Adaptive Weighting&rdquo; by C. Zhao, T. Li, S. Wang, et al. (2021)
+<ul>
+<li>论文链接：https://arxiv.org/abs/2102.08429</li>
+</ul>
+</li>
+</ol>
+<p>这些论文探索了不同的方法和算法来实现个性化的联邦迁移学习，通过模型选择、权重调整、元学习等技术来实现对不同参与方的个性化建模和迁移学习。请注意，这只是一些示例论文，并不是穷尽所有相关工作。你可以根据自己的具体需求和研究方向进一步探索和阅读相关论文。</p>
+<p>个性化联邦学习和域自适应结合的研究是一个活跃的领域，有一些相关的论文和工作。以下是一些可能与你感兴趣的主题相关的论文：</p>
+<ol>
+<li>
+<p>&ldquo;Personalized Federated Learning with Moreau Envelopes&rdquo; by Shuang Song, et al. (ICLR 2021)</p>
+<ul>
+<li>这篇论文提出了一种个性化联邦学习框架，通过引入Moreau Envelopes来实现模型个性化，并结合域自适应的思想。</li>
+</ul>
+</li>
+<li>
+<p>&ldquo;Personalized Federated Learning via Model Agnostic Meta Learning&rdquo; by Yichen Yang, et al. (NeurIPS 2020)</p>
+<ul>
+<li>该论文提出了一种基于元学习的个性化联邦学习方法，通过学习每个客户端的初始模型来实现个性化，并探索了与域自适应的结合。</li>
+</ul>
+</li>
+<li>
+<p>&ldquo;Personalized Domain Adaptation in Federated Learning&rdquo; by Yuanyuan Liu, et al. (ICLR 2020)</p>
+<ul>
+<li>这篇论文提出了一种个性化领域自适应的联邦学习方法，通过在联邦学习框架中引入领域自适应的技术来提高个性化模型的性能。</li>
+</ul>
+</li>
+<li>
+<p>&ldquo;Personalized Domain Adaptation in Federated Learning&rdquo; by Yuanyuan Liu, et al. (ICLR 2020)</p>
+<ul>
+<li>论文链接：https://openreview.net/forum?id=B1gGz306Ym</li>
+</ul>
+</li>
+<li>
+<p>&ldquo;Personalized Federated Learning with Moreau Envelopes&rdquo; by Mahdad Hosseini Kamal, et al. (NeurIPS 2020)</p>
+<ul>
+<li>论文链接：https://proceedings.neurips.cc/paper/2020/hash/bf1cdd736ec7a85565bd8a0861563c36-Abstract.html</li>
+</ul>
+</li>
+<li>
+<p>&ldquo;Personalized Federated Learning with Adaptive Clustering&rdquo; by Kai Yang, et al. (IJCAI 2020)</p>
+<ul>
+<li>论文链接：https://www.ijcai.org/Proceedings/2020/166</li>
+</ul>
+</li>
+<li>
+<p>&ldquo;Personalized Federated Learning via Model Agnostic Meta Learning&rdquo; by Abhishek Kumar, et al. (ICML 2020)</p>
+<ul>
+<li>论文链接：https://proceedings.icml.cc/paper/2020/hash/8f2893f9fe27b42102d584b0b1d472ee-Abstract.html</li>
+</ul>
+</li>
+<li>
+<p>&ldquo;Personalized Federated Learning with Moreau Envelopes&rdquo; by Tengyang Xie, et al. (NeurIPS 2020)</p>
+<ul>
+<li>论文链接：https://proceedings.neurips.cc/paper/2020/hash/23029b11fda5f119bb41e29625c0c125-Abstract.html</li>
+</ul>
+</li>
+</ol>
+<p>以下是一些关于联邦学习与迁移学习结合的相关论文：</p>
+<ol>
+<li>
+<p>&ldquo;FedMTL: A Federated Multi-Task Learning Approach for Collaborative Edge Learning&rdquo; (2020) - 该论文提出了一种联邦多任务学习方法，将联邦学习与多任务学习相结合。通过在联邦学习框架中进行模型聚合和模型更新，实现了在边缘设备上进行多任务学习任务的分布式训练。</p>
+</li>
+<li>
+<p>&ldquo;Federated Transfer Learning: Improving Model Personalization in Federated Learning&rdquo; (2021) - 该论文介绍了一种基于迁移学习的联邦学习方法，旨在改善联邦学习中的模型个性化。通过在模型聚合过程中引入源任务的知识迁移，提高了在联邦学习中个体设备的模型表现。</p>
+</li>
+<li>
+<p>&ldquo;Federated Transfer Reinforcement Learning for Traffic Signal Control&rdquo; (2019) - 该论文探讨了在联邦学习框架下应用迁移强化学习进行交通信号控制的方法。通过在不同城市之间共享经验，进行知识迁移，提高了交通信号控制策略的效果。</p>
+</li>
+<li>
+<p>&ldquo;Federated Transfer Learning for Energy Disaggregation in Smart Grids&rdquo; (2020) - 该论文提出了一种在智能电网中应用联邦学习和迁移学习的方法，以解决能源分解问题。通过在不同区域的数据上进行训练和迁移，实现了在不同区域的电网上进行能源分解的任务。</p>
+</li>
+</ol>
+<p>这些论文展示了联邦学习与迁移学习相结合的不同应用领域和方法。它们提供了一些有关如何在联邦学习中利用迁移学习的思路和技巧。请注意，这只是一部分相关论文的例子，仍有很多其他研究工作可供参考。</p>
+<p><a href="https://scholar.google.com.hk/scholar?as_ylo=2019&amp;q=personalized+federated+transfer+learning&amp;hl=zh-CN&amp;as_sdt=0,5">个性化联邦迁移学习 - Google 学术搜索</a></p>
+<p><a href="https://www.google.com.hk/search?q=personalized+federated+transfer+learning&amp;newwindow=1&amp;ei=XiKJZI0CmpaQ8g-4ubyYBA&amp;ved=0ahUKEwiNqZuF2MH_AhUaC0QIHbgcD0MQ4dUDCBA&amp;uact=5&amp;oq=personalized+federated+transfer+learning&amp;gs_lcp=Cgxnd3Mtd2l6LXNlcnAQDEoECEEYAFAAWABgAGgAcAB4AIABAIgBAJIBAJgBAA&amp;sclient=gws-wiz-serp">personalized federated transfer learning - Google 搜索</a></p>
+<p><a href="https://scholar.google.com/scholar?hl=zh-CN&amp;as_sdt=0%2C5&amp;as_vis=1&amp;q=Personalized+Domain+Adaptation+in+Federated+Learning&amp;btnG=">联邦学习中的个性化域适应 - Google 学术搜索</a></p>
+<hr>
+<hr>
+<hr>
+<p>数据集 digit 5</p>
+<p><a href="https://paperswithcode.com/sota/multi-source-unsupervised-domain-adaptation-3">https://paperswithcode.com/sota/multi-source-unsupervised-domain-adaptation-3</a></p>
+<h2 id="实验">实验</h2>
+<p>KD3A  <code>e=80, lr=0.01-0.0001</code></p>
+<table>
+<thead>
+<tr>
+<th>DomainNet(e=80)</th>
+<th>Clip</th>
+<th>info</th>
+<th>pain</th>
+<th>quic</th>
+<th>real</th>
+<th>sketch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paper</td>
+<td>72.5</td>
+<td>23.4</td>
+<td>60.9</td>
+<td>16.4</td>
+<td>72.7</td>
+<td>60.6</td>
+</tr>
+<tr>
+<td>test</td>
+<td><code>73.4</code></td>
+<td>34.9</td>
+<td>67.1</td>
+<td>51.2</td>
+<td>79.0</td>
+<td>70.7</td>
+</tr>
+<tr>
+<td>tar=cl</td>
+<td><code>73.2</code></td>
+<td>35.0</td>
+<td>67.0</td>
+<td>52.3</td>
+<td>79.0</td>
+<td>70.3</td>
+</tr>
+<tr>
+<td>pfl40</td>
+<td><code>66.5</code></td>
+<td>31.7</td>
+<td>65.6</td>
+<td>69.1</td>
+<td>75.5</td>
+<td>65.8</td>
+</tr>
+<tr>
+<td>pfl(tar=cl)</td>
+<td><code>67.8</code></td>
+<td>31.5</td>
+<td>64.8</td>
+<td><strong>69.5</strong></td>
+<td><strong>75.3</strong></td>
+<td>59.1</td>
+</tr>
+<tr>
+<td>tar=quic</td>
+<td>30.0</td>
+<td>6.7</td>
+<td>17.3</td>
+<td><code>15.4</code></td>
+<td>24.2</td>
+<td>48.2</td>
+</tr>
+<tr>
+<td>tar=info</td>
+<td>75.6</td>
+<td><code>21.6</code></td>
+<td>59.8</td>
+<td>32.2</td>
+<td>70.7</td>
+<td>60.6</td>
+</tr>
+</tbody>
+</table>
+<p><code>test2 = resnet 50</code></p>
+<table>
+<thead>
+<tr>
+<th>DomainNet(e=80)</th>
+<th>Clip</th>
+<th>info</th>
+<th>pain</th>
+<th>quic</th>
+<th>real</th>
+<th>sketch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paper</td>
+<td>72.5</td>
+<td>23.4</td>
+<td>60.9</td>
+<td>16.4</td>
+<td>72.7</td>
+<td>60.6</td>
+</tr>
+<tr>
+<td>test</td>
+<td><code>73.4</code></td>
+<td>34.9</td>
+<td>67.1</td>
+<td>51.2</td>
+<td>79.0</td>
+<td>70.7</td>
+</tr>
+<tr>
+<td>test2</td>
+<td>70.2</td>
+<td>32.2</td>
+<td>65.0</td>
+<td>45.7</td>
+<td>77.0</td>
+<td>68.7</td>
+</tr>
+<tr>
+<td>test(40)</td>
+<td>68.9</td>
+<td>29.9</td>
+<td>63.8</td>
+<td>45.4</td>
+<td>74.6</td>
+<td>68.4</td>
+</tr>
+<tr>
+<td>test2(40)</td>
+<td>66.3</td>
+<td>28.1</td>
+<td>62.9</td>
+<td>41.2</td>
+<td>73.5</td>
+<td>66.5</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>DominNet(e=40)</th>
+<th><code>Clip</code></th>
+<th>info</th>
+<th>pain</th>
+<th>quic</th>
+<th>real</th>
+<th>skect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paper</td>
+<td>72.5</td>
+<td>23.4</td>
+<td>60.9</td>
+<td>16.4</td>
+<td>72.7</td>
+<td>60.6</td>
+</tr>
+<tr>
+<td>test</td>
+<td>68.9</td>
+<td>29.9</td>
+<td>63.8</td>
+<td>45.4</td>
+<td>74.6</td>
+<td>68.4</td>
+</tr>
+<tr>
+<td><code>tar=cl</code></td>
+<td>67.9</td>
+<td>30.5</td>
+<td>65.1</td>
+<td>45.2</td>
+<td>75.6</td>
+<td>68.4</td>
+</tr>
+<tr>
+<td>pfl=cl</td>
+<td>66.5</td>
+<td><strong>31.7</strong></td>
+<td><strong>65.6</strong></td>
+<td><strong>69.1</strong></td>
+<td>75.5</td>
+<td>65.8</td>
+</tr>
+</tbody>
+</table>
+<p>e=40 &ndash; tar=info 20.4  tar=quic 15.7</p>
+<h2 id="实测"><code>实测</code></h2>
+<p>e =40 lr 0.01</p>
+<table>
+<thead>
+<tr>
+<th>DominNet(e=40)</th>
+<th><code>Clip</code></th>
+<th>info</th>
+<th>pain</th>
+<th>quic</th>
+<th>real</th>
+<th>skect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test lr 0.01</td>
+<td>72.1</td>
+<td>33.9</td>
+<td>68.0</td>
+<td>48.5</td>
+<td>79.4</td>
+<td>70.4</td>
+</tr>
+<tr>
+<td>test lr 0.005</td>
+<td>72.4</td>
+<td>34.2</td>
+<td>68.2</td>
+<td>43.8</td>
+<td>81.0</td>
+<td>70.1</td>
+</tr>
+<tr>
+<td>test2 lr 0.005</td>
+<td>71.0</td>
+<td>27.4</td>
+<td>69.3</td>
+<td>35.7</td>
+<td>80.4</td>
+<td>70.2</td>
+</tr>
+<tr>
+<td>test lr 0.005nobnmmd</td>
+<td>71.1</td>
+<td>30.8</td>
+<td>67.7</td>
+<td>35.4</td>
+<td>80.0</td>
+<td>69.7</td>
+</tr>
+<tr>
+<td>pfl0.005</td>
+<td>68.1</td>
+<td>31.5</td>
+<td>67.0</td>
+<td><code>68.7</code></td>
+<td>77.1</td>
+<td>64.3</td>
+</tr>
+<tr>
+<td>pfl0.005NOBNMMD</td>
+<td>68.6</td>
+<td>31.5</td>
+<td>66.5</td>
+<td>67.7</td>
+<td>77.8</td>
+<td>65.5</td>
+</tr>
+<tr>
+<td><strong>pfl0.005/0.5-0.6/gpu1kd3atest</strong></td>
+<td>68.8</td>
+<td>36.2</td>
+<td>65.4</td>
+<td>67.7</td>
+<td><code>77.4</code></td>
+<td>64.1</td>
+</tr>
+<tr>
+<td>pfl0.005/0.5-0.6/pflamin/gpu2kd3a</td>
+<td>68.9</td>
+<td>36.7</td>
+<td>62.9</td>
+<td>65.0</td>
+<td>77.2</td>
+<td>65.8</td>
+</tr>
+<tr>
+<td>pfl0.005/0.5-0.6/nobnmmd倒数第二轮效果好</td>
+<td>65.5</td>
+<td><strong>37.6</strong></td>
+<td><code>67.4</code></td>
+<td><code>67.9</code></td>
+<td><code>78.4</code></td>
+<td><code>66.8</code></td>
+</tr>
+<tr>
+<td>pfl0.005/0.5-0.6/NOBNMMD/pflamin</td>
+<td>64.8</td>
+<td><strong>36.2</strong></td>
+<td>65.6</td>
+<td>65.1</td>
+<td>77.2</td>
+<td>61.8</td>
+</tr>
+<tr>
+<td>pfladddata/0.5-0.6倒数第二轮效果好</td>
+<td>70.3</td>
+<td>35.9</td>
+<td>65.2</td>
+<td>68.4</td>
+<td>76.3</td>
+<td>65.0</td>
+</tr>
+<tr>
+<td>pfladddata/0.5-0.6/nobnmmd</td>
+<td></td>
+<td></td>
+<td>64.3</td>
+<td>70.7</td>
+<td>77.0</td>
+<td>63.7</td>
+</tr>
+<tr>
+<td>pfladddata/0.5-0.6/nobnmmd</td>
+<td>66.6</td>
+<td>33.3</td>
+<td>61.2</td>
+<td>70.1</td>
+<td>74.5</td>
+<td>59.3</td>
+</tr>
+<tr>
+<td>pfl/0.5-0.5temp=7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pfl/0.5-0.5temp=5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pfl/0.5-0.5temp=3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>adddata会过拟合！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python main.py --config DigitFive.yaml --target-domain mnist -bp basepath  2&gt;&amp;1 | tee ./outputs/output.log; shutdown 
+</code></pre></td></tr></table>
+</div>
+</div><p>Digit5是一个数字分类数据集，包括MNIST (mt)、MNISTM(mm)、SVHN (sv)、Synthetic (syn)和USPS (up)</p>
+<p><code>pfl2：det1,2 f=2</code></p>
+<p><code>pfl3:det1,2  f=5</code></p>
+<p>pfl4 f=1,d=1;f=2d=2</p>
+<table>
+<thead>
+<tr>
+<th>Digit（100）</th>
+<th><code>mt</code></th>
+<th>mm</th>
+<th>sv</th>
+<th>syn</th>
+<th>usps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paper</td>
+<td>99.2</td>
+<td>87.3</td>
+<td>85.6</td>
+<td>89.4</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>test</td>
+<td>99.3</td>
+<td>95.5</td>
+<td>84.8</td>
+<td>97.2</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl</td>
+<td>99.3</td>
+<td><strong>97.3</strong></td>
+<td>91.8</td>
+<td>98.3</td>
+<td><strong>99.0</strong></td>
+</tr>
+<tr>
+<td>pfl2</td>
+<td>99.2</td>
+<td>97.1</td>
+<td>91.6</td>
+<td>98.3</td>
+<td>98.8</td>
+</tr>
+<tr>
+<td>pfl3</td>
+<td>99.1</td>
+<td>97.2</td>
+<td><strong>92.2</strong></td>
+<td><strong>98.5</strong></td>
+<td>98.9</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Digit（40）</th>
+<th><code>mt</code></th>
+<th>mm</th>
+<th>sv</th>
+<th>syn</th>
+<th>usps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paper</td>
+<td>99.2</td>
+<td>87.3</td>
+<td>85.6</td>
+<td>89.4</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>test</td>
+<td>99.3</td>
+<td>95.3</td>
+<td>81.0</td>
+<td>96.1</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>pfl</td>
+<td>99.1</td>
+<td>96.8</td>
+<td>90.8</td>
+<td>97.3</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>pfl2</td>
+<td>99.0</td>
+<td><strong>96.9</strong></td>
+<td><strong>91.4</strong></td>
+<td><strong>98.0</strong></td>
+<td><strong>99.2</strong></td>
+</tr>
+<tr>
+<td>pfl3</td>
+<td>98.9</td>
+<td>96.6</td>
+<td>90.5</td>
+<td>97.6</td>
+<td>98.9</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Digit（100）</th>
+<th>mt</th>
+<th><code>mm</code></th>
+<th>sv</th>
+<th>syn</th>
+<th>usps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test</td>
+<td>99.3</td>
+<td>88.4</td>
+<td>91.0</td>
+<td>97.9</td>
+<td>98.2</td>
+</tr>
+<tr>
+<td>pfl</td>
+<td><strong>99.4</strong></td>
+<td>85.2</td>
+<td>91.9</td>
+<td><strong>98.4</strong></td>
+<td>99.1</td>
+</tr>
+<tr>
+<td>pfl_1</td>
+<td>99.2</td>
+<td>85.0</td>
+<td>92.0</td>
+<td>98.4</td>
+<td>99.3</td>
+</tr>
+<tr>
+<td>pfl2</td>
+<td>99.4</td>
+<td>85.6</td>
+<td>91.8</td>
+<td>98.2</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>pfl3</td>
+<td><strong>99.4</strong></td>
+<td>86.0</td>
+<td><strong>92.2</strong></td>
+<td><strong>98.4</strong></td>
+<td><strong>99.4</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Digit（40）</th>
+<th>mt</th>
+<th><code>mm</code></th>
+<th>sv</th>
+<th>syn</th>
+<th>usps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test</td>
+<td>99.1</td>
+<td>87.4</td>
+<td>90.1</td>
+<td>97.9</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>pfl</td>
+<td>99.3</td>
+<td>84.1</td>
+<td><strong>91.2</strong></td>
+<td><strong>97.9</strong></td>
+<td><strong>99.0</strong></td>
+</tr>
+<tr>
+<td>pfl_1</td>
+<td>99.3</td>
+<td>84.3</td>
+<td>91.2</td>
+<td>97.9</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>pfl2</td>
+<td>99.4</td>
+<td>83.0</td>
+<td>90.9</td>
+<td>97.8</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>pfl3</td>
+<td><strong>99.4</strong></td>
+<td>85.3</td>
+<td>90.8</td>
+<td>97.5</td>
+<td>98.9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="实测-1">实测</h2>
+<p>e=40 lr未变。</p>
+<table>
+<thead>
+<tr>
+<th>Digit（40）</th>
+<th><code>mt</code></th>
+<th>mm</th>
+<th>sv</th>
+<th>syn</th>
+<th>usps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test</code></td>
+<td>99.2</td>
+<td>95.1</td>
+<td>84.8</td>
+<td>96.8</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>test2</td>
+<td>99.3</td>
+<td>96.0</td>
+<td>90.4</td>
+<td>97.9</td>
+<td>98.8</td>
+</tr>
+<tr>
+<td>testnobnmmd</td>
+<td>98.3</td>
+<td>94.6</td>
+<td>80.8</td>
+<td>96.7</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>testnobnmmd2</td>
+<td>98.9</td>
+<td>96.3</td>
+<td>92.3</td>
+<td>98.2</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>testnobnmmd3</td>
+<td>98.9</td>
+<td>96.1</td>
+<td>91.9</td>
+<td>98.3</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>testnobnmmd4</td>
+<td>98.8</td>
+<td>96.3</td>
+<td>92.1</td>
+<td>98.1</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td>pfltar=mt</td>
+<td>99.1</td>
+<td><strong>97.2</strong></td>
+<td>91.8</td>
+<td>98.1</td>
+<td><strong>99.1</strong></td>
+</tr>
+<tr>
+<td>pfltar=mt2</td>
+<td><strong>99.3</strong></td>
+<td>96.9</td>
+<td>92.0</td>
+<td>98.2</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>pfltar=mt3</td>
+<td>99.2</td>
+<td>97.1</td>
+<td>92.0</td>
+<td>98.1</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td><code>pfl3tar=mt</code></td>
+<td>99.2</td>
+<td><strong>97.2</strong></td>
+<td><strong>92.0</strong></td>
+<td><strong>98.4</strong></td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfltar=mt2</td>
+<td>99.1</td>
+<td>96.9</td>
+<td>91.9</td>
+<td>98.2</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td>pflacc</td>
+<td>99.1</td>
+<td>97.1</td>
+<td>91.8</td>
+<td>97.9</td>
+<td>98.8</td>
+</tr>
+<tr>
+<td><code>pfladddata（T=1</code></td>
+<td>99.2</td>
+<td><strong>97.3</strong></td>
+<td><strong>92.0</strong></td>
+<td>98.4</td>
+<td><strong>99.4</strong></td>
+</tr>
+<tr>
+<td>T=10</td>
+<td>99.1</td>
+<td>97.4</td>
+<td>92.5</td>
+<td>99.0</td>
+<td>99.2</td>
+</tr>
+<tr>
+<td>T=9</td>
+<td>98.9</td>
+<td>97.6</td>
+<td>91.4</td>
+<td>98.5</td>
+<td>99.2</td>
+</tr>
+<tr>
+<td>T=8</td>
+<td>99.0</td>
+<td><strong>98.0</strong></td>
+<td><strong>92.5</strong></td>
+<td>98.2</td>
+<td><strong>99.3</strong></td>
+</tr>
+<tr>
+<td>T=7</td>
+<td>99.0</td>
+<td><strong>98.1</strong></td>
+<td>89.5</td>
+<td><strong>98.6</strong></td>
+<td><strong>99.4</strong></td>
+</tr>
+<tr>
+<td>T=6</td>
+<td>99.1</td>
+<td>97.8</td>
+<td><strong>92.8</strong></td>
+<td>96.8</td>
+<td>99.4</td>
+</tr>
+<tr>
+<td>T=5</td>
+<td>99.2</td>
+<td>97.7</td>
+<td>92.1</td>
+<td><strong>98.8</strong></td>
+<td>99.2</td>
+</tr>
+<tr>
+<td>T=4</td>
+<td>99.0</td>
+<td>97.7</td>
+<td>92.6</td>
+<td>98.6</td>
+<td>99.2</td>
+</tr>
+<tr>
+<td>T=3</td>
+<td>99.0</td>
+<td>97.8</td>
+<td>92.6</td>
+<td>98.6</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td>T=2</td>
+<td>99.1</td>
+<td>97.7</td>
+<td>91.7</td>
+<td><strong>99.0</strong></td>
+<td>99.3</td>
+</tr>
+<tr>
+<td>pfladddatataradddata(3)</td>
+<td>99.2</td>
+<td>97.7</td>
+<td>91.3</td>
+<td>98.3</td>
+<td>99.2</td>
+</tr>
+<tr>
+<td>pfladddata0.85-0.95</td>
+<td>99.1</td>
+<td>97.2</td>
+<td>91.8</td>
+<td><strong>98.7</strong></td>
+<td>98.8</td>
+</tr>
+<tr>
+<td>pfldet=1weight</td>
+<td>99.0</td>
+<td>97.1</td>
+<td>91.7</td>
+<td>98.0</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfldet=1weight2</td>
+<td>99.1</td>
+<td>97.0</td>
+<td>91.8</td>
+<td>97.7</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl上传pmodel</td>
+<td>98.6</td>
+<td>94.5</td>
+<td>65.5</td>
+<td>96.0</td>
+<td>97.0</td>
+</tr>
+<tr>
+<td>pfl上传pmodel2</td>
+<td>91.3</td>
+<td>95.1</td>
+<td>66.6</td>
+<td>95.8</td>
+<td>97.4</td>
+</tr>
+<tr>
+<td>targetpfl(5)+adddata（99.3）</td>
+<td><strong>99.1</strong></td>
+<td><strong>97.5</strong></td>
+<td><strong>91.9</strong></td>
+<td><strong>98.5</strong></td>
+<td><strong>99.4</strong></td>
+</tr>
+<tr>
+<td>targetpfl(3)+adddata（99.3）</td>
+<td>99.2</td>
+<td>97.3</td>
+<td>91.7</td>
+<td>98.6</td>
+<td>99.2</td>
+</tr>
+<tr>
+<td>targetpfl(5)(99.2)</td>
+<td>99.0</td>
+<td>97.2</td>
+<td>91.5</td>
+<td>97.9</td>
+<td>98.7</td>
+</tr>
+<tr>
+<td>targetpfl(3)+2kl(99.3)</td>
+<td>98.7</td>
+<td>97.0</td>
+<td>91.8</td>
+<td>97.8</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td>pfl0.5-0.6</td>
+<td>99.2</td>
+<td>97.1</td>
+<td>91.8</td>
+<td>97.8</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>pfl0.8-0.95</td>
+<td>99.2</td>
+<td>97.1</td>
+<td><strong>92.2</strong></td>
+<td>98.1</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl0.85-0.95</td>
+<td>99.0</td>
+<td><strong>97.2</strong></td>
+<td>92.0</td>
+<td>98.0</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>pfl0.75-0.95</td>
+<td>99.1</td>
+<td>97.1</td>
+<td>92.0</td>
+<td>97.9</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl0.75-0.85</td>
+<td>99.1</td>
+<td>97.0</td>
+<td>91.9</td>
+<td>97.8</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>pfl0.5-0.6deputymax</td>
+<td>99.1</td>
+<td>96.9</td>
+<td>91.3</td>
+<td>98.0</td>
+<td>99.0</td>
+</tr>
+<tr>
+<td>pfl0.5-0.6pflmin</td>
+<td>99.2</td>
+<td>96.9</td>
+<td>91.2</td>
+<td>97.8</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)28</td>
+<td>95.6</td>
+<td>97.1</td>
+<td>91.7</td>
+<td>98.1</td>
+<td>99.2</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20</td>
+<td>96.8</td>
+<td>97.1</td>
+<td>91.6</td>
+<td>98.1</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20_1</td>
+<td>97.8</td>
+<td>97.2</td>
+<td>92.1</td>
+<td>98.0</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20_2</td>
+<td>97.1</td>
+<td>97.0</td>
+<td>91.9</td>
+<td>97.9</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20_3</td>
+<td>97.9</td>
+<td>97.1</td>
+<td>91.7</td>
+<td>98.2</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.75-0.95</td>
+<td>97.7</td>
+<td>97.0</td>
+<td>92.0</td>
+<td>98.1</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6</td>
+<td>98.3</td>
+<td>97.1</td>
+<td>91.7</td>
+<td>98.1</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6amin</td>
+<td>97.1</td>
+<td>96.8</td>
+<td>91.3</td>
+<td>97.8</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6amax</td>
+<td>98.2</td>
+<td>96.5</td>
+<td>90.3</td>
+<td>97.4</td>
+<td>98.4</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6adeputymax</td>
+<td>97.1</td>
+<td>97.3</td>
+<td>91.7</td>
+<td>97.8</td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6adeputymax2</td>
+<td>97.9</td>
+<td><code>97.3</code></td>
+<td>91.6</td>
+<td>97.9</td>
+<td>98.8</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6adeputymax3</td>
+<td>97.2</td>
+<td>97.0</td>
+<td><code>92.2</code></td>
+<td><code>98.1</code></td>
+<td>98.9</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6PFLMAX</td>
+<td>97.7</td>
+<td>96.6</td>
+<td>90.1</td>
+<td>97.3</td>
+<td>98.8</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6PFLMIN</td>
+<td><code>98.7</code></td>
+<td>96.7</td>
+<td>91.2</td>
+<td>97.9</td>
+<td><code>99.2</code></td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6adeputymin</td>
+<td>97.8</td>
+<td>97.2</td>
+<td>91.9</td>
+<td>97.9</td>
+<td>98.8</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6pflmin+depmax</td>
+<td>98.2</td>
+<td>96.8</td>
+<td>90.7</td>
+<td>97.8</td>
+<td>98.8</td>
+</tr>
+<tr>
+<td>pfl(nobnmmd)20,0.5-0.6pflmin+depmax2</td>
+<td>97.5</td>
+<td>96.8</td>
+<td>90.6</td>
+<td>97.6</td>
+<td>99.0</td>
+</tr>
+</tbody>
+</table>
+<p>avg 98.5 91.9 98.5 98.9</p>
+<p>amin:loss_ce损失的权重a减少-a</p>
+<p>amax:loss_ce损失的权重a增加-b。目标域还可，源域降低，个性化模型去掉，副模型不变</p>
+<p>adeputymax:个性化模型去掉，副模型不变，动态损失</p>
+<p>pflmax：个性化增加动态损失，副模型去掉 &ndash; 个性化模型降低，副模型还可以&ndash;没啥用</p>
+<p>pflmin:</p>
+<p>deputyamin</p>
+<table>
+<thead>
+<tr>
+<th>Digit（40）</th>
+<th><code>mt</code></th>
+<th>mm</th>
+<th>sv</th>
+<th>syn</th>
+<th>usps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test</td>
+<td>99.2</td>
+<td>95.1</td>
+<td>84.8</td>
+<td>96.8</td>
+<td>98.5</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><code>gpu1 ： domainnet pfl1 e =40 lr 0.005  </code> 6.5 16.12 kd3atest</p>
+<p>pfl 0.5-0.6 nobnmmd&ndash;结束。</p>
+<p>pfl 0.5-0.6</p>
+<p>domainNet比例设置0.7-0.8 adddata e&gt;14 a=0 nobnmmd 寄</p>
+<p>&ndash;</p>
+<p>domainNet比例设置0.5-0.6 adddata  T=7?</p>
+<p><code>gpu2 ： domainnet pfl e =40 lr 0.005</code>  去掉了batchnorm nnd  6.5 16.16</p>
+<p>9.15-13.00 -4h*40=160h   &ndash;6day 6h  &mdash;实际5day7h</p>
+<p>去掉bnmmd，pflmin 0.5-0.6&mdash;-测完</p>
+<p>pflmin 0.5-0.6 6.16 22.08-6.22 13.00</p>
+<p>增加目标域个性化 3轮，增加数据量，0.5-0.6。</p>
+<p>adddata/0.5-0.6</p>
+<p><code>gpu2: digit5 pfl1</code> 20，test 副模型的性能,修改det状态的比例 0.5-0.6</p>
+<p><code>测试test倒退曲线。</code></p>
+<p>digit：1、修改det标准为ac/pfl/0.7-0.9不变/看一下准确率(p和d)&ndash;</p>
+<p>看一下聚合后的副模型的性能标准区别不大。。。</p>
+<p>2、det标准不变，pfl比例设置0.8-0.95</p>
+<p>&ndash;</p>
+<p>kd3a3: 0.85-0.95</p>
+<p>kd3a2 :0.75-0.85</p>
+<p>&ndash;</p>
+<p>kd3a2,3 &ndash; 增加数据量。0.7-0.9 效果可以的！</p>
+<p>&ndash;</p>
+<p>增加det=1的权重。</p>
+<p>&ndash;</p>
+<p>上传个性化模型，下发到副模型 &ndash;修改聚合和测试函数,以及目标域改为个性化模型,下发的时候目标域下发到个性化模型，知识投票用源域的个性化模型。。。</p>
+<p>好像有问题，效果很奇怪，聚合后副模型的性能下降很奇怪，聚合策略有问题？原因或许是因为个性化模型更侧重于本地知识，所以聚合后模型性能下降明显。但是个性化模型同样下降严重？</p>
+<p>det比例设置为0.75-0.85 作用不大</p>
+<p>&ndash;</p>
+<p>增加目标域的个性化模型，且增加了数据量，判断5次 作用不大</p>
+<p>增加目标域的个性化模型，且增加了数据量，判断3次 KD3A2</p>
+<p>增加目标域的个性化模型，未增加数据量，判断3次，增加了kl权重*2。作用不大</p>
+<p>且目标域的副模型性能优于个性化模型，奇怪，，，</p>
+<p>增加数据集，增加目标域数据</p>
+<p>???为什么每轮中f=0时副模型准确率下降很大？尤其是quickdraw？权重很低，所以重新聚合后性能低，但是阶段det=1会恢复性能。</p>
+<p>&ndash;</p>
+<p>f=3</p>
+<p>f=0 det=1,，缓解模型倒退。else单独训练，聚合副模型，计算个性化模型</p>
+<p>det =2 互相蒸馏</p>
+<p>F =5 去掉det=3 adddata</p>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>mnist</th>
+<th>mnistm</th>
+<th>svhn</th>
+<th>syn</th>
+<th>usps</th>
+<th>Average</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KD3A</td>
+<td>99.2</td>
+<td>95.1</td>
+<td>84.8</td>
+<td>96.8</td>
+<td>98.5</td>
+<td>94.88</td>
+</tr>
+<tr>
+<td>det=10.7-0.9bn</td>
+<td>98.9</td>
+<td>96.9</td>
+<td>90.8</td>
+<td>98.1</td>
+<td>99.1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>det=10.5-0.6bn</code></td>
+<td>99.1</td>
+<td>96.5</td>
+<td>90.7</td>
+<td>98.3</td>
+<td>99.2</td>
+<td></td>
+</tr>
+<tr>
+<td>det=20.7-0.9bn</td>
+<td>99.0</td>
+<td>97.0</td>
+<td>91.4</td>
+<td>98.2</td>
+<td>99.2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>det=20.5-0.6bn</code></td>
+<td>99.1</td>
+<td>97.2</td>
+<td>91.8</td>
+<td>98.2</td>
+<td>99.1</td>
+<td></td>
+</tr>
+<tr>
+<td>DET12,0.5-0.6</td>
+<td>99.1</td>
+<td>97.2</td>
+<td>92.2</td>
+<td>98.4</td>
+<td>99.3</td>
+<td></td>
+</tr>
+<tr>
+<td>DET12,0.5-0.6</td>
+<td>99.2</td>
+<td>97.5</td>
+<td>91.8</td>
+<td>98.6</td>
+<td>99.2</td>
+<td></td>
+</tr>
+<tr>
+<td>pfl</td>
+<td>99.3</td>
+<td>97.2</td>
+<td>92.0</td>
+<td>98.4</td>
+<td>98.9</td>
+<td>97.16</td>
+</tr>
+<tr>
+<td>pfladddata（T=1</td>
+<td>99.2</td>
+<td><strong>97.3</strong></td>
+<td><strong>92.0</strong></td>
+<td>98.4</td>
+<td><strong>99.4</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>T对知识蒸馏的影响</p>
+<p>T=5 /7/9 、10 、2</p>
+<p>gpu1 kd3a t=8</p>
+<p>&ndash;</p>
+<p>不同目标域进行测试</p>
+<p>KD3A3 pflmm   T=8</p>
+<p>kd3a2testmm</p>
+<p>PAPER 87.3</p>
+<table>
+<thead>
+<tr>
+<th>DIGIT5</th>
+<th><code>MM</code></th>
+<th>MT</th>
+<th>sv</th>
+<th>syn</th>
+<th>usps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KD3A</td>
+<td>91.6</td>
+<td>99.3</td>
+<td>90.6</td>
+<td>97.9</td>
+<td>98.5</td>
+</tr>
+<tr>
+<td>PFLADDDATA</td>
+<td>78.8</td>
+<td>99.5</td>
+<td>91.7</td>
+<td>98.3</td>
+<td>99.1</td>
+</tr>
+<tr>
+<td>PFLADDDATA2</td>
+<td>87.4</td>
+<td>99.3</td>
+<td>91.7</td>
+<td>97.9</td>
+<td>98.9</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>1、增加-workers=28  20快一点  2、pin_memory=False。lr0.005 e40</p>
+<p>待改</p>
+<p>1、去掉batchnorm nnd</p>
+<p>2、修改det状态的比例。det α 初始0.7-0.9</p>
+<p>#0.5 # 0.75</p>
+<p>#0.6 #0.95</p>
+<p>初始状态的区别不是很大？pfl论文中//验证隐私的效果。 # 2/3 增加鲁棒性， 22 33 22 111 &mdash;epoch 下 第一次判断的时候增加一个周期性的变化。</p>
+<p>//初试随机det，temp</p>
+<p>(做模型压缩一个点)（10个epoch通信一次？）</p>
+<p>loss动态损失函数&mdash;-没啥用好像。。。</p>
+<p>投票策略，现在是直接使用了一致性，先去掉一致性损失，然后根据不同的det状态来使用不同的策略。直接叠加取最大，最小值，平均值。众数，中位数。</p>
+<p>域不变个性化参数的全局一致性：（个性化模型参数对比：个性化中不变的参数模型）</p>
+<p>（1-x）* M+x*M_new</p>
+<hr>
+<p>1、info域后续始终为1 模型性能比较差，数据量不够，但是始终是1，进一步增加数据量？</p>
+<p>增加数据量？恢复原本一个epoch的数据量，使得模型充分训练，而不是还没有训练好，就进行了回退。</p>
+<p>效果还可以。</p>
+<p>增加det=1的时候kl的权重？-3/2+1/2提高知识蒸馏的权重可以帮助副模型快速恢复。</p>
+<p>作用不大好像</p>
+<p>增加目标域个性化？或者上传个性化模型，下发到副模型。</p>
+<p>设置比例？&ndash;不同性能的比例设置不同，低的低比例高的高比例？</p>
+<p>提升低性能的数据自训练权重？</p>
+<p>2、一致性损失如何计算的？</p>
+<p>3、一个epoch后，副模型的性能下降很明显？尤其是info域，因为这个域对目标域的贡献低，所以聚合后的副模型性能下降很严重。同时DET=1状态使得模型可以快速恢复。</p>
+<hr>
+<p>现有的个性化联邦迁移学习工作</p>
+<p>联邦学习不如本地训练？</p>
+<p>通信效率？鲁棒性？</p>
+
     </div>
 
     <div class="post-copyright">
@@ -485,7 +2107,11 @@
           <a href="/tags/federated-learning/">Federated Learning</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/introspection/20230715/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">20230715</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/dl_limu/">
             <span class="next-text nav-default">动手学深度学习-李沐</span>
             <span class="next-text nav-mobile">Next</span>
