@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Project - 大胖狗来了</title>
+  <title>Project - 乐观积极的...</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Project">
 <meta itemprop="description" content="参考链接 2 ssh 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 blog 删除 1 2 3 4 conda env list conda create -n syft_env python=3.9"><meta itemprop="datePublished" content="2022-09-08T19:22:49+08:00" />
 <meta itemprop="dateModified" content="2022-09-08T19:22:49+08:00" />
-<meta itemprop="wordCount" content="895">
+<meta itemprop="wordCount" content="920">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Project"/>
 <meta name="twitter:description" content="参考链接 2 ssh 创建一个项目的主要步骤： 前提：安装Anaconda，LINUX 1 2 wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh sh Anaconda3-2022.05-Linux-x86_64.sh 1、创建虚拟环境，并切换 blog 删除 1 2 3 4 conda env list conda create -n syft_env python=3.9"/>
@@ -67,7 +67,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/" class="logo">大胖狗来了</a>
+    <a href="/" class="logo">乐观积极的...</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -98,7 +98,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/" class="logo">大胖狗来了</a>
+  <a href="/" class="logo">乐观积极的...</a>
 </div>
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022-09-08 </span>
         
-          <span class="more-meta"> 895 words </span>
+          <span class="more-meta"> 920 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -218,7 +218,8 @@ conda config --set show_channel_urls yes
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt install python3-pip
 </code></pre></td></tr></table>
 </div>
-</div><p>更新pip</p>
+</div><p>更新pip <a href="https://blog.csdn.net/lanluyug/article/details/82878152">2</a></p>
+<p><a href="https://blog.csdn.net/thenorther/article/details/104376561">镜像</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -262,9 +263,17 @@ pip install syft[udacity]==0.2.4 -i https://pypi.doubanio.com/simple/
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install 包名 -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">pip</span> <span class="n">install</span> <span class="n">包名</span> <span class="o">-</span><span class="n">i</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">douban</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span> <span class="o">--</span><span class="n">trusted</span><span class="o">-</span><span class="n">host</span> <span class="n">pypi</span><span class="o">.</span><span class="n">douban</span><span class="o">.</span><span class="n">com</span>
+
+<span class="o">-</span><span class="n">i</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span> 
+
+<span class="o">-</span><span class="n">i</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">aliyun</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pypi</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span> <span class="o">--</span><span class="n">trusted</span><span class="o">-</span><span class="n">host</span> <span class="n">mirrors</span><span class="o">.</span><span class="n">aliyun</span><span class="o">.</span><span class="n">com</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>switch cuda <a href="https://gitee.com/doitnobb/switch-cuda">code</a> <a href="https://zhuanlan.zhihu.com/p/581634820?utm_id=0">blog</a></p>
@@ -340,6 +349,15 @@ ssh -L6006:localhost:6006 kfy@10.59.139.1
 打开：screen -r 31389.test
 </code></pre></td></tr></table>
 </div>
+</div><p>运行完自动关机</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python ..; shutdown 
+</code></pre></td></tr></table>
+</div>
 </div><p><a href="https://blog.csdn.net/qq_43799400/article/details/122582895">pdb设置断点</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -368,6 +386,7 @@ pdb.set_trace()
 <p>回到PPT，点击“ 设计 ”“ 幻灯片大小 ”“ 自定义大小 ”</p>
 <p>宽度改为50，高度改为28，点击“ 确定 ”。</p>
 <p>点击“ 最大化 ”https://learn.microsoft.com/zh-cn/office/troubleshoot/powerpoint/change-export-slide-resolution?source=recommendations</p>
+<p><a href="https://mp.weixin.qq.com/s/4FBPeunaYfuYoDlmkerHzA">visio</a></p>
 
     </div>
 

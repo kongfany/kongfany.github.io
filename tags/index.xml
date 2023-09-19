@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 大胖狗来了</title>
+    <title>Tags on 乐观积极的...</title>
     <link>https://kongfany.github.io/tags/</link>
-    <description>Recent content in Tags on 大胖狗来了</description>
+    <description>Recent content in Tags on 乐观积极的...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Jul 2023 14:21:52 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Sep 2023 14:25:39 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>introspection</title>
-      <link>https://kongfany.github.io/tags/introspection/</link>
-      <pubDate>Sat, 15 Jul 2023 14:21:52 +0800</pubDate>
+      <title>Latex</title>
+      <link>https://kongfany.github.io/tags/latex/</link>
+      <pubDate>Wed, 13 Sep 2023 14:25:39 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/tags/introspection/</guid>
+      <guid>https://kongfany.github.io/tags/latex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Object Detection</title>
+      <link>https://kongfany.github.io/tags/object-detection/</link>
+      <pubDate>Wed, 26 Jul 2023 11:33:09 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/tags/object-detection/</guid>
       <description></description>
     </item>
     

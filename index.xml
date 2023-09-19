@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>大胖狗来了</title>
+    <title>乐观积极的...</title>
     <link>https://kongfany.github.io/</link>
-    <description>Recent content on 大胖狗来了</description>
+    <description>Recent content on 乐观积极的...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Jul 2023 14:21:52 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Sep 2023 14:25:39 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>20230715</title>
-      <link>https://kongfany.github.io/post/introspection/20230715/</link>
-      <pubDate>Sat, 15 Jul 2023 14:21:52 +0800</pubDate>
+      <title>Latex</title>
+      <link>https://kongfany.github.io/post/latex/</link>
+      <pubDate>Wed, 13 Sep 2023 14:25:39 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/introspection/20230715/</guid>
-      <description>被年少时的子弹命中 课题组其余三人组队参加了数学建模比赛 我想，或许是我错过了在简历上添加一行的机会 但或许，这是我错过的研究生三年 没有收获友谊，</description>
+      <guid>https://kongfany.github.io/post/latex/</guid>
+      <description>安装教程 下载 快速入门教程 2 在线公式编辑器 mathpix，扫描图片生成公式代码 1 pycharm编写latex 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17</description>
+    </item>
+    
+    <item>
+      <title>伪装目标检测COD</title>
+      <link>https://kongfany.github.io/post/cod/</link>
+      <pubDate>Wed, 26 Jul 2023 11:33:09 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/cod/</guid>
+      <description>paper cvpr2020 code 评估 blog ResNet resnet-残留块blog 2 3 ResNet 模型中的一个残差块的定义。在这个残差块中，根据条件选择了两种不同的快捷连接方式：投影连接和身</description>
     </item>
     
     <item>
@@ -386,15 +395,6 @@
     </item>
     
     <item>
-      <title>2021/12/21</title>
-      <link>https://kongfany.github.io/post/introspection/20211221/</link>
-      <pubDate>Tue, 21 Dec 2021 21:54:08 +0800</pubDate>
-      
-      <guid>https://kongfany.github.io/post/introspection/20211221/</guid>
-      <description>能同途偶遇住这星球上 燃亮飘渺人生 我多么够运 无人如你逗留我思潮上 从没再疑问 这个世界好得很 暑天该很好 你若在场 火一般的太阳 在脸上 烧得肌肤如情 痕极又</description>
-    </item>
-    
-    <item>
       <title>联邦学习(Federated Learning)</title>
       <link>https://kongfany.github.io/post/federated-learning/</link>
       <pubDate>Mon, 20 Dec 2021 19:22:19 +0800</pubDate>
@@ -500,15 +500,6 @@
       
       <guid>https://kongfany.github.io/post/matlab/</guid>
       <description>安装教程 视频教程 MATLAB变量命名规则 MATLAB数据类型 数字 字符与字符串 s = &amp;lsquo;a&amp;rsquo; abs(s) %ASCLL码 char(97) %字符 num2str(65) %数字 length(str) %计算字符串的长度 矩阵 A</description>
-    </item>
-    
-    <item>
-      <title>2021/9/11</title>
-      <link>https://kongfany.github.io/post/introspection/20210911/</link>
-      <pubDate>Sat, 11 Sep 2021 20:42:06 +0800</pubDate>
-      
-      <guid>https://kongfany.github.io/post/introspection/20210911/</guid>
-      <description>现在，处于一个节点，研究生即将入学。进行一下大学的总结和未来的规划吧。 大学四年，完全是辜负了高考的努力，成为了一个感动自己的废物，大学四年什</description>
     </item>
     
     <item>
