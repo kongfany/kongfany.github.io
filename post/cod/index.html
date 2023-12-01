@@ -49,7 +49,7 @@
 <meta itemprop="name" content="伪装目标检测COD">
 <meta itemprop="description" content="paper cvpr2020 code 评估 blog ResNet resnet-残留块blog 2 3 ResNet 模型中的一个残差块的定义。在这个残差块中，根据条件选择了两种不同的快捷连接方式：投影连接和身"><meta itemprop="datePublished" content="2023-07-26T11:33:09+08:00" />
 <meta itemprop="dateModified" content="2023-07-26T11:33:09+08:00" />
-<meta itemprop="wordCount" content="8666">
+<meta itemprop="wordCount" content="9766">
 <meta itemprop="keywords" content="Object Detection," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="伪装目标检测COD"/>
 <meta name="twitter:description" content="paper cvpr2020 code 评估 blog ResNet resnet-残留块blog 2 3 ResNet 模型中的一个残差块的定义。在这个残差块中，根据条件选择了两种不同的快捷连接方式：投影连接和身"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2023-07-26 </span>
         
-          <span class="more-meta"> 8666 words </span>
-          <span class="more-meta"> 18 mins read </span>
+          <span class="more-meta"> 9766 words </span>
+          <span class="more-meta"> 20 mins read </span>
         
       </div>
     </header>
@@ -150,6 +150,7 @@
         <li><a href="#resnet">ResNet</a></li>
         <li><a href="#cod">COD</a></li>
         <li><a href="#代码">代码</a></li>
+        <li><a href="#基于像素与层级双对比的语义分割">基于像素与层级双对比的语义分割</a></li>
       </ul>
     </li>
   </ul>
@@ -673,7 +674,16 @@ Fully Connected Layer (Output)
 <span class="p">{</span><span class="s1">&#39;Smeasure&#39;</span><span class="p">:</span> <span class="mf">0.757855827894297</span><span class="p">,</span> <span class="s1">&#39;wFmeasure&#39;</span><span class="p">:</span> <span class="mf">0.5506477369940896</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="mf">0.05048519826051167</span><span class="p">,</span> <span class="s1">&#39;adpEm&#39;</span><span class="p">:</span> <span class="mf">0.798543892694507</span><span class="p">,</span> <span class="s1">&#39;meanEm&#39;</span><span class="p">:</span> <span class="mf">0.7831408148773497</span><span class="p">,</span> <span class="s1">&#39;maxEm&#39;</span><span class="p">:</span> <span class="mf">0.854691225152544</span><span class="p">,</span> <span class="s1">&#39;adpFm&#39;</span><span class="p">:</span> <span class="mf">0.5912450146637638</span><span class="p">,</span> <span class="s1">&#39;meanFm&#39;</span><span class="p">:</span> <span class="mf">0.6132905844614</span><span class="p">,</span> <span class="s1">&#39;maxFm&#39;</span><span class="p">:</span> <span class="mf">0.6561096578776877</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><h2 id="基于像素与层级双对比的语义分割">基于像素与层级双对比的语义分割</h2>
+<p>语义分割实现了图像像素级的分类。它能够将一张图片或者视频，按照类别的异同，将图像分为多个块。</p>
+<p>语义分割数据集的图像中往往含有多个目标对象，且它们之间存在相互作用的关系[9]。所以如何有效地获取图像内的上下文信息成为提升语义分割性能的关键。</p>
+<p>经过对比学习训练的网络在部分下游任务中甚至强过传统的神经网络[14–16]。传统的对比学习在执行下游语义分割任务往往分两步：首先，训练一个基于对比学习的主干网络；然后，针对语义分割任务对训练好的主干网络进行微调得到一个语义分割网络。但是，由于这两阶段相互独立，且现有的主干网络在对比学习过程中并没有很好的建模语义信息，导致模型在训练时产生割裂，使得通过对比学习学到的良好特征不能有效融入到语义分割网络。</p>
+<p>现有方法一般将对比学习作用于主干网络之后分割头之前（Before）的特征[17]，或者将对比学习作用于分类头之前分割头之后（After）的特征[18]。另外，语义分割网络的主干网络与分割头之间一般通过降维（卷积）操作，得到适合分割的分割特征（Intra）。因此，为充分利用对比学习提升语义分割性能，本文对对比学习位置进行了深入分析与实验验证，重点分析了在Intra处引入对比学习的端到端的语义分割网络。</p>
+<p>不同大小和形状的符号分别表示不同尺寸和类别的特征，左侧为原特征空间，右侧为经过对比学习训练得到的嵌入式特征空间。可以发现在嵌入式特征空间中不同类别的特征被更好的区分。但是，由于没有考虑到语义分割模型对多尺度目标的检测需求，一些不同尺度的物体仍然没有得到有效区分，从而造成不同类别间的边界模糊。</p>
+<p>为解决这个问题，本文设计了<code>多尺度嵌入式映射模块</code>(Multi-scale Embedded Projector, MEP)，采用空洞卷积生成三个不同尺度的嵌入式特征空间，针对不同尺度的特征进行对比学习，获得多尺度特征信息</p>
+<p>另外，为了更好的利用获取的多尺度特征信息，不仅不同层级特征内部进行像素级对比学习，不同层级之间也进行了层级对比学习。最后，在像素与层级双对比（Double Contrast, DC）的作用下，不同特征在嵌入式特征空间中得到的了更好的划分。</p>
+<p>在对比学习中，与正样本高度相似的负样本和与正样本高度区分的正样本统称为难样本。尽管难样本会诱导分类错误，损害分割精度，但是Kalantidis等人[19]发现难样本会带来更大的梯度贡献，在训练后期为模型提供更大的帮助。基于此，本文提出了激励式样本采样策略(Excitation Sampling，ES），把一幅图片中的同一类别的难样本和简单样本通过一定的采集策略组织成一个样本，并通过动态调整样本中的难样本和简单样本的权重为模型提供优质样本。</p>
+
     </div>
 
     <div class="post-copyright">

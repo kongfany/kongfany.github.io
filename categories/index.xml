@@ -6,7 +6,25 @@
     <description>Recent content in Categories on 乐观积极的...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 07 Apr 2022 14:02:19 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Dec 2023 16:54:57 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JAVA</title>
+      <link>https://kongfany.github.io/categories/java/</link>
+      <pubDate>Fri, 01 Dec 2023 16:54:57 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/categories/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algorithm</title>
+      <link>https://kongfany.github.io/categories/algorithm/</link>
+      <pubDate>Tue, 28 Nov 2023 15:07:53 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/categories/algorithm/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Computer-Vision</title>
       <link>https://kongfany.github.io/categories/computer-vision/</link>
@@ -22,15 +40,6 @@
       <pubDate>Wed, 15 Dec 2021 12:12:46 +0800</pubDate>
       
       <guid>https://kongfany.github.io/categories/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Leetcode</title>
-      <link>https://kongfany.github.io/categories/leetcode/</link>
-      <pubDate>Thu, 28 Oct 2021 21:20:26 +0800</pubDate>
-      
-      <guid>https://kongfany.github.io/categories/leetcode/</guid>
       <description></description>
     </item>
     

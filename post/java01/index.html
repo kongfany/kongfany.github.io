@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java概述 - 乐观积极的...</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="尚硅谷 谷粒学苑 教程：1、 2 技术路线 1、java基础，mysql基础，jdbc 2、前端：html，css，js web服务端：tomcat、xm" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/java01/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java概述" />
+<meta property="og:description" content="尚硅谷 谷粒学苑 教程：1、 2 技术路线 1、java基础，mysql基础，jdbc 2、前端：html，css，js web服务端：tomcat、xm" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/java01/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-11-28T15:43:44+08:00" />
+<meta property="article:modified_time" content="2023-11-28T15:43:44+08:00" />
+
+<meta itemprop="name" content="Java概述">
+<meta itemprop="description" content="尚硅谷 谷粒学苑 教程：1、 2 技术路线 1、java基础，mysql基础，jdbc 2、前端：html，css，js web服务端：tomcat、xm"><meta itemprop="datePublished" content="2023-11-28T15:43:44+08:00" />
+<meta itemprop="dateModified" content="2023-11-28T15:43:44+08:00" />
+<meta itemprop="wordCount" content="3864">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java概述"/>
+<meta name="twitter:description" content="尚硅谷 谷粒学苑 教程：1、 2 技术路线 1、java基础，mysql基础，jdbc 2、前端：html，css，js web服务端：tomcat、xm"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">乐观积极的...</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">乐观积极的...</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java概述</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-11-28 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> JAVA </a>
+            </div>
+          <span class="more-meta"> 3864 words </span>
+          <span class="more-meta"> 8 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#技术路线">技术路线</a></li>
+        <li><a href="#java开发环境搭建">Java开发环境搭建</a></li>
+        <li><a href="#java核心机制jvm">Java核心机制：JVM</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>尚硅谷</p>
+<p>谷粒学苑</p>
+<p>教程：<a href="https://m.runoob.com/java/">1</a>、 <a href="https://special.chaoxing.com/mobile/mooc/tocourse/93086910">2</a></p>
+</blockquote>
+<h2 id="技术路线">技术路线</h2>
+<p>1、java基础，mysql基础，jdbc</p>
+<p>2、前端：html，css，js</p>
+<p>web服务端：tomcat、xml配置文件、http协议</p>
+<p>后台三大组件：servlet，filter过滤器，listener监听器</p>
+<p>会话控制：cookies，session</p>
+<p>ajax&amp;jason</p>
+<p>文件上传下载</p>
+<p>thymeleaf</p>
+<p>ES6语法，vue.js</p>
+<p>3、经典框架：项目管理工具maven，spring，springmvc，mybatis，ssm整合，linux</p>
+<p>4、分布式项目：美年旅游，尚筹网，遇尚</p>
+<p>5、高级和前沿技术：版本控制git，负载均衡nginx，消息队列raabbitmq，虚拟化容器docker，内存级别数据库redis，springboot2.4，springcloud，mybatisplus，分布式事务</p>
+<p>6、全栈项目：尚荣宝，尚课吧，尚医通</p>
+<p>7、 就业加薪课：mysql高级，mycat，jvm，juc高并发双十一 ，zookepper，dubbo</p>
+<p>8、微服务架构项目</p>
+<p>9、底层os，计网组原，数据结构，算法</p>
+<p>10、设计模式，架构模式</p>
+<hr>
+<p>建议自学java的同学，如果是真正初学的即没有接触过程序或计算机相关知识的，学习的时候不要太钻牛角尖，我看视频的时候经常会看到有弹幕在问什么我这里eclipse跟老师的不一样啊，为什么这里要这样写不能那样写啊，有些问题自己敲一遍代码看看效果就行，毕竟使用场景一时半会说也说不明白，所以宋老师有时会给出比喻，当然这些比喻都很恰当，听个乐就行。
+然后就是建议学习顺序就是javase、mysql、jdbc、javaweb、mybatis、springmvc、spring，这几样基本上就是学习java的骨架了，你非要觉得hibernate好，struts好，多学几门也没问题，反正我这是第三次从头看了，也不打算看这两样了，以上说的尚硅谷都有教程，其余的学习路线图官方评论下有介绍，不过我是先系统在韩顺平老师那学习linux，学习linux对以后部署项目有好处，学习些基础命令，会查看日志，会给mysql调优（这涉及mysql高级教程，尚硅谷也有）就行，然后就是git、maven这些小知识点，花个一两天就能搞定，然后就是spring其他的框架了，springboot、cloud这些，再抽空看看redis、nginx，dubbo，这样后端方面横向纵向都有所涉及了，想必自己心里也有个谱了，这也是大部分招聘的需求了，如果想提升下自己，再看个vue，自己从前往后写个小项目，再部署到真正的网上，想必自己也是很有成就感的。</p>
+<hr>
+<p><strong>Java SE(Java Standard Edition)标准版</strong></p>
+<ul>
+<li>支持面向<code>桌面级应用</code>（如Windows下的应用程序）的Java平台，即定位个人计算机的应用开发。</li>
+<li>包括用户界面接口AWT及Swing，网络功能与国际化、图像处理能力以及输入输出支持等。</li>
+</ul>
+<p><strong>Java EE(Java Enterprise Edition)企业版</strong></p>
+<ul>
+<li>为开发企业环境下的应用程序提供的一套解决方案，即定位<code>在服务器端的Web应用开发</code>。</li>
+<li>JavaEE是JavaSE的扩展，增加了用于服务器开发的类库。如：Servlet能够延伸服务器的功能，通过请求-响应的模式来处理客户端的请求；JSP是一种可以将Java程序代码内嵌在网页内的技术。</li>
+</ul>
+<p>java长期版本：8.0、11.0、17.0&ndash;8-17</p>
+<h2 id="java开发环境搭建">Java开发环境搭建</h2>
+<ul>
+<li>
+<p><strong>JDK</strong>  (<code>J</code>ava <code>D</code>evelopment <code>K</code>it)：是Java程序开发工具包，包含<code>JRE</code> 和开发人员使用的工具。</p>
+</li>
+<li>
+<p>**JRE ** (<code>J</code>ava <code>R</code>untime <code>E</code>nvironment) ：是Java程序的运行时环境，包含<code>JVM</code> 和运行时所需要的<code>核心类库</code>。</p>
+</li>
+<li>
+<p>JDK = JRE + 开发工具集（例如Javac编译工具等）</p>
+<p>JRE = JVM + Java SE标准类库</p>
+</li>
+</ul>
+<p>安装jdk17并自动配置了环境变量</p>
+<p>编译运行</p>
+<p>HelloWorld.java文件，使用<code>javac</code> 命令进行编译，将编写好的<code>Java源文件</code> 编译成JVM可以看懂的<code>字节码文件</code> ，也就是<code>类名.class</code>文件。是Java的可运行文件，称为<strong>字节码文件</strong>，有了字节码文件，就可以运行程序了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloChina</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;HelloWorld!!&#34;</span><span class="o">);</span>
+  	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">javac HelloWorld.java
+
+java HelloChina
+</code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">输出内容</span><span class="o">);</span> <span class="c1">// 输出内容，完毕后进行换行
+</span><span class="c1"></span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">输出内容</span><span class="o">);</span> <span class="c1">// 不换行
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/*
+</span><span class="cm">注：Java语言是一门严格区分大小写的语言，但windows不区分文件名大小写
+</span><span class="cm">
+</span><span class="cm">编译后会出现一个或多个字节码文件，每一个字节码文件对应一个java类，文件名与类名相同
+</span><span class="cm">
+</span><span class="cm">源文件和类名
+</span><span class="cm">如果这个类不是public，那么源文件名可以和类名不一致。但是不便于代码维护。
+</span><span class="cm">
+</span><span class="cm">如果这个类是public，那么要求源文件名必须与类名一致。否则编译报错。
+</span><span class="cm">
+</span><span class="cm">我们建议大家，不管是否是public，都与源文件名保持一致，而且一个源文件尽量只写一个类，目的是为了好维护。
+</span><span class="cm">一个源文件中可以有多个类，编译后会生成多个.class字节码文件。
+</span><span class="cm">
+</span><span class="cm">但是一个源文件只能有一个public的类。
+</span><span class="cm">*/</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注释</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//单行注释
+</span><span class="c1"></span>
+<span class="cm">/*
+</span><span class="cm">多行注释
+</span><span class="cm">多行
+</span><span class="cm">*/</span>
+
+<span class="c1">//文档注释java特有的
+</span><span class="c1"></span><span class="cm">/**
+</span><span class="cm">  @author  指定java程序的作者
+</span><span class="cm">  @version  指定源文件的版本
+</span><span class="cm">*/</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>对于单行和多行注释，被注释的文字，不参与编译。不会出现在字节码文件中，进而不会被JVM（java虚拟机）解释执行。</p>
+<p>文档注释内容可以被JDK提供的工具 javadoc 所解析，生成一套以网页文件形式体现的该程序的说明文档。</p>
+<p>前提类声明为public</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">javadoc -d mydoc -author -version HelloWorld.java
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>API （Application Programming Interface，应用程序编程接口）是 Java 提供的基本编程接口。</li>
+<li>Java语言提供了大量的基础类，因此 Oracle 也为这些基础类提供了相应的说明文档，用于告诉开发者如何使用这些类，以及这些类里包含的方法。大多数Java书籍中的类的介绍都要参照它来完成，它是编程者经常查阅的资料。</li>
+<li>Java API文档，即为JDK使用说明书、帮助文档。</li>
+<li>下载API文档：
+<ul>
+<li>在线看：https://docs.oracle.com/en/java/javase/17/docs/api/index.html</li>
+<li>离线下载：https://www.oracle.com/java/technologies/javase-jdk17-doc-downloads.html</li>
+</ul>
+</li>
+</ul>
+<h2 id="java核心机制jvm">Java核心机制：JVM</h2>
+<p><code>java优点</code></p>
+<ul>
+<li>
+<p>**跨平台性：**这是Java的核心优势。Java在最初设计时就很注重移植和跨平台性。</p>
+<p>原理：只要在需要运行 java 应用程序的操作系统上，先安装一个Java虚拟机 (<code>J</code>VM ，Java <code>V</code>irtual <code>M</code>achine) 即可。由JVM来负责Java程序在该系统中的运行。</p>
+</li>
+<li>
+<p>**面向对象性：**面向对象是一种程序设计技术，非常<code>适合大型软件的设计和开发</code>。面向对象编程支持封装、继承、多态等特性，让程序更好达到<code>高内聚</code>，<code>低耦合</code>的标准。</p>
+</li>
+<li>
+<p>**健壮性：**吸收了C/C++语言的优点，但去掉了其影响程序健壮性的部分（如指针、内存的申请与释放等），提供了一个相对安全的内存管理和访问机制。</p>
+</li>
+<li>
+<p>**安全性高：**Java适合于网络/分布式环境，需要提供一个安全机制以防恶意代码的攻击。如：<code>安全防范机制</code>（ClassLoader类加载器），可以分配不同的命名空间以防替代本地的同名类、字节代码检查。</p>
+</li>
+<li>
+<p>**简单性：**Java就是C++语法的<code>简化版</code>，我们也可以将Java称之为“<code>C++--</code>”。比如：头文件，指针运算，结构，联合，操作符重载，虚基类等。</p>
+</li>
+<li>
+<p><strong>高性能</strong></p>
+</li>
+</ul>
+<p><code>JVM</code></p>
+<p>（<code>J</code>ava <code>V</code>irtual <code>M</code>achine ，Java虚拟机）：是一个虚拟的计算机，是Java程序的运行环境。JVM具有指令集并使用不同的存储区域，负责执行指令，管理数据、内存、寄存器。</p>
+<p><strong>实现Java程序的跨平台性</strong>。我们编写的Java代码，都运行在<strong>JVM</strong> 之上。正是因为有了JVM，才使得Java程序具备了跨平台性。</p>
+<p><strong>自动内存管理(内存分配、内存回收)</strong></p>
+<ul>
+<li>Java程序在运行过程中，涉及到运算的<code>数据的分配</code>、<code>存储</code>等都由JVM来完成</li>
+<li>Java消除了程序员回收无用内存空间的职责。提供了一种系统级线程跟踪存储空间的分配情况，在内存空间达到相应阈值时，检查并释放可被释放的存储器空间。</li>
+<li>GC的自动回收，提高了内存空间的利用效率，也提高了编程人员的效率，很大程度上<code>减少了</code>因为没有释放空间而导致的<code>内存泄漏</code>。</li>
+</ul>
+<blockquote>
+<p>Java程序还会出现内存溢出和内存泄漏问题吗？  Yes!</p>
+<p>内存溢出：数据超出了内存容量范围</p>
+<p>内存泄漏：垃圾回收器会自动回收不再使用的对象，JVm是使用可达性分析算法来判断对象是否不再使用的对象，本质都是判断一个对象是否还被引用。那么对于这种情况下，由于代码的实现不同就会出现很多种内存泄漏问题（让JVM误以为此对象还在引用中，无法回收，造成内存泄漏）<a href="https://blog.csdn.net/kking_edc/article/details/108409678">例子</a></p>
+</blockquote>
+<p>\n(换行)，\t(制表符)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">第1阶段：Java基本语法
+&gt; Java概述、关键字、标识符、变量、运算符、流程控制（条件判断、选择结构、循环结构）、IDEA、数组
+
+第2阶段：Java面向对象编程
+&gt; 类及类的内部成员
+&gt; 面向对象的三大特征
+&gt; 其它关键字的使用
+
+第3阶段：Java语言的高级应用
+&gt; 异常处理、多线程、IO流、集合框架、反射、网络编程、新特性、其它常用的API等
+</code></pre></td></tr></table>
+</div>
+</div><p>神书：《Java核心技术》、《Effective Java》、《Java编程思想》</p>
+<p><code>企业真题</code></p>
+<p>一个”.java”源文件中是否可以包括多个类？有什么限制</p>
+<p>是！</p>
+<p>一个源文件中可以声明多个类，但是最多只能有一个类使用public进行声明。
+且要求声明为public的类的类名与源文件名相同。</p>
+<p>如何看待Java是一门半编译半解释型的语言</p>
+<p>java编译成字节码文件后运行方式包括两种，一种是逐行进行翻译，直接解释（解释型）另一种是针对热点代码提前翻译成相关的机器指令，后面再调用可以直接拿来（JIT即时编译）</p>
+<p><img src="/images/2023/1.jpg" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2023-11-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/java02/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java变量与运算符</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/fl_pfl2/">
+            <span class="next-text nav-default">个性化联邦</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

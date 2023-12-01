@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on 乐观积极的...</title>
+    <link>https://kongfany.github.io/categories/algorithm/</link>
+    <description>Recent content in algorithm on 乐观积极的...</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 28 Nov 2023 15:07:53 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Algo</title>
+      <link>https://kongfany.github.io/post/algo/</link>
+      <pubDate>Tue, 28 Nov 2023 15:07:53 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/algo/</guid>
+      <description>算法 美团技术岗笔试 https://codefun2000.com/ python 输入输出 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 import sys # 多组测试用例 for line in sys.stdin: print(line)# 键盘输入，包含回车 a = line.split()# str类型列表 print(a,type(a),type(a[0])) print(int(a[0])</description>
+    </item>
+    
+    <item>
+      <title>重新排序得到 2 的幂</title>
+      <link>https://kongfany.github.io/post/lcode869/</link>
+      <pubDate>Thu, 28 Oct 2021 21:20:26 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/lcode869/</guid>
+      <description>给定正整数 N ，我们按任何顺序（包括原始顺序）将数字重新排序，注意其前导数字不能为零。 如果我们可以通过上述方式得到 2 的幂，返回 true；否则，</description>
+    </item>
+    
+    <item>
+      <title>有效三角形的个数</title>
+      <link>https://kongfany.github.io/post/lcode611/</link>
+      <pubDate>Tue, 26 Oct 2021 20:57:15 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/lcode611/</guid>
+      <description>给定一个包含非负整数的数组，你的任务是统计其中可以组成三角形三条边的三元组个数。 1 2 3 4 5 6 7 输入: [2,2,3,4] 输出: 3 解释: 有效的组合是: 2,3,4 (使用第</description>
+    </item>
+    
+    <item>
+      <title>求众数2</title>
+      <link>https://kongfany.github.io/post/lcode229/</link>
+      <pubDate>Fri, 22 Oct 2021 22:23:27 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/lcode229/</guid>
+      <description>给定一个大小为 n 的整数数组，找出其中所有出现超过 ⌊ n/3 ⌋ 次的元素。 方法一：哈希统计 思路:我们用哈希统计数组中每个元素出现的次数，设数组的长度为</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java - 乐观积极的...</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="尚硅谷 谷粒学苑 技术路线 1、java基础，mysql基础，jdbc 2、前端：html，css，js web服务端：tomcat、xml配置文件、" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/java/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java" />
+<meta property="og:description" content="尚硅谷 谷粒学苑 技术路线 1、java基础，mysql基础，jdbc 2、前端：html，css，js web服务端：tomcat、xml配置文件、" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/java/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-11-28T15:43:44+08:00" />
+<meta property="article:modified_time" content="2023-11-28T15:43:44+08:00" />
+
+<meta itemprop="name" content="Java">
+<meta itemprop="description" content="尚硅谷 谷粒学苑 技术路线 1、java基础，mysql基础，jdbc 2、前端：html，css，js web服务端：tomcat、xml配置文件、"><meta itemprop="datePublished" content="2023-11-28T15:43:44+08:00" />
+<meta itemprop="dateModified" content="2023-11-28T15:43:44+08:00" />
+<meta itemprop="wordCount" content="1354">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java"/>
+<meta name="twitter:description" content="尚硅谷 谷粒学苑 技术路线 1、java基础，mysql基础，jdbc 2、前端：html，css，js web服务端：tomcat、xml配置文件、"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">乐观积极的...</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">乐观积极的...</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-11-28 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> JAVA </a>
+            </div>
+          <span class="more-meta"> 1354 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#技术路线">技术路线</a></li>
+        <li><a href="#java开发环境搭建">Java开发环境搭建</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>尚硅谷</p>
+<p>谷粒学苑</p>
+</blockquote>
+<h2 id="技术路线">技术路线</h2>
+<p>1、java基础，mysql基础，jdbc</p>
+<p>2、前端：html，css，js</p>
+<p>web服务端：tomcat、xml配置文件、http协议</p>
+<p>后台三大组件：servlet，filter过滤器，listener监听器</p>
+<p>会话控制：cookies，session</p>
+<p>ajax&amp;jason</p>
+<p>文件上传下载</p>
+<p>thymeleaf</p>
+<p>ES6语法，vue.js</p>
+<p>3、经典框架：项目管理工具maven，spring，springmvc，mybatis，ssm整合，linux</p>
+<p>4、分布式项目：美年旅游，尚筹网，遇尚</p>
+<p>5、高级和前沿技术：版本控制git，负载均衡nginx，消息队列raabbitmq，虚拟化容器docker，内存级别数据库redis，springboot2.4，springcloud，mybatisplus，分布式事务</p>
+<p>6、全栈项目：尚荣宝，尚课吧，尚医通</p>
+<p>7、 就业加薪课：mysql高级，mycat，jvm，juc高并发双十一 ，zookepper，dubbo</p>
+<p>8、微服务架构项目</p>
+<p>9、底层os，计网组原，数据结构，算法</p>
+<p>10、设计模式，架构模式</p>
+<hr>
+<p>建议自学java的同学，如果是真正初学的即没有接触过程序或计算机相关知识的，学习的时候不要太钻牛角尖，我看视频的时候经常会看到有弹幕在问什么我这里eclipse跟老师的不一样啊，为什么这里要这样写不能那样写啊，有些问题自己敲一遍代码看看效果就行，毕竟使用场景一时半会说也说不明白，所以宋老师有时会给出比喻，当然这些比喻都很恰当，听个乐就行。
+然后就是建议学习顺序就是javase、mysql、jdbc、javaweb、mybatis、springmvc、spring，这几样基本上就是学习java的骨架了，你非要觉得hibernate好，struts好，多学几门也没问题，反正我这是第三次从头看了，也不打算看这两样了，以上说的尚硅谷都有教程，其余的学习路线图官方评论下有介绍，不过我是先系统在韩顺平老师那学习linux，学习linux对以后部署项目有好处，学习些基础命令，会查看日志，会给mysql调优（这涉及mysql高级教程，尚硅谷也有）就行，然后就是git、maven这些小知识点，花个一两天就能搞定，然后就是spring其他的框架了，springboot、cloud这些，再抽空看看redis、nginx，dubbo，这样后端方面横向纵向都有所涉及了，想必自己心里也有个谱了，这也是大部分招聘的需求了，如果想提升下自己，再看个vue，自己从前往后写个小项目，再部署到真正的网上，想必自己也是很有成就感的。</p>
+<hr>
+<p><strong>Java EE(Java Enterprise Edition)企业版</strong></p>
+<ul>
+<li>为开发企业环境下的应用程序提供的一套解决方案，即定位<code>在服务器端的Web应用开发</code>。</li>
+<li>JavaEE是JavaSE的扩展，增加了用于服务器开发的类库。如：Servlet能够延伸服务器的功能，通过请求-响应的模式来处理客户端的请求；JSP是一种可以将Java程序代码内嵌在网页内的技术。</li>
+</ul>
+<p>java长期版本：8.0、11.0、17.0&ndash;8-17</p>
+<h2 id="java开发环境搭建">Java开发环境搭建</h2>
+<ul>
+<li>
+<p><strong>JDK</strong>  (<code>J</code>ava <code>D</code>evelopment <code>K</code>it)：是Java程序开发工具包，包含<code>JRE</code> 和开发人员使用的工具。</p>
+</li>
+<li>
+<p>**JRE ** (<code>J</code>ava <code>R</code>untime <code>E</code>nvironment) ：是Java程序的运行时环境，包含<code>JVM</code> 和运行时所需要的<code>核心类库</code>。</p>
+</li>
+<li>
+<p>JDK = JRE + 开发工具集（例如Javac编译工具等）</p>
+<p>JRE = JVM + Java SE标准类库</p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2023-11-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/fl_pfl2/">
+            <span class="next-text nav-default">个性化联邦</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
