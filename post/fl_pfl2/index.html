@@ -49,7 +49,7 @@
 <meta itemprop="name" content="个性化联邦">
 <meta itemprop="description" content="视频 code fedbn ditto fedala fedb 数据集处理 dataset等三个文件夹mark directory as sources root&ndash;import下列的文件时才可以识别到 system ​ flscore"><meta itemprop="datePublished" content="2023-11-28T15:25:56+08:00" />
 <meta itemprop="dateModified" content="2023-11-28T15:25:56+08:00" />
-<meta itemprop="wordCount" content="7743">
+<meta itemprop="wordCount" content="13516">
 <meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="个性化联邦"/>
 <meta name="twitter:description" content="视频 code fedbn ditto fedala fedb 数据集处理 dataset等三个文件夹mark directory as sources root&ndash;import下列的文件时才可以识别到 system ​ flscore"/>
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2023-11-28 </span>
         
-          <span class="more-meta"> 7743 words </span>
-          <span class="more-meta"> 16 mins read </span>
+          <span class="more-meta"> 13516 words </span>
+          <span class="more-meta"> 27 mins read </span>
         
       </div>
     </header>
@@ -148,7 +148,17 @@
     <li>
       <ul>
         <li><a href="#数据集处理">数据集处理</a></li>
-        <li><a href="#client处理">client处理</a></li>
+        <li><a href="#client处理">client处理</a>
+          <ul>
+            <li><a href="#clientavgpy">clientavg.py</a></li>
+          </ul>
+        </li>
+        <li><a href="#server处理">server处理</a>
+          <ul>
+            <li><a href="#mainpy">main.py</a></li>
+            <li><a href="#serveravgpy">serveravg.py</a></li>
+          </ul>
+        </li>
         <li><a href="#fadala">FadALA</a></li>
       </ul>
     </li>
@@ -766,7 +776,7 @@ nohup python -u generate_mnist.py noniid - dir &gt; mnist_dataset.out 2&gt;&amp;
 
 <span class="n">Finish</span> <span class="n">generating</span> <span class="n">dataset</span><span class="o">.</span>
 
-<span class="c1"># IID 不平衡</span>
+<span class="c1"># IID 不平衡python generate_mnist.py iid - -</span>
 <span class="c1"># 对于每个i，每个client分到的样本数会重新划分</span>
 <span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">num_samples</span>
 <span class="p">[</span><span class="mi">71</span><span class="p">,</span> <span class="mi">269</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">289</span><span class="p">,</span> <span class="mi">237</span><span class="p">,</span> <span class="mi">167</span><span class="p">,</span> <span class="mi">178</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">315</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">310</span><span class="p">,</span> <span class="mi">288</span><span class="p">,</span> <span class="mi">286</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">249</span><span class="p">,</span> <span class="mi">3011</span><span class="p">]</span>
@@ -786,7 +796,7 @@ nohup python -u generate_mnist.py noniid - dir &gt; mnist_dataset.out 2&gt;&amp;
 </div><h2 id="client处理">client处理</h2>
 <blockquote>
 <p>learning_rate_decay：收敛性分析的时候要求学习率必须衰减，不衰减的话就没办法收敛，理论上是这样，实际上不衰减也能收敛，能达到一个比较高的准确率，北大的 On the Convergence of FedAvg on Non-IID Data，<a href="https://zhuanlan.zhihu.com/p/640517716">blog</a></p>
-<p>localepochs：每次聚合的时候本地训练次数</p>
+<p>local epochs：每次聚合的时候本地训练次数</p>
 <p>每个本地 epoch 内执行多通常情况下，在每个本地 epoch 中，模型会根据本地训练数据进行一次参数更新，然后进行一次模型评估。然而，当采用多个更新步骤时，模型将在同一本地 epoch 内执行多次参数更新，而不是仅执行一次。这种方法可能会提高模型的收敛速度，特别是在使用大型模型和数据集进行训练时。然而，需要注意的是，多次更新步骤可能会增加过拟合的风险，因此需要仔细权衡。个参数更新步骤。</p>
 <p>join_ratio：客户端每轮参加的比例，用于衡量client dift的程度</p>
 <p>eval_gap：几轮评估test一次模型</p>
@@ -874,6 +884,1740 @@ nohup python -u generate_mnist.py noniid - dir &gt; mnist_dataset.out 2&gt;&amp;
 </div>
 </div><hr>
 <p>client端先通过DataLoader分好batch，用batch的每个样本做梯度下降</p>
+<h3 id="clientavgpy">clientavg.py</h3>
+<p>一个epoch把所有训练集跑一遍，一个batch是一个batchsize的数据</p>
+<p>client.train()</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># client0 训练</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">trainloader</span><span class="p">)</span>
+<span class="mi">141</span>
+<span class="c1"># 本地训练的epoch</span>
+<span class="n">max_local_epochs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_epochs</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">trainloader</span><span class="p">)</span><span class="c1">#按batch进行</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">loss</span>
+<span class="n">tensor</span><span class="p">(</span><span class="mf">2.3381</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda:0&#39;</span><span class="p">,</span> <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">NllLossBackward0</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_time_cost</span><span class="c1"># 每个client独立计算</span>
+<span class="p">{</span><span class="s1">&#39;num_rounds&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;total_cost&#39;</span><span class="p">:</span> <span class="mf">657.0169236660004</span><span class="p">}</span>
+<span class="c1"># 每个client单独记录，不会被清空</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_clients</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">train_time_cost</span>
+<span class="p">{</span><span class="s1">&#39;num_rounds&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;total_cost&#39;</span><span class="p">:</span> <span class="mf">657.0169236660004</span><span class="p">}</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_clients</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">train_time_cost</span>
+<span class="p">{</span><span class="s1">&#39;num_rounds&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;total_cost&#39;</span><span class="p">:</span> <span class="mf">26.226897716522217</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="server处理">server处理</h2>
+<h3 id="mainpy">main.py</h3>
+<p>初始化超参数，生成模型和选择算法，使用 FedAvg 类来执行 FedAvg 算法，设置client(数据集和实例化client)，server.train()服务器端训练，计算测试结果</p>
+<p>for i in range(args.prev, args.times):# (0,1)&ndash;实验运行的次数，打印信息用的，并不是模型聚合的次数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python">	<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">algorithm</span> <span class="o">==</span> <span class="s2">&#34;FedAvg&#34;</span><span class="p">:</span>
+        	<span class="c1"># 备份模型的全连接层 (fc) </span>
+            <span class="n">args</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fc</span><span class="p">)</span>
+            <span class="c1"># 将模型的全连接层 (fc) 替换为 nn.Identity()，</span>
+            <span class="c1"># 这样做的目的是为了在聚合时只考虑模型的特征提取部分，而不包括全连接层的参数</span>
+            
+            <span class="c1"># 用于创建一个恒等映射(identity mapping)的模块。</span>
+            <span class="c1">#在神经网络中，它通常被用作一个占位符，不对输入进行任何变换，直接将输入作为输出返回。</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span> 
+        
+            <span class="c1"># 将模型和备份的全连接层重新组合，这可能是为了在聚合后重新还原模型结构。</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">BaseHeadSplit</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+            
+            <span class="c1"># FedAvg 类来执行 FedAvg 算法</span>
+            <span class="c1"># 传入参数 args 和 i，进行模型参数的聚合和更新。</span>
+            <span class="n">server</span> <span class="o">=</span> <span class="n">FedAvg</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            
+<span class="c1"># split an original model into a base and a head</span>
+<span class="c1"># 可以灵活地将原始模型拆分为基础部分和头部部分，</span>
+<span class="c1"># 以便在需要的时候进行个性化定制或模型结构的重新组合。</span>
+<span class="k">class</span> <span class="nc">BaseHeadSplit</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BaseHeadSplit</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">base</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">head</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span>         
+<span class="c1"># 备份全连接层的作用是为了在聚合过程中保留原始模型的全连接层参数。通过备份全连接层，可以确保在模型参数聚合后，还能够恢复原始的全连接层结构和参数，以便保持模型的完整性和性能。</span>
+
+<span class="c1"># 在代码中，备份全连接层的操作使得在模型参数聚合过程中，只聚合模型的特征提取部分，而不包括全连接层的参数。这有助于保持模型结构的一致性，并且在分布式学习中更容易实现模型参数的共享和聚合。</span>
+
+<span class="c1"># 在联邦学习中，是否需要聚合全连接层取决于具体的联邦学习任务和模型架构。一般来说，如果在联邦学习中全连接层的参数在不同设备上是相同的，那么可能不需要聚合全连接层；如果全连接层的参数需要在不同设备上进行调整，那么可能需要聚合全连接层。</span>
+
+<span class="c1"># 全连接层（Fully Connected Layer）通常位于神经网络的末尾，负责将前面的特征表示映射到最终的输出。在分类任务中，全连接层通常将特征映射到不同类别的得分或概率；在其他任务中，全连接层也扮演着类似的作用，将中间特征映射到最终输出。</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">args</span><span class="o">.</span><span class="n">head</span>
+<span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">args</span><span class="o">.</span><span class="n">model</span>
+<span class="n">FedAvgCNN</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">conv1</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">conv2</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">fc1</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">fc</span><span class="p">):</span> <span class="n">Identity</span><span class="p">()</span>
+<span class="p">)</span>
+           
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">args</span><span class="o">.</span><span class="n">model</span>
+<span class="n">BaseHeadSplit</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">base</span><span class="p">):</span> <span class="n">FedAvgCNN</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">conv1</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+      <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span><span class="n">conv2</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+      <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span><span class="n">fc1</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span><span class="n">fc</span><span class="p">):</span> <span class="n">Identity</span><span class="p">()</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">head</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 使用 FedAvg 类来执行 FedAvg 算法</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">FedAvg</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="c1"># 设置client</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">set_clients</span><span class="p">(</span><span class="n">clientAVG</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clients</span>
+<span class="mi">2</span>
+
+<span class="c1"># 读取数据 mnist，0(client_id),train</span>
+<span class="k">def</span> <span class="nf">read_client_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">is_train</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">train_file</span>
+<span class="s1">&#39;../dataset</span><span class="se">\\</span><span class="s1">mnist</span><span class="se">\\</span><span class="s1">train/0.npz&#39;</span>
+<span class="c1"># train_data读取数据</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">1411</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">type</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="s1">&#39;&gt;</span>
+<span class="c1"># 转为tensor张量</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">1411</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">type</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">1411</span><span class="p">])</span>
+
+<span class="c1"># 打包为元组的列表</span>
+<span class="c1"># 1411个二元组组成的列表</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">type</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="mi">1411</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">type</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">tuple</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span>  <span class="n">p</span> <span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">tensor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># 训练集和测试集 client0 1882</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="mi">1411</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="mi">471</span>
+<span class="c1"># client1 2922</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="mi">2191</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="mi">731</span>
+
+<span class="c1"># 实例化client类</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">set_clients</span><span class="p">(</span><span class="n">clientAVG</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">clientObj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> 
+                            <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> 
+                            <span class="n">train_samples</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">),</span> 
+                            <span class="n">test_samples</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">),</span> 
+                            <span class="n">train_slow</span><span class="o">=</span><span class="n">train_slow</span><span class="p">,</span> 
+                            <span class="n">send_slow</span><span class="o">=</span><span class="n">send_slow</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">client</span>
+<span class="o">&lt;</span><span class="n">flcore</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">clientavg</span><span class="o">.</span><span class="n">clientAVG</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000022DCD9EAC08</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="serveravgpy">serveravg.py</h3>
+<p>server.train()：</p>
+<p>for i in range(self.global_rounds+1)#2000+1&ndash;模型聚合的次数2000次</p>
+<p>下发全局模型(server-&gt;client)，评估全局模型(acc,auc,loss)，每个client进行训练(client.train()),接收client模型，聚合模型，保存结果，保存全局模型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_clients</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">flcore</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">clientavg</span><span class="o">.</span><span class="n">clientAVG</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000022DC7683948</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">flcore</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">clientavg</span><span class="o">.</span><span class="n">clientAVG</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000022DCD9EAC08</span><span class="o">&gt;</span><span class="p">]</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">global_model</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+<span class="c1"># server-&gt;client下发模型</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">send_models</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">global_model</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">set_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">global_model</span><span class="p">)</span><span class="c1"># 全局模型set到cliet模型上</span>
+<span class="c1"># new_param 是 model 的参数。在 PyTorch 中，模型的参数通常是指模型中的权重和偏置等可学习的参数。这些参数以张量（tensor）的形式存在，用于表示神经网络中不同层之间的连接权重和偏置。new_param 是一个模型的参数张量，其格式可以是任意形状的张量，取决于具体模型的结构和层的数量。</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">new_param</span>
+<span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+<span class="n">tensor</span><span class="p">([[[[</span><span class="o">-</span><span class="mf">1.4974e-03</span><span class="p">,</span>  <span class="mf">1.0729e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6461e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4719e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.7031e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">5.3631e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.9626e-03</span><span class="p">,</span>  <span class="mf">1.5858e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7749e-02</span><span class="p">,</span>  <span class="mf">5.2923e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">6.0443e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.9313e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9107e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3246e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.2445e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">7.4087e-03</span><span class="p">,</span>  <span class="mf">7.9067e-02</span><span class="p">,</span>  <span class="mf">1.2000e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3559e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.7093e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">7.2643e-02</span><span class="p">,</span>  <span class="mf">1.6608e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.1160e-02</span><span class="p">,</span>  <span class="mf">1.4966e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.2237e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">2.1163e-02</span><span class="p">,</span>  <span class="mf">1.8110e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8553e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2591e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0633e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">7.7960e-02</span><span class="p">,</span>  <span class="mf">1.7280e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2964e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.2067e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3973e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.8731e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1675e-01</span><span class="p">,</span>  <span class="mf">1.7192e-01</span><span class="p">,</span>  <span class="mf">8.9244e-02</span><span class="p">,</span>  <span class="mf">9.6935e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.0518e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0254e-01</span><span class="p">,</span>  <span class="mf">3.3837e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8674e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4451e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.0311e-01</span><span class="p">,</span>  <span class="mf">1.2619e-01</span><span class="p">,</span>  <span class="mf">1.1726e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8699e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.2165e-03</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.2791e-01</span><span class="p">,</span>  <span class="mf">1.9883e-01</span><span class="p">,</span>  <span class="mf">7.9376e-02</span><span class="p">,</span>  <span class="mf">2.7019e-02</span><span class="p">,</span>  <span class="mf">1.3410e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.1776e-01</span><span class="p">,</span>  <span class="mf">3.7269e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5506e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3862e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0332e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">9.0495e-02</span><span class="p">,</span>  <span class="mf">8.0432e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1847e-01</span><span class="p">,</span>  <span class="mf">6.0421e-02</span><span class="p">,</span>  <span class="mf">1.0979e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">2.5243e-02</span><span class="p">,</span>  <span class="mf">7.6363e-03</span><span class="p">,</span>  <span class="mf">4.6341e-02</span><span class="p">,</span>  <span class="mf">1.2408e-01</span><span class="p">,</span>  <span class="mf">1.9204e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.5412e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.3294e-02</span><span class="p">,</span>  <span class="mf">7.8602e-02</span><span class="p">,</span>  <span class="mf">1.6571e-01</span><span class="p">,</span>  <span class="mf">1.7404e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.7647e-01</span><span class="p">,</span>  <span class="mf">3.9803e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7392e-01</span><span class="p">,</span>  <span class="mf">1.8398e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2512e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.8639e-01</span><span class="p">,</span>  <span class="mf">1.7770e-01</span><span class="p">,</span>  <span class="mf">1.5207e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9951e-01</span><span class="p">,</span>  <span class="mf">3.7434e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">3.3692e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.2912e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.1551e-02</span><span class="p">,</span>  <span class="mf">7.6911e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1846e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">7.3318e-02</span><span class="p">,</span>  <span class="mf">1.0114e-01</span><span class="p">,</span>  <span class="mf">1.4317e-01</span><span class="p">,</span>  <span class="mf">7.4782e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9795e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.2974e-01</span><span class="p">,</span>  <span class="mf">9.9863e-02</span><span class="p">,</span>  <span class="mf">4.1860e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5602e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1516e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.8815e-01</span><span class="p">,</span>  <span class="mf">1.3476e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.7205e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0337e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9052e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">3.5948e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5061e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5427e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1020e-02</span><span class="p">,</span>  <span class="mf">3.0029e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">8.1906e-02</span><span class="p">,</span>  <span class="mf">1.1868e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2171e-01</span><span class="p">,</span>  <span class="mf">1.8147e-01</span><span class="p">,</span>  <span class="mf">1.3706e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.6866e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.9777e-02</span><span class="p">,</span>  <span class="mf">9.0245e-03</span><span class="p">,</span>  <span class="mf">2.9180e-02</span><span class="p">,</span>  <span class="mf">4.7435e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">7.8486e-02</span><span class="p">,</span>  <span class="mf">1.1980e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.7586e-02</span><span class="p">,</span>  <span class="mf">9.4638e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9185e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.1854e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0066e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.7423e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.9967e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6392e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">4.2543e-02</span><span class="p">,</span>  <span class="mf">4.2751e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3029e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0264e-02</span><span class="p">,</span>  <span class="mf">1.4317e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">2.0560e-02</span><span class="p">,</span>  <span class="mf">5.5584e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7254e-02</span><span class="p">,</span>  <span class="mf">4.0476e-02</span><span class="p">,</span>  <span class="mf">1.2717e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.8945e-01</span><span class="p">,</span>  <span class="mf">1.2701e-01</span><span class="p">,</span>  <span class="mf">1.8988e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4464e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7966e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">9.4815e-02</span><span class="p">,</span>  <span class="mf">1.3618e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2965e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.9409e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5326e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.8717e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6880e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.0567e-02</span><span class="p">,</span>  <span class="mf">1.0968e-01</span><span class="p">,</span>  <span class="mf">1.0813e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.9289e-01</span><span class="p">,</span>  <span class="mf">1.2476e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5650e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.2282e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.1095e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">3.8523e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.9269e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7947e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7269e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.1296e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">2.5864e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.0855e-02</span><span class="p">,</span>  <span class="mf">7.5340e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8001e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3497e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.7588e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.1578e-02</span><span class="p">,</span>  <span class="mf">1.8060e-01</span><span class="p">,</span>  <span class="mf">7.2431e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8049e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.2654e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.3079e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.9281e-02</span><span class="p">,</span>  <span class="mf">1.5993e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6162e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">2.1461e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.1874e-02</span><span class="p">,</span>  <span class="mf">1.4282e-01</span><span class="p">,</span>  <span class="mf">5.5829e-02</span><span class="p">,</span>  <span class="mf">9.6101e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">7.0632e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.8095e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.2061e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6482e-01</span><span class="p">,</span>  <span class="mf">1.0837e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.5880e-01</span><span class="p">,</span>  <span class="mf">1.3684e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4108e-01</span><span class="p">,</span>  <span class="mf">8.9200e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4099e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.1010e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1654e-01</span><span class="p">,</span>  <span class="mf">6.8349e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1918e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.3634e-03</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">8.4136e-03</span><span class="p">,</span>  <span class="mf">1.2892e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5118e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3730e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1613e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.3999e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.1893e-02</span><span class="p">,</span>  <span class="mf">1.6870e-01</span><span class="p">,</span>  <span class="mf">7.2322e-02</span><span class="p">,</span>  <span class="mf">2.5325e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.4888e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.9536e-02</span><span class="p">,</span>  <span class="mf">2.5093e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5669e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4053e-03</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">2.5519e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5644e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0483e-01</span><span class="p">,</span>  <span class="mf">1.6150e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6231e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.4361e-02</span><span class="p">,</span>  <span class="mf">1.9785e-01</span><span class="p">,</span>  <span class="mf">7.2247e-02</span><span class="p">,</span>  <span class="mf">5.6626e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7332e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">9.9076e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4246e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.6773e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.7103e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.9617e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">2.1877e-03</span><span class="p">,</span>  <span class="mf">1.6496e-01</span><span class="p">,</span>  <span class="mf">2.4968e-02</span><span class="p">,</span>  <span class="mf">1.7914e-01</span><span class="p">,</span>  <span class="mf">1.2234e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.2644e-01</span><span class="p">,</span>  <span class="mf">8.9701e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4138e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.4765e-02</span><span class="p">,</span>  <span class="mf">5.8825e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">6.6038e-02</span><span class="p">,</span>  <span class="mf">1.5005e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.4383e-02</span><span class="p">,</span>  <span class="mf">3.2017e-04</span><span class="p">,</span>  <span class="mf">1.0296e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.9342e-01</span><span class="p">,</span>  <span class="mf">1.4460e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6538e-01</span><span class="p">,</span>  <span class="mf">2.7565e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.4003e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.0533e-01</span><span class="p">,</span>  <span class="mf">2.6434e-02</span><span class="p">,</span>  <span class="mf">1.6538e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.8464e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1874e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">7.3968e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9823e-01</span><span class="p">,</span>  <span class="mf">9.0279e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.6053e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3347e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.1522e-01</span><span class="p">,</span>  <span class="mf">1.1499e-01</span><span class="p">,</span>  <span class="mf">1.0591e-01</span><span class="p">,</span>  <span class="mf">1.5350e-01</span><span class="p">,</span>  <span class="mf">7.2545e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">6.6792e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.5890e-02</span><span class="p">,</span>  <span class="mf">5.9086e-02</span><span class="p">,</span>  <span class="mf">1.6441e-01</span><span class="p">,</span>  <span class="mf">5.4378e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">9.4629e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.4015e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8909e-01</span><span class="p">,</span>  <span class="mf">4.3210e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1224e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.7832e-01</span><span class="p">,</span>  <span class="mf">1.7538e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2988e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.2752e-02</span><span class="p">,</span>  <span class="mf">5.7299e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">6.3717e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3458e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6166e-01</span><span class="p">,</span>  <span class="mf">1.5942e-01</span><span class="p">,</span>  <span class="mf">3.2568e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.6592e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.7048e-02</span><span class="p">,</span>  <span class="mf">5.8911e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5735e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8942e-03</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.2181e-01</span><span class="p">,</span>  <span class="mf">6.7640e-02</span><span class="p">,</span>  <span class="mf">6.3233e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.1257e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.4980e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.2329e-01</span><span class="p">,</span>  <span class="mf">1.3831e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4888e-01</span><span class="p">,</span>  <span class="mf">8.1933e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.7251e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">9.6494e-02</span><span class="p">,</span>  <span class="mf">3.5929e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0389e-01</span><span class="p">,</span>  <span class="mf">4.6081e-02</span><span class="p">,</span>  <span class="mf">3.9276e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.4850e-01</span><span class="p">,</span>  <span class="mf">3.3300e-02</span><span class="p">,</span>  <span class="mf">8.5186e-02</span><span class="p">,</span>  <span class="mf">7.9166e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5176e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.6396e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0831e-02</span><span class="p">,</span>  <span class="mf">6.9462e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.2975e-02</span><span class="p">,</span>  <span class="mf">7.5916e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.3319e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0443e-01</span><span class="p">,</span>  <span class="mf">1.9724e-03</span><span class="p">,</span>  <span class="mf">8.2700e-02</span><span class="p">,</span>  <span class="mf">1.5676e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.6706e-02</span><span class="p">,</span>  <span class="mf">2.4973e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5723e-01</span><span class="p">,</span>  <span class="mf">1.5718e-02</span><span class="p">,</span>  <span class="mf">1.3849e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.8022e-01</span><span class="p">,</span>  <span class="mf">1.1755e-01</span><span class="p">,</span>  <span class="mf">2.6801e-02</span><span class="p">,</span>  <span class="mf">9.3403e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.7296e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.6574e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7198e-01</span><span class="p">,</span>  <span class="mf">1.9952e-01</span><span class="p">,</span>  <span class="mf">1.2696e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3825e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">7.8249e-02</span><span class="p">,</span>  <span class="mf">1.5103e-01</span><span class="p">,</span>  <span class="mf">1.9992e-01</span><span class="p">,</span>  <span class="mf">1.7488e-01</span><span class="p">,</span>  <span class="mf">1.5495e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">4.5852e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.0188e-02</span><span class="p">,</span>  <span class="mf">1.6421e-01</span><span class="p">,</span>  <span class="mf">1.1208e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2036e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.7980e-01</span><span class="p">,</span>  <span class="mf">9.6632e-02</span><span class="p">,</span>  <span class="mf">1.0903e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2536e-01</span><span class="p">,</span>  <span class="mf">5.7380e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">7.0112e-02</span><span class="p">,</span>  <span class="mf">1.5627e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.5988e-02</span><span class="p">,</span>  <span class="mf">7.7863e-02</span><span class="p">,</span>  <span class="mf">3.5524e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">8.5094e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.7966e-02</span><span class="p">,</span>  <span class="mf">9.7514e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3969e-01</span><span class="p">,</span>  <span class="mf">4.5171e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.3532e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9731e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6061e-01</span><span class="p">,</span>  <span class="mf">1.5789e-01</span><span class="p">,</span>  <span class="mf">1.0821e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.8764e-01</span><span class="p">,</span>  <span class="mf">1.6022e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7861e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3649e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.2317e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.2989e-01</span><span class="p">,</span>  <span class="mf">1.3888e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5120e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.7580e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9322e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.1355e-01</span><span class="p">,</span>  <span class="mf">1.6450e-01</span><span class="p">,</span>  <span class="mf">1.6375e-01</span><span class="p">,</span>  <span class="mf">1.4317e-01</span><span class="p">,</span>  <span class="mf">1.5443e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.7784e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.1213e-02</span><span class="p">,</span>  <span class="mf">8.8000e-02</span><span class="p">,</span>  <span class="mf">1.7819e-01</span><span class="p">,</span>  <span class="mf">6.6164e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.9994e-01</span><span class="p">,</span>  <span class="mf">1.0373e-01</span><span class="p">,</span>  <span class="mf">1.2433e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.9998e-02</span><span class="p">,</span>  <span class="mf">9.5966e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">2.2981e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.7763e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1274e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1222e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5390e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.3427e-01</span><span class="p">,</span>  <span class="mf">1.4219e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.2763e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1574e-01</span><span class="p">,</span>  <span class="mf">1.5458e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.2790e-01</span><span class="p">,</span>  <span class="mf">1.4867e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.4427e-02</span><span class="p">,</span>  <span class="mf">1.8381e-01</span><span class="p">,</span>  <span class="mf">8.1788e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.5183e-01</span><span class="p">,</span>  <span class="mf">1.9142e-01</span><span class="p">,</span>  <span class="mf">1.5187e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.2898e-02</span><span class="p">,</span>  <span class="mf">1.1243e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.1364e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.1343e-02</span><span class="p">,</span>  <span class="mf">1.6982e-01</span><span class="p">,</span>  <span class="mf">8.2638e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4144e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">6.6847e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.4289e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.8586e-02</span><span class="p">,</span>  <span class="mf">1.9140e-02</span><span class="p">,</span>  <span class="mf">1.8497e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.0708e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2349e-01</span><span class="p">,</span>  <span class="mf">1.0251e-02</span><span class="p">,</span>  <span class="mf">9.5897e-02</span><span class="p">,</span>  <span class="mf">9.9208e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.8279e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.5788e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4863e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.5337e-02</span><span class="p">,</span>  <span class="mf">7.2059e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.4203e-01</span><span class="p">,</span>  <span class="mf">7.4345e-02</span><span class="p">,</span>  <span class="mf">1.6976e-01</span><span class="p">,</span>  <span class="mf">1.3118e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3330e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">7.1657e-02</span><span class="p">,</span>  <span class="mf">4.3673e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5246e-01</span><span class="p">,</span>  <span class="mf">9.9362e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8157e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.9226e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9433e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.0573e-02</span><span class="p">,</span>  <span class="mf">1.3449e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8930e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.6624e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.0005e-02</span><span class="p">,</span>  <span class="mf">5.8577e-02</span><span class="p">,</span>  <span class="mf">9.1206e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8034e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.6587e-01</span><span class="p">,</span>  <span class="mf">1.0769e-01</span><span class="p">,</span>  <span class="mf">1.9880e-01</span><span class="p">,</span>  <span class="mf">1.0104e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3201e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.6692e-01</span><span class="p">,</span>  <span class="mf">1.0749e-02</span><span class="p">,</span>  <span class="mf">9.4843e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6037e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.7525e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.9638e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.7899e-02</span><span class="p">,</span>  <span class="mf">4.3146e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5703e-01</span><span class="p">,</span>  <span class="mf">6.3753e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.0736e-01</span><span class="p">,</span>  <span class="mf">2.7862e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3382e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5506e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.1703e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">8.7792e-02</span><span class="p">,</span>  <span class="mf">1.9728e-01</span><span class="p">,</span>  <span class="mf">1.1501e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.2522e-02</span><span class="p">,</span>  <span class="mf">7.0123e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.9621e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7082e-01</span><span class="p">,</span>  <span class="mf">9.3322e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1328e-01</span><span class="p">,</span>  <span class="mf">9.6219e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.4119e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.9062e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6474e-01</span><span class="p">,</span>  <span class="mf">1.0437e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0379e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.5392e-01</span><span class="p">,</span>  <span class="mf">1.2377e-01</span><span class="p">,</span>  <span class="mf">1.1067e-01</span><span class="p">,</span>  <span class="mf">6.4312e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.1836e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">4.3486e-02</span><span class="p">,</span>  <span class="mf">2.6580e-02</span><span class="p">,</span>  <span class="mf">9.9142e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4012e-01</span><span class="p">,</span>  <span class="mf">1.6786e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">2.1746e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6759e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0821e-01</span><span class="p">,</span>  <span class="mf">1.7696e-01</span><span class="p">,</span>  <span class="mf">1.8291e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.8526e-01</span><span class="p">,</span>  <span class="mf">1.4106e-01</span><span class="p">,</span>  <span class="mf">1.0023e-01</span><span class="p">,</span>  <span class="mf">1.1838e-01</span><span class="p">,</span>  <span class="mf">1.6931e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.0779e-01</span><span class="p">,</span>  <span class="mf">6.3155e-02</span><span class="p">,</span>  <span class="mf">8.1847e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.9099e-02</span><span class="p">,</span>  <span class="mf">6.6931e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">5.7543e-02</span><span class="p">,</span>  <span class="mf">1.2365e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.5491e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.4559e-02</span><span class="p">,</span>  <span class="mf">5.0350e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">7.0939e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.7714e-02</span><span class="p">,</span>  <span class="mf">1.7680e-02</span><span class="p">,</span>  <span class="mf">1.1591e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9899e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">6.0867e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.8237e-02</span><span class="p">,</span>  <span class="mf">7.0100e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4488e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1761e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.0152e-01</span><span class="p">,</span>  <span class="mf">1.8380e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.3817e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.4607e-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.6899e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.9966e-01</span><span class="p">,</span>  <span class="mf">1.9533e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5084e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6213e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5160e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">9.6455e-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0981e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3091e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.1734e-02</span><span class="p">,</span>  <span class="mf">3.7786e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.0450e-01</span><span class="p">,</span>  <span class="mf">4.4317e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5863e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.6913e-02</span><span class="p">,</span>  <span class="mf">2.7477e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.6445e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3522e-01</span><span class="p">,</span>  <span class="mf">9.2869e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.3754e-02</span><span class="p">,</span>  <span class="mf">1.9626e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.8975e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9173e-01</span><span class="p">,</span>  <span class="mf">1.9708e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2654e-01</span><span class="p">,</span>  <span class="mf">3.8345e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.7261e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.2131e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.4670e-02</span><span class="p">,</span>  <span class="mf">1.2709e-01</span><span class="p">,</span>  <span class="mf">9.5594e-03</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.9472e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1807e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.8180e-02</span><span class="p">,</span>  <span class="mf">1.0064e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2943e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.8858e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.4546e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.5912e-02</span><span class="p">,</span>  <span class="mf">1.5671e-01</span><span class="p">,</span>  <span class="mf">1.0052e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.6962e-01</span><span class="p">,</span>  <span class="mf">1.1569e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.0671e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3269e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4881e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.6553e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.7124e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8547e-01</span><span class="p">,</span>  <span class="mf">8.1986e-02</span><span class="p">,</span>  <span class="mf">1.9469e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">5.6937e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6560e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8141e-01</span><span class="p">,</span>  <span class="mf">5.0120e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5144e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.0100e-01</span><span class="p">,</span>  <span class="mf">4.0426e-02</span><span class="p">,</span>  <span class="mf">7.5952e-02</span><span class="p">,</span>  <span class="mf">1.5906e-01</span><span class="p">,</span>  <span class="mf">1.5528e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">2.9937e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7635e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8072e-01</span><span class="p">,</span>  <span class="mf">1.8674e-01</span><span class="p">,</span>  <span class="mf">8.8411e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">8.7181e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7304e-01</span><span class="p">,</span>  <span class="mf">1.8520e-01</span><span class="p">,</span>  <span class="mf">1.8947e-01</span><span class="p">,</span>  <span class="mf">1.8057e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.6872e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.5465e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3755e-01</span><span class="p">,</span>  <span class="mf">1.8939e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.5936e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">9.1311e-02</span><span class="p">,</span>  <span class="mf">1.0478e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.2518e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.8504e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7494e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.9224e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5580e-01</span><span class="p">,</span>  <span class="mf">1.6673e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8224e-02</span><span class="p">,</span>  <span class="mf">7.0943e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.7396e-01</span><span class="p">,</span>  <span class="mf">1.0086e-01</span><span class="p">,</span>  <span class="mf">2.8316e-02</span><span class="p">,</span>  <span class="mf">1.7017e-01</span><span class="p">,</span>  <span class="mf">2.6885e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">9.2531e-02</span><span class="p">,</span>  <span class="mf">1.8920e-01</span><span class="p">,</span>  <span class="mf">4.7336e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9514e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.6938e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.3623e-01</span><span class="p">,</span>  <span class="mf">1.7535e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.3029e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8230e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2573e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.2560e-01</span><span class="p">,</span>  <span class="mf">5.1960e-02</span><span class="p">,</span>  <span class="mf">6.3241e-02</span><span class="p">,</span>  <span class="mf">1.8575e-02</span><span class="p">,</span>  <span class="mf">7.4564e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">4.8730e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.9560e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8694e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5067e-01</span><span class="p">,</span>  <span class="mf">8.6681e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.1842e-01</span><span class="p">,</span>  <span class="mf">2.8693e-02</span><span class="p">,</span>  <span class="mf">6.3838e-02</span><span class="p">,</span>  <span class="mf">1.4161e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2967e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.9127e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1630e-01</span><span class="p">,</span>  <span class="mf">1.6450e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5910e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.8110e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.0879e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.1716e-02</span><span class="p">,</span>  <span class="mf">1.6801e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3763e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6795e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">9.0184e-02</span><span class="p">,</span>  <span class="mf">3.2330e-02</span><span class="p">,</span>  <span class="mf">1.8415e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.5480e-02</span><span class="p">,</span>  <span class="mf">7.1526e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">5.0141e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.3372e-02</span><span class="p">,</span>  <span class="mf">1.4706e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5500e-01</span><span class="p">,</span>  <span class="mf">2.1243e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.8808e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.7482e-02</span><span class="p">,</span>  <span class="mf">1.5529e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.1591e-02</span><span class="p">,</span>  <span class="mf">1.6099e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.9347e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.8825e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.5129e-02</span><span class="p">,</span>  <span class="mf">6.4817e-02</span><span class="p">,</span>  <span class="mf">7.8465e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">1.5356e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.9797e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.9310e-03</span><span class="p">,</span>  <span class="mf">1.3696e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.4115e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.7533e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3316e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.1642e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0742e-02</span><span class="p">,</span>  <span class="mf">8.9242e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.3674e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.1701e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6570e-01</span><span class="p">,</span>  <span class="mf">9.9098e-02</span><span class="p">,</span>  <span class="mf">5.9826e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">8.0340e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2337e-01</span><span class="p">,</span>  <span class="mf">1.2872e-01</span><span class="p">,</span>  <span class="mf">1.8943e-01</span><span class="p">,</span>  <span class="mf">1.7354e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.8681e-01</span><span class="p">,</span>  <span class="mf">1.4040e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4829e-01</span><span class="p">,</span>  <span class="mf">4.5974e-02</span><span class="p">,</span>  <span class="mf">2.9064e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">9.3607e-02</span><span class="p">,</span>  <span class="mf">6.9639e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7889e-01</span><span class="p">,</span>  <span class="mf">4.5552e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2679e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">2.1627e-02</span><span class="p">,</span>  <span class="mf">2.5726e-02</span><span class="p">,</span>  <span class="mf">1.7039e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.5424e-02</span><span class="p">,</span>  <span class="mf">1.2813e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">2.5407e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.4986e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7416e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8350e-01</span><span class="p">,</span>  <span class="mf">1.9532e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">4.9880e-02</span><span class="p">,</span>  <span class="mf">9.9898e-03</span><span class="p">,</span>  <span class="mf">5.4222e-02</span><span class="p">,</span>  <span class="mf">1.3595e-01</span><span class="p">,</span>  <span class="mf">1.7069e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.6220e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4818e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.2043e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1835e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1427e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span> <span class="mf">4.7441e-02</span><span class="p">,</span>  <span class="mf">1.8773e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6022e-01</span><span class="p">,</span>  <span class="mf">1.2104e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0369e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">3.8955e-02</span><span class="p">,</span>  <span class="mf">1.5875e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5234e-02</span><span class="p">,</span>  <span class="mf">1.8211e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3981e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.7025e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5854e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4628e-01</span><span class="p">,</span>  <span class="mf">5.8562e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4220e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.5870e-01</span><span class="p">,</span>  <span class="mf">1.2184e-02</span><span class="p">,</span>  <span class="mf">1.5857e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.6597e-02</span><span class="p">,</span>  <span class="mf">9.4133e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">1.7186e-01</span><span class="p">,</span>  <span class="mf">1.3265e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0491e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.1924e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.2937e-02</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.6082e-01</span><span class="p">,</span>  <span class="mf">8.2642e-05</span><span class="p">,</span>  <span class="mf">1.5049e-01</span><span class="p">,</span>  <span class="mf">1.6850e-01</span><span class="p">,</span>  <span class="mf">1.8660e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">4.5425e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.6584e-02</span><span class="p">,</span>  <span class="mf">1.5097e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.3222e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3893e-01</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">3.0799e-02</span><span class="p">,</span>  <span class="mf">1.1988e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8032e-01</span><span class="p">,</span>  <span class="mf">1.8079e-01</span><span class="p">,</span>  <span class="mf">7.1946e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.4012e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.3081e-02</span><span class="p">,</span>  <span class="mf">1.7352e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5345e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.8455e-02</span><span class="p">],</span>
+          <span class="p">[</span> <span class="mf">6.5596e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7522e-01</span><span class="p">,</span>  <span class="mf">1.0964e-01</span><span class="p">,</span>  <span class="mf">1.0411e-01</span><span class="p">,</span>  <span class="mf">1.2404e-01</span><span class="p">]]],</span>
+
+
+        <span class="p">[[[</span><span class="o">-</span><span class="mf">1.2751e-01</span><span class="p">,</span>  <span class="mf">1.9920e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1855e-01</span><span class="p">,</span>  <span class="mf">1.9967e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9194e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.7819e-01</span><span class="p">,</span>  <span class="mf">1.2284e-01</span><span class="p">,</span>  <span class="mf">2.0903e-02</span><span class="p">,</span>  <span class="mf">1.1538e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1075e-01</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">8.3895e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.8477e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9483e-01</span><span class="p">,</span>  <span class="mf">1.0394e-02</span><span class="p">,</span>  <span class="mf">3.5372e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">1.6932e-04</span><span class="p">,</span>  <span class="mf">6.4586e-02</span><span class="p">,</span>  <span class="mf">1.8977e-01</span><span class="p">,</span>  <span class="mf">5.3177e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.3214e-02</span><span class="p">],</span>
+          <span class="p">[</span><span class="o">-</span><span class="mf">8.2309e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2796e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3864e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.2210e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.5373e-02</span><span class="p">]]]],</span>
+       <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda:0&#39;</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 模型发送时间 每个客户端单独计算发送时间</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">client</span><span class="o">.</span><span class="n">send_time_cost</span>
+<span class="p">{</span><span class="s1">&#39;num_rounds&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;total_cost&#39;</span><span class="p">:</span> <span class="mf">1461.3775424957275</span><span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 每一轮评估一次模型</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_gap</span>
+<span class="mi">1</span>
+<span class="c1"># rounds = 0: 初始状态评估，全局模型下发到client之后</span>
+<span class="o">-------------</span><span class="n">Round</span> <span class="n">number</span><span class="p">:</span> <span class="mi">0</span><span class="o">-------------</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
+<span class="c1"># 测试指标 中心方没有test数据集 中心方得到准确率的方式是从客户端这里拿，然后加权</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">test_metrics</span><span class="p">()</span>
+
+<span class="c1"># client的测试方法client0,acc和auc</span>
+<span class="n">c</span><span class="o">.</span><span class="n">test_metrics</span><span class="p">()</span>
+<span class="c1"># 一个batch一个batch的操作 DataLoader 第一个batchsize</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">testloaderfull</span><span class="err">：</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_acc</span>
+<span class="mi">0</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_num</span>
+<span class="mi">10</span>
+<span class="c1"># 真实值y对应的独热编码</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">lb</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="c1"># 遍历完所有client0 测试集</span>
+<span class="c1"># 48个batchsize后，重新按第一个维度进行拼接</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+<span class="mi">48</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y_true</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="c1"># 每个batchsize,(batchsize,numclasses)</span>
+<span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y_true</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="c1"># 每个数据</span>
+<span class="c1"># 按第一个维度拼接之后，所有数据拼接，去掉了batchsize</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+<span class="mi">471</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y_true</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="c1">#同上</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">auc</span>
+<span class="mf">0.38275912327597994</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_acc</span>
+<span class="mi">16</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_num</span>
+<span class="mi">471</span>
+
+<span class="c1"># 对于server而言</span>
+<span class="c1"># client 0 </span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">tot_correct</span> <span class="c1"># 正确的样本数</span>
+<span class="p">[</span><span class="mf">16.0</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">tot_auc</span> <span class="c1"># auc 乘 总样本数</span>
+<span class="p">[</span><span class="mf">180.27954706298655</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">num_samples</span>
+<span class="p">[</span><span class="mi">471</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">tot_correct</span>
+<span class="p">[</span><span class="mf">16.0</span><span class="p">,</span> <span class="mf">55.0</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">tot_auc</span>
+<span class="p">[</span><span class="mf">180.27954706298655</span><span class="p">,</span> <span class="mf">331.7627298981608</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">num_samples</span>
+<span class="p">[</span><span class="mi">471</span><span class="p">,</span> <span class="mi">731</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">ids</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># client测试方法，loss，client 0 </span>
+<span class="n">c</span><span class="o">.</span><span class="n">train_metrics</span><span class="p">()</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">trainloader</span><span class="p">)</span><span class="c1"># 141个batchsize</span>
+<span class="mi">141</span>
+<span class="c1"># 第一个batchsize</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y</span>
+<span class="n">tensor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda:0&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">loss</span>
+<span class="n">tensor</span><span class="p">(</span><span class="mf">2.3223</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda:0&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">train_num</span>
+<span class="mi">10</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">losses</span> <span class="c1"># loss*样本数</span>
+<span class="mf">23.22331666946411</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">losses</span>
+<span class="mf">3269.2880749702454</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">train_num</span> <span class="c1"># 少一个数据？</span>
+<span class="mi">1410</span>
+           
+<span class="c1"># 对于server而言</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">num_samples</span>
+<span class="p">[</span><span class="mi">1410</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">losses</span>
+<span class="p">[</span><span class="mf">3269.2880749702454</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">num_samples</span>
+<span class="p">[</span><span class="mi">1410</span><span class="p">,</span> <span class="mi">2190</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">losses</span>
+<span class="p">[</span><span class="mf">3269.2880749702454</span><span class="p">,</span> <span class="mf">5063.167586326599</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">ids</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># 计算acc，auc，loss</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">stats</span>
+<span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">471</span><span class="p">,</span> <span class="mi">731</span><span class="p">],</span> <span class="p">[</span><span class="mf">16.0</span><span class="p">,</span> <span class="mf">55.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">180.27954706298655</span><span class="p">,</span> <span class="mf">331.7627298981608</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">stats_train</span>
+<span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1410</span><span class="p">,</span> <span class="mi">2190</span><span class="p">],</span> <span class="p">[</span><span class="mf">3269.2880749702454</span><span class="p">,</span> <span class="mf">5063.167586326599</span><span class="p">])</span>
+<span class="c1"># acc：每个client样本正确数分别除所有client样本数 想加</span>
+<span class="c1"># 相当于，每个客户端的正确率*每个客户端数据的比重 相加          </span>
+<span class="n">test_acc</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="mf">1.0</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># &lt;=&gt;stats[2][0]/stats[1][0])*(stats[1][0]/sum[stats[1]]+...</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_acc</span>
+<span class="mf">0.05906821963394343</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_auc</span>
+<span class="mf">0.4259919109493738</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">train_loss</span>
+<span class="mf">2.314571017026901</span>
+<span class="c1"># 每个客户端的acc和auc</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">accs</span>
+<span class="p">[</span><span class="mf">0.03397027600849257</span><span class="p">,</span> <span class="mf">0.07523939808481532</span><span class="p">]</span> 
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">aucs</span>
+<span class="p">[</span><span class="mf">0.38275912327597994</span><span class="p">,</span> <span class="mf">0.4538477837184142</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">accs</span><span class="p">)</span><span class="c1"># 标准差</span>
+<span class="mf">0.020634561038161376</span>   
+           
+<span class="n">Averaged</span> <span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">2.3146</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.0591</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.4260</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.0206</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.0355</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># client -&gt;server</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">receive_models</span><span class="p">()</span>
+<span class="c1"># 选择client的时候是随机选择的，所有会导致选择的客户端的id的顺序会变化</span>
+<span class="c1"># `random.choice` 函数在随机抽取多个元素时会打乱它们的顺序</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">clients</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">flcore</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">clientavg</span><span class="o">.</span><span class="n">clientAVG</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001BC6BCD4F88</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">flcore</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">clientavg</span><span class="o">.</span><span class="n">clientAVG</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001BC3A056D88</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_clients</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">flcore</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">clientavg</span><span class="o">.</span><span class="n">clientAVG</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001BC3A056D88</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">flcore</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">clientavg</span><span class="o">.</span><span class="n">clientAVG</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001BC6BCD4F88</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">client</span> <span class="ow">in</span> <span class="n">active_clients</span><span class="p">:</span>
+<span class="c1"># client 1</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">client_time_cost</span><span class="c1"># 训练时间＋发送时间</span>
+<span class="mf">1.2847285270690918</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_threthold</span> <span class="c1"># 超时就不参与聚合(s)(2.78h)</span>
+<span class="mi">10000</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">tot_samples</span> <span class="c1"># 样本数</span>
+<span class="mi">2191</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">uploaded_ids</span> <span class="c1"># client id</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">uploaded_weights</span> <span class="c1"># 权重，数据量</span>
+<span class="p">[</span><span class="mi">2191</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">uploaded_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">model</span><span class="p">)</span><span class="c1"># client模型</span>
+<span class="c1"># 所有client</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">tot_samples</span>
+<span class="mi">3602</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">uploaded_ids</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">uploaded_weights</span>
+<span class="p">[</span><span class="mi">2191</span><span class="p">,</span> <span class="mi">1411</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">uploaded_weights</span><span class="c1"># 权重归一化</span>
+<span class="p">[</span><span class="mf">0.6082731815657968</span><span class="p">,</span> <span class="mf">0.3917268184342032</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 聚合模型</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">aggregate_parameters</span><span class="p">()</span>
+<span class="c1"># 初始化全局模型，复制client 0的模型结构且参数置为0 </span>
+<span class="bp">self</span><span class="o">.</span><span class="n">global_model</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uploaded_models</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">uploaded_weights</span>
+<span class="p">[</span><span class="mf">0.6082731815657968</span><span class="p">,</span> <span class="mf">0.3917268184342032</span><span class="p">]</span>
+<span class="c1"># 加权累加</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">add_parameters</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">client_model</span><span class="p">)</span>
+<span class="n">server_param</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="n">client_param</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span> <span class="o">*</span> <span class="n">w</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># python main.py -gr 20</span>
+<span class="o">-------------</span><span class="n">Round</span> <span class="n">number</span><span class="p">:</span> <span class="mi">20</span><span class="o">-------------</span>
+
+<span class="n">Evaluate</span> <span class="k">global</span> <span class="n">model</span>
+<span class="n">Averaged</span> <span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.0773</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.9584</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.9933</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.0025</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.0011</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs_test_acc</span>
+<span class="p">[</span><span class="mf">0.05906821963394343</span><span class="p">,</span> <span class="mf">0.3011647254575707</span><span class="p">,</span> <span class="mf">0.6755407653910149</span><span class="p">,</span> <span class="mf">0.8236272878535774</span><span class="p">,</span> <span class="mf">0.8569051580698835</span><span class="p">,</span> <span class="mf">0.889351081530782</span><span class="p">,</span> <span class="mf">0.9026622296173045</span><span class="p">,</span> <span class="mf">0.913477537437604</span><span class="p">,</span> <span class="mf">0.9234608985024958</span><span class="p">,</span> <span class="mf">0.93</span>
+<span class="mi">51081530782029</span><span class="p">,</span> <span class="mf">0.9334442595673876</span><span class="p">,</span> <span class="mf">0.937603993344426</span><span class="p">,</span> <span class="mf">0.9484193011647255</span><span class="p">,</span> <span class="mf">0.9450915141430949</span><span class="p">,</span> <span class="mf">0.9492512479201332</span><span class="p">,</span> <span class="mf">0.9559068219633944</span><span class="p">,</span> <span class="mf">0.9534109816971714</span><span class="p">,</span> <span class="mf">0.9492512479201332</span><span class="p">,</span> <span class="mf">0.9550748</span>
+<span class="mi">752079867</span><span class="p">,</span> <span class="mf">0.9534109816971714</span><span class="p">,</span> <span class="mf">0.9584026622296173</span><span class="p">]</span>
+
+<span class="n">Best</span> <span class="n">accuracy</span><span class="o">.</span>
+<span class="mf">0.9584026622296173</span>
+<span class="n">Average</span> <span class="n">time</span> <span class="n">cost</span> <span class="n">per</span> <span class="nb">round</span><span class="o">.</span><span class="c1"># 时间开销</span>
+<span class="mf">1.283463180065155</span>
+
+<span class="c1"># 保存结果 </span>
+<span class="bp">self</span><span class="o">.</span><span class="n">save_results</span><span class="p">()</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">algo</span>
+<span class="s1">&#39;mnist_FedAvg&#39;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">result_path</span>
+<span class="s1">&#39;../results/&#39;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">algo</span>
+<span class="s1">&#39;mnist_FedAvg_test_0&#39;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">file_path</span>
+<span class="s1">&#39;../results/mnist_FedAvg_test_0.h5&#39;</span>
+<span class="c1"># 向文件中写入三个数据集，分别是 ‘rs_test_acc’、‘rs_test_auc’ 和 ‘rs_train_loss’</span>
+<span class="c1"># evaluate中并没有保存rs_test_auc</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs_test_acc</span>
+<span class="p">[</span><span class="mf">0.05906821963394343</span><span class="p">,</span> <span class="mf">0.3011647254575707</span><span class="p">,</span> <span class="mf">0.6755407653910149</span><span class="p">,</span> <span class="mf">0.8236272878535774</span><span class="p">,</span> <span class="mf">0.8569051580698835</span><span class="p">,</span> <span class="mf">0.889351081530782</span><span class="p">,</span> <span class="mf">0.9026622296173045</span><span class="p">,</span> <span class="mf">0.913477537437604</span><span class="p">,</span> <span class="mf">0.9234608985024958</span><span class="p">,</span> <span class="mf">0.93</span>
+<span class="mi">51081530782029</span><span class="p">,</span> <span class="mf">0.9334442595673876</span><span class="p">,</span> <span class="mf">0.937603993344426</span><span class="p">,</span> <span class="mf">0.9484193011647255</span><span class="p">,</span> <span class="mf">0.9450915141430949</span><span class="p">,</span> <span class="mf">0.9492512479201332</span><span class="p">,</span> <span class="mf">0.9559068219633944</span><span class="p">,</span> <span class="mf">0.9534109816971714</span><span class="p">,</span> <span class="mf">0.9492512479201332</span><span class="p">,</span> <span class="mf">0.9550748</span>
+<span class="mi">752079867</span><span class="p">,</span> <span class="mf">0.9534109816971714</span><span class="p">,</span> <span class="mf">0.9584026622296173</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs_test_auc</span>
+<span class="p">[]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs_train_loss</span>
+<span class="p">[</span><span class="mf">2.314571017026901</span><span class="p">,</span> <span class="mf">2.086947536468506</span><span class="p">,</span> <span class="mf">1.3195898769630325</span><span class="p">,</span> <span class="mf">0.6253579562943843</span><span class="p">,</span> <span class="mf">0.43360667809223136</span><span class="p">,</span> <span class="mf">0.32859760250689257</span><span class="p">,</span> <span class="mf">0.28546613085911504</span><span class="p">,</span> <span class="mf">0.2471489678292225</span><span class="p">,</span> <span class="mf">0.21599847520701587</span><span class="p">,</span> <span class="mi">0</span>
+<span class="mf">.1882220826137604</span><span class="p">,</span> <span class="mf">0.1742167657499926</span><span class="p">,</span> <span class="mf">0.1539727338169339</span><span class="p">,</span> <span class="mf">0.14151522711229822</span><span class="p">,</span> <span class="mf">0.13180814096962826</span><span class="p">,</span> <span class="mf">0.126626226349294</span><span class="p">,</span> <span class="mf">0.10841290605668392</span><span class="p">,</span> <span class="mf">0.10612137640515963</span><span class="p">,</span> <span class="mf">0.10253492878497733</span><span class="p">,</span> <span class="mi">0</span>
+<span class="mf">.08905219737142842</span><span class="p">,</span> <span class="mf">0.0842796761914441</span><span class="p">,</span> <span class="mf">0.07731760282153523</span><span class="p">]</span>
+
+<span class="c1"># 重新修改 self.evaluate() 后</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs_test_auc</span>
+<span class="p">[</span><span class="mf">0.4259919109493738</span><span class="p">,</span> <span class="mf">0.7447302648864543</span><span class="p">,</span> <span class="mf">0.9229162438448569</span><span class="p">,</span> <span class="mf">0.9672684372148672</span><span class="p">,</span> <span class="mf">0.9744737834460371</span><span class="p">,</span> <span class="mf">0.9766528826588904</span><span class="p">,</span> <span class="mf">0.9814767508333857</span><span class="p">,</span> <span class="mf">0.9850432755687425</span><span class="p">,</span> <span class="mf">0.985603523913785</span><span class="p">,</span> <span class="mf">0.98</span>
+<span class="mi">7561845229809</span><span class="p">,</span> <span class="mf">0.9881369731008514</span><span class="p">,</span> <span class="mf">0.989969924724848</span><span class="p">,</span> <span class="mf">0.989925098209637</span><span class="p">,</span> <span class="mf">0.9911689493678782</span><span class="p">,</span> <span class="mf">0.9914534505980559</span><span class="p">,</span> <span class="mf">0.9919368626935388</span><span class="p">,</span> <span class="mf">0.9926894980663109</span><span class="p">,</span> <span class="mf">0.9917173501511063</span><span class="p">,</span> <span class="mf">0.992863217</span>
+<span class="mi">0223384</span><span class="p">,</span> <span class="mf">0.9926117283057737</span><span class="p">,</span> <span class="mf">0.9932817668849713</span><span class="p">]</span>
+
+<span class="c1"># 读取h5文件并按原格式打印</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;D:/Python/PycharmProjects/PFL-Non-IID-master/PFL-Non-IID-master/results/mnist_FedAvg_test_0.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="c1"># 遍历文件中的所有数据集并打印</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&#34;:&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="n">key</span><span class="p">][:])</span>
+        
+<span class="c1"># 保存全局模型</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">save_global_model</span><span class="p">()</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">model_path</span>
+<span class="s1">&#39;models</span><span class="se">\\</span><span class="s1">mnist&#39;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">model_path</span>
+<span class="s1">&#39;models</span><span class="se">\\</span><span class="s1">mnist</span><span class="se">\\</span><span class="s1">FedAvg_server.pt&#39;</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">global_model</span><span class="p">,</span> <span class="n">model_path</span><span class="p">)</span>
+
+<span class="c1"># 全局平均，多次实验中(args.times)</span>
+<span class="c1"># 从文件中读取多次实验的acc，得到每次实验的最大acc，计算标准差和均值</span>
+<span class="n">average_data</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">algorithm</span>
+<span class="s1">&#39;FedAvg&#39;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">dataset</span>
+<span class="s1">&#39;mnist&#39;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">goal</span>
+<span class="s1">&#39;test&#39;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">times</span>
+<span class="mi">1</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">max_accurancy</span>
+<span class="p">[</span><span class="mf">0.9584026622296173</span><span class="p">]</span>
+<span class="c1"># 多次实验结果的标准差和均值</span>
+<span class="n">std</span> <span class="k">for</span> <span class="n">best</span> <span class="n">accurancy</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="n">mean</span> <span class="k">for</span> <span class="n">best</span> <span class="n">accurancy</span><span class="p">:</span> <span class="mf">0.9584026622296173</span>
+
+<span class="c1"># 输出内存使用情况</span>
+<span class="n">reporter</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
+
+<span class="n">Storage</span> <span class="n">on</span> <span class="n">cuda</span><span class="p">:</span><span class="mi">0</span>
+<span class="o">-------------------------------------------------------------------------------</span>
+<span class="n">Total</span> <span class="n">Tensors</span><span class="p">:</span> <span class="mi">4656208</span>  <span class="n">Used</span> <span class="n">Memory</span><span class="p">:</span> <span class="mf">13.33</span><span class="n">M</span>
+<span class="n">The</span> <span class="n">allocated</span> <span class="n">memory</span> <span class="n">on</span> <span class="n">cuda</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="mf">13.33</span><span class="n">M</span>
+<span class="o">-------------------------------------------------------------------------------</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 参考文件 example.sh</span>
+<span class="c1"># `2&gt;&amp;1` 表示将标准错误（stderr）重定向到标准输出（stdout），这意味着错误信息将与标准输出一起处理。</span>
+<span class="c1"># `&amp;` 表示在后台运行命令，这样可以使命令在后台持续运行而不会阻塞当前终端。</span>
+<span class="c1"># 保存输出到mnist_fedavg.out文件中</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">u</span> <span class="n">main</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">gr</span> <span class="mi">20</span> <span class="o">&gt;</span> <span class="n">mnist_fedavg</span><span class="o">.</span><span class="n">out</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span> <span class="o">&amp;</span>
+
+<span class="c1"># 读取mnist_fedavg.out文件</span>
+<span class="c1"># 查找并提取出包含最佳准确率的行，然后计算这些最佳准确率的平均值和标准差</span>
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">mean</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">file_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;.out&#39;</span>
+
+<span class="n">acc</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">is_best</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">is_best</span><span class="p">:</span>
+            <span class="n">acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+            <span class="n">is_best</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="s1">&#39;Best accuracy&#39;</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+            <span class="n">is_best</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">D:\Python\Python37\python.exe D:/Python/PycharmProjects/PFL-Non-IID-master/PFL-Non-IID-master/system/get_mean_std.py
+</span><span class="s2">D:/Python/PycharmProjects/PFL-Non-IID-master/PFL-Non-IID-master/system/mnist_fedavg
+</span><span class="s2">[0.9575707154742097]
+</span><span class="s2">95.75707154742096 0.0
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># python generate_mnist.py iid - -</span>
+
+<span class="n">D</span><span class="p">:</span>\<span class="n">Python</span>\<span class="n">Python37</span>\<span class="n">python</span><span class="o">.</span><span class="n">exe</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="n">PycharmProjects</span><span class="o">/</span><span class="n">PFL</span><span class="o">-</span><span class="n">Non</span><span class="o">-</span><span class="n">IID</span><span class="o">-</span><span class="n">master</span><span class="o">/</span><span class="n">PFL</span><span class="o">-</span><span class="n">Non</span><span class="o">-</span><span class="n">IID</span><span class="o">-</span><span class="n">master</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">py</span>
+<span class="o">==================================================</span>
+<span class="n">Algorithm</span><span class="p">:</span> <span class="n">FedAvg</span>
+<span class="n">Local</span> <span class="n">batch</span> <span class="n">size</span><span class="p">:</span> <span class="mi">10</span>
+<span class="n">Local</span> <span class="n">steps</span><span class="p">:</span> <span class="mi">1</span> <span class="c1">#每次聚合的时候本地训练次数</span>
+<span class="n">Local</span> <span class="n">learing</span> <span class="n">rate</span><span class="p">:</span> <span class="mf">0.005</span>
+<span class="n">Local</span> <span class="n">learing</span> <span class="n">rate</span> <span class="n">decay</span><span class="p">:</span> <span class="kc">False</span>
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">clients</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">Clients</span> <span class="n">join</span> <span class="ow">in</span> <span class="n">each</span> <span class="nb">round</span><span class="p">:</span> <span class="mf">1.0</span> <span class="c1"># cliet全部参与</span>
+<span class="n">Clients</span> <span class="n">randomly</span> <span class="n">join</span><span class="p">:</span> <span class="kc">False</span>
+<span class="n">Client</span> <span class="n">drop</span> <span class="n">rate</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="n">Client</span> <span class="n">select</span> <span class="n">regarding</span> <span class="n">time</span><span class="p">:</span> <span class="kc">False</span>
+<span class="n">Running</span> <span class="n">times</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">Dataset</span><span class="p">:</span> <span class="n">mnist</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">classes</span><span class="p">:</span> <span class="mi">10</span>
+<span class="n">Backbone</span><span class="p">:</span> <span class="n">cnn</span>
+<span class="n">Using</span> <span class="n">device</span><span class="p">:</span> <span class="n">cuda</span>
+<span class="n">Using</span> <span class="n">DP</span><span class="p">:</span> <span class="kc">False</span>
+<span class="n">Auto</span> <span class="k">break</span><span class="p">:</span> <span class="kc">False</span>
+<span class="n">Global</span> <span class="n">rounds</span><span class="p">:</span> <span class="mi">2000</span>
+<span class="n">Cuda</span> <span class="n">device</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">DLG</span> <span class="n">attack</span><span class="p">:</span> <span class="kc">False</span>
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">new</span> <span class="n">clients</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Fine</span> <span class="n">tuning</span> <span class="n">epoches</span> <span class="n">on</span> <span class="n">new</span> <span class="n">clients</span><span class="p">:</span> <span class="mi">0</span>
+<span class="o">==================================================</span>
+
+<span class="o">=============</span> <span class="n">Running</span> <span class="n">time</span><span class="p">:</span> <span class="mi">0</span><span class="n">th</span> <span class="o">=============</span><span class="c1"># 运行次数(整个实验的次数)</span>
+<span class="n">Creating</span> <span class="n">server</span> <span class="ow">and</span> <span class="n">clients</span> <span class="o">...</span>
+<span class="n">FedAvgCNN</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">conv1</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">conv2</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">fc1</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">fc</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Join</span> <span class="n">ratio</span> <span class="o">/</span> <span class="n">total</span> <span class="n">clients</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">Finished</span> <span class="n">creating</span> <span class="n">server</span> <span class="ow">and</span> <span class="n">clients</span><span class="o">.</span>
+
+<span class="o">-------------</span><span class="n">Round</span> <span class="n">number</span><span class="p">:</span> <span class="mi">0</span><span class="o">-------------</span><span class="c1">#轮次</span>
+
+<span class="n">Evaluate</span> <span class="k">global</span> <span class="n">model</span>
+<span class="n">Averaged</span> <span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">2.3146</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.0591</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.4260</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.0206</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.0355</span>
+<span class="o">-------------------------</span> <span class="n">time</span> <span class="n">cost</span> <span class="o">-------------------------</span> <span class="mf">5.320608139038086</span>
+
+<span class="o">-------------</span><span class="n">Round</span> <span class="n">number</span><span class="p">:</span> <span class="mi">1</span><span class="o">-------------</span>
+
+<span class="n">Evaluate</span> <span class="k">global</span> <span class="n">model</span>
+<span class="n">Averaged</span> <span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">2.0873</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.2995</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.7448</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.0540</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.0632</span>
+<span class="o">-------------------------</span> <span class="n">time</span> <span class="n">cost</span> <span class="o">-------------------------</span> <span class="mf">1.006882905960083</span>
+
+<span class="o">-------------</span><span class="n">Round</span> <span class="n">number</span><span class="p">:</span> <span class="mi">2</span><span class="o">-------------</span>
+
+<span class="n">Evaluate</span> <span class="k">global</span> <span class="n">model</span>
+<span class="n">Averaged</span> <span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">1.3040</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.7155</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.9386</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.0332</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.0046</span>
+<span class="o">-------------------------</span> <span class="n">time</span> <span class="n">cost</span> <span class="o">-------------------------</span> <span class="mf">0.971451997756958</span>
+
+<span class="o">......</span>
+
+<span class="o">-------------</span><span class="n">Round</span> <span class="n">number</span><span class="p">:</span> <span class="mi">20</span><span class="o">-------------</span>
+
+<span class="n">Evaluate</span> <span class="k">global</span> <span class="n">model</span>
+<span class="n">Averaged</span> <span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.0775</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.9576</span>
+<span class="n">Averaged</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.9933</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">Accurancy</span><span class="p">:</span> <span class="mf">0.0035</span>
+<span class="n">Std</span> <span class="n">Test</span> <span class="n">AUC</span><span class="p">:</span> <span class="mf">0.0011</span>
+<span class="o">-------------------------</span> <span class="n">time</span> <span class="n">cost</span> <span class="o">-------------------------</span> <span class="mf">0.9970800876617432</span>
+
+<span class="n">Best</span> <span class="n">accuracy</span><span class="o">.</span>
+<span class="mf">0.9575707154742097</span>
+
+<span class="n">Average</span> <span class="n">time</span> <span class="n">cost</span> <span class="n">per</span> <span class="nb">round</span><span class="o">.</span>
+<span class="mf">1.0050838351249696</span>
+<span class="n">File</span> <span class="n">path</span><span class="p">:</span> <span class="o">../</span><span class="n">results</span><span class="o">/</span><span class="n">mnist_FedAvg_test_0</span><span class="o">.</span><span class="n">h5</span>
+
+<span class="n">Average</span> <span class="n">time</span> <span class="n">cost</span><span class="p">:</span> <span class="mf">25.04</span><span class="n">s</span><span class="o">.</span>
+<span class="n">Length</span><span class="p">:</span>  <span class="mi">21</span>
+<span class="n">std</span> <span class="k">for</span> <span class="n">best</span> <span class="n">accurancy</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="n">mean</span> <span class="k">for</span> <span class="n">best</span> <span class="n">accurancy</span><span class="p">:</span> <span class="mf">0.9575707154742097</span>
+<span class="n">All</span> <span class="n">done</span><span class="err">!</span>
+
+<span class="n">Storage</span> <span class="n">on</span> <span class="n">cuda</span><span class="p">:</span><span class="mi">0</span>
+<span class="o">-------------------------------------------------------------------------------</span>
+<span class="n">Total</span> <span class="n">Tensors</span><span class="p">:</span> <span class="mi">4656208</span>  <span class="n">Used</span> <span class="n">Memory</span><span class="p">:</span> <span class="mf">13.33</span><span class="n">M</span>
+<span class="n">The</span> <span class="n">allocated</span> <span class="n">memory</span> <span class="n">on</span> <span class="n">cuda</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="mf">13.33</span><span class="n">M</span>
+<span class="o">-------------------------------------------------------------------------------</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 模型结构图
+Input: (batch_size, 1, height, width)  
+  
+      -&gt; Conv2d(1, 32)  
+      -&gt; ReLU  
+      -&gt; MaxPool2d  
+      -&gt; Conv2d(32, 64)  
+      -&gt; ReLU  
+      -&gt; MaxPool2d  
+      -&gt; Flatten  
+      -&gt; Linear(1024, 512)  
+      -&gt; ReLU  
+      -&gt; Linear(512, 10)  
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Installing collected packages: torch, opacus
+Attempting uninstall: torch
+Found existing installation: torch 1.10.1+cu113
+Uninstalling torch-1.10.1+cu113:
+Successfully uninstalled torch-1.10.1+cu113
+ERROR: pip&rsquo;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</p>
+<p>重新安装了torch 1.10.1+cu113</p>
+</blockquote>
 <h2 id="fadala">FadALA</h2>
 <p>但由于客户机之间数据不可见，数据的统计异质性（数据非独立同分布（non-IID）和数据量不平衡现象）便成了FL 的巨大挑战之一。数据的统计异质性使得传统联邦学习方法（如FedAvg等）很难通过FL过程训练得到适用于每个客户机的单一全局模型。</p>
 <p>个性化联邦学习（pFL）方法因其应对数据统计异质性的能力受到了越来越多的关注。与寻求高质量全局模型的传统FL不同，pFL方法的目标是借助联邦学习的协同计算能力为每个客户机训练适用于自身的个性化模型。现有的在服务器上聚合模型的pFL研究可以分为以下三类：</p>
