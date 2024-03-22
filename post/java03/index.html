@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Java流程控制">
 <meta itemprop="description" content="程序设计中规定的三种流程结构，即： 顺序结构 程序从上到下逐行地执行，中间没有任何判断和跳转。 分支结构 根据条件，选择性地执行某段代码。 有if…e"><meta itemprop="datePublished" content="2023-12-01T16:54:57+08:00" />
 <meta itemprop="dateModified" content="2023-12-01T16:54:57+08:00" />
-<meta itemprop="wordCount" content="8104">
+<meta itemprop="wordCount" content="23760">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java流程控制"/>
 <meta name="twitter:description" content="程序设计中规定的三种流程结构，即： 顺序结构 程序从上到下逐行地执行，中间没有任何判断和跳转。 分支结构 根据条件，选择性地执行某段代码。 有if…e"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/java/"> JAVA </a>
             </div>
-          <span class="more-meta"> 8104 words </span>
-          <span class="more-meta"> 17 mins read </span>
+          <span class="more-meta"> 23760 words </span>
+          <span class="more-meta"> 48 mins read </span>
         
       </div>
     </header>
@@ -153,20 +153,60 @@
           <ul>
             <li><a href="#if-else条件判断结构">if-else条件判断结构</a></li>
             <li><a href="#switch-case选择结构">switch-case选择结构</a></li>
+            <li><a href="#判断几月几是第几天">判断几月几是第几天</a></li>
+            <li><a href="#是否是闰年">是否是闰年</a></li>
             <li><a href="#if-else语句与switch-case语句比较">if-else语句与switch-case语句比较</a></li>
           </ul>
         </li>
         <li><a href="#循环语句">循环语句</a>
           <ul>
             <li><a href="#for循环">for循环</a></li>
+            <li><a href="#水仙花数">水仙花数</a></li>
             <li><a href="#while循环">while循环</a></li>
             <li><a href="#do-while循环">do-while循环</a></li>
+            <li><a href="#无限循环">&ldquo;无限&quot;循环</a></li>
             <li><a href="#嵌套循环">嵌套循环</a></li>
           </ul>
         </li>
-        <li><a href="#关键字break和continue">关键字break和continue</a></li>
+        <li><a href="#关键字break和continue">关键字break和continue</a>
+          <ul>
+            <li><a href="#带标签的使用">带标签的使用</a></li>
+            <li><a href="#找素数">找素数</a></li>
+          </ul>
+        </li>
         <li><a href="#scanner键盘输入功能的实现">Scanner：键盘输入功能的实现</a></li>
         <li><a href="#随机数">随机数</a></li>
+        <li><a href="#小项目记账软件">小项目：<strong>记账软件</strong></a></li>
+        <li><a href="#总结">总结：</a></li>
+        <li><a href="#分支语句-1">分支语句</a>
+          <ul>
+            <li><a href="#if-else条件判断结构-1">if-else条件判断结构</a></li>
+            <li><a href="#switch-case选择结构-1">switch-case选择结构</a></li>
+            <li><a href="#判断几月几是第几天-1">判断几月几是第几天</a></li>
+            <li><a href="#是否是闰年-1">是否是闰年</a></li>
+            <li><a href="#if-else语句与switch-case语句比较-1">if-else语句与switch-case语句比较</a></li>
+          </ul>
+        </li>
+        <li><a href="#循环语句-1">循环语句</a>
+          <ul>
+            <li><a href="#for循环-1">for循环</a></li>
+            <li><a href="#水仙花数-1">水仙花数</a></li>
+            <li><a href="#while循环-1">while循环</a></li>
+            <li><a href="#do-while循环-1">do-while循环</a></li>
+            <li><a href="#无限循环-1">&ldquo;无限&quot;循环</a></li>
+            <li><a href="#嵌套循环-1">嵌套循环</a></li>
+          </ul>
+        </li>
+        <li><a href="#关键字break和continue-1">关键字break和continue</a>
+          <ul>
+            <li><a href="#带标签的使用-1">带标签的使用</a></li>
+            <li><a href="#找素数-1">找素数</a></li>
+          </ul>
+        </li>
+        <li><a href="#scanner键盘输入功能的实现-1">Scanner：键盘输入功能的实现</a></li>
+        <li><a href="#随机数-1">随机数</a></li>
+        <li><a href="#小项目记账软件-1">小项目：<strong>记账软件</strong></a></li>
+        <li><a href="#总结-1">总结：</a></li>
       </ul>
     </li>
   </ul>
@@ -564,7 +604,8 @@
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="case的穿透性">case的穿透性</h4>
-<p>在switch语句中，如果case的后面不写break，将出现穿透现象，也就是一旦匹配成功，不会在判断下一个case的值，直接向后运行，直到遇到break或者整个switch语句结束，执行终止。</p>
+<p>在switch语句中，<code>如果case的后面不写break，将出现穿透现象</code>，也就是一旦匹配成功，不会在判断下一个case的值，直接向后运行，直到遇到break或者整个switch语句结束，执行终止。</p>
+<h3 id="判断几月几是第几天">判断几月几是第几天</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -665,7 +706,8 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div><h3 id="是否是闰年">是否是闰年</h3>
+<blockquote>
 <p>要判断一年是否是闰年，可以根据以下规则：</p>
 <ol>
 <li>如果年份能被4整除，但不能被100整除，那么它是闰年。</li>
@@ -943,7 +985,8 @@ score&lt;60            等级:  D
 <span class="c1">//abcbc
 </span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><h3 id="水仙花数">水仙花数</h3>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1132,7 +1175,7 @@ score&lt;60            等级:  D
 </ul>
 </li>
 </ul>
-<p>&ldquo;无限&quot;循环</p>
+<h3 id="无限循环">&ldquo;无限&quot;循环</h3>
 <ul>
 <li>
 <p>最简单&quot;无限&quot;循环格式：<code>while(true)</code> , <code>for(;;)</code></p>
@@ -1247,18 +1290,331 @@ score&lt;60            等级:  D
 <tr>
 <td style="text-align:center">break</td>
 <td style="text-align:center">switch-case循环结构</td>
-<td style="text-align:center">一旦执行，就结束(或跳出)当前循环结构</td>
-<td style="text-align:center">此关键字的后面，不能声明语句</td>
+<td style="text-align:center">一旦执行，就结束(或跳出)<code>当前</code>循环结构</td>
+<td style="text-align:center"><code>此关键字的后面，不能声明语句</code></td>
 </tr>
 <tr>
 <td style="text-align:center">continue</td>
 <td style="text-align:center">循环结构</td>
-<td style="text-align:center">一旦执行，就结束(或跳出)当次循环结构</td>
+<td style="text-align:center">一旦执行，就结束(或跳出)<code>当次</code>循环结构</td>
 <td style="text-align:center">此关键字的后面，不能声明语句</td>
 </tr>
 </tbody>
 </table>
-<h2 id="scanner键盘输入功能的实现">Scanner：键盘输入功能的实现</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">BreakContinueTest1</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+	
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">10</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+			
+			<span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">4</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+				<span class="c1">//break;//123
+</span><span class="c1"></span>				<span class="k">continue</span><span class="o">;</span><span class="c1">//123567910
+</span><span class="c1"></span>				<span class="c1">//如下的语句不可能被执行，编译不通过
+</span><span class="c1"></span>				<span class="c1">//System.out.println(&#34;今晚迪丽热巴要约我吃饭&#34;);
+</span><span class="c1"></span>			<span class="o">}</span>
+
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;####&#34;</span><span class="o">);</span>
+
+		<span class="c1">//嵌套循环中的使用
+</span><span class="c1"></span>		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+		
+			<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">10</span><span class="o">;</span><span class="n">j</span><span class="o">++){</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">4</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+					<span class="c1">//break; //结束的是包裹break关键字的最近的一层循环！
+</span><span class="c1"></span>					<span class="k">continue</span><span class="o">;</span><span class="c1">//结束的是包裹break关键字的最近的一层循环的当次！
+</span><span class="c1"></span>				<span class="o">}</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">j</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+		<span class="o">}</span>
+
+	<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="带标签的使用">带标签的使用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">break语句用于终止某个语句块的执行</span>
+<span class="o">{</span>    <span class="err">……</span>	 
+	<span class="k">break</span><span class="o">;</span>
+	 <span class="err">……</span>
+<span class="o">}</span>
+
+<span class="n">break语句出现在多层嵌套的语句块中时</span><span class="err">，</span><span class="n">可以通过标签指明要终止的是哪一层语句块</span> 
+	<span class="n">label1</span><span class="o">:</span> <span class="o">{</span>   <span class="err">……</span>        
+	<span class="n">label2</span><span class="o">:</span>	     <span class="o">{</span>   <span class="err">……</span>
+	<span class="n">label3</span><span class="o">:</span>			 <span class="o">{</span>   <span class="err">……</span>
+				           <span class="k">break</span> <span class="n">label2</span><span class="o">;</span>
+				           <span class="err">……</span>
+					 <span class="o">}</span>
+			     <span class="o">}</span>
+			<span class="o">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>continue语句出现在多层嵌套的循环语句体中时，也可以通过标签指明要跳过的是哪一层循环。</p>
+</li>
+<li>
+<p>标号语句必须紧接在循环的头部。标号语句不能用在非循环语句的前面。</p>
+</li>
+<li>
+<p>举例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">BreakContinueTest2</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">l</span><span class="o">:</span><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+
+          <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">10</span><span class="o">;</span><span class="n">j</span><span class="o">++){</span>
+              <span class="k">if</span><span class="o">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">4</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+                  <span class="c1">//break l;
+</span><span class="c1"></span>                  <span class="k">continue</span> <span class="n">l</span><span class="o">;</span>
+              <span class="o">}</span>
+              <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">j</span><span class="o">);</span>
+          <span class="o">}</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+      <span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="找素数">找素数</h3>
+<p><strong>题目：找出100以内所有的素数（质数）？100000以内的呢？</strong></p>
+<p>分析：素数（质数）：只能被1和它本身整除的自然数。  &mdash;&gt; 从2开始，到这个数-1为止，此范围内没有这个数的约数。则此数是一个质数。
+比如：2、3、5、7、11、13、17、19、23、&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">PrimeNumberTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="kt">boolean</span> <span class="n">isFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//用于标识i是否被除尽过
+</span><span class="c1"></span>		<span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span> 
+        <span class="c1">//记录当前时间距离1970-1-1 00:00:00的毫秒数	
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span><span class="c1">//记录质数的个数
+</span><span class="c1"></span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">100000</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>  <span class="c1">//i
+</span><span class="c1"></span>
+			<span class="c1">//boolean isFlag = true; //用于标识i是否被除尽过
+</span><span class="c1"></span>		
+			<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span><span class="n">j</span><span class="o">++){</span>
+				
+				<span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span> <span class="c1">// 
+</span><span class="c1"></span>					<span class="n">isFlag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+				<span class="o">}</span>
+			
+			<span class="o">}</span>
+
+			<span class="c1">//判断i是否是质数
+</span><span class="c1"></span>			<span class="k">if</span><span class="o">(</span><span class="n">isFlag</span><span class="o">){</span> <span class="c1">//如果isFlag变量没有给修改过值，就意味着i没有被j除尽过。则i是一个质数
+</span><span class="c1"></span>				<span class="c1">//System.out.println(i);
+</span><span class="c1"></span>				<span class="n">count</span><span class="o">++;</span>
+			<span class="o">}</span>
+
+			<span class="c1">//重置isFlag
+</span><span class="c1"></span>			<span class="n">isFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+		
+		<span class="o">}</span>
+
+		<span class="kt">long</span> <span class="n">end</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;质数的个数为：&#34;</span> <span class="o">+</span> <span class="n">count</span><span class="o">);</span><span class="c1">//9592
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行此程序花费的毫秒数为：&#34;</span> <span class="o">+</span> <span class="o">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="o">));</span> <span class="c1">//6715
+</span><span class="c1"></span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>优化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">PrimeNumberTest1</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span> <span class="c1">//记录当前时间距离1970-1-1 00:00:00的毫秒数
+</span><span class="c1"></span>
+		<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span><span class="c1">//记录质数的个数
+</span><span class="c1"></span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">100000</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>  <span class="c1">//i
+</span><span class="c1"></span>
+			<span class="kt">boolean</span> <span class="n">isFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//用于标识i是否被除尽过
+</span><span class="c1"></span>			
+            <span class="c1">// 开根号等号要留着
+</span><span class="c1"></span>			<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span><span class="n">j</span><span class="o">++){</span> <span class="c1">//优化2：将循环条件中的i改为Math.sqrt(i)
+</span><span class="c1"></span>				
+				<span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span> <span class="c1">//表明i有约数
+</span><span class="c1"></span>					<span class="n">isFlag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+					<span class="k">break</span><span class="o">;</span><span class="c1">//优化1：主要针对非质数起作用---&gt;620
+</span><span class="c1"></span>				<span class="o">}</span>
+			
+			<span class="o">}</span>
+
+			<span class="c1">//判断i是否是质数
+</span><span class="c1"></span>			<span class="k">if</span><span class="o">(</span><span class="n">isFlag</span><span class="o">){</span> <span class="c1">//如果isFlag变量没有给修改过值，就意味着i没有被j除尽过。则i是一个质数
+</span><span class="c1"></span>				<span class="c1">//System.out.println(i);
+</span><span class="c1"></span>				<span class="n">count</span><span class="o">++;</span>
+			<span class="o">}</span>
+		
+		<span class="o">}</span>
+
+		<span class="kt">long</span> <span class="n">end</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;质数的个数为：&#34;</span> <span class="o">+</span> <span class="n">count</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行此程序花费的毫秒数为：&#34;</span> <span class="o">+</span> <span class="o">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="o">));</span><span class="c1">//16
+</span><span class="c1"></span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="scanner键盘输入功能的实现">Scanner：键盘输入功能的实现</h2>
 <ul>
 <li>
 <p>如何从键盘获取不同类型（基本数据类型、String类型）的变量：使用Scanner类。</p>
@@ -1438,7 +1794,2341 @@ score&lt;60            等级:  D
 </span><span class="c1"></span><span class="kt">double</span> <span class="n">randomDouble</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">();</span> <span class="c1">// 生成 0.0 到 1.0 之间的随机双精度浮点数  
 </span></code></pre></td></tr></table>
 </div>
+</div><h2 id="小项目记账软件">小项目：<strong>记账软件</strong></h2>
+<p>需求：该软件能够记录家庭的收入、支出，并能够打印收支明细表</p>
+<p>•假设家庭起始的生活基本金为10000元。</p>
+<p>•每次登记收入（菜单2）后，收入的金额应累加到基本金上，并记录本次收入明细，以便后续的查询。</p>
+<p>•每次登记支出（菜单3）后，支出的金额应从基本金中扣除，并记录本次支出明细，以便后续的查询。</p>
+<p>•查询收支明细（ 菜单1）时，将显示所有的收入、支出名细列表</p>
+<p><img src="/images/2024/10.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="cm">/**
+</span><span class="cm">Utility工具类：
+</span><span class="cm">将不同的功能封装为方法，就是可以直接通过调用方法使用它的功能，而无需考虑具体的功能实现细节。
+</span><span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Utility</span> <span class="o">{</span>
+    <span class="c1">// 声明了一个静态的、私有的Scanner类型的变量`scanner`，用于从命令行获取用户输入
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+    <span class="cm">/**
+</span><span class="cm">	用于界面菜单的选择。该方法读取键盘，如果用户键入’1’-’4’中的任意字符，则方法返回。返回值为用户键入字符。
+</span><span class="cm">	*/</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">readMenuSelection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">char</span> <span class="n">c</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">1</span><span class="o">);</span> 
+            <span class="n">c</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span><span class="c1">//获取字符串中索引位置为0的字符
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;1&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;2&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;3&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;4&#39;</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;选择错误，请重新输入：&#34;</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+	<span class="cm">/**
+</span><span class="cm">	用于收入和支出金额的输入。该方法从键盘读取一个不超过4位长度的整数，并将其作为方法的返回值。
+</span><span class="cm">	*/</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">readNumber</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">4</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NumberFormatException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;数字输入错误，请重新输入：&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">n</span><span class="o">;</span>
+    <span class="o">}</span>
+	<span class="cm">/**
+</span><span class="cm">	用于收入和支出说明的输入。该方法从键盘读取一个不超过8位长度的字符串，并将其作为方法的返回值。
+</span><span class="cm">	*/</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">readString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">8</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">str</span><span class="o">;</span>
+    <span class="o">}</span>
+	
+	<span class="cm">/**
+</span><span class="cm">	用于确认选择的输入。该方法从键盘读取‘Y’或’N’，并将其作为方法的返回值。
+</span><span class="cm">	*/</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">readConfirmSelection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">char</span> <span class="n">c</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">1</span><span class="o">).</span><span class="na">toUpperCase</span><span class="o">();</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;Y&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;N&#39;</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;选择错误，请重新输入：&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+	
+	
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">readKeyBoard</span><span class="o">(</span><span class="kt">int</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>
+		
+        <span class="c1">// 使用 hasNext() 检查是否还有下一个 token 
+</span><span class="c1"></span>        <span class="k">while</span> <span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">1</span> <span class="o">||</span> <span class="n">line</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;输入长度（不大于&#34;</span> <span class="o">+</span> <span class="n">limit</span> <span class="o">+</span> <span class="s">&#34;）错误，请重新输入：&#34;</span><span class="o">);</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">line</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
 </div>
+</div><blockquote>
+<p><strong><code>scanner.hasNext()</code></strong> 是一个用于检查输入流中是否还有下一个 token（标记）的方法。在 Java 中，<strong><code>Scanner</code></strong> 类可以用来从输入流中获取用户输入。<strong><code>hasNext()</code></strong> 方法返回一个布尔值，指示是否还有下一个 token 可用。</p>
+<p>while (scanner.hasNext()) {<br>
+String input = scanner.next(); // 读取下一个 token<br>
+System.out.println(&ldquo;You entered: &quot; + input);<br>
+}</p>
+<p>Enter a string: qqq
+You entered: qqq
+aaa
+You entered: aaa
+ccc
+You entered: ccc</p>
+<p><a href="https://blog.csdn.net/gao_zhennan/article/details/80562548">BLOG</a></p>
+<p>c = str.<code>charAt(0)</code>;//获取字符串中索引位置为0的字符</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FamilyAccount</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="kt">boolean</span> <span class="n">isFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="n">String</span> <span class="n">details</span> <span class="o">=</span> <span class="s">&#34;收支\t账户金额\t\t收支金额\t说    明\n&#34;</span><span class="o">;</span>
+		<span class="kt">double</span> <span class="n">balance</span> <span class="o">=</span> <span class="n">10000</span><span class="o">;</span><span class="c1">//初始账户 金额
+</span><span class="c1"></span>
+		<span class="k">do</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span>
+					<span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;\n-----------------谷粒收支记账软件-----------------\n&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;                   1 收支明细&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;                   2 登记收入&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;                   3 登记支出&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;                   4 退    出\n&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;                   请选择(1-4)：&#34;</span><span class="o">);</span>
+
+			<span class="c1">// 要求用户输入1-4选择
+</span><span class="c1"></span>			<span class="kt">char</span> <span class="n">menu</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readMenuSelection</span><span class="o">();</span>
+			<span class="k">switch</span> <span class="o">(</span><span class="n">menu</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">case</span> <span class="sc">&#39;1&#39;</span><span class="o">:</span>
+<span class="c1">//				System.out.println(&#34;显示详情&#34;);
+</span><span class="c1"></span>				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;-----------------当前收支明细记录-----------------&#34;</span><span class="o">);</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">details</span><span class="o">);</span>
+				
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;---------------------------------------------&#34;</span><span class="o">);</span>
+				
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">case</span> <span class="sc">&#39;2&#39;</span><span class="o">:</span>
+<span class="c1">//				System.out.println(&#34;收入情况&#34;);
+</span><span class="c1"></span>				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;本次收入金额：&#34;</span><span class="o">);</span>
+				<span class="kt">int</span> <span class="n">money</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readNumber</span><span class="o">();</span><span class="c1">//从键盘获取收入的金额
+</span><span class="c1"></span>				
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;本次收入说明：&#34;</span><span class="o">);</span>
+				<span class="n">String</span> <span class="n">desc</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readString</span><span class="o">();</span><span class="c1">//从键盘获取收入的说明
+</span><span class="c1"></span>				
+				<span class="c1">//根据获取的金额和收入说明修改用户的信息
+</span><span class="c1"></span>				<span class="n">balance</span> <span class="o">+=</span> <span class="n">money</span><span class="o">;</span>
+				
+				<span class="n">details</span> <span class="o">+=</span> <span class="o">(</span><span class="s">&#34;收入\t&#34;</span> <span class="o">+</span> <span class="n">balance</span> <span class="o">+</span> <span class="s">&#34;\t\t&#34;</span> <span class="o">+</span> <span class="n">money</span> <span class="o">+</span> <span class="s">&#34;\t&#34;</span> <span class="o">+</span><span class="n">desc</span> <span class="o">+</span> <span class="s">&#34;\n&#34;</span><span class="o">);</span>
+				
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;---------------------登记完成-------------------&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">case</span> <span class="sc">&#39;3&#39;</span><span class="o">:</span>
+<span class="c1">//				System.out.println(&#34;支出情况&#34;);
+</span><span class="c1"></span>				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;本次支出金额：&#34;</span><span class="o">);</span>
+				<span class="kt">int</span> <span class="n">money1</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readNumber</span><span class="o">();</span><span class="c1">//从键盘获取支出的金额
+</span><span class="c1"></span>				
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;本次支出说明：&#34;</span><span class="o">);</span>
+				<span class="n">String</span> <span class="n">desc1</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readString</span><span class="o">();</span><span class="c1">//从键盘获取支出的说明
+</span><span class="c1"></span>				
+				<span class="c1">//根据获取的金额和支出说明修改用户的信息
+</span><span class="c1"></span>				<span class="k">if</span><span class="o">(</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">money1</span><span class="o">){</span>
+					<span class="n">balance</span> <span class="o">-=</span> <span class="n">money1</span><span class="o">;</span>
+					<span class="n">details</span> <span class="o">+=</span> <span class="o">(</span><span class="s">&#34;支出\t&#34;</span> <span class="o">+</span> <span class="n">balance</span> <span class="o">+</span> <span class="s">&#34;\t\t&#34;</span> <span class="o">+</span> <span class="n">money1</span> <span class="o">+</span> <span class="s">&#34;\t&#34;</span> <span class="o">+</span><span class="n">desc1</span> <span class="o">+</span> <span class="s">&#34;\n&#34;</span><span class="o">);</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;---------------------登记完成-------------------&#34;</span><span class="o">);</span>
+				<span class="o">}</span><span class="k">else</span><span class="o">{</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;余额不足，支出失败&#34;</span><span class="o">);</span>
+				<span class="o">}</span>
+				
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">case</span> <span class="sc">&#39;4&#39;</span><span class="o">:</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;确认是否退出(Y/N)：&#34;</span><span class="o">);</span>
+				<span class="kt">char</span> <span class="n">exit</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readConfirmSelection</span><span class="o">();</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">exit</span> <span class="o">==</span> <span class="sc">&#39;Y&#39;</span><span class="o">){</span>
+					<span class="n">isFlag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+				<span class="o">}</span>
+				
+				<span class="k">break</span><span class="o">;</span>
+
+			<span class="o">}</span>
+
+		<span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">isFlag</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="总结">总结：</h2>
+<p>switch-case</p>
+<ul>
+<li>
+<p>在特殊的场景下，分支结构可以考虑使用switch-case</p>
+<ul>
+<li>指定的数据类型：byte \ short \ char \ int ; 枚举类（jdk5.0）\ String (jdk7.0)</li>
+<li>可以考虑的常量值有限且取值情况不多。</li>
+</ul>
+</li>
+<li>
+<p>特别之处：case穿透。</p>
+</li>
+<li>
+<p>在能使用switch-case的情况下，推荐使用switch-case，因为比if-else效率稍高</p>
+</li>
+</ul>
+<p>Scanner类中提供了获取byte \ short \ int \ long \float \double \boolean \ String类型变量的方法。&mdash;
+title: &ldquo;Java流程控制&rdquo;
+date: 2023-12-01T16:54:57+08:00
+categories: [&ldquo;JAVA&rdquo;]
+draft: false</p>
+<hr>
+<p>程序设计中规定的<code>三种</code>流程结构，即：</p>
+<ul>
+<li><strong>顺序结构</strong>
+<ul>
+<li>程序从上到下逐行地执行，中间没有任何判断和跳转。</li>
+</ul>
+</li>
+<li><strong>分支结构</strong>
+<ul>
+<li>根据条件，选择性地执行某段代码。</li>
+<li>有<code>if…else</code>和<code>switch-case</code>两种分支语句。</li>
+</ul>
+</li>
+<li><strong>循环结构</strong>
+<ul>
+<li>根据循环条件，重复性的执行某段代码。</li>
+<li>有<code>for</code>、<code>while</code>、<code>do-while</code>三种循环语句。</li>
+<li>补充：JDK5.0 提供了<code>foreach</code>循环，方便的遍历集合、数组元素。（第12章集合中讲解）</li>
+</ul>
+</li>
+</ul>
+<h2 id="分支语句-1">分支语句</h2>
+<h3 id="if-else条件判断结构-1">if-else条件判断结构</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span><span class="o">(</span><span class="n">条件表达式</span><span class="o">)</span><span class="err">｛</span>
+  	<span class="n">语句块</span><span class="o">;</span>
+<span class="err">｝</span>
+
+<span class="k">if</span><span class="o">(</span><span class="n">条件表达式</span><span class="o">)</span> <span class="o">{</span> 
+  	<span class="n">语句块1</span><span class="o">;</span>
+<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+  	<span class="n">语句块2</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">(</span><span class="n">条件表达式1</span><span class="o">)</span> <span class="o">{</span>
+  	<span class="n">语句块1</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">条件表达式2</span><span class="o">)</span> <span class="o">{</span>
+  	<span class="n">语句块2</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="o">...</span>
+<span class="o">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">条件表达式n</span><span class="o">)</span> <span class="o">{</span>
+ 	<span class="n">语句块n</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+  	<span class="n">语句块n</span><span class="o">+</span><span class="n">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">IfElseExer4</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;小明的期末Java成绩是：[0,100]&#34;</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="n">89</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="n">100</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;你的成绩是错误的&#34;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="n">90</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;你的成绩属于优秀&#34;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="n">80</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;你的成绩属于好&#34;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="n">70</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;你的成绩属于良&#34;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="n">60</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;你的成绩属于及格&#34;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;你的成绩属于不及格&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>当条件表达式之间是“<code>互斥</code>”关系时（即彼此没有交集），条件判断语句及执行语句间顺序无所谓。</p>
+<p>当条件表达式之间是“<code>包含</code>”关系时，“<code>小上大下 / 子上父下</code>”，否则范围小的条件表达式将不可能被执行。</p>
+</blockquote>
+<p>if&hellip;else嵌套</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">IfElseTest4</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+			<span class="c1">//声明num1,num2,num3三个变量并赋值
+</span><span class="c1"></span>			<span class="kt">int</span> <span class="n">num1</span> <span class="o">=</span> <span class="n">23</span><span class="o">,</span><span class="n">num2</span> <span class="o">=</span> <span class="n">32</span><span class="o">,</span><span class="n">num3</span> <span class="o">=</span> <span class="n">12</span><span class="o">;</span>
+
+			<span class="k">if</span><span class="o">(</span><span class="n">num1</span> <span class="o">&gt;=</span> <span class="n">num2</span><span class="o">){</span>
+				
+				<span class="k">if</span><span class="o">(</span><span class="n">num3</span> <span class="o">&gt;=</span> <span class="n">num1</span><span class="o">)</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num2</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num1</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num3</span><span class="o">);</span>
+				<span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">num3</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="o">)</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num3</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num2</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num1</span><span class="o">);</span>
+				<span class="k">else</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num2</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num3</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num1</span><span class="o">);</span>
+			<span class="o">}</span><span class="k">else</span><span class="o">{</span> <span class="c1">//num1 &lt; num2
+</span><span class="c1"></span>				
+				<span class="k">if</span><span class="o">(</span><span class="n">num3</span> <span class="o">&gt;=</span> <span class="n">num2</span><span class="o">){</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num2</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num3</span><span class="o">);</span>
+				<span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">num3</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="o">){</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num3</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num1</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num2</span><span class="o">);</span>
+				<span class="o">}</span><span class="k">else</span><span class="o">{</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num3</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">num2</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>语句块只有一条执行语句时，一对<code>{}可以省略</code>，但建议保留</li>
+<li>当if-else结构是“多选一”时，最后的<code>else是可选的</code>，根据需要可以省略</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//1)对下列代码，若有输出，指出输出结果。
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">4</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">2</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">2</span><span class="o">)</span> 
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+    		<span class="c1">//if没有括号只包含一行，下一行在if结构外。
+</span><span class="c1"></span>       		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">);</span>
+    	<span class="c1">//System.out.println(&#34;hello&#34;);//相当于在这
+</span><span class="c1"></span><span class="o">}</span> <span class="k">else</span>
+       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;x is &#34;</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+<span class="c1">//hello
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="n">b</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="c1">//if(b=false) //赋值b为false,不满足 c
+</span><span class="c1"></span><span class="k">if</span><span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="kc">false</span><span class="o">)</span><span class="c1">//判断b为false b	 //建议：if(!b)
+</span><span class="c1"></span>	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">b</span><span class="o">)</span>
+	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;b&#34;</span><span class="o">);</span>
+<span class="k">else</span> <span class="k">if</span><span class="o">(!</span><span class="n">b</span><span class="o">)</span>
+	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;c&#34;</span><span class="o">);</span>
+<span class="k">else</span>
+	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;d&#34;</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="switch-case选择结构-1">switch-case选择结构</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">switch(表达式){
+    case 常量值1:
+        语句块1;
+        //break;
+    case 常量值2:
+        语句块2;
+        //break; 
+    // ...
+   [default:
+        语句块n+1;
+        break;
+   ]
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>switch(表达式)中表达式的值必须是下述几种类型之一：byte，short，char，int，枚举 (jdk 5.0)，String (jdk 7.0)；</p>
+</li>
+<li>
+<p>case子句中的值必须是常量，不能是变量名或不确定的表达式值或范围；</p>
+</li>
+<li>
+<p>同一个switch语句，所有case子句中的常量值互不相同；</p>
+</li>
+<li>
+<p>break语句用来在执行完一个case分支后使程序跳出switch语句块；</p>
+<p>如果没有break，程序会顺序执行到switch结尾；</p>
+</li>
+<li>
+<p>default子句是可选的。同时，位置也是灵活的。放其他位置需要break，否则也会穿透。当没有匹配的case时，执行default语句。</p>
+</li>
+</ul>
+<blockquote>
+<p>直到遇到break关键字或执行完所有的case及default的执行语句，跳出当前的switch-case结构</p>
+<p>如果没有遇到break，则会继续执行当前case之后的其它case中的执行语句。&mdash;&gt;case穿透</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//switch-case实现：对学生成绩大于60分的，输出“合格”。低于60分的，输出“不合格”
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">SwitchCaseTest3</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="n">67</span><span class="o">;</span>
+		<span class="c1">//写法1:1-100每个都写
+</span><span class="c1"></span>
+		<span class="c1">//写法2：case穿透
+</span><span class="c1"></span>		<span class="k">switch</span><span class="o">(</span><span class="n">score</span> <span class="o">/</span> <span class="n">10</span><span class="o">){</span>
+			<span class="k">case</span> <span class="n">0</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">1</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">2</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">3</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">4</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">5</span><span class="o">:</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;不及格&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">case</span> <span class="n">6</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">7</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">8</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">9</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">10</span><span class="o">:</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;及格&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">default</span><span class="o">:</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;输入的成绩有误&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="c1">//写法3：
+</span><span class="c1"></span>		<span class="k">switch</span><span class="o">(</span><span class="n">score</span> <span class="o">/</span> <span class="n">60</span><span class="o">){</span>
+			<span class="k">case</span> <span class="n">0</span><span class="o">:</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;不及格&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">case</span> <span class="n">1</span><span class="o">:</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;及格&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">default</span><span class="o">:</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;输入的成绩有误&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="case的穿透性-1">case的穿透性</h4>
+<p>在switch语句中，<code>如果case的后面不写break，将出现穿透现象</code>，也就是一旦匹配成功，不会在判断下一个case的值，直接向后运行，直到遇到break或者整个switch语句结束，执行终止。</p>
+<h3 id="判断几月几是第几天-1">判断几月几是第几天</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//键盘上输入2023年的“month”和“day”，要求通过程序输出输入的日期为2023年的第几天。
+</span><span class="c1"></span><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">SwitchCaseTest4</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="n">Scanner</span> <span class="n">scan</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;请输入2023年的month:&#34;</span><span class="o">);</span>
+		<span class="kt">int</span> <span class="n">month</span> <span class="o">=</span> <span class="n">scan</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;请输入2023年的day:&#34;</span><span class="o">);</span>
+		<span class="kt">int</span> <span class="n">day</span> <span class="o">=</span> <span class="n">scan</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+
+		<span class="c1">//这里就不针对month和day进行合法性的判断了，以后可以使用正则表达式进行校验。
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="n">sumDays</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span><span class="c1">//记录总天数
+</span><span class="c1"></span>
+		<span class="k">switch</span><span class="o">(</span><span class="n">month</span><span class="o">){</span>
+			<span class="k">case</span> <span class="n">12</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">30</span><span class="o">;</span><span class="c1">//这个30是代表11月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">11</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//这个31是代表10月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">10</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">30</span><span class="o">;</span><span class="c1">//这个30是代表9月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">9</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//这个31是代表8月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">8</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//这个31是代表7月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">7</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">30</span><span class="o">;</span><span class="c1">//这个30是代表6月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">6</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//这个31是代表5月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">5</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">30</span><span class="o">;</span><span class="c1">//这个30是代表4月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">4</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//这个31是代表3月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">3</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">28</span><span class="o">;</span><span class="c1">//这个28是代表2月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">2</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//这个31是代表1月份的满月天数
+</span><span class="c1"></span>			<span class="k">case</span> <span class="n">1</span><span class="o">:</span>
+				<span class="n">sumDays</span> <span class="o">+=</span> <span class="n">day</span><span class="o">;</span><span class="c1">//这个day是代表当月的第几天
+</span><span class="c1"></span>		<span class="o">}</span>
+		
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">month</span> <span class="o">+</span> <span class="s">&#34;月&#34;</span> <span class="o">+</span> <span class="n">day</span> <span class="o">+</span> <span class="s">&#34;日是2023年的第&#34;</span> <span class="o">+</span> <span class="n">sumDays</span> <span class="o">+</span> <span class="s">&#34;天&#34;</span><span class="o">);</span>
+        <span class="c1">//关闭资源
+</span><span class="c1"></span>		<span class="n">scan</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="是否是闰年-1">是否是闰年</h3>
+<blockquote>
+<p>要判断一年是否是闰年，可以根据以下规则：</p>
+<ol>
+<li>如果年份能被4整除，但不能被100整除，那么它是闰年。</li>
+<li>如果年份能被400整除，那么它也是闰年。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">((</span><span class="n">year</span> <span class="o">%</span> <span class="n">4</span> <span class="o">==</span> <span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="n">year</span> <span class="o">%</span> <span class="n">100</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span> <span class="o">||</span> <span class="n">year</span> <span class="o">%</span> <span class="n">400</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>  
+	<span class="n">isLeapYear</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>  
+<span class="o">}</span>  
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SwitchCaseTest04</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;请输入year:&#34;</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">year</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;请输入month:&#34;</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">month</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;请输入day:&#34;</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">day</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+
+        <span class="c1">//判断这一天是当年的第几天==&gt;从1月1日开始，累加到xx月xx日这一天
+</span><span class="c1"></span>        <span class="c1">//(1)[1,month-1]个月满月天数
+</span><span class="c1"></span>        <span class="c1">//(2)单独考虑2月份是否是29天（依据是看year是否是闰年）
+</span><span class="c1"></span>        <span class="c1">//(3)第month个月的day天
+</span><span class="c1"></span>
+        <span class="c1">//声明一个变量days，用来存储总天数
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">sumDays</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+        <span class="c1">//累加[1,month-1]个月满月天数
+</span><span class="c1"></span>        <span class="k">switch</span> <span class="o">(</span><span class="n">month</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="n">12</span><span class="o">:</span>
+                <span class="c1">//累加的1-11月
+</span><span class="c1"></span>                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">30</span><span class="o">;</span><span class="c1">//这个30是代表11月份的满月天数
+</span><span class="c1"></span>                <span class="c1">//这里没有break，继续往下走
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">11</span><span class="o">:</span>
+                <span class="c1">//累加的1-10月
+</span><span class="c1"></span>                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//这个31是代表10月的满月天数
+</span><span class="c1"></span>                <span class="c1">//这里没有break，继续往下走
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">10</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">30</span><span class="o">;</span><span class="c1">//9月
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">9</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//8月
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">8</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//7月
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">7</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">30</span><span class="o">;</span><span class="c1">//6月
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">6</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//5月
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">5</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">30</span><span class="o">;</span><span class="c1">//4月
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">4</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//3月
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">3</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">28</span><span class="o">;</span><span class="c1">//2月
+</span><span class="c1"></span>                <span class="c1">//在这里考虑是否可能是29天
+</span><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">year</span> <span class="o">%</span> <span class="n">4</span> <span class="o">==</span> <span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="n">year</span> <span class="o">%</span> <span class="n">100</span> <span class="o">!=</span> <span class="n">0</span> <span class="o">||</span> <span class="n">year</span> <span class="o">%</span> <span class="n">400</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">sumDays</span><span class="o">++;</span><span class="c1">//多加1天
+</span><span class="c1"></span>                <span class="o">}</span>
+            <span class="k">case</span> <span class="n">2</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">31</span><span class="o">;</span><span class="c1">//1月
+</span><span class="c1"></span>            <span class="k">case</span> <span class="n">1</span><span class="o">:</span>
+                <span class="n">sumDays</span> <span class="o">+=</span> <span class="n">day</span><span class="o">;</span><span class="c1">//第month月的day天
+</span><span class="c1"></span>        <span class="o">}</span>
+
+        <span class="c1">//输出结果
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">year</span> <span class="o">+</span> <span class="s">&#34;年&#34;</span> <span class="o">+</span> <span class="n">month</span> <span class="o">+</span> <span class="s">&#34;月&#34;</span> <span class="o">+</span> <span class="n">day</span> <span class="o">+</span> <span class="s">&#34;日是这一年的第&#34;</span> <span class="o">+</span> <span class="n">sumDays</span> <span class="o">+</span> <span class="s">&#34;天&#34;</span><span class="o">);</span>
+
+        <span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="if-else语句与switch-case语句比较-1">if-else语句与switch-case语句比较</h3>
+<ul>
+<li>
+<p>结论：凡是使用switch-case的结构都可以转换为if-else结构。反之，不成立。</p>
+</li>
+<li>
+<p>开发经验：如果既可以使用switch-case，又可以使用if-else，建议使用switch-case。因为效率稍高。</p>
+</li>
+<li>
+<p>细节对比：</p>
+<ul>
+<li>if-else语句优势
+<ul>
+<li>if语句的条件是一个布尔类型值，if条件表达式为true则进入分支，可以用于范围的判断，也可以用于等值的判断，<code>使用范围更广</code>。</li>
+<li>switch语句的条件是一个常量值（byte,short,int,char,枚举,String），只能判断某个变量或表达式的结果是否等于某个常量值，<code>使用场景较狭窄</code>。</li>
+</ul>
+</li>
+<li>switch语句优势
+<ul>
+<li>当条件是判断某个变量或表达式是否等于某个固定的常量值时，使用if和switch都可以，习惯上使用switch更多。因为<code>效率稍高</code>。当条件是区间范围的判断时，只能使用if语句。</li>
+<li>使用switch可以利用<code>穿透性</code>，同时执行多个分支，而if&hellip;else没有穿透性。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">编写程序：从键盘上读入一个学生成绩，存放在变量score中，根据score的值输出其对应的成绩等级：
+
+score&gt;=90           等级:  A
+70&lt;=score&lt;90        等级:  B    
+60&lt;=score&lt;70        等级:  C
+score&lt;60            等级:  D
+
+方式一：使用if-else
+方式二：使用switch-case:  score / 10:   0 - 10
+
+编写一个程序，为一个给定的年份找出其对应的中国生肖。中国的生肖基于12年一个周期，每年用一个动物代表：rat、ox、tiger、rabbit、dragon、snake、horse、sheep、monkey、rooster、dog、pig。
+
+提示：2022年：虎   2022 % 12 == 6 --&gt;确定一个，其余可推
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="循环语句-1">循环语句</h2>
+<ul>
+<li>
+<p>循环结构分类：</p>
+<ul>
+<li>for 循环</li>
+<li>while 循环</li>
+<li>do-while 循环</li>
+</ul>
+</li>
+<li>
+<p>循环结构<code>四要素</code>：</p>
+<ul>
+<li>初始化部分</li>
+<li>循环条件部分</li>
+<li>循环体部分</li>
+<li>迭代部分</li>
+</ul>
+</li>
+</ul>
+<h3 id="for循环-1">for循环</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="k">for</span> <span class="o">(</span><span class="err">①</span><span class="n">初始化部分</span><span class="o">;</span> <span class="err">②</span><span class="n">循环条件部分</span><span class="o">;</span> <span class="err">④</span><span class="n">迭代部分</span><span class="o">)</span><span class="err">｛</span>
+         	<span class="err">③</span><span class="n">循环体部分</span><span class="o">;</span>
+<span class="err">｝</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>for(;;)中的两个；不能多也不能少</li>
+<li>①初始化部分可以声明多个变量，但必须是同一个类型，用逗号分隔</li>
+<li>②循环条件部分为boolean类型表达式，当值为false时，退出循环</li>
+<li>④可以有多个变量更新，用逗号分隔</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForTest2</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span><span class="n">num</span> <span class="o">&lt;</span> <span class="n">3</span><span class="o">;</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;c&#34;</span><span class="o">),</span><span class="n">num</span><span class="o">++){</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;b&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">//abcbc
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="水仙花数-1">水仙花数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//水仙花数
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForTest4</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">//定义统计变量，初始化值是0
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+		
+		<span class="c1">//获取三位数，用for循环实现
+</span><span class="c1"></span>		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">100</span><span class="o">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">1000</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="c1">//获取三位数的个位，十位，百位
+</span><span class="c1"></span>			<span class="kt">int</span> <span class="n">ge</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="n">10</span><span class="o">;</span>
+			<span class="kt">int</span> <span class="n">shi</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">10</span> <span class="o">%</span> <span class="n">10</span><span class="o">;</span><span class="c1">//shi=i%100/10
+</span><span class="c1"></span>			<span class="kt">int</span> <span class="n">bai</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">100</span><span class="o">;</span>
+			
+			<span class="c1">//判断这个三位数是否是水仙花数，如果是，统计变量++
+</span><span class="c1"></span>			<span class="k">if</span><span class="o">((</span><span class="n">ge</span><span class="o">*</span><span class="n">ge</span><span class="o">*</span><span class="n">ge</span><span class="o">+</span><span class="n">shi</span><span class="o">*</span><span class="n">shi</span><span class="o">*</span><span class="n">shi</span><span class="o">+</span><span class="n">bai</span><span class="o">*</span><span class="n">bai</span><span class="o">*</span><span class="n">bai</span><span class="o">)</span> <span class="o">==</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;水仙花数：&#34;</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+				<span class="n">count</span><span class="o">++;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		
+		<span class="c1">//输出统计结果就可以了
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;水仙花数共有&#34;</span><span class="o">+</span><span class="n">count</span><span class="o">+</span><span class="s">&#34;个&#34;</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>break 跳出当前循环结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForTest5</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//需求1：最大公约数
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">12</span><span class="o">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">20</span><span class="o">;</span>
+        <span class="c1">//取出两个数中的较小值
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">?</span> <span class="n">m</span> <span class="o">:</span> <span class="n">n</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">min</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span><span class="c1">//for(int i = 1;i &lt;= min;i++){
+</span><span class="c1"></span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;最大公约数是：&#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span> <span class="c1">//公约数
+</span><span class="c1"></span>
+                <span class="k">break</span><span class="o">;</span> <span class="c1">//跳出当前循环结构
+</span><span class="c1"></span>            <span class="o">}</span>
+        <span class="o">}</span>
+
+
+        <span class="c1">//需求2：最小公倍数
+</span><span class="c1"></span>        <span class="c1">//取出两个数中的较大值
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="o">(</span><span class="n">m</span> <span class="o">&gt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">?</span> <span class="n">m</span> <span class="o">:</span> <span class="n">n</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">max</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">m</span> <span class="o">==</span> <span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;最小公倍数是：&#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span><span class="c1">//公倍数
+</span><span class="c1"></span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="while循环-1">while循环</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="err">①</span><span class="n">初始化部分</span>
+<span class="nf">while</span><span class="o">(</span><span class="err">②</span><span class="n">循环条件部分</span><span class="o">)</span><span class="err">｛</span>
+    <span class="err">③</span><span class="n">循环体部分</span><span class="o">;</span>
+    <span class="err">④</span><span class="n">迭代部分</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>while(循环条件)中循环条件必须是boolean类型。</li>
+<li>注意不要忘记声明④迭代部分。否则，循环将不能结束，变成死循环。</li>
+<li>for循环和while循环可以相互转换。二者没有性能上的差别。实际开发中，根据具体结构的情况，选择哪个格式更合适、美观。</li>
+<li>for循环与while循环的区别：初始化条件部分的作用域不同。</li>
+</ul>
+<h3 id="do-while循环-1">do-while循环</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="err">①</span><span class="n">初始化部分</span><span class="o">;</span>
+<span class="k">do</span><span class="o">{</span>
+	<span class="err">③</span><span class="n">循环体部分</span>
+	<span class="err">④</span><span class="n">迭代部分</span>
+<span class="o">}</span><span class="k">while</span><span class="o">(</span><span class="err">②</span><span class="n">循环条件部分</span><span class="o">);</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>结尾while(循环条件)中循环条件必须是boolean类型</li>
+<li>do{}while();最后有一个分号</li>
+<li>do-while结构的循环体语句是<code>至少会执行一次</code>，这个和for和while是不一样的</li>
+</ul>
+<p><code>比较：</code></p>
+<ul>
+<li><strong>从循环次数角度分析</strong>
+<ul>
+<li>do-while循环至少执行一次循环体语句。</li>
+<li>for和while循环先判断循环条件语句是否成立，然后决定是否执行循环体。</li>
+</ul>
+</li>
+<li><strong>如何选择</strong>
+<ul>
+<li>遍历有明显的循环次数（范围）的需求，选择for循环</li>
+<li>遍历没有明显的循环次数（范围）的需求，选择while循环</li>
+<li>如果循环体语句块至少执行一次，可以考虑使用do-while循环</li>
+<li>本质上：三种循环之间完全可以互相转换，都能实现循环的功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="无限循环-1">&ldquo;无限&quot;循环</h3>
+<ul>
+<li>
+<p>最简单&quot;无限&quot;循环格式：<code>while(true)</code> , <code>for(;;)</code></p>
+</li>
+<li>
+<p>开发中，有时并不确定需要循环多少次，需要根据循环体内部某些条件，来控制循环的结束（使用break）。</p>
+</li>
+<li>
+<p>如果此循环结构不能终止，则构成了死循环！开发中要避免出现死循环。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EndlessFor1</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(;;){</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;我爱你！&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="c1">//        System.out.println(&#34;end&#34;);//永远无法到达的语句，编译报错
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//从键盘读入个数不确定的整数，并判断读入的正数和负数的个数，输入为0时结束程序。
+</span><span class="c1"></span><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">PositiveNegative</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        
+		<span class="kt">int</span> <span class="n">positiveNumber</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span><span class="c1">//统计正数的个数
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="n">negativeNumber</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span><span class="c1">//统计负数的个数
+</span><span class="c1"></span>		<span class="k">for</span><span class="o">(;;){</span>  <span class="c1">//while(true){
+</span><span class="c1"></span>			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;请输入一个整数：(输入为0时结束程序)&#34;</span><span class="o">);</span>
+			<span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">){</span>
+				 <span class="n">positiveNumber</span><span class="o">++;</span>
+            <span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">num</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">){</span>
+				 <span class="n">negativeNumber</span><span class="o">++;</span>
+        	<span class="o">}</span><span class="k">else</span><span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;程序结束&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span> 
+            <span class="o">}</span>
+         <span class="o">}</span>
+		 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;正数的个数为：&#34;</span><span class="o">+</span> <span class="n">positiveNumber</span><span class="o">);</span>
+		 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;负数的个数为：&#34;</span><span class="o">+</span> <span class="n">negativeNumber</span><span class="o">);</span>  
+        
+         <span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	<span class="o">}</span> 
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="嵌套循环-1">嵌套循环</h3>
+<ul>
+<li>实质上，<code>嵌套循环就是把内层循环当成外层循环的循环体</code>。只有当内层循环的循环条件为false时，才会完全跳出内层循环，才可结束外层的当次循环，开始下一次的外层循环。</li>
+<li>设外层循环次数为<code>m</code>次，内层为<code>n</code>次，则内层循环体实际上需要执行<code>m*n</code>次。</li>
+<li>**技巧：**从二维图形的角度看，外层循环控制<code>行数</code>，内层循环控制<code>列数</code>。</li>
+<li>**开发经验：**实际开发中，我们最多见到的嵌套循环是两层。一般不会出现超过三层的嵌套循环。如果将要出现，一定要停下来重新梳理业务逻辑，重新思考算法的实现，控制在三层以内。否则，可读性会很差。</li>
+</ul>
+<h2 id="关键字break和continue-1">关键字break和continue</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">适用范围</th>
+<th style="text-align:center">在循环结构中使用的作用</th>
+<th style="text-align:center">相同点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">break</td>
+<td style="text-align:center">switch-case循环结构</td>
+<td style="text-align:center">一旦执行，就结束(或跳出)<code>当前</code>循环结构</td>
+<td style="text-align:center"><code>此关键字的后面，不能声明语句</code></td>
+</tr>
+<tr>
+<td style="text-align:center">continue</td>
+<td style="text-align:center">循环结构</td>
+<td style="text-align:center">一旦执行，就结束(或跳出)<code>当次</code>循环结构</td>
+<td style="text-align:center">此关键字的后面，不能声明语句</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">BreakContinueTest1</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+	
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">10</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+			
+			<span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">4</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+				<span class="c1">//break;//123
+</span><span class="c1"></span>				<span class="k">continue</span><span class="o">;</span><span class="c1">//123567910
+</span><span class="c1"></span>				<span class="c1">//如下的语句不可能被执行，编译不通过
+</span><span class="c1"></span>				<span class="c1">//System.out.println(&#34;今晚迪丽热巴要约我吃饭&#34;);
+</span><span class="c1"></span>			<span class="o">}</span>
+
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;####&#34;</span><span class="o">);</span>
+
+		<span class="c1">//嵌套循环中的使用
+</span><span class="c1"></span>		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+		
+			<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">10</span><span class="o">;</span><span class="n">j</span><span class="o">++){</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">4</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+					<span class="c1">//break; //结束的是包裹break关键字的最近的一层循环！
+</span><span class="c1"></span>					<span class="k">continue</span><span class="o">;</span><span class="c1">//结束的是包裹break关键字的最近的一层循环的当次！
+</span><span class="c1"></span>				<span class="o">}</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">j</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+		<span class="o">}</span>
+
+	<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="带标签的使用-1">带标签的使用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">break语句用于终止某个语句块的执行</span>
+<span class="o">{</span>    <span class="err">……</span>	 
+	<span class="k">break</span><span class="o">;</span>
+	 <span class="err">……</span>
+<span class="o">}</span>
+
+<span class="n">break语句出现在多层嵌套的语句块中时</span><span class="err">，</span><span class="n">可以通过标签指明要终止的是哪一层语句块</span> 
+	<span class="n">label1</span><span class="o">:</span> <span class="o">{</span>   <span class="err">……</span>        
+	<span class="n">label2</span><span class="o">:</span>	     <span class="o">{</span>   <span class="err">……</span>
+	<span class="n">label3</span><span class="o">:</span>			 <span class="o">{</span>   <span class="err">……</span>
+				           <span class="k">break</span> <span class="n">label2</span><span class="o">;</span>
+				           <span class="err">……</span>
+					 <span class="o">}</span>
+			     <span class="o">}</span>
+			<span class="o">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>continue语句出现在多层嵌套的循环语句体中时，也可以通过标签指明要跳过的是哪一层循环。</p>
+</li>
+<li>
+<p>标号语句必须紧接在循环的头部。标号语句不能用在非循环语句的前面。</p>
+</li>
+<li>
+<p>举例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">BreakContinueTest2</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">l</span><span class="o">:</span><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+
+          <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">10</span><span class="o">;</span><span class="n">j</span><span class="o">++){</span>
+              <span class="k">if</span><span class="o">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">4</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+                  <span class="c1">//break l;
+</span><span class="c1"></span>                  <span class="k">continue</span> <span class="n">l</span><span class="o">;</span>
+              <span class="o">}</span>
+              <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">j</span><span class="o">);</span>
+          <span class="o">}</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+      <span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="找素数-1">找素数</h3>
+<p><strong>题目：找出100以内所有的素数（质数）？100000以内的呢？</strong></p>
+<p>分析：素数（质数）：只能被1和它本身整除的自然数。  &mdash;&gt; 从2开始，到这个数-1为止，此范围内没有这个数的约数。则此数是一个质数。
+比如：2、3、5、7、11、13、17、19、23、&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">PrimeNumberTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="kt">boolean</span> <span class="n">isFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//用于标识i是否被除尽过
+</span><span class="c1"></span>		<span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span> 
+        <span class="c1">//记录当前时间距离1970-1-1 00:00:00的毫秒数	
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span><span class="c1">//记录质数的个数
+</span><span class="c1"></span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">100000</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>  <span class="c1">//i
+</span><span class="c1"></span>
+			<span class="c1">//boolean isFlag = true; //用于标识i是否被除尽过
+</span><span class="c1"></span>		
+			<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span><span class="n">j</span><span class="o">++){</span>
+				
+				<span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span> <span class="c1">// 
+</span><span class="c1"></span>					<span class="n">isFlag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+				<span class="o">}</span>
+			
+			<span class="o">}</span>
+
+			<span class="c1">//判断i是否是质数
+</span><span class="c1"></span>			<span class="k">if</span><span class="o">(</span><span class="n">isFlag</span><span class="o">){</span> <span class="c1">//如果isFlag变量没有给修改过值，就意味着i没有被j除尽过。则i是一个质数
+</span><span class="c1"></span>				<span class="c1">//System.out.println(i);
+</span><span class="c1"></span>				<span class="n">count</span><span class="o">++;</span>
+			<span class="o">}</span>
+
+			<span class="c1">//重置isFlag
+</span><span class="c1"></span>			<span class="n">isFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+		
+		<span class="o">}</span>
+
+		<span class="kt">long</span> <span class="n">end</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;质数的个数为：&#34;</span> <span class="o">+</span> <span class="n">count</span><span class="o">);</span><span class="c1">//9592
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行此程序花费的毫秒数为：&#34;</span> <span class="o">+</span> <span class="o">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="o">));</span> <span class="c1">//6715
+</span><span class="c1"></span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>优化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">PrimeNumberTest1</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span> <span class="c1">//记录当前时间距离1970-1-1 00:00:00的毫秒数
+</span><span class="c1"></span>
+		<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span><span class="c1">//记录质数的个数
+</span><span class="c1"></span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">100000</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>  <span class="c1">//i
+</span><span class="c1"></span>
+			<span class="kt">boolean</span> <span class="n">isFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//用于标识i是否被除尽过
+</span><span class="c1"></span>			
+            <span class="c1">// 开根号等号要留着
+</span><span class="c1"></span>			<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span><span class="n">j</span><span class="o">++){</span> <span class="c1">//优化2：将循环条件中的i改为Math.sqrt(i)
+</span><span class="c1"></span>				
+				<span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span> <span class="c1">//表明i有约数
+</span><span class="c1"></span>					<span class="n">isFlag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+					<span class="k">break</span><span class="o">;</span><span class="c1">//优化1：主要针对非质数起作用---&gt;620
+</span><span class="c1"></span>				<span class="o">}</span>
+			
+			<span class="o">}</span>
+
+			<span class="c1">//判断i是否是质数
+</span><span class="c1"></span>			<span class="k">if</span><span class="o">(</span><span class="n">isFlag</span><span class="o">){</span> <span class="c1">//如果isFlag变量没有给修改过值，就意味着i没有被j除尽过。则i是一个质数
+</span><span class="c1"></span>				<span class="c1">//System.out.println(i);
+</span><span class="c1"></span>				<span class="n">count</span><span class="o">++;</span>
+			<span class="o">}</span>
+		
+		<span class="o">}</span>
+
+		<span class="kt">long</span> <span class="n">end</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;质数的个数为：&#34;</span> <span class="o">+</span> <span class="n">count</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行此程序花费的毫秒数为：&#34;</span> <span class="o">+</span> <span class="o">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="o">));</span><span class="c1">//16
+</span><span class="c1"></span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="scanner键盘输入功能的实现-1">Scanner：键盘输入功能的实现</h2>
+<ul>
+<li>
+<p>如何从键盘获取不同类型（基本数据类型、String类型）的变量：使用Scanner类。</p>
+</li>
+<li>
+<p>键盘输入代码的四个步骤：</p>
+<ol>
+<li>
+<p>导包：<code>import java.util.Scanner;</code></p>
+</li>
+<li>
+<p>创建Scanner类型的对象：<code>Scanner scan = new Scanner(System.in);</code></p>
+</li>
+<li>
+<p>调用Scanner类的相关方法（<code>next() / nextXxx()</code>），来获取指定类型的变量</p>
+</li>
+<li>
+<p>释放资源：<code>scan.close();</code></p>
+<p>在 Java 中，当一个对象不再被程序所引用时，Java 的垃圾回收机制会负责回收该对象所占用的内存空间。然而，对于一些底层资源（比如文件句柄、网络连接等），Java 的垃圾回收机制无法直接回收，这就需要程序员手动关闭这些资源。</p>
+<p>如果不及时关闭 Scanner 对象，它所占用的系统资源将无法被及时释放，可能导致资源泄漏，最终会影响系统的稳定性和性能。因此，通过调用 scan.close()方法，可以及时释放 Scanner 对象占用的系统资源，从而<code>防止内存泄漏</code>问题的发生。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>注意：需要根据相应的方法，来输入指定类型的值。如果输入的数据类型与要求的类型不匹配时，会报异常 导致程序终止。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//① 导包
+</span><span class="c1"></span><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ScannerTest1</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//② 创建Scanner的对象
+</span><span class="c1"></span>        <span class="c1">//Scanner是一个引用数据类型，它的全名称是java.util.Scanner
+</span><span class="c1"></span>        <span class="c1">//scanner就是一个引用数据类型的变量了，赋给它的值是一个对象
+</span><span class="c1"></span>        <span class="c1">//new Scanner(System.in)是一个new表达式，该表达式的结果是一个对象
+</span><span class="c1"></span>        <span class="c1">//引用数据类型  变量 = 对象;
+</span><span class="c1"></span>        <span class="c1">//这个等式的意思可以理解为用一个引用数据类型的变量代表一个对象，所以这个变量的名称又称为对象名
+</span><span class="c1"></span>        <span class="c1">//我们也把scanner变量叫做scanner对象
+</span><span class="c1"></span>        <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span><span class="c1">//System.in默认代表键盘输入
+</span><span class="c1"></span>        
+        <span class="c1">//③根据提示，调用Scanner的方法，获取不同类型的变量
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;欢迎光临你好我好交友网站！&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;请输入你的网名：&#34;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;请输入你的年龄：&#34;</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;请输入你的体重：&#34;</span><span class="o">);</span>
+        <span class="kt">double</span> <span class="n">weight</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;你是否单身（true/false)：&#34;</span><span class="o">);</span>
+        <span class="c1">//System.out.print(&#34;你是否单身（true\\false)：&#34;);
+</span><span class="c1"></span>        <span class="c1">//一个\会报错，表示转义字符两个就可以正常输出
+</span><span class="c1"></span>        <span class="kt">boolean</span> <span class="n">isSingle</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextBoolean</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;请输入你的性别：&#34;</span><span class="o">);</span>
+        <span class="c1">////先按照字符串接收，然后再取字符串的第一个字符（下标为0）
+</span><span class="c1"></span>        <span class="kt">char</span> <span class="n">gender</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">next</span><span class="o">().</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;你的基本情况如下：&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;网名：&#34;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&#34;\n年龄：&#34;</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="s">&#34;\n体重：&#34;</span> <span class="o">+</span> <span class="n">weight</span> <span class="o">+</span> 
+                           <span class="s">&#34;\n单身：&#34;</span> <span class="o">+</span> <span class="n">isSingle</span> <span class="o">+</span> <span class="s">&#34;\n性别：&#34;</span> <span class="o">+</span> <span class="n">gender</span><span class="o">);</span>
+        
+        <span class="c1">//④ 关闭资源
+</span><span class="c1"></span>        <span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>中文报错，编码改为ANSI</p>
+<p>字符串相等：</p>
+<p><code>&quot;是&quot;.equals(str) </code>判读字符串的内容</p>
+<p>str== &ldquo;是&rdquo; &mdash;不行，判断两个字符串是不是同一个</p>
+</blockquote>
+<h2 id="随机数-1">随机数</h2>
+<p>Math.random()方法</p>
+<p>Math类的random()的调用，会返回一个[0,1)范围的一个double型值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kt">double</span> <span class="n">randomValue</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">();</span>
+
+<span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="n">100</span>  <span class="o">---&gt;</span>  <span class="o">[</span><span class="n">0</span><span class="o">,</span><span class="n">100</span><span class="o">)</span>
+<span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="n">100</span><span class="o">)</span>	<span class="o">---&gt;</span> <span class="o">[</span><span class="n">0</span><span class="o">,</span><span class="n">99</span><span class="o">]</span>
+<span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="n">101</span><span class="o">)</span>	<span class="o">---&gt;</span> <span class="o">[</span><span class="n">0</span><span class="o">,</span><span class="n">100</span><span class="o">]</span>                        
+<span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="n">100</span><span class="o">)</span> <span class="o">+</span> <span class="n">5</span>  <span class="o">----&gt;</span> <span class="o">[</span><span class="n">5</span><span class="o">,</span><span class="n">104</span><span class="o">]</span>
+
+<span class="c1">//先取[0,b-a]，然后＋a
+</span><span class="c1"></span><span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="o">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span> <span class="o">+</span> <span class="n">1</span><span class="o">))</span> <span class="o">+</span> <span class="n">a</span>	<span class="o">----&gt;</span> <span class="o">[</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>java.util.Random类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>  
+  
+<span class="c1">// 创建 Random 对象  
+</span><span class="c1"></span><span class="n">Random</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>  
+  
+<span class="c1">// 生成随机整数  
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">randomNumber</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">100</span><span class="o">);</span> <span class="c1">// 生成 0 到 99 之间的随机整数  
+</span><span class="c1"></span>  
+<span class="c1">// 生成随机双精度浮点数  
+</span><span class="c1"></span><span class="kt">double</span> <span class="n">randomDouble</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">();</span> <span class="c1">// 生成 0.0 到 1.0 之间的随机双精度浮点数  
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="小项目记账软件-1">小项目：<strong>记账软件</strong></h2>
+<p>需求：该软件能够记录家庭的收入、支出，并能够打印收支明细表</p>
+<p>•假设家庭起始的生活基本金为10000元。</p>
+<p>•每次登记收入（菜单2）后，收入的金额应累加到基本金上，并记录本次收入明细，以便后续的查询。</p>
+<p>•每次登记支出（菜单3）后，支出的金额应从基本金中扣除，并记录本次支出明细，以便后续的查询。</p>
+<p>•查询收支明细（ 菜单1）时，将显示所有的收入、支出名细列表</p>
+<p><img src="/images/2024/10.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="cm">/**
+</span><span class="cm">Utility工具类：
+</span><span class="cm">将不同的功能封装为方法，就是可以直接通过调用方法使用它的功能，而无需考虑具体的功能实现细节。
+</span><span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Utility</span> <span class="o">{</span>
+    <span class="c1">// 声明了一个静态的、私有的Scanner类型的变量`scanner`，用于从命令行获取用户输入
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+    <span class="cm">/**
+</span><span class="cm">	用于界面菜单的选择。该方法读取键盘，如果用户键入’1’-’4’中的任意字符，则方法返回。返回值为用户键入字符。
+</span><span class="cm">	*/</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">readMenuSelection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">char</span> <span class="n">c</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">1</span><span class="o">);</span> 
+            <span class="n">c</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span><span class="c1">//获取字符串中索引位置为0的字符
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;1&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;2&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;3&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;4&#39;</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;选择错误，请重新输入：&#34;</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+	<span class="cm">/**
+</span><span class="cm">	用于收入和支出金额的输入。该方法从键盘读取一个不超过4位长度的整数，并将其作为方法的返回值。
+</span><span class="cm">	*/</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">readNumber</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">4</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NumberFormatException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;数字输入错误，请重新输入：&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">n</span><span class="o">;</span>
+    <span class="o">}</span>
+	<span class="cm">/**
+</span><span class="cm">	用于收入和支出说明的输入。该方法从键盘读取一个不超过8位长度的字符串，并将其作为方法的返回值。
+</span><span class="cm">	*/</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">readString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">8</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">str</span><span class="o">;</span>
+    <span class="o">}</span>
+	
+	<span class="cm">/**
+</span><span class="cm">	用于确认选择的输入。该方法从键盘读取‘Y’或’N’，并将其作为方法的返回值。
+</span><span class="cm">	*/</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">readConfirmSelection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">char</span> <span class="n">c</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">1</span><span class="o">).</span><span class="na">toUpperCase</span><span class="o">();</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;Y&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;N&#39;</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;选择错误，请重新输入：&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+	
+	
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">readKeyBoard</span><span class="o">(</span><span class="kt">int</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>
+		
+        <span class="c1">// 使用 hasNext() 检查是否还有下一个 token 
+</span><span class="c1"></span>        <span class="k">while</span> <span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">1</span> <span class="o">||</span> <span class="n">line</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;输入长度（不大于&#34;</span> <span class="o">+</span> <span class="n">limit</span> <span class="o">+</span> <span class="s">&#34;）错误，请重新输入：&#34;</span><span class="o">);</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">line</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong><code>scanner.hasNext()</code></strong> 是一个用于检查输入流中是否还有下一个 token（标记）的方法。在 Java 中，<strong><code>Scanner</code></strong> 类可以用来从输入流中获取用户输入。<strong><code>hasNext()</code></strong> 方法返回一个布尔值，指示是否还有下一个 token 可用。</p>
+<p>while (scanner.hasNext()) {<br>
+String input = scanner.next(); // 读取下一个 token<br>
+System.out.println(&ldquo;You entered: &quot; + input);<br>
+}</p>
+<p>Enter a string: qqq
+You entered: qqq
+aaa
+You entered: aaa
+ccc
+You entered: ccc</p>
+<p><a href="https://blog.csdn.net/gao_zhennan/article/details/80562548">BLOG</a></p>
+<p>c = str.<code>charAt(0)</code>;//获取字符串中索引位置为0的字符</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FamilyAccount</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="kt">boolean</span> <span class="n">isFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="n">String</span> <span class="n">details</span> <span class="o">=</span> <span class="s">&#34;收支\t账户金额\t\t收支金额\t说    明\n&#34;</span><span class="o">;</span>
+		<span class="kt">double</span> <span class="n">balance</span> <span class="o">=</span> <span class="n">10000</span><span class="o">;</span><span class="c1">//初始账户 金额
+</span><span class="c1"></span>
+		<span class="k">do</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span>
+					<span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;\n-----------------谷粒收支记账软件-----------------\n&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;                   1 收支明细&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;                   2 登记收入&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;                   3 登记支出&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;                   4 退    出\n&#34;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;                   请选择(1-4)：&#34;</span><span class="o">);</span>
+
+			<span class="c1">// 要求用户输入1-4选择
+</span><span class="c1"></span>			<span class="kt">char</span> <span class="n">menu</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readMenuSelection</span><span class="o">();</span>
+			<span class="k">switch</span> <span class="o">(</span><span class="n">menu</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">case</span> <span class="sc">&#39;1&#39;</span><span class="o">:</span>
+<span class="c1">//				System.out.println(&#34;显示详情&#34;);
+</span><span class="c1"></span>				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;-----------------当前收支明细记录-----------------&#34;</span><span class="o">);</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">details</span><span class="o">);</span>
+				
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;---------------------------------------------&#34;</span><span class="o">);</span>
+				
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">case</span> <span class="sc">&#39;2&#39;</span><span class="o">:</span>
+<span class="c1">//				System.out.println(&#34;收入情况&#34;);
+</span><span class="c1"></span>				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;本次收入金额：&#34;</span><span class="o">);</span>
+				<span class="kt">int</span> <span class="n">money</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readNumber</span><span class="o">();</span><span class="c1">//从键盘获取收入的金额
+</span><span class="c1"></span>				
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;本次收入说明：&#34;</span><span class="o">);</span>
+				<span class="n">String</span> <span class="n">desc</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readString</span><span class="o">();</span><span class="c1">//从键盘获取收入的说明
+</span><span class="c1"></span>				
+				<span class="c1">//根据获取的金额和收入说明修改用户的信息
+</span><span class="c1"></span>				<span class="n">balance</span> <span class="o">+=</span> <span class="n">money</span><span class="o">;</span>
+				
+				<span class="n">details</span> <span class="o">+=</span> <span class="o">(</span><span class="s">&#34;收入\t&#34;</span> <span class="o">+</span> <span class="n">balance</span> <span class="o">+</span> <span class="s">&#34;\t\t&#34;</span> <span class="o">+</span> <span class="n">money</span> <span class="o">+</span> <span class="s">&#34;\t&#34;</span> <span class="o">+</span><span class="n">desc</span> <span class="o">+</span> <span class="s">&#34;\n&#34;</span><span class="o">);</span>
+				
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;---------------------登记完成-------------------&#34;</span><span class="o">);</span>
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">case</span> <span class="sc">&#39;3&#39;</span><span class="o">:</span>
+<span class="c1">//				System.out.println(&#34;支出情况&#34;);
+</span><span class="c1"></span>				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;本次支出金额：&#34;</span><span class="o">);</span>
+				<span class="kt">int</span> <span class="n">money1</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readNumber</span><span class="o">();</span><span class="c1">//从键盘获取支出的金额
+</span><span class="c1"></span>				
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;本次支出说明：&#34;</span><span class="o">);</span>
+				<span class="n">String</span> <span class="n">desc1</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readString</span><span class="o">();</span><span class="c1">//从键盘获取支出的说明
+</span><span class="c1"></span>				
+				<span class="c1">//根据获取的金额和支出说明修改用户的信息
+</span><span class="c1"></span>				<span class="k">if</span><span class="o">(</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">money1</span><span class="o">){</span>
+					<span class="n">balance</span> <span class="o">-=</span> <span class="n">money1</span><span class="o">;</span>
+					<span class="n">details</span> <span class="o">+=</span> <span class="o">(</span><span class="s">&#34;支出\t&#34;</span> <span class="o">+</span> <span class="n">balance</span> <span class="o">+</span> <span class="s">&#34;\t\t&#34;</span> <span class="o">+</span> <span class="n">money1</span> <span class="o">+</span> <span class="s">&#34;\t&#34;</span> <span class="o">+</span><span class="n">desc1</span> <span class="o">+</span> <span class="s">&#34;\n&#34;</span><span class="o">);</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;---------------------登记完成-------------------&#34;</span><span class="o">);</span>
+				<span class="o">}</span><span class="k">else</span><span class="o">{</span>
+					<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;余额不足，支出失败&#34;</span><span class="o">);</span>
+				<span class="o">}</span>
+				
+				<span class="k">break</span><span class="o">;</span>
+			<span class="k">case</span> <span class="sc">&#39;4&#39;</span><span class="o">:</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;确认是否退出(Y/N)：&#34;</span><span class="o">);</span>
+				<span class="kt">char</span> <span class="n">exit</span> <span class="o">=</span> <span class="n">Utility</span><span class="o">.</span><span class="na">readConfirmSelection</span><span class="o">();</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">exit</span> <span class="o">==</span> <span class="sc">&#39;Y&#39;</span><span class="o">){</span>
+					<span class="n">isFlag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+				<span class="o">}</span>
+				
+				<span class="k">break</span><span class="o">;</span>
+
+			<span class="o">}</span>
+
+		<span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">isFlag</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="总结-1">总结：</h2>
+<p>switch-case</p>
+<ul>
+<li>
+<p>在特殊的场景下，分支结构可以考虑使用switch-case</p>
+<ul>
+<li>指定的数据类型：byte \ short \ char \ int ; 枚举类（jdk5.0）\ String (jdk7.0)</li>
+<li>可以考虑的常量值有限且取值情况不多。</li>
+</ul>
+</li>
+<li>
+<p>特别之处：case穿透。</p>
+</li>
+<li>
+<p>在能使用switch-case的情况下，推荐使用switch-case，因为比if-else效率稍高</p>
+</li>
+</ul>
+<p>Scanner类中提供了获取byte \ short \ int \ long \float \double \boolean \ String类型变量的方法。没有提供获取char类型变量的方法。需要使用next().charAt(0)</p>
+<p>Java支持哪些类型循环(上海*睿)</p>
+<ul>
+<li>for;while;do-while</li>
+<li>增强for （或foreach）</li>
+</ul>
+
     </div>
 
     <div class="post-copyright">
@@ -1459,7 +4149,11 @@ score&lt;60            等级:  D
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/java04/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java-IDEA</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/java02/">
             <span class="next-text nav-default">Java变量与运算符</span>
             <span class="next-text nav-mobile">Next</span>
@@ -1503,7 +4197,7 @@ score&lt;60            等级:  D
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
   </span>
 </div>
 

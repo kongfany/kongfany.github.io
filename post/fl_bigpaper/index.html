@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>大论文思路分析 - 乐观积极的...</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="blog1 Domain Shift in FL DA 常用数据集：Office-31，Office-Caltech-10，MINIST&#43;USPS，更多的见：https://githu" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/fl_bigpaper/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="大论文思路分析" />
+<meta property="og:description" content="blog1 Domain Shift in FL DA 常用数据集：Office-31，Office-Caltech-10，MINIST&#43;USPS，更多的见：https://githu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/fl_bigpaper/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-03-02T10:31:34+08:00" />
+<meta property="article:modified_time" content="2024-03-02T10:31:34+08:00" />
+
+<meta itemprop="name" content="大论文思路分析">
+<meta itemprop="description" content="blog1 Domain Shift in FL DA 常用数据集：Office-31，Office-Caltech-10，MINIST&#43;USPS，更多的见：https://githu"><meta itemprop="datePublished" content="2024-03-02T10:31:34+08:00" />
+<meta itemprop="dateModified" content="2024-03-02T10:31:34+08:00" />
+<meta itemprop="wordCount" content="18384">
+<meta itemprop="keywords" content="Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="大论文思路分析"/>
+<meta name="twitter:description" content="blog1 Domain Shift in FL DA 常用数据集：Office-31，Office-Caltech-10，MINIST&#43;USPS，更多的见：https://githu"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">乐观积极的...</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">乐观积极的...</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">大论文思路分析</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-03-02 </span>
+        
+          <span class="more-meta"> 18384 words </span>
+          <span class="more-meta"> 37 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#domain-shift-in-fl">Domain Shift in FL</a></li>
+            <li><a href="#personalized-fl">Personalized FL</a></li>
+          </ul>
+        </li>
+        <li><a href="#non-iid">Non-iid</a></li>
+        <li><a href="#noiid">NOIID</a>
+          <ul>
+            <li><a href="#狄利克雷分布dirichlet-distribution">狄利克雷分布(Dirichlet Distribution)</a></li>
+          </ul>
+        </li>
+        <li><a href="#域自适应kd3a">域自适应KD3A</a></li>
+        <li><a href="#个性化-相互学习">个性化-相互学习</a></li>
+        <li><a href="#第二篇论文">第二篇论文</a>
+          <ul>
+            <li><a href="#fedsoup"><code>fedsoup</code></a></li>
+            <li><a href="#数据划分">数据划分</a></li>
+          </ul>
+        </li>
+        <li><a href="#思路分析">思路分析</a></li>
+        <li><a href="#大论文">大论文</a></li>
+        <li><a href="#存在问题与研究动机">存在问题与研究动机</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><a href="https://zhuanlan.zhihu.com/p/449164981">blog1</a></p>
+<h3 id="domain-shift-in-fl">Domain Shift in FL</h3>
+<ul>
+<li>
+<p>DA 常用数据集：Office-31，Office-Caltech-10，MINIST+USPS，更多的见：<a href="https://link.zhihu.com/?target=https%3A//github.com/jindongwang/transferlearning/blob/master/data/dataset.md">https://github.com/jindongwang/transferlearning/blob/master/data/dataset.md</a></p>
+</li>
+<li>
+<p>一个 baseline 方法：DDC，见：<a href="https://link.zhihu.com/?target=https%3A//github.com/jindongwang/transferlearning/tree/master/code/DeepDA">https://github.com/jindongwang/transferlearning/tree/master/code/DeepDA</a></p>
+</li>
+<li>
+<p>domain adaption 的 setting: source domain 有 labeled data，target domain 没有或者只有少量 labeled data（可以有大量 unlabeled data）。在 FL 下可能的 setting：</p>
+</li>
+<li>
+<ul>
+<li>client 有 target unlabeded data，server 有 source labeled data</li>
+<li>client 有 target unlabeded data + server 共享的 source labeled data</li>
+<li>client 之间 target unlabeled data 存在 non-iid</li>
+</ul>
+</li>
+<li>
+<h3 id="personalized-fl">Personalized FL</h3>
+</li>
+<li>
+<blockquote>
+<p>先是一个 survey: Towards Personalized Federated Learning</p>
+</blockquote>
+</li>
+<li>
+<p>可以分成 data-based, model-based；其中 model-based 按照 FL 阶段会产生多少个不同的 model，有可以分成 single-model，multi-model，和 n-model</p>
+</li>
+<li>
+<p>Data-based</p>
+</li>
+<li>
+<ul>
+<li><code>FedPer_Federated Learning with Non-IID Data</code>：Server 给 client 发一小部分 shared data，减少 weight deviation</li>
+<li>还可以对不均衡样本进行 over-sampling，down-sampling, GAN 之类的方法</li>
+</ul>
+</li>
+<li>
+<p>Model-based</p>
+</li>
+<li>
+<ul>
+<li>
+<p>Single model &ndash;&gt; Meta-learning</p>
+<ul>
+<li>Per-FedAvg</li>
+<li>pFedMe</li>
+<li>FedFomo</li>
+<li><code>On Data Efficiency of Meta-learning_AISTATS21</code>: 详细对比分析了 Reptile，MAML，ProtoNet 3种 meta-learning 的方法
+MAML 偏好需要很多 task，每个task的 data point 可以比较少，而 reptile 正好相反</li>
+</ul>
+</li>
+<li>
+<p>Single model &ndash;&gt; Regularization</p>
+<ul>
+<li><code>Debiasing Model Updates for Improving Personalized Federated Training_ICML21</code>，见 <a href="https://link.zhihu.com/?target=https%3A//wandb.ai/mckjoo/meta-proto-meta-set/reports/Federated-meta-learning--VmlldzoyMTEyMDY">weights &amp; Biases</a></li>
+<li>其他的比如 <code>Elastic Weight Consolidation (EWC)</code> 等</li>
+</ul>
+</li>
+<li>
+<p>Parameter-decoupling</p>
+</li>
+<li>
+<p>N-model</p>
+<ul>
+<li>
+<p>Transfer Leraning/ Knowledge Distillation.上传对于一个 (public dataset + private dataset) 的 logit 预测结果（作为 knowledge）。server 对 knowledge 进行 aggregate，client 利用 aggregated knowledge 进行知识蒸馏（local model 作为学生）。但这类方法需要一个 public dataset 来做知识蒸馏，算是传统 FL 形式的拓展</p>
+<p><code>FedMD: Heterogenous Federated Learningvia Model Distillation</code>：知识蒸馏在 client 端进行，server 负责 aggregate logit；classifier所需的分类数 = public dataset类别数 + private dataset类别数</p>
+</li>
+<li>
+<p>Multiple-Model &ndash;&gt; Clustering ClusterFL, FedDL</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h2 id="non-iid">Non-iid</h2>
+</li>
+<li>
+<p>通过改 server 端 aggregation 算法</p>
+</li>
+<li>
+<ul>
+<li>
+<p><strong><code>Federated Learning on Non-IID Data Silos: An Experimental Study</code>*</strong> (挺有启发的一篇文章)：比较了 FedAvg, FedProx, SCAFFOLD, FedNova 几种算法，有几个观察：</p>
+</li>
+<li>
+<ul>
+<li>IID 时，FedAvg 不比其他3个方法差；Feature distribution skew, quantity skew 情况下，准确率下降不明显，并且 FedAvg 甚至比其他三个更好（The state-of-the-art algorithms signifi-cantly outperform FedAvg only in several cases）</li>
+<li>Label distribution skew（也即 label non-iid）确实会带来巨大准确率下降。极端 non-iid 情况下，FedProx 比 FedAvg 稍好</li>
+<li>SCAFFOLD, FedNova 在很多情况下不稳定（可以排除掉了）</li>
+<li>Dirichlet 分布产生的 Label distribution skew 相比每个 client 只有一类这种极端情况，要稍微好一点。另外这篇文章也提到，只有一类这种极端情况在现实中也可能存在，比如 speaker recognition</li>
+</ul>
+</li>
+<li>
+<p><code>FedMA_Federated learning withmatched averaging_ICLR20</code>：对于每一层（以FC为例），local dataset 训练得到的 weight 是 optimal 乘上一个 L*L 的矩阵，其中 L 是 hidden unit 数量。在 server 端，可以先求出来每一层的这个变换矩阵（通过迫使 global model 和 local model 变换后接近），再 aggregate；缺点是不支持 BN 层</p>
+</li>
+<li>
+<p><code>FedBN: Federated Learning on Non-IID Features via Local Batch Normalization_ICLR21</code>：server does not aggregate BN layers，探索的是 BN 层怎么 aggregate 的问题</p>
+</li>
+<li>
+<p><code>FedDF_Ensemble Distillation for Robust Model Fusion in Federated Learning_NIPS20</code></p>
+</li>
+<li>
+<ul>
+<li>最终目标还是产生一个 model，不是 personalized FL；其中知识蒸馏在 server 端进行，client 还是只需要上传 model</li>
+<li>相比于 FedAvg（算法第6行为止），FedDF 多了在 server 上的 N 次迭代；每次迭代中，将 client models 对于 <code>samples d</code> 的 logit 的平均值作为 teacher，global model（<code>x_{t, j-1}</code>）作为 student</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://www.cnblogs.com/orion-orion/p/15897853.html">https://www.cnblogs.com/orion-orion/p/15897853.html</a>)</p>
+<h2 id="noiid">NOIID</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/554878748">BLOG</a>,<a href="https://github.com/Xtra-Computing/NIID-Bench">CODE</a></p>
+<p>数据分割的方式：</p>
+<p>1.Label distribution skew 标签分布倾斜</p>
+<ul>
+<li>
+<p>Quantity-based label imbalance：基于数量的标签不平衡</p>
+<p>每一方只能获得特定个数的标签（例如在MNIST中，只能获得任意2个标签的样本构成数据集）</p>
+<p>对于有相同标签的一组参与方，将对应标签的数据集随机并平均地分配到参与方手中</p>
+</li>
+<li>
+<p>Distribution-based label imbalance：基于分布的标签不平衡</p>
+<p>根据狄利克雷分布，每一方将获得对应地数据集，具体来说： pk∼DirN(β)</p>
+<p>其中 pk,i 记为类别k分到第i方的数据量</p>
+</li>
+</ul>
+<p>2.Feature distribution skew 特征分布倾斜</p>
+<ul>
+<li>
+<p>Noise-based feature imbalance 基于噪声的</p>
+<p>首先将数据平均并随机分配至各参与方手中</p>
+<p>对图像数据集加上x ∼ Gau(σ · i/N ) 均值为0，方差为σ · i/N的高斯噪声</p>
+</li>
+<li>
+<p>Synthetic feature imbalance 生成特征不平衡</p>
+<p>文章中生成了一个feature imbalance的数据集FCUBE</p>
+</li>
+<li>
+<p>Real-world feature imbalance 现实世界的特征不平衡</p>
+<p>EMNIST数据集中，手写数字来自于不同的人，因此将不同的人的数据分发给不同的参与方，即可实现天然的feature imbalance</p>
+</li>
+</ul>
+<p>3.Quantity skew 数量偏移</p>
+<ul>
+<li>各参与方数据集大小不同</li>
+</ul>
+<p>&ndash;</p>
+<h3 id="狄利克雷分布dirichlet-distribution">狄利克雷分布(Dirichlet Distribution)</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/78743630?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_oi=693565951899074560&amp;utm_psn=1565622651724464128&amp;utm_source=wechat_session">BLOG</a></p>
+<p><a href="https://www.cnblogs.com/orion-orion/p/15897853.html">可视化</a></p>
+<p><a href="https://www.cnblogs.com/orion-orion/p/15991423.html">可视化2</a></p>
+<p><a href="https://www.cnblogs.com/orion-orion/p/15631167.html">可视化3</a>、</p>
+<p>（第一次采用Dirichlet分布来划分数据集的论文为<a href="https://arxiv.org/pdf/1909.06335.pdf">《Measuring the Effects of Non-Identical Data Distribution for Federated Visual Classification》</a>[2]）。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/240435991">auc</a></p>
+<p><strong>ACC（Accuracy）是模型的准确率</strong>，即模型正确预测的样本数占总样本数的比例。ACC 可以用来评估模型在整体上的分类效果，但它不能很好地反映模型在不同类别上的表现差异。</p>
+<p><strong>AUC（Area Under the Curve）是 ROC 曲线下的面积</strong>，可以用来评估模型在不同阈值下的分类效果。AUC 的取值范围在 0.5 到 1 之间，值越大表示模型性能越好。当 AUC = 0.5 时，表示模型预测效果与随机猜测一样；当 AUC = 1 时，表示模型完全正确地区分了正负样本。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">auc = metrics.roc_auc_score(y_true, y_prob, average=&#34;micro&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码使用了<code>sklearn.metrics</code>模块中的<code>roc_auc_score</code>函数来计算接收者操作特征曲线下面积（Area Under the Receiver Operating Characteristic Curve，简称AUC）。AUC是一个用于评估分类模型性能的指标，特别是在不平衡的数据集上。</p>
+<p>下面是代码中各部分的解释：</p>
+<ul>
+<li><code>y_true</code>: 真实标签，通常是一个数组或列表，其中包含每个样本的真实类别（例如，0和1）。</li>
+<li><code>y_prob</code>: 预测概率，通常是一个数组或列表，其中包含模型为每个样本预测的属于正类的概率。</li>
+<li><code>average</code>: 这个参数决定了如何计算多类问题的AUC。在二分类问题中，这个参数通常不需要设置。但在多类问题中，你可以设置它为<code>&quot;micro&quot;</code>, <code>&quot;macro&quot;</code>, <code>&quot;weighted&quot;</code>等，以决定如何平均每个类别的AUC。
+<ul>
+<li><code>&quot;micro&quot;</code>: 计算总体的真正例（True Positives, TP）和假正例（False Positives, FP），然后基于这些值计算AUC。这基本上是将多类问题视为一个单一的二分类问题。</li>
+<li><code>&quot;macro&quot;</code>: 计算每个类别的AUC，然后取平均值，不考虑类别的样本数量。</li>
+<li><code>&quot;weighted&quot;</code>: 计算每个类别的AUC，然后取加权平均，权重是每个类别的样本数量。</li>
+</ul>
+</li>
+</ul>
+<p>因此，<code>auc = metrics.roc_auc_score(y_true, y_prob, average=&quot;micro&quot;)</code>这段代码的意思是：计算基于真实标签<code>y_true</code>和预测概率<code>y_prob</code>的AUC，其中对于多类问题，AUC是通过<code>&quot;micro&quot;</code>方式计算的。</p>
+<p>请注意，为了使<code>roc_auc_score</code>正常工作，<code>y_true</code>应该只包含二进制的标签（例如，0和1），而<code>y_prob</code>应该包含模型为每个样本预测的属于正类的概率。如果你直接使用了模型的输出标签（而不是概率），你可能需要修改你的代码以使用模型的概率输出。</p>
+<p>20中不同颜色区分tab20</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> plt.figure(figsize=(12, 8))
+    colors = plt.cm.get_cmap(&#39;Accent&#39;, num_clients)
+    plt.hist([id for id in client_dist], stacked=True,
+             bins=np.arange(-0.5, num_classes+ 1.5, 1),
+             label=[&#34;Client {}&#34;.format(i) for i in range(num_clients)],color=[colors(i) for i in range(num_clients)],
+             rwidth=0.5)
+    plt.xticks(np.arange(n_classes), classes,rotation=45)
+    plt.xlabel(&#34;标签类型&#34;)
+    plt.ylabel(&#34;样本数&#34;)
+    plt.legend(loc=&#34;upper right&#34;)
+    plt.title(&#34;每个标签在不同客户端上的分布&#34;)
+    plt.tight_layout()
+    plt.show()
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="mi">60000</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span>  <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="mi">10000</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">type</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">tuple</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="mi">5</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">classes</span>
+<span class="p">[</span><span class="s1">&#39;0 - zero&#39;</span><span class="p">,</span> <span class="s1">&#39;1 - one&#39;</span><span class="p">,</span> <span class="s1">&#39;2 - two&#39;</span><span class="p">,</span> <span class="s1">&#39;3 - three&#39;</span><span class="p">,</span> <span class="s1">&#39;4 - four&#39;</span><span class="p">,</span> <span class="s1">&#39;5 - five&#39;</span><span class="p">,</span> <span class="s1">&#39;6 - six&#39;</span><span class="p">,</span> <span class="s1">&#39;7 - seven&#39;</span><span class="p">,</span> <span class="s1">&#39;8 - eight&#39;</span><span class="p">,</span> <span class="s1">&#39;9 - nine&#39;</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">n_classes</span>
+<span class="mi">10</span>
+
+<span class="c1"># 合并了训练集和测试集</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">labels</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">type</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="mi">70000</span>
+
+<span class="c1"># 将所有数据集划分到 10 client 对应的下标</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">type</span><span class="p">(</span><span class="n">client_idcs</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">client_idcs</span><span class="p">)</span>
+<span class="mi">10</span>
+<span class="c1"># 每个客户端的数据量</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">client_idcs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="mi">6955</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">client_idcs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="mi">9462</span>
+
+<span class="c1"># </span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">label_distribution</span>
+<span class="p">[[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">c_id</span>
+<span class="mi">0</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">idc</span> <span class="c1">#客户端0 对应数据的下标</span>
+<span class="n">array</span><span class="p">([</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">21</span><span class="p">,</span>   <span class="mi">34</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">1177</span><span class="p">,</span> <span class="mi">1194</span><span class="p">,</span> <span class="mi">1221</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">idc</span><span class="p">)</span>
+<span class="mi">6955</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">labels</span><span class="p">[</span><span class="n">idc</span><span class="p">]</span><span class="c1"># client 0 对应数据的下标</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="c1">#每个客户端含有标签的数量</span>
+
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">idc</span><span class="p">:</span>
+    <span class="n">label_distribution</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c_id</span><span class="p">)</span>
+<span class="c1"># client 0 的所有数据 对应下标为idc</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">idc</span>
+<span class="n">array</span><span class="p">([</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">21</span><span class="p">,</span>   <span class="mi">34</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">1177</span><span class="p">,</span> <span class="mi">1194</span><span class="p">,</span> <span class="mi">1221</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">idc</span><span class="p">)</span>
+<span class="mi">6955</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">idx</span>
+<span class="mi">1</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="c1"># 数据 对应的标签</span>
+<span class="mi">0</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">label_distribution</span><span class="c1"># 标签</span>
+<span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_distribution</span><span class="p">)</span>
+<span class="mi">10</span>
+<span class="c1"># 每个标签对应的client id</span>
+<span class="n">标签为0的数据在每个客户端上的id</span>
+
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">dataset_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">70000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">dataset_label</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset_label</span><span class="p">)</span>
+<span class="mi">70000</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">p_client_id</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">p_label_id</span>
+<span class="p">[</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">)]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">p_label_num</span>
+<span class="p">[[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">140</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">319</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1067</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">184</span><span class="p">)]]</span>
+<span class="o">----</span>
+<span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">p_client_id</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">p_label_id</span>
+<span class="p">[</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+<span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span>
+<span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int64</span><span class="p">)]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">p_label_num</span>
+<span class="p">[[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">140</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">319</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1067</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">184</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">335</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">107</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">143</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1461</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">23</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">155</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2381</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">71</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">207</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1129</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span>
+<span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">451</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">38</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6086</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">873</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">176</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">46</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">42</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">106</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">787</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">441</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3599</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">633</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1997</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">89</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">519</span>
+<span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">768</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">920</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1450</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">513</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">134</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">97</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">159</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3055</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">558</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3277</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">148</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">237</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">343</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">453</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1095</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2719</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3011</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1785</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span>
+<span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">756</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2856</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3628</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1463</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1379</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">335</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2373</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">998</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4260</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">310</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5789</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]]</span>
+
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">statistic</span>
+<span class="p">[[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">810</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">736</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2092</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">313</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6633</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">997</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">352</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">17</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">223</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">52</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">900</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">138</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3853</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">112</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">90</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">284</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">783</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">96</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1471</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">511</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">112</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1193</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">483</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">68</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1992</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">104</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4063</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3055</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">98</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5762</span><span class="p">)],</span> 
+ <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2013</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">900</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">58</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">187</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3187</span><span class="p">)],</span>
+ <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2031</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">380</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1316</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">159</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1548</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">391</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1845</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">967</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1149</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">795</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4090</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">225</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">25</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span>
+<span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3997</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">45</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">372</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">293</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">74</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">162</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">198</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">894</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">258</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">699</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">79</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">77</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">236</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1684</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1705</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">83</span><span class="p">)]]</span>
+<span class="c1"># 20个client</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="nb">len</span><span class="p">(</span><span class="n">statistic</span><span class="p">)</span>
+<span class="mi">20</span>
+<span class="c1"># 每个client对应的标签和数量</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">statistic</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">810</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">736</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2092</span><span class="p">)]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="域自适应kd3a">域自适应KD3A</h2>
+<p>http://localhost:1313/post/fl_da/</p>
+<h2 id="个性化-相互学习">个性化-相互学习</h2>
+<p>http://localhost:1313/post/fl_pfl/</p>
+<p><a href="https://kc.sustech.edu.cn/handle/2SGJ60CL/335681?mode=full&amp;submit_simple=Show+full+item+record"><code>paper</code></a></p>
+<p>面向非独立同分布数据的个性化联邦学习算法研究 <a href="http://kc.sustech.edu.cn/handle/2SGJ60CL/335681">paper</a></p>
+<p>面向数据分布不平衡问题的联邦学习算法研究 <a href="http://kc.sustech.edu.cn/handle/2SGJ60CL/335781">paper</a></p>
+<h2 id="第二篇论文">第二篇论文</h2>
+<p>fedala</p>
+<p><code>ala 权重损失</code></p>
+<p>如果 <code>losses</code> 的长度大于 <code>self.num_pre_loss</code>，并且最后 <code>self.num_pre_loss</code> 个 <code>losses</code> 元素的标准差小于 <code>self.threshold</code></p>
+<p>首先，ALA模块的主要目标是提供一个有效的初始化策略，使得每个客户端的本地模型能够在训练开始时就具备较好的起点。通过在第一轮本地初始化时训练到收敛，ALA模块能够确保初始模型已经充分学习到了全局和本地的数据特征，从而为后续的微调阶段打下坚实的基础。</p>
+<p>其次，随着训练的进行，模型逐渐接近其最优解，此时再进行大规模的训练可能会导致过拟合或训练效率的降低。因此，在后续轮次中，微调成为了一个更为合适的选择。微调能够在保持模型基本结构不变的情况下，对模型参数进行小幅度的调整，以适应新的数据分布和学习任务。这种方式既能够避免过拟合，又能够提高训练效率。</p>
+<p>此外，联邦学习的环境本身具有一些特殊性，例如数据分布的非独立同分布性和客户端之间的不平衡性。这些特性使得在每个客户端上独立训练模型变得更为困难。然而，通过ALA模块的初始化策略和后续的微调策略，FedALA算法能够在这样的环境下实现个性化的联邦学习，使得每个客户端的模型都能够更好地适应其本地数据。</p>
+<p>综上所述，ALA模块仅在第一轮本地初始化时训练到收敛，而后续轮次只需要微调的原因在于：这样既能够确保初始模型的质量，又能够提高后续训练的效率；同时，这种策略也能够适应联邦学习环境的特殊性，实现个性化的本地聚合。</p>
+<p>FedALA（Federated Adaptive Local Aggregation）算法中的ALA（Adaptive Local Aggregation）模块在第一轮本地初始化时进行训练到收敛的原因是为了建立一个全局的权重调整策略。这种策略能够根据用户的数据分布和模型性能，动态地调整各个本地模型更新在最终聚合模型中的权重。</p>
+<p>在第一轮训练时，ALA模块学习如何根据用户的本地数据特性和模型性能来分配不同的权重，以便在后续的联邦学习过程中能够更好地整合各个用户的本地模型更新。一旦ALA模块在第一轮训练中收敛，它就找到了一个能够反映大多数用户数据分布和性能要求的权重调整方案。</p>
+<p>在后续的联邦学习轮次中，由于ALA模块已经学会了如何根据用户的数据分布进行权重调整，因此只需要进行微调而不是完全重新训练。这样做的好处是：</p>
+<ol>
+<li><strong>效率提升</strong>：不需要在每一轮联邦学习中都从头开始训练ALA模块，这样可以显著减少计算资源的消耗和通信成本。</li>
+<li><strong>快速适应</strong>：通过微调，ALA模块可以迅速适应用户数据分布的微小变化，而不必经历完整的训练周期。</li>
+<li><strong>模型稳定性</strong>：已经收敛的ALA模块提供了一个稳定的权重调整框架，后续微调可以在此基础上进一步优化模型性能，而不会引入大的扰动。</li>
+<li><strong>个性化学习</strong>：在后续轮次中，ALA模块通过微调可以更好地支持个性化学习，即允许不同的用户拥有更适合自己数据分布的模型权重，从而提高整体的模型性能和用户满意度。</li>
+</ol>
+<p>综上所述，FedALA算法中ALA模块在第一轮训练到收敛后，后续轮次只需微调是为了提高算法的效率，同时保持足够的灵活性以适应不断变化的数据分布，进而在保持数据隐私的前提下实现个性化的模型学习。</p>
+<p>&ndash;</p>
+<p>FedALA算法中ALA（Adaptive Local Aggregation）模块在第一轮本地初始化时训练到收敛的原因在于，ALA模块的目的是学习一个适用于所有参与用户的全局权重调整策略。这种策略能够反映用户数据分布的普遍特性和模型性能需求。</p>
+<p>在第一轮训练中，ALA模块通过收集所有用户的本地模型更新并进行聚合，然后根据聚合后模型的性能反馈调整权重分配策略。这个过程会重复进行，直到找到一个稳定的权重分配方案，这个方案能够使得聚合后的全局模型在不同用户的数据上都有较好的性能表现。</p>
+<p>一旦ALA模块在第一轮训练中收敛到一个稳定的权重调整策略，它就可以作为一个全局的元模型被应用到后续的联邦学习轮次中。在后续轮次中，虽然用户的本地数据可能会发生变化，但是ALA模块通过微调可以迅速适应这些变化，而不必进行完全的重新训练。</p>
+<p>微调的好处在于，它可以在保持ALA模块已有的全局权重调整框架的基础上，进一步优化模型性能，同时节省计算资源和通信成本。此外，微调还可以使得ALA模块更好地支持个性化学习，即允许不同的用户拥有更适合自己数据分布的模型权重，从而提高整体的模型性能和用户满意度。</p>
+<p>因此，FedALA算法中ALA模块在第一轮训练到收敛后，后续轮次只需微调的原因在于提高算法的效率、快速适应变化、保持模型稳定性以及支持个性化学习。</p>
+<p>&ndash;</p>
+<p>全局的元模型（Global Meta-Model）在工程和机器学习领域中指的是一个经过训练，能够捕捉和总结多个任务或数据集共同特性的模型。在联邦学习的背景下，全局元模型是指一个在多个设备或用户之间共享，能够整合不同数据源信息的模型。它通常在初始阶段通过多轮的训练和学习，从各个局部模型中提取共性，形成一个能够代表整体数据分布的模型。</p>
+<p>在FedALA算法中，全局元模型就是ALA（Adaptive Local Aggregation）模块学习到的权重调整策略。这个策略在第一轮训练中收敛后，就成为了一个全局的元模型。在后续的联邦学习轮次中，这个全局元模型不需要重新训练，只需要根据新的数据和反馈进行微调，以适应可能的数据分布变化，确保模型的性能持续优化。全局元模型的存在使得算法能够在保持计算效率的同时，实现个性化学习和快速适应新的数据变化。</p>
+<p>&ndash;</p>
+<p>后续轮次不需要重新训练的原因在于，在初始阶段已经通过多次迭代学习到了一个全局的元模型，这个模型能够反映出参与学习的所有用户或任务的共同特征和模式。在联邦学习的上下文中，全局元模型是一个权重调整策略，它指导了如何根据不同用户的本地模型更新来进行有效的全局模型聚合。</p>
+<p>一旦全局元模型在第一轮或初期训练中收敛，它就已经捕捉到了足够的信息来指导后续的学习过程。在后续的轮次中，尽管用户的本地数据可能会有所变化，但全局元模型已经具有了足够的泛化能力，能够通过微调来适应这些变化。微调是一个轻量级的过程，相比于从头开始的完整训练，它需要较少的计算资源和时间。</p>
+<p>此外，重新训练全局元模型可能会导致之前学习到的知识丢失，特别是在数据分布相对稳定的情况下。微调能够在不破坏原有的全局知识结构的前提下，对模型进行局部优化，从而提高模型的整体性能和适应性。</p>
+<p>综上所述，后续轮次不需要重新训练的核心原因是全局元模型已经学习到了足够的信息，并且具备了适应新数据变化的能力，通过微调即可实现性能的持续优化，而无需进行耗时且资源密集的完整训练过程。</p>
+<p>&ndash;</p>
+<p>本地模型自适应聚合模块的作用在于提高每个客户端的本地模型质量。该模块在每次本地训练之前，将全局模型与本地模型进行自适应聚合，以捕获全局模型中的有用信息，并用于初始化本地模型。这样做有助于解决全局模型对单个客户端同时具有期望和不期望的信息，泛化能力较差的问题。通过优先为每个客户端训练本地模型，该模块可以更好地适应不同客户端的数据分布特性，从而提高模型的性能和泛化能力。</p>
+<p>此外，本地模型自适应聚合模块还具有降低通信开销的潜在优势。由于它仅下载一个全局模型并在每个客户端上传一个本地模型，因此与一些其他联邦学习方法相比，具有相同的通信开销。这种设计减少了客户端之间下载和上传模型的频率，从而降低了通信成本。</p>
+<hr>
+<h3 id="fedsoup"><code>fedsoup</code></h3>
+<p>当前的 FL 算法面临着局部和全局性能之间的权衡。具体来说，个性化 FL 方法倾向于过度拟合本地数据，导致局部模型中的山谷尖锐，并抑制其泛化到分布外数据的能力。在本文中，我们提出了一种新的联邦模型汤方法（即模型参数的<code>选择性插值</code>）来优化局部和全局性能之间的权衡。具体来说，在联邦训练阶段，每个客户端通过监控局部模型和全局模型之间插值模型的性能来维护自己的全局模型池。这使我们能够减轻过度拟合并寻求平坦的最小值，这可以显着提高模型的泛化能力。</p>
+<blockquote>
+<p>selective interpolation of model parameters</p>
+<p>模型参数的选择性插值</p>
+<p>根据某些标准（如参数的重要性、不确定性、与其他参数的关联性等）选择特定的模型参数进行插值。</p>
+<p>这种选择性插值的目的通常是为了在保持模型性能的同时，减少计算复杂性、提高模型的鲁棒性或解决过拟合等问题。</p>
+<p>**Weight Interpolation（权重插值）**是一种插值方法，其原理在于根据已知数据点的权重来估计未知数据点的值。这里的“权重”通常反映了已知数据点对未知数据点影响的大小或重要性。在进行权重插值时，会计算每个已知数据点的权重，并根据这些权重对它们进行加权平均，从而得到未知数据点的估计值。</p>
+<p>权重插值的作用主要体现在以下几个方面：</p>
+<ol>
+<li><strong>提高估计准确性</strong>：通过合理地分配权重，权重插值可以使估计值更加接近真实值。在数据分布不均匀或存在噪声的情况下，这种方法尤其有效。</li>
+<li><strong>适应不同数据特性</strong>：权重插值可以根据数据的特性调整权重，使其更加适应不同的应用场景。例如，在处理具有空间相关性的数据时，可以根据距离或其他相关指标来设置权重。</li>
+<li><strong>灵活性</strong>：权重插值允许用户根据具体需求自定义权重分配方式。这使得它能够在各种复杂场景下进行有效的数据估计和预测。</li>
+</ol>
+<p>总之，权重插值是一种灵活且有效的数据估计方法，它通过引入权重概念来提高估计的准确性和适应性。在机器学习、数据处理、地理信息系统等领域都有广泛的应用。</p>
+</blockquote>
+<p>问题：</p>
+<p>最近的研究 [28] 已经确定了当前 FL 算法的一个重要问题，即遇到分布变化时局部和全局性能之间的权衡。个性化 FL (PFL) 技术通常用于通过权衡每个客户端的分布内 (ID) 数据来解决数据异质性问题。例如，FedRep [5] 在本地更新期间学习整个网络，并从全局同步中保留部分网络。然而，它们有过度拟合本地数据的风险 [23]，尤其是当客户端本地数据有限时，并且在分布外 (OOD) 数据上的泛化能力较差。另一项工作通过正则化局部模型的更新来研究异质性问题。例如，FedProx[15]约束本地更新更接近全局模型。</p>
+<p>评估 FL 泛化能力的一种有效方法是研究其在 [28] 之后的联合全局分布上的性能，它指的是在 ⋃{Di} 上测试 FL 模型，其中 Di 表示客户端 i 的分布 4。不幸的是，现有的工作没有发现个性化（局部）和共识（全局）模型之间的最佳点。</p>
+<p>在异构设置（Di 6 = Dj）中，Dj 被视为客户端 i 的 OOD 数据。</p>
+<p>我们发现 FL 中的过度个性化会导致对本地数据的过度拟合，并将模型捕获到<code>损失景观</code>的尖锐山谷中（对参数扰动高度敏感，参见第 2.2 节中的详细定义），从而限制了其泛化性。避免损失景观中尖锐山谷的有效策略是强制模型获得平坦的最小值。在集中式领域，<code>权重插值</code>已被探索为寻找平坦最小值的一种手段，因为它的解决方案更接近高性能模型的质心，这对应于更平坦的最小值 [11,3,6,24]。然而，对这些插值方法的研究在FL中被忽略了。</p>
+<p>在此基础上，我们建议在联合训练过程中跟踪局部模型和全局模型，并执行模型插值来寻求最优平衡。我们的见解是从模型汤方法[27]中提取的，这表明<code>具有相同初始参数的多个训练模型的平均权重可以增强模型的泛化能力</code>。然而，原始模型汤方法需要训练具有不同超参数的大量模型，这在 FL 期间的通信方面可能非常耗时且成本高昂。鉴于通信成本高，无法在 FL 中从头开始训练，我们利用<code>单个训练会话中不同时间点的全局模型</code>作为使模型汤方法 [27] 适应 FL 的成分</p>
+<p>我们提出了一种新的联邦模型汤方法(FedSoup)，从局部和全局模型生成集成模型，以实现更好的局部-全局权衡。第一个是时间模型选择，旨在选择合适的模型组合成一个模型。第二个模块是联邦模型修补[10]，它指的是一种微调技术，旨在在不影响已经令人满意的全局表现的情况下增强个性化。</p>
+<p>对于第一个模块，时间模型选择，我们使用基于局部验证性能的<code>贪心模型选择策略</code>。这避免了合并可能位于不同错误景观盆地的模型，而不是局部损失景观（如图 1 所示）。因此，每个客户端都有自己的个性化全局模型汤，由基于其本地验证集选择的历史全局模型的子集组成。</p>
+<p>图1：而我们的联邦模型汤方法通过寻找平坦最小值来平衡局部和全局损失。与之前的 pFL 方法相比，我们的方法引入了全局模型选择模块和 全局模型的局部<code>模型插值（称为模型修补）</code></p>
+<p>我们的主要贡献如下：（i）提出了一种新的 FL 方法，称为联邦模型 Soup（FedSoup），通过促进平滑度和寻求平坦最小值来提高泛化和个性化。(ii) FL 设计了一种新的时间模型选择机制，该机制维护一个具有时间历史全局模型的特定于客户端的模型汤，以满足个性化需求，同时不会产生额外的训练成本。(iii)在联邦客户端训练中引入了局部和全局模型之间的创新联邦模型修补方法，以缓解局部有限数据的过拟合。</p>
+<h3 id="数据划分">数据划分</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># noiid 标签分布不平衡</span>
+<span class="c1">#balance：数量平衡</span>
+<span class="c1"># dir</span>
+<span class="n">python</span> <span class="n">generate_mnist</span><span class="o">.</span><span class="n">py</span> <span class="n">iid</span> <span class="n">balance</span> <span class="o">-</span>
+
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">70000</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">train</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2621</span><span class="p">,</span> <span class="mi">2696</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">test</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">874</span><span class="p">,</span> <span class="mi">899</span><span class="p">]</span>
+
+<span class="n">Client</span> <span class="mi">0</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">3495</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">345</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">393</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">349</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">357</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">341</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">315</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">343</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">364</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">341</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">347</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">1</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">3495</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">345</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">393</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">349</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">357</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">341</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">315</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">343</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">364</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">341</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">347</span><span class="p">)]</span>
+
+<span class="n">每个类的数量一致</span>
+
+<span class="n">python</span> <span class="n">generate_mnist</span><span class="o">.</span><span class="n">py</span> <span class="n">iid</span> <span class="o">-</span> <span class="o">-</span>
+
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">70000</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">train</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">1411</span><span class="p">,</span> <span class="mi">2191</span><span class="p">,</span> <span class="mi">992</span><span class="p">,</span> <span class="mi">1853</span><span class="p">,</span> <span class="mi">1303</span><span class="p">,</span> <span class="mi">1632</span><span class="p">,</span> <span class="mi">1461</span><span class="p">,</span> <span class="mi">1067</span><span class="p">,</span> <span class="mi">1401</span><span class="p">,</span> <span class="mi">1326</span><span class="p">,</span> <span class="mi">1470</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span> <span class="mi">1632</span><span class="p">,</span> <span class="mi">1377</span><span class="p">,</span> <span class="mi">1570</span><span class="p">,</span> <span class="mi">1470</span><span class="p">,</span> <span class="mi">1362</span><span class="p">,</span> <span class="mi">1055</span><span class="p">,</span> <span class="mi">1158</span><span class="p">,</span> <span class="mi">25381</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">test</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">471</span><span class="p">,</span> <span class="mi">731</span><span class="p">,</span> <span class="mi">331</span><span class="p">,</span> <span class="mi">618</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">544</span><span class="p">,</span> <span class="mi">488</span><span class="p">,</span> <span class="mi">356</span><span class="p">,</span> <span class="mi">468</span><span class="p">,</span> <span class="mi">442</span><span class="p">,</span> <span class="mi">491</span><span class="p">,</span> <span class="mi">460</span><span class="p">,</span> <span class="mi">545</span><span class="p">,</span> <span class="mi">459</span><span class="p">,</span> <span class="mi">524</span><span class="p">,</span> <span class="mi">491</span><span class="p">,</span> <span class="mi">455</span><span class="p">,</span> <span class="mi">352</span><span class="p">,</span> <span class="mi">386</span><span class="p">,</span> <span class="mi">8461</span><span class="p">]</span>
+<span class="n">数量不平衡</span>
+
+<span class="n">Client</span> <span class="mi">0</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">1882</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">71</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">280</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">83</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">336</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">137</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">253</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">111</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">244</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">1</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">2922</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">269</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">391</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">347</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">230</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">294</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">267</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">253</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">321</span><span class="p">)]</span>
+
+<span class="n">python</span> <span class="n">generate_mnist</span><span class="o">.</span><span class="n">py</span> <span class="n">noniid</span> <span class="o">-</span> <span class="n">pat</span>
+<span class="n">每个客户端两个类</span>
+<span class="n">且数量不平衡</span>
+
+<span class="n">Client</span> <span class="mi">0</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">2334</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1233</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1101</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">1</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">1318</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">407</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">911</span><span class="p">)]</span>
+
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">70000</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">train</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">1750</span><span class="p">,</span> <span class="mi">988</span><span class="p">,</span> <span class="mi">2349</span><span class="p">,</span> <span class="mi">5996</span><span class="p">,</span> <span class="mi">996</span><span class="p">,</span> <span class="mi">1545</span><span class="p">,</span> <span class="mi">753</span><span class="p">,</span> <span class="mi">7303</span><span class="p">,</span> <span class="mi">2280</span><span class="p">,</span> <span class="mi">2182</span><span class="p">,</span> <span class="mi">1414</span><span class="p">,</span> <span class="mi">3975</span><span class="p">,</span> <span class="mi">1139</span><span class="p">,</span> <span class="mi">1751</span><span class="p">,</span> <span class="mi">1446</span><span class="p">,</span> <span class="mi">6290</span><span class="p">,</span> <span class="mi">1485</span><span class="p">,</span> <span class="mi">1429</span><span class="p">,</span> <span class="mi">1257</span><span class="p">,</span> <span class="mi">6165</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">test</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">584</span><span class="p">,</span> <span class="mi">330</span><span class="p">,</span> <span class="mi">784</span><span class="p">,</span> <span class="mi">1999</span><span class="p">,</span> <span class="mi">332</span><span class="p">,</span> <span class="mi">516</span><span class="p">,</span> <span class="mi">251</span><span class="p">,</span> <span class="mi">2435</span><span class="p">,</span> <span class="mi">761</span><span class="p">,</span> <span class="mi">728</span><span class="p">,</span> <span class="mi">472</span><span class="p">,</span> <span class="mi">1325</span><span class="p">,</span> <span class="mi">380</span><span class="p">,</span> <span class="mi">584</span><span class="p">,</span> <span class="mi">482</span><span class="p">,</span> <span class="mi">2097</span><span class="p">,</span> <span class="mi">495</span><span class="p">,</span> <span class="mi">477</span><span class="p">,</span> <span class="mi">419</span><span class="p">,</span> <span class="mi">2056</span><span class="p">]</span>
+
+<span class="n">python</span> <span class="n">generate_mnist</span><span class="o">.</span><span class="n">py</span> <span class="n">noniid</span> <span class="n">balance</span> <span class="n">pat</span>
+<span class="n">两个类</span><span class="err">，</span><span class="n">数量平衡</span>
+<span class="n">Client</span> <span class="mi">0</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">3694</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1725</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1969</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">1</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">3694</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1725</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1969</span><span class="p">)]</span>
+
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">70000</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">train</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">2770</span><span class="p">,</span> <span class="mi">2770</span><span class="p">,</span> <span class="mi">2770</span><span class="p">,</span> <span class="mi">2773</span><span class="p">,</span> <span class="mi">2649</span><span class="p">,</span> <span class="mi">2649</span><span class="p">,</span> <span class="mi">2649</span><span class="p">,</span> <span class="mi">2651</span><span class="p">,</span> <span class="mi">2463</span><span class="p">,</span> <span class="mi">2463</span><span class="p">,</span> <span class="mi">2463</span><span class="p">,</span> <span class="mi">2463</span><span class="p">,</span> <span class="mi">2656</span><span class="p">,</span> <span class="mi">2656</span><span class="p">,</span> <span class="mi">2656</span><span class="p">,</span> <span class="mi">2657</span><span class="p">,</span> <span class="mi">2583</span><span class="p">,</span> <span class="mi">2583</span><span class="p">,</span> <span class="mi">2583</span><span class="p">,</span> <span class="mi">2586</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">test</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">924</span><span class="p">,</span> <span class="mi">924</span><span class="p">,</span> <span class="mi">924</span><span class="p">,</span> <span class="mi">925</span><span class="p">,</span> <span class="mi">883</span><span class="p">,</span> <span class="mi">883</span><span class="p">,</span> <span class="mi">883</span><span class="p">,</span> <span class="mi">884</span><span class="p">,</span> <span class="mi">821</span><span class="p">,</span> <span class="mi">821</span><span class="p">,</span> <span class="mi">821</span><span class="p">,</span> <span class="mi">822</span><span class="p">,</span> <span class="mi">886</span><span class="p">,</span> <span class="mi">886</span><span class="p">,</span> <span class="mi">886</span><span class="p">,</span> <span class="mi">886</span><span class="p">,</span> <span class="mi">862</span><span class="p">,</span> <span class="mi">862</span><span class="p">,</span> <span class="mi">862</span><span class="p">,</span> <span class="mi">862</span><span class="p">]</span>
+
+<span class="n">python</span> <span class="n">generate_mnist</span><span class="o">.</span><span class="n">py</span> <span class="n">noniid</span> <span class="o">-</span> <span class="nb">dir</span>
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">70000</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">train</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">1972</span><span class="p">,</span> <span class="mi">374</span><span class="p">,</span> <span class="mi">1222</span><span class="p">,</span> <span class="mi">1905</span><span class="p">,</span> <span class="mi">1437</span><span class="p">,</span> <span class="mi">4641</span><span class="p">,</span> <span class="mi">942</span><span class="p">,</span> <span class="mi">951</span><span class="p">,</span> <span class="mi">2700</span><span class="p">,</span> <span class="mi">3004</span><span class="p">,</span> <span class="mi">2337</span><span class="p">,</span> <span class="mi">2829</span><span class="p">,</span> <span class="mi">2709</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">4297</span><span class="p">,</span> <span class="mi">4086</span><span class="p">,</span> <span class="mi">2721</span><span class="p">,</span> <span class="mi">4239</span><span class="p">,</span> <span class="mi">3949</span><span class="p">,</span> <span class="mi">4577</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">test</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">658</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">408</span><span class="p">,</span> <span class="mi">636</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">1548</span><span class="p">,</span> <span class="mi">314</span><span class="p">,</span> <span class="mi">318</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1002</span><span class="p">,</span> <span class="mi">779</span><span class="p">,</span> <span class="mi">943</span><span class="p">,</span> <span class="mi">904</span><span class="p">,</span> <span class="mi">534</span><span class="p">,</span> <span class="mi">1433</span><span class="p">,</span> <span class="mi">1362</span><span class="p">,</span> <span class="mi">907</span><span class="p">,</span> <span class="mi">1414</span><span class="p">,</span> <span class="mi">1317</span><span class="p">,</span> <span class="mi">1526</span><span class="p">]</span>
+<span class="n">Client</span> <span class="mi">0</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">2630</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">140</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">319</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1067</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">184</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">1</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">499</span>       <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">335</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">107</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">2</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">1630</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">3</span> <span class="mi">6</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">143</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1461</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">23</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">3</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">2541</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">4</span> <span class="mi">7</span> <span class="mi">8</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">155</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2381</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+
+<span class="n">python</span> <span class="n">generate_mnist</span><span class="o">.</span><span class="n">py</span> <span class="n">noniid</span> <span class="n">balance</span> <span class="nb">dir</span>
+<span class="n">和上述区别不大</span>
+<span class="n">Client</span> <span class="mi">0</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">2630</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">140</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">319</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1067</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">184</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">1</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">499</span>       <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">335</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">107</span><span class="p">)]</span>
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">70000</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">train</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">1972</span><span class="p">,</span> <span class="mi">374</span><span class="p">,</span> <span class="mi">1222</span><span class="p">,</span> <span class="mi">1905</span><span class="p">,</span> <span class="mi">1437</span><span class="p">,</span> <span class="mi">4641</span><span class="p">,</span> <span class="mi">942</span><span class="p">,</span> <span class="mi">951</span><span class="p">,</span> <span class="mi">2700</span><span class="p">,</span> <span class="mi">3004</span><span class="p">,</span> <span class="mi">2337</span><span class="p">,</span> <span class="mi">2829</span><span class="p">,</span> <span class="mi">2709</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">4297</span><span class="p">,</span> <span class="mi">4086</span><span class="p">,</span> <span class="mi">2721</span><span class="p">,</span> <span class="mi">4239</span><span class="p">,</span> <span class="mi">3949</span><span class="p">,</span> <span class="mi">4577</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">test</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">658</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">408</span><span class="p">,</span> <span class="mi">636</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">1548</span><span class="p">,</span> <span class="mi">314</span><span class="p">,</span> <span class="mi">318</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1002</span><span class="p">,</span> <span class="mi">779</span><span class="p">,</span> <span class="mi">943</span><span class="p">,</span> <span class="mi">904</span><span class="p">,</span> <span class="mi">534</span><span class="p">,</span> <span class="mi">1433</span><span class="p">,</span> <span class="mi">1362</span><span class="p">,</span> <span class="mi">907</span><span class="p">,</span> <span class="mi">1414</span><span class="p">,</span> <span class="mi">1317</span><span class="p">,</span> <span class="mi">1526</span><span class="p">]</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">70000</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">train</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">2728</span><span class="p">,</span> <span class="mi">5209</span><span class="p">,</span> <span class="mi">1135</span><span class="p">,</span> <span class="mi">989</span><span class="p">,</span> <span class="mi">2899</span><span class="p">,</span> <span class="mi">956</span><span class="p">,</span> <span class="mi">1587</span><span class="p">,</span> <span class="mi">1353</span><span class="p">,</span> <span class="mi">4683</span><span class="p">,</span> <span class="mi">6686</span><span class="p">,</span> <span class="mi">4760</span><span class="p">,</span> <span class="mi">2795</span><span class="p">,</span> <span class="mi">2973</span><span class="p">,</span> <span class="mi">5253</span><span class="p">,</span> <span class="mi">238</span><span class="p">,</span> <span class="mi">3006</span><span class="p">,</span> <span class="mi">615</span><span class="p">,</span> <span class="mi">978</span><span class="p">,</span> <span class="mi">1016</span><span class="p">,</span> <span class="mi">2633</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">test</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">910</span><span class="p">,</span> <span class="mi">1737</span><span class="p">,</span> <span class="mi">379</span><span class="p">,</span> <span class="mi">330</span><span class="p">,</span> <span class="mi">967</span><span class="p">,</span> <span class="mi">319</span><span class="p">,</span> <span class="mi">530</span><span class="p">,</span> <span class="mi">451</span><span class="p">,</span> <span class="mi">1562</span><span class="p">,</span> <span class="mi">2229</span><span class="p">,</span> <span class="mi">1587</span><span class="p">,</span> <span class="mi">932</span><span class="p">,</span> <span class="mi">991</span><span class="p">,</span> <span class="mi">1751</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">1003</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">327</span><span class="p">,</span> <span class="mi">339</span><span class="p">,</span> <span class="mi">878</span><span class="p">]</span>
+<span class="n">Client</span> <span class="mi">0</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">3638</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">6</span> <span class="mi">7</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">810</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">736</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2092</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">1</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">6946</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">313</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6633</span><span class="p">)]</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">test_metrics</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">16</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y</span>
+<span class="n">tensor</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">tensor</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_acc</span>
+<span class="mi">2</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_num</span>
+<span class="mi">16</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_prob</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">tensor</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="o">---</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">y_prob</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">616</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">auc</span>
+<span class="mf">0.6709406214276344</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_acc</span>
+<span class="mi">79</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">test_num</span>
+<span class="mi">616</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p><code>cifar10</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+
+<span class="n">D</span><span class="p">:</span>\<span class="n">Python</span>\<span class="n">PycharmProjects</span>\<span class="n">PFL</span><span class="o">-</span><span class="n">Non</span><span class="o">-</span><span class="n">IID</span><span class="o">-</span><span class="n">master</span>\<span class="n">FedALA</span><span class="o">-</span><span class="n">main</span>\<span class="n">FedALA</span><span class="o">-</span><span class="n">main</span>\<span class="n">dataset</span><span class="o">&gt;</span><span class="n">python</span> <span class="n">generate_cifar10</span><span class="o">.</span><span class="n">py</span> <span class="n">noniid</span> <span class="o">-</span> <span class="nb">dir</span>
+<span class="n">Files</span> <span class="n">already</span> <span class="n">downloaded</span> <span class="ow">and</span> <span class="n">verified</span>
+<span class="n">Files</span> <span class="n">already</span> <span class="n">downloaded</span> <span class="ow">and</span> <span class="n">verified</span>
+<span class="n">Client</span> <span class="mi">0</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">5237</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">7</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5195</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">1</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">4375</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">3</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1450</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">119</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">719</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2087</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">2</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">459</span>       <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">2</span> <span class="mi">5</span> <span class="mi">7</span> <span class="mi">9</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">74</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">377</span><span class="p">)]</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Client</span> <span class="mi">3</span>         <span class="n">Size</span> <span class="n">of</span> <span class="n">data</span><span class="p">:</span> <span class="mi">5278</span>      <span class="n">Labels</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">5</span><span class="p">]</span>
+                 <span class="n">Samples</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span>  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1160</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">706</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3412</span><span class="p">)]</span>
+
+<span class="n">Total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">60000</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">train</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">3927</span><span class="p">,</span> <span class="mi">3281</span><span class="p">,</span> <span class="mi">344</span><span class="p">,</span> <span class="mi">3958</span><span class="p">,</span> <span class="mi">3378</span><span class="p">,</span> <span class="mi">3362</span><span class="p">,</span> <span class="mi">3181</span><span class="p">,</span> <span class="mi">454</span><span class="p">,</span> <span class="mi">659</span><span class="p">,</span> <span class="mi">2256</span><span class="p">,</span> <span class="mi">2075</span><span class="p">,</span> <span class="mi">2472</span><span class="p">,</span> <span class="mi">2328</span><span class="p">,</span> <span class="mi">2322</span><span class="p">,</span> <span class="mi">2524</span><span class="p">,</span> <span class="mi">1350</span><span class="p">,</span> <span class="mi">1587</span><span class="p">,</span> <span class="mi">1448</span><span class="p">,</span> <span class="mi">3262</span><span class="p">,</span> <span class="mi">825</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">test</span> <span class="n">samples</span><span class="p">:</span> <span class="p">[</span><span class="mi">1310</span><span class="p">,</span> <span class="mi">1094</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">1320</span><span class="p">,</span> <span class="mi">1126</span><span class="p">,</span> <span class="mi">1121</span><span class="p">,</span> <span class="mi">1061</span><span class="p">,</span> <span class="mi">152</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">753</span><span class="p">,</span> <span class="mi">692</span><span class="p">,</span> <span class="mi">824</span><span class="p">,</span> <span class="mi">776</span><span class="p">,</span> <span class="mi">774</span><span class="p">,</span> <span class="mi">842</span><span class="p">,</span> <span class="mi">451</span><span class="p">,</span> <span class="mi">529</span><span class="p">,</span> <span class="mi">483</span><span class="p">,</span> <span class="mi">1088</span><span class="p">,</span> <span class="mi">276</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>fedsoup 生成数据集出错&mdash;直接复制fedala中划分的数据集</p>
+<h2 id="思路分析">思路分析</h2>
+<p><a href="https://kc.sustech.edu.cn/handle/2SGJ60CL/335781">https://kc.sustech.edu.cn/handle/2SGJ60CL/335781</a>：</p>
+<p>数据分布不平衡：</p>
+<ul>
+<li>数据标签分布不平衡</li>
+<li>数据特征分布不平衡</li>
+</ul>
+<p>第一章</p>
+<ul>
+<li>研究现状
+<ul>
+<li>联邦学习&ndash;以下挑战
+<ul>
+<li>数据异质性：数据分布不同</li>
+<li>系统异质性：计算能力、存储能力、通信能力</li>
+<li>通信效率：传输参数或梯度</li>
+<li>隐私风险：参数也会带有信息</li>
+<li>模型安全：防御，攻击中毒</li>
+<li>公平性：公平分配资源-根据计算能力的差距</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>应用
+<ul>
+<li>教育&ndash;高效评估成绩 FEEDAN   Federated Deep Knowledge Tracing（FDKT）</li>
+<li>医疗-医学图像  FedMoCo personalized retrogress-resilient framework for real-world medical federated learnin</li>
+<li>物联网&ndash;减少了上传的数据量和训练所需的通信轮数,区块链</li>
+<li>交通&ndash;交通流预测</li>
+</ul>
+</li>
+</ul>
+<p>第二章：</p>
+<ul>
+<li>优化目标和基本算法fedavg</li>
+<li>横向、纵向、迁移</li>
+<li>数据分布场景
+<ul>
+<li>标签 标签分布不平衡和标签偏好不平衡
+<ul>
+<li>标签分布倾斜是指不同客户端的标签分布 𝑃𝑛(𝑦) 不同，而他们的条件特征分
+布 𝑃𝑛(𝑥|𝑦) 相同。不同客户端地理位置不容导致的。
+<ul>
+<li>每个客户端只包含c(&lt;nc)个类别，且每个类别的样本相同</li>
+<li>Dirichlet 分布。客户端 𝑛 上类别 𝑐 的样本比例 超参数 𝛽 可以控制类别不平衡的程度。𝛽 越大，则客户端之间的类别不平衡越严重</li>
+</ul>
+</li>
+<li>标签偏好不平衡出现的场景通常是，不同客户端上的样本有重叠，而对于相同的样本，不同的客户端会根据本身不同的偏好为该样本设置不同的标签值。</li>
+</ul>
+</li>
+<li>特征 不同客户端的 𝑃𝑛(𝑥)(特征分布) 互不相同
+<ul>
+<li>不重叠特征不平衡&ndash;不同客户端之间的特征不存在重叠。这种情况也成为纵向联邦学习</li>
+<li>部分重叠特征不平衡&ndash;不同客户端之间一部分的特征是共享的。每个客户端会保存不同角度的对于同一个物体的图片。</li>
+<li>完全重叠特征不平衡&ndash;客户端之间的特征完全重叠。可能是由于诸如扰动噪声等因素导致的，也可能是来自于不同的客户端产生数据时的偏好导致。对于相同的标签，不同风格的图片可以看作是完全重叠特征不平衡下的数据不平衡场景</li>
+</ul>
+</li>
+<li>时序
+<ul>
+<li>当客户端上保存的数据是时序数据时，可能会出现时序不平衡的场景。</li>
+<li>不同客户端上的数据出现时序不平衡的原因通常是不同的客户端保存不同的时间段的数据。例如客户端 A 保存第一季度的数据，而客户端 B 保存第二季度的数据。</li>
+</ul>
+</li>
+<li>其他：客户端之间的样本数量不同时，会出现数量不平衡</li>
+</ul>
+</li>
+</ul>
+<p>第三章：实际工作</p>
+<ul>
+<li>问题描述</li>
+<li>相关工作</li>
+<li>算法</li>
+<li>实验</li>
+</ul>
+<p><a href="https://kc.sustech.edu.cn/handle/2SGJ60CL/335681">https://kc.sustech.edu.cn/handle/2SGJ60CL/335681</a></p>
+<p>第一章</p>
+<ul>
+<li>背景意义
+<ul>
+<li>挑战：通信成本、数据分布的异质性、隐私安全等</li>
+</ul>
+</li>
+<li>研究现状</li>
+</ul>
+<p>第二章</p>
+<ul>
+<li>联邦学习理论
+<ul>
+<li>原理</li>
+<li>系统流程</li>
+<li>加密方式：同态加密、差分隐私、秘密分享</li>
+<li>三类别：横向。。</li>
+</ul>
+</li>
+<li>挑战
+<ul>
+<li>昂贵的通信成本&ndash;提高通信效率&ndash;模型压缩</li>
+<li>系统异质性&ndash;存储容量，计算能力，通信能力&ndash;heterofl根据算力实质模型复杂度</li>
+<li>数据分布异质性
+<ul>
+<li>特征分布不平衡 &ndash;<code>pi(y)不同，pi(x|y)分布相同</code></li>
+<li>标签分布不平衡 &ndash;pi(y)不同，pi(y|x)分布相同</li>
+<li>数据数量不平衡</li>
+<li>相关研究 fedprox scaffold fedbn</li>
+</ul>
+</li>
+<li>隐私安全：同态加密 安全多方计算 差分隐私</li>
+</ul>
+</li>
+<li>个性化联邦学习
+<ul>
+<li>迁移学习方法
+<ul>
+<li>基础层叠加个性化层 fedper fedhn</li>
+<li>对全局模型进行本地个性化处理 per-fedavg pfedme</li>
+</ul>
+</li>
+<li>融合方法：全局模型与本地模型结合得到个性化模型 fedphp pfl-moe</li>
+<li>跨客户端协作：fedamp fedfomo</li>
+</ul>
+</li>
+</ul>
+<p>第三章：</p>
+<ul>
+<li>引言</li>
+<li>算法
+<ul>
+<li>概述</li>
+<li>算法</li>
+</ul>
+</li>
+<li>实验
+<ul>
+<li>实验设置</li>
+<li>结果分析</li>
+<li>敏感度分析</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://kns.cnki.net/kcms2/article/abstract?v=N5T8oFSaxGEYs4Doh9eEcSrHZktsncl31hPAuMglYnEu6qlnCVdkW9oYhhIx1xCx_duAATgwuOyv6EeUr6IZTG8PTCeUO42oaRSaZVesShvff3kRB8A3rIdSbg4oqQjQeYFDuqJY3YHCm0gfgqfuGw==&amp;uniplatform=NZKPT&amp;language=CHS">https://kns.cnki.net/kcms2/article/abstract?v=N5T8oFSaxGEYs4Doh9eEcSrHZktsncl31hPAuMglYnEu6qlnCVdkW9oYhhIx1xCx_duAATgwuOyv6EeUr6IZTG8PTCeUO42oaRSaZVesShvff3kRB8A3rIdSbg4oqQjQeYFDuqJY3YHCm0gfgqfuGw==&amp;uniplatform=NZKPT&amp;language=CHS</a></p>
+<p>面向数据异构场景的高效联邦学习算法研究与系统开发</p>
+<p>第一章：</p>
+<ul>
+<li>背景意义
+<ul>
+<li>隐私保护和分布式训练&ndash;fl</li>
+<li>挑战
+<ul>
+<li>通信瓶颈 &ndash;结构化模型检核和梯度压缩减少 数据传输量；加速收敛减少通信回合</li>
+<li>数据异构性&ndash;fedprox，scaffold，moon</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>研究挑战和创新
+<ul>
+<li>iid和数据种类分布不平衡；缓解模型偏移</li>
+<li>缓解随机采样导致模型的不稳定收敛</li>
+</ul>
+</li>
+<li>相关工作
+<ul>
+<li>本地训练改进
+<ul>
+<li>正则化约束项 fedprox 抑制模型漂移，feddyn，</li>
+<li>偏差纠正 scaffold</li>
+<li>对比学习或可持续学习moon fedcl</li>
+</ul>
+</li>
+<li>模型聚合改进
+<ul>
+<li>自适应权重 fedadp自适应的给局部模型分配聚合权重</li>
+<li>标准化方法 fednova</li>
+<li>概率匹配 pfnm fedma</li>
+<li>梯度动量 fedavgm</li>
+</ul>
+</li>
+<li>训练框架改进
+<ul>
+<li>引入额外的模块或机制 引入层次聚类，数据监测机制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>第二章：相关理论</p>
+<ul>
+<li>
+<p>深度学习模型训练</p>
+<ul>
+<li>优化目标</li>
+<li>训练过程&ndash;前向传播，反向传播，梯度下降</li>
+<li>SGD adam</li>
+</ul>
+</li>
+<li>
+<p>联邦学习</p>
+<ul>
+<li>联邦学习架构流程：损失函数 目标优化函数</li>
+<li>与传统分布式区别：四个特性
+<ul>
+<li>数据非独立同分布</li>
+<li>数据量不平衡</li>
+<li>参与方数量很大</li>
+<li>慢速且不可靠的通信、</li>
+</ul>
+</li>
+<li>fedavg</li>
+<li>非独立同分布 它们的数据分布可能因为地理位置、时间段或者用户模 式不同而产生明显的差异性，并且这种分布的差异性通常是不可控的，而这种非 独立同分布的数据集会直接影响联邦学习的收敛性能
+<ul>
+<li>特征分布不平衡（协方差偏移）：具有相同的条件概率p(y|x)，边缘概p(x)率不同</li>
+<li>标签分布不平衡(先验概率偏移)：p(x|y)相同，p(y)不同</li>
+<li>相同标签对应不同特征(概念偏移)</li>
+<li>相同特征对应不同标签（概念偏移）</li>
+<li>数据量偏移或不均衡</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>第三章：</p>
+<ul>
+<li>引言(不写标题)</li>
+<li>问题分析&mdash;包含<code>模型偏移示例图</code></li>
+<li>算法</li>
+<li>算法流程</li>
+<li>实验流程
+<ul>
+<li>不同数 据子集的数据分布情况如图 3-5 所示，其中，我们将β分别设置为 0.2 和 0.5。可 以看出，当 α 为 0.2 时，每个参与方拥有的数据类别更少，且数量更加不均衡。&mdash;可视化图</li>
+</ul>
+</li>
+<li>实验结果</li>
+</ul>
+<p><a href="https://kns.cnki.net/kcms2/article/abstract?v=N5T8oFSaxGGjRjAfpY6RJGccJ9TwBduPUz-jKk4oyXpEADfNW51Dwh5Hra6gzuQoNqO9M96LqhHXh2HZGc397eEcJXw3zjAwD2ttRCYujZZq0Z88po_gV9TQ7cw2mI1FTgifv63oWyiV5tBj9L4NeQ==&amp;uniplatform=NZKPT&amp;language=CHS">https://kns.cnki.net/kcms2/article/abstract?v=N5T8oFSaxGGjRjAfpY6RJGccJ9TwBduPUz-jKk4oyXpEADfNW51Dwh5Hra6gzuQoNqO9M96LqhHXh2HZGc397eEcJXw3zjAwD2ttRCYujZZq0Z88po_gV9TQ7cw2mI1FTgifv63oWyiV5tBj9L4NeQ==&amp;uniplatform=NZKPT&amp;language=CHS</a></p>
+<p>面向异构数据的个性化联邦学习方法</p>
+<p>智慧医疗、信贷金融风控、自动驾驶</p>
+<p>第一章：</p>
+<ul>
+<li>研究背景和意义
+<ul>
+<li>数据孤岛</li>
+<li>国内外研究现状</li>
+<li>主要挑战
+<ul>
+<li>系统挑战&ndash;计算能力 通信能力 存储能力</li>
+<li>统计挑战&ndash;NO-IID
+<ul>
+<li>增加正则化项，预处理客户端之间的数据</li>
+<li>个性化联邦
+<ul>
+<li>基于相似度的方法&ndash;多任务学习，<strong>聚类学习</strong></li>
+<li>基于结构的方法&ndash;参数解耦和 知识蒸馏
+<ul>
+<li>参数解耦  基础层+个性化层</li>
+<li>知识蒸馏</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>资源优化&ndash;信道状态更好、存储空间 更大和计算能力更强的客户端将负载更复杂的任务，相反，信道状态较差、存储 空间更小和计算能力更弱的客户端将负载更简单的任务。</li>
+<li>隐私保护</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>第二章：</p>
+<ul>
+<li>机器学习基础：
+<ul>
+<li>无监督聚类算法</li>
+<li>人工神经网络 cnn rnn</li>
+<li>分布式机器学习</li>
+</ul>
+</li>
+<li>联邦学习
+<ul>
+<li>联邦学习与机器学习</li>
+<li>定义和分类，包含<code>分类示意图</code></li>
+<li>fedavg</li>
+</ul>
+</li>
+<li>异构数据
+<ul>
+<li>属性倾斜 特征
+<ul>
+<li>数据属性部分重叠，完成不重叠</li>
+</ul>
+</li>
+<li>标签倾斜
+<ul>
+<li>标签分布倾斜&ndash;存储类似训练数据的客户端位置的差异所导致的
+<ul>
+<li>标签大小不平衡&ndash;是不同客户端拥有的数据的标签类别是不平衡</li>
+<li>标签分布不平衡&ndash;指每个客户端中含有每一类标签的样本个 数是不平衡的</li>
+</ul>
+</li>
+<li>标签偏好倾斜</li>
+</ul>
+</li>
+<li>noiid产生的模型<code>偏移现象示意图</code></li>
+</ul>
+</li>
+</ul>
+<p>第三章：</p>
+<ul>
+<li>引言</li>
+<li>微调策略</li>
+<li>自适应更新权重</li>
+<li>算法</li>
+<li>结果分析 <code>不同客户端类别数据分布示意图</code>含 10 个客户端的不同类别数据分布示意图</li>
+</ul>
+<hr>
+<hr>
+<p><code>数据孤岛</code> ：Federated machine learning: Concept and applications <a href="https://readpaper.com/pdf-annotate/note?pdfId=4544566317213704193&amp;noteId=2211141496131001600">paper</a></p>
+<p>随着AlphaGo的成功，人们自然会希望像AlphaGo这样的大数据驱动的人工智能将在我们的生活的所有方面很快实现。然而，现实世界的情况有些令人失望：除了少数行业外，大多数领域只有有限的数据或很差</p>
+<p>质量数据，使人工智能技术的实现比我们认为更难。通过跨组织传输数据，是否有可能将数据融合在一起在公共站点。事实上，在许多情况下，打破数据源之间的障碍是非常困难的（如果不是不可能的话）。一般来说，任何 AI 项目所需的数据都涉及多种类型的。例如，在 AI 驱动的产品推荐服务中，产品卖家提供有关产品、用户购买数据的信息，而不是描述用户购买能力和支付习惯的数据。在大多数行业中，数据以孤立的岛屿的形式存在。由于行业竞争、隐私和安全和复杂的行政程序，即使是同一公司不同部门之间的数据集成也面临着沉重的阻力。几乎不可能整合分散在国家和机构周围的数据，或者禁止成本。</p>
+<p>人工智能中的传统数据处理模型通常涉及简单的数据事务模型，一方收集和将数据传输到另一方，另一方将负责清理和融合数据。最后，第三方将采用集成数据并为其他各方构建模型以供使用。这些模型通常是作为服务出售的最终产品。这种传统程序面临着上述新数据法规和法律的挑战。此外，由于用户可能不清楚模型的未来用途，因此交易违反了 GDPR 等法律。因此，我们面临一个困境，即我们的数据以孤立的岛屿的形式，但我们在许多情况下禁止收集、融合和使用数据到不同的地方进行 AI 处理。如何合法地解决数据碎片化和隔离问题是当今人工智能研究人员和实践者的主要挑战。</p>
+<p><code>分布式</code></p>
+<p>联邦学习与分布式学习相比具有以下优势：</p>
+<p>隐私保护：联邦学习通过在本地训练模型并仅共享模型更新，避免了中心化数据的隐私风险。</p>
+<p>数据分散：联邦学习允许在不集中数据的情况下进行模型训练，从而解决了数据存储在不同地方的问题。</p>
+<p>减少数据传输：相对于传统的分布式学习，联邦学习通过在本地进行计算，减少了在网络上传输数据的需求，从而降低了通信成本。</p>
+<p>增量学习：联邦学习允许在本地进行增量学习，同时共享增量模型的更新，从而有效利用新数据而无需重新训练整个模型。</p>
+<p><code>挑战</code></p>
+<p><a href="http://localhost:1313/post/federated-learning/">wss</a>&ndash;研究现状</p>
+<ul>
+<li>通信效率</li>
+<li>隐私保护</li>
+<li>鲁棒性</li>
+</ul>
+<ol>
+<li><strong>统计挑战</strong>：由于联邦学习中的数据是分散存储在各个客户端上，且数据分布是非独立同分布的（Non-IID），这给模型的训练带来了很大的挑战。不同的客户端数据可能存在偏差或噪声，导致模型在全局范围内的性能下降。</li>
+<li><strong>隐私保护</strong>：尽管联邦学习通过仅共享模型而非原始数据来减少隐私泄露的风险，但仍存在一些潜在的隐私攻击手段，如梯度泄漏和模型反演等。这些攻击手段可能导致原始数据的敏感信息被泄露，从而威胁到用户的隐私安全。</li>
+<li><strong>通信效率</strong>：在联邦学习中，各个客户端需要定期上传本地模型的更新信息到服务器进行聚合。然而，由于网络带宽和延迟的限制，频繁的通信可能导致通信成本较高，影响模型的训练效率。</li>
+<li><strong>系统异构性</strong>：在实际的联邦学习场景中，各个客户端的设备性能、网络连接和电池电量等条件可能存在较大的差异。这种系统异构性可能导致部分客户端无法及时参与模型的训练，从而影响整体模型的性能。</li>
+<li><strong>安全和鲁棒性</strong>：联邦学习面临着各种安全威胁，如投毒攻击、后门攻击等。这些攻击可能导致模型在训练过程中被篡改或破坏，从而影响模型的准确性和可靠性。</li>
+</ol>
+<p>为了应对这些挑战，研究者们提出了各种解决方案和技术，如差分隐私、安全多方计算、加密技术等，以增强联邦学习的安全性、隐私性和鲁棒性。同时，针对统计挑战和系统异构性等问题，研究者们也在不断探索和改进联邦学习的算法和架构，以提高其在实际应用中的性能和效率。</p>
+<p><a href="https://course.cmpreading.com/web/refbook/detail/9420/226">应用</a></p>
+<ul>
+<li>在<strong>智慧金融</strong>领域中，可以根据多方数据建立更准确的业务模型，从而实现合理定价、定向业务推广、企业风控评定等；</li>
+<li>在<strong>智慧城市</strong>中，实现各政府机构之间、企业与政府之间的联合，实现更准确的实时交通预测，更简化的机关办事步骤，更高效的信息内容查询，更全面的安全防控检测等；</li>
+<li>在<strong>智慧医疗</strong>中，联邦学习可以综合各医院之间的数据，提高医疗影像诊断的准确性，预警病人的身体情况等。</li>
+</ul>
+<p><code>数据异构性</code></p>
+<p><a href="https://arxiv.org/pdf/1912.04977.pdf">https://arxiv.org/pdf/1912.04977.pdf</a> <a href="https://blog.csdn.net/qq_43827595/article/details/120661931">blog</a></p>
+<p><a href="https://xwzheng.gitbook.io/fl/03-efficiency_and_effectiveness">https://xwzheng.gitbook.io/fl/03-efficiency_and_effectiveness</a></p>
+<p>联邦学习中客户端数据Non-IID分布的五种类型：
+类型1：Feature distribution skew (convariate shift)
+类型2：Label distribution skew (prior probability shift)
+类型3：Same label, different features (concept shift)
+类型4：Same features, different label (concept shift)
+类型5：Quantity skew or unbalancedness</p>
+<ul>
+<li>
+<p>不同客户端数据分布不同</p>
+<p>(x,y)~P_j(x,y)</p>
+<ul>
+<li>特征分布倾斜：P(y|x)相同（条件概率），P_i(x)不同；不同人的笔迹不同</li>
+<li>标签分布倾斜：P(x|y)相同，P(y)不同；企鹅在只在南极、北极熊只在北极</li>
+<li>标签相同特征不同：P(y)相同，P(x|y)不同；概念飘移。同一个信息代表的含义不同，表示yes是点头/摇头</li>
+<li>特征相同标签不同：P_i(x)相同，P(y|x)不同；点头表示Yes / No?</li>
+<li>数量不平衡：客户端的数据量</li>
+</ul>
+</li>
+<li>
+<p><strong>数据偏移</strong>：训练集测试集不同分布（训练草丛上的狗，无法识别海里的狗）</p>
+</li>
+<li>
+<p><strong>非独立</strong>：可用节点大多在附近的时区（地理位置）（睡觉时手机的状态容易被选中）</p>
+</li>
+</ul>
+<hr>
+<h2 id="大论文">大论文</h2>
+<p>第一章：</p>
+<ul>
+<li>背景和意义
+<ul>
+<li>数据孤岛</li>
+<li>隐私保护</li>
+<li>联邦学习&ndash;与分布式的区别</li>
+<li>意义：应用???</li>
+</ul>
+</li>
+<li>研究现状
+<ul>
+<li>挑战：
+<ul>
+<li>数据异构性 fedprox,fednova,fedu,scaffold,fedbn</li>
+<li>隐私保护-差分隐私</li>
+<li>通信效率</li>
+<li>系统异构性</li>
+<li>鲁棒性</li>
+</ul>
+</li>
+<li><strong>统计挑战</strong>：由于联邦学习中的数据是分散存储在各个客户端上，且数据分布是非独立同分布的（Non-IID），这给模型的训练带来了很大的挑战。不同的客户端数据可能存在偏差或噪声，导致模型在全局范围内的性能下降。</li>
+<li><strong>隐私保护</strong>：尽管联邦学习通过仅共享模型而非原始数据来减少隐私泄露的风险，但仍存在一些潜在的隐私攻击手段，如梯度泄漏和模型反演等。这些攻击手段可能导致原始数据的敏感信息被泄露，从而威胁到用户的隐私安全。</li>
+<li><strong>通信效率</strong>：在联邦学习中，各个客户端需要定期上传本地模型的更新信息到服务器进行聚合。然而，由于网络带宽和延迟的限制，频繁的通信可能导致通信成本较高，影响模型的训练效率。</li>
+<li><strong>系统异构性</strong>：在实际的联邦学习场景中，各个客户端的设备性能、网络连接和电池电量等条件可能存在较大的差异。这种系统异构性可能导致部分客户端无法及时参与模型的训练，从而影响整体模型的性能。</li>
+<li></li>
+</ul>
+</li>
+<li><code>数据集与评价指标 ???</code></li>
+<li><code>存在问题和研究动机</code>
+<ul>
+<li>由联邦学习的数据异构性引出个性化联邦学习</li>
+<li>联邦学习存在的问题—尤其是数据异构场景—个性化联邦学习</li>
+<li>模型漂移</li>
+<li><strong>对应三四章</strong></li>
+</ul>
+</li>
+<li><code>本文主要内容和组织架构</code></li>
+</ul>
+<p>第二章：</p>
+<ul>
+<li>
+<p>神经网络 cnn resnet</p>
+<ul>
+<li>（1）卷积层。卷积层是CNN的核心，负责提取输入数据的局部特征。通过卷积操作，卷积层能够捕捉到图像中的边缘、角点、纹理等基础特征。卷积层由多个卷积核组成，从输入数据中提取多种不同的特征。（2）标准化层。标准化层对输入进行规范化处理，有助于缓解梯度消失或爆炸的问题，从而使得网络训练过程更加稳定，加快收敛速度，可以使得网络在不同数据分布之间具有更好的泛化能力。（3）激活层。激活层用于引入非线性因素，使得网络能够学习和表示复杂的函数关系，并提高其泛化能力。最常用的激活函数是ReLU（Rectified Linear Unit）函数，它将所有负值置为零，保留正值不变。（4）池化层。池化层也称为下采样层，用于降低特征图的空间维度，减少参数数量和计算量，同时保持特征的不变性。最常见的池化操作是最大池化（Max Pooling）和平均池化（Average Pooling）。（5）全连接层。全连接层位于CNN的末端，主要功能是将前面层学到的高级特征映射到最终的输出，如分类标签或回归值。（6）输出层。输出层是神经网络的最后一层，根据全连接层的结果给出最终的预测结果。在分类任务中，输出层通常使用softmax函数将全连接层的输出转换为概率分布。</li>
+<li>画图
+<ul>
+<li><a href="https://www.zhihu.com/question/40698990">https://www.zhihu.com/question/40698990</a></li>
+<li><a href="https://blog.csdn.net/Small___ming/article/details/121348071">https://blog.csdn.net/Small___ming/article/details/121348071</a></li>
+<li><a href="https://www.cnblogs.com/q735613050/p/9699094.html">https://www.cnblogs.com/q735613050/p/9699094.html</a></li>
+</ul>
+</li>
+<li>resnethttps://blog.csdn.net/m0_64799972/article/details/132753608</li>
+</ul>
+</li>
+<li>
+<p>深度学习模型训练？？？</p>
+</li>
+<li>
+<p>联邦学习</p>
+<ul>
+<li>fl 定义和分类</li>
+<li>fedavg算法 优化目标</li>
+</ul>
+</li>
+<li>
+<p>数据异构性</p>
+<ul>
+<li>模型漂移</li>
+<li>特征分布不平衡与特征不同但标签相同的主要区别在于它们关注的侧重点不同。特征分布不平衡主要关注的是不同类别在特征空间上的分布差异，以及这种差异对模型性能的影响。而特征不同但标签相同则更多关注同一类别内样本的特征变化及其对模型识别能力的影响。</li>
+</ul>
+</li>
+<li>
+<p>个性化联邦学习</p>
+</li>
+</ul>
+<p>第四章：</p>
+<ul>
+<li>
+<p>如何划分标签异构场景&ndash;狄利克雷函数的介绍</p>
+<ul>
+<li><a href="https://www.cnblogs.com/orion-orion/p/15897853.html">https://www.cnblogs.com/orion-orion/p/15897853.html</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/78743630?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_oi=693565951899074560&amp;utm_psn=1565622651724464128&amp;utm_source=wechat_session">https://zhuanlan.zhihu.com/p/78743630?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_oi=693565951899074560&amp;utm_psn=1565622651724464128&amp;utm_source=wechat_session</a></li>
+<li>alpha =0.1
+<ul>
+<li>Client 0         Size of data: 5237      Labels:  [0 2 7]
+Samples of labels:  [(0, 3), (2, 39), (7, 5195)</li>
+</ul>
+</li>
+<li>alpha =1
+<ul>
+<li>Client 0         Size of data: 3263      Labels:  [0 1 2 3 4 5 6 7]
+Samples of labels:  [(0, 204), (1, 26), (2, 797), (3, 37), (4, 351), (5, 516), (6, 850), (7, 482)]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>fedala</p>
+</li>
+<li>
+<p>fedsoup</p>
+</li>
+</ul>
+<hr>
+<p>应用？</p>
+<p>尤其是在医疗场景下，个性化联邦学习可以使得每个参与联邦学习的医院可以根据自己医院的实际情况获得更加符合自身医院需求的个性化模型[31, 34]。中期</p>
+<p>2.1.2 深度学习模型训练</p>
+<p>深度学习的训练过程本质上是求解优化问题的过程，它的优化目标是找到一 种最优的模型参数使得预先定义的损失函数达到最小值。损失函数通常被定义为 模型预测值与真实数据标签之间的距离，例如对于一个 N-分类问题，我们可以 将损失函数定义为输出类别概率分布与真实 one-hot 标签向量之间的交叉熵。 深度学习的训练过程主要分为前向传播、反向传播算法和梯度下降算法三个 部分。前向传播是模型由输入数据到输出预测值的计算过程，中间的计算步骤以 计算图的形式记录，用于后续的梯度计算。反向传播算法通过链式求导法则，沿 着模型输出侧到模型输入侧的方向对损失函数进行梯度求解，得到各层参数的梯 度值，其中，求导公式与每层前向计算的定义相关。梯度下降算法则是沿着损失 函数梯度的反方向更新模型参数，</p>
+<p>2.2.2联邦学习经典算法fedavg</p>
+<p>2.5 伪装目标检测主流数据集与评价指标
+2.5.1 典型的伪装目标检测数据集</p>
+<p>2.5.2 常用的性能评价指标</p>
+<hr>
+<h2 id="存在问题与研究动机">存在问题与研究动机</h2>
+<p>对照论文中的三四章—简单介绍数据异构场景带来的问题</p>
+<p>引出联邦学习&mdash;引出工作内容</p>
+<p>联邦学习存在的问题—尤其是数据异构场景—个性化联邦学习</p>
+<p>根据现有的联邦学习的研究[10-12]，数据异构性问题会影响模型的有效性。由于每个客户端的数据分布和全局的数据分布有很大的不同，因此，每个本地客户端的局部最优模型和全局最优模型并不一致。尤其是本地更新比较大的时候，聚合后的平均模型会远离全局最优模型，局部模型和全局模型比集中训练更不稳定。与IID数据的分布式训练相比，FL的局部模型之间存在更严重的分歧[13]，这被称之为客户端漂移[11]。这一现象也说明了数据异构性现象严重损害了联邦学聚合模型的性能和收敛效率。</p>
+<p>如图3所示</p>
+<p>因此，深入研究并解决联邦学习中的数据异构性问题，对于提升模型性能、实现更为精准和可靠的预测具有重要意义</p>
+<p>为了缓解客户端漂移，Wang等人[22]提出需要仔细的调整超参数。例如学习率和局部训练迭代，它直接决定局部模型移动的速度有多快，从而决定它们有多大漂移。然而，太小的学习率也意味着收敛速度较慢。因此，如何同时实现更快的训练速度和更有效缓解客户漂移很重要。为此，许多研究工作试图设计更有效的联邦学习算法来解决客户漂移问题。例如，通过添加正则化来校准局部模型的优化方向，限制局部模型与服务器模型之间的距离[23]。此外，Wang等人[24]提出对本地更新进行归一化，以消除局部和全局优化目标函数之间的不一致，对客户端更新进行纠正，加速和稳定收敛。除此之外由于在高度异构环境下模型收敛性差，并且缺少个性化方案，个性化联邦学习[25]逐渐兴起。个性化联邦学习为每个客户端用户生成一个个性化的客户端模型，而不是使用全局的共享模型，因此可以更加高效的利用本地客户端的局部知识以此来有效的缓解数据异构性的问题，满足参与联邦学习的用户更加个性化的需求。</p>
+<p>由于在高度异构环境下模型收敛性差，并且缺少个性化方案，个性化联邦学习[16]逐渐兴起。个性化联邦学习为每个客户端用户生成一个个性化的客户端模型，而不是使用全局的共享模型，因此可以更加高效的利用本地客户端的局部知识以此来有效的缓解数据异构性的问题，满足参与联邦学习的用户更加个性化的需求。</p>
+<p>尽管目前已有不少工作对个性化联邦学习进行研究，但是，个性化联邦学习仍然处于未成熟状态。本课题主要针对多源域自适应[17]的场景下进行个性化联邦学习的研究，该场景下多个源域的数据是有标签的，目标域的数据是没有标签的，需要通过迁移学习实现知识迁移。由于数据异构性的问题使得联邦学习聚合过程中遇到了很大的阻碍。简而言之，联邦学习的各个用户之间的数据的非独立同分布性，使得联邦学习在模型迁移方面会产生很大的困难，以及模型聚合方面需要花费更多的时间成本，而多源域自适应的场景下，客户端的数据来源于不同的域，不同域之间的特征不同，这种数据异构性的情况会更加突出[18]。此外，客户端用户加入联邦学习的目的是为了提升自身的收益，但是现有的联邦迁移学习的目标仅仅是为了提升目标域的性能，而忽略了联邦学习的场景下每个客户端的性能[19]。</p>
+<p>本课题旨在通过个性化联邦学习的方法来提升数据异构场景下模型的性能，以及模型的收敛速度。基于知识投票的方法来实现对目标域数据的迁移，衡量客户端模型对全局模型的贡献程度来赋予客户端模型不同的权重进行模型聚合，提升模型迁移的性能；基于代理增强转移的方法，旨在提升目标域性能的同时，还可以提升源域的性能，满足每个客户端用户更加个性化的需求，提升每个客户端用户加入联邦学习的收益，以此也能吸引更多的用户加入联邦学习框架中。</p>
+<hr>
+<p>三年很短，好像很多“本可以”。然而，时间匆匆如流水。很多事情，不亲身经历，永远不会明白别人的劝诫，即使知道，也不会执行，而是依然我行我素。</p>
+<p>所幸，</p>
+<hr>
+<p>$$
+( F_i(\theta) )
+[ F(\theta) = \sum_{i=1}^{N} w_i F_i(\theta) ]
+$$</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2024-03-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/job_syb/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">事业编</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/java07/">
+            <span class="next-text nav-default">Java-面向对面2</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

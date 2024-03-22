@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java-IDEA - 乐观积极的...</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kong" /><meta name="description" content="功能强大： ① 强大的整合能力。比如：Git、Maven、Spring等 ② 开箱即用的体验（集成版本控制系统、多语言支持的框架随时可用，无需额外安" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://kongfany.github.io/post/java04/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java-IDEA" />
+<meta property="og:description" content="功能强大： ① 强大的整合能力。比如：Git、Maven、Spring等 ② 开箱即用的体验（集成版本控制系统、多语言支持的框架随时可用，无需额外安" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kongfany.github.io/post/java04/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-01-22T16:56:56+08:00" />
+<meta property="article:modified_time" content="2024-01-22T16:56:56+08:00" />
+
+<meta itemprop="name" content="Java-IDEA">
+<meta itemprop="description" content="功能强大： ① 强大的整合能力。比如：Git、Maven、Spring等 ② 开箱即用的体验（集成版本控制系统、多语言支持的框架随时可用，无需额外安"><meta itemprop="datePublished" content="2024-01-22T16:56:56+08:00" />
+<meta itemprop="dateModified" content="2024-01-22T16:56:56+08:00" />
+<meta itemprop="wordCount" content="1745">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java-IDEA"/>
+<meta name="twitter:description" content="功能强大： ① 强大的整合能力。比如：Git、Maven、Spring等 ② 开箱即用的体验（集成版本控制系统、多语言支持的框架随时可用，无需额外安"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">乐观积极的...</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">乐观积极的...</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java-IDEA</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-01-22 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> JAVA </a>
+            </div>
+          <span class="more-meta"> 1745 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#快捷操作">快捷操作</a></li>
+        <li><a href="#jdk相关设置">JDK相关设置</a></li>
+        <li><a href="#相关设置">相关设置</a></li>
+        <li><a href="#工程与模块管理">工程与模块管理</a>
+          <ul>
+            <li><a href="#project和module的概念">Project和Module的概念</a></li>
+          </ul>
+        </li>
+        <li><a href="#代码模板">代码模板</a>
+          <ul>
+            <li><a href="#常用代码模板">常用代码模板</a></li>
+          </ul>
+        </li>
+        <li><a href="#下面向对面-讲">下：面向对面 讲</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>功能强大：</strong></p>
+<p>① 强大的整合能力。比如：Git、Maven、Spring等</p>
+<p>② 开箱即用的体验（集成版本控制系统、多语言支持的框架随时可用，无需额外安装插件）</p>
+<h2 id="快捷操作">快捷操作</h2>
+<p>main：main方法</p>
+<p>sout：输出。或者&quot;hello&quot;.sout</p>
+<p>fori：for循环</p>
+<p>快捷键：</p>
+<p>ctrl+/:多行的单行注释，取消</p>
+<p>ctrl+tab：多行缩进，shift+tab</p>
+<p>ctl+shift+/:多行注释</p>
+<p>shift+回车，不在最后也能换行</p>
+<p>shift+alt+回车，换到上一行</p>
+<p>/**:文档注释</p>
+<p><strong><code>Ctrl + Alt + L</code></strong>：代码格式化</p>
+<p>自动导包：alt+enter</p>
+<p>搜索ctrl+n；双击shift</p>
+<p>ctrl+p：显示方法的参数</p>
+<p>alt+ins：生成getset方法，构造器</p>
+<h2 id="jdk相关设置">JDK相关设置</h2>
+<p><code>File--&gt;Project Structure...--&gt;Platform Settings --&gt;SDKs</code></p>
+<p>修改jdk版本，语言版本设置，编译文件位置</p>
+<h2 id="相关设置">相关设置</h2>
+<p>view-appear-tooblar</p>
+<p>file-settings</p>
+<p>如果去掉Reopen projects on startup前面的对勾,不会打开上次文件</p>
+<p>取消自动更新</p>
+<p>Settings&ndash;&gt;Appearance &amp; Behavior-&gt;System Settings -&gt; Updates</p>
+<p>editor-color sc-language注释颜色00FDC8，默认808080</p>
+<p>智能提示：editor-gene-code co-math case;IntelliJ IDEA 的代码提示和补充功能有一个特性：<code>区分大小写</code>。 如果想不区分大小写的话，就把这个对勾去掉。</p>
+<p>自动导包：alt+enter gener-auto import</p>
+<p>设置项目文件编码（一定要改）</p>
+<p>gener-file encoding：utf-8；Transparent native-to-ascii conversion主要用于转换ascii，显式原生内容。一般都要勾选。</p>
+<p>修改类头的文档注释信息file and code temple</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm">* ClassName: ${NAME}
+</span><span class="cm">* Package: ${PACKAGE_NAME}
+</span><span class="cm">* Description: 
+</span><span class="cm">* @Author kong
+</span><span class="cm">* @Create ${DATE} ${TIME} 
+</span><span class="cm">* @Version 1.0   
+</span><span class="cm">*/</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>设置自动编译</p>
+<p><code>Settings--&gt;Build,Execution,Deployment--&gt;Compiler</code></p>
+<p>清理缓存和退出 Invalidate Caches</p>
+<h2 id="工程与模块管理">工程与模块管理</h2>
+<p>IDEA项目结构</p>
+<p><strong>层级关系：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">project(工程) - module(模块) - package(包) - class(类)
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="project和module的概念">Project和Module的概念</h3>
+<p>在 IntelliJ IDEA 中Project是<code>最顶级的结构单元</code>，然后就是Module。目前，主流的大型项目结构基本都是多Module的结构，这类项目一般是<code>按功能划分</code>的，比如：user-core-module、user-facade-module和user-hessian-module等等，模块之间彼此可以<code>相互依赖</code>，有着不可分割的业务关系。因此，对于一个Project来说：</p>
+<ul>
+<li>当为单Module项目的时候，这个单独的Module实际上就是一个Project。</li>
+<li>当为多Module项目的时候，多个模块处于同一个Project之中，此时彼此之间具有<code>互相依赖</code>的关联关系。</li>
+<li>当然多个模块没有建立依赖关系的话，也可以作为单独一个“小项目”运行。</li>
+</ul>
+<p>在一个module下，可以声明多个包（package），一般命名规范如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">1.不要有中文
+2.不要以数字开头
+3.给包取名时一般都是公司域名倒着写,而且都是小写
+  比如：尚硅谷网址是www.atguigu.com
+  那么我们的package包名应该写成：com.atguigu.子名字。
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/2024/11.png" alt=""></p>
+<p>删除module：</p>
+<p>移除模块：右键remove</p>
+<p>彻底删除模块：右键delete</p>
+<p><code>导入别的包出现乱码</code>，单独设置编码gbk，file-editor-file encodings:加号添加路径单独设置编码格式</p>
+<h2 id="代码模板">代码模板</h2>
+<h3 id="常用代码模板">常用代码模板</h3>
+<h4 id="1非空判断">1、非空判断</h4>
+<ul>
+<li>变量.null：if(变量 == null)</li>
+<li>变量.nn：if(变量 != null)</li>
+<li>变量.notnull：if(变量 != null)</li>
+<li>ifn：if(xx  == null)</li>
+<li>inn：if(xx  != null)</li>
+</ul>
+<h4 id="2遍历数组和集合">2、遍历数组和集合</h4>
+<ul>
+<li>数组或集合变量.fori：for循环</li>
+<li>数组或集合变量.for：增强for循环</li>
+<li>数组或集合变量.forr：反向for循环</li>
+<li>数组或集合变量.iter：增强for循环遍历数组或集合</li>
+</ul>
+<h4 id="3输出语句">3、输出语句</h4>
+<ul>
+<li>sout：相当于System.out.println</li>
+<li>soutm：打印当前方法的名称</li>
+<li>soutp：打印当前方法的形参及形参对应的实参值</li>
+<li>soutv：打印方法中声明的最近的变量的值</li>
+<li>变量.sout：打印当前变量值</li>
+<li>变量.soutv：打印当前变量名及变量值</li>
+</ul>
+<h4 id="4对象操作">4、对象操作</h4>
+<ul>
+<li>创建对象
+<ul>
+<li>Xxx.new  .var ：创建Xxx类的对象，并赋给相应的变量</li>
+<li>Xxx.new  .field：会将方法内刚创建的Xxx对象抽取为一个属性</li>
+</ul>
+</li>
+<li>强转
+<ul>
+<li>对象.cast：将对象进行强转</li>
+<li>对象.castvar：将对象强转后，并赋给一个变量</li>
+</ul>
+</li>
+</ul>
+<h4 id="5静态常量声明">5、静态常量声明</h4>
+<ul>
+<li>psf：public static final</li>
+<li>psfi：public static final int</li>
+<li>psfs：public static final String</li>
+<li>prsf：private static final</li>
+</ul>
+<h2 id="下面向对面-讲">下：面向对面 讲</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">kong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2024-01-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/java05/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java-数组</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/java03/">
+            <span class="next-text nav-default">Java流程控制</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=_JOXlp_emZaBjZ3IwcrMuImJ1puXlQ" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/kongfany" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/5947688533?is_all=1" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/yu-ni-zhong-nian-bu-yu" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://space.bilibili.com/232669848" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://kongfany.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script type="text/javascript" async src="/lib/mathjax/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

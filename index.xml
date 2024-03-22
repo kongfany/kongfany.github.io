@@ -6,7 +6,61 @@
     <description>Recent content on 乐观积极的...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Dec 2023 16:54:57 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Mar 2024 16:51:38 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>事业编</title>
+      <link>https://kongfany.github.io/post/job_syb/</link>
+      <pubDate>Mon, 18 Mar 2024 16:51:38 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/job_syb/</guid>
+      <description>大纲 真题 2021 基于ARM架构的智能手机处理器采用的指令集主要是RISC（精简指令集计算机）。RISC指令集的设计思路是尽量简化计算机指令集，使指</description>
+    </item>
+    
+    <item>
+      <title>大论文思路分析</title>
+      <link>https://kongfany.github.io/post/fl_bigpaper/</link>
+      <pubDate>Sat, 02 Mar 2024 10:31:34 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/fl_bigpaper/</guid>
+      <description>blog1 Domain Shift in FL DA 常用数据集：Office-31，Office-Caltech-10，MINIST+USPS，更多的见：https://githu</description>
+    </item>
+    
+    <item>
+      <title>Java-面向对面2</title>
+      <link>https://kongfany.github.io/post/java07/</link>
+      <pubDate>Wed, 21 Feb 2024 16:36:01 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/java07/</guid>
+      <description>关键字this 实例方法或构造器中使用当前对象的成员 在实例方法或构造器中，如果使用当前类的成员变量或成员方法可以在其前面添加this，增强程序</description>
+    </item>
+    
+    <item>
+      <title>Java-面向对面</title>
+      <link>https://kongfany.github.io/post/java06/</link>
+      <pubDate>Tue, 30 Jan 2024 22:23:28 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/java06/</guid>
+      <description>学习面向对象内容的三条主线 Java类及类的成员：（重点）属性、方法、构造器；（熟悉）代码块、内部类 面向对象的特征：封装、继承、多态、（抽象）</description>
+    </item>
+    
+    <item>
+      <title>Java-数组</title>
+      <link>https://kongfany.github.io/post/java05/</link>
+      <pubDate>Tue, 23 Jan 2024 22:04:29 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/java05/</guid>
+      <description>为什么需要数组 需求分析1： 需要统计某公司50个员工的工资情况，例如计算平均工资、找到最高工资等。用之前知识，首先需要声明50个变量来分别记录</description>
+    </item>
+    
+    <item>
+      <title>Java-IDEA</title>
+      <link>https://kongfany.github.io/post/java04/</link>
+      <pubDate>Mon, 22 Jan 2024 16:56:56 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/java04/</guid>
+      <description>功能强大： ① 强大的整合能力。比如：Git、Maven、Spring等 ② 开箱即用的体验（集成版本控制系统、多语言支持的框架随时可用，无需额外安</description>
+    </item>
+    
     <item>
       <title>Java流程控制</title>
       <link>https://kongfany.github.io/post/java03/</link>
@@ -40,7 +94,7 @@
       <pubDate>Tue, 28 Nov 2023 15:25:56 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/fl_pfl2/</guid>
-      <description>视频 code fedbn ditto fedala fedb 数据集处理 dataset等三个文件夹mark directory as sources root&amp;ndash;import下列的文件时才可以识别到 system ​ flscore</description>
+      <description>视频 PFLlib_code fedbn ditto fedala fedb PFLLIB 数据集处理 dataset等三个文件夹mark directory as sources root&amp;ndash;import下列的文件时才可以识别到 system ​ flscor</description>
     </item>
     
     <item>
@@ -67,7 +121,7 @@
       <pubDate>Wed, 13 Sep 2023 14:25:39 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/latex/</guid>
-      <description>latex 安装教程 下载 快速入门教程 2 在线公式编辑器 mathpix，扫描图片生成公式代码 1 pycharm编写latex 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16</description>
+      <description>latex 安装教程 下载 快速入门教程 2 在线公式编辑器 ，2 mathpix，扫描图片生成公式代码 1 pycharm编写latex 1 2 3 4 5 6 7 8 9 10 11 12 13 14</description>
     </item>
     
     <item>
@@ -941,6 +995,15 @@
       
       <guid>https://kongfany.github.io/post/my-first-post/</guid>
       <description>hugo创建blog &#34;可以加类似于引言的格式-- 网工172-陈迪荣 2021/6/5 9:48:03 搭建博客可以看这篇下面的reference： https://www.lttzz.cn/post/hello-world/ https://olowolo.com/post/hugo-quick-start/ hugo new不是可以新建博</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kongfany.github.io/post/introspection/untitled/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kongfany.github.io/post/introspection/untitled/</guid>
+      <description>从读论文就是在读论文，知道别人的东西好。但不知道为什么好，怎么用 到知道为什么好，并能合理的应用到现在的实验中 但是我没有达到可以去改进的地步 很</description>
     </item>
     
   </channel>

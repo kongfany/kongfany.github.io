@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Algo">
 <meta itemprop="description" content="算法 美团技术岗笔试 https://codefun2000.com/ python 输入输出 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 import sys # 多组测试用例 for line in sys.stdin: print(line)# 键盘输入，包含回车 a = line.split()# str类型列表 print(a,type(a),type(a[0])) print(int(a[0])"><meta itemprop="datePublished" content="2023-11-28T15:07:53+08:00" />
 <meta itemprop="dateModified" content="2023-11-28T15:07:53+08:00" />
-<meta itemprop="wordCount" content="11257">
+<meta itemprop="wordCount" content="18718">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Algo"/>
 <meta name="twitter:description" content="算法 美团技术岗笔试 https://codefun2000.com/ python 输入输出 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 import sys # 多组测试用例 for line in sys.stdin: print(line)# 键盘输入，包含回车 a = line.split()# str类型列表 print(a,type(a),type(a[0])) print(int(a[0])"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/algorithm/"> algorithm </a>
             </div>
-          <span class="more-meta"> 11257 words </span>
-          <span class="more-meta"> 23 mins read </span>
+          <span class="more-meta"> 18718 words </span>
+          <span class="more-meta"> 38 mins read </span>
         
       </div>
     </header>
@@ -151,8 +151,18 @@
       <ul>
         <li><a href="#算法">算法</a></li>
         <li><a href="#美团技术岗笔试">美团技术岗笔试</a></li>
-        <li><a href="#美团笔试">美团笔试</a></li>
         <li><a href="#中国铁塔笔试">中国铁塔笔试</a></li>
+        <li><a href="#笔试真题">笔试真题</a></li>
+        <li><a href="#中华财险技术笔试">中华财险技术笔试</a>
+          <ul>
+            <li><a href="#java">java</a></li>
+            <li><a href="#设计模式">设计模式</a></li>
+            <li><a href="#数据结构">数据结构</a></li>
+            <li><a href="#数据库">数据库</a></li>
+            <li><a href="#计网">计网</a></li>
+            <li><a href="#git">git</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -574,7 +584,7 @@ a = line.split()# 列表,str</p>
 </code></pre></td></tr></table>
 </div>
 </div><hr>
-<h2 id="美团笔试">美团笔试</h2>
+<p>美团笔试</p>
 <p>笔试：题型和上述题型类似，但只做出来了1和26.6-2 和16.6-3</p>
 <p>不知道后续会不会有面试，也不清楚我通过笔试是因为内推还是真的就是都有</p>
 <p>如果没面试机会，希望春招的时候可以再次参与笔试。</p>
@@ -1211,7 +1221,501 @@ a = line.split()# 列表,str</p>
 <span class="c1">//truetruetrue
 </span></code></pre></td></tr></table>
 </div>
+</div><h2 id="笔试真题">笔试真题</h2>
+<p>美团</p>
+<p>1、小美拿到了一个大小为n的数组，她希望删除一个元素，使得剩余元素之和不小于x。
+小美想知道，有多少种不同的删除方案?
+输入描述
+第一行输入两个正整数n和x。第二行输入n个正整数ai，代表数组的元素。
+1≤n≤105
+1≤a≤104
+1≤x≤10
+输出描述
+一个整数，代表删除的方案数。</p>
+<p>3 7</p>
+<p>3 4 3</p>
+<p>2
+说明
+删除第一个或者第三个元素都可以。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">n</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">:</span>
+        <span class="n">flag</span><span class="o">=</span><span class="n">flag</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
+</div><p>&ndash;</p>
+<p>2、小美拿到了一个数组，她可以进行最多一次操作:选择两个元素 ai和aj，使得ai加1，aj减1
+小美希望最终数组所有元素的乘积尽可能大。你能帮帮她吗?
+输入描述
+第一行输入一个正整数n，代表数组的大小。
+第二行输入n个正整数ai，代表数组的元素。
+输出描述</p>
+<p>输出描述
+最终的最大乘积 由于答案过大，请对10^9+7取模</p>
+<p>3</p>
+<p>3 1 6</p>
+<p>30</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e9</span><span class="p">)</span><span class="o">+</span><span class="mi">7</span>
+<span class="k">def</span> <span class="nf">chengji</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="n">product</span> <span class="o">=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">product</span><span class="o">*=</span><span class="n">num</span>
+    <span class="k">return</span> <span class="n">product</span><span class="o">%</span><span class="n">mod</span>
+
+
+<span class="n">product</span> <span class="o">=</span><span class="n">chengji</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">a</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">product</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">product</span><span class="p">,</span><span class="n">chengji</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>&ndash;</p>
+<p>3、小美拿到了一个字符串s，她准备按以下的规则生成一个字符串t
+1.首先令t等于s
+2.若s不为空，删除s最后一个字符，然后将剩下的字符加入t的后缀。
+3.若s不为空，删除s第一个字符，然后将剩下的字符加入t的后缀。
+4.若s不为空，回到第二步，否则结束。
+操作结束后，小美有若干次询问，每次查询t的第x个字符是多少。</p>
+<p>输入描述
+第一行输入两个正整数n，q，代表字符串s的长度，以及询问次数。</p>
+<p>第二行输入一个长度为n的、仅由小写字母组成的字符串，代表字符 s
+接下来的q行，每行输入一个正整数x，代表一次查询。
+1≤n,q≤105
+输出描述
+输出q行，每行输出一个小写字母代表查询的答案。
+输入
+32</p>
+<p>abc</p>
+<p>2</p>
+<p>5</p>
+<p>输出</p>
+<p>b</p>
+<p>b</p>
+<p>说明：输出的字符串为abcabb</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">n</span><span class="p">,</span><span class="n">q</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+
+<span class="n">t</span> <span class="o">=</span><span class="n">s</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="c1">#t =deque(t)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">t</span> <span class="o">=</span><span class="n">t</span> <span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+
+        <span class="n">t</span> <span class="o">=</span><span class="n">t</span> <span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="中华财险技术笔试">中华财险技术笔试</h2>
+<h3 id="java">java</h3>
+<p>1、java中哪些类型的变量不能被赋值为null</p>
+<p>基本数据类型不能赋值为null；只有引用类型，如对象数组，可以被赋值为null</p>
+<p>静态变量（类变量）和成员变量（实例变量）都是引用类型（Reference types），因此它们可以被赋值为null。</p>
+<p>2、super，this关键字</p>
+<p>用于引用对象的特定类型</p>
+<p>super：<strong>引用父类的成员</strong>使用 <strong><code>super</code></strong> 关键字可以在子类中引用父类的成员（方法、属性），包括在子类中被隐藏的同名属性或方法。</p>
+<p><strong>调用父类构造函数</strong>在子类构造函数中，可以使用 <strong><code>super()</code></strong> 来调用父类的构造函数。这通常用于子类需要在构造过程中执行父类特定的初始化操作。</p>
+<p>this：<strong>引用当前对象</strong>使用 <strong><code>this</code></strong> 关键字可以在类的成员方法中引用当前对象。</p>
+<p><strong>解决命名冲突</strong>，<strong><code>this</code></strong> 可以用来区分成员变量和局部变量，当它们同名时，使用 <strong><code>this</code></strong> 可以指代当前对象的成员变量。</p>
+<p>总的来说，<strong><code>super</code></strong> 用于与父类有关的操作，包括引用父类的成员和调用父类的构造函数，而 <strong><code>this</code></strong> 则用于当前对象的操作，包括引用当前对象的成员和解决成员变量与局部变量之间的命名冲突。</p>
+<p>最佳实践是将 <strong><code>super()</code></strong> 或 <strong><code>this()</code></strong> 调用放在构造函数的第一行，以确保正确的对象初始化。</p>
+<p><strong><code>super()</code></strong> 和 <strong><code>this()</code></strong> 可以同时出现在一个构造函数中。这种情况通常发生在需要调用另一个构造函数或者需要引用当前对象的情况下。</p>
+<p>当两者同时出现时，需要注意以下几点：</p>
+<ol>
+<li><strong>构造函数中只能出现一个显式的调用</strong>：在一个构造函数中，只能显式调用 <strong><code>super()</code></strong> 或 <strong><code>this()</code></strong> 中的一个，因为它们都需要作为构造函数的第一条语句。</li>
+<li><strong>隐式调用</strong>：如果在构造函数中没有显式调用 <strong><code>super()</code></strong> 或 <strong><code>this()</code></strong>，Java会在构造函数的第一行自动插入一个无参的 <strong><code>super()</code></strong> 调用。</li>
+<li><strong>先调用super()，再调用this()</strong>：如果在一个构造函数中显式调用了 <strong><code>this()</code></strong>，那么它必须是构造函数的第一条语句，而在**<code>this()</code>**调用的构造函数中也可能含有**<code>super()</code>**调用。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Example</span> <span class="o">{</span>  
+    <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>  
+  
+    <span class="n">Example</span><span class="o">()</span> <span class="o">{</span>  
+        <span class="k">this</span><span class="o">(</span><span class="n">0</span><span class="o">);</span> <span class="c1">// 调用另一个构造函数  
+</span><span class="c1"></span>    <span class="o">}</span>  
+  
+    <span class="n">Example</span><span class="o">(</span><span class="kt">int</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>  
+        <span class="kd">super</span><span class="o">();</span> <span class="c1">// 可以在this()后调用super()  
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>在上述示例中，无参的构造函数中显式调用了有参的构造函数 <strong><code>this(0)</code></strong>，而有参的构造函数中又显式调用了 <strong><code>super()</code></strong>，这种情况是允许的。</p>
+<p>在Java中，<strong><code>super</code></strong> 和 <strong><code>this</code></strong> 关键字在静态环境中（例如静态方法和静态语句块）是不允许使用的。这是因为这两个关键字是用来引用对象实例的，而在静态环境中，并不存在具体的对象实例，因此无法使用 <strong><code>this</code></strong> 和 <strong><code>super</code></strong>。</p>
+<p>3、java classloader</p>
+<p>Java中的ClassLoader是Java虚拟机（JVM）的一个子系统，它的主要作用是动态加载Java类到JVM中。</p>
+<p>作用：</p>
+<ol>
+<li><strong>加载类文件</strong>：ClassLoader负责将类文件加载到内存中，使得Java程序能够使用这些类。</li>
+<li><strong>类隔离</strong>：不同的ClassLoader加载的类相互隔离，每个ClassLoader都有自己的命名空间，从而避免类名冲突。</li>
+<li><strong>动态更新</strong>：允许在运行时动态地加载新的类，这在一些框架和应用程序中具有重要作用，比如插件系统。</li>
+</ol>
+<p>特点：</p>
+<ol>
+<li><strong>层级结构</strong>：ClassLoader以层级结构组织，形成父子关系，当子ClassLoader需要加载类时，会先委托给父ClassLoader来尝试加载，只有在父ClassLoader无法加载时，子ClassLoader才会尝试加载类。</li>
+<li><strong>双亲委派模型</strong>：基于双亲委派模型，每个类加载请求都会被委托给父ClassLoader，只有在父ClassLoader无法完成加载时，子ClassLoader才会尝试加载。这样做可以保证类加载的一致性和避免重复加载。</li>
+<li><strong>自定义ClassLoader</strong>：允许开发人员自定义ClassLoader，以满足一些特殊的加载需求，比如从网络中加载类，或者对类进行加密保护等。</li>
+</ol>
+<p>ClassLoader在Java中起着至关重要的作用，它不仅实现了Java程序的动态性，同时也保证了类的安全性和隔离性。</p>
+<p>在Java中，默认提供了三个主要的ClassLoader，<strong>Bootstrap ClassLoader</strong>，<strong>Extension ClassLoader</strong>，<strong>System ClassLoader</strong>。</p>
+<p>当JVM判定两个class是否相同时，不仅要判断类名是否相同，还要考虑类加载器。在Java中，类的唯一性是由类加载器和类的全限定名（包括类的包名）共同决定的。</p>
+<p>4、sleep()方法和wait()方法</p>
+<ol>
+<li><strong>所属类</strong>：
+<ul>
+<li>**<code>sleep()</code><strong>方法属于</strong><code>Thread</code><strong>类，而</strong><code>wait()</code><strong>方法属于</strong><code>Object</code>**类。</li>
+</ul>
+</li>
+<li><strong>调用方式</strong>：
+<ul>
+<li>**<code>sleep()</code><strong>方法是静态方法，可以直接通过</strong><code>Thread.sleep()</code>**调用。</li>
+<li>**<code>wait()</code><strong>方法则需要在同步上下文（即</strong><code>synchronized</code>**块或方法）中调用。</li>
+</ul>
+</li>
+<li><strong>释放锁</strong>：
+<ul>
+<li>当线程调用**<code>sleep()</code>**方法时，它不会释放持有的任何锁。</li>
+<li>当线程调用**<code>wait()</code>**方法时，它会释放对象上的锁，并进入等待状态。</li>
+</ul>
+</li>
+<li><strong>唤醒条件</strong>：
+<ul>
+<li>线程调用**<code>sleep()</code>**方法后会在指定时间后自动唤醒，或者可以通过**<code>interrupt()</code>**方法提前唤醒。</li>
+<li>线程调用**<code>wait()</code>**方法后，需要通过其他线程调用对象上的**<code>notify()</code>**或**<code>notifyAll()</code>**方法来唤醒它。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>它们都涉及线程的暂停和恢复操作，用于线程之间的协调和同步。</li>
+</ul>
+<p>5、抽象类</p>
+<p>抽象类是用于包含抽象方法的类，无法被实例化。抽象类使用**<code>abstract</code>**关键字来定义，它可以包含抽象方法和具体方法。子类必须实现抽象类中的所有抽象方法才能实例化。</p>
+<p>抽象类的主要作用是作为其他类的父类，提供一组通用的方法和属性，并定义一些抽象方法，让子类去实现这些抽象方法。</p>
+<p>抽象类可以有构造方法，但是它们不能被用来实例化抽象类本身。构造方法在抽象类中的作用是初始化实例变量或执行其他必要的操作。子类在实例化时会调用父类的构造方法来初始化父类的实例变量。</p>
+<p>抽象类必须提供至少一个抽象方法。抽象方法是在抽象类中声明但没有实现的方法，它不包含方法体。抽象方法的存在使得抽象类本身无法被实例化，因为抽象类中的抽象方法必须由子类实现后才能使用。</p>
+<p>有抽象方法的类不一定是抽象类（抽象类的子类），但是只有抽象类才能包含抽象方法。一般类可以包含抽象方法，但它必须标记为抽象类。抽象类可以包含抽象方法，也可以包含具体方法。另一方面，普通类不能包含抽象方法，因为抽象方法必须在抽象类中。</p>
+<p>6、ThreadLocal</p>
+<p><strong><code>ThreadLocal</code></strong> 是 Java 中的一个类，它提供了线程局部变量的支持。使用 <strong><code>ThreadLocal</code></strong> 可以让每个线程都拥有自己独立的变量副本，互不影响。这在多线程环境下非常有用，可以避免线程间的数据共享问题。</p>
+<p>通过 <strong><code>ThreadLocal</code></strong>，每个线程可以像使用普通变量一样操作自己的局部变量，而不必担心线程安全性。</p>
+<p>ThreadLocal 采用线程隔离的方式存放数据。每个 ThreadLocal 实例都为每个线程提供了一个独立的变量副本，这意味着每个线程都可以独立地操作自己的局部变量，而不会受到其他线程的影响。当一个线程访问 ThreadLocal 的 <code>get()</code> 方法或<code>set()</code>方法时，实际上是操作了当前线程的局部变量，这种方式实现了线程之间数据的隔离，从而避免了线程安全性问题。</p>
+<p>在Java 9中，引入了 <strong><code>ThreadLocal</code></strong> 的 <strong><code>remove</code></strong> 方法，它可以用来删除当前线程的局部变量值。调用 <strong><code>remove()</code></strong> 方法后，当前线程对应的局部变量会被清除，这样可以帮助减少内存泄漏的风险。</p>
+<p>7、权限修饰符</p>
+<table>
+<thead>
+<tr>
+<th>操作修饰符</th>
+<th>本类内部</th>
+<th>本包内</th>
+<th>其他包的子类</th>
+<th>其他包非子类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>private</td>
+<td>√</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>缺省(default)</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>protected</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>public</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<p>8、<strong><code>==</code></strong> 和 <strong><code>equals</code></strong></p>
+<p>在Java中，<strong><code>==</code></strong> 和 <strong><code>equals</code></strong> 是用于比较对象的两种不同方式。</p>
+<ol>
+<li><strong><code>==</code></strong> 比较的是对象的引用，即判断两个对象是否指向同一个内存地址。如果比较的是基本数据类型，则比较它们的值。</li>
+<li><strong><code>equals</code></strong> 是用于比较对象的内容是否相等，它是一个方法，可以被重写。在**<code>Object</code>**类中，**<code>equals</code>**方法默认是使用**<code>==</code>**比较对象的引用</li>
+</ol>
+<p>9、多线程</p>
+<p>多线程是指在同一个进程内同时执行多个线程的能力。每个线程都可以独立执行不同的任务，但它们共享同一个进程的内存空间和资源。多线程可以提高程序的并发性能和响应速度，常用于并发处理、异步编程和提升系统性能等方面。</p>
+<p>10、str.substring()的取值范围</p>
+<p><strong><code>str.substring()</code></strong> 方法用于从指定的开始索引到结束索引截取字符串。其取值范围是从开始索引处的字符（包括）到结束索引前的字符（不包括）</p>
+<p>11、java object默认的基本方法</p>
+<p>Java中，**<code>Object</code>**类默认包含以下基本方法：</p>
+<ol>
+<li><strong><code>equals(Object obj)</code></strong>: 用于判断对象是否相等。</li>
+<li><strong><code>hashCode()</code></strong>: 返回对象的哈希码值。</li>
+<li><strong><code>toString()</code></strong>: 返回对象的字符串表示。</li>
+<li><strong><code>getClass()</code></strong>: 返回对象的运行时类。</li>
+<li><strong><code>clone()</code></strong>: 用于创建并返回对象的副本。</li>
+<li><strong><code>finalize()</code></strong>: 当对象被垃圾回收器回收时调用。</li>
+<li><strong><code>notify()</code></strong>, <strong><code>notifyAll()</code></strong>, <strong><code>wait()</code></strong>: 用于实现线程间的通信。wait()导致当前线程等待，直到其他线程调用此对象的notify(),notifyall().</li>
+</ol>
+<p>12、nginx.log</p>
+<p>nginx.log通常是Nginx Web服务器生成的日志文件，记录了服务器的访问日志、错误日志等信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">tail -f nginx.log  //实时监视`nginx.log`文件的最新内容，并将其输出到屏幕上。
+
+`cat nginx.log`: 显示nginx.log文件的全部内容。
+
+`less nginx.log`: 逐页显示nginx.log文件的内容，可向上/向下滚动查看。
+
+`grep &#34;keyword&#34; nginx.log`: 在nginx.log文件中搜索包含指定关键字的内容。
+
+`wc -l nginx.log`: 统计nginx.log文件中的行数。
+
+`head -n 10 nginx.log`: 显示nginx.log文件的前10行内容。
+
+`tail -n 10 nginx.log`: 显示nginx.log文件的最后10行内容。
+</code></pre></td></tr></table>
+</div>
+</div><p>13、String框架的持久化支持方法</p>
+<p>Java中的String类是不可变的，因此并不需要专门的持久化支持方法。如果您需要将String对象持久化到文件或数据库中，您可以使用常规的持久化技术，如文件I/O或数据库操作。</p>
+<p>在JDBC中，通常会使用String来表示和处理数据库中的文本数据，但String并不是JDBC的一部分，也没有直接封装JDBC的数据操作</p>
+<p>Spring对各种持久化技术提供了统一的编程方式</p>
+<p>14、CMS垃圾回收器</p>
+<p>CMS垃圾回收器通常指的是内容管理系统的垃圾回收机制，用于清理不再需要的或过时的内容和资源，以节省存储空间和优化系统性能。不过，这与编程语言中的垃圾回收器不同，后者用于自动回收不再使用的内存。</p>
+<h3 id="设计模式">设计模式</h3>
+<p>Java设计模式是一套被广泛接受和应用于Java编程的解决方案。这些设计模式是针对常见问题的通用解决方案，通过它们可以更容易地编写出易于理解、可维护和可扩展的代码。Java设计模式通常可以分为以下几种类型： 1. <strong>创建型模式</strong>：这些模式关注对象的创建机制，包括如何实例化对象或者将对象组合成更复杂的结构。典型的创建型模式包括工厂模式、抽象工厂模式、建造者模式、原型模式和单例模式。 2. <strong>结构型模式</strong>：这些模式处理类和对象的组合，从而形成更大的结构。它们帮助确保在系统中更容易地识别对象之间的关系。结构型模式包括适配器模式、桥接模式、组合模式、装饰器模式、外观模式、享元模式和代理模式。 3. <strong>行为型模式</strong>：这些模式涉及对象之间的交互，包括如何分配职责以及如何实现通信。行为型模式包括模板方法模式、命令模式、迭代器模式、观察者模式、中介者模式、备忘录模式、解释器模式、状态模式、策略模式、职责链模式和访问者模式。 这些设计模式为解决特定类型的问题提供了指导，使得开发人员可以更容易地编写出高质量、易于理解和可维护的代码。在实际的软件开发中，设计模式通常被视为一种最佳实践，有助于提高代码的灵活性、可重用性和可扩展性。</p>
+<p>1、模版模式和策略模式</p>
+<p>模板模式和策略模式都属于行为型设计模式，它们都关注对象之间的交互，但它们的应用场景和解决问题的方式略有不同。</p>
+<p>模板模式</p>
+<ul>
+<li><strong>特点</strong>:
+<ul>
+<li>模板模式定义了一个算法的骨架，将某些步骤的具体实现延迟到子类中。它允许子类为一个或多个步骤提供其自己的实现，同时保持算法的结构不变。</li>
+<li>模板模式通常由一个抽象类和一组实现类组成，抽象类中定义了算法的框架，而具体实现类提供了算法中具体步骤的实现。</li>
+<li>在模板模式中，算法的结构由父类决定，具体步骤的实现则由子类决定。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>:
+<ul>
+<li>当有一个算法的整体结构是固定的，但是其中某些步骤的具体实现可能不同的时候，可以考虑使用模板模式。</li>
+</ul>
+</li>
+</ul>
+<p>策略模式</p>
+<ul>
+<li><strong>特点</strong>:
+<ul>
+<li>策略模式定义了一系列的算法，并将每一个算法封装起来，使它们可以相互替换。这使得算法可以独立于使用它们的客户而变化。</li>
+<li>在策略模式中，算法被视为一个可替换的行为，并且客户可以在运行时动态地选择所需的算法。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>:
+<ul>
+<li>当一个问题有多种解决方案，或者一个系统需要动态地在几种算法中选择一种的时候，可以考虑使用策略模式。</li>
+</ul>
+</li>
+</ul>
+<p>联系</p>
+<ul>
+<li>
+<p>联系:</p>
+<ul>
+<li>模板模式和策略模式都涉及到算法的封装和替换，但它们的关注点不同。</li>
+<li>模板模式关注的是算法的整体结构，提供一个固定的算法框架，允许子类提供特定步骤的实现。</li>
+<li>策略模式关注的是多个算法的替换和动态选择，使得客户可以在运行时选择合适的算法。</li>
+</ul>
+</li>
+</ul>
+<p>虽然它们的关注点不同，但是在实际应用中，这两种模式可能会相互结合，比如模板模式可以使用策略模式来实现某些具体步骤的替换。</p>
+<p>在某些情况下，策略模式和模板模式确实可以在一定程度上互换使用，特别是在涉及算法的封装和替换方面。虽然它们的主要关注点不同，但在一些情况下可以进行相互转换或结合使用。</p>
+<p>模板模式使用的是集成关系实现，策略模式使用的是组合关系实现</p>
+<p><strong>模板模式</strong>倾向于将解决问题的过程定义为一个完整的框架，其中具体的步骤由子类来实现。策略模式中，通常会定义一个策略接口或抽象类，具体的算法实现则通过这个接口或抽象类来实现。</p>
+<h3 id="数据结构">数据结构</h3>
+<p>1、二叉树遍历 前序，中序，后序。</p>
+<p>后序遍历从后开始看，最后一个是根节点，然后根据中序遍历区分左右子树。</p>
+<h3 id="数据库">数据库</h3>
+<p>1、MySQL数据库四种隔离级别</p>
+<p>MySQL 数据库提供了四种标准的事务隔离级别，分别是：</p>
+<ol>
+<li>READ UNCOMMITTED（读取未提交的数据）：最低的隔离级别，事务可以读取未提交的数据，可能会导致脏读、不可重复读和幻读问题。</li>
+<li>READ COMMITTED（读取提交的数据）：事务只能读取已提交的数据，可以避免脏读问题，但仍可能出现不可重复读和幻读问题。</li>
+<li>REPEATABLE READ（可重复读）：确保在事务执行期间多次读取的数据保持一致，可以避免脏读和不可重复读问题，但仍可能出现幻读问题。</li>
+<li>SERIALIZABLE（可串行化）：最高的隔离级别，确保事务之间的数据读写操作彼此之间完全隔离，可以避免脏读、不可重复读和幻读问题，但会降低并发性能。</li>
+</ol>
+<h3 id="计网">计网</h3>
+<p>1、tcp/ip网络中，为各种公共服务保留的端口范围是 0-1023</p>
+<p>大于1023的端口则可供用户级应用程序使用</p>
+<p>2、tcp/ip协议</p>
+<p>TCP/IP协议集分为四层，分别是：</p>
+<ol>
+<li>
+<p><strong>应用层</strong>：包括诸如HTTP、FTP、SMTP等协议，用于应用程序之间的通信和数据交换。</p>
+<p>HTTP（超文本传输协议）,SMTP（简单邮件传输协议）,FTP（文件传输协议）,DNS（域名系统）</p>
+</li>
+<li>
+<p><strong>传输层</strong>：主要有TCP（传输控制协议）和UDP（用户数据报协议），负责在网络中传输数据并提供端到端的通信服务。</p>
+</li>
+<li>
+<p><strong>网络层</strong>：主要有IP（网际协议），负责数据包的路由和转发，实现不同网络之间的通信。</p>
+</li>
+<li>
+<p><strong>数据链路层</strong>：包括以太网、WiFi等，负责在物理网络中传输数据帧，并提供了物理寻址、错误检测和纠正等功能。</p>
+</li>
+</ol>
+<p>HTTP（Hypertext Transfer Protocol）位于TCP/IP协议集中的应用层。 HTTP协议用于在网络中传输超文本文档，是Web应用程序的基础，通过HTTP，客户端（如浏览器）可以向服务器请求资源，并接收服务器返回的数据。</p>
+<p>TFTP（Trivial File Transfer Protocol）位于TCP/IP协议集中的传输层。 TFTP是一个简单的文件传输协议，用于在计算机网络中进行文件传输，它基于UDP协议进行数据传输，通常用于在局域网内进行简单的文件传输操作。</p>
+<p>TCP在建立连接时使用三次握手，断开连接时使用四次挥手。</p>
+<ol>
+<li><strong>三次握手</strong>：
+<ul>
+<li>第一次握手：客户端发送连接请求报文段，服务端收到请求后，进入到 LISTEN（监听）状态。</li>
+<li>第二次握手：服务端接收到连接请求后，发送确认报文段，并进入到 SYN-RECEIVED 状态。</li>
+<li>第三次握手：客户端收到服务端的确认后，发送一个确认报文段，双方进入 ESTABLISHED（已建立连接）状态。</li>
+</ul>
+</li>
+<li><strong>四次挥手</strong>：
+<ul>
+<li>第一次挥手：客户端发送连接释放报文段，并进入 FIN-WAIT-1 状态。</li>
+<li>第二次挥手：服务端接收到释放报文段后，发送确认报文段，自己进入 CLOSE-WAIT 状态，等待数据传输完成。</li>
+<li>第三次挥手：服务端完成数据传输后，向客户端发送连接释放报文段，并进入 LAST-ACK 状态。</li>
+<li>第四次挥手：客户端接收到释放报文段后，发送确认报文段，双方进入 CLOSED（连接关闭）状态。</li>
+</ul>
+</li>
+</ol>
+<h3 id="git">git</h3>
+<p>1、哪个命令可以查看git所有分支git branch</p>
+<p>如果想要查看远程仓库的分支，可以加上 <strong><code>-r</code></strong> 选项，或者使用 <strong><code>-a</code></strong> 选项来查看所有本地和远程跟踪的分支。<code>-d</code> 是删除本地分支的命令</p>
+
     </div>
 
     <div class="post-copyright">
@@ -1280,7 +1784,7 @@ a = line.split()# 列表,str</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>kong</span>
   </span>
 </div>
 

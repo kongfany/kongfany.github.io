@@ -6,7 +6,43 @@
     <description>Recent content in JAVA on 乐观积极的...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Dec 2023 16:54:57 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Feb 2024 16:36:01 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java-面向对面2</title>
+      <link>https://kongfany.github.io/post/java07/</link>
+      <pubDate>Wed, 21 Feb 2024 16:36:01 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/java07/</guid>
+      <description>关键字this 实例方法或构造器中使用当前对象的成员 在实例方法或构造器中，如果使用当前类的成员变量或成员方法可以在其前面添加this，增强程序</description>
+    </item>
+    
+    <item>
+      <title>Java-面向对面</title>
+      <link>https://kongfany.github.io/post/java06/</link>
+      <pubDate>Tue, 30 Jan 2024 22:23:28 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/java06/</guid>
+      <description>学习面向对象内容的三条主线 Java类及类的成员：（重点）属性、方法、构造器；（熟悉）代码块、内部类 面向对象的特征：封装、继承、多态、（抽象）</description>
+    </item>
+    
+    <item>
+      <title>Java-数组</title>
+      <link>https://kongfany.github.io/post/java05/</link>
+      <pubDate>Tue, 23 Jan 2024 22:04:29 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/java05/</guid>
+      <description>为什么需要数组 需求分析1： 需要统计某公司50个员工的工资情况，例如计算平均工资、找到最高工资等。用之前知识，首先需要声明50个变量来分别记录</description>
+    </item>
+    
+    <item>
+      <title>Java-IDEA</title>
+      <link>https://kongfany.github.io/post/java04/</link>
+      <pubDate>Mon, 22 Jan 2024 16:56:56 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/java04/</guid>
+      <description>功能强大： ① 强大的整合能力。比如：Git、Maven、Spring等 ② 开箱即用的体验（集成版本控制系统、多语言支持的框架随时可用，无需额外安</description>
+    </item>
+    
     <item>
       <title>Java流程控制</title>
       <link>https://kongfany.github.io/post/java03/</link>
