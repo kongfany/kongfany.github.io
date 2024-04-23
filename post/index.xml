@@ -98,7 +98,7 @@
     </item>
     
     <item>
-      <title>Algo</title>
+      <title>算法，八股</title>
       <link>https://kongfany.github.io/post/algo/</link>
       <pubDate>Tue, 28 Nov 2023 15:07:53 +0800</pubDate>
       
@@ -112,7 +112,7 @@
       <pubDate>Tue, 28 Nov 2023 14:55:10 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/job/</guid>
-      <description>job 国考 国家公务员局 专业名筛选 参照专业目录表-专业对应的专业类（控制科学与工程）和门类(工学) 报名时间：10-15-10.24 报名序号2024</description>
+      <description>job 国考 国家公务员局 专业名筛选 参照专业目录表-专业对应的专业类（控制科学与工程）和门类(工学) 电子信息类-机电控制类 报名时间：10-15-10</description>
     </item>
     
     <item>
@@ -148,7 +148,7 @@
       <pubDate>Wed, 22 Mar 2023 14:25:03 +0800</pubDate>
       
       <guid>https://kongfany.github.io/post/dl_limu/</guid>
-      <description>视频 课程主页 教材 github 课程论坛 pytorch论坛 BLOG 安装 映射本地端口，端口被占用1，2 1 ssh -L8888:localhost:8888 kfy@10.59.139.1 softmax-09 卷积：提取特征 卷积层的超参数：卷积核的大小，填充和</description>
+      <description>视频 课程主页 教材 github 课程论坛 pytorch论坛 BLOG 安装 映射本地端口，端口被占用1，2 1 ssh -L8888:localhost:8888 kfy@10.59.139.1 softmax-09 卷积神经网络 线性神经网络： 线性回归模型时一个单层神</description>
     </item>
     
     <item>
@@ -986,15 +986,6 @@
       
       <guid>https://kongfany.github.io/post/my-first-post/</guid>
       <description>hugo创建blog &#34;可以加类似于引言的格式-- 网工172-陈迪荣 2021/6/5 9:48:03 搭建博客可以看这篇下面的reference： https://www.lttzz.cn/post/hello-world/ https://olowolo.com/post/hugo-quick-start/ hugo new不是可以新建博</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://kongfany.github.io/post/introspection/untitled/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kongfany.github.io/post/introspection/untitled/</guid>
-      <description>从读论文就是在读论文，知道别人的东西好。但不知道为什么好，怎么用 到知道为什么好，并能合理的应用到现在的实验中 但是我没有达到可以去改进的地步 很</description>
     </item>
     
   </channel>

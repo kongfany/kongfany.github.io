@@ -121,14 +121,21 @@
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/post/algo/</loc>
+    <loc>https://kongfany.github.io/categories/algorithm/</loc>
     <lastmod>2023-11-28T15:07:53+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://kongfany.github.io/categories/algorithm/</loc>
+    <loc>https://kongfany.github.io/categories/job/</loc>
+    <lastmod>2023-11-28T15:07:53+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://kongfany.github.io/post/algo/</loc>
     <lastmod>2023-11-28T15:07:53+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1033,12 +1040,6 @@
   <url>
     <loc>https://kongfany.github.io/tags/new/</loc>
     <lastmod>2021-06-05T15:48:11+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://kongfany.github.io/post/introspection/untitled/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
