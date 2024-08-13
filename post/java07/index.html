@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Java-面向对面2">
 <meta itemprop="description" content="关键字this 实例方法或构造器中使用当前对象的成员 在实例方法或构造器中，如果使用当前类的成员变量或成员方法可以在其前面添加this，增强程序"><meta itemprop="datePublished" content="2024-02-21T16:36:01+08:00" />
 <meta itemprop="dateModified" content="2024-02-21T16:36:01+08:00" />
-<meta itemprop="wordCount" content="1764">
+<meta itemprop="wordCount" content="10659">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java-面向对面2"/>
 <meta name="twitter:description" content="关键字this 实例方法或构造器中使用当前对象的成员 在实例方法或构造器中，如果使用当前类的成员变量或成员方法可以在其前面添加this，增强程序"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/java/"> JAVA </a>
             </div>
-          <span class="more-meta"> 1764 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 10659 words </span>
+          <span class="more-meta"> 22 mins read </span>
         
       </div>
     </header>
@@ -153,6 +153,31 @@
           <ul>
             <li><a href="#实例方法或构造器中使用当前对象的成员">实例方法或构造器中使用当前对象的成员</a></li>
             <li><a href="#同一个类中构造器互相调用">同一个类中构造器互相调用</a></li>
+          </ul>
+        </li>
+        <li><a href="#项目2客户管理系统">项目2：客户管理系统</a></li>
+        <li><a href="#继承">继承</a>
+          <ul>
+            <li><a href="#继承的好处">继承的好处</a></li>
+            <li><a href="#继承的语法">继承的语法</a></li>
+            <li><a href="#继承的细节">继承的细节</a></li>
+          </ul>
+        </li>
+        <li><a href="#方法的重写">方法的重写</a>
+          <ul>
+            <li><a href="#方法重写的要求">方法重写的要求</a></li>
+            <li><a href="#重载与重写">重载与重写</a></li>
+          </ul>
+        </li>
+        <li><a href="#关键字super">关键字super</a>
+          <ul>
+            <li><a href="#super的理解">super的理解</a></li>
+            <li><a href="#super的使用场景">super的使用场景</a></li>
+          </ul>
+        </li>
+        <li><a href="#面向对象特征三多态性">面向对象特征三：多态性</a>
+          <ul>
+            <li><a href="#多态的好处和弊端">多态的好处和弊端</a></li>
           </ul>
         </li>
       </ul>
@@ -194,7 +219,7 @@
 </ul>
 </li>
 <li>
-<p>this()和this(实参列表)只能声明在构造器首行。</p>
+<p>this()和this(实参列表)<strong>只能声明在构造器首行</strong>。</p>
 <ul>
 <li>推论：在类的一个构造器中，最多只能声明一个&quot;this(参数列表)&quot;</li>
 </ul>
@@ -547,6 +572,1001 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/2024/32.png" alt=""></p>
+<h2 id="项目2客户管理系统">项目2：客户管理系统</h2>
+<p>软件包含三个模块：</p>
+<p>CustomerView为主模块，负责菜单的显示和处理用户操作</p>
+<p>CustomerList为Customer对象的管理模块，内部用数组管理一组Customer对象，并提供相应的添加、修改、删除和遍历方法，供CustomerView调用</p>
+<p>Customer为实体对象，用来封装客户信息</p>
+<p><code>键盘访问：</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//从键盘读取一个字符
+</span><span class="c1"></span>	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">readChar</span><span class="o">()</span> <span class="o">{</span>
+   		<span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+    	<span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="cm">/**
+</span><span class="cm">	从键盘读取一个字符，并将其作为方法的返回值。
+</span><span class="cm">	如果用户不输入字符而直接回车，方法将以defaultValue 作为返回值。
+</span><span class="cm">*/</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">readChar</span><span class="o">(</span><span class="kt">char</span> <span class="n">defaultValue</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">readKeyBoard</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">?</span> <span class="n">defaultValue</span> <span class="o">:</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">readKeyBoard</span><span class="o">(</span><span class="kt">int</span> <span class="n">limit</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">blankReturn</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//用于确定当输入为空字符串时是否直接返回该空字符串
+</span><span class="c1"></span>        <span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">blankReturn</span><span class="o">)</span> <span class="k">return</span> <span class="n">line</span><span class="o">;</span>
+                <span class="k">else</span> <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">1</span> <span class="o">||</span> <span class="n">line</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&#34;输入长度（不大于&#34;</span> <span class="o">+</span> <span class="n">limit</span> <span class="o">+</span> <span class="s">&#34;）错误，请重新输入：&#34;</span><span class="o">);</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">line</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>快捷get、set方法，构造器</code>:alt+insert</p>
+<p>构造器的<code>作用</code>: new对象，并在new对象的时候为实例变量赋值。</p>
+<p>文档注释/**</p>
+<p>删除数据，其他数据前移，最后一位置为null(地址)</p>
+<p>查询所有数据，新建一个total长度的数组，防止打印原数组中空白元素</p>
+<h2 id="继承">继承</h2>
+<p>面向对象特征二：继承(Inheritance)</p>
+<p><strong>角度一：从上而下</strong></p>
+<p>为描述和处理<strong>个人</strong>信息，定义类Person，为描述和处理<strong>学生</strong>信息，定义类Student，通过继承，简化Student类的定义。</p>
+<p><img src="/images/2024/47.png" alt=""></p>
+<p>说明：Student类继承了父类Person的所有属性和方法，并增加了一个属性school。Person中的属性和方法，Student都可以使用。</p>
+<p><strong>角度二：从下而上</strong></p>
+<p>多个类中存在相同属性和行为时，将这些内容抽取到单独一个类中，那么多个类中无需再定义这些属性和行为，只需要和抽取出来的类构成<code>继承关系</code>。</p>
+<h3 id="继承的好处">继承的好处</h3>
+<ul>
+<li>
+<p>继承的出现减少了代码冗余，提高了代码的复用性。</p>
+</li>
+<li>
+<p>继承的出现，更有利于功能的扩展。</p>
+</li>
+<li>
+<p>继承的出现让类与类之间产生了<code>is-a</code>的关系，为多态的使用提供了前提。</p>
+<ul>
+<li>继承描述事物之间的所属关系，这种关系是：<code>is-a</code> 的关系。可见，父类更通用、更一般，子类更具体。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：不要仅为了获取其他类中某个功能而去继承！</p>
+</blockquote>
+<ul>
+<li>is-a（英语：subsumption，包含架构）：代表类之间或类与接口之间的继承关系。具体来说，当类D是另一个类B的子类（类B是类D的父类）时，我们就说D与B之间存在is-a的关系。这种关系表达的是“这个东西是那个东西的一种”的概念。例如，猫和狗都是动物，都继承了动物的特性，在面向对象语言中，将猫狗定义为两种不同的类，都继承了动物类。</li>
+<li>has-a：代表对象和它的成员的从属关系，即整体和部分之间的关系。如果A has a B，那么B就是A的组成部分。同一个类的对象，可以通过它们属性的不同值来区别。例如，张三和李四都是人，他们都是“人”这一个类，但具有不同的姓名属性，姓名和人是属于has-a关系。</li>
+</ul>
+<h3 id="继承的语法">继承的语法</h3>
+<p>通过 <code>extends</code> 关键字，可以声明一个类B继承另外一个类A，定义格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="o">[</span><span class="n">修饰符</span><span class="o">]</span> <span class="kd">class</span> <span class="nc">类A</span> <span class="o">{</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+
+<span class="o">[</span><span class="n">修饰符</span><span class="o">]</span> <span class="kd">class</span> <span class="nc">类B</span> <span class="kd">extends</span> <span class="n">类A</span> <span class="o">{</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>类B，称为子类、派生类(derived class)、SubClass</p>
+<p>类A，称为父类、超类、基类(base class)、SuperClass</p>
+<p>属性:都有默认初始化值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+    <span class="c1">// 定义name属性
+</span><span class="c1"></span>    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="c1">// 定义age属性
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="c1">// 定义动物的吃东西方法
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">age</span> <span class="o">+</span> <span class="s">&#34;岁的&#34;</span>
+                <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&#34;在吃东西&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Cat</span> <span class="kd">extends</span> <span class="n">Animal</span><span class="o">{</span>
+    <span class="kt">int</span> <span class="n">count</span><span class="o">;</span><span class="c1">//记录每只猫抓的老鼠数量
+</span><span class="c1"></span>
+    <span class="c1">// 定义一个猫抓老鼠的方法catchMouse
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">catchMouse</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">count</span><span class="o">++;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;抓老鼠，已经抓了&#34;</span>
+                <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">&#34;只老鼠&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">TestCat</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Cat</span> <span class="n">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Cat</span><span class="o">();</span>
+        <span class="n">cat</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="s">&#34;Tom&#34;</span><span class="o">;</span>
+        <span class="c1">// 为该猫类对象的age属性进行赋值
+</span><span class="c1"></span>        <span class="n">cat</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+        <span class="c1">// 调用该猫继承来的eat()方法
+</span><span class="c1"></span>        <span class="n">cat</span><span class="o">.</span><span class="na">eat</span><span class="o">();</span>
+        <span class="c1">// 调用该猫的catchMouse()方法
+</span><span class="c1"></span>        <span class="n">cat</span><span class="o">.</span><span class="na">catchMouse</span><span class="o">();</span>
+        <span class="n">cat</span><span class="o">.</span><span class="na">catchMouse</span><span class="o">();</span>
+        <span class="n">cat</span><span class="o">.</span><span class="na">catchMouse</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="继承的细节">继承的细节</h3>
+<p><strong>1、子类会继承父类所有的实例变量和实例方法</strong></p>
+<p>从类的定义来看，类是一类具有相同特性的事物的抽象描述。父类是所有子类共同特征的抽象描述。而实例变量和实例方法就是事物的特征，那么父类中声明的实例变量和实例方法代表子类事物也有这个特征。</p>
+<ul>
+<li>当子类对象被创建时，在堆中给对象申请内存时，就要看子类和父类都声明了什么实例变量，这些实例变量都要分配内存。</li>
+<li>当子类对象调用方法时，编译器会先在子类模板中看该类是否有这个方法，如果没找到，会看它的父类甚至父类的父类是否声明了这个方法，遵循<code>从下往上</code>找的顺序，找到了就停止，一直到根父类都没有找到，就会报编译错误。</li>
+</ul>
+<p>所以继承意味着子类的对象除了看子类的类模板还要看父类的类模板。</p>
+<p><strong>2、子类不能直接访问父类中私有的(private)的成员变量和方法</strong></p>
+<p>子类虽会继承父类私有(private)的成员变量，但子类不能对继承的私有成员变量直接进行访问，可通过继承的get/set方法进行访问。</p>
+<p><strong>3、在Java 中，继承的关键字用的是“extends”，即子类不是父类的子集，而是对父类的“扩展”</strong></p>
+<p>子类在继承父类以后，还可以定义自己特有的方法，这就可以看做是对父类功能上的扩展。</p>
+<p><strong>4、Java支持多层继承(继承体系)</strong></p>
+<ul>
+<li>
+<p>子类和父类是一种相对的概念</p>
+</li>
+<li>
+<p>顶层父类是Object类。所有的类默认继承Object，作为父类。</p>
+</li>
+</ul>
+<p><strong>5、一个父类可以同时拥有多个子类</strong></p>
+<p><strong>6、Java只支持单继承，不支持多重继承</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 构造器
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Kids</span> <span class="kd">extends</span> <span class="n">ManKind</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">yearsOld</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Kids</span><span class="o">(){</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Kids</span><span class="o">(</span><span class="kt">int</span> <span class="n">yearsOld</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">yearsOld</span> <span class="o">=</span> <span class="n">yearsOld</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Kids</span><span class="o">(</span><span class="kt">int</span> <span class="n">sex</span><span class="o">,</span> <span class="kt">int</span> <span class="n">salary</span><span class="o">,</span><span class="kt">int</span> <span class="n">yearsOld</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">yearsOld</span> <span class="o">=</span> <span class="n">yearsOld</span><span class="o">;</span>
+        <span class="n">setSex</span><span class="o">(</span><span class="n">sex</span><span class="o">);</span>
+        <span class="n">setSalary</span><span class="o">(</span><span class="n">salary</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="方法的重写">方法的重写</h2>
+<p>父类的所有方法子类都会继承，但是当某个方法被继承到子类之后，子类觉得父类原来的实现不适合于自己当前的类，该怎么办呢？子类可以对从父类中继承来的方法进行改造，我们称为方法的<code>重写 (override、overwrite)</code>。也称为方法的<code>重置</code>、<code>覆盖</code>。</p>
+<p>在程序执行时，子类的方法将覆盖父类的方法。</p>
+<blockquote>
+<p>@Override使用说明：</p>
+<p>写在方法上面，用来检测是不是满足重写方法的要求。这个<strong>注解</strong>就算不写，只要满足要求，也是正确的方法覆盖重写。建议保留，这样编译器可以帮助我们检查格式，另外也可以让阅读源代码的程序员清晰的知道这是一个重写的方法。</p>
+</blockquote>
+<h3 id="方法重写的要求">方法重写的要求</h3>
+<ol>
+<li>
+<p>子类重写的方法<code>必须</code>和父类被重写的方法具有相同的<code>方法名称</code>、<code>参数列表</code>。</p>
+</li>
+<li>
+<p>子类重写的方法的返回值类型<code>不能大于</code>父类被重写的方法的返回值类型。（例如：Student &lt; Person）。</p>
+<p>注意：如果返回值类型是基本数据类型和void，那么必须是相同</p>
+<p>父类被重写的方法的返回值类型是<strong>引用数据类型(比如类)</strong>，则子类重写的方法的返回值类型可以与被重写的方法的<strong>返回值类型相同</strong> 或 是被重写的方法的<strong>返回值类型的子类</strong></p>
+</li>
+<li>
+<p>子类重写的方法使用的访问权限<code>不能小于</code>父类被重写的方法的访问权限。（public &gt; protected &gt; 缺省 &gt; private）</p>
+<p>注意：① 父类私有方法不能重写   ② 跨包的父类缺省的方法也不能重写</p>
+</li>
+<li>
+<p>子类方法抛出的异常不能大于父类被重写方法的异常。子类重写的方法抛出的异常类型可以与父类被重写的方法抛出的异常类型相同，或是父类被重写的方法抛出的异常类型的子类。</p>
+</li>
+<li>
+<p>此外，子类与父类中同名同参数的方法必须同时声明为非static的(即为重写)，或者同时声明为static的（不是重写）。因为static方法是属于类的，子类无法覆盖父类的方法。</p>
+</li>
+</ol>
+<h3 id="重载与重写">重载与重写</h3>
+<p>重载：“两同一不同” 参数列表不同，意味着<code>参数个数</code>或参数<code>类型</code>的不同
+重写：继承以后，子类覆盖父类中同名同参数的方法</p>
+<p>[类比]相同类型的面试题：</p>
+<p>throws / throw
+final / finally / finalize
+Collection / Collections
+String / StringBuffer / StringBuilder
+ArrayList / LinkedList
+HashMap / LinkedHashMap / Hashtable
+&hellip;</p>
+<p>sleep() / wait()
+== / equals()
+同步 / 异步</p>
+<h2 id="关键字super">关键字super</h2>
+<h3 id="super的理解">super的理解</h3>
+<p>在Java类中使用super来调用<strong>父类</strong>中的指定操作：</p>
+<ul>
+<li>super可用于访问父类中定义的属性</li>
+<li>super可用于调用父类中定义的成员方法</li>
+<li>super可用于在子类构造器中调用父类的构造器</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>尤其当子父类出现同名成员时，可以用super表明调用的是父类中的成员</li>
+<li>super的追溯不仅限于直接父类</li>
+<li>super和this的用法相像，<strong>this代表本类对象的引用，super代表父类的内存空间的标识</strong></li>
+</ul>
+<h3 id="super的使用场景">super的使用场景</h3>
+<h4 id="子类中调用父类被重写的方法">子类中调用父类被重写的方法</h4>
+<ul>
+<li>
+<p>如果子类没有重写父类的方法，只要权限修饰符允许，在子类中完全可以直接调用父类的方法；</p>
+</li>
+<li>
+<p>如果子类重写了父类的方法，在子类中需要通过<code>super.</code>才能调用父类被重写的方法，否则默认调用的子类重写的方法</p>
+</li>
+<li>
+<p>总结：</p>
+<ul>
+<li>
+<p><strong>方法前面没有super.和this.</strong></p>
+<ul>
+<li>先从子类找匹配方法，如果没有，再从直接父类找，再没有，继续往上追溯</li>
+</ul>
+</li>
+<li>
+<p><strong>方法前面有this.</strong></p>
+<ul>
+<li>先从子类找匹配方法，如果没有，再从直接父类找，再没有，继续往上追溯</li>
+</ul>
+</li>
+<li>
+<p><strong>方法前面有super.</strong></p>
+<ul>
+<li>从当前子类的直接父类找，如果没有，继续往上追溯</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="子类中调用父类中同名的成员变量">子类中调用父类中同名的成员变量</h4>
+<p>属性不会覆盖，重名的也单独为一个。方法可以覆盖</p>
+<ul>
+<li>如果实例变量与局部变量重名，可以在实例变量前面加this.进行区别.(实例变量==成员变量)</li>
+<li>如果子类实例变量和父类实例变量重名，并且父类的该实例变量在子类仍然可见，在子类中要访问父类声明的实例变量需要在父类实例变量前加super.，否则默认访问的是子类自己声明的实例变量</li>
+<li>如果父子类实例变量没有重名，只要权限修饰符允许，在子类中完全可以直接访问父类中声明的实例变量，也可以用this.实例访问，也可以用super.实例变量访问</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Father</span><span class="o">{</span>
+	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">11</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Son</span> <span class="kd">extends</span> <span class="n">Father</span><span class="o">{</span>
+	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">20</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(){</span>
+		<span class="c1">//子类与父类的属性同名，子类对象中就有两个a
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;子类的a：&#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span><span class="c1">//20  先找局部变量找，没有再从本类成员变量找
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;子类的a：&#34;</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">a</span><span class="o">);</span><span class="c1">//20   先从本类成员变量找
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;父类的a：&#34;</span> <span class="o">+</span> <span class="kd">super</span><span class="o">.</span><span class="na">a</span><span class="o">);</span><span class="c1">//10    直接从父类成员变量找
+</span><span class="c1"></span>		
+		<span class="c1">//子类与父类的属性不同名，是同一个b
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;b = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span><span class="c1">//11  先找局部变量找，没有再从本类成员变量找，没有再从父类找
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;b = &#34;</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">b</span><span class="o">);</span><span class="c1">//11   先从本类成员变量找，没有再从父类找
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;b = &#34;</span> <span class="o">+</span> <span class="kd">super</span><span class="o">.</span><span class="na">b</span><span class="o">);</span><span class="c1">//11  直接从父类局部变量找
+</span><span class="c1"></span>	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">){</span>
+		<span class="c1">//子类与父类的属性同名，子类对象中就有两个成员变量a，此时方法中还有一个局部变量a		
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;局部变量的a：&#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span><span class="c1">//30  先找局部变量
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;子类的a：&#34;</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">a</span><span class="o">);</span><span class="c1">//20  先从本类成员变量找
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;父类的a：&#34;</span> <span class="o">+</span> <span class="kd">super</span><span class="o">.</span><span class="na">a</span><span class="o">);</span><span class="c1">//10  直接从父类成员变量找
+</span><span class="c1"></span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;b = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span><span class="c1">//13  先找局部变量
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;b = &#34;</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">b</span><span class="o">);</span><span class="c1">//11  先从本类成员变量找
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;b = &#34;</span> <span class="o">+</span> <span class="kd">super</span><span class="o">.</span><span class="na">b</span><span class="o">);</span><span class="c1">//11  直接从父类局部变量找
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="n">Son</span> <span class="n">son</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Son</span><span class="o">();</span>
+		<span class="n">son</span><span class="o">.</span><span class="na">test</span><span class="o">();</span>
+		<span class="n">son</span><span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="n">30</span><span class="o">,</span><span class="n">13</span><span class="o">);</span>  
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>总结：<strong>起点不同（就近原则）</strong></p>
+<ul>
+<li>
+<p><strong>变量前面没有super.和this.</strong></p>
+<ul>
+<li>在构造器、代码块、方法中如果出现使用某个变量，先查看是否是当前块声明的<code>局部变量</code>，</li>
+<li>如果不是局部变量，先从当前执行代码的<code>本类去找成员变量</code></li>
+<li>如果从当前执行代码的本类中没有找到，会往上找<code>父类声明的成员变量</code>（权限修饰符允许在子类中访问的）</li>
+</ul>
+</li>
+<li>
+<p><strong>变量前面有this.</strong></p>
+<ul>
+<li>通过this找成员变量时，先从当前执行代码的==本类去找成员变量==</li>
+<li>如果从当前执行代码的本类中没有找到，会往上找==父类声明的成员变量==(权限修饰符允许在子类中访问的）</li>
+</ul>
+</li>
+<li>
+<p><strong>变量前面super.</strong></p>
+<ul>
+<li>通过super找成员变量，直接从当前执行代码的直接父类去找成员变量（权限修饰符允许在子类中访问的）</li>
+<li>如果直接父类没有，就去父类的父类中找（权限修饰符允许在子类中访问的）</li>
+</ul>
+</li>
+</ul>
+<p><strong><font color='red'>特别说明：应该避免子类声明和父类重名的成员变量</font></strong></p>
+<h4 id="子类构造器中调用父类构造器">子类构造器中调用父类构造器</h4>
+<p>① 子类继承父类时，不会继承父类的构造器。只能通过“super(形参列表)”的方式调用父类指定的构造器。</p>
+<p>② 规定：“super(形参列表)”，<strong>必须声明在构造器的首行</strong>。</p>
+<p>③ 我们前面讲过，在构造器的首行可以使用&quot;this(形参列表)&quot;，调用本类中重载的构造器，
+结合②，结论：<strong>在构造器的首行，&ldquo;this(形参列表)&rdquo; 和 &ldquo;super(形参列表)</strong>&ldquo;只能二选一。</p>
+<p>④ 如果在子类构造器的首行既没有显示调用&quot;this(形参列表)&quot;，也没有显式调用&quot;super(形参列表)&quot;，
+​     则子类此构造器<strong>默认</strong>调用&quot;super()&quot;，<strong>即调用父类中空参的构造器</strong>。</p>
+<p>⑤ 由③和④得到结论：子类的任何一个构造器中，要么会调用本类中重载的构造器，要么会调用父类的构造器。
+只能是这两种情况之一。(构造器首行，一定会存在this或super形参列表/显示或隐示)</p>
+<p>⑥ 由⑤得到：一个类中声明有n个构造器，最多有n-1个构造器中使用了&quot;this(形参列表)&quot;，则剩下的那个一定使用&quot;super(形参列表)&quot;。//n个this的话会形成环，报错</p>
+<p>&ndash;&gt; 我们在通过子类的构造器创建对象时，一定在调用子类构造器的过程中，<strong>直接或间接的调用到父类的构造器</strong>。也正因为调用过父类的构造器，我们才会将父类<strong>中声明的属性或方法</strong>加载到内存中，供子类对象使用。</p>
+<blockquote>
+<p>目的：为了初始化信息，赋值等作用；隐式的构造器-加载父类的属性或方法</p>
+<p>子类在构造过程中调用父类构造器的目的主要是：</p>
+<ol>
+<li><strong>初始化继承的字段</strong>：子类继承了父类的所有字段（除了私有的静态字段），但在子类实例化时，这些字段可能还没有被初始化。因此，子类需要确保在构造自己的实例之前，父类的字段被正确地初始化。</li>
+<li><strong>执行父类的初始化逻辑</strong>：父类构造器中可能包含一些必要的初始化逻辑，如检查参数的有效性、设置默认值、执行一些必要的计算等。子类需要确保这些逻辑在创建子类实例之前被执行。</li>
+<li>当创建子类的实例时，首先会执行父类的构造器，然后执行子类的构造器。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>开发中常见错误：</p>
+<p>如果子类构造器中既未显式调用父类或本类的构造器，且父类中又没有空参的构造器，则<code>编译出错</code>。</p>
+<p>因为：</p>
+<p>创建类以后，在没有显示提供任何构造器的情况下，系统会默认提供一个空参的构造器，且构造器的权限
+与类声明的权限相同。
+<strong><font color='red'>一旦类中显示声明了构造器，则系统不再提供默认的空参的构造器。</font></strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="c1">//属性
+</span><span class="c1"></span>    <span class="n">String</span> <span class="n">name</span><span class="o">;</span><span class="c1">//姓名
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">age</span><span class="o">;</span><span class="c1">//年龄
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="n">Person</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//调用父类的构造器来初始化
+</span><span class="c1"></span>        <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">A</span><span class="o">{</span>
+	<span class="n">A</span><span class="o">(){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;A类无参构造器&#34;</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">B</span> <span class="kd">extends</span> <span class="n">A</span><span class="o">{</span>
+	<span class="n">B</span><span class="o">(){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;B类无参构造器&#34;</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="n">B</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="o">();</span>
+        <span class="c1">//A类显示声明一个无参构造，
+</span><span class="c1"></span>		<span class="c1">//B类显示声明一个无参构造，        
+</span><span class="c1"></span>		<span class="c1">//B类的无参构造中虽然没有写super()，但是仍然会默认调用A类的无参构造
+</span><span class="c1"></span>        <span class="c1">//可以看到会输出“A类无参构造器&#34;和&#34;B类无参构造器&#34;)
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">A</span><span class="o">{</span>
+	<span class="n">A</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;A类有参构造器&#34;</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">B</span> <span class="kd">extends</span> <span class="n">A</span><span class="o">{</span>
+	<span class="n">B</span><span class="o">(){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;B类无参构造器&#34;</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Test05</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="n">B</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="o">();</span>
+        <span class="c1">//A类显示声明一个有参构造，没有写无参构造，那么A类就没有无参构造了
+</span><span class="c1"></span>		<span class="c1">//B类显示声明一个无参构造，        
+</span><span class="c1"></span>		<span class="c1">//B类的无参构造没有写super(...)，表示默认调用A类的无参构造
+</span><span class="c1"></span>        <span class="c1">//编译报错，因为A类没有无参构造
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Interview02</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Father</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Father</span><span class="o">();</span>
+        <span class="n">Son</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Son</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span><span class="c1">//atguigu
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span> <span class="c1">//atguigu
+</span><span class="c1"></span>        <span class="n">s</span><span class="o">.</span><span class="na">test</span><span class="o">();</span><span class="c1">//atguigu atguigu
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;-----------------&#34;</span><span class="o">);</span>
+        <span class="n">s</span><span class="o">.</span><span class="na">setInfo</span><span class="o">(</span><span class="s">&#34;大硅谷&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span><span class="c1">//atguigu
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span><span class="c1">//大硅谷
+</span><span class="c1"></span>        <span class="n">s</span><span class="o">.</span><span class="na">test</span><span class="o">();</span> <span class="c1">//大硅谷 大硅谷
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Father</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">info</span> <span class="o">=</span> <span class="s">&#34;atguigu&#34;</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setInfo</span><span class="o">(</span><span class="n">String</span> <span class="n">info</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">info</span> <span class="o">=</span> <span class="n">info</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getInfo</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">info</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Son</span> <span class="kd">extends</span> <span class="n">Father</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">info</span> <span class="o">=</span> <span class="s">&#34;尚硅谷&#34;</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="kd">super</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span>
+    <span class="o">}</span>
+
+<span class="c1">//    public String getInfo(){
+</span><span class="c1">//        return info;
+</span><span class="c1">//    }
+</span><span class="c1"></span><span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="子类对象实例化全过程">子类对象实例化全过程</h4>
+<ol>
+<li>从结果的角度来看：体现为类的继承性</li>
+</ol>
+<p>当我们创建子类对象后，子类对象就获取了其父类中声明的所有的属性和方法，在权限允许的情况下，可以直接调用。</p>
+<ol start="2">
+<li>从过程的角度来看：</li>
+</ol>
+<p>当我们通过子类的构造器创建对象时，子类的构造器一定会直接或间接的调用到其父类的构造器，而其父类的构造器同样会直接或间接的调用到其父类的父类的构造器，&hellip;.，直到调用了Object类中的构造器为止。</p>
+<p>正因为我们调用过子类所有的父类的构造器，所以我们就会将父类中声明的属性、方法加载到内存中，供子类的对象使用。</p>
+<ol start="3">
+<li>问题：创建子类的对象时，内存中到底有几个对象？
+就只有一个对象！即为当前new后面构造器对应的类的对象。</li>
+</ol>
+<p><img src="/images/2024/48.png" alt=""></p>
+<p>构造器调用过程，首行一定是this或者super&ndash;对象的加载过程是先加载父类，最后再加载自己</p>
+<p><img src="/images/2024/49.png" alt=""></p>
+<h2 id="面向对象特征三多态性">面向对象特征三：多态性</h2>
+<p>多态性，是面向对象中最重要的概念，在Java中的体现：<strong>对象的多态性：父类的引用指向子类的对象</strong></p>
+<p>对象的多态：在Java中，子类的对象可以替代父类的对象使用。所以，一个引用类型变量可能指向(引用)多种不同类型的对象</p>
+<p>开发中，有时我们在设计一个数组、或一个成员变量、或一个方法的形参、返回值类型时，无法确定它具体的类型，只能确定它是某个系列的类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">父类类型</span> <span class="n">变量名</span> <span class="o">=</span> <span class="n">子类对象</span><span class="err">；</span>
+    
+<span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">();</span>
+
+<span class="n">Object</span> <span class="n">o</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span><span class="c1">//Object类型的变量o，指向Person类型的对象
+</span><span class="c1"></span>
+<span class="n">o</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">();</span> <span class="c1">//Object类型的变量o，指向Student类型的对象
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Java引用变量有两个类型：<code>编译时类型</code>和<code>运行时类型</code>。编译时类型由<code>声明</code>该变量时使用的类型决定，运行时类型由<code>实际赋给该变量的对象</code>决定。简称：<strong>编译时，看左边；运行时，看右边。</strong>(虚方法调用)</p>
+<ul>
+<li>
+<p>若编译时类型和运行时类型不一致，就出现了对象的多态性(Polymorphism)</p>
+</li>
+<li>
+<p>多态情况下，“看左边”：看的是父类的引用（父类中不具备子类特有的方法）
+“看右边”：看的是子类的对象（实际运行的是子类重写父类的方法）</p>
+</li>
+<li>
+<p>编译看左，运行看右，直接点p.eat会进入到person类，运行的时候是student类</p>
+</li>
+<li>
+<p>多态的使用前提：① 类的继承关系  ② 方法的重写 (@Override注解表示方法重写)</p>
+</li>
+<li>
+<p>多态的适用性：适用于方法，不适用于属性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">id</span><span class="o">);</span> <span class="n">调用属性</span><span class="err">，</span><span class="n">为父类中的值</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Pet</span> <span class="n">pet</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">adopt</span><span class="o">(</span><span class="n">Pet</span> <span class="n">pet</span><span class="o">)</span> <span class="o">{</span><span class="c1">//形参是父类类型，实参是子类对象
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">pet</span> <span class="o">=</span> <span class="n">pet</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">feed</span><span class="o">(){</span>
+        <span class="n">pet</span><span class="o">.</span><span class="na">eat</span><span class="o">();</span><span class="c1">//pet实际引用的对象类型不同，执行的eat方法也不同
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPerson</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+
+        <span class="n">Dog</span> <span class="n">dog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">();</span>
+        <span class="n">dog</span><span class="o">.</span><span class="na">setNickname</span><span class="o">(</span><span class="s">&#34;小白&#34;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">adopt</span><span class="o">(</span><span class="n">dog</span><span class="o">);</span><span class="c1">//实参是dog子类对象，形参是父类Pet类型
+</span><span class="c1"></span>        <span class="n">person</span><span class="o">.</span><span class="na">feed</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// Pet pet = new Dog()
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="多态的好处和弊端">多态的好处和弊端</h3>
+<p><strong>好处</strong>：变量引用的子类对象不同，执行的方法就不同，实现动态绑定。代码编写更灵活、功能更强大，可维护性和扩展性更好了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Account</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">withdraw</span><span class="o">(){}</span> <span class="c1">//取钱
+</span><span class="c1"></span><span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">CheckAccount</span> <span class="kd">extends</span> <span class="n">Account</span><span class="o">{</span> <span class="c1">//信用卡
+</span><span class="c1"></span>    <span class="c1">//存在方法的重写
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">withdraw</span><span class="o">(){}</span> <span class="c1">//取钱
+</span><span class="c1"></span><span class="o">}</span>
+<span class="kd">class</span> <span class="nc">SavingAccount</span> <span class="kd">extends</span> <span class="n">Account</span><span class="o">{</span> <span class="c1">//储蓄卡
+</span><span class="c1"></span>    <span class="c1">//存在方法的重写
+</span><span class="c1"></span><span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Customer</span><span class="o">{</span>
+    <span class="n">Account</span> <span class="n">account</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAccount</span><span class="o">(</span><span class="n">Account</span> <span class="n">account</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">account</span> <span class="o">=</span> <span class="n">account</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Account</span> <span class="nf">getAccount</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">accout</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">CustomerTest</span><span class="o">{</span>
+    <span class="n">main</span><span class="o">(){</span>
+        <span class="n">Customer</span> <span class="n">cust</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Customer</span><span class="o">();</span>
+        <span class="n">cust</span><span class="o">.</span><span class="na">setAccount</span><span class="o">(</span><span class="k">new</span> <span class="n">CheckAccount</span><span class="o">());</span>
+
+        <span class="n">cust</span><span class="o">.</span><span class="na">getAccount</span><span class="o">().</span><span class="na">withdraw</span><span class="o">();</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>弊端</strong>：一个引用类型变量如果声明为父类的类型，但实际引用的是子类对象，那么该变量就不能再访问子类中添加的属性和方法。</p>
+<p>在多态的场景下，我们创建了子类的对象，也加载了子类特有的属性和方法（占用了内存）。但是由于声明为父类的引用，导致我们没有办法直接调用子类特有的属性和方法。</p>
+<ul>
+<li>
+<p>若子类重写了父类方法，就意味着子类里定义的方法彻底覆盖了父类里的同名方法，系统将不可能把父类里的方法转移到子类中。</p>
+</li>
+<li>
+<p>对于实例变量则不存在这样的现象，即使子类里定义了与父类完全相同的实例变量，这个实例变量依然不可能覆盖父类中定义的实例变量</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.atguigu.polymorphism.grammar</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestVariable</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Base</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sub</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">a</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(((</span><span class="n">Sub</span><span class="o">)</span><span class="n">b</span><span class="o">).</span><span class="na">a</span><span class="o">);</span>
+
+        <span class="n">Sub</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sub</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">a</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(((</span><span class="n">Base</span><span class="o">)</span><span class="n">s</span><span class="o">).</span><span class="na">a</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Base</span><span class="o">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Sub</span> <span class="kd">extends</span> <span class="n">Base</span><span class="o">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">Student</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">();</span>
+<span class="n">m</span><span class="o">.</span><span class="na">school</span> <span class="o">=</span> <span class="s">&#34;pku&#34;</span><span class="o">;</span> 	<span class="c1">//合法,Student类有school成员变量
+</span><span class="c1"></span><span class="n">Person</span> <span class="n">e</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">();</span> 
+<span class="n">e</span><span class="o">.</span><span class="na">school</span> <span class="o">=</span> <span class="s">&#34;pku&#34;</span><span class="o">;</span>	<span class="c1">//非法,Person类没有school成员变量
+</span><span class="c1"></span>
+<span class="c1">// 属性是在编译时确定的，编译时e为Person类型，没有school成员变量，因而编译错误。
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>开发中：</p>
+<p>使用父类做方法的形参，是多态使用最多的场合。即使增加了新的子类，方法也无需改变，提高了扩展性，符合开闭原则。</p>
+<p>【开闭原则OCP】</p>
+<ul>
+<li>对扩展开放，对修改关闭</li>
+<li>通俗解释：软件系统中的各种组件，如模块（Modules）、类（Classes）以及功能（Functions）等，应该在不修改现有代码的基础上，引入新功能</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>虚方法调用(Virtual Method Invocation)</p>
+<p>在Java中虚方法是指在编译阶段不能确定方法的调用入口地址，在运行阶段才能确定的方法，即可能被重写的方法。子类中定义了与父类同名同参数的方法，在多态情况下，将此时父类的方法称为虚方法，父类根据赋给它的不同子类对象，动态调用属于子类的该方法。这样的方法调用在编译期是无法确定的。</p>
+<p>拓展：</p>
+<p><code>静态链接（或早起绑定）</code>：当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。这种情况下将调用方法的符号引用转换为直接引用的过程称之为静态链接。那么调用这样的方法，就称为非虚方法调用。比如调用静态方法、私有方法、final方法、父类构造器、本类重载构造器等。</p>
+<p><code>动态链接（或晚期绑定）</code>：如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，由于这种引用转换过程具备动态性，因此也就被称之为动态链接。调用这样的方法，就称为虚方法调用。比如调用重写的方法（针对父类）、实现的方法（针对接口）。</p>
+</blockquote>
 
     </div>
 

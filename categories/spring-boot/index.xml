@@ -6,13 +6,31 @@
     <description>Recent content in Spring Boot on 乐观积极的...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 08 Aug 2021 09:56:30 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Aug 2024 23:15:49 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Springbootp2</title>
+      <link>https://kongfany.github.io/post/springbootp2/</link>
+      <pubDate>Wed, 07 Aug 2024 23:15:49 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/springbootp2/</guid>
+      <description>视频 maven下载和安装，1,2,3 postman安装使用教程，1 &amp;ndash; 视频文档链接： https://www.yuque.com/zaibaliweigezidemeixi/dopm5h 密码：mp6h 代码： spring boot: https://github.com/coder-fengzhu/boot-demo mybatis-plus: https://github.com/coder-fengzhu/mp-demo 项目结构 后端 api层：接收</description>
+    </item>
+    
+    <item>
+      <title>upload_excel</title>
+      <link>https://kongfany.github.io/post/springboot_project/</link>
+      <pubDate>Wed, 24 Jul 2024 15:02:17 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/springboot_project/</guid>
+      <description>项目需求：SpringBoot读取excel并存入连接的数据库 路线：java-sql-jdbc-jpa-springboot 视频https:</description>
+    </item>
+    
     <item>
       <title>Springboot项目</title>
-      <link>https://kongfany.github.io/post/springboot%E9%A1%B9%E7%9B%AE/</link>
+      <link>https://kongfany.github.io/post/springbootp/</link>
       <pubDate>Sun, 08 Aug 2021 09:56:30 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/springboot%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>https://kongfany.github.io/post/springbootp/</guid>
       <description>Spring Boot+Vue vue 下载nodejs 安装配置 个人没进行配置。。。 创建vue-springboot-demo 本地localhost:8080就可以打开初始界</description>
     </item>
     

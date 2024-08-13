@@ -6,7 +6,25 @@
     <description>Recent content in Categories on 乐观积极的...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 21 Feb 2024 16:36:01 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Aug 2024 23:15:49 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Boot</title>
+      <link>https://kongfany.github.io/categories/spring-boot/</link>
+      <pubDate>Wed, 07 Aug 2024 23:15:49 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/categories/spring-boot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MySQL</title>
+      <link>https://kongfany.github.io/categories/mysql/</link>
+      <pubDate>Wed, 24 Jul 2024 15:20:44 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/categories/mysql/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>JAVA</title>
       <link>https://kongfany.github.io/categories/java/</link>
@@ -58,15 +76,6 @@
       <pubDate>Tue, 17 Aug 2021 13:59:06 +0800</pubDate>
       
       <guid>https://kongfany.github.io/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring Boot</title>
-      <link>https://kongfany.github.io/categories/spring-boot/</link>
-      <pubDate>Sun, 08 Aug 2021 09:56:30 +0800</pubDate>
-      
-      <guid>https://kongfany.github.io/categories/spring-boot/</guid>
       <description></description>
     </item>
     

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="算法，八股">
 <meta itemprop="description" content="算法 美团技术岗笔试 https://codefun2000.com/ python 输入输出 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 import sys # 多组测试用例 for line in sys.stdin: print(line)# 键盘输入，包含回车 a = line.split()# str类型列表 print(a,type(a),type(a[0])) print(int(a[0])"><meta itemprop="datePublished" content="2023-11-28T15:07:53+08:00" />
 <meta itemprop="dateModified" content="2023-11-28T15:07:53+08:00" />
-<meta itemprop="wordCount" content="18718">
+<meta itemprop="wordCount" content="25045">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="算法，八股"/>
 <meta name="twitter:description" content="算法 美团技术岗笔试 https://codefun2000.com/ python 输入输出 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 import sys # 多组测试用例 for line in sys.stdin: print(line)# 键盘输入，包含回车 a = line.split()# str类型列表 print(a,type(a),type(a[0])) print(int(a[0])"/>
@@ -137,8 +137,8 @@
             <a href="/categories/algorithm/"> algorithm </a>
             <a href="/categories/job/"> JOB </a>
             </div>
-          <span class="more-meta"> 18718 words </span>
-          <span class="more-meta"> 38 mins read </span>
+          <span class="more-meta"> 25045 words </span>
+          <span class="more-meta"> 50 mins read </span>
         
       </div>
     </header>
@@ -1572,6 +1572,7 @@ a = line.split()# 列表,str</p>
 <li><strong><code>clone()</code></strong>: 用于创建并返回对象的副本。</li>
 <li><strong><code>finalize()</code></strong>: 当对象被垃圾回收器回收时调用。</li>
 <li><strong><code>notify()</code></strong>, <strong><code>notifyAll()</code></strong>, <strong><code>wait()</code></strong>: 用于实现线程间的通信。wait()导致当前线程等待，直到其他线程调用此对象的notify(),notifyall().</li>
+<li>不包含copy()方法</li>
 </ol>
 <p>12、nginx.log</p>
 <p>nginx.log通常是Nginx Web服务器生成的日志文件，记录了服务器的访问日志、错误日志等信息。</p>
@@ -1613,8 +1614,166 @@ a = line.split()# 列表,str</p>
 <p>Spring对各种持久化技术提供了统一的编程方式</p>
 <p>14、CMS垃圾回收器</p>
 <p>CMS垃圾回收器通常指的是内容管理系统的垃圾回收机制，用于清理不再需要的或过时的内容和资源，以节省存储空间和优化系统性能。不过，这与编程语言中的垃圾回收器不同，后者用于自动回收不再使用的内存。</p>
+<p>15、JVM堆内存</p>
+<p>JVM（Java Virtual Machine）中的堆内存被分为两个主要区域：新生代（Young Generation）和老年代（Old Generation）。这种分区的目的是为了更有效地管理内存和进行垃圾回收。</p>
+<p>新生代主要用来存放新创建的对象。由于大多数对象在创建后不久就会变为不可达（即成为垃圾），因此新生代是垃圾收集发生最频繁的区域。新生代又进一步细分为三个区：Eden区、SurvivorFrom区和SurvivorTo区。</p>
+<p>老年代主要存放那些经历了多次GC仍然存活的对象，或者是在新生代中分配空间不足而直接分配到老年代的大对象。由于老年代中的对象生命周期较长，因此Major GC（也称作Full GC）在老年代中发生的频率相对较低。但每次Full GC都会暂停所有的应用线程，因此其执行时间相对较长，对系统性能的影响也较大。</p>
+<p>JVM（Java Virtual Machine）中的HotSpot是Oracle JDK和OpenJDK的默认虚拟机，也是目前使用最广泛的JVM实现之一。HotSpot虚拟机通过即时编译（JIT，Just-In-Time）技术，将热点代码（即频繁执行的代码）编译成机器码，从而提高了Java程序的执行效率。</p>
+<p>新生代与老年代的比例是1:2。新生代内部又被细分为Eden区和两个Survivor区（通常命名为S0和S1）。在HotSpot虚拟机中，Eden区与Survivor区的默认比例是8:1:1。</p>
+<p>16、？三元运算符</p>
+<p>条件 ? 表达式1 : 表达式2</p>
+<p>int max = (a &gt; b) ? a : b;</p>
+<p>17、ArrayList</p>
+<p>在Java中，当你使用<code>ArrayList</code>并初始化其指定容量为10时，这并不意味着<code>ArrayList</code>只能存储10个元素。实际上，这个容量只是<code>ArrayList</code>的内部数组的初始大小。当你试图添加第11个元素时，<code>ArrayList</code>会自动进行扩容。</p>
+<p>添加元素导致当前容量不足时，<code>ArrayList</code>通常会将其内部数组的大小增加大约50%。它会创建一个新的更大的数组，将原数组的内容复制到新数组中，然后丢弃原数组，以便为新的元素腾出空间。这个过程被称为数组的扩容或再分配。</p>
+<p>在创建 <code>ArrayList</code> 时，虽然不强制要求指定初始化容量，但根据实际应用场景，有时指定一个合适的初始化容量可以提高性能。当你预计 <code>ArrayList</code> 将存储大量元素，并且你知道大致的数量时，指定初始化容量可以避免在添加元素过程中频繁的扩容操作，这可以减少内存分配和数组复制的开销。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>  
+  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayListExample</span> <span class="o">{</span>  
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>  
+        <span class="c1">// 1. 创建 ArrayList 实例  
+</span><span class="c1"></span>        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span> 
+        <span class="c1">// 指定初始化容量为 10  
+</span><span class="c1"></span>        <span class="c1">// ArrayList&lt;String&gt; names = new ArrayList&lt;&gt;(10);
+</span><span class="c1"></span>  
+        <span class="c1">// 2. 向 ArrayList 中添加元素  
+</span><span class="c1"></span>        <span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;Alice&#34;</span><span class="o">);</span>  
+        <span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;Bob&#34;</span><span class="o">);</span>  
+        <span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;Charlie&#34;</span><span class="o">);</span>  
+  
+        <span class="c1">// 3. 访问和修改 ArrayList 中的元素  
+</span><span class="c1"></span>        <span class="n">String</span> <span class="n">firstName</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">0</span><span class="o">);</span> <span class="c1">// 获取第一个元素  
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;第一个名字是: &#34;</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">);</span> <span class="c1">// 输出: 第一个名字是: Alice  
+</span><span class="c1"></span>        <span class="n">names</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="s">&#34;Amy&#34;</span><span class="o">);</span> <span class="c1">// 修改第一个元素为 Amy  
+</span><span class="c1"></span>        <span class="n">firstName</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>  
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;修改后的第一个名字是: &#34;</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">);</span> <span class="c1">// 输出: 修改后的第一个名字是: Amy  
+</span><span class="c1"></span>  
+        <span class="c1">// 4. 遍历 ArrayList 中的元素  
+</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">name</span> <span class="o">:</span> <span class="n">names</span><span class="o">)</span> <span class="o">{</span>  
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>  
+        <span class="o">}</span>  
+        <span class="c1">// 输出:  
+</span><span class="c1"></span>        <span class="c1">// Amy  
+</span><span class="c1"></span>        <span class="c1">// Bob  
+</span><span class="c1"></span>        <span class="c1">// Charlie  
+</span><span class="c1"></span>  
+        <span class="c1">// 5. 执行其他操作  
+</span><span class="c1"></span>        <span class="n">names</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">1</span><span class="o">);</span> <span class="c1">// 删除索引为 1 的元素 (Bob)  
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;删除元素后的 ArrayList:&#34;</span><span class="o">);</span>  
+        <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">name</span> <span class="o">:</span> <span class="n">names</span><span class="o">)</span> <span class="o">{</span>  
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>  
+        <span class="o">}</span>  
+        <span class="c1">// 输出:  
+</span><span class="c1"></span>        <span class="c1">// Amy  
+</span><span class="c1"></span>        <span class="c1">// Charlie  
+</span><span class="c1"></span>  
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;ArrayList 的大小是: &#34;</span> <span class="o">+</span> <span class="n">names</span><span class="o">.</span><span class="na">size</span><span class="o">());</span> <span class="c1">// 输出 ArrayList 的大小  
+</span><span class="c1"></span>    <span class="o">}</span>  
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>18、元注解：</p>
+<p>Java元注解（Meta-Annotation）是用于修饰其他注解的注解。它们提供了定义注解时的一些通用属性和行为。</p>
+<p><code>@Target</code>用于指定注解的使用范围，即该注解可以被用于哪些Java元素上，例如类、方法、字段等</p>
+<p><code>@Retention</code>用于指定注解的生命周期，即该注解会被保留到哪个阶段。</p>
+<ul>
+<li><code>RetentionPolicy.SOURCE</code>：注解只在源码阶段存在，编译时会被丢弃。</li>
+<li><code>RetentionPolicy.CLASS</code>：注解在类文件中可用，但会被JVM丢弃。</li>
+<li><code>RetentionPolicy.RUNTIME</code>：注解在运行时也保留，因此可以通过反射读取。</li>
+</ul>
+<p><code>@Documented</code>表示使用该注解的元素应该被javadoc或类似工具文档化。简单来说，如果一个注解类型被声明为@Documented，那么使用了此注解的Java元素在使用javadoc生成API文档时，注解将被包含在生成的文档中。</p>
+<p><code>@Inherited</code>元注解是一个标记注解，如果它存在于一个被用于类的注解类型上，那么这个注解将被自动继承给子类的成员。但是要注意，继承性并不具备传递性，如果一个类使用了一个有@Inherited注解的注解类型，这个类的子类将继承这个注解，但是这个类的孙子类不会继承这个注解。</p>
+<p>注解：</p>
+<p>Java的注解（Annotation）是Java 5开始引入的一种用于为代码提供元数据的机制。注解本质上是一种接口，它提供了一种为程序元素（类、方法、变量、参数和包等）附加信息的方式，而这些信息并不会直接影响代码的执行，但可以被编译器用来生成代码、进行编译检查，或者在运行时由JVM或其他工具读取并进行相应的处理。</p>
+<ol>
+<li><strong>元数据</strong>：注解为代码提供了额外的信息，这些信息并不直接参与程序的执行逻辑，但可以被其他工具或框架用来生成代码、检查代码或执行其他任务。</li>
+<li><strong>与注释的区别</strong>：注解与Java的注释不同，注释是给程序员看的，而注解是给编译器或其他工具看的。编译器会处理注解，而忽略注释。</li>
+<li><strong>定义</strong>：注解使用<code>@interface</code>关键字定义</li>
+</ol>
+<p>19、锁升级：</p>
+<p>在Java中，锁升级通常与<code>synchronized</code>关键字以及Java HotSpot JVM的实现相关。<code>synchronized</code>关键字在Java中用于提供线程同步，它背后的机制依赖于JVM的实现。在某些JVM实现（如Java HotSpot VM）中，为了优化性能，当<code>synchronized</code>块或方法被争用时，锁的状态可能会经历一个“升级”过程。</p>
+<p>Java HotSpot VM的锁升级通常涉及以下状态：</p>
+<ol>
+<li><strong>无锁状态</strong>：这是锁的初始状态，当没有线程持有锁时，锁处于无锁状态。</li>
+<li><strong>偏向锁</strong>：这是锁的第一次优化状态。偏向锁的目标是<em>减少无竞争情况下的同步开销</em>。当一个线程<em>首次访问</em>同步块并获取锁时，JVM会<em>记录锁的持有者</em>，并在后续访问中<em>偏向</em>这个线程，从而避免不必要的锁获取和释放操作。如果其他线程尝试获取偏向锁，<em>偏向锁就会被撤销并升级到轻量级锁</em>。</li>
+<li><strong>轻量级锁</strong>：当多个线程试图<em>同时访问同一个同步块</em>时，锁可能会升级到轻量级锁状态。轻量级锁通过<em>自旋等待</em>（busy-waiting）的方式<em>尝试获取锁</em>，而<em>不是立即阻塞</em>线程。如果自旋等待一段时间后仍然无法获取锁，轻量级锁会升级为重量级锁。</li>
+<li><strong>重量级锁</strong>：当轻量级锁的自旋等待无法解决问题时，锁会最终升级为重量级锁。重量级锁通常涉及操作系统层面的<em>同步机制（如互斥锁</em>），并且<em>当线程无法获取锁时会阻塞</em>。重量级锁的开销相对较大，因为它涉及到线程的挂起和恢复。</li>
+</ol>
+<p>互斥锁（Mutex，全称Mutual Exclusion Lock）是一种基本的同步原语，用于在并发编程中保护共享资源，防止多个线程同时访问同一资源，从而导致数据不一致或其他并发问题。当一个线程获得互斥锁时，其他尝试获取该锁的线程将会被阻塞，直到持有锁的线程释放该锁。</p>
+<p>互斥锁通常具有以下特性：</p>
+<ol>
+<li><strong>互斥性</strong>：在任何时刻，只有一个线程可以持有互斥锁。这确保了同一时间只有一个线程能够访问被保护的共享资源。</li>
+<li><strong>原子性</strong>：锁的获取和释放操作是原子的，即这些操作不会被其他线程中断。这保证了线程安全地获取和释放锁。</li>
+<li><strong>非忙等待</strong>：当一个线程试图获取一个已被其他线程持有的互斥锁时，该线程通常会被阻塞（即进入等待状态），而不是忙等待（即持续检查锁是否可用）。这允许线程在等待期间释放CPU资源，从而提高了系统的整体效率。</li>
+<li><strong>可重入性</strong>：某些互斥锁实现允许同一个线程多次获取同一把锁而不会引起死锁，这种锁被称为可重入锁或递归锁。</li>
+<li><strong>公平性</strong>：某些互斥锁实现会确保等待时间最长的线程优先获得锁，这被称为公平锁。然而，并非所有的互斥锁实现都是公平的，有些实现可能采用非确定性策略来分配锁。</li>
+</ol>
+<p>20、支持反射：</p>
+<p>Java是一种支持反射（Reflection）的语言。反射是Java语言的一个强大特性，它允许程序在<em>运行时检查类、接口、字段和方法的信</em>息，并且<em>允许程序动态地创建和操作对象</em>。这种动态性为Java提供了极大的灵活性和扩展性。</p>
+<ol>
+<li><strong>获取类的信息</strong>：通过反射，可以获取一个类的Class对象，进而获取该类的名称、父类、实现的接口、声明的字段和方法等信息。</li>
+<li><strong>动态创建对象</strong>：使用反射，可以在运行时动态地创建类的实例，而无需提前编写具体的类名。</li>
+<li><strong>调用方法</strong>：通过反射，可以获取一个类的方法信息，并动态地调用该方法，传递参数并获取返回值。</li>
+<li><strong>操作字段</strong>：反射允许程序获取类的字段信息，并可以动态地读取和修改字段的值。</li>
+</ol>
+<p>反射虽然强大，但也有一些缺点。比如性能开销较大，因为反射涉及到动态类型解析和内存分配等操作；另外，反射<em>破坏了封装性</em>，因为它允许程序直接访问类的内部结构和成员。</p>
+<p>JAVA反射主要涉及的类包括<code>Class</code>、<code>Field</code>、<code>Method</code>和<code>Constructor</code>。这些类都位于特定的包下，以便有效地组织和使用。通过这些类，Java的反射机制能够在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够动态调用它的任意方法和属性。这为Java提供了丰富的动态性支持，使得程序能够在运行时根据需要进行灵活的调整。虽然反射机制提供了很大的灵活性，但它也有一些缺点，比如性能开销较大，破坏了封装性等。</p>
+<ol>
+<li><strong>Class类</strong>：这是反射的核心类，它位于<code>java.lang</code>包下。通过<code>Class</code>类，我们可以获取类的属性、方法等信息，这是实现反射机制的关键。</li>
+<li><strong>Field类</strong>：这个类位于<code>java.lang.reflect</code>包下。它表示类的成员变量，通过<code>Field</code>类，我们可以获取和设置类中的属性值。</li>
+<li><strong>Method类</strong>：同样，<code>Method</code>类也位于<code>java.lang.reflect</code>包下。它表示类的方法，通过<code>Method</code>类，我们可以获取类中的方法信息或者执行方法。</li>
+<li><strong>Constructor类</strong>：这个类也位于<code>java.lang.reflect</code>包下。它表示类的构造方法，通过<code>Constructor</code>类，我们可以获取类的构造方法信息，并在运行时动态地创建对象。</li>
+</ol>
+<p><strong>Java反射机制本身并不提供字节码修改技术</strong>。Java反射机制主要允许程序在运行时检查类、接口、字段和方法的信息，并且可以动态地创建和操作对象。它提供了对类和对象的内部结构的访问能力，但并不涉及对字节码的修改。Java反射机制本身不能直接动态地实现一个接口并形成一个新的类。反射主要用于在运行时检查和操作已经存在的类、接口、字段和方法。虽然反射能够获取接口的信息，但它不能用来动态地创建实现该接口的新类。</p>
 <h3 id="设计模式">设计模式</h3>
-<p>Java设计模式是一套被广泛接受和应用于Java编程的解决方案。这些设计模式是针对常见问题的通用解决方案，通过它们可以更容易地编写出易于理解、可维护和可扩展的代码。Java设计模式通常可以分为以下几种类型： 1. <strong>创建型模式</strong>：这些模式关注对象的创建机制，包括如何实例化对象或者将对象组合成更复杂的结构。典型的创建型模式包括工厂模式、抽象工厂模式、建造者模式、原型模式和单例模式。 2. <strong>结构型模式</strong>：这些模式处理类和对象的组合，从而形成更大的结构。它们帮助确保在系统中更容易地识别对象之间的关系。结构型模式包括适配器模式、桥接模式、组合模式、装饰器模式、外观模式、享元模式和代理模式。 3. <strong>行为型模式</strong>：这些模式涉及对象之间的交互，包括如何分配职责以及如何实现通信。行为型模式包括模板方法模式、命令模式、迭代器模式、观察者模式、中介者模式、备忘录模式、解释器模式、状态模式、策略模式、职责链模式和访问者模式。 这些设计模式为解决特定类型的问题提供了指导，使得开发人员可以更容易地编写出高质量、易于理解和可维护的代码。在实际的软件开发中，设计模式通常被视为一种最佳实践，有助于提高代码的灵活性、可重用性和可扩展性。</p>
+<p>Java设计模式是一套被广泛接受和应用于Java编程的解决方案。这些设计模式是针对常见问题的通用解决方案，通过它们可以更容易地编写出易于理解、可维护和可扩展的代码。Java设计模式通常可以分为以下几种类型： 1. <strong>创建型模式</strong>：这些模式关注对象的创建机制，包括如何实例化对象或者将对象组合成更复杂的结构。典型的创建型模式包括工厂模式、抽象工厂模式、<em>建造者模式</em>、原型模式和<em>单例模式</em>。 2. <strong>结构型模式</strong>：这些模式处理类和对象的组合，从而形成更大的结构。它们帮助确保在系统中更容易地识别对象之间的关系。结构型模式包括适配器模式、桥接模式、组合模式、装饰器模式、外观模式、享元模式和<em>代理模式</em>。 3. <strong>行为型模式</strong>：这些模式涉及对象之间的交互，包括如何分配职责以及如何实现通信。行为型模式包括模板方法模式、命令模式、迭代器模式、<em>观察者模式</em>、中介者模式、备忘录模式、解释器模式、状态模式、<em>策略模式</em>、职责链模式和访问者模式。 这些设计模式为解决特定类型的问题提供了指导，使得开发人员可以更容易地编写出高质量、易于理解和可维护的代码。在实际的软件开发中，设计模式通常被视为一种最佳实践，有助于提高代码的灵活性、可重用性和可扩展性。</p>
 <p>1、模版模式和策略模式</p>
 <p>模板模式和策略模式都属于行为型设计模式，它们都关注对象之间的交互，但它们的应用场景和解决问题的方式略有不同。</p>
 <p>模板模式</p>
@@ -1661,9 +1820,21 @@ a = line.split()# 列表,str</p>
 <p>在某些情况下，策略模式和模板模式确实可以在一定程度上互换使用，特别是在涉及算法的封装和替换方面。虽然它们的主要关注点不同，但在一些情况下可以进行相互转换或结合使用。</p>
 <p>模板模式使用的是集成关系实现，策略模式使用的是组合关系实现</p>
 <p><strong>模板模式</strong>倾向于将解决问题的过程定义为一个完整的框架，其中具体的步骤由子类来实现。策略模式中，通常会定义一个策略接口或抽象类，具体的算法实现则通过这个接口或抽象类来实现。</p>
+<p>2、单例模式：</p>
+<p>Java中的单例模式是一种创建对象的设计模式，它保证在一个应用程序中，某个类只有一个实例存在。单例模式通常用于那些只需要一个对象的场景，比如配置文件的读取、线程池、缓存等。</p>
+<p><strong>单例模式并不是Java特有的</strong>。单例模式是一种设计模式，它的主要目的是确保一个类仅有一个实例，并提供一个全局访问点来访问这个唯一实例。这种设计模式可以应用于任何面向对象的编程语言，包括Java、C++、C#、Python等。</p>
+<p>3、观察者模型</p>
+<p>对象间存在一对多关系，当一个对象被修改时，自动通知其依赖对象，这种设计模式通常采用的是<strong>观察者模式</strong>（Observer Pattern）。</p>
+<p>观察者模式是一种行为设计模式，它允许对象之间定义一对多的依赖关系，当一个对象状态发生改变时，它的所有依赖者都会收到通知并自动更新。</p>
+<p>这种设计模式有助于实现模块化、可复用和可扩展的代码，因为它降低了对象之间的耦合度，使得各个对象可以独立地改变和演进。虽然观察者模式在处理一对多关系时非常有效，但在某些情况下，如果依赖关系过于复杂，可能会导致性能问题或难以维护</p>
 <h3 id="数据结构">数据结构</h3>
 <p>1、二叉树遍历 前序，中序，后序。</p>
 <p>后序遍历从后开始看，最后一个是根节点，然后根据中序遍历区分左右子树。</p>
+<p>2、循环队列</p>
+<p>循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）原则并且队尾被连接在队首以形成一个循环。它也被称为“环形”队列。循环队列在内存中是一个环形空间，当存储空间被填满后，就从第一个元素开始覆盖。</p>
+<p>循环队列的主要优势在于，它可以更有效地利用存储空间，因为当一个元素被移除后，其位置可以被新的元素立即占用，而不需要进行任何额外的数据移动。此外，循环队列的入队和出队操作都是 O(1) 复杂度，即常数时间复杂度，这使得循环队列在处理大量数据时非常高效。</p>
+<p>循环队列的实现通常需要两个指针，一个指向队头（front），另一个指向队尾（rear）。当元素入队时，rear 指针向前移动；当元素出队时，front 指针向前移动。当 front 和 rear 相遇时，队列为空；当 rear 到达队列的末尾并准备再次回到队首时，队列为满。</p>
+<p>在实现中，我们预留了一个数组位置来区分队列满和队列空的情况。当<code>rear</code>指针追上<code>front</code>指针时，队列是满的；当<code>front</code>和<code>rear</code>都指向同一个位置且队列大小为0时，队列是空的。</p>
 <h3 id="数据库">数据库</h3>
 <p>1、MySQL数据库四种隔离级别</p>
 <p>MySQL 数据库提供了四种标准的事务隔离级别，分别是：</p>
@@ -1673,6 +1844,20 @@ a = line.split()# 列表,str</p>
 <li>REPEATABLE READ（可重复读）：确保在事务执行期间多次读取的数据保持一致，可以避免脏读和不可重复读问题，但仍可能出现幻读问题。</li>
 <li>SERIALIZABLE（可串行化）：最高的隔离级别，确保事务之间的数据读写操作彼此之间完全隔离，可以避免脏读、不可重复读和幻读问题，但会降低并发性能。</li>
 </ol>
+<p>2、数据库设计范式：</p>
+<p>数据库设计范式是数据库设计中所需要满足的规范，这些规范确保数据库结构清晰、简洁，并避免数据冗余和异常操作。范式是一系列逐级递增的规范，越高的范式数据库冗余越小。关系数据库中有六种范式，分别是第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式（4NF）和第五范式（5NF，又称完美范式）。</p>
+<p>第一范式（1NF）要求数据库表中的每个字段都是不可分割的<strong>原子数据项</strong>，即每个字段都是单一属性的，不<strong>可再分</strong>。这意味着每个字段只能包含一个值，而不能包含多个值或者数组。<strong>第一范式（1NF）是所有关系型数据库的最基本要求</strong></p>
+<p>第二范式（2NF）是在第一范式的基础上建立的，它要求数据库表中的每个非主键字段必须完全依赖于整个主键。换句话说，如果表中有复合主键，那么任何非主键字段不能仅依赖于主键的一部分。</p>
+<p>第三范式（3NF）则进一步要求数据库表中的每个非主键字段不能依赖于其他非主键字段。这确保了数据表中的字段之间不存在传递依赖关系。</p>
+<p>遵循数据库设计范式可以确保数据库结构的合理性，减少数据冗余，提高数据的一致性和可维护性。同时，它也有助于避免在数据库操作（如插入、删除和更新）时出现异常。</p>
+<p>数据库设计并不必须完全遵守所有的范式。虽然范式理论为数据库设计提供了有价值的指导原则，但在实际应用中，完全遵守所有范式可能会导致数据库设计过于复杂，影响性能，甚至与业务需求相悖。</p>
+<ol>
+<li><strong>业务需求</strong>：首先，数据库设计的最终目标是满足业务需求。在某些情况下，为了满足特定的业务需求，可能需要适当地牺牲某些范式规则。例如，在某些数据仓库或数据分析场景中，为了提高查询性能，可能会选择保留一些冗余数据。</li>
+<li><strong>性能考虑</strong>：完全遵守高级范式（如4NF和5NF）可能导致数据库结构过于复杂，增加查询的复杂性，从而影响性能。在某些情况下，为了提高性能，可能会选择保留一些低级别的冗余数据。</li>
+<li><strong>维护成本</strong>：过于严格的范式遵守可能导致数据库结构过于复杂，增加维护成本。在某些情况下，简化数据库结构以降低维护成本可能是一个合理的选择。</li>
+<li><strong>数据一致性</strong>：虽然范式理论有助于确保数据一致性，但在实际应用中，还需要通过其他手段（如触发器、存储过程等）来维护数据的一致性。</li>
+</ol>
+<p>设计范式之间确实有一定的独立性，因为每个范式都是针对特定问题或场景提出的解决方案。然而，这些范式之间也存在一定的关联和交互。</p>
 <h3 id="计网">计网</h3>
 <p>1、tcp/ip网络中，为各种公共服务保留的端口范围是 0-1023</p>
 <p>大于1023的端口则可供用户级应用程序使用</p>
@@ -1713,6 +1898,8 @@ a = line.split()# 列表,str</p>
 </ul>
 </li>
 </ol>
+<p>3、TCP超时重传：</p>
+<p>在TCP中，当发送端的数据到达接收主机时，接收端主机会返回一个确认应答消息，表示已收到消息。对于在传输过程中丢失的数据包，TCP使用重传机制来解决。这种机制包括设定一个定时器，在超过指定的时间后没有收到对方的ACK确认应答报文时，就会重发该数据，即超时重传。</p>
 <h3 id="git">git</h3>
 <p>1、哪个命令可以查看git所有分支git branch</p>
 <p>如果想要查看远程仓库的分支，可以加上 <strong><code>-r</code></strong> 选项，或者使用 <strong><code>-a</code></strong> 选项来查看所有本地和远程跟踪的分支。<code>-d</code> 是删除本地分支的命令</p>
