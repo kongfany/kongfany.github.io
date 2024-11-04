@@ -6,13 +6,40 @@
     <description>Recent content in Posts on 乐观积极的...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Aug 2024 23:15:49 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Aug 2024 14:01:52 +0800</lastBuildDate><atom:link href="https://kongfany.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>艺赛旗is_rpa</title>
+      <link>https://kongfany.github.io/post/job_rpa/</link>
+      <pubDate>Thu, 29 Aug 2024 14:01:52 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/job_rpa/</guid>
+      <description>艺赛旗rpa初级https://support.i-search.com.cn/article/1686059673913 课程https:/</description>
+    </item>
+    
+    <item>
+      <title>Ctsp</title>
+      <link>https://kongfany.github.io/post/ctsp/</link>
+      <pubDate>Wed, 28 Aug 2024 09:14:26 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/ctsp/</guid>
+      <description>官网 - 江苏官网 报名时间：8月19日至9月15日 考试时间：11月9日至12日 学习路线 笔记： https://www.yuque.com/ixc_666/rk_gogogo 密码：in38 https://www.yuque.com/dengnixiake-as5wa/ip7xs9 刷题app：软考通</description>
+    </item>
+    
+    <item>
+      <title>Springboot项目</title>
+      <link>https://kongfany.github.io/post/springbootproject/</link>
+      <pubDate>Wed, 14 Aug 2024 09:46:52 +0800</pubDate>
+      
+      <guid>https://kongfany.github.io/post/springbootproject/</guid>
+      <description>青戈-带小白做毕设系列学习 视频 技术栈: 前端：html,css,javascript,vue,element-ui 后端：java,spring</description>
+    </item>
+    
     <item>
       <title>Springboot-jpa</title>
-      <link>https://kongfany.github.io/post/springbootp2-jpa/</link>
+      <link>https://kongfany.github.io/post/springbootp-jpa/</link>
       <pubDate>Wed, 07 Aug 2024 23:15:49 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/springbootp2-jpa/</guid>
+      <guid>https://kongfany.github.io/post/springbootp-jpa/</guid>
       <description>视频 maven下载和安装，1,2,3 postman安装使用教程，1 &amp;ndash; 视频文档链接： https://www.yuque.com/zaibaliweigezidemeixi/dopm5h 密码：mp6h 代码： spring boot: https://github.com/coder-fengzhu/boot-demo mybatis-plus: https://github.com/coder-fengzhu/mp-demo 项目结构 后端 api层：接收</description>
     </item>
     
@@ -27,10 +54,10 @@
     
     <item>
       <title>upload_excel</title>
-      <link>https://kongfany.github.io/post/springboot_uploadexcel/</link>
+      <link>https://kongfany.github.io/post/springbootp_uploadexcel/</link>
       <pubDate>Wed, 24 Jul 2024 15:02:17 +0800</pubDate>
       
-      <guid>https://kongfany.github.io/post/springboot_uploadexcel/</guid>
+      <guid>https://kongfany.github.io/post/springbootp_uploadexcel/</guid>
       <description>项目需求：SpringBoot读取excel并存入连接的数据库 路线：java-sql-jdbc-jpa-springboot 视频https:</description>
     </item>
     
@@ -665,15 +692,6 @@
     </item>
     
     <item>
-      <title>Springboot项目</title>
-      <link>https://kongfany.github.io/post/springbootp/</link>
-      <pubDate>Sun, 08 Aug 2021 09:56:30 +0800</pubDate>
-      
-      <guid>https://kongfany.github.io/post/springbootp/</guid>
-      <description>Spring Boot+Vue vue 下载nodejs 安装配置 个人没进行配置。。。 创建vue-springboot-demo 本地localhost:8080就可以打开初始界</description>
-    </item>
-    
-    <item>
       <title>进程和线程</title>
       <link>https://kongfany.github.io/post/python31%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Wed, 04 Aug 2021 14:42:06 +0800</pubDate>
@@ -1013,6 +1031,15 @@
       
       <guid>https://kongfany.github.io/post/my-first-post/</guid>
       <description>hugo创建blog &#34;可以加类似于引言的格式-- 网工172-陈迪荣 2021/6/5 9:48:03 搭建博客可以看这篇下面的reference： https://www.lttzz.cn/post/hello-world/ https://olowolo.com/post/hugo-quick-start/ hugo new不是可以新建博</description>
+    </item>
+    
+    <item>
+      <title>Springboot项目</title>
+      <link>https://kongfany.github.io/post/springboot_%E6%AF%95%E8%AE%BE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kongfany.github.io/post/springboot_%E6%AF%95%E8%AE%BE/</guid>
+      <description>Spring Boot+Vue vue 下载nodejs 安装配置 个人没进行配置。。。 创建vue-springboot-demo 本地localhost:8080就可以打开初始界</description>
     </item>
     
   </channel>
